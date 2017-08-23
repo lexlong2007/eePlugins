@@ -28,30 +28,34 @@ PluginName=$(basename $plugAbsPath)
 PluginName_lower=`grep 'Package:' < $plugAbsPath/CONTROL/control|cut -d ':' -f2| xargs`
 PluginSubPath=$(basename $(dirname $plugAbsPath)|sed 's;-;/;')
 PluginPath="/usr/lib/enigma2/python/$PluginSubPath/$PluginName"
+rm -f $plugAbsPath/*.pyo 2>/dev/null
+rm -f $plugAbsPath/*.pyc 2>/dev/null
 if [ -z $2 ]; then
   echo "Info: no version provided, date &time of last modification will be used"
-  version=`ls -atR --full-time "$plugAbsPath/" | grep -m 1 -o '20[12][5678].[0-9]*.[0-9]* [0-9]*\:[0-9]*'|sed 's/^20//'|sed 's/ /./'|sed 's/-/./g'|sed 's/\://g'`
+  version=`ls -atR --full-time "$plugAbsPath/"|egrep -v '^dr|version.py|control|*.mo'|grep -m 1 -o '20[12][5678].[0-9]*.[0-9]* [0-9]*\:[0-9]*'|sed 's/^20//'|sed 's/ /./'|sed 's/-/./g'|sed 's/\://g'`
   echo $version
   [ -z $version ] && echo "Error getting version" && exit 0
 else
   version=$2
 fi
+sed -i "s/^Version\:.*/Version: $version/" $plugAbsPath//CONTROL/control
+echo "Version='$version'" > $plugAbsPath/version.py
+find $plugAbsPath/ -type f -name *.po  -exec bash -c 'msgfmt "$1" -o "${1%.po}".mo' - '{}' \;
+
 [ -e $ipkdir ] && sudo rm -rf $ipkdir
 mkdir -p $ipkdir$PluginPath/
 cp -a $plugAbsPath/* $ipkdir$PluginPath/
 mv -f $ipkdir$PluginPath/CONTROL $ipkdir/
 sudo chmod 755 $ipkdir/CONTROL/post*
-sed -i "s/^Version\:.*/Version: $version/" $ipkdir/CONTROL/control
-sed -i "s/^Version\:.*/Version: $version/" $ipkdir/CONTROL/control
 sudo chown -R root $ipkdir/
 cd /tmp
 sudo rm -rf /tmp/IPKG_BUILD* 2>/dev/null
 rm -f ~/tmp/$PluginName_lower*
 $myAbsPath/tools/ipkg-build.sh $ipkdir
 echo $PluginName_lower
-if [ -d ~/opkg ] && [ ! -z $PluginName_lower ];then
-  rm -f ~/opkg/$PluginName_lower*
-  mv /tmp/$PluginName_lower* ~/opkg/
+if [ -d ~/opkg-repository ] && [ ! -z $PluginName_lower ];then
+  rm -f ~/opkg-repository/$PluginName_lower*
+  mv /tmp/$PluginName_lower* ~/opkg-repository/
 fi
 
 exit 0
