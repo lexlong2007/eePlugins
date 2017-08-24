@@ -16,18 +16,13 @@ elif [ ! -e "$1" ]; then
 elif [ ! -d "$1" ]; then
   echo "Error: provided pluginpath is NOT a directory"
   exit 0
-elif [ $(echo $1|grep -c 'Plugins-') -eq 0 ]; then
-  echo "Error: provided pluginpath is NOT subfolder of 'Plugins-'"
-  exit 0
 elif [ ! -e "$1/CONTROL/control" ]; then
   echo "Error: required by ipk control file missing"
   exit 0
 fi
 plugAbsPath=$(readlink -fn "$1")
-PluginName=$(basename $plugAbsPath)
-PluginName_lower=`grep 'Package:' < $plugAbsPath/CONTROL/control|cut -d ':' -f2| xargs`
-PluginSubPath=$(basename $(dirname $plugAbsPath)|sed 's;-;/;')
-PluginPath="/usr/lib/enigma2/python/$PluginSubPath/$PluginName"
+PluginName_lower=`grep 'Package:' < $plugAbsPath/CONTROL/control|cut -d ':' -f2|xargs`
+PluginPath=`grep 'DestinationPath:' < $plugAbsPath/CONTROL/control|cut -d ':' -f2|xargs`
 rm -f $plugAbsPath/*.pyo 2>/dev/null
 rm -f $plugAbsPath/*.pyc 2>/dev/null
 if [ -z $2 ]; then
@@ -52,7 +47,7 @@ cd /tmp
 sudo rm -rf /tmp/IPKG_BUILD* 2>/dev/null
 rm -f ~/tmp/$PluginName_lower*
 $myAbsPath/tools/ipkg-build.sh $ipkdir
-echo $PluginName_lower
+#echo $PluginName_lower
 if [ -d ~/opkg-repository ] && [ ! -z $PluginName_lower ];then
   rm -f ~/opkg-repository/$PluginName_lower*
   mv /tmp/$PluginName_lower* ~/opkg-repository/
