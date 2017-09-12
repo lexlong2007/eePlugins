@@ -5,7 +5,7 @@ myAbsPath=$(readlink -fn "$myPath")
 ipkdir=/tmp/IPK
 
 if [ -z $1 ]; then
-  echo "Error: no path to plugin provided, please us build)ipk.sh <path_to_plugin> [version]"
+  echo "Error: no path to plugin provided, please us build_ipk.sh <path_to_plugin> [version]"
   exit 0
 elif [ $(echo $1|grep -c $myPath) -eq 0 ]; then
   echo "Error: provided pluginpath is NOT subfolder of script path"
