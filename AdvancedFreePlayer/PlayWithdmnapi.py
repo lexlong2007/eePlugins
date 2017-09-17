@@ -257,13 +257,15 @@ class AdvancedFreePlayer(Screen):
         if self.showJumpNumber != 0:
             self["showJump"].setText("%02d:%02d" % divmod(self.showJumpNumber,60))
             self["showJump"].show()
-            self.ResumeTimer.stop() #in case ff/rf pressed several timwes
-            self.ResumeTimer.start(1000 * int(myConfig.InfobarTime.value), True) # singleshot
+            self.ShowJumpTimer.stop() #in case ff/rf pressed several timwes
+            self.ShowJumpTimer.start(1000 * int(myConfig.InfobarTime.value), True) # singleshot
         else:
+            self["showJump"].setText("")
             self["showJump"].hide()
             self.showJumpNumber = 0
       
     def ShowJumpTimerCallBack(self):
+        self["showJump"].setText("")
         self["showJump"].hide()
         self.showJumpNumber = 0
       
