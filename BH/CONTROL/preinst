@@ -1,0 +1,12 @@
+#!/bin/sh
+
+if [ -e /usr/lib/enigma2/python/Plugins/SystemPlugins/VTIPanel ];then
+  echo
+  if `grep -q 'osd.language=pl_PL' </etc/enigma2/settings`; then
+    echo -e "\033[0;31mWersja nie dla VTI, zainstaluj enigma2-plugin-skins-crash-blackharmony-vti\033[0m"
+  else
+    echo -e "\033[0;31mNot for VTI, install enigma2-plugin-skins-crash-blackharmony-vti instead\033[0m"
+  fi
+  echo
+  exit 1
+fi

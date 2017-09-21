@@ -1,0 +1,28 @@
+#!/bin/sh
+
+if [ -e /usr/share/enigma2/BlackHarmony/skin_user_bar ];then
+  cp -f /usr/share/enigma2/BlackHarmony/skin_user_bar/* /usr/share/enigma2/BlackHarmony/menu/ 2>/dev/null
+fi
+
+if `grep -q 'osd.language=pl_PL' </etc/enigma2/settings`; then
+  echo
+  echo "UWAGA:"
+  echo "Aby działało w skórce wyświetlanie pogody, musisz doinstalować wtyczkę enigma2-plugin-extensions-weatherplugin"
+else
+  echo
+  echo "ATTENTION:"
+  echo "You need to install enigma2-plugin-extensions-weatherplugin plugin to use weather components in skin"
+fi
+
+if `ls /usr/share/enigma2/BlackHarmony/UserSkin_Selections/ |grep -q '.xml'`;then
+  if `grep -q 'osd.language=pl_PL' </etc/enigma2/settings`; then
+    echo
+    echo "Nie zapomnij wejść do wtyczki UserSkin i zaktualizować ustawienia"
+  else
+    echo
+    echo "Do not forget to enter UserSkin plugin and do actualization of settings"
+  fi
+  cd /usr/share/enigma2/BlackHarmony/UserSkin_Selections
+  find -L . -name . -o -type d -prune -o -type l -exec rm {} +
+  cd ~
+fi

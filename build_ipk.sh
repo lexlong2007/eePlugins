@@ -34,7 +34,7 @@ else
   version=$2
 fi
 sed -i "s/^Version\:.*/Version: $version/" $plugAbsPath//CONTROL/control
-echo "Version='$version'" > $plugAbsPath/version.py
+[ -e $plugAbsPath/version.py ] && echo "Version='$version'" > $plugAbsPath/version.py
 find $plugAbsPath/ -type f -name *.po  -exec bash -c 'msgfmt "$1" -o "${1%.po}".mo' - '{}' \;
 
 [ -e $ipkdir ] && sudo rm -rf $ipkdir
@@ -42,6 +42,7 @@ mkdir -p $ipkdir$PluginPath/
 cp -a $plugAbsPath/* $ipkdir$PluginPath/
 mv -f $ipkdir$PluginPath/CONTROL $ipkdir/
 sudo chmod 755 $ipkdir/CONTROL/post*
+sudo chmod 755 $ipkdir/CONTROL/pre*
 sudo chown -R root $ipkdir/
 cd /tmp
 sudo rm -rf /tmp/IPKG_BUILD* 2>/dev/null
