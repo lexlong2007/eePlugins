@@ -172,7 +172,7 @@ class AdvancedFreePlayer(Screen):
                 <!-- SubTitles -->
                 <widget name="afpSubtitles" position="0,0" size="1,1" valign="center" halign="center" font="Regular;60" backgroundColor="#ff000000" transparent="0" />
                 <!-- Info about ff,rf -->
-                <widget name="showJump" position="120,120" size="120,40" valign="center" halign="center" font="Regular;36" backgroundColor="#80000000" transparent="0" />
+                <widget name="showJump" position="120,120" zPosition="10" size="120,40" valign="center" halign="center" font="Regular;36" backgroundColor="#80000000" transparent="0" />
               </screen>"""
         else:
             self.skin = """
@@ -180,7 +180,7 @@ class AdvancedFreePlayer(Screen):
                 <!-- SubTitles -->
                 <widget name="afpSubtitles" position="0,0" size="1,1" valign="center" halign="center" font="Regular;60" backgroundColor="#ff000000" transparent="0" />
                 <!-- Info about ff,rf -->
-                <widget name="showJump" position="100,100" size="120,34" valign="center" halign="center" font="Regular;30" backgroundColor="#80000000" transparent="0" />
+                <widget name="showJump" position="100,100" zPosition="10" size="120,34" valign="center" halign="center" font="Regular;30" backgroundColor="#80000000" transparent="0" />
               </screen>"""
         Screen.__init__(self, session)
         self["afpSubtitles"] = Label()
