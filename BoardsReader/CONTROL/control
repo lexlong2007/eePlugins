@@ -1,0 +1,10 @@
+Package: enigma2-plugin-extensions--j00zeks-boardsreader
+Priority: optional
+Section: utils
+Depends: 
+Description: keep yourself up-2-date looking at you forum when watching TV
+Maintainer: j00zek
+Source: http://github.com/j00zek/eePlugins
+Version: 17.09.22.0740
+Architecture: all
+DestinationPath: /usr/lib/enigma2/python/Plugins/Extensions/BoardsReader
