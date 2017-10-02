@@ -5,6 +5,6 @@ Depends:
 Description: keep yourself up-2-date looking at you forum when watching TV
 Maintainer: j00zek
 Source: http://github.com/j00zek/eePlugins
-Version: 17.09.22.0740
+Version: 17.09.25.1254
 Architecture: all
 DestinationPath: /usr/lib/enigma2/python/Plugins/Extensions/BoardsReader
