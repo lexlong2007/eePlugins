@@ -2,7 +2,7 @@ Package: enigma2-plugin-skins--j00zeks-blackharmonyfhd
 Priority: optional
 Section: utils
 Depends: 
-Description: crash BlackHarmonyFHD, openATV mod j00zek
+Description: crash BlackHarmonyFHD mod by j00zek for VTI, OpenATV, and other images
 Maintainer: j00zek
 Source: NA
 Version: 17.09.21.1451
