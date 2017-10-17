@@ -32,7 +32,7 @@ pkg_appears_sane() {
 		cd $owd
 		return 1
 	fi
-echo aqq
+
 	pkg=`required_field Package`
 	version=`required_field Version | sed 's/.*://;'`
 	arch=`required_field Architecture`

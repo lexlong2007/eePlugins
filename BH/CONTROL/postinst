@@ -4,14 +4,16 @@ if [ -e /usr/share/enigma2/BlackHarmony/skin_user_bar ];then
   cp -f /usr/share/enigma2/BlackHarmony/skin_user_bar/* /usr/share/enigma2/BlackHarmony/menu/ 2>/dev/null
 fi
 
-if `grep -q 'osd.language=pl_PL' </etc/enigma2/settings`; then
-  echo
-  echo "UWAGA:"
-  echo "Aby działało w skórce wyświetlanie pogody, musisz doinstalować wtyczkę enigma2-plugin-extensions-weatherplugin"
-else
-  echo
-  echo "ATTENTION:"
-  echo "You need to install enigma2-plugin-extensions-weatherplugin plugin to use weather components in skin"
+if [ ! -e /usr/lib/enigma2/python/Plugins/Extensions/WeatherPlugin ]; then
+  if `grep -q 'osd.language=pl_PL' </etc/enigma2/settings`; then
+    echo
+    echo "UWAGA:"
+    echo "Aby działało w skórce wyświetlanie pogody, musisz doinstalować wtyczkę enigma2-plugin-extensions-weatherplugin"
+  else
+    echo
+    echo "ATTENTION:"
+    echo "You need to install enigma2-plugin-extensions-weatherplugin plugin to use weather components in skin"
+  fi
 fi
 
 if [ -e /usr/lib/enigma2/python/skin.py ];then #patching BlackHole skin.py to be less resstrictive, similar rules to openATV
@@ -27,31 +29,34 @@ if [ -e /usr/lib/enigma2/python/skin.py ];then #patching BlackHole skin.py to be
 fi
 
 #build skin.xml
-'<?xml version=1.0?>' > /usr/share/enigma2/BlackHarmony/skin.xml
-'<skin>' >> /usr/share/enigma2/BlackHarmony/skin.xml
+echo '<skin>' > /usr/share/enigma2/BlackHarmony/skin.xml
 cat /usr/share/enigma2/BlackHarmony/screens-common.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
 if [ -e /usr/lib/enigma2/python/Plugins/SystemPlugins/VTIPanel ];then
   cat /usr/share/enigma2/BlackHarmony/screens-VTI_specific.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
   echo 'VTI image'
-elif [ -e /usr/lib/enigma2/python/Blackhole ];then
-  cat /usr/share/enigma2/BlackHarmony/screens-BlackHole_specific.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
-  echo 'VTI BlackHole image'
 elif [ -e /usr/lib/enigma2/python/Plugins/Extensions/Infopanel ];then
   cat /usr/share/enigma2/BlackHarmony/screens-openATV_specific.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
   echo 'openATV image'
+elif [ -e /usr/lib/enigma2/python/Blackhole ];then
+  cat /usr/share/enigma2/BlackHarmony/screens-BlackHole_specific.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
+  echo 'VTI BlackHole image'
 fi
-'</skin>' >> /usr/share/enigma2/BlackHarmony/skin.xml
+echo '</skin>' >> /usr/share/enigma2/BlackHarmony/skin.xml
 
 #final message
-if `ls /usr/share/enigma2/BlackHarmony/UserSkin_Selections/ |grep -q '.xml'`;then
-  if `grep -q 'osd.language=pl_PL' </etc/enigma2/settings`; then
-    echo
-    echo "Nie zapomnij wejść do wtyczki UserSkin i zaktualizować ustawienia"
-  else
-    echo
-    echo "Do not forget to enter UserSkin plugin and do actualization of settings"
+if [ -e /usr/share/enigma2/BlackHarmony/UserSkin_Selections/ ];then
+  if `ls /usr/share/enigma2/BlackHarmony/UserSkin_Selections/ |grep -q '.xml'`;then
+    if `grep -q 'osd.language=pl_PL' </etc/enigma2/settings`; then
+      echo
+      echo "Nie zapomnij wejść do wtyczki UserSkin i zaktualizować ustawienia"
+    else
+      echo
+      echo "Do not forget to enter UserSkin plugin and do actualization of settings"
+    fi
+    cd /usr/share/enigma2/BlackHarmony/UserSkin_Selections
+    find -L . -name . -o -type d -prune -o -type l -exec rm {} +
+    cd ~
   fi
-  cd /usr/share/enigma2/BlackHarmony/UserSkin_Selections
-  find -L . -name . -o -type d -prune -o -type l -exec rm {} +
-  cd ~
 fi
+sleep 5
+exit 0

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 myPath=$(dirname $0)
 myAbsPath=$(readlink -fn "$myPath")
@@ -27,8 +27,9 @@ rm -f $plugAbsPath/*.pyo 2>/dev/null
 rm -f $plugAbsPath/*.pyc 2>/dev/null
 if [ -z $2 ]; then
   echo "Info: no version provided, date &time of last modification will be used"
-  version=`ls -atR --full-time "$plugAbsPath/"|egrep -v '^dr|version.py|control|*.mo'|grep -m 1 -o '20[12][5678].[0-9]*.[0-9]* [0-9]*\:[0-9]*'|sed 's/^20//'|sed 's/ /./'|sed 's/-/./g'|sed 's/\://g'`
-  echo $version
+  #version=`ls -atR --full-time "$plugAbsPath/"|egrep -v '^dr|version.py|control|*.mo'|grep -m 1 -o '20[12][5678].[0-9]*.[0-9]* [0-9]*\:[0-9]*'|sed 's/^20//'|sed 's/ /./'|sed 's/-/./g'|sed 's/\://g'`
+  version=`ls -atR --full-time "$plugAbsPath/"|egrep -v '^dr|version.py|control|*.mo'|grep -o '20[12][5678].[0-9]*.[0-9]* [0-9]*\:[0-9]*'|sort -r|head -1|sed 's/^20//'|sed 's/ /./'|sed 's/-/./g'|sed 's/\://g'`
+  echo "'$version'"
   [ -z $version ] && echo "Error getting version" && exit 0
 else
   version=$2
@@ -41,8 +42,17 @@ find $plugAbsPath/ -type f -name *.po  -exec bash -c 'msgfmt "$1" -o "${1%.po}".
 mkdir -p $ipkdir$PluginPath/
 cp -a $plugAbsPath/* $ipkdir$PluginPath/
 mv -f $ipkdir$PluginPath/CONTROL $ipkdir/
-sudo chmod 755 $ipkdir/CONTROL/post*
-sudo chmod 755 $ipkdir/CONTROL/pre*
+if [ -e $ipkdir/usr/lib/enigma2/python ];then
+find $ipkdir/usr/lib/enigma2/python -iname "*.py" | 
+  while read F 
+  do
+    [ -e "${F/.py/.pyo}" ] || touch "${F/.py/.pyo}"
+    [ -e "${F/.py/.pyc}" ] && rm -f "${F/.py/.pyc}"
+    [ -e "${F/.py/.py~}" ] && rm -f "${F/.py/.py~}"
+  done
+fi
+sudo chmod 755 $ipkdir/CONTROL/post* 2>/dev/null
+sudo chmod 755 $ipkdir/CONTROL/pre* 2>/dev/null
 sudo chown -R root $ipkdir/
 cd /tmp
 sudo rm -rf /tmp/IPKG_BUILD* 2>/dev/null
