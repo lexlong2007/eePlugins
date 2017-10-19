@@ -428,3 +428,21 @@ msgstr "Zaawansowany (łączenie)"
 
 msgid "Personalization mode:"
 msgstr "Tryb personalizacji:"
+
+msgid "Loaded screens %s"
+msgstr "Lista definicji ekranów %s"
+
+msgid "default skin_display.xml"
+msgstr "skin_display.xml"
+
+msgid "Screen"
+msgstr "Definicja ekranu"
+
+msgid "Source"
+msgstr "Źródło"
+
+msgid "default skin.xml"
+msgstr "skin.xml"
+
+msgid "List loaded screens"
+msgstr "Wyświetl załadowane definicje ekranów"

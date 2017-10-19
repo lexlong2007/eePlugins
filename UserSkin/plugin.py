@@ -97,17 +97,20 @@ class UserSkin_Menu(Screen):
                 skinHistory, skinUpdate, skinAddOns, skinComponents = readSkinConfig()
                 l = [(self.buildListEntry(_("Skin personalization"), "config.png",'config'))]
                 
-                l.append(self.buildListEntry(_("LCD skin personalization"), "lcd.png",'LCDskin')),
+                l.append(self.buildListEntry(_("miniTV skin creator (NIE SKONCZONY!!!)"), "lcd.png",'LCDskin')),
                     
                 if skinUpdate:
                     l.append(self.buildListEntry(_("Update main skin"), "skin.png",'getskin')),
                 if skinAddOns:
                     l.append(self.buildListEntry(_("Download addons"), "addon.png",'getaddons'))
                    
-                (self.buildListEntry(_("Delete addons"), "remove.png",'delete_addons')),
+                #l.append(self.buildListEntry(_("Delete addons"), "remove.png",'delete_addons')),
 
                 if skinComponents:
                     l.append(self.buildListEntry(_("Download additional Components/plugins"), "plugin.png",'getcomponents'))
+
+                l.append(self.buildListEntry(_("List loaded screens"), "import.png",'ListScreens')),
+
                 if skinHistory:
                     l.append(self.buildListEntry(_("History of changes"), "history.png",'history')),
                 l.append(self.buildListEntry(_("Import foreign skin"), "import.png",'importskin')),
@@ -151,6 +154,10 @@ class UserSkin_Menu(Screen):
                 from miniTVskinner import miniTVskinner
                 self.session.openWithCallback(self.quit,miniTVskinner)
                 return
+            elif selected == 'ListScreens':
+                from ScreensLister import ScreensLister
+                self.session.openWithCallback(self.doNothing,ScreensLister)
+                return
             elif selected == 'getaddons':
                 from myComponents import myMenu
                 self.session.openWithCallback(self.refresh, myMenu, MenuFolder = '%sscripts' % PluginPath, MenuFile = '_Getaddons', MenuTitle = _("Download addons"))
@@ -184,5 +191,8 @@ class UserSkin_Menu(Screen):
                 self.session.openWithCallback(self.refresh, UserSkinconsole, title = _("History of changes"), cmdlist = [ '%sscripts/SkinHistory.sh %s' % (PluginPath,SkinPath) ])
                 return
 
+        def doNothing(self):
+                return
+                
         def quit(self):
                 self.close()
