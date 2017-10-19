@@ -5,6 +5,6 @@ Depends:
 Description: plays videos using system and serviceapp routines, also downloads covers and movie infos from tmdb
 Maintainer: j00zek
 Source: http://github.com/j00zek/eePlugins
-Version: 17.10.17.1139
+Version: 17.10.18.2055
 Architecture: all
 DestinationPath: /usr/lib/enigma2/python/Plugins/Extensions/UserSkin
