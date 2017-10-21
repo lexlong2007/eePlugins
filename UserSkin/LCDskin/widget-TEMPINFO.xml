@@ -1,0 +1,11 @@
+<definition>
+  <widgetInit script="self['TEMPINFO'] = Label('TEMP: 38 C')" />
+  <previewXML>
+    <widget name="TEMPINFO" position="300,400" size="150,35" foregroundColor="white" backgroundColor="#000000" zPosition="3" transparent="0" halign="left" valign="top" font="Regular;32" noWrap="1" />
+  </previewXML>
+  <widgetXML>
+    <widget source="session.CurrentService" render="Label"position="300,400" size="150,35" foregroundColor="white" backgroundColor="#000000" zPosition="3" transparent="0" halign="left" valign="top" font="Regular;32" noWrap="1">
+      <convert type="VtiInfo">TempInfo</convert>
+    </widget>
+  </widgetXML>
+</definition>

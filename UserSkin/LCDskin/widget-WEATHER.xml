@@ -1,0 +1,11 @@
+<definition>
+  <widgetInit script="self['WEATHERicon'] = Label('B')" />
+  <previewXML>
+    <widget name="WEATHERicon" position="50,350" size="50,50" zPosition="2" transparent="0" halign="left" valign="top" font="Meteo;50" noWrap="1" />
+  </previewXML>
+  <widgetXML>
+    <widget source="session.CurrentService" render="Label" position="50,350" size="50,50" zPosition="2" transparent="0" halign="left" valign="top" font="Meteo;50" noWrap="1" >
+      <convert type="VWeather">currentWeatherCode</convert>
+    </widget>
+  </widgetXML>
+</definition>

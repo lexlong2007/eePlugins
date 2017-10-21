@@ -41,7 +41,9 @@ def getPixmapPath(Pixmap=None):
             return resolveFilename(SCOPE_SKIN, 'skin_default/vfd_icons/%s' % Pixmap)
         elif path.exists(resolveFilename(SCOPE_SKIN, 'skin_default/icons/%s' % Pixmap)):
             return resolveFilename(SCOPE_SKIN, 'skin_default/icons/%s' % Pixmap)
+        elif path.exists("%s%s" % (PluginPath, Pixmap)):
+            return "%s%s" % (PluginPath, Pixmap)
         else:
-            return "%spic/%s" % (PluginPath,Pixmap)
+            return "%spic/config.png" % (PluginPath)
 
 

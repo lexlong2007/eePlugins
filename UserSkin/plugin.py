@@ -97,7 +97,7 @@ class UserSkin_Menu(Screen):
                 skinHistory, skinUpdate, skinAddOns, skinComponents = readSkinConfig()
                 l = [(self.buildListEntry(_("Skin personalization"), "config.png",'config'))]
                 
-                l.append(self.buildListEntry(_("miniTV skin creator (NIE SKONCZONY!!!)"), "lcd.png",'LCDskin')),
+                l.append(self.buildListEntry(_("miniTV skin creator"), "lcd.png",'LCDskin')),
                     
                 if skinUpdate:
                     l.append(self.buildListEntry(_("Update main skin"), "skin.png",'getskin')),
@@ -152,7 +152,7 @@ class UserSkin_Menu(Screen):
                 return
             elif selected == 'LCDskin':
                 from miniTVskinner import miniTVskinner
-                self.session.openWithCallback(self.quit,miniTVskinner)
+                self.session.openWithCallback(self.doNothing,miniTVskinner)
                 return
             elif selected == 'ListScreens':
                 from ScreensLister import ScreensLister

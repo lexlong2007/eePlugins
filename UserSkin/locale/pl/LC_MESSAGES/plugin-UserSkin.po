@@ -446,3 +446,66 @@ msgstr "skin.xml"
 
 msgid "List loaded screens"
 msgstr "Wyświetl załadowane definicje ekranów"
+
+msgid "NOTE: System uses definition from plugin when screen is not listed above."
+msgstr "UWAGA: System korzysta z definicji zawartej we wtyczce, gdy brak jej na liście"
+
+msgid "miniTV skin creator"
+msgstr "Tworzenie skórek dla ekranu miniTV (LCD tunera)"
+
+msgid "pixmap path is incorrect"
+msgstr "niepoprawna ścieżka do pixmap-y"
+
+msgid "Select Widget:"
+msgstr "Wybierz widżet"
+
+msgid "Load saved design"
+msgstr "Załaduj zapisany wzór"
+
+msgid "Save design"
+msgstr "Zapisz wzór"
+
+msgid "Save as LCD skin"
+msgstr "Zapisz jako skórkę LCD"
+
+msgid "Save as UserSkin skin"
+msgstr "Zapisz jako skórkę użytkownika"
+
+msgid "action NOT ready yet"
+msgstr "akcja jeszcze nie gotowa"
+
+msgid "No saved designs found"
+msgstr "Nie znaleziono zapisanych wzorów"
+
+msgid "Select saved design to load:"
+msgstr "Wybierz wzór do załadowania:"
+
+msgid "I want to enter own name"
+msgstr "Chcę podać własną nazwę"
+
+msgid "Save as:"
+msgstr "Zapisz jako:"
+
+msgid "RECORDicon"
+msgstr "Ikona zapisu"
+
+msgid "16x9icon"
+msgstr "Ikona 16x9"
+
+msgid "CRYPTicon"
+msgstr "Ikona kodowania"
+
+msgid "DOLBYicon"
+msgstr "Ikona Dolby"
+
+msgid "PICONicon"
+msgstr "Pikona"
+
+msgid "WEATHERicon"
+msgstr "Ikona pogody"
+
+msgid "WEATHERtemp"
+msgstr "Temperatura"
+
+msgid "aqq2"
+msgstr ""

@@ -1,0 +1,12 @@
+<definition>
+  <widgetInit script="self['16x9icon'] = Pixmap()" />
+  <previewXML>
+    <widget name="16x9icon" position="185,15" size="55,42" zPosition="2" transparent="0" alphatest="blend" />
+  </previewXML>
+  <widgetXML>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="vfd_icons/16x9_blue.png" position="185,15" size="55,42" zPosition="2" transparent="0" alphatest="blend" >
+      <convert type="ServiceInfo">IsWidescreen</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+  </widgetXML>
+</definition>

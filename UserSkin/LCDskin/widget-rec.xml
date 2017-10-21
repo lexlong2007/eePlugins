@@ -1,0 +1,11 @@
+<definition>
+  <widgetInit script="self['RECORDicon'] = Pixmap()" />
+  <previewXML>
+    <widget pixmap="icons/record.png" position="20,15" size="55,42" alphatest="blend" name="RECORDicon" />
+  </previewXML>
+  <widgetXML>
+    <widget render="Pixmap" pixmap="icons/record.png" position="20,15" size="55,42" alphatest="blend" source="session.RecordState" >
+      <convert type="ConditionalShowHide" />
+    </widget>
+  </widgetXML>
+</definition>

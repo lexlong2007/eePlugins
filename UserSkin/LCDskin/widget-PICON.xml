@@ -1,0 +1,9 @@
+<definition>
+  <widgetInit script="self['PICONicon'] = Pixmap()" />
+  <previewXML>
+    <widget name="PICONicon" position="130,85" zPosition="4" size="220,132" transparent="1" alphatest="blend" />
+  </previewXML>
+  <widgetXML>
+    <widget source="session.CurrentService" render="Picon" position="130,85" zPosition="4" size="220,132" transparent="1" alphatest="blend" />
+  </widgetXML>
+</definition>
