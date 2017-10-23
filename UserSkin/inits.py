@@ -29,6 +29,16 @@ currLang = language.getLanguage()[:2] #used for descriptions keep GUI language i
 myDEBUG=True
 myDEBUGfile = '/tmp/%s.log' % PluginName
 
+DictDesigns=None
+
+def getDictDesigns():
+    global DictDesigns
+    return DictDesigns
+
+def setDictDesigns(value):
+    global DictDesigns
+    DictDesigns = value
+  
 def getPixmapPath(Pixmap=None):
     from os import path
     if Pixmap is not None:
@@ -37,12 +47,18 @@ def getPixmapPath(Pixmap=None):
             return "%sUserSkinpics/%s" % (SkinPath,Pixmap)
         elif path.exists("%sicons/%s" % (SkinPath,Pixmap)):
             return "%sicons/%s" % (SkinPath,Pixmap)
+        elif path.exists("%s%s" % (SkinPath,Pixmap)):
+            return "%s%s" % (SkinPath,Pixmap)
         elif path.exists(resolveFilename(SCOPE_SKIN, 'skin_default/vfd_icons/%s' % Pixmap)):
             return resolveFilename(SCOPE_SKIN, 'skin_default/vfd_icons/%s' % Pixmap)
         elif path.exists(resolveFilename(SCOPE_SKIN, 'skin_default/icons/%s' % Pixmap)):
             return resolveFilename(SCOPE_SKIN, 'skin_default/icons/%s' % Pixmap)
+        elif path.exists(resolveFilename(SCOPE_SKIN, 'skin_default/%s' % Pixmap)):
+            return resolveFilename(SCOPE_SKIN, 'skin_default/%s' % Pixmap)
         elif path.exists("%s%s" % (PluginPath, Pixmap)):
             return "%s%s" % (PluginPath, Pixmap)
+        elif path.exists("%spic/%s" % (PluginPath, Pixmap)):
+            return "%spic/%s" % (PluginPath, Pixmap)
         else:
             return "%spic/config.png" % (PluginPath)
 

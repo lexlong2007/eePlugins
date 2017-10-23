@@ -1,7 +1,7 @@
 <definition>
   <widgetInit script="self['DATE'] = Label('29.12.2029')" />
   <previewXML>
-    <widget name="DATE" position="320,10" size="150,35" foregroundColor="white" backgroundColor="#000000" zPosition="2" transparent="0" halign="right" font="Regular;32" />
+    <widget source="global.CurrentTime" name="DATE" position="320,10" size="150,35" foregroundColor="white" backgroundColor="#000000" zPosition="2" transparent="0" halign="right" font="Regular;32" />
   </previewXML>
   <widgetXML>
       <widget source="global.CurrentTime" render="Label" position="320,10" size="150,35" foregroundColor="white" backgroundColor="#000000" zPosition="2" transparent="0" halign="right" font="Regular;32">

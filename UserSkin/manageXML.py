@@ -6,7 +6,7 @@ from os import listdir
 import xml.etree.cElementTree as ET
 from Tools.LoadPixmap import LoadPixmap
 
-def getWidgetsDefinitions(fileXML): #/usr/local/e2/lib/enigma2/python/Plugins/Extensions/UserSkin//LCDskin/rec.widget.xml
+def getWidgetsDefinitions(fileXML, sizeX, sizeY): #/usr/local/e2/lib/enigma2/python/Plugins/Extensions/UserSkin//LCDskin/rec.widget.xml
     wDict = {}
     for fileName in listdir(fileXML):
         widgetActiveState='X'
@@ -17,7 +17,7 @@ def getWidgetsDefinitions(fileXML): #/usr/local/e2/lib/enigma2/python/Plugins/Ex
         widgetPic='widget.png' #config.png
         widgetInfo=''
         printDEBUG(fileName)
-        widgetFaultyAttrib=''
+        widgetFaultyAttribs=[]
         if fileName.startswith('widget-') and fileName.endswith('.xml'):
             wgetfileName= PluginPath + '/LCDskin/' + fileName
             try:
@@ -37,7 +37,7 @@ def getWidgetsDefinitions(fileXML): #/usr/local/e2/lib/enigma2/python/Plugins/Ex
                             if child[0].attrib['pixmap'].endswith('config.png'):
                                 widgetInfo = _('pixmap path is incorrect')
                                 widgetActiveState='?' #if ? needs configuration
-                                widgetFaultyAttrib = 'pixmap'
+                                widgetFaultyAttribs.append('pixmap')
                         if 'font' in child[0].attrib :
                             widgetPic='label.png'
                         previewXML = ET.tostring(child[0]).strip()
@@ -54,21 +54,34 @@ def getWidgetsDefinitions(fileXML): #/usr/local/e2/lib/enigma2/python/Plugins/Ex
                               'previewXML':previewXML,
                               'widgetXML':widgetXML,
                               'wgetfileName':wgetfileName,
-                              'widgetParams':getWidgetParams(previewXML),
-                              'widgetFaultyAttrib':widgetFaultyAttrib
+                              'widgetFaultyAttribs':widgetFaultyAttribs
                               }
     return wDict
 
+def updateWidgetparam(widgetXML, param, paramValue):
+    root = ET.ElementTree(ET.fromstring(widgetXML)).getroot()
+    if param in root.attrib:
+        root.attrib[param] = paramValue
+    widgetXML = ET.tostring(root)
+    print '>>>>>>>>>>>>>>>>>>>>>>', param, widgetXML
+    return widgetXML
+  
 def getWidgetParams(previewXML):
-    params = [(_('Widget attributes:'),)]
+    params = [(_('Widget attributes:'), LoadPixmap(getPixmapPath('wdg_btn_menu.png')))]
     root = ET.ElementTree(ET.fromstring(previewXML)).getroot()
     knownAttribs=('position','size','pixmap')
     hiddenAttributes=('name')
     for param in knownAttribs:
         if param in root.attrib:
-            params.append((param + ' = ' + root.attrib[param],))
+            params.append((param + ' = ' + root.attrib[param], LoadPixmap(getPixmapPath('wdg_btn_%s.png' % param))))
+    return params
+
+def getWidgetParams4Config(previewXML):
+    params = [(_('Widget attributes:'),)]
+    root = ET.ElementTree(ET.fromstring(previewXML)).getroot()
+    knownAttribs=('position','size','pixmap')
     for param in root.attrib:
-        if param not in knownAttribs and param not in hiddenAttributes:
+        if param not in knownAttribs:
             params.append((param + ' = ' + root.attrib[param],))
             
     return params

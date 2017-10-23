@@ -507,5 +507,14 @@ msgstr "Ikona pogody"
 msgid "WEATHERtemp"
 msgstr "Temperatura"
 
+msgid "File %s.design\n ...has been written"
+msgstr "Zapisano plik...\n%s"
+
+msgid "Error occured: %s"
+msgstr "Wystąpił błąd: %s"
+
+msgid "Design %s\n ...has been loaded"
+msgstr "Wzór %s\n ... został załadowany"
+
 msgid "aqq2"
 msgstr ""

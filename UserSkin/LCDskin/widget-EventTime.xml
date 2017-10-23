@@ -1,7 +1,7 @@
 <definition>
-  <widgetInit script="self['EventTime'] = Slider(0, 100);self['EventTime'].setValue(75)" />
+  <widgetInit script="self['EVENTTIMEprogress'] = Slider(0, 100);self['EVENTTIMEprogress'].setValue(75)" />
   <previewXML>
-    <widget name="EventTime" position="10,270" size="460,30" zPosition="5" transparent="0" backgroundColor="white" borderWidth="2" />
+    <widget name="EVENTTIMEprogress" position="10,270" size="460,30" zPosition="5" transparent="0" backgroundColor="white" borderWidth="2" />
   </previewXML>
   <widgetXML>
     <widget source="session.Event_Now" render="Progress"  position="10,270" size="460,30" zPosition="5" transparent="0" backgroundColor="white" borderWidth="2">

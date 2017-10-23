@@ -73,17 +73,18 @@ class miniTVskinner(Screen):
             self.LCDwidth = getDesktop(1).size().width()
             self.LCDheight = getDesktop(1).size().height()
             self.imageType = 'AQQ'
-        skin = """
+        self.skin = """
         <screen name="MiniTVskinner" title="miniTV (%dx%d) skin creator mod j00zek on %s" position="center,center" size="1280,720">
             <eLabel position="0,0" size="%d,%d" zPosition="-10" backgroundColor="#00aaaaaa" />
           <!-- active WIDGET description -->
             <widget source="WidgetParams" render="Listbox" position="0,480" size="800,240" scrollbarMode="showOnDemand" zPosition="10" backgroundColor="#080808" >
                 <convert type="TemplatedMultiContent">
                     {"template": [
-                        MultiContentEntryText(pos = (0,0), size = (800, 22), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 0, color=0x808080, color_sel=0xffffff ),
+                        MultiContentEntryText(pos = (0,0), size = (774, 26), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 0, color=0x808080, color_sel=0xffffff ),
+                        MultiContentEntryPixmapAlphaTest(pos = (696, 0), size = (104, 26), png = 1),
                         ],
-                        "fonts": [gFont("Regular", 20)],
-                        "itemHeight": 22
+                        "fonts": [gFont("Regular", 22)],
+                        "itemHeight": 28
                     }
                 </convert>
             </widget>
@@ -96,10 +97,9 @@ class miniTVskinner(Screen):
             <widget name="yellow" position="820,670" size="485,25" zPosition="10" font="Regular;21" noWrap="1" halign="left" valign="center"  transparent="1"/>
             <eLabel position="810,695" size="5,25" zPosition="-10" backgroundColor="#202673ec" />
             <widget name="blue" position="820,695" size="485,25" zPosition="10" font="Regular;21" noWrap="1" halign="left" valign="center"  transparent="1"/>
-            <!--ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/UserSkin/pic/left_right.png" position="1013,695" size="25,25" alphatest="on" />
-            <widget name="leftright" position="1055,695" size="700,25" zPosition="10" font="Regular;21" noWrap="1" halign="left" valign="center" /-->
           <!-- Widgets list on right -->
-            <widget name="InfoLine" position="810,5" size="470,30" zPosition="5" transparent="0" halign="left" valign="top" font="Regular;28" foregroundColor="yellow" />
+            <widget name="InfoLine" position="810,5" size="410,30" zPosition="5" transparent="0" halign="left" valign="top" font="Regular;28" foregroundColor="yellow" />
+            <ePixmap pixmap="%spic/wdg_btn_ch_plus_minus.png" position="1228,5" size="60,30" alphatest="on" zPosition="10" />
             <widget source="Widgetslist" render="Listbox" position="810,40" size="470,550" scrollbarMode="showOnDemand" zPosition="10" backgroundColor="#20a0a0a0">
                 <convert type="TemplatedMultiContent">
                     {"template": [
@@ -113,44 +113,46 @@ class miniTVskinner(Screen):
                     }
                 </convert>
             </widget>
-          <!-- WIDGETS -->\n""" % (self.LCDwidth, self.LCDheight, self.imageType, self.LCDwidth+2, self.LCDheight+2)
+          <!-- WIDGETS -->\n""" % (self.LCDwidth, self.LCDheight, self.imageType, self.LCDwidth+2, self.LCDheight+2, PluginPath)
           
-        skinLCD = '<screen name="MiniTVskinner_summary" position="center,center" size="%d,%d">' % (self.LCDwidth, self.LCDheight)
+        self.skinLCD = '<screen name="MiniTVskinner_summary" position="center,center" size="%d,%d">' % (self.LCDwidth, self.LCDheight)
     
-        self.WidgetsDict = getWidgetsDefinitions(PluginPath + '/LCDskin/')
-        self.WidgetsList = []
+        if getDictDesigns() is None:
+            self.WidgetsDict = getWidgetsDefinitions(PluginPath + '/LCDskin/', self.LCDwidth, self.LCDheight)
+        else:
+            self.WidgetsDict = getDictDesigns()
+            setDictDesigns(None)
+            
         for widget in self.WidgetsDict:
-            skin += '          ' + self.WidgetsDict[widget]['previewXML'] + '\n'
-            skinLCD +=  '          ' + self.WidgetsDict[widget]['previewXML'] + '\n'
-            self.WidgetsList.append(( LoadPixmap(getPixmapPath(self.WidgetsDict[widget]['widgetPic'])),self.WidgetsDict[widget]['widgetActiveState'],
-                                      self.WidgetsDict[widget]['widgetDisplayName'],self.WidgetsDict[widget]['widgetInfo'],widget))
+            self.skin += '          ' + self.WidgetsDict[widget]['previewXML'] + '\n'
+            self.skinLCD +=  '          ' + self.WidgetsDict[widget]['previewXML'] + '\n'
                         
-        skin += '\n</screen>'
-        skinLCD += '\n</screen>'
+        self.skin += '\n</screen>'
+        self.skinLCD += '\n</screen>'
         
-        printDEBUG(skin)
-        self.skin = skin
+        printDEBUG(self.skin)
+        #self.skin = skin
         self.session = session
         Screen.__init__(self, session)
 
-        self["actions"]  = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", "SetupActions", "NumberActions", "MenuActions", "EPGSelectActions"], {
-            "cancel": self.keyCancel,
-            "ok": self.KeyOK,
-            "left": self.KeyLeft,
-            "right": self.KeyRight,
-            "up": self.KeyUp,
-            "down": self.KeyDown,
-            "red": self.keyCancel,
-            "nextBouquet" : self.listUP,
-            "prevBouquet" : self.listDown,
-            "red" : self.KeyRed,
-            "green": self.KeyGreen,
-            "yellow": self.KeyYellow,
-            "blue" : self.KeyBlue,
-            "2" : self.heightDecrease,
-            "8" : self.heightIncrease,
-            "4" : self.widthDecrease,
-            "6" : self.widthIncrease,
+        self["actions"]  = ActionMap(["UserSkinMiniTVmakerActions"], {
+            "keyCancel": self.keyCancel,
+            "keyOK": self.KeyOK,
+            "keyLeft": self.KeyLeft,
+            "keyRight": self.KeyRight,
+            "keyUp": self.KeyUp,
+            "keyDown": self.KeyDown,
+            "keyChannelUp" : self.listUP,
+            "keyChannelDown" : self.listDown,
+            "keyMenu" : self.widgetConfig,
+            "keyRed" : self.KeyRed,
+            "keyGreen": self.KeyGreen,
+            "keyYellow": self.KeyYellow,
+            "keyBlue" : self.KeyBlue,
+            "key2" : self.heightDecrease,
+            "key8" : self.heightIncrease,
+            "key4" : self.widthDecrease,
+            "key6" : self.widthIncrease,
         }, -1)
         
         addFont(resolveFilename(SCOPE_FONTS,"meteocons.ttf"), "Meteo", 100, False)
@@ -175,13 +177,16 @@ class miniTVskinner(Screen):
         #self['leftright'] = Label(_("Resize width/height"))
         
         #initiate dynamic widgets
+        self.updateWidgetsList() #generates self.WidgetsList
         for widget in self.WidgetsList: #(widgetPic, widgetActiveState _(widgetName), widgetName, widgetInitscript, previewXML, widgetXML) #widgetActiveState=X then widget disabled
             printDEBUG('Executing:%s' % self.WidgetsDict[widget[4]]['widgetInitscript'])
             if self.WidgetsDict[widget[4]]['widgetInitscript'] != '':
                 try:
                     exec(self.WidgetsDict[widget[4]]['widgetInitscript'])
                 except Exception, e:
-                    printDEBUG('EXCEPTION running init script for %s:' % (widget, str(e)))
+                    printDEBUG('EXCEPTION running init script for %s: %s' % (widget[4], str(e)))
+            if self.WidgetsDict[widget[4]]['widgetActiveState'] != '':
+                self[widget[4]].hide()
 
         self.xachse = 0
         self.yachse = 0
@@ -192,50 +197,22 @@ class miniTVskinner(Screen):
         self.onLayoutFinish.append(self.start)
 
     def start(self):
-        l = self.WidgetsList #(widgetPic, widgetActiveState, _(widgetName), widgetName, widgetInitscript, previewXML, widgetXML) #widgetActiveState=X then widget disabled
-        l.sort()
+        l = self.WidgetsList
         self["Widgetslist"].list = l
         self.currIndex=self["Widgetslist"].getIndex()
+        self.currWidgetName = self.WidgetsList[self.currIndex][4]
         
-        self.miniTVskinsPath = resolveFilename(SCOPE_CONFIG, 'miniTVskins')
-        if not fileExists(self.miniTVskinsPath):
-            os.mkdir(miniTVskinsPath)  
+        self.miniTVdesignsPath = resolveFilename(SCOPE_CONFIG, 'miniTVdesigns')
+        if not fileExists(self.miniTVdesignsPath):
+            os.mkdir(self.miniTVdesignsPath)  
 
         if not self.selectionChanged in self["Widgetslist"].onSelectionChanged:
             self["Widgetslist"].onSelectionChanged.append(self.selectionChanged)
 
-        #self.readSize()
+        self.readSize()
         #self.showWidgetInfo()
         #self.readBackups()
-
-    def listUP(self):
-        self["Widgetslist"].selectPrevious()
-        self.showWidgetInfo()
-        
-    def listDown(self):
-        if self.currIndex == len(self.WidgetsList) -1 :
-            self["Widgetslist"].setIndex(0)
-        else:
-            self["Widgetslist"].selectNext()
-        self.showWidgetInfo()
-
-    def showWidgetInfo(self):
-        return
-        self.readSize()
-        myInfo  = _('Active Widget:\n')
-        myInfo += _('Position: %sx%s') % ( self[self.widgetLabel].instance.position().x(), self[self.widgetLabel].instance.position().y() )
-        myInfo += '\n'
-        myInfo += _('size: %sx%s') % ( self[self.widgetLabel].instance.size().width(), self[self.widgetLabel].instance.size().height() )
-        myInfo += '\n'
-        myInfo += _('Font: XXX')
-        myInfo += '\n'
-        myInfo += _('size: YYY')
-        myInfo += '\n'
-        myInfo += _('Text color: XXX')
-        myInfo += '\n'
-        myInfo += _('Background color: YYY')
-        myInfo += '\n'
-        myInfo += _('Path: /aqq\n')
+        self.selectionChanged()
 
     def heightDecrease(self):
         self.changeSize('height', -2)
@@ -255,43 +232,26 @@ class miniTVskinner(Screen):
         self.readSize()
         if Dimension == "width":
             self.xsize += Value
-            self[self.widgetLabel].instance.resize(eSize(self.xsize,self.ysize))
+            self[self.currWidgetName].instance.resize(eSize(self.xsize,self.ysize))
         else:
             self.ysize += Value
-            self[self.widgetLabel].instance.resize(eSize(self.xsize,self.ysize))
+            self[self.currWidgetName].instance.resize(eSize(self.xsize,self.ysize))
 
-        if str(type(self[self.widgetLabel])) == "<class 'Components.Pixmap.Pixmap'>":
-            self[self.widgetLabel].instance.setScale(3)
-        elif str(type(self[self.widgetLabel])) == "<class 'Components.Slider.Slider'>":
+        if str(type(self[self.currWidgetName])) == "<class 'Components.Pixmap.Pixmap'>":
+            self[self.currWidgetName].instance.setScale(3)
+        elif str(type(self[self.currWidgetName])) == "<class 'Components.Slider.Slider'>":
             pass
         else:
             if Dimension == "height":
-                if self.widgetLabel == "WEATHER":
-                    self[self.widgetLabel].instance.setFont(gFont('Meteo', self.ysize))
+                if self.currWidgetName == "WEATHER":
+                    self[self.currWidgetName].instance.setFont(gFont('Meteo', self.ysize))
                 else:
-                    self[self.widgetLabel].instance.setFont(gFont('Regular', self.ysize-2))
+                    self[self.currWidgetName].instance.setFont(gFont('Regular', self.ysize-2))
         self.showWidgetInfo()
 
     def readSize(self):
-        return
-        self.widgetLabel = self["Widgetslist"].getCurrent()[0][0]
-        self.xsize = self[self.widgetLabel].instance.size().width()
-        self.ysize = self[self.widgetLabel].instance.size().height()
-        print self.widgetLabel, self.xsize, self.ysize
-
-    def writeDesign(self, filename):
-        if filename is not None and filename != '':
-            self.session.open(MessageBox, "writeDesign " + filename + '\n' + _("action NOT ready yet"), type = MessageBox.TYPE_INFO, timeout=10)
-
-    def readBackups(self):
-        self.backuplist = []
-        for fileName in os.listdir(miniTVskinsPath):
-            if fileName.endswith('.backup'):
-                fileName = fileName[:-7]
-                fileParts = fileName.split(',')
-                if len(fileParts) == 2:
-                    self.backuplist.append((fileParts[0],fileParts[1]))
-        self.backuplist.reverse()
+        self.xsize = self[self.currWidgetName].instance.size().width()
+        self.ysize = self[self.currWidgetName].instance.size().height()
 
     def writeSkinFile(self, which):
         screenPart = ""
@@ -343,108 +303,142 @@ class miniTVskinner(Screen):
         print width, height
         return width, height
 
-    def KeyOK(self):
-        widgetLabelName = self.WidgetsList[self.currIndex][2] #(widgetPic, widgetActiveState, _(widgetName), widgetName, widgetInitscript, previewXML, widgetXML) #widgetActiveState=X then widget disabled
-        widgetLabelStatus = self.WidgetsList[self.currIndex][1]
-        if widgetLabelStatus == 'X':
-            self[widgetLabelName].show()
-            self.WidgetsList[self.currIndex][1] = ''
-        elif widgetLabelStatus == '':
-            self[widgetLabelName].hide()
-            self.WidgetsList[self.currIndex][1] = 'X'
-
-    def changeWidgetStatus(self, widgetLabelName, currentStatus):
-        dumpList = []
-        for name,status in self.WidgetsList:
-            if name == widgetLabelName:
-                dumpList.append((name, currentStatus))
-            else:
-                dumpList.append((name, status))
-        self.WidgetsList = dumpList
-        self.chooseMenuList.setList(map(self.paintWidgetsList, self.WidgetsList))
-
     def readPos(self):
-        self.widgetLabel = self["Widgetslist"].getCurrent()[0][0]
-        print self.widgetLabel
-        pos = self[self.widgetLabel].instance.position()
-        self.xachse = pos.x()
-        self.yachse = pos.y()
+        print self.currWidgetName
+        pos = self[self.currWidgetName].instance.position()
+        return pos.x(),  pos.y()
+#### WIDGETS LIST >>>
+    def updateWidgetsList(self, refreshGUI = False):
+        self.WidgetsList = []
+        for widget in self.WidgetsDict:
+            self.WidgetsList.append(( LoadPixmap(getPixmapPath(self.WidgetsDict[widget]['widgetPic'])),self.WidgetsDict[widget]['widgetActiveState'],
+                                      self.WidgetsDict[widget]['widgetDisplayName'],self.WidgetsDict[widget]['widgetInfo'],widget))
+        
+        try: self.WidgetsList.sort(key=lambda t : tuple(str(t[2]).lower()))
+        except Exception: self.WidgetsList.sort()
+        
+        if refreshGUI == True:
+            try:
+                self["Widgetslist"].UpdateList(self.WidgetsList)
+            except Exception:
+                print "Update assert error :(" #workarround to have it working on openpliPC
+                myIndex=self["Widgetslist"].getIndex() #as an effect, index is cleared so we need to store it first
+                self["Widgetslist"].setList(self.WidgetsList)
+                self["Widgetslist"].setIndex(myIndex) #and restore
+            self.selectionChanged()
+      
+    def showWidgetInfo(self):
+        self["WidgetParams"].list = getWidgetParams(self.WidgetsDict[self.currWidgetName]['previewXML'])
+
+    def listUP(self):
+        self["Widgetslist"].selectPrevious()
+        #self.showWidgetInfo()
+        
+    def listDown(self):
+        if self.currIndex == len(self.WidgetsList) -1 :
+            self["Widgetslist"].setIndex(0)
+        else:
+            self["Widgetslist"].selectNext()
+        #self.showWidgetInfo()
 
     def selectionChanged(self):
         self.currIndex=self["Widgetslist"].getIndex()
-        self.currwidgetName = self.WidgetsList[self.currIndex][4]
-        myList = self.WidgetsDict[self.currwidgetName]['widgetParams']
-        print myList
-        self["WidgetParams"].list = myList
-      
-    def KeyRight(self):
-        try:
-            if self["Widgetslist"].getCurrent()[0][1] == "0":
-                return
-        except Exception:
-            return
-        self.readPos()
-        self.xachse += 5
-        if self.xachse < self.LCDwidth:
-            newPos = ePoint(self.xachse,self.yachse)
-            self[self.widgetLabel].move(newPos)
-            self.showWidgetInfo()
+        self.currWidgetName = self.WidgetsList[self.currIndex][4]
+        self.showWidgetInfo()
+        
+    def KeyOK(self):
+        self.currWidgetName = self.WidgetsList[self.currIndex][4]
+        if self.WidgetsDict[self.currWidgetName]['widgetActiveState'] == 'X':
+            self[self.currWidgetName].show()
+            self.WidgetsDict[self.currWidgetName]['widgetActiveState'] = ''
+        elif self.WidgetsDict[self.currWidgetName]['widgetActiveState'] == '':
+            self[self.currWidgetName].hide()
+            self.WidgetsDict[self.currWidgetName]['widgetActiveState'] = 'X'
+        self.updateWidgetsList(refreshGUI=True)
+#### MOVING WIDGET
+    def KeyRight(self, step=1):
+        self.changePos(1, 0)
         
     def KeyLeft(self):
-        try:
-            if self["Widgetslist"].getCurrent()[0][1] == "0":
-                return
-        except Exception:
-            return
-        self.readPos()
-        self.xachse -= 5
-        if self.xachse < 0:
-            self.xachse = 0
-        newPos = ePoint(self.xachse,self.yachse)
-        self[self.widgetLabel].move(newPos)
-        self.showWidgetInfo()
+        self.changePos(-1, 0)
 
     def KeyDown(self):
-        try:
-            if self["Widgetslist"].getCurrent()[0][1] == "0":
-                return
-        except Exception:
-            return
-        self.readPos()
-        self.yachse += 5
-        if self.yachse < self.LCDheight:
-            newPos = ePoint(self.xachse,self.yachse)
-            self[self.widgetLabel].move(newPos)
-            self.showWidgetInfo()
+        self.changePos(0, 1)
 
     def KeyUp(self):
-        try:
-            if self["Widgetslist"].getCurrent()[0][1] == "0":
-                return
-        except Exception:
-            return
-        self.readPos()
-        self.yachse -= 5
-        if self.yachse < 0:
-            self.yachse = 0
-        newPos = ePoint(self.xachse,self.yachse)
-        self[self.widgetLabel].move(newPos)
-        self.showWidgetInfo()
+        self.changePos(0, -1)
 
+    def changePos(self,stepX=0, stepY=0):
+        if self["Widgetslist"].getCurrent()[1] == "":
+            posX, posY = self.readPos()
+            posX += stepX
+            if posX < 0: posX = 0
+            elif posX > self.LCDwidth: posX = self.LCDwidth
+            posY += stepY
+            if posY < 0: posY = 0
+            elif posY > self.LCDheight: posY = self.LCDheight
+            newPos = ePoint(posX, posY)
+            self[self.currWidgetName].move(newPos)
+            self.updateWidgetXMLs('position', '%s,%s' %(posX,posY))
+
+    def updateWidgetXMLs(self, param, paramValue):
+        self.WidgetsDict[self.currWidgetName]['previewXML'] = updateWidgetparam( self.WidgetsDict[self.currWidgetName]['previewXML'],param, paramValue)
+        self.WidgetsDict[self.currWidgetName]['widgetXML'] = updateWidgetparam( self.WidgetsDict[self.currWidgetName]['widgetXML'],param, paramValue)
+        self.showWidgetInfo()
+      
+#### LOAD DESIGNS >>>
     def KeyRed(self):
         savedDesigns = []
-        for fileName in os.listdir(self.miniTVskinsPath):
-            if fileName.endswith('.backup'):
-                savedDesigns.append((fileName[:-7],fileName))
+        for fileName in os.listdir(self.miniTVdesignsPath):
+            if fileName.endswith('.design'):
+                savedDesigns.append((fileName[:-7],"%s/%s" % (self.miniTVdesignsPath,fileName)))
+        for fileName in os.listdir('%s/LCDskin/sharedDesigns' % (PluginPath) ):
+            if fileName.endswith('.design'):
+                savedDesigns.append((fileName[:-7],"%s/%s" % (self.miniTVdesignsPath,fileName)))
         if len(savedDesigns) == 0:
             self.session.openWithCallback(self.doNothing, MessageBox,_("No saved designs found"),  type = MessageBox.TYPE_INFO, timeout = 10, default = False)
         else:
             self.session.openWithCallback(self.KeyRedCallback, ChoiceBox, title = _("Select saved design to load:"), list = savedDesigns)
       
     def KeyRedCallback(self, ret):
+        def _byteify(data, ignore_dicts = False):
+            # if this is a unicode string, return its string representation
+            if isinstance(data, unicode):
+                return data.encode('utf-8')
+            # if this is a list of values, return list of byteified values
+            if isinstance(data, list):
+                return [ _byteify(item, ignore_dicts=True) for item in data ]
+            # if this is a dictionary, return dictionary of byteified keys and values
+            # but only if we haven't already byteified it
+            if isinstance(data, dict) and not ignore_dicts:
+                return {
+                    _byteify(key, ignore_dicts=True): _byteify(value, ignore_dicts=True)
+                    for key, value in data.iteritems()
+                }
+            # if it's anything else, return it in its original form
+            return data
         if ret:
-            self.session.open(MessageBox, "Load\n" + self.miniTVskinsPath + ret[1] + '\n' + _("action NOT ready yet"), type = MessageBox.TYPE_INFO, timeout=10)
-      
+            wDict={}
+            import json
+            try:
+                with open(ret[1], 'r') as f:
+                    wDict= _byteify(json.loads(f.read(), object_hook=_byteify), ignore_dicts=True)
+                    f.close()
+                for widget in wDict:
+                  if widget in self.WidgetsDict:
+                      self.WidgetsDict[widget] = wDict[widget]
+                
+                setDictDesigns(self.WidgetsDict)
+                self.updateWidgetsList(True)      
+                self.session.openWithCallback(self.cancelRet,MessageBox, _("Design %s\n ...has been loaded") % ret[0], type = MessageBox.TYPE_INFO, timeout=10)
+            except Exception, e:
+                printDEBUG("Error occured: %s" % str(e))
+                self.session.open(MessageBox, "Error occured: %s" % str(e), type = MessageBox.TYPE_ERROR, timeout=10)
+                
+    def cancelRet(self, ret = None):
+        self.close(234)
+        
+#### WRITE DESIGNS >>>
     def KeyGreen(self):
         currentTime = time.strftime("%d.%m.%Y - %H:%M:%S")
         myList = []
@@ -457,11 +451,22 @@ class miniTVskinner(Screen):
     def KeyGreenCallback(self, ret):
         if ret:
             if ret[1] == True:
-                self.writeDesign(ret[0])
+                self.KeyGreenwriteDesign(ret[0])
             else:
                 from Screens.VirtualKeyBoard import VirtualKeyBoard
-                self.session.openWithCallback(self.writeDesign, VirtualKeyBoard, title=(_("Enter filename")), text = "")
+                self.session.openWithCallback(self.KeyGreenwriteDesign, VirtualKeyBoard, title=(_("Enter filename")), text = "")
 
+    def KeyGreenwriteDesign(self, filename):
+        if filename is not None and filename != '':
+            import json
+            try:
+                with open('%s/%s.design' % (self.miniTVdesignsPath, filename), 'w') as f:
+                    f.write(json.dumps(self.WidgetsDict, ensure_ascii=False))
+                    f.close()
+                self.session.open(MessageBox, _("File %s.design\n ...has been written") % filename, type = MessageBox.TYPE_INFO, timeout=10)
+            except Exception, e:
+                self.session.open(MessageBox, "Error occured: %s" % str(e), type = MessageBox.TYPE_ERROR, timeout=10)
+#### WRITE DESIGNS <<<
     def KeyYellow(self):
         self.session.open(MessageBox, "KeyYellow" +' ' + _("action NOT ready yet"), type = MessageBox.TYPE_INFO, timeout=10)
 
@@ -473,3 +478,20 @@ class miniTVskinner(Screen):
       
     def keyCancel(self):
         self.close()
+
+    def widgetConfig(self):
+        self.session.open(MessageBox, "widgetConfig" +' ' + _("action NOT ready yet"), type = MessageBox.TYPE_INFO, timeout=10)
+
+    def createSummary(self):
+         return None
+         #return miniTVskinnerLCDScreen
+      
+################################################################################################################################################################      
+class miniTVskinnerLCDScreen(Screen):
+    def __init__(self, session, parent):
+        Screen.__init__(self, session, parent = parent)
+        #/PluginBrowser.py
+        #self.onShow.append(self.addWatcher)
+        #self.onHide.append(self.removeWatcher)
+        
+

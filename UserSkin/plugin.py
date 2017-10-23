@@ -152,7 +152,7 @@ class UserSkin_Menu(Screen):
                 return
             elif selected == 'LCDskin':
                 from miniTVskinner import miniTVskinner
-                self.session.openWithCallback(self.doNothing,miniTVskinner)
+                self.session.openWithCallback(self.LCDskinRet,miniTVskinner)
                 return
             elif selected == 'ListScreens':
                 from ScreensLister import ScreensLister
@@ -191,8 +191,15 @@ class UserSkin_Menu(Screen):
                 self.session.openWithCallback(self.refresh, UserSkinconsole, title = _("History of changes"), cmdlist = [ '%sscripts/SkinHistory.sh %s' % (PluginPath,SkinPath) ])
                 return
 
+        def LCDskinRet(self, retDict = None):
+            if retDict is not None:
+                print retDict
+                from miniTVskinner import miniTVskinner
+                self.session.openWithCallback(self.LCDskinRet,miniTVskinner)
+            return
+              
         def doNothing(self):
-                return
+            return
                 
         def quit(self):
-                self.close()
+            self.close()
