@@ -75,7 +75,8 @@ class miniTVskinner(Screen):
             self.imageType = 'AQQ'
         self.skin = """
         <screen name="MiniTVskinner" title="miniTV (%dx%d) skin creator mod j00zek on %s" position="center,center" size="1280,720">
-            <eLabel position="0,0" size="%d,%d" zPosition="-10" backgroundColor="#00aaaaaa" />
+            <eLabel position="0,0" size="800,460" zPosition="-10" backgroundColor="#00222222" />
+            <eLabel position="0,0" size="%d,%d" zPosition="-9" backgroundColor="#00555555" />
           <!-- active WIDGET description -->
             <widget source="WidgetParams" render="Listbox" position="0,480" size="800,240" scrollbarMode="showOnDemand" zPosition="10" backgroundColor="#080808" >
                 <convert type="TemplatedMultiContent">
@@ -174,7 +175,6 @@ class miniTVskinner(Screen):
         self['green'] = Label(_("Save design"))
         self['yellow'] = Label(_("Save as LCD skin"))
         self['blue'] = Label(_("Save as UserSkin skin"))
-        #self['leftright'] = Label(_("Resize width/height"))
         
         #initiate dynamic widgets
         self.updateWidgetsList() #generates self.WidgetsList
@@ -188,8 +188,6 @@ class miniTVskinner(Screen):
             if self.WidgetsDict[widget[4]]['widgetActiveState'] != '':
                 self[widget[4]].hide()
 
-        self.xachse = 0
-        self.yachse = 0
         self.wsize = "height"
         self.xsize = 0
         self.ysize = 0
@@ -213,45 +211,6 @@ class miniTVskinner(Screen):
         #self.showWidgetInfo()
         #self.readBackups()
         self.selectionChanged()
-
-    def heightDecrease(self):
-        self.changeSize('height', -2)
-      
-    def widthDecrease(self):
-        self.changeSize('width', -2)
-      
-    def heightIncrease(self):
-        self.changeSize('height', 2)
-      
-    def widthIncrease(self):
-        self.changeSize('width', 2)
-
-    def changeSize(self, Dimension, Value ):
-        if self["Widgetslist"].getCurrent()[0][1] == "0":
-            return
-        self.readSize()
-        if Dimension == "width":
-            self.xsize += Value
-            self[self.currWidgetName].instance.resize(eSize(self.xsize,self.ysize))
-        else:
-            self.ysize += Value
-            self[self.currWidgetName].instance.resize(eSize(self.xsize,self.ysize))
-
-        if str(type(self[self.currWidgetName])) == "<class 'Components.Pixmap.Pixmap'>":
-            self[self.currWidgetName].instance.setScale(3)
-        elif str(type(self[self.currWidgetName])) == "<class 'Components.Slider.Slider'>":
-            pass
-        else:
-            if Dimension == "height":
-                if self.currWidgetName == "WEATHER":
-                    self[self.currWidgetName].instance.setFont(gFont('Meteo', self.ysize))
-                else:
-                    self[self.currWidgetName].instance.setFont(gFont('Regular', self.ysize-2))
-        self.showWidgetInfo()
-
-    def readSize(self):
-        self.xsize = self[self.currWidgetName].instance.size().width()
-        self.ysize = self[self.currWidgetName].instance.size().height()
 
     def writeSkinFile(self, which):
         screenPart = ""
@@ -302,11 +261,70 @@ class miniTVskinner(Screen):
         width, height = im.size
         print width, height
         return width, height
+#### CHANGE WIDGET SIZE
+    def heightDecrease(self):
+        self.changeSize(0,-1)
+      
+    def widthDecrease(self):
+        self.changeSize(-1,0)
+      
+    def heightIncrease(self):
+        self.changeSize(0,1)
+      
+    def widthIncrease(self):
+        self.changeSize(1,0)
+
+    def readSize(self):
+        sizeX = self[self.currWidgetName].instance.size().width()
+        sizeY = self[self.currWidgetName].instance.size().height()
+        return sizeX, sizeY
+
+    def changeSize(self, stepX=0, stepY=0 ):
+        if self["Widgetslist"].getCurrent()[1] == "":
+            sizeX, sizeY = self.readSize()
+            sizeX += stepX
+            if sizeX < 1: sizeX = 1
+            elif sizeX > self.LCDwidth: sizeX = self.LCDwidth
+            sizeY += stepY
+            if sizeY < 1: sizeY = 1
+            elif sizeY > self.LCDheight: sizeY = self.LCDheight
+            self[self.currWidgetName].instance.resize(eSize(sizeX,sizeY))
+            self.updateWidgetXMLs('size', '%s,%s' %(sizeX,sizeY))
+#### MOVING WIDGET
+    def KeyRight(self, step=1):
+        self.changePos(1, 0)
+        
+    def KeyLeft(self):
+        self.changePos(-1, 0)
+
+    def KeyDown(self):
+        self.changePos(0, 1)
+
+    def KeyUp(self):
+        self.changePos(0, -1)
 
     def readPos(self):
-        print self.currWidgetName
         pos = self[self.currWidgetName].instance.position()
         return pos.x(),  pos.y()
+
+    def changePos(self,stepX=0, stepY=0):
+        if self["Widgetslist"].getCurrent()[1] == "":
+            posX, posY = self.readPos()
+            posX += stepX
+            if posX < 0: posX = 0
+            elif posX > self.LCDwidth: posX = self.LCDwidth
+            posY += stepY
+            if posY < 0: posY = 0
+            elif posY > self.LCDheight: posY = self.LCDheight
+            newPos = ePoint(posX, posY)
+            self[self.currWidgetName].move(newPos)
+            self.updateWidgetXMLs('position', '%s,%s' %(posX,posY))
+
+#### Manipulate WIDGET XMLs >>>
+    def updateWidgetXMLs(self, param, paramValue):
+        self.WidgetsDict[self.currWidgetName]['previewXML'] = updateWidgetparam( self.WidgetsDict[self.currWidgetName]['previewXML'],param, paramValue)
+        self.WidgetsDict[self.currWidgetName]['widgetXML'] = updateWidgetparam( self.WidgetsDict[self.currWidgetName]['widgetXML'],param, paramValue)
+        self.showWidgetInfo()
 #### WIDGETS LIST >>>
     def updateWidgetsList(self, refreshGUI = False):
         self.WidgetsList = []
@@ -355,37 +373,6 @@ class miniTVskinner(Screen):
             self[self.currWidgetName].hide()
             self.WidgetsDict[self.currWidgetName]['widgetActiveState'] = 'X'
         self.updateWidgetsList(refreshGUI=True)
-#### MOVING WIDGET
-    def KeyRight(self, step=1):
-        self.changePos(1, 0)
-        
-    def KeyLeft(self):
-        self.changePos(-1, 0)
-
-    def KeyDown(self):
-        self.changePos(0, 1)
-
-    def KeyUp(self):
-        self.changePos(0, -1)
-
-    def changePos(self,stepX=0, stepY=0):
-        if self["Widgetslist"].getCurrent()[1] == "":
-            posX, posY = self.readPos()
-            posX += stepX
-            if posX < 0: posX = 0
-            elif posX > self.LCDwidth: posX = self.LCDwidth
-            posY += stepY
-            if posY < 0: posY = 0
-            elif posY > self.LCDheight: posY = self.LCDheight
-            newPos = ePoint(posX, posY)
-            self[self.currWidgetName].move(newPos)
-            self.updateWidgetXMLs('position', '%s,%s' %(posX,posY))
-
-    def updateWidgetXMLs(self, param, paramValue):
-        self.WidgetsDict[self.currWidgetName]['previewXML'] = updateWidgetparam( self.WidgetsDict[self.currWidgetName]['previewXML'],param, paramValue)
-        self.WidgetsDict[self.currWidgetName]['widgetXML'] = updateWidgetparam( self.WidgetsDict[self.currWidgetName]['widgetXML'],param, paramValue)
-        self.showWidgetInfo()
-      
 #### LOAD DESIGNS >>>
     def KeyRed(self):
         savedDesigns = []

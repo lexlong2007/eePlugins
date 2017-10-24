@@ -516,5 +516,14 @@ msgstr "Wystąpił błąd: %s"
 msgid "Design %s\n ...has been loaded"
 msgstr "Wzór %s\n ... został załadowany"
 
+msgid "PICONZ"
+msgstr "Pikona Z (400x170)"
+
+msgid "PICONX"
+msgstr "Pikona X (220x132)"
+
+msgid "PICON"
+msgstr "Pikona (100x60)"
+
 msgid "aqq2"
 msgstr ""

@@ -1,10 +1,10 @@
 <definition>
-  <widgetInit script="self['ChannelName'] = Label('Paramount HD')" />
+  <widgetInit script="self[''] = Label('Paramount HD')" />
   <previewXML>
-    <widget name="ChannelName" position="350,350" size="100,42" foregroundColor="white" backgroundColor="#000000" zPosition="3" transparent="0" halign="left" valign="top" font="Regular;40" />
+    <widget name="" position="350,350" size="300,44" foregroundColor="white" backgroundColor="#000000" zPosition="3" transparent="0" halign="left" valign="top" font="Regular;40" />
   </previewXML>
   <widgetXML>
-      <widget source="session.CurrentService" render="Label" text="123" position="350,350" size="100,42" foregroundColor="white" backgroundColor="#000000" zPosition="3" transparent="0" halign="left" valign="top" font="Regular;40" >
+      <widget source="session.CurrentService" render="Label" text="123" position="350,350" size="300,44" foregroundColor="white" backgroundColor="#000000" zPosition="3" transparent="0" halign="left" valign="top" font="Regular;40" >
         <convert type="ServiceName">Name</convert>
       </widget>
   </widgetXML>

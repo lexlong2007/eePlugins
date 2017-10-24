@@ -31,6 +31,18 @@ myDEBUGfile = '/tmp/%s.log' % PluginName
 
 DictDesigns=None
 
+def getSkinName():
+    global CurrentSkinName
+    return CurrentSkinName
+
+def getSkinPath():
+    global SkinPath
+    return SkinPath
+
+def getPluginPath():
+    global PluginPath
+    return PluginPath
+
 def getDictDesigns():
     global DictDesigns
     return DictDesigns
@@ -55,6 +67,8 @@ def getPixmapPath(Pixmap=None):
             return resolveFilename(SCOPE_SKIN, 'skin_default/icons/%s' % Pixmap)
         elif path.exists(resolveFilename(SCOPE_SKIN, 'skin_default/%s' % Pixmap)):
             return resolveFilename(SCOPE_SKIN, 'skin_default/%s' % Pixmap)
+        elif path.exists(resolveFilename(SCOPE_SKIN, '%s' % Pixmap)):
+            return resolveFilename(SCOPE_SKIN, '%s' % Pixmap)
         elif path.exists("%s%s" % (PluginPath, Pixmap)):
             return "%s%s" % (PluginPath, Pixmap)
         elif path.exists("%spic/%s" % (PluginPath, Pixmap)):
