@@ -2,7 +2,7 @@
 from inits import *
 from debug import printDEBUG
 from translate import _
-from os import listdir
+from os import listdir, path as os_path
 import xml.etree.cElementTree as ET
 from Tools.LoadPixmap import LoadPixmap
 import re
@@ -62,18 +62,25 @@ def getWidgetsDefinitions(fileXML, sizeX, sizeY): #/usr/local/e2/lib/enigma2/pyt
                               }
     return wDict
 
-def updateWidgetparam(widgetXML, param, paramValue):
+def updateWidgetparam(widgetXML, paramName, paramValue):
     root = ET.ElementTree(ET.fromstring(widgetXML)).getroot()
-    if param in root.attrib:
-        root.attrib[param] = paramValue
+    if paramName in root.attrib:
+        root.attrib[paramName] = paramValue
     widgetXML = ET.tostring(root)
-    #print '>>>>>>>>>>>>>>>>>>>>>>', param, widgetXML
+    #print '>>>>>>>>>>>>>>>>>>>>>>', paramName, widgetXML
     return widgetXML
   
+def getWidgetParam(previewXML, paramName):
+    paramValue = None
+    root = ET.ElementTree(ET.fromstring(previewXML)).getroot()
+    if paramName in root.attrib:
+        paramValue = root.attrib[paramName]
+    return paramValue
+
 def getWidgetParams(previewXML):
     params = [(_('Widget attributes:'), LoadPixmap(getPixmapPath('wdg_btn_menu.png')))]
     root = ET.ElementTree(ET.fromstring(previewXML)).getroot()
-    knownAttribs=('position','size','pixmap')
+    knownAttribs=('position','size','pixmap','font','foregroundColor','backgroundColor','zPosition','transparent')
     hiddenAttributes=('name')
     for param in knownAttribs:
         if param in root.attrib:
@@ -84,11 +91,34 @@ def getWidgetParams(previewXML):
     return params
 
 def getWidgetParams4Config(previewXML):
-    params = [(_('Widget attributes:'),)]
+    params = {}
     root = ET.ElementTree(ET.fromstring(previewXML)).getroot()
-    knownAttribs=('position','size','pixmap')
     for param in root.attrib:
-        if param not in knownAttribs:
-            params.append((param + ' = ' + root.attrib[param],))
-            
+        if param not in ['position','size', 'name', 'pixmap', 'font','foregroundColor','backgroundColor']:
+            params[param] = root.attrib[param]
     return params
+  
+def getLoadedFonts(SkinPath, vfdSkinFileName, CurrentSkinName):
+    fonts=[]
+    fonts.append('Regular')
+    fontsFiles=[]
+    fontsFiles.append('%sskin_default.xml' % SkinPath)
+    fontsFiles.append('%sskin.xml' % SkinPath)
+    fontsFiles.append('%s%s/skin.xml' % (SkinPath,CurrentSkinName))
+    fontsFiles.append('/etc/enigma2/skin_user_%s.xml' % CurrentSkinName)
+    fontsFiles.append('/etc/enigma2/skin_user.xml')
+    if vfdSkinFileName is not None:
+        fontsFiles.append(vfdSkinFileName)
+    for fontFile in fontsFiles:
+        if os_path.exists(fontFile):
+            with open(fontFile, 'r') as f:
+                for line in f:
+                    if line.find('</fonts>') > -1 or line.find('<screen ') > -1:
+                        continue
+                    elif line.find('<font filename="') > -1 and line.find(' name="') > -1:
+                        fontName=line.replace('filename="','').split('name="')[1].split('"')[0]
+                        if fontName not in fonts:
+                            fonts.append(fontName)
+                f.close()
+    fonts.sort()
+    return fonts

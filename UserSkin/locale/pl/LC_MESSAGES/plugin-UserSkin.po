@@ -525,5 +525,20 @@ msgstr "Pikona X (220x132)"
 msgid "PICON"
 msgstr "Pikona (100x60)"
 
-msgid "aqq2"
-msgstr ""
+msgid "Widget attributes:"
+msgstr "Atrybuty widżeta:"
+
+msgid "Press OK to enable widget"
+msgstr "Naciśnij klawisz OK, aby aktywować widżet"
+
+msgid "Filename not selected, skin won't be saved!"
+msgstr "Nie podano nazwy pliku, skórka nie zostanie zapisana!"
+
+msgid "GUI needs a restart to apply a new skin\nDo you want to Restart the GUI now?"
+msgstr "Skórka została zapisana.\nZrestartować system, aby ją aktywować?"
+
+msgid "Skin has been written in .../LCD folder\nActivate it in UserSkin:\n'Skin personalization/UserSkin additional screens'"
+msgstr "Skórka została zapisana w katalogu .../LCD.\nAktywuj ją poprzez UserSkin:\n'Personalizacja skórki/Skórki użytkownika'"
+
+msgid "aqq"
+msgstr "aqq"

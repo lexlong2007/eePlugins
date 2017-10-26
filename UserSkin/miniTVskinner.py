@@ -22,57 +22,34 @@ from Plugins.Plugin import PluginDescriptor
 from Components.Label import Label
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.AVSwitch import AVSwitch
-from Components.config import config, ConfigSelection, getConfigListEntry, ConfigText, ConfigYesNo, ConfigSubsection, NoSave
-from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
 from Components.Pixmap import Pixmap, MovingPixmap
 from Components.Slider import Slider
-from Components.FileList import FileList
 from Components.MenuList import MenuList
 from Components.Pixmap import Pixmap
-from PIL import Image
 import skin #we use loadSkin, dom_screens
 
 
 import glob, re, os, random, time
 
-isVTI = None
-imageType = 'Unknown'
-#configure for VTI or openATV
-try:
-    if config.skin.primary_vfdskin.value == '': pass # exists in VTI only
-    myLCDconfig = config.skin.primary_vfdskin
-    isVTI = True
-    skinPath=resolveFilename(SCOPE_SKIN, 'vfd_skin/skin_vfd_UserSkin.xml')
-    imageType ='VTI'
-except:
-    try:
-        if config.skin.display_skin.value == '': pass # exists in openATV
-        imageType ='openATV'
-    except:
-        print "Unknown IMAGE"
-        config.skin.display_skin = ConfigText(default = 'fake display_skin')
-    myLCDconfig = config.skin.display_skin
-    isVTI = False
-    skinPath=resolveFilename(SCOPE_SKIN, 'display/Userskin/skin_display.xml')
-    #required stuff config (VTI has all already)
-    if not fileExists(resolveFilename(SCOPE_FONTS,"meteocons.ttf")):
-        os.symlink(PluginPath + "LCDskin/meteocons.ttf", resolveFilename(SCOPE_FONTS,"meteocons.ttf"))
-    if not fileExists(resolveFilename(SCOPE_SKIN, 'display/')):
-        os.mkdir(resolveFilename(SCOPE_SKIN, 'display/'))
-    if not fileExists(resolveFilename(SCOPE_SKIN, 'display/Userskin/')):
-        os.mkdir(resolveFilename(SCOPE_SKIN, 'display/Userskin/'))
-
 class miniTVskinner(Screen):
-    def __init__(self, session):
+    def __init__(self, session, loadedDesigns):
         if fileExists('/usr/local/e2'): #fake LCD size for enigma2-pc
-            self.LCDwidth = 481
-            self.LCDheight = 321
+            self.LCDwidth = 480
+            self.LCDheight = 320
             self.imageType = 'enigma2-PC'
         else:
             self.LCDwidth = getDesktop(1).size().width()
             self.LCDheight = getDesktop(1).size().height()
-            self.imageType = 'AQQ'
+            if fileExists('/usr/lib/enigma2/python/Plugins/SystemPlugins/VTIPanel'):
+                self.imageType = 'VTI'
+            elif fileExists('/usr/lib/enigma2/python/Blackhole'):
+                self.imageType = 'BlackHole'
+            elif fileExists('/usr/lib/enigma2/python/Plugins/Extensions/Infopanel'):
+                self.imageType = 'OpenATV'
+            else:
+                self.imageType = _('Unknown image')
+              
         self.skin = """
         <screen name="MiniTVskinner" title="miniTV (%dx%d) skin creator mod j00zek on %s" position="center,center" size="1280,720">
             <eLabel position="0,0" size="800,460" zPosition="-10" backgroundColor="#00222222" />
@@ -118,11 +95,10 @@ class miniTVskinner(Screen):
           
         self.skinLCD = '<screen name="MiniTVskinner_summary" position="center,center" size="%d,%d">' % (self.LCDwidth, self.LCDheight)
     
-        if getDictDesigns() is None:
+        if loadedDesigns is None or len(loadedDesigns) ==0 :
             self.WidgetsDict = getWidgetsDefinitions(PluginPath + '/LCDskin/', self.LCDwidth, self.LCDheight)
         else:
-            self.WidgetsDict = getDictDesigns()
-            setDictDesigns(None)
+            self.WidgetsDict = loadedDesigns
             
         for widget in self.WidgetsDict:
             self.skin += '          ' + self.WidgetsDict[widget]['previewXML'] + '\n'
@@ -154,6 +130,12 @@ class miniTVskinner(Screen):
             "key8" : self.heightIncrease,
             "key4" : self.widthDecrease,
             "key6" : self.widthIncrease,
+            "KeyInfo" : self.changePixmapPath,
+            "key7" : self.changeFonttype,
+            "key9" : self.FontSizeUp,
+            "key3" : self.FontSizeDown,
+            "key1" : self.changeforegroundColor,
+            "key0" : self.backgroundColor,
         }, -1)
         
         addFont(resolveFilename(SCOPE_FONTS,"meteocons.ttf"), "Meteo", 100, False)
@@ -206,61 +188,99 @@ class miniTVskinner(Screen):
 
         if not self.selectionChanged in self["Widgetslist"].onSelectionChanged:
             self["Widgetslist"].onSelectionChanged.append(self.selectionChanged)
+            
+        self.colorNamesList = []
+        for color in skin.colorNames:
+          if color not in self.colorNamesList:
+              self.colorNamesList.append((color,color))
+        with open(PluginPath + '/LCDskin/_AdditionalColors', 'r') as f:
+            for line in f:
+                lineParts = line.strip().split(':')
+                if len(lineParts) == 2 and lineParts[1] not in self.colorNamesList:
+                    self.colorNamesList.append( (lineParts[0],lineParts[1]) )
+          
 
-        self.readSize()
-        #self.showWidgetInfo()
-        #self.readBackups()
+        self.myLCDconfig = None
+        self.vfdSkinFileName = None
+        try:
+            if config.skin.primary_vfdskin.value == '': pass # exists in VTI only
+            myLCDconfig = config.skin.primary_vfdskin
+            vfdSkinFileName = resolveFilename(SCOPE_SKIN, 'vfd_skin/skin_vfd_UserSkin.xml')
+        except Exception:
+            try:
+                if config.skin.display_skin.value == '': pass # exists in openATV
+                if fileExists(resolveFilename(SCOPE_SKIN, 'display/')):
+                    myLCDconfig = config.skin.display_skin
+                    if not fileExists(resolveFilename(SCOPE_SKIN, 'display/Userskin/')):
+                        os.mkdir(resolveFilename(SCOPE_SKIN, 'display/Userskin/'))
+                    skinPath=resolveFilename(SCOPE_SKIN, 'display/Userskin/skin_display.xml')
+            except Exception, e:
+                printDEBUG('System does not have known vfd skin attributes, error: %s' % str(e))
+                self['yellow'].hide()
+                
+        self.fontsList = getLoadedFonts(resolveFilename(SCOPE_SKIN, ''), self.vfdSkinFileName, CurrentSkinName)
         self.selectionChanged()
 
-    def writeSkinFile(self, which):
-        screenPart = ""
-        screenPart += '\n<screen name="%s" position="0,0" size="480,320" id="1">\n' % which
-        for widget,status in self.WidgetsList:
-            if int(status) == 1:
-                if skinPart is not None:
-                    print "Write %s Widget to SkinFile" % (widget)
-                    print skinPart
-                    screenPart += skinPart
+#### CHANGE COLORS
+    def changeforegroundColor(self):
+        self.changeColor('foregroundColor')
+      
+    def backgroundColor(self):
+        self.changeColor('backgroundColor')
 
-        screenPart += '</screen>\n'
-        #skinfile += '</skin>'
+    def changeColor(self, param):
+        if self["Widgetslist"].getCurrent()[1] == "":
+            currColor = getWidgetParam(self.WidgetsDict[self.currWidgetName]['previewXML'], param)
+            for i, Color in enumerate(self.colorNamesList):
+                if currColor == Color[0] or currColor == Color[1]:
+                    if i == len(self.colorNamesList)-1:
+                        currColor = self.colorNamesList[0]
+                    else:
+                        currColor = self.colorNamesList[i+1]
+                    if param == 'foregroundColor':
+                        self[self.currWidgetName].instance.setForegroundColor(skin.parseColor(currColor[0]))
+                    elif param == 'backgroundColor':
+                        self[self.currWidgetName].instance.setBackgroundColor(skin.parseColor(currColor[0]))
+                        self[self.currWidgetName].hide()
+                        self[self.currWidgetName].show()
+                    self.updateWidgetXMLs( param, currColor[0] )
+                    break
+                    
+#### CHANGE FONT
+    def changeFonttype(self):
+        if self["Widgetslist"].getCurrent()[1] == "":
+            fontParts = getWidgetParam(self.WidgetsDict[self.currWidgetName]['previewXML'], 'font')
+            if fontParts is not None:
+                fontParts = fontParts.split(';')
+                fontType = fontParts[0]
+                if fontType in self.fontsList:
+                    for i,x in enumerate(self.fontsList):
+                      if x == fontType:
+                          if i == len(self.fontsList)-1:
+                              fontType = self.fontsList[0]
+                          else:
+                              fontType = self.fontsList[i+1]
+                          self[self.currWidgetName].instance.setFont(gFont(fontType , int(fontParts[1]) ) )
+                          self.updateWidgetXMLs('font', '%s;%s' %(fontType,fontParts[1]))
+                          break
+                    
+      
+    def FontSizeUp(self):
+        self.changeFontSize(step = 1)
+      
+    def FontSizeDown(self):
+        self.changeFontSize(step = -1)
 
-        if not fileExists('/usr/share/enigma2/vfd_skin/skin_vfd_miniTvSkinner.xml'):
-            file = open('/usr/lib/enigma2/python/Plugins/Extensions/MiniTVskinner/skin_vfd_default.xml', 'r')
-        else:
-            file = open('/usr/share/enigma2/vfd_skin/skin_vfd_miniTvSkinner.xml', 'r')
-        skinBase = file.read()
-        file.close()
-        if re.search(which, skinBase, re.S|re.I):
-            pattern = re.compile('<screen name="'+which+'" position="0,0" size="480,320" id="1">(.*?)</screen>', re.S|re.I)
-            skinFile = re.sub(pattern, screenPart, skinBase)
-        else:
-            #pattern = re.compile('<screen name="'+which+'" position="0,0" size="480,320" id="1">(.*?)</screen>', re.S|re.I)
-            skinFile = re.sub('</skin>', screenPart+'\n</skin>', skinBase)
-        
-        f = open('/usr/share/enigma2/vfd_skin/skin_vfd_miniTvSkinner.xml', 'w')
-        f.write(skinFile)
-        f.close()
-        
-        if myLCDconfig.value != "vfd_skin/skin_vfd_miniTvSkinner.xml":
-            print "set new VFD Skin..", myLCDconfig.value
-            myLCDconfig.value = "vfd_skin/skin_vfd_miniTvSkinner.xml"
-            myLCDconfig.save()
-        skin.loadSkin("/usr/share/enigma2/vfd_skin/skin_vfd_miniTvSkinner.xml")
-        restartbox = self.session.openWithCallback(self.restartGUI,MessageBox,_("GUI needs a restart to apply a new skin\nDo you want to Restart the GUI now?"), MessageBox.TYPE_YESNO)
-        restartbox.setTitle(_("Restart GUI now?"))
-
-        #eDBoxLCD.getInstance().update()
-
-    def restartGUI(self, answer):
-        if answer is True:
-            self.session.open(TryQuitMainloop, 3)
-
-    def getPiconSize(self, filename):
-        im = Image.open(filename)
-        width, height = im.size
-        print width, height
-        return width, height
+    def changeFontSize(self, step):
+        if self["Widgetslist"].getCurrent()[1] == "":
+            fontParts = getWidgetParam(self.WidgetsDict[self.currWidgetName]['previewXML'], 'font')
+            if fontParts is not None:
+                fontParts = fontParts.split(';')
+                fontSize = int(fontParts[1]) + step
+                if fontSize < 5: fontSize = 5
+                elif fontSize > 90: fontSize = 90
+                self[self.currWidgetName].instance.setFont(gFont(fontParts[0] , fontSize ) )
+                self.updateWidgetXMLs('font', '%s;%s' %(fontParts[0], fontSize ))
 #### CHANGE WIDGET SIZE
     def heightDecrease(self):
         self.changeSize(0,-1)
@@ -288,8 +308,7 @@ class miniTVskinner(Screen):
             sizeY += stepY
             if sizeY < 1: sizeY = 1
             elif sizeY > self.LCDheight: sizeY = self.LCDheight
-            self[self.currWidgetName].instance.resize(eSize(sizeX,sizeY))
-            self.updateWidgetXMLs('size', '%s,%s' %(sizeX,sizeY))
+            self.updateSize(sizeX, sizeY)
 #### MOVING WIDGET
     def KeyRight(self, step=1):
         self.changePos(1, 0)
@@ -320,11 +339,40 @@ class miniTVskinner(Screen):
             self[self.currWidgetName].move(newPos)
             self.updateWidgetXMLs('position', '%s,%s' %(posX,posY))
 
+    def changePixmapPath(self):
+        if self["Widgetslist"].getCurrent()[1] == "":
+            PixmapPath = getWidgetParam(self.WidgetsDict[self.currWidgetName]['previewXML'], 'pixmap')
+            if PixmapPath is not None:
+                def SetDirPathCallBack(newPath = None):
+                    if None != newPath:
+                        self.updateWidgetXMLs('pixmap', newPath)
+                        self[self.currWidgetName].instance.setPixmapFromFile(newPath)
+                        from PIL import Image
+                        width, height = Image.open(newPath).size
+                        self.updateSize(width,height)
+                        self.updateWidgetXMLs('size', '%s,%s' %(width,height))
+                self.session.openWithCallback(SetDirPathCallBack, miniTVmakerFileBrowser, currDir=os.path.dirname(PixmapPath), title=_("Select file"))
+        
 #### Manipulate WIDGET XMLs >>>
+    def widgetConfigRet(self, reloadSelf = False, parametersDict = {} ):
+        if reloadSelf == True:
+            for param in parametersDict:
+                self.updateWidgetXMLs(param, parametersDict[param])
+                self.close(self.WidgetsDict)
+      
+    def widgetConfig(self):
+        if self["Widgetslist"].getCurrent()[1] == "":
+            parametersDict = getWidgetParams4Config(self.WidgetsDict[self.currWidgetName]['previewXML'])
+            self.session.openWithCallback(self.widgetConfigRet,miniTVskinnerWidgetConfig, parametersDict)
+
     def updateWidgetXMLs(self, param, paramValue):
         self.WidgetsDict[self.currWidgetName]['previewXML'] = updateWidgetparam( self.WidgetsDict[self.currWidgetName]['previewXML'],param, paramValue)
         self.WidgetsDict[self.currWidgetName]['widgetXML'] = updateWidgetparam( self.WidgetsDict[self.currWidgetName]['widgetXML'],param, paramValue)
         self.showWidgetInfo()
+
+    def updateSize(self, sizeX, sizeY ):
+        self[self.currWidgetName].instance.resize(eSize(sizeX,sizeY))
+        self.updateWidgetXMLs('size', '%s,%s' %(sizeX,sizeY))
 #### WIDGETS LIST >>>
     def updateWidgetsList(self, refreshGUI = False):
         self.WidgetsList = []
@@ -346,7 +394,10 @@ class miniTVskinner(Screen):
             self.selectionChanged()
       
     def showWidgetInfo(self):
-        self["WidgetParams"].list = getWidgetParams(self.WidgetsDict[self.currWidgetName]['previewXML'])
+        if self["Widgetslist"].getCurrent()[1] == "":
+            self["WidgetParams"].list = getWidgetParams(self.WidgetsDict[self.currWidgetName]['previewXML'])
+        else:
+            self["WidgetParams"].list = [(_('Press OK to enable widget'), LoadPixmap(getPixmapPath('wdg_btn_no_button.png')))]
 
     def listUP(self):
         self["Widgetslist"].selectPrevious()
@@ -415,7 +466,6 @@ class miniTVskinner(Screen):
                   if widget in self.WidgetsDict:
                       self.WidgetsDict[widget] = wDict[widget]
                 
-                setDictDesigns(self.WidgetsDict)
                 self.updateWidgetsList(True)      
                 self.session.openWithCallback(self.cancelRet,MessageBox, _("Design %s\n ...has been loaded") % ret[0], type = MessageBox.TYPE_INFO, timeout=10)
             except Exception, e:
@@ -423,7 +473,7 @@ class miniTVskinner(Screen):
                 self.session.open(MessageBox, "Error occured: %s" % str(e), type = MessageBox.TYPE_ERROR, timeout=10)
                 
     def cancelRet(self, ret = None):
-        self.close(234)
+        self.close(self.WidgetsDict)
         
 #### WRITE DESIGNS >>>
     def KeyGreen(self):
@@ -453,21 +503,94 @@ class miniTVskinner(Screen):
                 self.session.open(MessageBox, _("File %s.design\n ...has been written") % filename, type = MessageBox.TYPE_INFO, timeout=10)
             except Exception, e:
                 self.session.open(MessageBox, "Error occured: %s" % str(e), type = MessageBox.TYPE_ERROR, timeout=10)
-#### WRITE DESIGNS <<<
+#### WRITE SKINS >>>
     def KeyYellow(self):
-        self.session.open(MessageBox, "KeyYellow" +' ' + _("action NOT ready yet"), type = MessageBox.TYPE_INFO, timeout=10)
+        if self.vfdSkinFileName is not None:
+            self.session.open(MessageBox, "KeyYellow" +' ' + _("action NOT ready yet"), type = MessageBox.TYPE_INFO, timeout=10)
 
     def KeyBlue(self):
-        self.session.open(MessageBox, "KeyBlue" +' ' + _("action NOT ready yet"), type = MessageBox.TYPE_INFO, timeout=10)
+        self.selectScreen('UserSkin')
+
+    def selectScreen(self, skinType ):
+        myList = []
+        with open(PluginPath + '/LCDskin/_selection_screens', 'r') as f:
+            for line in f:
+                myList.append((line.strip(),line.strip()))
+        if len(myList) > 1:
+            self.session.openWithCallback(boundFunction(self.selectScreenRet, skinType), ChoiceBox, title = _("Save as:"), list = myList)
+    
+    def selectScreenRet(self, skinType=None , screenName = None):
+        if screenName is not None:
+            currentTime = time.strftime("%d.%m.%Y - %H:%M:%S")
+            if skinType == 'UserSkin':
+                self.session.openWithCallback(boundFunction(self.writeSkinFile, skinType, screenName[0]), VirtualKeyBoard, title=(_("Enter filename")), text = '%s %s' % (screenName[0], currentTime))
+            else:
+                self.writeSkinFile(skinType, screenName[0], self.vfdSkinFileName)
+      
+    def writeSkinFile(self, skinType=None , screenName = None, filename = None):
+        if filename is None:
+            self.session.openWithCallback(self.doNothing, MessageBox,_("Filename not selected, skin won't be saved!"),  type = MessageBox.TYPE_INFO, timeout = 10, default = False)
+            return
+        elif filename[1] != '/':
+            if not filename.startswith('skin_'):
+                filename = 'skin_' + filename
+            if not filename.endswith('.xml'):
+                filename += '.xml'
+            filename = '%sallScreens/LCD/%s' % (SkinPath, filename)
+            if not fileExists('%sallScreens' % (SkinPath)):
+                os.mkdir('%sallScreens' % (SkinPath))  
+            if not fileExists('%sallScreens/LCD' % (SkinPath)):
+                os.mkdir('%sallScreens/LCD' % (SkinPath))  
+
+        screenPart = ""
+        screenPart += '\n<screen name="%s" position="0,0" size="%s,%s" id="1">\n    ' % (screenName, self.LCDwidth, self.LCDheight)
+        for widget in self.WidgetsDict:
+            if self.WidgetsDict[widget]['widgetActiveState'] == '':
+                print "Write %s Widget to SkinFile" % (widget)
+                screenPart += self.WidgetsDict[widget]['widgetXML'] + '\n'
+        screenPart += '</screen>\n'
+        if fileExists(filename):
+          with open(filename, 'r') as f:
+              skinBase = f.read()
+              f.close()
+        else:
+              skinBase = '<skin>\n</skin>\n'
+
+        if re.search(screenName, skinBase, re.S|re.I):
+            pattern = re.compile('<screen name="'+screenName+'" position="0,0" size="480,320" id="1">(.*?)</screen>', re.S|re.I)
+            skinFile = re.sub(pattern, screenPart, skinBase)
+        else:
+            #pattern = re.compile('<screen name="'+screenName+'" position="0,0" size="480,320" id="1">(.*?)</screen>', re.S|re.I)
+            skinFile = re.sub('</skin>', screenPart+'\n</skin>', skinBase)
+        
+        with open(filename, 'w') as f:
+            f.write(skinFile)
+            f.close()
+        
+        skin.loadSkin(filename)
+        if skinType == 'UserSkin':
+            restartbox = self.session.openWithCallback(self.doNothing,MessageBox,_("Skin has been written in .../LCD folder\nActivate it in UserSkin:\n'Skin personalization/UserSkin additional screens'"), MessageBox.TYPE_INFO)
+        elif myLCDconfig.value == self.vfdSkinFileName:
+            restartbox = self.session.openWithCallback(self.restartGUI,MessageBox,_("GUI needs a restart to apply a new skin\nDo you want to Restart the GUI now?"), MessageBox.TYPE_YESNO)
+            restartbox.setTitle(_("Restart GUI now?"))
+        else:
+            restartbox = self.session.openWithCallback(self.doNothing,MessageBox,_("Skin has been written.\nAcrivate it in Menu/System/"), MessageBox.TYPE_INFO)
+            #myLCDconfig.value = "vfd_skin/skin_vfd_miniTvSkinner.xml"
+            #myLCDconfig.save()
+            #restartbox = self.session.openWithCallback(self.restartGUI,MessageBox,_("GUI needs a restart to apply a new skin\nDo you want to Restart the GUI now?"), MessageBox.TYPE_YESNO)
+            #restartbox.setTitle(_("Restart GUI now?"))
+
+        #eDBoxLCD.getInstance().update()
+
+    def restartGUI(self, answer):
+        if answer is True:
+            self.session.open(TryQuitMainloop, 3)
 
     def doNothing(self, ret = None):
         return
       
     def keyCancel(self):
         self.close()
-
-    def widgetConfig(self):
-        self.session.open(MessageBox, "widgetConfig" +' ' + _("action NOT ready yet"), type = MessageBox.TYPE_INFO, timeout=10)
 
     def createSummary(self):
          return None
@@ -481,4 +604,154 @@ class miniTVskinnerLCDScreen(Screen):
         #self.onShow.append(self.addWatcher)
         #self.onHide.append(self.removeWatcher)
         
+################################################################################################################################################################
+from Components.Button import Button
+from Components.config import *
+from Components.ConfigList import ConfigListScreen
+from Screens.VirtualKeyBoard import VirtualKeyBoard
+from Tools.BoundFunction import boundFunction
+from Components.FileList import FileList
 
+class miniTVmakerFileBrowser(Screen):
+        skin ="""
+  <screen name="miniTVmakerFileBrowser" position="center,center" size="870,690" title=" " flags="wfNoBorder" backgroundColor="#20606060">
+    <widget name="InfoLine" position="0,0" zPosition="2" size="860,30" valign="center" halign="center" font="Regular;24" transparent="1" />
+    <widget name="filelist" position="10,40" size="850,640" itemHeight="35" font="Roboto_HD; 26" scrollbarMode="showOnDemand"/>
+  </screen>"""
+        def __init__(self, session,currDir,title):
+                Screen.__init__(self, session)
+                self.title = title
+                self.currDir = currDir
+                self["filelist"] = FileList(self.currDir, matchingPattern = "(?i)^.*\.(png|jpg)")
+                self["FilelistActions"] = ActionMap(["OkCancelActions", "ColorActions"],
+                        {
+                                "ok": self.ok,
+                                "cancel": self.exit
+                        })
+                self["InfoLine"] = Label(self.currDir)
+                self.onLayoutFinish.append(self.layoutFinished)
+                
+        def layoutFinished(self):
+                self.setTitle(self.title)
+                
+        def tgz(self):
+                self.tgzret = os.system("tar zxf \"%s\" -C /" % self.filename)
+                
+        def ok(self):
+                if self["filelist"].canDescent(): # isDir
+                        self["filelist"].descent()
+                        self["InfoLine"].setText(self["filelist"].getCurrentDirectory())
+                else:
+                        filename = self["filelist"].getCurrentDirectory() + '/' + self["filelist"].getFilename()
+                        self.close(filename)
+                        
+        def exit(self):
+                self.close()
+
+class miniTVskinnerWidgetConfig(Screen, ConfigListScreen):
+    skin = """
+    <screen name="miniTVskinnerWidgetConfig" position="center,center" size="640,500" title="miniTVskinner Widget Config" backgroundColor="#20606060" >
+
+            <widget name="config" position="10,10" size="620,450" zPosition="1" transparent="0" scrollbarMode="showOnDemand" />
+            <widget name="key_red" position="0,465" zPosition="2" size="200,35" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="red" />
+            <widget name="key_green" position="220,465" zPosition="2" size="200,35" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="green" />
+            <widget name="key_blue" position="440,465" zPosition="2" size="200,35" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="#202673ec" />
+    </screen>"""
+    
+    def __init__(self, session, paramsDict = {} ):
+        Screen.__init__(self, session)
+
+        ConfigListScreen.__init__(self, [], session)
+        self["actions"] = ActionMap(["SetupActions", "ColorActions"],
+            {
+                "cancel": self.keyCancel,
+                "red": self.keyCancel,
+                "green": self.keySave,
+                "blue": self.keyBlue,
+                "ok": self.keyOK,
+            }, -2)
+
+        self["key_green"] = Label(_("Save"))
+        self["key_red"] = Label(_("Cancel"))
+        self["key_blue"] = Label(_("Show keyboard"))
+
+        self.list=[]
+        self.paramsDict = paramsDict
+        
+        #self.list.append(getConfigListEntry(_("Download:"), myConfig.Version)) #debug|public
+        
+        self.onLayoutFinish.append(self.layoutFinished)
+
+    def layoutFinished(self):
+        self.setTitle(_('Widget attributes:'))
+        for param in self.paramsDict:
+            paramValue = self.paramsDict[param]
+            if param == 'name':
+                continue
+            elif param == 'transparent':
+                exec('self.%s = ConfigYesNo(default=%s)' %(param, int(paramValue)))
+                exec('self.list.append(getConfigListEntry("%s", self.%s, "%s"))' % (_(param),param,param))
+            elif param == 'zPosition':
+                exec('self.%s = ConfigSelectionNumber(min= -10, max= 10, stepwidth = 1, default=%s)' %(param, int(paramValue)))
+                exec('self.list.append(getConfigListEntry("%s", self.%s, "%s"))' % (_(param),param,param))
+            elif param == 'font':
+                fontParts = paramValue.split(';')
+                exec('self.fontType = ConfigText( default="%s")' % fontParts[0])
+                exec('self.list.append(getConfigListEntry("%s", self.fontType, "fontType"))' % _('fontType'))
+                
+                exec('self.fontSize = ConfigSelectionNumber(min= 5, max= 50, stepwidth = 1, default=%s)' % int(fontParts[1]) )
+                exec('self.list.append(getConfigListEntry("%s", self.fontSize, "fontSize"))' % _('fontSize'))
+            elif param == 'pixmap':
+                exec('self.%s = ConfigDirectory( default = "%s")' %(param,paramValue))
+                exec('self.list.append(getConfigListEntry("%s", self.%s, "%s"))' % (_(param),param,param))
+            else:
+                exec('self.%s = ConfigText(fixed_size=False, default = "%s")' %(param,paramValue))
+                exec('self.list.append(getConfigListEntry("%s", self.%s, "%s"))' % (_(param),param,param))
+        self["config"].list = self.list        
+        
+    def keyOK(self):
+        curIndex = self["config"].getCurrentIndex()
+        currItem = self["config"].list[curIndex][1]
+        if isinstance(currItem, ConfigDirectory):
+            def SetDirPathCallBack(curIndex = None, newPath = None):
+                if None != newPath: self["config"].list[curIndex][1].value = newPath
+            self.session.openWithCallback(boundFunction(SetDirPathCallBack, curIndex), miniTVmakerFileBrowser, currDir=os.path.dirname(currItem.value), title=_("Select file"))
+        elif isinstance(currItem, ConfigText):
+            self.keyBlue()
+
+    def keySave(self):
+        for x in self["config"].list:
+            param = x[2]
+            if isinstance(x[1], ConfigYesNo):
+                if x[1].value:
+                    paramValue = '1'
+                else:
+                    paramValue = '0'
+            else:
+                paramValue = str(x[1].value)
+            if param in self.paramsDict:
+                self.paramsDict[param] = paramValue
+            elif param == 'fontType':
+                fontParts = self.paramsDict['font'].split(';')
+                fontParts[0] = self.paramsDict[param]
+                self.paramsDict[param] = ';'.join(fontParts)
+            elif param == 'fontSize':
+                fontParts = self.paramsDict['font'].split(';')
+                fontParts[1] = self.paramsDict[param]
+                self.paramsDict[param] = ';'.join(fontParts)
+        self.close(True, self.paramsDict)
+
+    def keyCancel(self):
+        self.close(False, {})
+        
+    def keyBlue(self):
+        sel = self['config'].getCurrent()
+        if sel:
+            self.session.openWithCallback(self.VirtualKeyBoardCallback, VirtualKeyBoard, title=self['config'].getCurrent()[0], text=self['config'].getCurrent()[1].value)
+        return
+
+    def VirtualKeyBoardCallback(self, callback = None):
+        if callback is not None and len(callback):
+            self['config'].getCurrent()[1].setValue(callback)
+            self['config'].invalidate(self['config'].getCurrent())
+        return

@@ -29,8 +29,6 @@ currLang = language.getLanguage()[:2] #used for descriptions keep GUI language i
 myDEBUG=True
 myDEBUGfile = '/tmp/%s.log' % PluginName
 
-DictDesigns=None
-
 def getSkinName():
     global CurrentSkinName
     return CurrentSkinName
@@ -43,14 +41,6 @@ def getPluginPath():
     global PluginPath
     return PluginPath
 
-def getDictDesigns():
-    global DictDesigns
-    return DictDesigns
-
-def setDictDesigns(value):
-    global DictDesigns
-    DictDesigns = value
-  
 def getPixmapPath(Pixmap=None):
     from os import path
     if Pixmap is not None:
