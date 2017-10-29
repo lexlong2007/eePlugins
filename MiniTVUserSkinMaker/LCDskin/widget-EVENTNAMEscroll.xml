@@ -1,0 +1,11 @@
+<definition>
+  <widgetInit script="self[''] = Label(_('Event name'))" />
+  <previewXML>
+    <widget name="" position="10,220" size="460,36" foregroundColor="white" backgroundColor="#000000" zPosition="2" transparent="0" halign="left" valign="top" font="Regular;30" />
+  </previewXML>
+  <widgetXML>
+    <widget source="session.Event_Now" render="VRunningText" options="movetype=running,startpoint=0,direction=left,steptime=100,repeat=2,startdelay=11000,wrap" foregroundColor="white" backgroundColor="#000000" position="10,220" size="460,36" font="Roboto_HD; 30" transparent="1">
+      <convert type="EventName">Name</convert>
+    </widget>
+  </widgetXML>
+</definition>

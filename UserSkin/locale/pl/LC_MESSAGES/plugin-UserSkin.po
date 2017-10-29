@@ -540,5 +540,20 @@ msgstr "Skórka została zapisana.\nZrestartować system, aby ją aktywować?"
 msgid "Skin has been written in .../LCD folder\nActivate it in UserSkin:\n'Skin personalization/UserSkin additional screens'"
 msgstr "Skórka została zapisana w katalogu .../LCD.\nAktywuj ją poprzez UserSkin:\n'Personalizacja skórki/Skórki użytkownika'"
 
+msgid "CHANNELNAME"
+msgstr "Nazwa kanału"
+
+msgid "CHANNELNUMBER"
+msgstr "Numer kanału"
+
+msgid "EVENTNAME"
+msgstr "Nazwa programu"
+
+msgid "EVENTNAMEscroll"
+msgstr "Nazwa programu (przewijana)"
+
+msgid "REMAININGtext"
+msgstr "Info ile minut do końca"
+
 msgid "aqq"
-msgstr "aqq"
+msgstr ""

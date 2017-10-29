@@ -1,0 +1,14 @@
+<definition>
+  <widgetInit script="self['WEATHERtemp'] = Label('7 C')" />
+  <previewXML>
+    <widget name="WEATHERtemp" position="50,400" size="50,34" foregroundColor="white" backgroundColor="#000000" zPosition="3" transparent="0" halign="left" valign="top" font="Regular;32" noWrap="1" />
+  </previewXML>
+  <widgetXML>
+    <widget source="session.CurrentService" position="50,400" size="50,34" foregroundColor="white" backgroundColor="#000000" zPosition="3" transparent="0" halign="left" valign="top" font="Regular;32" noWrap="1">
+      <convert type="VWeather">currentWeatherTemp</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="50,400" size="50,34" foregroundColor="white" backgroundColor="#000000" zPosition="3" transparent="0" halign="right" valign="top" font="Regular;32" noWrap="1" >
+      <convert type="VWeather">CF</convert>
+    </widget>
+  </widgetXML>
+</definition>

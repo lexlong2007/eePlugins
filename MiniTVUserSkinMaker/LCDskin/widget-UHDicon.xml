@@ -1,0 +1,13 @@
+<definition>
+  <widgetInit script="self[''] = Pixmap()" />
+  <previewXML>
+    <widget name="" pixmap="BlackHarmony/icons/ico_uhd_on.png" position="130,15" size="37,20" zPosition="2" transparent="0" alphatest="blend" />
+  </previewXML>
+  <widgetXML>
+    <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_uhd_on.png" position="999,770" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="4">
+      <convert type="ServiceInfo">VideoHeight</convert>
+      <convert type="ValueRange">1921,2160</convert>
+      <convert type="ConditionalShowHide"/>
+    </widget>
+  </widgetXML>
+</definition>

@@ -4,6 +4,6 @@
     <widget name="" pixmap="XPicon.png" position="130,85" zPosition="4" size="220,132" transparent="1" alphatest="blend" />
   </previewXML>
   <widgetXML>
-    <widget source="session.CurrentService" render="BlackHarmonyXPicon" position="130,85" zPosition="4" size="220,132" transparent="1" alphatest="blend" />
+    <widget source="session.CurrentService" render="XPicon" position="130,85" zPosition="4" size="220,132" transparent="1" alphatest="blend" />
   </widgetXML>
 </definition>
