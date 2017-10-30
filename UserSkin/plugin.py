@@ -65,12 +65,12 @@ def readSkinConfig():
   
 class UserSkin_Menu(Screen):
         skin = """
-<screen position="center,center" size="560,320">
-        <widget source="list" render="Listbox" position="0,0" size="560,320" scrollbarMode="showOnDemand">
+<screen position="center,center" size="660,320">
+        <widget source="list" render="Listbox" position="0,0" size="660,320" scrollbarMode="showOnDemand">
                 <convert type="TemplatedMultiContent">
                         {"template": [
                                 MultiContentEntryPixmapAlphaTest(pos = (12, 2), size = (40, 40), png = 0),
-                                MultiContentEntryText(pos = (58, 2), size = (500, 40), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 1),
+                                MultiContentEntryText(pos = (58, 2), size = (600, 40), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 1),
                                 ],
                                 "fonts": [gFont("Regular", 24)],
                                 "itemHeight": 44
@@ -98,9 +98,17 @@ class UserSkin_Menu(Screen):
                 l = [(self.buildListEntry(_("Skin personalization"), "config.png",'config'))]
                 
                 if pathExists(resolveFilename(SCOPE_PLUGINS,'Extensions/MiniTVUserSkinMaker')):
-                    l.append(self.buildListEntry(_("miniTV skin creator"), "lcd.png",'LCDskin')),
+                    l.append(self.buildListEntry(_("miniTV skin creator"), "lcd.png",'LCDskin'))
                 else:
-                    l.append(self.buildListEntry(_("Install miniTV skin creator"), "addon.png",'LCDskinInstall')),
+                    try:
+                        from enigma import getDesktop
+                        if getDesktop(1).size().width() > 132:
+                            l.append(self.buildListEntry(_("Install miniTV skin creator"), "lcd.png",'LCDskinInstall'))
+                        else:
+                            l.append(self.buildListEntry(_("LCD/VFD too small to use miniTV skin creator"), "lcd.png",'fakeParam'))
+                           
+                    except Exception:
+                        pass
                     
                 if skinUpdate:
                     l.append(self.buildListEntry(_("Update main skin"), "skin.png",'getskin')),

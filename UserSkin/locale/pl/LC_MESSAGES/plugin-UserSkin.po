@@ -451,109 +451,13 @@ msgid "NOTE: System uses definition from plugin when screen is not listed above.
 msgstr "UWAGA: System korzysta z definicji zawartej we wtyczce, gdy brak jej na liście"
 
 msgid "miniTV skin creator"
-msgstr "Tworzenie skórek dla ekranu miniTV (LCD tunera)"
+msgstr "Tworzenie skórek miniTV (LCD tunera)"
 
-msgid "pixmap path is incorrect"
-msgstr "niepoprawna ścieżka do pixmap-y"
+msgid "Install miniTV skin creator"
+msgstr "Instalacja kreatora skórek miniTV (LCD tunera)"
 
-msgid "Select Widget:"
-msgstr "Wybierz widżet"
-
-msgid "Load saved design"
-msgstr "Załaduj zapisany wzór"
-
-msgid "Save design"
-msgstr "Zapisz wzór"
-
-msgid "Save as LCD skin"
-msgstr "Zapisz jako skórkę LCD"
-
-msgid "Save as UserSkin skin"
-msgstr "Zapisz jako skórkę użytkownika"
-
-msgid "action NOT ready yet"
-msgstr "akcja jeszcze nie gotowa"
-
-msgid "No saved designs found"
-msgstr "Nie znaleziono zapisanych wzorów"
-
-msgid "Select saved design to load:"
-msgstr "Wybierz wzór do załadowania:"
-
-msgid "I want to enter own name"
-msgstr "Chcę podać własną nazwę"
-
-msgid "Save as:"
-msgstr "Zapisz jako:"
-
-msgid "RECORDicon"
-msgstr "Ikona zapisu"
-
-msgid "16x9icon"
-msgstr "Ikona 16x9"
-
-msgid "CRYPTicon"
-msgstr "Ikona kodowania"
-
-msgid "DOLBYicon"
-msgstr "Ikona Dolby"
-
-msgid "PICONicon"
-msgstr "Pikona"
-
-msgid "WEATHERicon"
-msgstr "Ikona pogody"
-
-msgid "WEATHERtemp"
-msgstr "Temperatura"
-
-msgid "File %s.design\n ...has been written"
-msgstr "Zapisano plik...\n%s"
-
-msgid "Error occured: %s"
-msgstr "Wystąpił błąd: %s"
-
-msgid "Design %s\n ...has been loaded"
-msgstr "Wzór %s\n ... został załadowany"
-
-msgid "PICONZ"
-msgstr "Pikona Z (400x170)"
-
-msgid "PICONX"
-msgstr "Pikona X (220x132)"
-
-msgid "PICON"
-msgstr "Pikona (100x60)"
-
-msgid "Widget attributes:"
-msgstr "Atrybuty widżeta:"
-
-msgid "Press OK to enable widget"
-msgstr "Naciśnij klawisz OK, aby aktywować widżet"
-
-msgid "Filename not selected, skin won't be saved!"
-msgstr "Nie podano nazwy pliku, skórka nie zostanie zapisana!"
-
-msgid "GUI needs a restart to apply a new skin\nDo you want to Restart the GUI now?"
-msgstr "Skórka została zapisana.\nZrestartować system, aby ją aktywować?"
-
-msgid "Skin has been written in .../LCD folder\nActivate it in UserSkin:\n'Skin personalization/UserSkin additional screens'"
-msgstr "Skórka została zapisana w katalogu .../LCD.\nAktywuj ją poprzez UserSkin:\n'Personalizacja skórki/Skórki użytkownika'"
-
-msgid "CHANNELNAME"
-msgstr "Nazwa kanału"
-
-msgid "CHANNELNUMBER"
-msgstr "Numer kanału"
-
-msgid "EVENTNAME"
-msgstr "Nazwa programu"
-
-msgid "EVENTNAMEscroll"
-msgstr "Nazwa programu (przewijana)"
-
-msgid "REMAININGtext"
-msgstr "Info ile minut do końca"
+msgid "LCD/VFD too small to use miniTV skin creator"
+msgstr "LCD/VFD za mały dla kreatora skórek miniTV (LCD tunera)"
 
 msgid "aqq"
 msgstr ""
