@@ -145,7 +145,7 @@ class miniTVskinner(Screen):
             "key0" : self.backgroundColor,
         }, -1)
         
-        addFont(resolveFilename(SCOPE_FONTS,"meteocons.ttf"), "Meteo", 100, False)
+        #addFont(resolveFilename(SCOPE_FONTS,"meteocons.ttf"), "Meteo", 100, False)
 
         self.keyLocked = True
         self.backuplist = []
