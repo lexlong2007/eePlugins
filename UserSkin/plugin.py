@@ -27,7 +27,7 @@ from Components.Sources.List import List
 from Plugins.Plugin import PluginDescriptor
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
-from Tools.Directories import resolveFilename, pathExists,SCOPE_SKIN
+from Tools.Directories import resolveFilename, pathExists, SCOPE_SKIN, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
 #from Tools import Notifications
 #import shutil
@@ -97,7 +97,10 @@ class UserSkin_Menu(Screen):
                 skinHistory, skinUpdate, skinAddOns, skinComponents = readSkinConfig()
                 l = [(self.buildListEntry(_("Skin personalization"), "config.png",'config'))]
                 
-                l.append(self.buildListEntry(_("miniTV skin creator"), "lcd.png",'LCDskin')),
+                if pathExists(resolveFilename(SCOPE_PLUGINS,'Extensions/MiniTVUserSkinMaker')):
+                    l.append(self.buildListEntry(_("miniTV skin creator"), "lcd.png",'LCDskin')),
+                else:
+                    l.append(self.buildListEntry(_("Install miniTV skin creator"), "addon.png",'LCDskinInstall')),
                     
                 if skinUpdate:
                     l.append(self.buildListEntry(_("Update main skin"), "skin.png",'getskin')),
@@ -151,7 +154,16 @@ class UserSkin_Menu(Screen):
                 self.session.openWithCallback(self.quit,UserSkin_Config)
                 return
             elif selected == 'LCDskin':
+                from Plugins.Extensions.MiniTVUserSkinMaker.miniTVskinner import miniTVskinnerInitiator
                 self.runLCDskin(retDict = None, initRun = True)
+                return
+            elif selected == 'LCDskinInstall':
+                from myComponents import UserSkinconsole
+                runlist = []
+                runlist.append( ('opkg update') )
+                runlist.append( ('opkg install enigma2-plugin-extensions--j00zeks-minitvuserskinmaker') )
+                self.session.openWithCallback(self.refresh, UserSkinconsole, title = _("Installing  miniTV skin creator"), cmdlist = runlist)
+                self.refresh()
                 return
             elif selected == 'ListScreens':
                 from ScreensLister import ScreensLister
@@ -191,7 +203,8 @@ class UserSkin_Menu(Screen):
                 return
 
         def runLCDskin(self, retDict = None, initRun = False):
-            from miniTVskinner import miniTVskinner
+            #from miniTVskinner import miniTVskinner
+            from Plugins.Extensions.MiniTVUserSkinMaker.miniTVskinner import miniTVskinner
             if initRun == True:
                 self.session.openWithCallback(self.runLCDskin,miniTVskinner, {} )
             elif retDict is not None and len(retDict) > 0:
