@@ -16,12 +16,18 @@ from inits import *
 
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
+from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 
 def Plugins(**kwargs):
     return [PluginDescriptor(name=_("miniTV User skin maker"), description="NA", where = PluginDescriptor.WHERE_MENU, fnc=menu)]
 
 def menu(menuid, **kwargs):
-    if menuid == "vtimain" or menuid == "system":
+    runPlugin = False
+    if menuid == 'display': #display always on LCD submenu
+        runPlugin = True
+    elif menuid in ('vtimain', 'system') and not fileExists(resolveFilename(SCOPE_PLUGINS, 'Extensions/UserSkin')):
+        runPlugin = True
+    if runPlugin == True:
         from miniTVskinner import miniTVskinnerInitiator        
         return [(_("miniTV user skin maker"), miniTVskinnerInitiator, "miniTVUserSkinMeaker", 40)]
     return []

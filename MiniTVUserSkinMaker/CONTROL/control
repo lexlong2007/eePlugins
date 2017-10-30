@@ -5,6 +5,6 @@ Depends:
 Description: creates user skin for internal tuner LCD
 Maintainer: j00zek
 Source: http://github.com/j00zek/eePlugins
-Version: 17.10.29.1307
+Version: 17.10.30.0720
 Architecture: all
 DestinationPath: /usr/lib/enigma2/python/Plugins/Extensions/MiniTVUserSkinMaker
