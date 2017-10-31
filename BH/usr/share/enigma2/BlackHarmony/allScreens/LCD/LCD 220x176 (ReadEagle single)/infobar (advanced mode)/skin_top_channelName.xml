@@ -1,0 +1,7 @@
+<skin>
+  <screen name="InfoBarSummary" position="0,0" size="220,176">
+    <widget source="session.CurrentService" render="Label" position="0,0" size="220,35" font="FdLcD;34" halign="center" foregroundColor="#05F7F3" >
+      <convert type="ServiceName">Name</convert>
+    </widget>
+  </screen>
+</skin>
