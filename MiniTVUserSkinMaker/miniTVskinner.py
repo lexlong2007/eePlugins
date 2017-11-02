@@ -256,6 +256,7 @@ class miniTVskinner(Screen):
                         self[self.currWidgetName].hide()
                         self[self.currWidgetName].show()
                     self.updateWidgetXMLs( param, currColor[0] )
+                    self.session.summary.changeColor(param, skin.parseColor(currColor[0]))
                     break
                     
 #### CHANGE FONT
@@ -273,6 +274,7 @@ class miniTVskinner(Screen):
                           else:
                               fontType = self.fontsList[i+1]
                           self[self.currWidgetName].instance.setFont(gFont(fontType , int(fontParts[1]) ) )
+                          self.session.summary.setFontType(gFont(fontType , int(fontParts[1]) ) )
                           self.updateWidgetXMLs('font', '%s;%s' %(fontType,fontParts[1]))
                           break
                     
@@ -292,6 +294,7 @@ class miniTVskinner(Screen):
                 if fontSize < 5: fontSize = 5
                 elif fontSize > 90: fontSize = 90
                 self[self.currWidgetName].instance.setFont(gFont(fontParts[0] , fontSize ) )
+                self.session.summary.setFontSize(gFont(fontParts[0] , fontSize ))
                 self.updateWidgetXMLs('font', '%s;%s' %(fontParts[0], fontSize ))
 #### CHANGE WIDGET SIZE
     def heightDecrease(self):
@@ -602,12 +605,6 @@ class miniTVskinner(Screen):
             restartbox.setTitle(_("Restart GUI now?"))
         else:
             restartbox = self.session.openWithCallback(self.doNothing,MessageBox,_("Skin has been written.\nAcrivate it in Menu/System/"), MessageBox.TYPE_INFO)
-            #myLCDconfig.value = "vfd_skin/skin_vfd_miniTvSkinner.xml"
-            #myLCDconfig.save()
-            #restartbox = self.session.openWithCallback(self.restartGUI,MessageBox,_("GUI needs a restart to apply a new skin\nDo you want to Restart the GUI now?"), MessageBox.TYPE_YESNO)
-            #restartbox.setTitle(_("Restart GUI now?"))
-
-        #eDBoxLCD.getInstance().update()
 
     def restartGUI(self, answer):
         if answer is True:
@@ -651,7 +648,20 @@ class miniTVskinnerLCDScreen(Screen):
     def sizeWidget(self, newSize):
         self[self.parent.currWidgetName].instance.resize(newSize)
 
-             
+    def setFontSize(self, fontData):
+        self[self.parent.currWidgetName].instance.setFont(fontData)
+
+    def setFontType(self, fontData):
+        self[self.parent.currWidgetName].instance.setFont(fontData)
+ 
+    def changeColor(self, param, color):
+        if param == 'foregroundColor':
+            self[self.parent.currWidgetName].instance.setForegroundColor(color)
+        elif param == 'backgroundColor':
+            self[self.parent.currWidgetName].instance.setBackgroundColor(color)
+            self[self.parent.currWidgetName].hide()
+            self[self.parent.currWidgetName].show()
+
 ################################################################################################################################################################
 from Components.Button import Button
 from Components.config import *
