@@ -119,7 +119,7 @@ class miniTVskinner(Screen):
         self.session = session
         Screen.__init__(self, session)
 
-        self["actions"]  = ActionMap(["UserSkinMiniTVmakerActions"], {
+        self["actions"]  = ActionMap(["miniTVskinnerActions"], {
             "keyCancel": self.keyCancel,
             "keyOK": self.KeyOK,
             "keyLeft": self.KeyLeft,
@@ -143,10 +143,12 @@ class miniTVskinner(Screen):
             "key3" : self.FontSizeDown,
             "key1" : self.changeforegroundColor,
             "key0" : self.backgroundColor,
+            "key5" : self.changeStep,
         }, -1)
         
         #addFont(resolveFilename(SCOPE_FONTS,"meteocons.ttf"), "Meteo", 100, False)
 
+        self.step = 5
         self.keyLocked = True
         self.backuplist = []
         self.menulist = open(PluginPath + '/LCDskin/_selection_screens', 'r').readlines()
@@ -177,10 +179,6 @@ class miniTVskinner(Screen):
             if self.WidgetsDict[widget[4]]['widgetActiveState'] != '':
                 self[widget[4]].hide()
 
-        self.wsize = "height"
-        self.xsize = 0
-        self.ysize = 0
-        
         self.onLayoutFinish.append(self.start)
 
     def start(self):
@@ -228,6 +226,13 @@ class miniTVskinner(Screen):
         self.fontsList = getLoadedFonts(resolveFilename(SCOPE_SKIN, ''), self.vfdSkinFileName, CurrentSkinName)
         self.selectionChanged()
 
+    def changeStep(self):
+        if self.step == 5:
+           self.step = 1
+        else:
+           self.step = 5
+        if self["Widgetslist"].getCurrent()[1] == "":
+           self.showWidgetInfo()
 #### CHANGE COLORS
     def changeforegroundColor(self):
         self.changeColor('foregroundColor')
@@ -290,16 +295,16 @@ class miniTVskinner(Screen):
                 self.updateWidgetXMLs('font', '%s;%s' %(fontParts[0], fontSize ))
 #### CHANGE WIDGET SIZE
     def heightDecrease(self):
-        self.changeSize(0,-1)
+        self.changeSize(0,-self.step)
       
     def widthDecrease(self):
-        self.changeSize(-1,0)
+        self.changeSize(-self.step,0)
       
     def heightIncrease(self):
-        self.changeSize(0,1)
+        self.changeSize(0,self.step)
       
     def widthIncrease(self):
-        self.changeSize(1,0)
+        self.changeSize(self.step,0)
 
     def readSize(self):
         sizeX = self[self.currWidgetName].instance.size().width()
@@ -318,16 +323,16 @@ class miniTVskinner(Screen):
             self.updateSize(sizeX, sizeY)
 #### MOVING WIDGET
     def KeyRight(self, step=1):
-        self.changePos(1, 0)
+        self.changePos(self.step, 0)
         
     def KeyLeft(self):
-        self.changePos(-1, 0)
+        self.changePos(-self.step, 0)
 
     def KeyDown(self):
-        self.changePos(0, 1)
+        self.changePos(0, self.step)
 
     def KeyUp(self):
-        self.changePos(0, -1)
+        self.changePos(0, -self.step)
 
     def readPos(self):
         pos = self[self.currWidgetName].instance.position()
@@ -344,6 +349,7 @@ class miniTVskinner(Screen):
             elif posY > self.LCDheight: posY = self.LCDheight
             newPos = ePoint(posX, posY)
             self[self.currWidgetName].move(newPos)
+            self.session.summary.moveWidget(newPos)
             self.updateWidgetXMLs('position', '%s,%s' %(posX,posY))
 
     def changePixmapPath(self):
@@ -379,6 +385,8 @@ class miniTVskinner(Screen):
 
     def updateSize(self, sizeX, sizeY ):
         self[self.currWidgetName].instance.resize(eSize(sizeX,sizeY))
+        self.session.summary.sizeWidget(eSize(sizeX,sizeY))
+        
         self.updateWidgetXMLs('size', '%s,%s' %(sizeX,sizeY))
 #### WIDGETS LIST >>>
     def updateWidgetsList(self, refreshGUI = False):
@@ -402,7 +410,7 @@ class miniTVskinner(Screen):
       
     def showWidgetInfo(self):
         if self["Widgetslist"].getCurrent()[1] == "":
-            self["WidgetParams"].list = getWidgetParams(self.WidgetsDict[self.currWidgetName]['previewXML'])
+            self["WidgetParams"].list = getWidgetParams(self.WidgetsDict[self.currWidgetName]['previewXML'], self.step)
         else:
             self["WidgetParams"].list = [(_('Press OK to enable widget'), LoadPixmap(getPixmapPath('wdg_btn_no_button.png')))]
 
@@ -426,9 +434,11 @@ class miniTVskinner(Screen):
         self.currWidgetName = self.WidgetsList[self.currIndex][4]
         if self.WidgetsDict[self.currWidgetName]['widgetActiveState'] == 'X':
             self[self.currWidgetName].show()
+            self.session.summary.showWidget(True)
             self.WidgetsDict[self.currWidgetName]['widgetActiveState'] = ''
         elif self.WidgetsDict[self.currWidgetName]['widgetActiveState'] == '':
             self[self.currWidgetName].hide()
+            self.session.summary.showWidget(False)
             self.WidgetsDict[self.currWidgetName]['widgetActiveState'] = 'X'
         self.updateWidgetsList(refreshGUI=True)
 #### LOAD DESIGNS >>>
@@ -610,17 +620,38 @@ class miniTVskinner(Screen):
         self.close()
 
     def createSummary(self):
-         return None
-         #return miniTVskinnerLCDScreen
+         return miniTVskinnerLCDScreen
       
 ################################################################################################################################################################      
 class miniTVskinnerLCDScreen(Screen):
     def __init__(self, session, parent):
         Screen.__init__(self, session, parent = parent)
-        #/PluginBrowser.py
-        #self.onShow.append(self.addWatcher)
-        #self.onHide.append(self.removeWatcher)
+        self.skin = self.parent.skinLCD
         
+        #initiate dynamic widgets
+        for widget in self.parent.WidgetsList: #(widgetPic, widgetActiveState _(widgetName), widgetName, widgetInitscript, previewXML, widgetXML) #widgetActiveState=X then widget disabled
+            printDEBUG('Executing:%s' % self.parent.WidgetsDict[widget[4]]['widgetInitscript'])
+            if self.parent.WidgetsDict[widget[4]]['widgetInitscript'] != '':
+                try:
+                    exec(self.parent.WidgetsDict[widget[4]]['widgetInitscript'])
+                except Exception, e:
+                    printDEBUG('EXCEPTION running init script for %s: %s' % (widget[4], str(e)))
+            if self.parent.WidgetsDict[widget[4]]['widgetActiveState'] != '':
+                self[widget[4]].hide()
+
+    def showWidget(self , state):
+        if state == True:
+            self[self.parent.currWidgetName].show()
+        else:
+            self[self.parent.currWidgetName].hide()
+
+    def moveWidget(self, newPos):
+        self[self.parent.currWidgetName].move(newPos)
+
+    def sizeWidget(self, newSize):
+        self[self.parent.currWidgetName].instance.resize(newSize)
+
+             
 ################################################################################################################################################################
 from Components.Button import Button
 from Components.config import *

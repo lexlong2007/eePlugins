@@ -76,17 +76,19 @@ def getWidgetParam(previewXML, paramName):
         paramValue = root.attrib[paramName]
     return paramValue
 
-def getWidgetParams(previewXML):
+def getWidgetParams(previewXML, step = 0):
     params = [(_('Widget attributes:'), LoadPixmap(getPixmapPath('wdg_btn_menu.png')))]
+    if step > 0:
+        params.append((_('Move/resize step') + ' = %s' % step, LoadPixmap(getPixmapPath('wdg_btn_stepSize.png'))))
     root = ET.ElementTree(ET.fromstring(previewXML)).getroot()
-    knownAttribs=('position','size','pixmap','font','foregroundColor','backgroundColor','zPosition','transparent')
+    knownAttribs=('position','size','pixmap','font','foregroundColor','backgroundColor')
     hiddenAttributes=('name')
     for param in knownAttribs:
         if param in root.attrib:
             paramValue = root.attrib[param]
             if param == 'pixmap':
                 paramValue = paramValue.replace(getPluginPath(),'.../UserSkin/').replace(getSkinPath(), '.../%s/' % getSkinName() )
-            params.append((param + ' = ' + paramValue, LoadPixmap(getPixmapPath('wdg_btn_%s.png' % param))))
+            params.append(( _(param) + ' = ' + paramValue, LoadPixmap(getPixmapPath('wdg_btn_%s.png' % param))))
     return params
 
 def getWidgetParams4Config(previewXML):

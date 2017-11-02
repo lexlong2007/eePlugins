@@ -120,5 +120,23 @@ msgstr "Nazwa programu (przewijana)"
 msgid "REMAININGtext"
 msgstr "Info ile minut do końca"
 
-msgid "aqq"
-msgstr ""
+msgid "Move/resize step"
+msgstr "Krok zmiany pozycji/wielkości"
+
+msgid "position"
+msgstr "pozycja"
+
+msgid "size"
+msgstr "wielkość"
+
+msgid "pixmap"
+msgstr "ikona"
+
+msgid "foregroundColor"
+msgstr "kolor tekstu"
+
+msgid "backgroundColor"
+msgstr "kolor tła"
+
+msgid "transparent"
+msgstr "przezroczystość"

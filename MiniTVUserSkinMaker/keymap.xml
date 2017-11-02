@@ -1,5 +1,5 @@
 <keymap>
-  <map context="UserSkinMiniTVmakerActions">
+  <map context="miniTVskinnerActions">
     <key id="\x0a" mapto="keyOK" flags="m" />
     <key id="\x1b" mapto="keyCancel" flags="m" />
     <key id="KEY_OK" mapto="keyOK" flags="m" />
@@ -9,16 +9,16 @@
     <key id="KEY_GREEN" mapto="keyGreen" flags="m" />
     <key id="KEY_YELLOW" mapto="keyYellow" flags="m" />
     <key id="KEY_BLUE" mapto="keyBlue" flags="m" />
-    <key id="KEY_1" mapto="key1" flags="m" />
-    <key id="KEY_2" mapto="key2" flags="m" />
-    <key id="KEY_3" mapto="key3" flags="m" />
-    <key id="KEY_4" mapto="key4" flags="m" />
+    <key id="KEY_1" mapto="key1" flags="mr" />
+    <key id="KEY_2" mapto="key2" flags="mr" />
+    <key id="KEY_3" mapto="key3" flags="mr" />
+    <key id="KEY_4" mapto="key4" flags="mr" />
     <key id="KEY_5" mapto="key5" flags="m" />
-    <key id="KEY_6" mapto="key6" flags="m" />
-    <key id="KEY_7" mapto="key7" flags="m" />
-    <key id="KEY_8" mapto="key8" flags="m" />
-    <key id="KEY_9" mapto="key9" flags="m" />
-    <key id="KEY_0" mapto="key0" flags="m" />
+    <key id="KEY_6" mapto="key6" flags="mr" />
+    <key id="KEY_7" mapto="key7" flags="mr" />
+    <key id="KEY_8" mapto="key8" flags="mr" />
+    <key id="KEY_9" mapto="key9" flags="mr" />
+    <key id="KEY_0" mapto="key0" flags="mr" />
     <key id="KEY_UP" mapto="keyUp" flags="mr" />
     <key id="KEY_DOWN" mapto="keyDown" flags="mr" />
     <key id="KEY_LEFT" mapto="keyLeft" flags="mr" />
@@ -42,9 +42,8 @@
     <key id="KEY_F3" mapto="keyYellow" flags="mr" />
     <key id="KEY_F4" mapto="keyBlue" flags="mr" />
     <device name="keyboard">
-        <key id="a" mapto="up" flags="mr" />
-        <key id="b" mapto="down" flags="mr" />
+        <key id="a" mapto="keyChannelUp" flags="mr" />
+        <key id="b" mapto="keyChannelDown" flags="mr" />
     </device>
-
   </map>
 </keymap>
