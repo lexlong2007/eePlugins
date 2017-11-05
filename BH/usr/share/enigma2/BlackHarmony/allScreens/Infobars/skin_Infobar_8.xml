@@ -455,12 +455,8 @@
     <widget source="session.CurrentService" render="Label" font="Roboto_HD; 22" position="844,997" size="35,25" halign="left" backgroundColor="background" transparent="1" noWrap="1">
       <convert type="BlackHarmonyServiceInfoEX">fps</convert>
     </widget>
-    <widget source="session.CurrentService" render="Label" position="1682,975" size="60,25" font="Roboto_HD; 22" halign="right" backgroundColor="black" transparent="1" foregroundColor="light_yellow">
-      <convert type="ServiceInfo">VideoWidth</convert>
-    </widget>
-    <eLabel text="x" position="1747,974" size="15,25" font="Roboto_HD; 20" halign="center" backgroundColor="black" transparent="1" />
-    <widget source="session.CurrentService" render="Label" position="1767,975" size="60,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" foregroundColor="light_yellow">
-      <convert type="ServiceInfo">VideoHeight</convert>
+    <widget source="session.CurrentService" render="Label" position="1682,975" size="170,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" foregroundColor="light_yellow">
+      <convert type="BlackHarmonyVR">VideoResolution</convert>
     </widget>
     <widget source="session.CurrentService" render="VtiEmuInfo" position="1645,925" size="217,25" zPosition="3" font="Roboto_HD;22" halign="center" valign="center" backgroundColor="background" foregroundColor="white" transparent="1" />
   </screen>

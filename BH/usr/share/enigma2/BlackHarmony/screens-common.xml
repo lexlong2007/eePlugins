@@ -1040,12 +1040,8 @@
     <widget source="session.CurrentService" render="Label" position="505,978" size="110,30" font="Roboto_HD; 26" halign="right" backgroundColor="black" transparent="1" foregroundColor="green">
       <convert type="ServicePosition">Remaining,Negate</convert>
     </widget>
-    <widget source="session.CurrentService" render="Label" font="Roboto_HD; 26" position="1032,978" size="70,30" halign="right" backgroundColor="black" transparent="1" foregroundColor="light_yellow">
-      <convert type="ServiceInfo">VideoWidth</convert>
-    </widget>
-    <eLabel text="x" font="Roboto_HD; 20" position="1105,980" size="15,30" halign="center" backgroundColor="black" transparent="1"/>
-    <widget source="session.CurrentService" render="Label" font="Roboto_HD; 26" position="1123,978" size="70,30" halign="left" backgroundColor="black" transparent="1" foregroundColor="light_yellow">
-      <convert type="ServiceInfo">VideoHeight</convert>
+    <widget source="session.CurrentService" render="Label" font="Roboto_HD; 26" position="1032,978" size="170,30" halign="left" backgroundColor="black" transparent="1" foregroundColor="light_yellow">
+      <convert type="BlackHarmonyVR">VideoResolution</convert>
     </widget>
     <widget source="session.CurrentService" render="Label" position="395,978" size="110,30" font="Roboto_HD; 26" halign="center" backgroundColor="black" transparent="1">
       <convert type="ServicePosition">Length</convert>

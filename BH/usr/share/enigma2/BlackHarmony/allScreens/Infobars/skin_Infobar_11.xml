@@ -287,12 +287,8 @@
   <widget source="session.CurrentService" render="Label" position="1720,955" size="150,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1">
     <convert type="BlackHarmonyBitrate_BH">VideoBitrateUnits</convert>
   </widget>
-  <widget source="session.CurrentService" render="Label" position="1478,955" size="70,25" font="Roboto_HD; 22" halign="right" backgroundColor="black" transparent="1" foregroundColor="white">
-    <convert type="ServiceInfo">VideoWidth</convert>
-  </widget>
-  <eLabel text="x" position="1550,954" size="15,25" font="Roboto_HD; 22" halign="center" backgroundColor="black" transparent="1" />
-  <widget source="session.CurrentService" render="Label" position="1567,955" size="70,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" foregroundColor="white">
-    <convert type="ServiceInfo">VideoHeight</convert>
+  <widget source="session.CurrentService" render="Label" position="1478,955" size="170,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" foregroundColor="white">
+      <convert type="BlackHarmonyVR">VideoResolution</convert>
   </widget>
 <!-- POGODA -->
   <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1289,35" size="85,85" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">

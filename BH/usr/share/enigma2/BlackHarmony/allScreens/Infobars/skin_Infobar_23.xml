@@ -383,17 +383,13 @@
   <widget source="session.CurrentService" render="Label" position="1658,612" size="160,30" font="Roboto_HD; 24" halign="left" backgroundColor="black" transparent="1">
     <convert type="BlackHarmonyBitrate_BH">VideoBitrateUnits</convert>
   </widget>
-  <widget font="Roboto_HD; 24" backgroundColor="black" halign="right" position="870,612" render="Label" size="70,30" source="session.CurrentService" transparent="1" foregroundColor="white">
-    <convert type="ServiceInfo">VideoWidth</convert>
-  </widget>
-  <widget font="Roboto_HD; 24" backgroundColor="black" halign="left" position="987,612" render="Label" size="70,30" source="session.CurrentService" transparent="1" foregroundColor="white">
-    <convert type="ServiceInfo">VideoHeight</convert>
+  <widget font="Roboto_HD; 24" backgroundColor="black" halign="right" position="870,612" render="Label" size="170,30" source="session.CurrentService" transparent="1" foregroundColor="white">
+      <convert type="BlackHarmonyVR">VideoResolution</convert>
   </widget>
   <eLabel text="TMP:" position="110,612" size="69,30" font="Roboto_HD; 24" backgroundColor="black" halign="left" transparent="1" foregroundColor="red" />
   <eLabel text="FAN:" position="415,612" size="65,30" font="Roboto_HD; 24" backgroundColor="black" halign="left" transparent="1" foregroundColor="green" />
   <eLabel text="CPU:" position="1290,612" size="65,30" font="Roboto_HD; 24" backgroundColor="black" halign="left" transparent="1" foregroundColor="yellow" />
   <eLabel text="BTR:" position="1593,612" size="65,30" font="Roboto_HD; 24" backgroundColor="black" halign="left" transparent="1" foregroundColor="blue" />
-  <eLabel text="x" position="948,612" size="30,30" font="Roboto_HD; 24" halign="center" backgroundColor="black" transparent="1" foregroundColor="cyan" />
   <!--##########################################-->
   <ePixmap position="30,721" zPosition="-2" size="1900,300" pixmap="BlackHarmony/bg_design/infobar.png" />
   <ePixmap position="1410,828" zPosition="10" size="450,1" pixmap="BlackHarmony/gfx/linia_IB.png" />

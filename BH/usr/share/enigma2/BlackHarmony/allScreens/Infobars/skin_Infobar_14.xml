@@ -303,12 +303,8 @@
   <widget source="session.CurrentService" render="Label" position="1720,940" size="150,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1">
     <convert type="BlackHarmonyBitrate_BH">VideoBitrateUnits</convert>
   </widget>
-  <widget source="session.CurrentService" render="Label" position="849,798" size="60,25" font="Roboto_HD; 22" halign="right" backgroundColor="black" transparent="1">
-    <convert type="ServiceInfo">VideoWidth</convert>
-  </widget>
-  <eLabel text="x" position="909,799" size="15,25" font="Roboto_HD; 17" halign="center" backgroundColor="black" transparent="1" foregroundColor="green" />
-  <widget source="session.CurrentService" render="Label" position="924,798" size="60,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1">
-    <convert type="ServiceInfo">VideoHeight</convert>
+  <widget source="session.CurrentService" render="Label" position="849,798" size="170,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1">
+      <convert type="BlackHarmonyVR">VideoResolution</convert>
   </widget>
 </screen>
 <screen name="SecondInfoBar" backgroundColor="transparent" flags="wfNoBorder" position="-2,50" size="1920,1080">
