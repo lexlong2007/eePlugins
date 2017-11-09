@@ -103,13 +103,18 @@ def getLoadedFonts(SkinPath, vfdSkinFileName, CurrentSkinName):
     fonts=[]
     fonts.append('Regular')
     fontsFiles=[]
+    #first userskin
+    if os_path.exists('/etc/enigma2/skin_user_%s.xml' % CurrentSkinName):
+        fontsFiles.append('/etc/enigma2/skin_user_%s.xml' % CurrentSkinName)
+    else:
+        fontsFiles.append('/etc/enigma2/skin_user.xml')
+    #second active screen
+    fontsFiles.append('%s%s/skin.xml' % (SkinPath,CurrentSkinName))
     fontsFiles.append('%sskin_default.xml' % SkinPath)
     fontsFiles.append('%sskin.xml' % SkinPath)
-    fontsFiles.append('%s%s/skin.xml' % (SkinPath,CurrentSkinName))
-    fontsFiles.append('/etc/enigma2/skin_user_%s.xml' % CurrentSkinName)
-    fontsFiles.append('/etc/enigma2/skin_user.xml')
     if vfdSkinFileName is not None:
         fontsFiles.append(vfdSkinFileName)
+    print fontsFiles
     for fontFile in fontsFiles:
         if os_path.exists(fontFile):
             with open(fontFile, 'r') as f:

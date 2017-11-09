@@ -41,13 +41,18 @@ def miniTVskinnerInitiator(session, **kwargs):
 
 class miniTVskinner(Screen):
     def __init__(self, session, loadedDesigns):
+        if getDesktop(1).size().width() >= getDesktop(2).size().width():
+            self.desktopID = 1
+        else:
+            self.desktopID = 2
+          
         if fileExists('/usr/local/e2'): #fake LCD size for enigma2-pc
             self.LCDwidth = 480
             self.LCDheight = 320
             self.imageType = 'enigma2-PC'
         else:
-            self.LCDwidth = getDesktop(1).size().width()
-            self.LCDheight = getDesktop(1).size().height()
+            self.LCDwidth = getDesktop(self.desktopID).size().width()
+            self.LCDheight = getDesktop(self.desktopID).size().height()
             if fileExists('/usr/lib/enigma2/python/Plugins/SystemPlugins/VTIPanel'):
                 self.imageType = 'VTI'
             elif fileExists('/usr/lib/enigma2/python/Blackhole'):
@@ -58,7 +63,7 @@ class miniTVskinner(Screen):
                 self.imageType = _('Unknown image')
               
         self.skin = """
-        <screen name="MiniTVskinner" title="miniTV (%dx%d) skin creator mod j00zek on %s" position="center,center" size="1280,720">
+        <screen name="MiniTVskinner" title="miniTV skin creator (c) j00zek on %s, display %d (%dx%d)" position="center,center" size="1280,720">
             <eLabel position="0,0" size="800,460" zPosition="-10" backgroundColor="#00222222" />
             <eLabel position="0,0" size="%d,%d" zPosition="-9" backgroundColor="#00555555" />
           <!-- active WIDGET description -->
@@ -98,7 +103,7 @@ class miniTVskinner(Screen):
                     }
                 </convert>
             </widget>
-          <!-- WIDGETS -->\n""" % (self.LCDwidth, self.LCDheight, self.imageType, self.LCDwidth+2, self.LCDheight+2, PluginPath)
+          <!-- WIDGETS -->\n""" % (self.imageType, self.desktopID, self.LCDwidth, self.LCDheight, self.LCDwidth+2, self.LCDheight+2, PluginPath)
           
         self.skinLCD = '<screen name="MiniTVskinner_summary" position="center,center" size="%d,%d">' % (self.LCDwidth, self.LCDheight)
     
@@ -182,6 +187,7 @@ class miniTVskinner(Screen):
         self.onLayoutFinish.append(self.start)
 
     def start(self):
+        self.setTitle(_('miniTV skin creator %s system: %s, display %d (%dx%d)') % (UserSkinInfo, self.imageType, self.desktopID, self.LCDwidth, self.LCDheight))
         l = self.WidgetsList
         self["Widgetslist"].list = l
         self.currIndex=self["Widgetslist"].getIndex()
@@ -210,7 +216,7 @@ class miniTVskinner(Screen):
         try:
             if config.skin.primary_vfdskin.value == '': pass # exists in VTI only
             myLCDconfig = config.skin.primary_vfdskin
-            vfdSkinFileName = resolveFilename(SCOPE_SKIN, 'vfd_skin/skin_vfd_UserSkin.xml')
+            self.vfdSkinFileName = resolveFilename(SCOPE_SKIN, 'vfd_skin/skin_vfd_UserSkin.xml')
         except Exception:
             try:
                 if config.skin.display_skin.value == '': pass # exists in openATV
@@ -218,7 +224,7 @@ class miniTVskinner(Screen):
                     myLCDconfig = config.skin.display_skin
                     if not fileExists(resolveFilename(SCOPE_SKIN, 'display/Userskin/')):
                         os.mkdir(resolveFilename(SCOPE_SKIN, 'display/Userskin/'))
-                    skinPath=resolveFilename(SCOPE_SKIN, 'display/Userskin/skin_display.xml')
+                    self.vfdSkinFileName = resolveFilename(SCOPE_SKIN, 'display/Userskin/skin_display.xml')
             except Exception, e:
                 printDEBUG('System does not have known vfd skin attributes, error: %s' % str(e))
                 self['yellow'].hide()
@@ -292,7 +298,7 @@ class miniTVskinner(Screen):
                 fontParts = fontParts.split(';')
                 fontSize = int(fontParts[1]) + step
                 if fontSize < 5: fontSize = 5
-                elif fontSize > 90: fontSize = 90
+                elif fontSize > 200: fontSize = 200
                 self[self.currWidgetName].instance.setFont(gFont(fontParts[0] , fontSize ) )
                 self.session.summary.setFontSize(gFont(fontParts[0] , fontSize ))
                 self.updateWidgetXMLs('font', '%s;%s' %(fontParts[0], fontSize ))
@@ -563,7 +569,8 @@ class miniTVskinner(Screen):
                 os.mkdir('%sallScreens/LCD' % (SkinPath))  
 
         screenPart = ""
-        screenPart += '\n<screen name="%s" position="0,0" size="%s,%s" id="1">\n    ' % (screenName, self.LCDwidth, self.LCDheight)
+        #screenPart += '\n<screen name="%s" position="0,0" size="%s,%s" id="%s">\n' % ( screenName, self.LCDwidth, self.LCDheight, self.desktopID )
+        screenPart += '\n<screen name="%s" position="0,0" size="%s,%s">\n' % ( screenName, self.LCDwidth, self.LCDheight )
         for widget in self.WidgetsDict:
             if self.WidgetsDict[widget]['widgetActiveState'] == '':
                 print "Write %s Widget to SkinFile" % (widget)

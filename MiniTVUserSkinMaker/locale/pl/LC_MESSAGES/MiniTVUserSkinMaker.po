@@ -140,3 +140,27 @@ msgstr "kolor tła"
 
 msgid "transparent"
 msgstr "przezroczystość"
+
+msgid "miniTV skin creator %s system: %s, display %d (%dx%d)"
+msgstr "Kreator skórek miniTV %s system: %s, wyświetlacz %d (%dx%d)"
+
+msgid "DATE"
+msgstr "Aktualna data"
+
+msgid "TIME"
+msgstr "Aktualny czas"
+
+msgid "REMAINING"
+msgstr "Czas do końca audycji (info)"
+
+msgid "EVENTTIMEprogress"
+msgstr "Czas do końca audycji (pasek)"
+
+msgid "UHDicon"
+msgstr "Ikona UHD"
+
+msgid "HD1080icon"
+msgstr "ikona 1080HD"
+
+msgid "HD720icon"
+msgstr "ikona 720HD"
