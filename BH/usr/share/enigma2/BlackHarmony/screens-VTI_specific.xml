@@ -248,3 +248,62 @@
     <widget source="key_red" render="Label" position="91,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget source="key_green" render="Label" position="378,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
   </screen>
+  <screen name="AnimationSetupScreen" position="465,135" size="1000,500" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <eLabel text="Animation Setup" position="561,30" size="380,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <ePixmap position="0,0" zPosition="-10" size="1000,820" pixmap="BlackHarmony/bg_design/short.png"/>
+    <widget source="global.CurrentTime" render="Label" position="45,30" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="129,30" size="360,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+    </widget>
+    <widget name="config" font="Roboto_HD; 27" position="73,140" size="850,240" itemHeight="35" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/short_sel.png" backgroundColor="transpBlack" transparent="1"/>
+    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="47,440" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="273,440" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="723,440" size="35,27" alphatest="blend"/>
+    <widget source="key_red" render="Label" position="87,439" size="180,27" zPosition="1" font="Roboto_HD; 24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="key_green" render="Label" position="313,439" size="180,27" zPosition="1" font="Roboto_HD; 24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="key_blue" render="Label" position="763,439" size="180,26" zPosition="1" font="Roboto_HD;24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1"/>
+  </screen>
+  <screen name="MessageBox" position="555,366" size="790,50" title="Message">
+    <widget name="text" position="110,8" size="680,0" font="Roboto_HD; 25"/>
+    <widget name="ErrorPixmap" pixmap="BlackHarmony/icons/error.png" position="5,5" size="65,65" alphatest="blend"/>
+    <widget name="QuestionPixmap" pixmap="BlackHarmony/icons/question.png" position="5,5" size="65,65" alphatest="blend"/>
+    <widget name="InfoPixmap" pixmap="BlackHarmony/icons/info.png" position="5,5" size="65,65" alphatest="blend"/>
+    <widget name="list" font="Roboto_HD; 27" position="15,70" size="750,320" backgroundColor="background" itemHeight="35" selectionPixmap="BlackHarmony/menu/sel_750_35.png" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" transparent="1"/>
+    <applet type="onLayoutFinish">
+# this should be factored out into some helper code, but currently demonstrates applets.
+from enigma import eSize, ePoint
+
+orgwidth = self.instance.size().width()
+orgpos = self.instance.position()
+textsize = self["text"].getSize()
+
+# y size still must be fixed in font stuff...
+textsize = (textsize[0] + 80, textsize[1] + 80)
+offset = 20
+if self.type == self.TYPE_YESNO:
+        offset = 80
+wsizex = textsize[0] + 120
+wsizey = textsize[1] + offset
+if (600 &gt; wsizex):
+        wsizex = 600
+wsize = (wsizex, wsizey)
+
+
+# resize
+self.instance.resize(eSize(*wsize))
+
+# resize label
+self["text"].instance.resize(eSize(*textsize))
+
+# move list
+listsize = (wsizex - 20, 80)
+self["list"].instance.move(ePoint(10, textsize[1]))
+self["list"].instance.resize(eSize(*listsize))
+
+# center window
+newwidth = wsize[0]
+self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2,orgpos.y()))
+    </applet>
+  </screen>
