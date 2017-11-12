@@ -458,7 +458,7 @@ class miniTVskinner(Screen):
                 savedDesigns.append((fileName[:-7],"%s/%s" % (self.miniTVdesignsPath,fileName)))
         for fileName in os.listdir('%s/LCDskin/sharedDesigns' % (PluginPath) ):
             if fileName.endswith('.design'):
-                savedDesigns.append((fileName[:-7],"%s/%s" % (self.miniTVdesignsPath,fileName)))
+                savedDesigns.append((fileName[:-7],'%s/LCDskin/sharedDesigns/%s' % (PluginPath,fileName)))
         if len(savedDesigns) == 0:
             self.session.openWithCallback(self.doNothing, MessageBox,_("No saved designs found"),  type = MessageBox.TYPE_INFO, timeout = 10, default = False)
         else:

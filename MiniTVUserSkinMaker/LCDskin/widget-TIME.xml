@@ -1,5 +1,5 @@
 <definition>
-  <widgetInit script="self['TIME'] = Label('23:59')" />
+  <widgetInit script="from time import gmtime, strftime;self['TIME'] = Label(strftime('%H:%M', gmtime()))" />
   <previewXML>
     <widget name="TIME" position="320,45" size="150,35" foregroundColor="white" backgroundColor="#000000" zPosition="2" transparent="0" halign="right" font="Regular;32" />
   </previewXML>

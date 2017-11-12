@@ -164,3 +164,9 @@ msgstr "ikona 1080HD"
 
 msgid "HD720icon"
 msgstr "ikona 720HD"
+
+msgid "Very long event name to scroll"
+msgstr "Bardzo aleo to bardzo długa, przewijana nazwa audycji"
+
+msgid "aqq"
+msgstr ""

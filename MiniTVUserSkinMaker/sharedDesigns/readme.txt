@@ -1,1 +1,0 @@
-Will contain designs prepared by someone and shared to public.
