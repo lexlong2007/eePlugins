@@ -1,0 +1,12 @@
+<skin>
+
+<screen name="StandbySummary" position="0,0" size="480,320">
+<widget backgroundColor="#000000" font="LCD;140" foregroundColor="white" halign="right" position="75,65" render="Label" size="315,155" source="global.CurrentTime" transparent="0" zPosition="2">
+        <convert type="ClockToText">Format:%H:%M</convert>
+      </widget>
+<widget backgroundColor="#000000" font="Regular;42" foregroundColor="#FFFF00" halign="right" position="80,260" render="Label" size="280,55" source="global.CurrentTime" transparent="0" zPosition="2">
+        <convert type="ClockToText">Format:%d.%m.%Y</convert>
+      </widget>
+</screen>
+
+</skin>
