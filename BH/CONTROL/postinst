@@ -42,7 +42,6 @@ elif [ -e /usr/lib/enigma2/python/Blackhole ];then
   echo 'VTI BlackHole image'
 fi
 echo '</skin>' >> /usr/share/enigma2/BlackHarmony/skin.xml
-
 #final message
 if [ -e /usr/share/enigma2/BlackHarmony/UserSkin_Selections/ ];then
   if `ls /usr/share/enigma2/BlackHarmony/UserSkin_Selections/ |grep -q '.xml'`;then
