@@ -168,5 +168,8 @@ msgstr "ikona 720HD"
 msgid "Very long event name to scroll"
 msgstr "Bardzo aleo to bardzo długa, przewijana nazwa audycji"
 
+msgid "No active widgets to save"
+msgstr "Brak aktywnych widżetów do zapisania"
+
 msgid "aqq"
 msgstr ""

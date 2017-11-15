@@ -653,7 +653,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
         def getScreenNames(XMLfilename):
             myPath=path.realpath(XMLfilename)
             if not path.exists(myPath):
-                remove(XMLfilename)
+                system('rm -f %s' % XMLfilename) 
                 return []
             filecontent = ''
             screenNames = []
@@ -669,7 +669,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
         def readScreenContent(XMLfilename, screenSection):
             myPath=path.realpath(XMLfilename)
             if not path.exists(myPath):
-                remove(XMLfilename)
+                system('rm -f %s' % XMLfilename) 
                 return ''
             screencontent = ''
             sectionmarker = False
@@ -715,10 +715,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
             remove(SkinPath + 'mySkin')
             mkdir(SkinPath + 'mySkin')       
 
-        if self.isVTI == True: #jesli mamy VTI, to nie musimy robic pliku
-            user_skin_file = SkinPath + 'mySkin/skin_user' + self.currentSkin + '.xml'
-        else:
-            user_skin_file = resolveFilename(SCOPE_CONFIG, 'skin_user' + self.currentSkin + '.xml')
+        user_skin_file = SkinPath + 'mySkin/skin_user' + self.currentSkin + '.xml' #standardowo zapisujemy gotowa skorke w katalogu BH
         if path.exists(user_skin_file):
             remove(user_skin_file)
             
@@ -767,8 +764,13 @@ class UserSkin_Config(Screen, ConfigListScreen):
                     myFile.write(user_skin)
                     myFile.flush()
                     myFile.close()
-                    if path.exists('(/usr/lib/enigma2/python/Blackhole'):
-                        system('ln -sf %s /etc/enigma2/user_skin.xml' % user_skin_file)
+                    if self.isVTI == True: #VTI i openATV czytaja, to nie musimy robic pliku
+                        pass #VTI standardowo laduje pliki z SkinPath + 'mySkin/skin_user' + self.currentSkin + '.xml'
+                    elif path.exists('(/usr/lib/enigma2/python/Blackhole'):
+                        system('ln -sf %s /etc/enigma2/user_skin.xml' % user_skin_file) #Blackhole ma jedynie standardowy mechanizm
+                    else: #openATV i inne oparte o pli obsluguja skorki spersonalizowane dla kazdej wybranej osobno
+                        system('ln -sf %s %s' % (user_skin_file, resolveFilename(SCOPE_CONFIG, 'skin_user' + self.currentSkin + '.xml')))
+
             #checking if all renderers are in the system
             self.checkComponent(user_skin, 'render' , resolveFilename(SCOPE_PLUGINS, '../Components/Renderer/') )
             self.checkComponent(user_skin, 'pixmap' , resolveFilename(SCOPE_SKIN, '') )

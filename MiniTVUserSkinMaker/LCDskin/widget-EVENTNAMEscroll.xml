@@ -1,11 +1,11 @@
 <definition>
   <widgetInit script="self[''] = Label(_('Very long event name to scroll'))" />
   <previewXML>
-    <widget name="" options="movetype=running,startpoint=0,direction=left,steptime=100,repeat=2,startdelay=11000,wrap" foregroundColor="white" backgroundColor="#000000" position="10,220" size="460,36" font="Roboto_HD; 30" transparent="1">
+    <widget name="" options="movetype=running,startpoint=0,direction=left,steptime=100,repeat=2,startdelay=11000,wrap" foregroundColor="white" backgroundColor="#000000" position="10,220" size="460,36" font="Roboto_HD; 30" transparent="0">
     </widget>
   </previewXML>
   <widgetXML>
-    <widget source="session.Event_Now" render="VRunningText" options="movetype=running,startpoint=0,direction=left,steptime=100,repeat=2,startdelay=11000,wrap" foregroundColor="white" backgroundColor="#000000" position="10,220" size="460,36" font="Roboto_HD; 30" transparent="1">
+    <widget source="session.Event_Now" render="miniTVRunningText" options="movetype=running,startpoint=0,direction=left,steptime=100,repeat=2,startdelay=11000,wrap" foregroundColor="white" backgroundColor="#000000" position="10,220" size="460,36" font="Roboto_HD; 30" transparent="0">
       <convert type="EventName">Name</convert>
     </widget>
   </widgetXML>

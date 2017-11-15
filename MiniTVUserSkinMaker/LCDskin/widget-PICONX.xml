@@ -1,9 +1,11 @@
 <definition>
   <widgetInit script="self[''] = Pixmap()" />
   <previewXML>
-    <widget name="" pixmap="XPicon.png" position="130,85" zPosition="4" size="220,132" transparent="1" alphatest="blend" />
+    <widget name="" pixmap="XPicon.png" position="0,0" zPosition="4" size="220,132" transparent="1" alphatest="blend" />
   </previewXML>
   <widgetXML>
-    <widget source="session.CurrentService" render="XPicon" position="130,85" zPosition="4" size="220,132" transparent="1" alphatest="blend" />
+    <widget alphatest="blend" position="30,30" render="miniTVxpicon" size="220,132" source="session.CurrentService" transparent="1" zPosition="4">
+        <convert type="ServiceName">Reference</convert>
+    </widget>
   </widgetXML>
 </definition>

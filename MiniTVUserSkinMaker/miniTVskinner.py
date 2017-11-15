@@ -522,13 +522,24 @@ class miniTVskinner(Screen):
     def KeyGreenwriteDesign(self, filename):
         if filename is not None and filename != '':
             import json
-            try:
-                with open('%s/%s.design' % (self.miniTVdesignsPath, filename), 'w') as f:
-                    f.write(json.dumps(self.WidgetsDict, ensure_ascii=False))
-                    f.close()
-                self.session.open(MessageBox, _("File %s.design\n ...has been written") % filename, type = MessageBox.TYPE_INFO, timeout=10)
-            except Exception, e:
-                self.session.open(MessageBox, "Error occured: %s" % str(e), type = MessageBox.TYPE_ERROR, timeout=10)
+            wDict = {}
+            for widget in self.WidgetsDict:
+                if self.WidgetsDict[widget]['widgetActiveState'] != 'X': #only active widgets
+                    wDict[widget] = self.WidgetsDict[widget]
+            if len(wDict) > 0:
+                try:
+                    with open('%s/%s.design' % (self.miniTVdesignsPath, filename), 'w') as f:
+                        f.write(json.dumps(wDict, ensure_ascii=False, indent=2))
+                        f.close()
+                    self.session.open(MessageBox, _("File %s.design\n ...has been written") % filename, type = MessageBox.TYPE_INFO, timeout=10)
+                    return
+                except Exception, e:
+                    self.session.open(MessageBox, "Error occured: %s" % str(e), type = MessageBox.TYPE_ERROR, timeout=10)
+                    return
+            else:
+                self.session.open(MessageBox, _("No active widgets to save"), type = MessageBox.TYPE_INFO, timeout=10)
+                return
+              
 #### WRITE SKINS >>>
     def KeyYellow(self):
         if self.vfdSkinFileName is not None:
