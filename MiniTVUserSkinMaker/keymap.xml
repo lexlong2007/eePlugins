@@ -23,10 +23,10 @@
     <key id="KEY_DOWN" mapto="keyDown" flags="mr" />
     <key id="KEY_LEFT" mapto="keyLeft" flags="mr" />
     <key id="KEY_RIGHT" mapto="keyRight" flags="mr" />
-    <key id="KEY_CHANNELUP" mapto="keyChannelUp" flags="m" />
-    <key id="KEY_CHANNELDOWN" mapto="keyChannelDown" flags="m" />
+    <key id="KEY_CHANNELUP" mapto="keyChannelUp" flags="mr" />
+    <key id="KEY_CHANNELDOWN" mapto="keyChannelDown" flags="mr" />
     <key id="KEY_INFO" mapto="KeyInfo" flags="m" />
-                <key id="KEY_TV" mapto="preview" flags="m" />
+    <key id="KEY_TV" mapto="keyTV" flags="m" /> <!-- t on pc -->
                 <key id="KEY_REWIND" mapto="prevDay" flags="m" />
                 <key id="KEY_FASTFORWARD" mapto="nextDay" flags="m" />
                 <key id="KEY_NEXT" mapto="nextService" flags="m" />

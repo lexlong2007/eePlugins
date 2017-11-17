@@ -1,4 +1,4 @@
-#it's standard Picon.py from openatv with minor changes to asure compatibility with miniTV
+#it's standard Picon.py from openatv with changed name for compatibility with BlackHarmony
 import os, re, unicodedata
 from Renderer import Renderer
 from enigma import ePixmap, ePicLoad

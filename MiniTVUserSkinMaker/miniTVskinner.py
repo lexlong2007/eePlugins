@@ -149,6 +149,7 @@ class miniTVskinner(Screen):
             "key1" : self.changeforegroundColor,
             "key0" : self.backgroundColor,
             "key5" : self.changeStep,
+            "keyTV": self.previewSkin,
         }, -1)
         
         #addFont(resolveFilename(SCOPE_FONTS,"meteocons.ttf"), "Meteo", 100, False)
@@ -385,7 +386,7 @@ class miniTVskinner(Screen):
     def widgetConfig(self):
         if self["Widgetslist"].getCurrent()[1] == "":
             parametersDict = getWidgetParams4Config(self.WidgetsDict[self.currWidgetName]['previewXML'])
-            self.session.openWithCallback(self.widgetConfigRet,miniTVskinnerWidgetConfig, parametersDict)
+            self.session.openWithCallback(self.widgetConfigRet,miniTVskinnerWidgetConfig, parametersDict, self.currWidgetName)
 
     def updateWidgetXMLs(self, param, paramValue):
         self.WidgetsDict[self.currWidgetName]['previewXML'] = updateWidgetparam( self.WidgetsDict[self.currWidgetName]['previewXML'],param, paramValue)
@@ -636,6 +637,14 @@ class miniTVskinner(Screen):
 
     def createSummary(self):
          return miniTVskinnerLCDScreen
+       
+    def previewSkin(self):
+        previewSkin = '<screen name="miniTVskinnerPreviewSkin" title="%s" position="center,center" size="%d,%d" backgroundColor="black">\n' % (self.imageType, self.LCDwidth, self.LCDheight)
+        for widget in self.WidgetsDict:
+            if self.WidgetsDict[widget]['widgetActiveState'] == '':
+                previewSkin += self.WidgetsDict[widget]['widgetXML'] + '\n'
+        previewSkin += '</screen>\n'
+        self.session.openWithCallback(self.doNothing,miniTVskinnerPreviewSkin, previewSkin)
       
 ################################################################################################################################################################      
 class miniTVskinnerLCDScreen(Screen):
@@ -681,6 +690,17 @@ class miniTVskinnerLCDScreen(Screen):
             self[self.parent.currWidgetName].show()
 
 ################################################################################################################################################################
+class miniTVskinnerPreviewSkin(Screen):
+    def __init__(self, session, previewSkin):
+        self.skin = previewSkin
+        self.session = session
+        Screen.__init__(self, session)
+
+        self["actions"]  = ActionMap(["miniTVskinnerActions"], {
+            "keyCancel": self.close,
+            "keyOK": self.close,
+        }, -1)
+################################################################################################################################################################
 from Components.Button import Button
 from Components.config import *
 from Components.ConfigList import ConfigListScreen
@@ -723,7 +743,7 @@ class miniTVmakerFileBrowser(Screen):
                         
         def exit(self):
                 self.close()
-
+################################################################################################################################################################
 class miniTVskinnerWidgetConfig(Screen, ConfigListScreen):
     skin = """
     <screen name="miniTVskinnerWidgetConfig" position="center,center" size="640,500" title="miniTVskinner Widget Config" backgroundColor="#20606060" >
@@ -734,7 +754,7 @@ class miniTVskinnerWidgetConfig(Screen, ConfigListScreen):
             <widget name="key_blue" position="440,465" zPosition="2" size="200,35" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="#202673ec" />
     </screen>"""
     
-    def __init__(self, session, paramsDict = {} ):
+    def __init__(self, session, paramsDict = {}, currWidgetName = '' ):
         Screen.__init__(self, session)
 
         ConfigListScreen.__init__(self, [], session)
@@ -753,6 +773,7 @@ class miniTVskinnerWidgetConfig(Screen, ConfigListScreen):
 
         self.list=[]
         self.paramsDict = paramsDict
+        self.currWidgetName = currWidgetName
         
         #self.list.append(getConfigListEntry(_("Download:"), myConfig.Version)) #debug|public
         
@@ -780,6 +801,58 @@ class miniTVskinnerWidgetConfig(Screen, ConfigListScreen):
             elif param == 'pixmap':
                 exec('self.%s = ConfigDirectory( default = "%s")' %(param,paramValue))
                 exec('self.list.append(getConfigListEntry("%s", self.%s, "%s"))' % (_(param),param,param))
+            elif param == 'optionsDISABLED' and self.currWidgetName == 'miniTVRunningText':
+                if 1: #try:
+                    options = paramValue.split(',')
+                    if len(options) > 0:
+                      for o in options:
+                          if '=' in o:
+                              opt, optValue = (x.strip() for x in o.split('=', 1))
+                          else:
+                              opt, optValue = o.strip(), ""
+                          print '******************** %s,%s;' % (opt, optValue)
+                          if opt == "":
+                              continue
+                          elif opt in ("wrap", "nowrap"):
+                              exec('self.option%s = ConfigSelection(default = "%s", choices = [("wrap", _("wrap")),("nowrap", _("nowrap"))])' %(opt,opt))
+                              exec('self.list.append(getConfigListEntry("%s", self.option%s, "option%s"))' % (_('Option %s' % opt), opt,opt))
+                          elif opt == "movetype":
+                              exec('self.option%s = ConfigSelection(default = "%s", choices = [("none", _("none")),("running", _("running")),("swimming", _("swimming"))])' %(opt,optValue))
+                              exec('self.list.append(getConfigListEntry("%s", self.option%s, "option%s"))' % (_('Option %s' % opt), opt,opt))
+                          elif opt =="direction" and optValue in ("left","right","top","bottom"):
+                              exec('self.option%s = ConfigSelection(default = "%s", choices = [("left", _("left")),("right", _("right")),("top", _("top")),("bottom", _("bottom"))])' %(opt,optValue))
+                              exec('self.list.append(getConfigListEntry("%s", self.option%s, "option%s"))' % (_('Option %s' % opt), opt,opt))
+                          elif opt == "step":
+                              exec('self.option%s = ConfigSelectionNumber(min= 1, max= 10, stepwidth = 1, default=%s)' %(opt,optValue))
+                              exec('self.list.append(getConfigListEntry("%s", self.option%s, "option%s"))' % (_('Option %s' % opt), opt,opt))
+                          elif opt == "steptime":
+                              exec('self.option%s = ConfigSelectionNumber(min= 25, max= 1000, stepwidth = 5, default=%s)' %(opt,optValue)) #in miliseconds
+                              exec('self.list.append(getConfigListEntry("%s", self.option%s, "option%s"))' % (_('Option %s' % opt), opt,opt))
+                          elif opt == "startdelay":
+                              exec('self.option%s = ConfigSelectionNumber(min= 0, max= 2000, stepwidth = 10, default=%s)' %(opt,optValue)) #in miliseconds
+                              exec('self.list.append(getConfigListEntry("%s", self.option%s, "option%s"))' % (_('Option %s' % opt), opt,opt))
+                          elif opt == "pause":
+                              exec('self.option%s = ConfigSelectionNumber(min= 0, max= 1000, stepwidth = 10, default=%s)' %(opt,optValue)) #in miliseconds
+                              exec('self.list.append(getConfigListEntry("%s", self.option%s, "option%s"))' % (_('Option %s' % opt), opt,opt))
+                          elif opt =="repeat":
+                              exec('self.option%s = ConfigSelectionNumber(min= 0, max= 10, stepwidth = 1, default=%s)' %(opt,optValue)) 
+                              exec('self.list.append(getConfigListEntry("%s", self.option%s, "option%s"))' % (_('Option %s' % opt), opt,opt))
+                          elif opt =="always":
+                              exec('self.option%s = ConfigSelectionNumber(min= 0, max= 1, stepwidth = 1, default=%s)' %(opt,optValue)) ## always move text
+                              exec('self.list.append(getConfigListEntry("%s", self.option%s, "option%s"))' % (_('Option %s' % opt), opt,opt))
+                              pass #self.mAlways = retValue(val, 0, self.mAlways)
+                          elif opt =="startpoint":
+                              exec('self.option%s = ConfigSelectionNumber(min= 0, max= 800, stepwidth = 10, default=%s)' %(opt,optValue)) ## always move text
+                              exec('self.list.append(getConfigListEntry("%s", self.option%s, "option%s"))' % (_('Option %s' % opt), opt,opt))
+                              pass #self.mStartPoint = int(val)
+                          #elif opt == "oneshot":
+                          #    pass #self.mOneShot = retValue(val, 0, self.mOneShot)
+                          #elif opt == "pagedelay":
+                          #    pass #self.mPageDelay = retValue(val, 0, self.mPageDelay)
+                          #elif opt == "pagelength":
+                          #    pass #self.mPageLength = retValue(val, 0, self.mPageLength)
+                #except Exception:
+                #    pass
             else:
                 exec('self.%s = ConfigText(fixed_size=False, default = "%s")' %(param,paramValue))
                 exec('self.list.append(getConfigListEntry("%s", self.%s, "%s"))' % (_(param),param,param))
@@ -815,6 +888,17 @@ class miniTVskinnerWidgetConfig(Screen, ConfigListScreen):
                 fontParts = self.paramsDict['font'].split(';')
                 fontParts[1] = self.paramsDict[param]
                 self.paramsDict[param] = ';'.join(fontParts)
+            elif param.startswith('optionDISABLED'):
+                pparm = '%s=%s' % (param[6:], paramValue)
+                sparm = self.paramsDict['options']
+                if pparm in ("wrap", "nowrap"):
+                    if 'wrap' in sparm and paramValue != 'wrap':
+                        self.paramsDict['options'] = re.sub('wrap', 'nowrap', sparm)
+                    #elif :
+                    #    self.paramsDict['options'] = re.sub('pparm=[^ ",]*', 'pparm=' + paramValue + ',', sparm)
+                else:
+                    self.paramsDict['options'] = re.sub('pparm=[^,]*,', 'pparm=' + paramValue + ',', sparm)
+              
         self.close(True, self.paramsDict)
 
     def keyCancel(self):
