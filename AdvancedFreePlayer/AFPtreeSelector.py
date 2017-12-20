@@ -295,8 +295,9 @@ class AdvancedFreePlayerStart(Screen):
       
     def PlayMovie(self):
         if not self.openmovie == "":
-            myConfig.FileListLastFolder.value =  self["myPath"].getText()
-            myConfig.FileListLastFolder.save()
+            if myConfig.StoreLastFolder == True:
+                myConfig.FileListLastFolder.value =  self["myPath"].getText()
+                myConfig.FileListLastFolder.save()
             print self["myPath"].getText()
             self.lastPosition, Length = getCut(self.openmovie + '.cuts') #returns in mins
             if self.lastPosition < 1:
