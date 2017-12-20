@@ -168,7 +168,8 @@ class BlackHarmonygExtraTuner(Converter, object):
 									}[frontendData.get("fec_inner", eDVBFrontendParametersSatellite.FEC_Auto)]	
 						tunerinfo = (frequency + "  " + pol + "  " + fec + "  " + symbolrate + "  " + orb)
 					elif (frontendData.get("tuner_type") == "DVB-C"):
-						fec = {
+						try:
+							fec = {
 										eDVBFrontendParametersCable.FEC_None : "None",
 										eDVBFrontendParametersCable.FEC_Auto : "Auto",
 										eDVBFrontendParametersCable.FEC_1_2 : "1/2",
@@ -178,6 +179,8 @@ class BlackHarmonygExtraTuner(Converter, object):
 										eDVBFrontendParametersCable.FEC_7_8 : "7/8",
 										eDVBFrontendParametersCable.FEC_8_9 : "8/9"
 									}[frontendData.get("fec_inner", eDVBFrontendParametersCable.FEC_Auto)]
+						except:
+							fec = 'None'
 						tunerinfo = (frequency + "  " + fec + "  " + symbolrate)
 					else:
 						tunerinfo = (frequency + "  " + symbolrate)	

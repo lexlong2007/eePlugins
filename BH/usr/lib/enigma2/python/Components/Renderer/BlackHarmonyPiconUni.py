@@ -1,5 +1,5 @@
 # BlackHarmonyPiconUni
-# Copyright (c) 2boom 2012-15
+# Copyright (c) 2boom 2012-15 mod by j00zek 2017
 # 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -26,10 +26,16 @@
 # 17.04.2014 added path in plugin dir...
 # 02.07.2014 small fix reference
 # 09.01.2015 redesign code
+# automode included
 
 from Renderer import Renderer 
 from enigma import ePixmap
-from Tools.Directories import SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, SCOPE_PLUGINS, resolveFilename 
+from Tools.Directories import SCOPE_SKIN_IMAGE, SCOPE_PLUGINS, resolveFilename, pathExists
+try:
+    from Tools.Directories import SCOPE_ACTIVE_SKIN
+except Exception:
+    from Tools.Directories import SCOPE_CURRENT_SKIN as SCOPE_ACTIVE_SKIN
+
 import os
 
 searchPaths = []
@@ -41,7 +47,8 @@ def initPiconPaths():
 			if '/dev/sd' in line:
 				piconPath = line.split()[1].replace('\\040', ' ') + '/%s/'
 				searchPaths.append(piconPath)
-	searchPaths.append(resolveFilename(SCOPE_CURRENT_SKIN, '%s/'))
+        searchPaths.append(resolveFilename(SCOPE_SKIN_IMAGE, '%s/'))
+	searchPaths.append(resolveFilename(SCOPE_ACTIVE_SKIN, '%s/'))
 	searchPaths.append(resolveFilename(SCOPE_PLUGINS, '%s/'))
 
 class BlackHarmonyPiconUni(Renderer):
@@ -87,7 +94,7 @@ class BlackHarmonyPiconUni(Renderer):
 				if pngname is '':
 					pngname = self.findPicon('picon_default')
 					if pngname is '':
-						tmp = resolveFilename(SCOPE_CURRENT_SKIN, 'picon_default.png')
+						tmp = resolveFilename(SCOPE_ACTIVE_SKIN, 'picon_default.png')
 						if os.path.isfile(tmp):
 							pngname = tmp
 						else:

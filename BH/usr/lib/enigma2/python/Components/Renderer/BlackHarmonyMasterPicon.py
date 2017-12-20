@@ -3,7 +3,12 @@ import os, re, unicodedata
 from Renderer import Renderer
 from enigma import ePixmap, ePicLoad
 from Tools.Alternatives import GetWithAlternative
-from Tools.Directories import pathExists, SCOPE_SKIN_IMAGE, SCOPE_ACTIVE_SKIN, resolveFilename
+from Tools.Directories import pathExists, SCOPE_SKIN_IMAGE, resolveFilename
+try:
+    from Tools.Directories import SCOPE_ACTIVE_SKIN
+except Exception:
+    from Tools.Directories import SCOPE_CURRENT_SKIN as SCOPE_ACTIVE_SKIN
+
 from Components.Harddisk import harddiskmanager
 from ServiceReference import ServiceReference
 from Components.config import config, ConfigBoolean
