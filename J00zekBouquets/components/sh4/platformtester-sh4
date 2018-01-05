@@ -1,0 +1,4 @@
+#!/bin/sh
+#j00zek fake tester, as we support only B-type kernels on sh4
+echo "[Btype]"
+exit 0
