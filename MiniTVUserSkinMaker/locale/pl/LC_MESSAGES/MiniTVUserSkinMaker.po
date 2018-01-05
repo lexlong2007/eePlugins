@@ -81,14 +81,8 @@ msgstr "Wystąpił błąd: %s"
 msgid "Design %s\n ...has been loaded"
 msgstr "Wzór %s\n ... został załadowany"
 
-msgid "PICONZ"
-msgstr "Pikona Z (400x170)"
-
-msgid "PICONX"
-msgstr "Pikona X (220x132)"
-
 msgid "PICON"
-msgstr "Pikona (100x60)"
+msgstr "Pikona"
 
 msgid "Widget attributes:"
 msgstr "Atrybuty widżeta:"
@@ -170,6 +164,18 @@ msgstr "Bardzo aleo to bardzo długa, przewijana nazwa audycji"
 
 msgid "No active widgets to save"
 msgstr "Brak aktywnych widżetów do zapisania"
+
+msgid "Preview skin"
+msgstr "Podgląd skórki"
+
+msgid "j00zekRunningText"
+msgstr "Nazwa programu (przewijana)"
+
+msgid "picontype"
+msgstr "typ pikony"
+
+msgid "VRicon"
+msgstr "Ikona rozdz. wideo"
 
 msgid "aqq"
 msgstr ""

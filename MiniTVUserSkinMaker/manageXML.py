@@ -76,19 +76,28 @@ def getWidgetParam(previewXML, paramName):
         paramValue = root.attrib[paramName]
     return paramValue
 
+def hasWidgetAttrib(previewXML, attrib):
+    if previewXML.find('%s="' % attrib) >=0:
+        return True
+    else:
+        return False
+      
 def getWidgetParams(previewXML, step = 0):
     params = [(_('Widget attributes:'), LoadPixmap(getPixmapPath('wdg_btn_menu.png')))]
     if step > 0:
         params.append((_('Move/resize step') + ' = %s' % step, LoadPixmap(getPixmapPath('wdg_btn_stepSize.png'))))
     root = ET.ElementTree(ET.fromstring(previewXML)).getroot()
-    knownAttribs=('position','size','pixmap','font','foregroundColor','backgroundColor')
+    knownAttribs=('position','size','pixmap','font','foregroundColor','backgroundColor', 'picontype', 'halign', 'valign')
     hiddenAttributes=('name')
     for param in knownAttribs:
         if param in root.attrib:
             paramValue = root.attrib[param]
-            if param == 'pixmap':
+            if param == 'pixmap' and not hasWidgetAttrib(previewXML, 'picontype'):
                 paramValue = paramValue.replace(getPluginPath(),'.../UserSkin/').replace(getSkinPath(), '.../%s/' % getSkinName() )
-            params.append(( _(param) + ' = ' + paramValue, LoadPixmap(getPixmapPath('wdg_btn_%s.png' % param))))
+            elif param == 'pixmap' and hasWidgetAttrib(previewXML, 'picontype'):
+                pass #we do not show pixmap path on picon
+            else:
+                params.append(( _(param) + ' = ' + paramValue, LoadPixmap(getPixmapPath('wdg_btn_%s.png' % param))))
     return params
 
 def getWidgetParams4Config(previewXML):

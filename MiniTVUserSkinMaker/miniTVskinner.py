@@ -67,7 +67,7 @@ class miniTVskinner(Screen):
             <eLabel position="0,0" size="800,460" zPosition="-10" backgroundColor="#00222222" />
             <eLabel position="0,0" size="%d,%d" zPosition="-9" backgroundColor="#00555555" />
           <!-- active WIDGET description -->
-            <widget source="WidgetParams" render="Listbox" position="0,480" size="800,240" scrollbarMode="showOnDemand" zPosition="10" backgroundColor="#080808" >
+            <widget source="WidgetParams" render="Listbox" position="0,470" size="800,260" scrollbarMode="showOnDemand" zPosition="10" backgroundColor="#080808" >
                 <convert type="TemplatedMultiContent">
                     {"template": [
                         MultiContentEntryText(pos = (0,0), size = (774, 26), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 0, color=0x808080, color_sel=0xffffff ),
@@ -87,6 +87,7 @@ class miniTVskinner(Screen):
             <widget name="yellow" position="820,670" size="485,25" zPosition="10" font="Regular;21" noWrap="1" halign="left" valign="center"  transparent="1"/>
             <eLabel position="810,695" size="5,25" zPosition="-10" backgroundColor="#202673ec" />
             <widget name="blue" position="820,695" size="485,25" zPosition="10" font="Regular;21" noWrap="1" halign="left" valign="center"  transparent="1"/>
+            <ePixmap pixmap="%spic/wdg_btn_TV.png" position="1258,620" size="60,30" alphatest="on" zPosition="10" />
           <!-- Widgets list on right -->
             <widget name="InfoLine" position="810,5" size="410,30" zPosition="5" transparent="0" halign="left" valign="top" font="Regular;28" foregroundColor="yellow" />
             <ePixmap pixmap="%spic/wdg_btn_ch_plus_minus.png" position="1228,5" size="60,30" alphatest="on" zPosition="10" />
@@ -103,7 +104,7 @@ class miniTVskinner(Screen):
                     }
                 </convert>
             </widget>
-          <!-- WIDGETS -->\n""" % (self.imageType, self.desktopID, self.LCDwidth, self.LCDheight, self.LCDwidth+2, self.LCDheight+2, PluginPath)
+          <!-- WIDGETS -->\n""" % (self.imageType, self.desktopID, self.LCDwidth, self.LCDheight, self.LCDwidth+2, self.LCDheight+2, PluginPath, PluginPath)
           
         self.skinLCD = '<screen name="MiniTVskinner_summary" position="center,center" size="%d,%d">' % (self.LCDwidth, self.LCDheight)
     
@@ -119,8 +120,7 @@ class miniTVskinner(Screen):
         self.skin += '\n</screen>'
         self.skinLCD += '\n</screen>'
         
-        printDEBUG(self.skin)
-        #self.skin = skin
+        #printDEBUG(self.skin)
         self.session = session
         Screen.__init__(self, session)
 
@@ -364,17 +364,35 @@ class miniTVskinner(Screen):
 
     def changePixmapPath(self):
         if self["Widgetslist"].getCurrent()[1] == "":
-            PixmapPath = getWidgetParam(self.WidgetsDict[self.currWidgetName]['previewXML'], 'pixmap')
-            if PixmapPath is not None:
-                def SetDirPathCallBack(newPath = None):
-                    if None != newPath:
-                        self.updateWidgetXMLs('pixmap', newPath)
-                        self[self.currWidgetName].instance.setPixmapFromFile(newPath)
-                        from PIL import Image
-                        width, height = Image.open(newPath).size
-                        self.updateSize(width,height)
-                        self.updateWidgetXMLs('size', '%s,%s' %(width,height))
-                self.session.openWithCallback(SetDirPathCallBack, miniTVmakerFileBrowser, currDir=os.path.dirname(PixmapPath), title=_("Select file"))
+            if hasWidgetAttrib(self.WidgetsDict[self.currWidgetName]['previewXML'], 'picontype'):
+                picontype = getWidgetParam(self.WidgetsDict[self.currWidgetName]['previewXML'], 'picontype')
+                if picontype == 'picon':
+                    self.updateWidgetXMLs('picontype', 'xpicon')
+                    ppreview = 'XPicon.png'
+                elif picontype == 'xpicon':
+                    self.updateWidgetXMLs('picontype', 'zzpicon')
+                    ppreview = 'ZPicon.png'
+                else:
+                    self.updateWidgetXMLs('picontype', 'picon')
+                    ppreview = 'Picon.png'
+                self.updateWidgetXMLs('pixmap', ppreview)
+                self[self.currWidgetName].instance.setPixmapFromFile('%spic/%s' % (getPluginPath(), ppreview) )
+                from PIL import Image
+                width, height = Image.open('%spic/%s' % (getPluginPath(), ppreview)).size
+                self.updateSize(width,height)
+                self.updateWidgetXMLs('size', '%s,%s' %(width,height))
+            else:
+                PixmapPath = getWidgetParam(self.WidgetsDict[self.currWidgetName]['previewXML'], 'pixmap')
+                if PixmapPath is not None:
+                    def SetDirPathCallBack(newPath = None):
+                        if None != newPath:
+                            self.updateWidgetXMLs('pixmap', newPath)
+                            self[self.currWidgetName].instance.setPixmapFromFile(newPath)
+                            from PIL import Image
+                            width, height = Image.open(newPath).size
+                            self.updateSize(width,height)
+                            self.updateWidgetXMLs('size', '%s,%s' %(width,height))
+                    self.session.openWithCallback(SetDirPathCallBack, miniTVmakerFileBrowser, currDir=os.path.dirname(PixmapPath), title=_("Select file"))
         
 #### Manipulate WIDGET XMLs >>>
     def widgetConfigRet(self, reloadSelf = False, parametersDict = {} ):
@@ -425,8 +443,10 @@ class miniTVskinner(Screen):
             self["WidgetParams"].list = [(_('Press OK to enable widget'), LoadPixmap(getPixmapPath('wdg_btn_no_button.png')))]
 
     def listUP(self):
-        self["Widgetslist"].selectPrevious()
-        #self.showWidgetInfo()
+        if self.currIndex == 0:
+            self["Widgetslist"].setIndex(len(self.WidgetsList) -1)
+        else:
+            self["Widgetslist"].selectPrevious()
         
     def listDown(self):
         if self.currIndex == len(self.WidgetsList) -1 :
@@ -607,16 +627,6 @@ class miniTVskinner(Screen):
             f.close()
         
         skin.loadSkin(filename)
-        #uzupelnienie podstawowych komponentow, jesli brakuja)
-        Dirs = ('Components/','Components/Converter/','Components/Renderer/','Components/Sources/')
-        for sDir in Dirs:
-            ssDir = getPluginPath() + 'LCDskin/' + sDir
-            dDir = resolveFilename(SCOPE_PLUGINS, '../%s' %(sDir))
-            for sComponent in os.listdir(ssDir):
-                sFile =  ssDir + sComponent
-                dFile = dDir + sComponent
-                if not os.path.isdir(sFile) and not fileExists(dFile):
-                    os.system('cp %s %s' %(sFile,dFile))
         if skinType == 'UserSkin':
             restartbox = self.session.openWithCallback(self.doNothing,MessageBox,_("Skin has been written in .../LCD folder\nActivate it in UserSkin:\n'Skin personalization/UserSkin additional screens'"), MessageBox.TYPE_INFO)
         elif myLCDconfig.value == self.vfdSkinFileName:
@@ -639,7 +649,7 @@ class miniTVskinner(Screen):
          return miniTVskinnerLCDScreen
        
     def previewSkin(self):
-        previewSkin = '<screen name="miniTVskinnerPreviewSkin" title="%s" position="center,center" size="%d,%d" backgroundColor="black">\n' % (self.imageType, self.LCDwidth, self.LCDheight)
+        previewSkin = '<screen name="miniTVskinnerPreviewSkin" title="%s" position="center,center" size="%d,%d" backgroundColor="black">\n' % (_('Preview skin'), self.LCDwidth, self.LCDheight)
         for widget in self.WidgetsDict:
             if self.WidgetsDict[widget]['widgetActiveState'] == '':
                 previewSkin += self.WidgetsDict[widget]['widgetXML'] + '\n'
@@ -693,6 +703,8 @@ class miniTVskinnerLCDScreen(Screen):
 class miniTVskinnerPreviewSkin(Screen):
     def __init__(self, session, previewSkin):
         self.skin = previewSkin
+        printDEBUG("!!!!!!!!!! PREVIEW !!!!!!!!!!")
+        printDEBUG(self.skin)
         self.session = session
         Screen.__init__(self, session)
 
