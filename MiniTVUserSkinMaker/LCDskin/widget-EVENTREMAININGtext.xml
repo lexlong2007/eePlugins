@@ -1,0 +1,12 @@
+<definition>
+  <widgetInit script="self['REMAINING'] = Label('+ 124')" />
+  <previewXML>
+    <widget name="REMAINING" position="300,230" size="180,60" font="Regular;60" halign="right" valign="center" />
+  </previewXML>
+  <widgetXML>
+    <widget source="session.Event_Now" render="Label" position="300,230" size="180,60" font="Regular;60" halign="right" valign="center" >
+      <convert type="EventTime">Remaining</convert>
+      <convert type="RemainingToText">FOLLOW</convert>
+    </widget>
+  </widgetXML>
+</definition>
