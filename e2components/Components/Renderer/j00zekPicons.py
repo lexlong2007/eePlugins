@@ -1,4 +1,4 @@
-# standard Picon.py modified by j00zek to support any picon folder name
+# standard Picon.py modified by @j00zek to support any picon folder name
 # the name can be defined in xml by puttin attri picontype="<foldername>"
 # e.g. picontype="zzpicon"
 import os, re, unicodedata
@@ -52,14 +52,15 @@ def onPartitionChange(why, part):
 def findPicon(serviceName):
     global lastPiconsPathsDict, piconType
     pngname = None
-    if serviceName in lastPiconsDict:
-        pngname = lastPiconsDict[serviceName]
+    piconTypeName='%s%s' % (piconType,serviceName)
+    if piconTypeName in lastPiconsDict:
+        pngname = lastPiconsDict[piconTypeName]
     else:
         for path in searchPaths:
             sPath = path + piconType + '/'
             if pathExists(sPath + serviceName + '.png'):
                 pngname = sPath + serviceName + '.png'
-                lastPiconsDict[serviceName] = pngname
+                lastPiconsDict[piconTypeName] = pngname
                 break
     return pngname
 
@@ -93,19 +94,6 @@ class j00zekPicons(Renderer):
         self.PicLoad.PictureData.get().append(self.updatePicon)
         self.piconsize = (0, 0)
         self.pngname = ''
-        self.lastPath = None
-        pngname = findPicon('picon_default')
-        self.defaultpngname = None
-        if not pngname:
-            tmp = resolveFilename(SCOPE_CURRENT_SKIN, 'picon_default.png')
-            if pathExists(tmp):
-                pngname = tmp
-            else:
-                pngname = resolveFilename(SCOPE_SKIN_IMAGE, 'skin_default/picon_default.png')
-        self.nopicon = resolveFilename(SCOPE_SKIN_IMAGE, 'skin_default/picon_default.png')
-        if os.path.getsize(pngname):
-            self.defaultpngname = pngname
-            self.nopicon = pngname
         return
 
     def addPath(self, value):
@@ -150,9 +138,9 @@ class j00zekPicons(Renderer):
                 if not what[0] is self.CHANGED_CLEAR:
                     pngname = getPiconName(self.source.text)
                     if pngname is None:
-                        return
-                    if not pathExists(pngname):
-                        pngname = self.defaultpngname
+                        pngname = findPicon('picon_default')
+                    elif not pathExists(pngname):
+                        pngname = findPicon('picon_default')
                     if self.pngname != pngname:
                         if pngname:
                             self.instance.setScale(1)
