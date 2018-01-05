@@ -264,7 +264,10 @@ class AdvancedFreePlayerStart(Screen):
             return
         def deleteRet(ret):
             selection = self["filelist"].getSelection()
-            print 'rm -rf %s/%s*' % (self.filelist.getCurrentDirectory(),selection[0][:-4])
+            if myConfig.MoveToTrash == True:
+                print 'mv -f %s/%s* %s/' % (self.filelist.getCurrentDirectory(),selection[0][:-4], myConfig.TrashFolder.value)
+            else:
+                print 'rm -rf %s/%s*' % (self.filelist.getCurrentDirectory(),selection[0][:-4])
             print ret
             if ret:
                 selection = self["filelist"].getSelection()
@@ -273,13 +276,21 @@ class AdvancedFreePlayerStart(Screen):
                     system('rm -rf "%s"' % selection[0])
                 else:
                     if selection[0][-4:].lower() in ('.srt','.txt','.url'):
-                        printDEBUG('Deleting file "%s/%s"' % (self.filelist.getCurrentDirectory(),selection[0]))
                         ClearMemory()
-                        system('rm -rf "%s/%s"' % (self.filelist.getCurrentDirectory(),selection[0]))
+                        if myConfig.MoveToTrash == True:
+                            printDEBUG('Moving file "%s/%s" to %s/' % (self.filelist.getCurrentDirectory(),selection[0], myConfig.TrashFolder.value))
+                            system('mv -f "%s/%s" %s/' % (self.filelist.getCurrentDirectory(),selection[0], myConfig.TrashFolder.value))
+                        else:
+                            printDEBUG('Deleting file "%s/%s"' % (self.filelist.getCurrentDirectory(),selection[0]))
+                            system('rm -rf "%s/%s"' % (self.filelist.getCurrentDirectory(),selection[0]))
                     else:
-                        printDEBUG('Deleting files "%s/%s"*' % (self.filelist.getCurrentDirectory(),selection[0][:-4]))
                         ClearMemory()
-                        system('rm -rf "%s/%s"*' % (self.filelist.getCurrentDirectory(),selection[0][:-4]))
+                        if myConfig.MoveToTrash == True:
+                            printDEBUG('Moving files "%s/%s" to %s/' % (self.filelist.getCurrentDirectory(),selection[0][:-4], myConfig.TrashFolder.value))
+                            system('mv -f "%s/%s" %s/' % (self.filelist.getCurrentDirectory(),selection[0][:-4], myConfig.TrashFolder.value))
+                        else:
+                            printDEBUG('Deleting files "%s/%s"*' % (self.filelist.getCurrentDirectory(),selection[0][:-4]))
+                            system('rm -rf "%s/%s"*' % (self.filelist.getCurrentDirectory(),selection[0][:-4]))
             self["filelist"].refresh()
             return
         
@@ -601,7 +612,7 @@ class AdvancedFreePlayerStart(Screen):
         self.movieTitle = None
         self["Description"].setText('')
         ClearMemory() #just in case for nbox, where we have limited RAM
-        system('rm -rf /tmp/*.AFP.* &')
+        system('(rm -rf /tmp/*.AFP.*;mkdir -p %s) &' % myConfig.TrashFolder.value)
         myConfig.PlayerOn.value = False
         configfile.save()
         self.close()

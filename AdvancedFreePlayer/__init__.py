@@ -193,5 +193,7 @@ except:
 myConfig.ShowMusicFiles = ConfigYesNo(default = False)
 myConfig.ShowPicturesFiles = ConfigYesNo(default = False)
     
+myConfig.MoveToTrash = ConfigYesNo(default = False)
+myConfig.TrashFolder = ConfigText(default = "/hdd/movie/trashcan", fixed_size = False)
 #ToDo
 myConfig.CacheStreams = ConfigYesNo(default = False)

@@ -359,3 +359,9 @@ msgstr "Skasować link do filmu '%s'?"
 
 msgid "No internet connection. :("
 msgstr "Brak połączenia z internetem :("
+
+msgid "Move to trash folder instead delete:"
+msgstr "Przenieś do śmietnika zamiast kasować:"
+
+msgid "Trash folder:"
+msgstr "Śmietnik:"

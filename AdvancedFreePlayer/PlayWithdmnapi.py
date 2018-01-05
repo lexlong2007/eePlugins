@@ -960,27 +960,43 @@ class AdvancedFreePlayer(Screen):
             def ExitRet(ret):
                 if ret:
                     if self.URLlinkName == '':
-                        myDir = path.dirname(self.openmovie)
-                        myFile = getNameWithoutExtension(path.basename(self.openmovie)) #To delete all files e.g. txt,jpg,eit,etc
-                        DeleteFile(self.openmovie)
-                        DeleteFile(self.opensubtitle)
-                        DeleteFile(myDir + '/' + myFile + ".jpg")
-                        DeleteFile(myDir + '/' + myFile + ".eit")
-                        DeleteFile(myDir + '/' + myFile + ".txt")
-                        DeleteFile(self.openmovie + ".ap")
-                        DeleteFile(self.openmovie + ".meta")
-                        DeleteFile(self.openmovie + ".sc")
-                        DeleteFile(self.openmovie + ".cuts")
-                        try:
-                            printDEBUG("Executing 'rm -f \"%s/%s.*\"'" %(myDir,myFile))
-                            ClearMemory() #some tuners (e.g. nbox) with small amount of RAM have problems with next command
-                            system('rm -f "%s/%s*"' %(myDir,myFile))
-                        except Exception:
-                            printDEBUG("Error executing system>delete files engine")
+                        if myConfig.MoveToTrash == True:
+                            try:
+                                printDEBUG("Executing 'mv -f \"%s/%s.*\" %s'" %(myDir,myFile,myConfig.TrashFolder.value))
+                                ClearMemory() #some tuners (e.g. nbox) with small amount of RAM have problems with next command
+                                system('mv -f "%s/%s*" "%s/";(sleep 5;rm -f "%s/%s*" "%s/") &' %(myDir,myFile,myConfig.TrashFolder.value, myDir,myFile,myConfig.TrashFolder.value))
+                            except Exception:
+                                printDEBUG("Error executing system>move files engine")
+                        else:
+                            myDir = path.dirname(self.openmovie)
+                            myFile = getNameWithoutExtension(path.basename(self.openmovie)) #To delete all files e.g. txt,jpg,eit,etc
+                            DeleteFile(self.openmovie)
+                            DeleteFile(self.opensubtitle)
+                            DeleteFile(myDir + '/' + myFile + ".jpg")
+                            DeleteFile(myDir + '/' + myFile + ".eit")
+                            DeleteFile(myDir + '/' + myFile + ".txt")
+                            DeleteFile(self.openmovie + ".ap")
+                            DeleteFile(self.openmovie + ".meta")
+                            DeleteFile(self.openmovie + ".sc")
+                            DeleteFile(self.openmovie + ".cuts")
+                            try:
+                                printDEBUG("Executing 'rm -f \"%s/%s.*\"'" %(myDir,myFile))
+                                ClearMemory() #some tuners (e.g. nbox) with small amount of RAM have problems with next command
+                                system('rm -f "%s/%s*";(sleep 5;rm -f "%s/%s*") &' %(myDir,myFile, myDir,myFile))
+                            except Exception:
+                                printDEBUG("Error executing system>delete files engine")
                             
                     else:
-                        printDEBUG("Deleting %s" % self.URLlinkName)
-                        DeleteFile(self.URLlinkName)
+                        if myConfig.MoveToTrash == True:
+                            printDEBUG("Moving %s" % self.URLlinkName)
+                            try:
+                                ClearMemory() #some tuners (e.g. nbox) with small amount of RAM have problems with next command
+                                system('mv -f "%s" "%s/"' %(self.URLlinkName, myConfig.TrashFolder.value))
+                            except Exception:
+                                printDEBUG("Error executing system>move files engine")
+                        else:
+                            printDEBUG("Deleting %s" % self.URLlinkName)
+                            DeleteFile(self.URLlinkName)
                 else:
                     setCut(self.openmovie + ".cuts", LastPosition, Movielength)
             self.session.openWithCallback(ExitRet, MessageBox, _("Delete this movie?"), timeout=10, default=False)

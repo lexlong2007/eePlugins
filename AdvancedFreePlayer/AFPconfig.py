@@ -63,7 +63,8 @@ class AdvancedFreePlayerConfig(Screen, ConfigListScreen):
         self.list.append(getConfigListEntry(_("Key OK behavior:"), myConfig.KeyOK))
         self.list.append(getConfigListEntry(_("Ask for file removal when % played (0=off):"), myConfig.DeleteWhenPercentagePlayed))
         self.list.append(getConfigListEntry(_("Always ask for file removal:"), myConfig.DeleteFileQuestion))
-        
+        self.list.append(getConfigListEntry(_("Move to trash folder instead delete:"), myConfig.MoveToTrash ))
+        self.list.append(getConfigListEntry(_("Trash folder:"), myConfig.TrashFolder ))
         self.list.append(getConfigListEntry("", myConfig.separator))
         self.list.append(getConfigListEntry(_("--- Infobar settings ---"), myConfig.separator))
         self.list.append(getConfigListEntry(_("Time displaying infobar:"), myConfig.InfobarTime))
