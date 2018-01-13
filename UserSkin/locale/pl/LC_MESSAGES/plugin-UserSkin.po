@@ -459,5 +459,17 @@ msgstr "Instalacja kreatora skórek miniTV (LCD tunera)"
 msgid "LCD/VFD too small to use miniTV skin creator"
 msgstr "LCD/VFD za mały dla kreatora skórek miniTV (LCD tunera)"
 
+msgid "Nothing to select"
+msgstr ""
+
+msgid "Secondinfobars"
+msgstr "Drugie paski informacyjne"
+
+msgid "Screens by"
+msgstr "Stworzone przez"
+
+msgid "default"
+msgstr "standardowy"
+
 msgid "aqq"
 msgstr ""

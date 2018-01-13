@@ -9,6 +9,8 @@ from Tools.LoadPixmap import LoadPixmap
 from os import path as os_path, listdir
 from inits import *
 from translate import _
+from debug import printDEBUG
+
 ##################################################### treeSelector #####################################################
 
 def FileEntryComponent(name, absolute = None, isDir = False, goBack = False, DimText0 = (60, 2, 500, 22), DimText1 = (80, 24, 500, 32), DimPIC = (2, 2, 54, 54) ):
@@ -26,7 +28,7 @@ def FileEntryComponent(name, absolute = None, isDir = False, goBack = False, Dim
         
     def translateName(name):
         import re
-        wordsList=['Channel[ ]*Selections','Channel[ ]*Selection','Infobars','Infobar','_no_']
+        wordsList=['Channel[ ]*Selections','Channel[ ]*Selection','Secondinfobars','Infobars','Infobar','_no_','Screens by']
         for word in wordsList:
             name = re.sub(word , _(word), name, flags=re.I)
         name = re.sub('(\_|\-|\.|\+)',' ', name, flags=re.I) #cleaning

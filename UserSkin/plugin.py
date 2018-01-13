@@ -42,7 +42,7 @@ def menu(menuid, **kwargs):
     return []
 
 def main(session, **kwargs):
-    printDEBUG("Opening Menu ...")
+    printDEBUG("Opening UserSkin%s menu ..." % UserSkinInfo)
     session.open(UserSkin_Menu)
 
 def readSkinConfig():

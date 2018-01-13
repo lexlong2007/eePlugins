@@ -35,12 +35,21 @@
     <key id="KEY_RED" mapto="cancel" flags="m" />
     <key id="KEY_GREEN" mapto="green" flags="m" />
     <key id="KEY_YELLOW" mapto="yellow" flags="m" />
+    <key id="KEY_BLUE" mapto="blue" flags="m" />
     <key id="KEY_UP" mapto="lineUp" flags="mr" />
     <key id="KEY_DOWN" mapto="lineDown" flags="mr" />
     <key id="KEY_LEFT" mapto="pageUp" flags="m" />
     <key id="KEY_RIGHT" mapto="pageDown" flags="m" />
     <key id="KEY_PAGEUP" mapto="pageUp" flags="m" />
     <key id="KEY_PAGEDOWN" mapto="pageDown" flags="m" />
+  </map>
+  <map context="UserSkinPreviewSkinActions">
+    <key id="KEY_ENTER" mapto="keyCancel" flags="m" />
+    <key id="KEY_OK" mapto="keyCancel" flags="m" />
+    <key id="KEY_EXIT" mapto="keyCancel" flags="m" />
+    <key id="KEY_ESC" mapto="keyCancel" flags="m" />
+    <key id="KEY_RED" mapto="keyCancel" flags="m" />
+    <key id="KEY_GREEN" mapto="keyCancel" flags="m" />
   </map>
   <map context="UserSkinMiniTVmakerActions">
     <key id="\x0a" mapto="keyOK" flags="m" />
