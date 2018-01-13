@@ -115,7 +115,7 @@ class MSNWeather(Source):
 	def getFeelslike(self):
 		skey = "-1"
 		if weathermsn.weatherData.weatherItems.has_key(skey):
-			return weathermsn.weatherData.weatherItems[skey].feelslike
+			return "%s°%s" % (weathermsn.weatherData.weatherItems[skey].feelslike, weathermsn.weatherData.degreetype)
 		else:
 			return _("n/a")
 	
