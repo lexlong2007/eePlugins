@@ -18,16 +18,29 @@ searchPaths = ['/usr/share/enigma2/']
 lastPiconsDict = {}
 piconType = 'picon'
 
+DBG = False
+if DBG: from Components.j00zekComponents import j00zekDEBUG
+
 def initPiconPaths():
     for part in harddiskmanager.getMountedPartitions():
+        if DBG: j00zekDEBUG('MountedPartitions:' + part.mountpoint)
         addPiconPath(part.mountpoint)
+    if pathExists("/proc/mounts"):
+        with open("/proc/mounts", "r") as f:
+            for line in f:
+                if line.startswith('/dev/sd'):
+                    mountpoint = line.split(' ')[1]
+                    if DBG: j00zekDEBUG('mounts:' + mountpoint)
+                    addPiconPath(mountpoint)
 
 def addPiconPath(mountpoint):
+    if DBG: j00zekDEBUG('mountpoint=' + mountpoint)
     if mountpoint == '/':
         return
     global searchPaths
     try:
         if mountpoint not in searchPaths:
+            if DBG: j00zekDEBUG('mountpoint not in searchPaths')
             for pp in os.listdir(mountpoint):
                 lpp = os.path.join(mountpoint, pp) + '/'
                 if pp.find('picon') >= 0 and os.path.isdir(lpp): #any folder *picon*
@@ -37,11 +50,16 @@ def addPiconPath(mountpoint):
                                 searchPaths.append(mountpoint)
                             else:
                                 searchPaths.append(mountpoint + '/')
+                            if DBG: j00zekDEBUG('mountpoint appended to searchPaths')
                             break
+                    else:
+                        continue
+                    break
     except Exception, e:
-        pass
+        if DBG: j00zekDEBUG('Exception:' + str(e))
 
 def onPartitionChange(why, part):
+    if DBG: j00zekDEBUG('>>>')
     global searchPaths
     if why == 'add' and part.mountpoint not in searchPaths:
         addPiconPath(part.mountpoint)
@@ -50,6 +68,7 @@ def onPartitionChange(why, part):
 
 
 def findPicon(serviceName):
+    if DBG: j00zekDEBUG('serviceName=' + str(serviceName))
     global lastPiconsPathsDict, piconType
     pngname = None
     piconTypeName='%s%s' % (piconType,serviceName)
@@ -66,6 +85,7 @@ def findPicon(serviceName):
 
 
 def getPiconName(serviceName):
+    if DBG: j00zekDEBUG('serviceName=' + str(serviceName))
     sname = '_'.join(GetWithAlternative(serviceName).split(':', 10)[:10])
     pngname = findPicon(sname)
     if not pngname:
@@ -149,6 +169,7 @@ class j00zekPicons(Renderer):
                         else:
                             self.instance.hide()
                         self.pngname = pngname
+                    if DBG: j00zekDEBUG('pngname=' + str(pngname))
             except Exception, e:
                 pass
 
