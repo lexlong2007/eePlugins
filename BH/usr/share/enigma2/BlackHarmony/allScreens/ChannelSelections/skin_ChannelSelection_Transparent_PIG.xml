@@ -34,7 +34,7 @@
   <widget source="ServiceEvent" render="Label" position="1170,480" size="685,35" font="HD_Thin; 32" backgroundColor="black" transparent="1" halign="left" noWrap="1" foregroundColor="light_yellow">
     <convert type="EventName">Name</convert>
   </widget>
-  <widget source="ServiceEvent" render="BlackHarmonyXPicon" position="1185,225" size="220,132" zPosition="2" transparent="1" alphatest="blend">
+  <widget source="ServiceEvent" render="j00zekPicons" picontype="picon" position="1185,225" size="220,132" zPosition="2" transparent="1" alphatest="blend">
     <convert type="ServiceName">Reference</convert>
   </widget>
   <!--eLabel text="Potem:" position="1058,815" size="100,30" font="HD_Thin; 27" backgroundColor="black" transparent="1" foregroundColor="light_yellow" /-->

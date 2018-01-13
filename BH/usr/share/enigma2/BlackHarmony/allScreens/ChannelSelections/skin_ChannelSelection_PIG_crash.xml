@@ -56,7 +56,7 @@
     <convert type="ConfigEntryTest"></convert>
     <convert type="ConditionalShowHide" />
   </widget>
-  <widget alphatest="blend" position="1195,185" render="BlackHarmonyXPicon" size="220,132" source="ServiceEvent" transparent="1" zPosition="4">
+  <widget alphatest="blend" position="1195,185" render="j00zekPicons" picontype="picon" size="220,132" source="ServiceEvent" transparent="1" zPosition="4">
     <convert type="ServiceName">Reference</convert>
   </widget>
 </screen>

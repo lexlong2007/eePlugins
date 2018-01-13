@@ -1,9 +1,14 @@
 # for crash & http://blackharmony.pl/ by areq 2015-12-13 http://areq.eu.org/
+# mod by j00zek 2018
 
 from enigma import eConsoleAppContainer, eTimer, iServiceInformation
 from Components.Converter.Converter import Converter
 from Components.Element import cached
+from Components.j00zekComponents import isImageType
 import os
+
+DBG = False
+if DBG: from Components.j00zekComponents import j00zekDEBUG
 
 class BlackHarmonyBitrate_BH(Converter, object):
 
@@ -42,15 +47,15 @@ class BlackHarmonyBitrate_BH(Converter, object):
         if self.source.service and self.running == 1:
             self.runTimer.start(600, True)
         else:
-            print "bitrate class start po else", self.source.service, self.running
+            if DBG: j00zekDEBUG("bitrate class start po else %s" % str(self.running))
         if self.running == 1:
-            os.system('echo "self.timer.start(300, True)" >> /tmp/bitrate')
+            if DBG: j00zekDEBUG('self.timer.start(300, True)')
             #print "bitrate class setup timer"
             self.timer.start(300, True)
 
     def runBitrate(self):
         os.system('killall -9 bitrate > /dev/null 2>&1')
-        if os.path.exists('/usr/lib/enigma2/python/Plugins/SystemPlugins/VTIPanel'):
+        if isImageType('vti'):
             demux = 2
         else:
             adapter = 0
@@ -71,14 +76,14 @@ class BlackHarmonyBitrate_BH(Converter, object):
         info = self.source.service.info()
         vpid = info.getInfo(iServiceInformation.sVideoPID)
         apid = info.getInfo(iServiceInformation.sAudioPID)
-        os.system('echo "bitrate %i %i %i %i" >> /tmp/bitrate' % ( adapter, demux, vpid, vpid ))
         if vpid >= 0 and apid >= 0:
-            if os.path.exists('/usr/lib/enigma2/python/Plugins/SystemPlugins/VTIPanel'):
+            if isImageType('vti'):
                 cmd = 'bitrate %i %i %i' % ( demux, vpid, vpid )
             else:
                 cmd = 'bitrate %i %i %i %i' % ( adapter, demux, vpid, vpid )
             print "bitrate class start", cmd
             self.running = 2
+            if DBG: j00zekDEBUG('starting "%s"' % cmd)
             self.container.execute(cmd)
     
     def clearValues(self):
@@ -90,7 +95,7 @@ class BlackHarmonyBitrate_BH(Converter, object):
 
     def appClosed(self, retval):
         self.clearValues()
-        print "bitrate class bitrateStopped", retval
+        if DBG: j00zekDEBUG("bitrate class bitrateStopped, retval=%s" % str(retval))
 
     def dataAvail(self, str):
         str = self.remainingdata + str
@@ -109,7 +114,7 @@ class BlackHarmonyBitrate_BH(Converter, object):
                 self.vmin, self.vmax, self.vavg, self.vcur = [int(x) for x in self.datalines[0].split(' ')]
                 self.amin, self.amax, self.aavg, self.acur = [int(x) for x in self.datalines[1].split(' ')]
             except:
-                print "bitrate class dataAvail except"
+                if DBG: j00zekDEBUG("bitrate class dataAvail except")
             self.datalines = []
             #print "bitrate class new data"
             Converter.changed(self, (self.CHANGED_POLL,))
