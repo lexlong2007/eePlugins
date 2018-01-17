@@ -1,5 +1,4 @@
 #!/bin/sh
-
 if [ -e /usr/share/enigma2/BlackHarmony/skin_user_bar ];then
   cp -f /usr/share/enigma2/BlackHarmony/skin_user_bar/* /usr/share/enigma2/BlackHarmony/menu/ 2>/dev/null
 fi
@@ -30,6 +29,7 @@ fi
 
 #build skin.xml
 echo '<skin>' > /usr/share/enigma2/BlackHarmony/skin.xml
+cat /usr/share/enigma2/BlackHarmony/skin-header.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
 cat /usr/share/enigma2/BlackHarmony/screens-common.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
 if [ -e /usr/lib/enigma2/python/Plugins/SystemPlugins/VTIPanel ];then
   cat /usr/share/enigma2/BlackHarmony/screens-VTI_specific.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
@@ -40,8 +40,12 @@ elif [ -e /usr/lib/enigma2/python/Plugins/Extensions/Infopanel ];then
 elif [ -e /usr/lib/enigma2/python/Blackhole ];then
   cat /usr/share/enigma2/BlackHarmony/screens-BlackHole_specific.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
   echo 'VTI BlackHole image'
+elif [ -e //etc/init.d/start_pkt.sh ];then
+  cat /usr/share/enigma2/BlackHarmony/screens-PKT_specific.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
+  echo 'PKT image'
 fi
 echo '</skin>' >> /usr/share/enigma2/BlackHarmony/skin.xml
+sync
 #final message
 if [ -e /usr/share/enigma2/BlackHarmony/UserSkin_Selections/ ];then
   if `ls /usr/share/enigma2/BlackHarmony/UserSkin_Selections/ |grep -q '.xml'`;then
