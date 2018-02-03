@@ -16,10 +16,10 @@ from ServiceReference import ServiceReference
 from Components.config import config, ConfigBoolean
 searchPaths = ['/usr/share/enigma2/']
 lastPiconsDict = {}
-piconType = 'picon'
+#piconType = 'picon'
 
 DBG = False
-if DBG: from Components.j00zekComponents import j00zekDEBUG
+from Components.j00zekComponents import j00zekDEBUG
 
 def initPiconPaths():
     for part in harddiskmanager.getMountedPartitions():
@@ -67,42 +67,52 @@ def onPartitionChange(why, part):
         searchPaths.remove(part.mountpoint)
 
 
-def findPicon(serviceName):
+def findPicon(serviceName, selfPiconType = 'picon'):
+    if serviceName is None or serviceName == '':
+        return None
     if DBG: j00zekDEBUG('serviceName=' + str(serviceName))
-    global lastPiconsPathsDict, piconType
+    global lastPiconsPathsDict #, piconType
     pngname = None
-    piconTypeName='%s%s' % (piconType,serviceName)
-    if piconTypeName in lastPiconsDict:
-        pngname = lastPiconsDict[piconTypeName]
+    findPiconTypeName='%s%s' % (selfPiconType,serviceName)
+    if findPiconTypeName in lastPiconsDict:
+        pngname = lastPiconsDict[findPiconTypeName]
     else:
         for path in searchPaths:
-            sPath = path + piconType + '/'
+            sPath = path + selfPiconType + '/'
             if pathExists(sPath + serviceName + '.png'):
                 pngname = sPath + serviceName + '.png'
-                lastPiconsDict[piconTypeName] = pngname
+                lastPiconsDict[findPiconTypeName] = pngname
                 break
     return pngname
 
 
-def getPiconName(serviceName):
-    if DBG: j00zekDEBUG('serviceName=' + str(serviceName))
+def getPiconName(serviceName, selfPiconType):
+    name = 'unknown'
     sname = '_'.join(GetWithAlternative(serviceName).split(':', 10)[:10])
-    pngname = findPicon(sname)
+    pngname = findPicon(sname, selfPiconType)
     if not pngname:
         fields = sname.split('_', 3)
-        if len(fields) > 2 and fields[2] != '2':
+        isChanged = False
+        if len(fields) > 2 and fields[2] != '2' and fields[2] != '1':
             fields[2] = '1'
+            isChanged = True
         if len(fields) > 0 and fields[0] == '4097':
             fields[0] = '1'
-        pngname = findPicon('_'.join(fields))
+            isChanged = True
+        if isChanged == True:
+            pngname = findPicon('_'.join(fields), selfPiconType)
     if not pngname:
         name = ServiceReference(serviceName).getServiceName()
         name = unicodedata.normalize('NFKD', unicode(name, 'utf_8', errors='ignore')).encode('ASCII', 'ignore')
         name = re.sub('[^a-z0-9]', '', name.replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
         if len(name) > 0:
-            pngname = findPicon(name)
+            pngname = findPicon(name, selfPiconType)
             if not pngname and len(name) > 2 and name.endswith('hd'):
-                pngname = findPicon(name[:-2])
+                pngname = findPicon(name[:-2], selfPiconType)
+    if DBG:
+        j00zekDEBUG('serviceName=%s, picon=%s, %s, piconFile=%s' %(str(serviceName), sname, name, str(pngname)) )
+    elif pngname is None:
+        j00zekDEBUG('Missing picon for serviceName=%s, byReference=%s, byName=%s' %(str(serviceName), sname, name) )
     return pngname
 
 
@@ -114,6 +124,7 @@ class j00zekPicons(Renderer):
         self.PicLoad.PictureData.get().append(self.updatePicon)
         self.piconsize = (0, 0)
         self.pngname = ''
+        self.piconType = 'picon'
         return
 
     def addPath(self, value):
@@ -132,8 +143,7 @@ class j00zekPicons(Renderer):
             elif attrib == 'size':
                 self.piconsize = value
             elif attrib == 'picontype':
-                global piconType
-                piconType = value
+                self.piconType = value
                 attribs.remove((attrib, value))
 
         self.skinAttributes = attribs
@@ -153,14 +163,15 @@ class j00zekPicons(Renderer):
 
     def changed(self, what):
         if self.instance:
-            pngname = ''
+            pngname = None
             try:
                 if not what[0] is self.CHANGED_CLEAR:
-                    pngname = getPiconName(self.source.text)
+                    if self.source.text is not None and self.source.text != '':
+                        pngname = getPiconName(self.source.text, self.piconType)
                     if pngname is None:
-                        pngname = findPicon('picon_default')
-                    elif not pathExists(pngname):
-                        pngname = findPicon('picon_default')
+                        pngname = findPicon('picon_default', self.piconType)
+                        if pngname is None and pathExists(resolveFilename(SCOPE_CURRENT_SKIN, 'picon_default.png')):
+                            pngname = resolveFilename(SCOPE_CURRENT_SKIN, 'picon_default.png')
                     if self.pngname != pngname:
                         if pngname:
                             self.instance.setScale(1)
@@ -169,9 +180,9 @@ class j00zekPicons(Renderer):
                         else:
                             self.instance.hide()
                         self.pngname = pngname
-                    if DBG: j00zekDEBUG('pngname=' + str(pngname))
+                    if DBG: j00zekDEBUG('piconType=' + self.piconType + ', pngname=' + str(pngname))
             except Exception, e:
-                pass
+                j00zekDEBUG('Exception:' + str(e))
 
 
 harddiskmanager.on_partition_list_change.append(onPartitionChange)

@@ -5,6 +5,6 @@ Depends:
 Description: e2 components used in BlackHarmony and UserSkin
 Maintainer: j00zek
 Source: http://github.com/j00zek/eePlugins
-Version: 18.01.09.0757
+Version: 18.02.03.1048
 Architecture: all
 DestinationPath: /usr/lib/enigma2/python
