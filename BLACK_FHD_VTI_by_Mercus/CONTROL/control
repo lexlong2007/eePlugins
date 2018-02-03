@@ -1,0 +1,10 @@
+Package: enigma2-plugin-skin-black-fhd-vti-by-mercus
+Priority: optional
+Section: utils
+Depends: 
+Description: BLACK FHD dla VTI autor Mercus
+Maintainer: Mercus
+Source: NA
+Version: 18.02.03.2350
+Architecture: all
+DestinationPath: /

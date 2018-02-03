@@ -1,0 +1,72 @@
+<skin>
+<screen name="Menu" position="center,center" size="1920,1080" title="Main menu" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+  <ePixmap position="1,12" zPosition="-10" size="1920,1080" pixmap="BLACK_FHD_VTI/bg_design/cs3.png" />
+  <eLabel text="Skin by Mercus - http://all-forum.cba.pl" position="41,1012" size="680,38" font="Roboto_HD; 30" halign="left" backgroundColor="black" transparent="1" foregroundColor="lemon" />
+  <widget source="session.VideoPicture" render="Pig" position="831,118" size="1025,660" backgroundColor="transparent" zPosition="1" />
+  <widget source="session.CurrentService" render="Label" position="1416,948" size="475,26" font="HD_Thin; 20" halign="left" valign="center" transparent="1" zPosition="6" backgroundColor="background">
+    <convert type="MambasHDCpuUsage">CPU:$0 (Core 1: $1, Core 2: $2)</convert>
+  </widget>
+  <widget source="session.Event_Now" render="Progress" pixmap="BLACK_FHD_VTI/pli/device1.png" position="1423,927" size="384,10" transparent="1" zPosition="3" backgroundColor="background">
+    <convert type="MambasHDCpuUsage">$0</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Label" zPosition="6" position="879,947" size="475,26" halign="left" valign="center" font="HD_Thin; 20" transparent="1" backgroundColor="background">
+    <convert type="ProgressDiskSpaceInfo">MemTotal,Full</convert>
+  </widget>
+  <widget source="session.Event_Now" render="Progress" pixmap="BLACK_FHD_VTI/pli/device1.png" position="882,928" size="384,10" transparent="1" zPosition="3" backgroundColor="background">
+    <convert type="ProgressDiskSpaceInfo">MemTotal</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Label" zPosition="6" position="1416,845" size="475,26" halign="left" valign="center" font="HD_Thin; 20" transparent="1" backgroundColor="background">
+    <convert type="ProgressDiskSpaceInfo">UsbInfo,Full</convert>
+  </widget>
+  <widget source="session.Event_Now" render="Progress" pixmap="BLACK_FHD_VTI/pli/device1.png" position="1423,827" size="384,10" transparent="1" zPosition="3" backgroundColor="background">
+    <convert type="ProgressDiskSpaceInfo">UsbInfo</convert>
+  </widget>
+  <widget source="session.Event_Now" render="Progress" pixmap="BLACK_FHD_VTI/pli/device1.png" position="882,827" size="384,10" transparent="1" zPosition="3" backgroundColor="background">
+    <convert type="ProgressDiskSpaceInfo">HddInfo</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Label" zPosition="6" position="879,846" size="475,26" halign="left" valign="center" font="HD_Thin; 20" transparent="1" backgroundColor="background">
+    <convert type="ProgressDiskSpaceInfo">HddInfo,Full</convert>
+  </widget>
+  <widget alphatest="blend" render="MSNWeatherPixmap" position="70,720" size="135,135" source="session.MSNWeather" transparent="1" zPosition="5">
+    <convert type="MSNWeather">weathericon,current</convert>
+  </widget>
+  <widget noWrap="1" backgroundColor="background" font="HD_Thin; 24" render="Label" position="215,735" size="110,30" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" foregroundColor="lemon">
+    <convert type="MSNWeather">temperature_current</convert>
+  </widget>
+  <widget noWrap="1" backgroundColor="background" font="HD_Thin; 24" render="Label" position="240,801" size="400,32" source="session.MSNWeather" zPosition="3" halign="left" transparent="1">
+    <convert type="MSNWeather">temperature_text,current</convert>
+  </widget>
+  <eLabel name="new eLabel" position="335,735" size="80,30" font="HD_Thin; 24" foregroundColor="white" backgroundColor="black" transparent="1" halign="left" text="maks." />
+  <widget noWrap="1" backgroundColor="black" font="HD_Thin; 24" render="Label" position="409,735" size="70,30" source="session.MSNWeather" zPosition="3" halign="left" transparent="1" foregroundColor="yellow">
+    <convert type="MSNWeather">temperature_high,day1</convert>
+  </widget>
+  <eLabel name="new eLabel" position="495,735" size="63,30" font="HD_Thin; 24" foregroundColor="white" backgroundColor="black" transparent="1" halign="left" text="min." />
+  <widget noWrap="1" backgroundColor="black" font="HD_Thin; 24" render="Label" position="554,735" size="70,30" source="session.MSNWeather" zPosition="3" halign="left" transparent="1" foregroundColor="blue">
+    <convert type="MSNWeather">temperature_low,day1</convert>
+  </widget>
+  <ePixmap position="1360,922" size="50,50" pixmap="BLACK_FHD_VTI/pli/extensions/cpu.png" zPosition="22" />
+  <ePixmap position="821,920" size="50,50" pixmap="BLACK_FHD_VTI/pli/extensions/ram.png" zPosition="22" />
+  <ePixmap position="821,823" size="50,50" pixmap="BLACK_FHD_VTI/pli/extensions/hdd.png" zPosition="22" />
+  <ePixmap position="1358,823" size="50,50" pixmap="BLACK_FHD_VTI/pli/extensions/usb.png" zPosition="22" />
+  <widget source="global.CurrentTime" render="Label" position="131,33" size="360,30" font="Roboto_HD; 27" foregroundColor="blue" backgroundColor="black" transparent="1">
+    <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+  </widget>
+  <widget source="global.CurrentTime" render="Label" position="44,33" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
+    <convert type="ClockToText">Default</convert>
+  </widget>
+  <eLabel text="Menu" position="1516,33" size="340,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1" />
+  <ePixmap position="805,center" size="1,880" pixmap="BLACK_FHD_VTI/gfx/linia_bp3.png" zPosition="22" />
+  <ePixmap position="818,805" size="1050,1" pixmap="BLACK_FHD_VTI/gfx/linia_IB5.png" zPosition="22" />
+  <ePixmap position="818,107" size="1050,680" pixmap="BLACK_FHD_VTI/gfx/ramkatv.png" zPosition="22" />
+  <widget source="menu" render="Listbox" position="50,107" size="740,600" scrollbarMode="showNever" enableWrapAround="1" transparent="0">
+    <convert type="TemplatedMultiContent">
+				{"template": [ MultiContentEntryText(pos = (15,5),size = (620,40),flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER,text = 0) ],
+				"fonts": [gFont("HD_Thin",34)],
+				"itemHeight": 50
+				}
+			</convert>
+  </widget>
+  <ePixmap position="50,860" size="740,1" pixmap="BLACK_FHD_VTI/gfx/linia_bp21.png" zPosition="22" />
+  <ePixmap position="50,715" size="740,1" pixmap="BLACK_FHD_VTI/gfx/linia_bp21.png" zPosition="22" />
+</screen>
+<skin>
