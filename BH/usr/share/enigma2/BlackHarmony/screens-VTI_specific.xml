@@ -1,4 +1,34 @@
-<screen name="VTIMainMenu" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
+  <!-- >>>>>>>>>> VTI SPECIFIC SCREENS <<<<<<<<<< -->
+  <screen name="PluginBrowser" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png"/>
+    <widget source="global.CurrentTime" render="Label" position="40,25" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="125,25" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+    </widget>
+    <eLabel text="Plugin browser" position="860,25" size="320,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget name="list" position="65,147" scrollbarMode="showOnDemand" size="1095,630" zPosition="3" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" selectionPixmap="BlackHarmony/menu/sel_1095_70.png" backgroundColor="background" transparent="1">
+      <convert type="TemplatedMultiContent">{"template": 
+                        [
+                            MultiContentEntryText(pos = (55, 8), size = (1020, 35), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 0),
+                            MultiContentEntryText(pos = (55, 45), size = (1020, 35), font=1, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 2),
+                            MultiContentEntryPixmapAlphaTest(pos = (5, 20), size = (48, 48), png = 4), # index 4 is the status pixmap
+                        ],
+                        "fonts": [gFont("Regular", 26),gFont("Regular", 22)],
+                        "itemHeight": 70
+                    }</convert>
+    </widget>
+    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="41,850" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="328,850" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="615,850" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="902,850" size="35,27" alphatest="blend"/>
+    <widget name="red" position="91,849" size="250,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <widget name="green" position="378,849" size="250,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <widget name="yellow" position="665,849" size="250,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <widget name="blue" position="952,849" size="250,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+  </screen>
+  <screen name="VTIMainMenu" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png"/>
     <widget source="global.CurrentTime" render="Label" position="40,25" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Default</convert>
@@ -28,7 +58,9 @@
     <widget source="key_green" render="Label" position="378,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget source="key_yellow" render="Label" position="665,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget source="key_blue" render="Label" position="952,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
-  </screen><screen name="VTIStatusListMenu" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
+  </screen>
+  
+  <screen name="VTIStatusListMenu" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png"/>
     <widget source="global.CurrentTime" render="Label" position="40,25" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Default</convert>
@@ -57,7 +89,8 @@
     <widget name="key_green" position="378,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget name="key_yellow" position="665,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget name="key_blue" position="952,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
-  </screen><screen name="VTISubMenu" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
+  </screen>
+  <screen name="VTISubMenu" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png"/>
     <widget source="global.CurrentTime" render="Label" position="40,25" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Default</convert>
@@ -81,7 +114,8 @@
     </widget>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="41,850" size="35,27" alphatest="blend"/>
     <widget source="key_red" render="Label" position="91,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
-  </screen><screen name="VTIPasswdScreen" position="465,135" size="1000,500" title=" " flags="wfNoBorder" backgroundColor="transparent">
+  </screen>
+  <screen name="VTIPasswdScreen" position="465,135" size="1000,500" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <eLabel text="Change root password" position="561,30" size="380,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <ePixmap position="0,0" zPosition="-10" size="1000,820" pixmap="BlackHarmony/bg_design/short.png"/>
     <widget source="global.CurrentTime" render="Label" position="45,30" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
@@ -99,7 +133,8 @@
     <widget source="key_green" render="Label" position="313,439" size="180,27" zPosition="1" font="Roboto_HD; 24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1"/>
     <widget source="key_yellow" render="Label" position="538,439" size="180,26" zPosition="1" font="Roboto_HD;24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1"/>
     <widget source="key_blue" render="Label" position="763,439" size="180,26" zPosition="1" font="Roboto_HD;24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1"/>
-  </screen><screen name="VtiNews" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
+  </screen>
+  <screen name="VtiNews" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png"/>
     <widget source="global.CurrentTime" render="Label" position="40,25" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Default</convert>
@@ -117,7 +152,8 @@
     <widget source="key_green" render="Label" position="378,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget source="key_yellow" render="Label" position="665,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget source="key_blue" render="Label" position="952,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
-  </screen><screen name="VTiUpdateInfo" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
+  </screen>
+  <screen name="VTiUpdateInfo" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png"/>
     <widget source="global.CurrentTime" render="Label" position="40,25" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Default</convert>
@@ -136,7 +172,8 @@
     <widget source="key_green" render="Label" position="378,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget source="key_yellow" render="Label" position="665,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget source="key_blue" render="Label" position="952,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
-  </screen><screen name="SleepTimerEdit" position="462,128" size="1000,820" title=" " flags="wfNoBorder" backgroundColor="transparent">
+  </screen>
+  <screen name="SleepTimerEdit" position="462,128" size="1000,820" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1000,820" pixmap="BlackHarmony/bg_design/small.png"/>
     <widget source="global.CurrentTime" render="Label" position="45,30" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Default</convert>
@@ -158,7 +195,8 @@
     <widget name="blue_text" position="405,470" size="520,64" font="Roboto_HD; 26" halign="left" backgroundColor="black" transparent="1"/>
     <widget name="current_status" position="405,590" size="520,32" font="Roboto_HD; 26" halign="center" backgroundColor="black" transparent="1" foregroundColor="light_yellow"/>
     <ePixmap position="80,443" size="250,250" pixmap="BlackHarmony/menu/power.png"/>
-  </screen><screen name="IpkgInstaller" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
+  </screen>
+  <screen name="IpkgInstaller" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png"/>
     <widget source="global.CurrentTime" render="Label" position="40,25" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Default</convert>
@@ -173,7 +211,8 @@
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="328,850" size="35,27" alphatest="blend"/>
     <widget source="key_red" render="Label" position="91,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget source="key_green" render="Label" position="378,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
-  </screen><screen name="InfoPanel" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
+  </screen>
+  <screen name="InfoPanel" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png"/>
     <widget source="global.CurrentTime" render="Label" position="40,25" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Default</convert>

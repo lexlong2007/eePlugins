@@ -1,7 +1,0 @@
-<skin>
-  <screen name="InfoBarSummary" position="0,0" size="220,176">
-                <widget source="session.Event_Now" render="Label" position="0,40" size="220,50" font="FdLcD;24" halign="center" >
-                        <convert type="EventName">Name</convert>
-                </widget>
-  </screen>
-</skin>

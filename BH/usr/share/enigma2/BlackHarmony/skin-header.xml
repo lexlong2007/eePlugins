@@ -13,6 +13,7 @@
     <color name="blue" value="#0000cbf6"/>
     <color name="blue_epg" value="#000b2b4e"/>
     <color name="border" value="#00292929"/>
+    <color name="cyan" value="#000090e6" />
     <color name="dark" value="#00294a6b"/>
     <color name="dark_blue" value="#00005ea0"/>
     <color name="dark_grey" value="#00595959"/>
@@ -50,7 +51,8 @@
     <font filename="/usr/share/enigma2/BlackHarmony/fonts/roboto.ttf" name="Roboto_HD" scale="100"/>
     <font filename="/usr/share/enigma2/BlackHarmony/fonts/hd_thin.ttf" name="HD_Thin" scale="100"/>
     <font filename="/usr/share/enigma2/BlackHarmony/fonts/scoutcondd.ttf" name="Cyfry" scale="100"/>
-  </fonts>
+    <font filename="/usr/share/enigma2/BlackHarmony/fonts/meteocons.ttf" name="Wetter" scale="140" />
+</fonts>
   <parameters>
     <!--             MovieList                                  -->
     <parameter name="MovieListProgress" value="1200,17,80,13"/>
