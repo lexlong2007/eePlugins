@@ -76,7 +76,7 @@
     <widget source="global.CurrentTime" render="Label" position="1718,766" size="140,46" font="Roboto_HD; 44" halign="right" backgroundColor="black" transparent="1" valign="center">
       <convert type="ClockToText">Default</convert>
     </widget>
-    <widget alphatest="blend" position="65,822" render="BlackHarmonyXPicon" size="220,132" source="session.CurrentService" transparent="1" zPosition="4">
+    <widget alphatest="blend" position="65,822" render="j00zekPicons" picontype="picon" size="220,132" source="session.CurrentService" transparent="1" zPosition="4">
       <convert type="ServiceName">Reference</convert>
     </widget>
     <widget backgroundColor="black" font="Roboto_HD; 24" halign="left" position="1560,777" render="Label" size="165,26" source="global.CurrentTime" transparent="1" valign="center" noWrap="1" foregroundColor="#75b765">
@@ -288,6 +288,11 @@
       <convert type="ServiceInfo">VideoHeight</convert>
       <convert type="ValueRange">1001,1080</convert>
       <convert type="ConditionalShowHide" />
+    </widget>
+    <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_hd_on_960.png" position="1034,770" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="3">
+      <convert type="ServiceInfo">VideoWidth</convert>
+      <convert type="ValueRange">960,1000</convert>
+      <convert type="ConditionalShowHide"/>
     </widget>
     <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_hd_on_720.png" position="1034,770" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="2">
       <convert type="ServiceInfo">VideoHeight</convert>

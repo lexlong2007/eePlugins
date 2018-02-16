@@ -1,7 +1,7 @@
 <screen backgroundColor="transparent" flags="wfNoBorder" name="InfoBar" position="60,850" size="1800,196" title="InfoBar">
 	<ePixmap pixmap="BlackHarmony/bg_design/j00zekInfobar1800x196.png" position="0,0" size="1800,196" zPosition="-10" />
 	<!-- Pikona -->
-	<widget alphatest="blend" position="30,30" render="BlackHarmonyXPicon" size="220,132" source="session.CurrentService" transparent="1" zPosition="4">
+	<widget alphatest="blend" position="30,30" render="j00zekPicons" picontype="picon" size="220,132" source="session.CurrentService" transparent="1" zPosition="4">
 		<convert type="ServiceName">Reference</convert>
 	</widget>
 	<!-- czas -->
@@ -26,15 +26,15 @@
 		<convert type="EventTime">Progress</convert>
 	</widget>
 	<!-- Nastepny program -->
-	<widget source="session.Event_Next" render="Label" position="280,39" size="115,120" font="HD_Thin; 32" valign="bottom" halign="left" foregroundColor="light_grey" backgroundColor="black" transparent="1">
+	<widget source="session.Event_Next" render="Label" position="280,120" size="115,35" font="HD_Thin; 32" valign="bottom" halign="left" foregroundColor="light_grey" backgroundColor="black" transparent="1">
 		<convert type="EventTime">StartTime</convert>
 		<convert type="ClockToText">Default</convert>
 	</widget>
-	<eLabel text="-" position="280,39" size="115,120" font="HD_Thin; 30" valign="bottom" halign="right" foregroundColor="light_grey" backgroundColor="black" transparent="1" />
-	<widget source="session.Event_Next" render="Label" position="410,39" size="780,120" font="HD_Thin; 32" valign="bottom" halign="left" backgroundColor="black" transparent="1" foregroundColor="light_grey"  noWrap="1">
+	<eLabel text="-" position="280,120" size="115,120" font="HD_Thin; 30" valign="bottom" halign="right" foregroundColor="light_grey" backgroundColor="black" transparent="1" />
+	<widget source="session.Event_Next" render="Label" position="410,120" size="780,35" font="HD_Thin; 32" valign="bottom" halign="left" backgroundColor="black" transparent="1" foregroundColor="light_grey"  noWrap="1">
 		<convert type="EventName">Name</convert>
 	</widget>
-	<widget source="session.Event_Next" render="Label" position="1200,39" size="180,120" font="HD_Thin; 32" valign="bottom" halign="right" foregroundColor="light_grey" backgroundColor="black" transparent="1">
+	<widget source="session.Event_Next" render="Label" position="1200,120" size="180,35" font="HD_Thin; 32" valign="bottom" halign="right" foregroundColor="light_grey" backgroundColor="black" transparent="1">
 		<convert type="EventTime">Duration</convert>
 		<convert type="ClockToText">InMinutes</convert>
 	</widget>
@@ -52,10 +52,10 @@
 		<convert type="FrontendInfo">BER</convert>
 	</widget>
 	<!-- wykorzystanie glowic -->
-	<eLabel text="A" position="1580,130" zPosition="1" size="35,25" font="Roboto_HD; 22" halign="left" foregroundColor="gray" backgroundColor="black" transparent="1" />
-	<eLabel text="B" position="1580,130" zPosition="1" size="35,25" font="Roboto_HD; 22" halign="right" foregroundColor="gray" backgroundColor="black" transparent="1" />
-	<eLabel text="C" position="1580,160" zPosition="1" size="35,25" font="Roboto_HD; 22" halign="left" foregroundColor="gray" backgroundColor="black" transparent="1" />
-	<eLabel text="D" position="1580,160" zPosition="1" size="35,25" font="Roboto_HD; 22" halign="right" foregroundColor="gray" backgroundColor="black" transparent="1" />
+	<eLabel text="A" position="1580,130" zPosition="1" size="35,25" font="Roboto_HD; 22" halign="left" foregroundColor="#00dcdcdc" backgroundColor="black" transparent="1" />
+	<eLabel text="B" position="1580,130" zPosition="1" size="35,25" font="Roboto_HD; 22" halign="right" foregroundColor="#00dcdcdc" backgroundColor="black" transparent="1" />
+	<eLabel text="C" position="1580,160" zPosition="1" size="35,25" font="Roboto_HD; 22" halign="left" foregroundColor="#00dcdcdc" backgroundColor="black" transparent="1" />
+	<eLabel text="D" position="1580,160" zPosition="1" size="35,25" font="Roboto_HD; 22" halign="right" foregroundColor="#00dcdcdc" backgroundColor="black" transparent="1" />
   <widget source="session.TunerInfo" render="FixedLabel" text="A" position="1580,130" zPosition="2" size="35,25" font="Roboto_HD; 22" halign="left" foregroundColor="yellow" backgroundColor="black" transparent="1">
     <convert type="TunerInfo">TunerUseMask</convert>
     <convert type="ValueBitTest">1</convert>

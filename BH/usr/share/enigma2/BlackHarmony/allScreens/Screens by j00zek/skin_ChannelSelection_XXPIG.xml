@@ -28,11 +28,11 @@
     <widget source="ServiceEvent" render="Progress" position="1225,540" size="460,6" pixmap="BlackHarmony/gfx/progress_scan.png" transparent="1">
       <convert type="EventTime">Progress</convert>
     </widget>
-    <widget render="BlackHarmonyMaggyRunningText" source="ServiceEvent" position="980,562" size="835,276" options="movetype=running,startpoint=0,direction=top,steptime=80,repeat=2,startdelay=6000,wrap" halign="left" font="Roboto_HD; 30" backgroundColor="background" transparent="1">
+    <widget render="BlackHarmonyRunningText" source="ServiceEvent" position="980,562" size="835,276" options="movetype=running,startpoint=0,direction=top,steptime=80,repeat=2,startdelay=6000,wrap" halign="left" font="Roboto_HD; 30" backgroundColor="background" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
 	<!--Nastepne audycje-->
-	<widget source="ServiceEvent" render="BlackHarmonyj00zekNextEvents" position="980,867" size="835,145" zPosition="2" noWrap="1" font="Roboto_HD; 26" backgroundColor="black" transparent="1" foregroundColor="light_yellow" >
+	<widget source="ServiceEvent" render="j00zekNextEvents" position="980,867" size="835,145" zPosition="2" noWrap="1" font="Roboto_HD; 26" backgroundColor="black" transparent="1" foregroundColor="light_yellow" >
 		<convert type="ServiceName">Reference</convert>
 	</widget>
  	<!--Belka dolna-->
@@ -46,6 +46,6 @@
     <widget name="key_blue" position="775,991" size="230,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <!-- EMU -->
     <widget source="session.CurrentService" render="Label" position="10,75" size="950,40" halign="right" valign="center" zPosition="1" font="Regular; 16" foregroundColor="foreground" backgroundColor="background" transparent="1" noWrap="1">
-      <convert type="BlackHarmonyj00zekInfo">EcmInfo</convert>
+      <convert type="j00zekInfo">EcmInfo</convert>
     </widget> 
 </screen>

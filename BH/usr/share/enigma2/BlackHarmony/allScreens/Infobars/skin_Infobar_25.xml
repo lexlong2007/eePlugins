@@ -1,37 +1,4 @@
 <skin>
-  <colors>
-    <color name="background" value="#18000000" />
-    <color name="backtop" value="#001b2c47" />
-    <color name="black" value="#00000000" />
-    <color name="blue" value="#0000cbf6" />
-    <color name="blue_epg" value="#15091d37" />
-    <color name="border" value="#00292929" />
-    <color name="dark" value="#00294a6b" />
-    <color name="dark_blue" value="#00005ea0" />
-    <color name="dark_grey" value="#00595959" />
-    <color name="foreground" value="#00ffffff" />
-    <color name="green" value="#007ad927" />
-    <color name="green_epg" value="#1800851f" />
-    <color name="grey" value="#00dcdcdc" />
-    <color name="lemon" value="#00c0f000" />
-    <color name="light_grey" value="#00bababa" />
-    <color name="light_red" value="#00ea225f" />
-    <color name="light_yellow" value="#00fffe9e" />
-    <color name="linie" value="#00828282" />
-    <color name="orange" value="#00ff6215" />
-    <color name="pastel" value="#00ffffd8" />
-    <color name="picture" value="#ff000000" />
-    <color name="podsw" value="#00ffffd1" />
-    <color name="red" value="#00db0000" />
-    <color name="selected" value="#00091d37" />
-    <color name="transparent" value="#ffffffff" />
-    <color name="transpBlack" value="#19000000" />
-    <color name="transpBlack_1" value="#25000000" />
-    <color name="transpWhite" value="#77d4d4d4" />
-    <color name="transpyellow" value="#33bab329" />
-    <color name="white" value="#00ffffff" />
-    <color name="yellow" value="#00ffcc00" />
-  </colors>
 <screen name="InfoBar" position="-2,-20" size="1920,1080" title="InfoBar" flags="wfNoBorder" backgroundColor="transparent">
   <ePixmap position="35,723" zPosition="-2" size="1850,375" pixmap="BlackHarmony/bg_design/infobar_big.png" />
   <widget source="session.CurrentService" render="Pixmap" pixmap="BlackHarmony/icons/ico_lan_on.png" position="1818,1029" zPosition="2" size="17,20" transparent="1" alphatest="blend">
@@ -160,7 +127,7 @@
   </widget>
   <eLabel name="linia" position="1629,888" size="1,112" backgroundColor="border" zPosition="3" transparent="0" foregroundColor="dark_grey" />
   <eLabel text="SNR:" position="1656,890" size="65,30" font="Roboto_HD; 23" backgroundColor="background" halign="left" transparent="1" foregroundColor="green" />
-  <eLabel text="CPU:" position="1657,930" size="65,30" font="Roboto_HD; 23" backgroundColor="background" halign="left" transparent="1" foregroundColor="light_red" />
+  <eLabel text="CPU:" position="1657,930" size="65,30" font="Roboto_HD; 23" backgroundColor="background" halign="left" transparent="1" foregroundColor="#00ea225f" />
   <eLabel text="BTR:" position="1658,970" size="65,30" font="Roboto_HD; 23" backgroundColor="background" halign="left" transparent="1" foregroundColor="blue" />
   <widget source="session.CurrentService" render="Label" position="1719,970" size="150,30" font="Roboto_HD; 23" halign="left" zPosition="3" backgroundColor="background" transparent="1">
     <convert type="BlackHarmonyBitrate_BH">VideoBitrateUnits</convert>
@@ -175,6 +142,11 @@
     <convert type="ValueRange">1001,1080</convert>
     <convert type="ConditionalShowHide" />
   </widget>
+    <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_hd_on_960.png" position="1593,1029" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="3">
+      <convert type="ServiceInfo">VideoWidth</convert>
+      <convert type="ValueRange">960,1000</convert>
+      <convert type="ConditionalShowHide"/>
+    </widget>
   <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_hd_on_720.png" position="1593,1029" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="2">
     <convert type="ServiceInfo">VideoHeight</convert>
     <convert type="ValueRange">720,1000</convert>
@@ -275,7 +247,7 @@
     <convert type="BlackHarmonyCaidInfo2">BisEcm</convert>
     <convert type="ConditionalShowHide" />
   </widget>
-  <widget alphatest="blend" position="97,875" render="BlackHarmonyXPicon" size="220,132" source="session.CurrentService" transparent="1" zPosition="4">
+  <widget alphatest="blend" position="97,875" render="j00zekPicons" picontype="picon" size="220,132" source="session.CurrentService" transparent="1" zPosition="4">
     <convert type="ServiceName">Reference</convert>
   </widget>
   <widget source="session.CurrentService" render="Label" position="69,829" zPosition="1" size="442,25" font="HD_Thin; 21" halign="center" backgroundColor="black" transparent="1" foregroundColor="light_grey">

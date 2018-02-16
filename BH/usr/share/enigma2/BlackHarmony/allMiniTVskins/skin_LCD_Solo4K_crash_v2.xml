@@ -28,7 +28,7 @@
     <widget source="global.CurrentTime" render="Label" position="256,219" size="210,80" font="Cyfry; 100" halign="right" zPosition="-2">
       <convert type="ClockToText">Format:%H:%M</convert>
     </widget>
-    <widget source="session.CurrentService" render="ZPicon" position="40,7" zPosition="4" size="400,170" transparent="1" alphatest="blend">
+    <widget source="session.CurrentService" render="j00zekPicons" picontype="zzpicon" position="40,7" zPosition="4" size="400,170" transparent="1" alphatest="blend">
       <convert type="ServiceName">Reference</convert>
     </widget>
     <widget source="session.Event_Now" render="Progress" pixmap="BlackHarmony/gfx/progress_lcd_1.png" position="20,277" size="260,20" borderWidth="2">
@@ -82,7 +82,7 @@
   </widget>
 </screen>
   <screen name="ChannelSelection_summary" position="0,0" size="480,320" id="1">
-    <widget position="40,10" size="400,170" source="parent.ServiceEvent" render="ZPicon" zPosition="1">
+    <widget position="40,10" size="400,170" source="parent.ServiceEvent" render="j00zekPicons" picontype="zzpicon" zPosition="1">
       <convert type="ServiceName">Reference</convert>
     </widget>
     <widget source="parent.ServiceEvent" render="RollerCharLCDLong" noWrap="1" position="10,192" size="460,55" font="VFD;55" halign="left" valign="center">

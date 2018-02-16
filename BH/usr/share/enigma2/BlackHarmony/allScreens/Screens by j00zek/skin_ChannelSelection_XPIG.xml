@@ -35,7 +35,7 @@
     <widget source="ServiceEvent" render="Progress" position="1355,452" size="376,6" pixmap="BlackHarmony/gfx/progress_cs.png" transparent="1">
       <convert type="EventTime">Progress</convert>
     </widget>
-    <widget render="BlackHarmonyMaggyRunningText" source="ServiceEvent" position="1180,482" size="635,276" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=6000,wrap" halign="left" font="Roboto_HD; 28" backgroundColor="background" transparent="1">
+    <widget render="BlackHarmonyRunningText" source="ServiceEvent" position="1180,482" size="635,276" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=6000,wrap" halign="left" font="Roboto_HD; 28" backgroundColor="background" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
 	<!--Nastepne audycje-->

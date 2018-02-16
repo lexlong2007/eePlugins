@@ -1,40 +1,4 @@
 <skin>
-  <colors>
-    <color name="background" value="#18000000" />
-    <color name="backtop" value="#001b2c47" />
-    <color name="black" value="#00000000" />
-    <color name="blue" value="#0000cbf6" />
-    <color name="blue_epg" value="#15091d37" />
-    <color name="border" value="#00292929" />
-    <color name="dark" value="#00294a6b" />
-    <color name="dark_blue" value="#00005ea0" />
-    <color name="dark_grey" value="#00595959" />
-    <color name="foreground" value="#00ffffff" />
-    <color name="green" value="#007ad927" />
-    <color name="green_epg" value="#1800851f" />
-    <color name="grey" value="#00dcdcdc" />
-    <color name="lemon" value="#00c0f000" />
-    <color name="light_grey" value="#00bababa" />
-    <color name="light_red" value="#00ea225f" />
-    <color name="light_yellow" value="#00fffe9e" />
-    <color name="linie" value="#00828282" />
-    <color name="orange" value="#00ff6215" />
-    <color name="pastel" value="#00ffffd8" />
-    <color name="picture" value="#ff000000" />
-    <color name="podsw" value="#00ffffd1" />
-    <color name="red" value="#00db0000" />
-    <color name="selected" value="#00091d37" />
-    <color name="transparent" value="#ffffffff" />
-    <color name="transpBlack" value="#19000000" />
-    <color name="transpBlack_1" value="#25000000" />
-    <color name="transpWhite" value="#77d4d4d4" />
-    <color name="transpyellow" value="#33bab329" />
-    <color name="white" value="#00ffffff" />
-    <color name="yellow" value="#00ffcc00" />
-    <color name="cyan" value="#000090e6" />
-    <color name="rot" value="#22ff4a3c" />
-
-  </colors>
 <screen name="InfoBar" position="0,52" size="1920,1080" title="InfoBar" flags="wfNoBorder" backgroundColor="transparent">
   <ePixmap position="30,721" zPosition="-2" size="1900,300" pixmap="BlackHarmony/bg_design/infobar.png" />
   <ePixmap position="1410,828" zPosition="10" size="450,1" pixmap="BlackHarmony/gfx/linia_IB.png" />
@@ -112,10 +76,10 @@
   <widget source="global.CurrentTime" render="Label" position="1718,766" size="140,46" font="HD_Thin; 44" halign="right" backgroundColor="black" transparent="1" valign="center">
     <convert type="ClockToText">Default</convert>
   </widget>
-  <widget alphatest="blend" position="65,835" render="BlackHarmonyXPicon" size="220,132" source="session.CurrentService" transparent="1" zPosition="4">
+  <widget alphatest="blend" position="65,835" render="j00zekPicons" picontype="picon" size="220,132" source="session.CurrentService" transparent="1" zPosition="4">
     <convert type="ServiceName">Reference</convert>
   </widget>
-  <widget backgroundColor="black" font="HD_Thin; 25" halign="left" position="1560,775" render="Label" size="165,26" source="global.CurrentTime" transparent="1" valign="center" noWrap="1" foregroundColor="rot">
+  <widget backgroundColor="black" font="HD_Thin; 25" halign="left" position="1560,775" render="Label" size="165,26" source="global.CurrentTime" transparent="1" valign="center" noWrap="1" foregroundColor="#22ff4a3c">
   <convert type="ClockToText">Format:%d.%m.%Y</convert>
 </widget>
   <eLabel name="new eLabel" position="310,955" size="45,25" font="Roboto_HD; 22" foregroundColor="yellow" backgroundColor="black" text="CA:" transparent="1" />
@@ -315,11 +279,16 @@
   <widget source="session.CurrentService" render="Label" position="1523,850" size="85,25" font="Roboto_HD; 22" backgroundColor="black" transparent="1" text="DVB-S2" halign="left" zPosition="1" foregroundColor="green">
     <convert type="BlackHarmonyServiceName2">%s </convert>
   </widget>
-  <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_hd_on_1080.png" position="999,770" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="3">
+  <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_hd_on_1080.png" position="999,770" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="4">
     <convert type="ServiceInfo">VideoHeight</convert>
     <convert type="ValueRange">1001,1080</convert>
     <convert type="ConditionalShowHide" />
   </widget>
+    <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_hd_on_960.png" position="999,770" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="3">
+      <convert type="ServiceInfo">VideoWidth</convert>
+      <convert type="ValueRange">960,1000</convert>
+      <convert type="ConditionalShowHide"/>
+    </widget>
   <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_hd_on_720.png" position="999,770" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="2">
     <convert type="ServiceInfo">VideoHeight</convert>
     <convert type="ValueRange">720,1000</convert>
@@ -384,7 +353,7 @@
     <convert type="BlackHarmonyBitrate_BH">VideoBitrateUnits</convert>
   </widget>
   <widget font="Roboto_HD; 24" backgroundColor="black" halign="right" position="870,612" render="Label" size="170,30" source="session.CurrentService" transparent="1" foregroundColor="white">
-      <convert type="BlackHarmonyVR">VideoResolution</convert>
+      <convert type="j00zekVR">VideoResolution</convert>
   </widget>
   <eLabel text="TMP:" position="110,612" size="69,30" font="Roboto_HD; 24" backgroundColor="black" halign="left" transparent="1" foregroundColor="red" />
   <eLabel text="FAN:" position="415,612" size="65,30" font="Roboto_HD; 24" backgroundColor="black" halign="left" transparent="1" foregroundColor="green" />
@@ -467,10 +436,10 @@
   <widget source="global.CurrentTime" render="Label" position="1718,766" size="140,46" font="HD_Thin; 44" halign="right" backgroundColor="black" transparent="1" valign="center">
     <convert type="ClockToText">Default</convert>
   </widget>
-  <widget alphatest="blend" position="65,835" render="BlackHarmonyXPicon" size="220,132" source="session.CurrentService" transparent="1" zPosition="4">
+  <widget alphatest="blend" position="65,835" render="j00zekPicons" picontype="picon" size="220,132" source="session.CurrentService" transparent="1" zPosition="4">
     <convert type="ServiceName">Reference</convert>
   </widget>
-  <widget backgroundColor="black" font="HD_Thin; 25" halign="left" position="1560,775" render="Label" size="165,26" source="global.CurrentTime" transparent="1" valign="center" noWrap="1" foregroundColor="rot">
+  <widget backgroundColor="black" font="HD_Thin; 25" halign="left" position="1560,775" render="Label" size="165,26" source="global.CurrentTime" transparent="1" valign="center" noWrap="1" foregroundColor="#22ff4a3c">
     <convert type="ClockToText">Format:%d.%m.%Y</convert>
   </widget>
   <eLabel name="new eLabel" position="310,955" size="45,25" font="Roboto_HD; 22" foregroundColor="yellow" backgroundColor="black" text="CA:" transparent="1" />
