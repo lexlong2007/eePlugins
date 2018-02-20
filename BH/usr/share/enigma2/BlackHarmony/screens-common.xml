@@ -1872,7 +1872,7 @@
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
     <eLabel text="Service Info" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
-    <widget name="infolist" position="65,140" size="1095,640" itemHeight="40" font="Roboto_HD; 30 " selectionDisabled="1" scrollbarMode="showOnDemand" backgroundColor="transpBlack" transparent="1"/>
+    <widget name="infolist" position="65,140" size="1095,640" itemHeight="40" font="Roboto_HD; 38" selectionDisabled="1" scrollbarMode="showOnDemand" backgroundColor="transpBlack" transparent="1"/>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="41,850" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="328,850" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="615,850" size="35,27" alphatest="blend"/>
