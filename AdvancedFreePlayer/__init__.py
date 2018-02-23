@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-PluginInfo='@j00zek 17-08-23'
+from version import Version
+PluginInfo='@j00zek %s' % Version
 
 #permanent
 PluginName = 'AdvancedFreePlayer'

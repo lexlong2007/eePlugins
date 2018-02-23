@@ -39,7 +39,9 @@ EXTENSIONS = {
         "bmp": "picture",
         
         "txt": "text",
-        "srt": "text"
+        "srt": "text",
+
+        "url": "movieurl",
     }
 
 from cueSheetHelper import getCut

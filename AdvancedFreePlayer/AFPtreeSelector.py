@@ -169,6 +169,8 @@ class AdvancedFreePlayerStart(Screen):
             print myExtension, EXTENSIONS[myExtension]
             if EXTENSIONS[myExtension] == "movie":
                 self.matchingPattern += "|" + myExtension
+            elif EXTENSIONS[myExtension] == "movieurl":
+                self.matchingPattern += "|" + myExtension
             elif myConfig.ShowMusicFiles.value == True and  EXTENSIONS[myExtension] == "music":
                 self.matchingPattern += "|" + myExtension
             elif myConfig.ShowPicturesFiles.value == True and  EXTENSIONS[myExtension] == "picture":
@@ -424,7 +426,7 @@ class AdvancedFreePlayerStart(Screen):
             f = self.filelist.getFilename()
             printDEBUG("self.selectFile>> " + d + f)
             temp = self.getExtension(f)
-            #print temp
+            printDEBUG("self.getExtension(%s) = %s" %(f,temp))
             if temp == ".url":
                 self.opensubtitle = ''
                 self.openmovie = ''
