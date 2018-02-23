@@ -142,9 +142,9 @@
     <parameter name="SelectionListIcon" value="0,5,35,35"/>
     <parameter name="SelectionListItemHeight" value="35"/>
     <!--             ServiceInfoList                         -->
-    <parameter name="ServiceInfo" value="0, 0, 300, 38"/>
-    <parameter name="ServiceInfoLeft" value="0, 0, 300, 38"/>
-    <parameter name="ServiceInfoRight" value="3295, 0, 420, 38"/>
+    <parameter name="ServiceInfo" value="0, 0, 250, 38"/>
+    <parameter name="ServiceInfoLeft" value="0, 0, 250, 38"/>
+    <parameter name="ServiceInfoRight" value="270, 0, 840, 38"/>
     <!--             ServiceList                         -->
     <parameter name="ServicelistDoubleSpacedMinHeight" value="50"/>
     <parameter name="Servicelist100Picon" value="10,17,100,60"/>
