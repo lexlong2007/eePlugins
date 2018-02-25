@@ -71,7 +71,6 @@ def findPicon(serviceName, selfPiconType = 'picon'):
     if serviceName is None or serviceName == '':
         return None
     if DBG: j00zekDEBUG('serviceName=' + str(serviceName))
-    global lastPiconsPathsDict #, piconType
     pngname = None
     findPiconTypeName='%s%s' % (selfPiconType,serviceName)
     if findPiconTypeName in lastPiconsDict:
@@ -111,8 +110,6 @@ def getPiconName(serviceName, selfPiconType):
                 pngname = findPicon(name[:-2], selfPiconType)
     if DBG:
         j00zekDEBUG('serviceName=%s, picon=%s, %s, piconFile=%s' %(str(serviceName), sname, name, str(pngname)) )
-    elif pngname is None:
-        j00zekDEBUG('Missing picon for serviceName=%s, byReference=%s, byName=%s' %(str(serviceName), sname, name) )
     return pngname
 
 
