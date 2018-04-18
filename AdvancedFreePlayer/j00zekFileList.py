@@ -380,7 +380,10 @@ class FileList(MenuList):
         harddiskmanager.on_partition_list_change.remove(self.partitionListChanged)
 
     def refresh(self):
+        selectedIndex = self.getSelectedIndex()
         self.changeDir(self.current_directory, self.getFilename())
+        if selectedIndex >0:
+            self.moveToIndex(selectedIndex-1)
 
     def partitionListChanged(self, action, device):
         self.refreshMountpoints()

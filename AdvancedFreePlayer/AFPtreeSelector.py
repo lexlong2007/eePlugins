@@ -266,7 +266,7 @@ class AdvancedFreePlayerStart(Screen):
             return
         def deleteRet(ret):
             selection = self["filelist"].getSelection()
-            if myConfig.MoveToTrash == True:
+            if myConfig.MoveToTrash.value == True:
                 print 'mv -f %s/%s* %s/' % (self.filelist.getCurrentDirectory(),selection[0][:-4], myConfig.TrashFolder.value)
             else:
                 print 'rm -rf %s/%s*' % (self.filelist.getCurrentDirectory(),selection[0][:-4])
@@ -279,17 +279,17 @@ class AdvancedFreePlayerStart(Screen):
                 else:
                     if selection[0][-4:].lower() in ('.srt','.txt','.url'):
                         ClearMemory()
-                        if myConfig.MoveToTrash == True:
+                        if myConfig.MoveToTrash.value == True:
                             printDEBUG('Moving file "%s/%s" to %s/' % (self.filelist.getCurrentDirectory(),selection[0], myConfig.TrashFolder.value))
-                            system('mv -f "%s/%s" %s/' % (self.filelist.getCurrentDirectory(),selection[0], myConfig.TrashFolder.value))
+                            system('mkdir -p "%s";mv -f "%s/%s" %s/' % (myConfig.TrashFolder.value, self.filelist.getCurrentDirectory(),selection[0], myConfig.TrashFolder.value))
                         else:
                             printDEBUG('Deleting file "%s/%s"' % (self.filelist.getCurrentDirectory(),selection[0]))
                             system('rm -rf "%s/%s"' % (self.filelist.getCurrentDirectory(),selection[0]))
                     else:
                         ClearMemory()
-                        if myConfig.MoveToTrash == True:
-                            printDEBUG('Moving files "%s/%s" to %s/' % (self.filelist.getCurrentDirectory(),selection[0][:-4], myConfig.TrashFolder.value))
-                            system('mv -f "%s/%s" %s/' % (self.filelist.getCurrentDirectory(),selection[0][:-4], myConfig.TrashFolder.value))
+                        if myConfig.MoveToTrash.value == True:
+                            printDEBUG('Moving files "%s/%s"* to %s/' % (self.filelist.getCurrentDirectory(),selection[0][:-4], myConfig.TrashFolder.value))
+                            system('mkdir -p "%s";mv -f "%s/%s"* %s/' % (myConfig.TrashFolder.value, self.filelist.getCurrentDirectory(),selection[0][:-4], myConfig.TrashFolder.value))
                         else:
                             printDEBUG('Deleting files "%s/%s"*' % (self.filelist.getCurrentDirectory(),selection[0][:-4]))
                             system('rm -rf "%s/%s"*' % (self.filelist.getCurrentDirectory(),selection[0][:-4]))
@@ -297,14 +297,24 @@ class AdvancedFreePlayerStart(Screen):
             return
         
         selection = self["filelist"].getSelection()
-        if selection[1] == True: # isDir
-            self.session.openWithCallback(deleteRet, MessageBox, _("Delete '%s' folder?") % selection[0], timeout=10, default=False)
-        elif selection[0][-4:].lower() in ('.srt','.txt'):
-            self.session.openWithCallback(deleteRet, MessageBox, _("Delete subtitles for '%s' movie?") % selection[0][:-4], timeout=10, default=False)
-        elif selection[0][-4:].lower() in ('.url'):
-            self.session.openWithCallback(deleteRet, MessageBox, _("Delete link for '%s' movie?") % selection[0][:-4], timeout=10, default=False)
+        if myConfig.MoveToTrash.value == True:
+            if selection[1] == True: # isDir
+                self.session.openWithCallback(deleteRet, MessageBox, _("Move folder '%s' to trash?") % selection[0], timeout=10, default=False)
+            elif selection[0][-4:].lower() in ('.srt','.txt'):
+                self.session.openWithCallback(deleteRet, MessageBox, _("Move subtitles for movie '%s' to trash?") % selection[0][:-4], timeout=10, default=False)
+            elif selection[0][-4:].lower() in ('.url'):
+                self.session.openWithCallback(deleteRet, MessageBox, _("Move link for movie '%s' to trash?") % selection[0][:-4], timeout=10, default=False)
+            else:
+                self.session.openWithCallback(deleteRet, MessageBox, _("Move movie '%s' to trash?") % selection[0][:-4], timeout=10, default=False)
         else:
-            self.session.openWithCallback(deleteRet, MessageBox, _("Delete '%s' movie?") % selection[0][:-4], timeout=10, default=False)
+            if selection[1] == True: # isDir
+                self.session.openWithCallback(deleteRet, MessageBox, _("Delete '%s' folder?") % selection[0], timeout=10, default=False)
+            elif selection[0][-4:].lower() in ('.srt','.txt'):
+                self.session.openWithCallback(deleteRet, MessageBox, _("Delete subtitles for '%s' movie?") % selection[0][:-4], timeout=10, default=False)
+            elif selection[0][-4:].lower() in ('.url'):
+                self.session.openWithCallback(deleteRet, MessageBox, _("Delete link for '%s' movie?") % selection[0][:-4], timeout=10, default=False)
+            else:
+                self.session.openWithCallback(deleteRet, MessageBox, _("Delete '%s' movie?") % selection[0][:-4], timeout=10, default=False)
       
     def PlayMovie(self):
         if not self.openmovie == "":
@@ -701,6 +711,7 @@ class AdvancedFreePlayerStart(Screen):
                     original_language=''
                     title=''
                     popularity=''
+                    coverUrl = ''
                     vote_average=''
                     for myItem in list['results']:
                         coverPath=myItem['poster_path'].encode('ascii','ignore')
@@ -735,7 +746,7 @@ class AdvancedFreePlayerStart(Screen):
                         with open(WebDescrFile,'r') as descrTXT:
                             myDescr = descrTXT.read()
                             self["Description"].setText(myDescr)
-                    if FoundCover == False: #no need to download cover, if we have it. ;)
+                    if FoundCover == False or coverUrl != '': #no need to download cover, if we have it, or if there is no cover url. ;)
                         downloadPage(coverUrl,WebCoverFile).addCallback(WebCover).addErrback(dataError)
                 
                 else:

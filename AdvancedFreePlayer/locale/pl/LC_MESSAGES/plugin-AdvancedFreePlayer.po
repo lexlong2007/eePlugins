@@ -365,3 +365,15 @@ msgstr "Przenieś do śmietnika zamiast kasować:"
 
 msgid "Trash folder:"
 msgstr "Śmietnik:"
+
+msgid "Move folder '%s' to trash?"
+msgstr "Przenieść katalog '%s' do śmietnika?"
+
+msgid "Move subtitles for movie '%s' to trash?"
+msgstr "Przenieść napisy do filmu '%s' do śmietnika?"
+
+msgid "Move link for movie '%s' to trash?"
+msgstr "Przenieść link do filmu '%s' do śmietnika?"
+
+msgid "Move movie '%s' to trash?"
+msgstr "Przenieść film '%s' do śmietnika?"
