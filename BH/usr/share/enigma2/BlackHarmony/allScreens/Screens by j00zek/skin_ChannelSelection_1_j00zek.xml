@@ -45,7 +45,7 @@
     <widget name="key_yellow" position="545,991" size="230,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget name="key_blue" position="775,991" size="230,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <!-- EMU -->
-    <widget source="session.CurrentService" render="Label" position="10,75" size="950,40" halign="right" valign="center" zPosition="1" font="Regular; 16" foregroundColor="foreground" backgroundColor="background" transparent="1" noWrap="1">
+    <widget source="session.CurrentService" render="Label" position="410,75" size="550,40" halign="right" valign="center" zPosition="1" font="Regular; 16" foregroundColor="foreground" backgroundColor="background" transparent="1" noWrap="1">
       <convert type="j00zekInfo">EcmInfo</convert>
     </widget> 
 </screen>
