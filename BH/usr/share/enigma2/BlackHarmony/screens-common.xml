@@ -8799,3 +8799,109 @@
     <widget source="key_red" render="Label" position="80,750" size="160,26" zPosition="1" font="Roboto_HD;22" halign="left" backgroundColor="black" transparent="1" />
     <ePixmap pixmap="BlackHarmony/buttons/key_exit.png" position="890,748" size="60,30" alphatest="blend" />
   </screen>
+  <!-- SilverHarmony > BlackHarmony zmigrowane DNIA 22.05.2018 -->
+  <screen name="ServiceScanMinimal" position="720,970" size="1174,92" title="Service Scan" backgroundColor="transparent" flags="wfNoBorder">
+    <ePixmap position="0,0" zPosition="-1" size="1174,92" pixmap="BlackHarmony/gfx/scan_background.png" />
+    <widget name="scan_state" position="115,26" zPosition="2" size="1020,40" font="Roboto_HD; 28" backgroundColor="background" />
+    <widget name="pass" position="115,43" size="1000,30" font="Roboto_HD; 26" halign="center" valign="center" backgroundColor="background" foregroundColor="light_yellow" />
+  </screen>
+  <screen name="Fantastic" position="345,93" size="1232,908" title="My Updater" flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png" />
+    <widget source="global.CurrentTime" render="Label" position="40,28" size="110,60" font="Cyfry; 50" backgroundColor="font_light_grey" transparent="1" foregroundColor="font_1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="140,22" size="200,60" font="Cyfry; 50" foregroundColor="data" backgroundColor="font_light_grey" transparent="1" valign="center">
+      <convert type="ClockToText">Format:%d.%m.%Y</convert>
+    </widget>
+    <widget source="Title" render="Label" position="560,30" size="620,60" font="Roboto_HD; 34" halign="right" backgroundColor="font_light_grey" transparent="1" foregroundColor="dark_grey" />
+    <widget name="menu" position="65,140" size="1095,640" font="Roboto_HD; 27" itemHeight="40" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" scrollbarMode="showOnDemand" selectionPixmap="SilverHarmony/menu/sel_1095_40.png" backgroundColor="black" transparent="1" />
+  </screen>
+  <screen name="TaskListScreen" position="345,93" size="1232,908" flags="wfNoBorder" title="Task list" backgroundColor="transparent">
+    <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png" />
+    <widget source="global.CurrentTime" render="Label" position="40,28" size="110,60" font="Cyfry; 50" backgroundColor="font_light_grey" transparent="1" foregroundColor="font_1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="140,22" size="200,60" font="Cyfry; 50" foregroundColor="data" backgroundColor="font_light_grey" transparent="1" valign="center">
+      <convert type="ClockToText">Format:%d.%m.%Y</convert>
+    </widget>
+    <widget source="Title" render="Label" position="560,30" size="620,60" font="Roboto_HD; 34" halign="right" backgroundColor="font_light_grey" transparent="1" foregroundColor="dark_grey" />
+    <widget source="tasklist" render="Listbox" position="65,140" size="1095,640" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" scrollbarMode="showOnDemand" selectionPixmap="SilverHarmony/menu/sel_1095_40.png" backgroundColor="black" transparent="1">
+      <convert type="TemplatedMultiContent">
+                                {"template": [
+                                                MultiContentEntryText(pos = (5, 1), size = (675, 24), font=1, flags = RT_HALIGN_LEFT, text = 1), # name
+                                                MultiContentEntryText(pos = (5, 25), size = (150, 24), font=1, flags = RT_HALIGN_LEFT, text = 2), # state
+                                                MultiContentEntryProgress(pos = (160, 25), size = (390, 20), percent = -3), # progress
+                                                MultiContentEntryText(pos = (560, 25), size = (100, 24), font=1, flags = RT_HALIGN_RIGHT, text = 4), # percentage
+                                        ],
+                                "fonts": [gFont("Roboto_HD", 28),gFont("Roboto_HD",25)],
+                                "itemHeight": 40
+                                }
+                        </convert>
+    </widget>
+    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="36,850" size="35,27" alphatest="blend" />
+    <widget name="key_red" position="86,846" size="230,40" zPosition="1" font="Roboto_HD; 28" halign="left" backgroundColor="font_light_grey" transparent="1" foregroundColor="font_0" />
+  </screen>
+  <screen name="QuadPipScreen" position="0,0" size="1920,1080" backgroundColor="transparent" flags="wfNoBorder">
+    <widget name="ch1" position="240,240" zPosition="1" size="480,60" font="Regular; 34" halign="center" valign="center" foregroundColor="white" backgroundColor="transparent" />
+    <widget name="ch2" position="1200,240" zPosition="1" size="480,60" font="Regular; 34" halign="center" valign="center" foregroundColor="white" backgroundColor="transparent" />
+    <widget name="ch3" position="240,780" zPosition="1" size="480,60" font="Regular; 34" halign="center" valign="center" foregroundColor="white" backgroundColor="transparent" />
+    <widget name="ch4" position="1200,780" zPosition="1" size="480,60" font="Regular; 34" halign="center" valign="center" foregroundColor="white" backgroundColor="transparent" />
+    <widget name="text1" position="0,1030" zPosition="2" size="960,50" font="Regular; 34" halign="center" valign="center" backgroundColor="transpBlack" foregroundColor="white" />
+    <widget name="text2" position="960,1030" zPosition="2" size="960,50" font="Regular; 34" halign="center" valign="center" backgroundColor="transpBlack" foregroundColor="white" />
+    <widget name="focus" position="0,0" zPosition="-1" size="960,540" backgroundColor="transparent" borderWidth="4" borderColor="blue" />
+  </screen>
+  <screen name="QuadPiPChannelSelection" position="204,20" size="1522,1022" flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap position="0,0" zPosition="-10" size="1522,1022" pixmap="BlackHarmony/bg_design/window_1522x1022.png" />
+    <widget source="global.CurrentTime" render="Label" position="70,68" size="110,60" font="Cyfry; 50" backgroundColor="font_light_grey" transparent="1" foregroundColor="font_1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="170,62" size="200,60" font="Cyfry; 50" foregroundColor="data" backgroundColor="font_light_grey" transparent="1" valign="center">
+      <convert type="ClockToText">Format:%d.%m.%Y</convert>
+    </widget>
+    <widget source="Title" render="Label" position="825,70" size="620,60" font="Roboto_HD; 34" halign="right" backgroundColor="font_light_grey" transparent="1" foregroundColor="dark_grey" />
+    <widget source="ChannelList" render="Listbox" position="88,188" size="1340,706" scrollbarMode="showOnDemand" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" enableWrapAround="1" selectionPixmap="SilverHarmony/menu/sel_1340_300.png" backgroundColor="background" transparent="1">
+      <convert type="TemplatedMultiContent">
+                                {"template":
+                                        [
+                                                MultiContentEntryText(pos = (30, 20), size = (600, 45), font=1, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 0),
+                                                MultiContentEntryText(pos = (50, 130), size = (700, 40), font=2, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 1),
+                                                MultiContentEntryText(pos = (50, 210), size = (700, 40), font=2, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 3),
+                                                MultiContentEntryText(pos = (650, 130), size = (700, 40), font=2, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 2),
+                                                MultiContentEntryText(pos = (650, 210), size = (700, 40), font=2, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 4),
+                                        ],
+                                        "fonts": [gFont("Roboto_HD", 45), gFont("Roboto_HD", 32) ,gFont("Roboto_HD", 32), gFont("Roboto_HD", 16)],
+                                        "itemHeight": 300
+                                }
+                        </convert>
+    </widget>
+    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="76,950" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="428,950" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="775,950" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="1112,950" size="35,27" alphatest="blend" />
+    <widget name="key_red" position="126,946" size="230,40" zPosition="1" font="Roboto_HD; 28" halign="left" backgroundColor="font_light_grey" transparent="1" foregroundColor="font_0" />
+    <widget name="key_green" position="478,946" size="230,40" zPosition="1" font="Roboto_HD; 28" halign="left" backgroundColor="font_light_grey" foregroundColor="font_0" transparent="1" />
+    <widget name="key_yellow" position="822,946" size="230,40" zPosition="1" font="Roboto_HD; 28" halign="left" backgroundColor="font_light_grey" foregroundColor="font_0" transparent="1" />
+    <widget name="key_blue" position="1162,946" size="230,40" zPosition="1" font="Roboto_HD; 28" halign="left" backgroundColor="font_light_grey" foregroundColor="font_0" transparent="1" />
+  </screen>
+  <screen name="CreateQuadPipChannelEntry" position="204,20" size="1522,1022" flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap position="0,0" zPosition="-10" size="1522,1022" pixmap="BlackHarmony/bg_design/window_1522x1022.png" />
+    <widget source="global.CurrentTime" render="Label" position="70,68" size="110,60" font="Cyfry; 50" backgroundColor="font_light_grey" transparent="1" foregroundColor="font_1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="170,62" size="200,60" font="Cyfry; 50" foregroundColor="data" backgroundColor="font_light_grey" transparent="1" valign="center">
+      <convert type="ClockToText">Format:%d.%m.%Y</convert>
+    </widget>
+    <widget source="Title" render="Label" position="490,70" size="955,60" font="Roboto_HD; 34" halign="right" backgroundColor="font_light_grey" transparent="1" foregroundColor="dark_grey" />
+    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="76,950" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="428,950" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="775,950" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="1112,950" size="35,27" alphatest="blend" />
+    <widget name="key_red" position="126,946" size="230,40" zPosition="1" font="Roboto_HD; 28" halign="left" backgroundColor="font_light_grey" transparent="1" foregroundColor="font_0" />
+    <widget name="key_green" position="478,946" size="230,40" zPosition="1" font="Roboto_HD; 28" halign="left" backgroundColor="font_light_grey" foregroundColor="font_0" transparent="1" />
+    <widget name="key_yellow" position="822,946" size="230,40" zPosition="1" font="Roboto_HD; 28" halign="left" backgroundColor="font_light_grey" foregroundColor="font_0" transparent="1" />
+    <widget name="key_blue" position="1162,946" size="230,40" zPosition="1" font="Roboto_HD; 28" halign="left" backgroundColor="font_light_grey" foregroundColor="font_0" transparent="1" />
+    <widget name="list" position="78,197" size="750,675" serviceItemHeight="45" serviceNumberFont="Roboto_HD;28" serviceNameFont="Roboto_HD;28" serviceInfoFont="Roboto_HD;24" transparent="1" scrollbarMode="showOnDemand" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" enableWrapAround="1" selectionPixmap="SilverHarmony/menu/sel_850_45.png" backgroundColor="background" />
+    <widget name="textChannels" position="855,229" size="585,40" font="Roboto_HD; 36" backgroundColor="black" foregroundColor="lemon" transparent="1" halign="center" />
+    <widget name="selectedList" position="855,341" size="585,160" font="Roboto_HD;30" itemHeight="40" backgroundColor="black" foregroundColor="light_yellow" transparent="1" />
+    <widget name="description" position="855,735" size="585,170" font="Roboto_HD;28" halign="left" transparent="1" />
+  </screen>

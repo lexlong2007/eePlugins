@@ -272,6 +272,8 @@ class AdvancedFreePlayerStart(Screen):
                 print 'rm -rf %s/%s*' % (self.filelist.getCurrentDirectory(),selection[0][:-4])
             print ret
             if ret:
+                self["Cover"].hide()
+                self["Description"].setText('')
                 selection = self["filelist"].getSelection()
                 if selection[1] == True: # isDir
                     printDEBUG('Deleting folder %s' % selection[0])
@@ -294,6 +296,8 @@ class AdvancedFreePlayerStart(Screen):
                             printDEBUG('Deleting files "%s/%s"*' % (self.filelist.getCurrentDirectory(),selection[0][:-4]))
                             system('rm -rf "%s/%s"*' % (self.filelist.getCurrentDirectory(),selection[0][:-4]))
             self["filelist"].refresh()
+            self.buttonsNames()
+            self.GetCoverTimer.start(self.ShowDelay,False)
             return
         
         selection = self["filelist"].getSelection()
