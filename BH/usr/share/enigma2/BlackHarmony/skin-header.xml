@@ -17,6 +17,16 @@
     <color name="dark" value="#00294a6b"/>
     <color name="dark_blue" value="#00005ea0"/>
     <color name="dark_grey" value="#00595959"/>
+    <color name="data" value="#000383c5" />
+    <color name="font_0" value="#00454545" />
+    <color name="font_1" value="#00292929" />
+    <color name="font_ciemny" value="#00292929" />
+    <color name="font_green" value="#0045b701" />
+    <color name="font_grey" value="#006a6a6a" />
+    <color name="font_light_grey" value="#00b5b5b5" />
+    <color name="font_szary" value="#00595959" />
+    <color name="font_tlo_ciemny" value="#00aaaaaa" />
+    <color name="font_tlo_szary" value="#00dddddd" />
     <color name="foreground" value="#00ffffff"/>
     <color name="green" value="#007ad927"/>
     <color name="green_epg" value="#00096509"/>
@@ -52,6 +62,9 @@
     <font filename="/usr/share/enigma2/BlackHarmony/fonts/hd_thin.ttf" name="HD_Thin" scale="100"/>
     <font filename="/usr/share/enigma2/BlackHarmony/fonts/scoutcondd.ttf" name="Cyfry" scale="100"/>
     <font filename="/usr/share/enigma2/BlackHarmony/fonts/meteocons.ttf" name="Wetter" scale="140" />
+    <font filename="/usr/share/enigma2/BlackHarmony/fonts/NewXTA.ttf" name="Menu" scale="100" />
+    <font filename="/usr/share/enigma2/BlackHarmony/fonts/Geomanist.ttf" name="Geomanist" scale="100" />
+    <font filename="/usr/share/enigma2/BlackHarmony/fonts/BebasNeue.ttf" name="BebasNeue" scale="100" />
 </fonts>
   <parameters>
     <!--             MovieList                                  -->
