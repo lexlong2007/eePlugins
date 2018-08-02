@@ -8821,7 +8821,6 @@
   <screen name="j00zekConsole" position="60,560" size="600,400" title="Command execution...">
     <widget name="text" position="20,20" size="580,360" font="Console;16" backgroundColor="background" transparent="1"/>
   </screen>
-</skin>
   <!-- SilverHarmony > BlackHarmony zmigrowane DNIA 22.05.2018 -->
   <screen name="ServiceScanMinimal" position="720,970" size="1174,92" title="Service Scan" backgroundColor="transparent" flags="wfNoBorder">
     <ePixmap position="0,0" zPosition="-1" size="1174,92" pixmap="BlackHarmony/gfx/scan_background.png" />

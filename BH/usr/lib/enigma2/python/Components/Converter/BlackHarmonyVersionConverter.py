@@ -16,6 +16,7 @@ class BlackHarmonyVersionConverter(Converter, object):
 
     @cached
     def getBoolean(self):
+        return False #disabled for now, should look after opkg instead
         t = time()
         v = 0
         if self.nextt < t:
