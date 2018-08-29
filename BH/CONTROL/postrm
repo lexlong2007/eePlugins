@@ -1,5 +1,5 @@
 #!/bin/sh
-if `ps -ef|grep -v grep|grep opkg|grep remove`;then
+if [ `ps -ef|grep -v grep|grep opkg|grep -c remove` -ge 1 ];then
   #czyszczenie ewentualnych pozostalosci, ale tylko, jak ktos wywala calkowicie skorke
   rm -f /etc/enigma2/*BlackHarmony* 2 > /dev/null
   rm -rf /usr/lib/enigma2/python/Plugins/SystemPlugins/BlackHarmonyWeatherComponentHandler 2 > /dev/null

@@ -46,7 +46,7 @@
 	</screen>
 
 	<screen name="InfoBarSummary" position="0,0" size="480,320">
-		<widget source="session.CurrentService" render="Label" position="0,2" size="480,50" font="FdLcD;45" halign="center" valign="center" foregroundColor="#05F7F3" >
+		<widget source="session.CurrentService" render="Label" position="0,2" size="480,50" font="FdLcD;45" halign="center" valign="center" foregroundColor="#05F7F3"  noWrap="1" >
 			<convert type="ServiceName">Name</convert>
 		</widget>
 		<widget source="session.Event_Now" render="Label" position="0,50" size="480,160" font="FdLcD;50" halign="center" valign="center" foregroundColor="#FFFF00">
@@ -68,7 +68,7 @@
 	
 <!-- channelselection-->
 	<screen name="ChannelSelection_summary" position="0,0" size="480,320">
-		<widget source="parent.ServiceEvent" render="Label" position="0,5" size="480,50" font="FdLcD;45" halign="center" valign="center" foregroundColor="#05F7F3" >
+		<widget source="parent.ServiceEvent" render="Label" position="0,5" size="480,50" font="FdLcD;45" halign="center" valign="center" foregroundColor="#05F7F3"  noWrap="1" >
 			<convert type="ServiceName">Name</convert>
 		</widget>
 		<widget source="parent.ServiceEvent" render="Label" position="0,60" size="480,165" font="FdLcD;50" halign="center" valign="center" foregroundColor="#FFFF00">

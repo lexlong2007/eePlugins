@@ -5,6 +5,6 @@ Depends: enigma2---j00zeks-components, enigma2-plugin-skins--j00zeks-blackharmon
 Description: installs crash BlackHarmonyFHD mod j00zek with all useful packages
 Maintainer: j00zek
 Source: NA
-Version: 18.08.01.0809
+Version: 18.08.04.0832
 Architecture: all
 DestinationPath: /
