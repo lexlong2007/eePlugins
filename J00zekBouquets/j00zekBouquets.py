@@ -73,6 +73,12 @@ j00zekConfig.Bouquets_services = ConfigYesNo(default = False) #Assigment of PIDs
 j00zekConfig.Bouquets_dvbapi = ConfigYesNo(default = False) #we need to know what packet user has
 
 BackupFile='KopiaListyKanalow.tar.gz'
+
+j00zekConfig.Znacznik = ConfigSelection(default = "#SERVICE 1:832:D:0:0:0:0:0:0:0:: ", 
+                                        choices = [("#SERVICE 1:832:D:0:0:0:0:0:0:0:: ", "Pomijaj"),
+                                                   ("#SERVICE 1:0:1:144B:5DC:13E:820000:0:0:0::---", "Wyświetlaj '---'"),
+                                                   ("#SERVICE 1:0:1:144B:5DC:13E:820000:0:0:0::<puste>", "Wyświetlaj '<puste>'")
+                                                  ])
 ##############################################################
 
 class j00zekBouquets(Screen, ConfigListScreen):
@@ -109,8 +115,8 @@ class j00zekBouquets(Screen, ConfigListScreen):
 
         self["key_red"] = Label('Załaduj z pliku tar.gz')
         self["key_green"] = Label('Utwórz archiwum tar.gz')
-        self["key_blue"] = Label("Pobierz z tunera")
-        self["key_yellow"] = Label("Pobierz z satelity")
+        self["key_blue"] = Label()
+        self["key_yellow"] = Label()
         
         self.timer = eTimer()
         
@@ -127,13 +133,17 @@ class j00zekBouquets(Screen, ConfigListScreen):
         self.list.append(getConfigListEntry(' ', j00zekConfig.separator))
         self.list.append(getConfigListEntry('--- Synchronizacja z tunera ---', j00zekConfig.chlistEnabled))
         if j00zekConfig.chlistEnabled.value == True:
+            self["key_blue"].setText('Pobierz z tunera')
             self.list.append(getConfigListEntry('Pobierz listę z tunera:', j00zekConfig.chlistServerIP))
             self.list.append(getConfigListEntry("Konto:", j00zekConfig.chlistServerLogin))
             self.list.append(getConfigListEntry('Hasło:', j00zekConfig.chlistServerPass))
-            
+        else:
+            self["key_blue"].setText('')
+        
         self.list.append(getConfigListEntry(' ', j00zekConfig.separator))
         self.list.append(getConfigListEntry('--- Synchronizacja z satelity ---', j00zekConfig.BouquetsEnabled))
         if j00zekConfig.BouquetsEnabled.value == True:
+            self["key_yellow"].setText('Pobierz z satelity')
             self.list.append(getConfigListEntry('nc+:', j00zekConfig.BouquetsNC))
             if j00zekConfig.BouquetsNC.value == '49188PL':
                 self.list.append(getConfigListEntry('Synchronizuj listę TR,SID z web:', j00zekConfig.syncPLtransponders))
@@ -143,6 +153,7 @@ class j00zekBouquets(Screen, ConfigListScreen):
                 if j00zekConfig.BouquetsAction.value == '1st' or j00zekConfig.BouquetsAction.value == 'all':
                     self.list.append(getConfigListEntry("Usuń nieznane pozycje z bukietu:", j00zekConfig.Clear1st))
                 self.list.append(getConfigListEntry("Pomiń zdefiniowane kanały:", j00zekConfig.BouquetsExcludeBouquet))
+                self.list.append(getConfigListEntry('Puste miejsca na liście kanałów:', j00zekConfig.Znacznik))
                 
                 self.list.append(getConfigListEntry(" ", j00zekConfig.separator))                
                 self.list.append(getConfigListEntry("--- Synchronizacja nazw kanałów w oscamie ---", j00zekConfig.BouquetsOscam))
@@ -153,6 +164,8 @@ class j00zekBouquets(Screen, ConfigListScreen):
                     else:
                         j00zekConfig.Bouquets_srvid.value = False
                         self.list.append(getConfigListEntry("Nie znaleziono pliku oscam.srvid", j00zekConfig.separator))
+        else:
+            self["key_yellow"].setText('')
 
         self["config"].list = self.list
         self["config"].setList(self.list)
@@ -201,13 +214,13 @@ class j00zekBouquets(Screen, ConfigListScreen):
                 os_remove(self.IncludedTranspondersFile)
         #kanaly do pominiecia
         if j00zekConfig.BouquetsExcludeBouquet.value == True:
-            self.ExcludeSIDS="ExcludeSIDS"
+            self.ExcludeSIDS="1"
             ExcludedSIDsFileNeedsUpdate=1
             if pathExists(self.ExcludedSIDsFile) is False:
                 from shutil import copy as shutil_copy
                 shutil_copy(self.ExcludedSIDsTemplate,self.ExcludedSIDsFile)
         else:
-            self.ExcludeSIDS=""
+            self.ExcludeSIDS="0"
             ExcludedSIDsFileNeedsUpdate=0
             
         #sprawdzamy schemat pliku bouquets.tv
@@ -262,12 +275,12 @@ class j00zekBouquets(Screen, ConfigListScreen):
         if j00zekConfig.BouquetsNC.value == '49188PL' and j00zekConfig.syncPLtransponders.value == True:
              self.runlist.append('%scomponents/SyncFromWeb.sh' % PluginPath)
         if j00zekConfig.BouquetsNC.value != 'NA':
-            self.runlist.append("%s %s %s %s %s" % ( self.BouquetsNCBin, j00zekConfig.BouquetsNC.value, \
-                                j00zekConfig.BouquetsAction.value, self.ZapNC, self.ExcludeSIDS))
+            self.runlist.append("%s %s %s %s %s '%s'" % ( self.BouquetsNCBin, j00zekConfig.BouquetsNC.value, \
+                                j00zekConfig.BouquetsAction.value, self.ZapNC, self.ExcludeSIDS, j00zekConfig.Znacznik.value))
             self.ZapTo=self.ZapNC
         if j00zekConfig.BouquetsCP.value != 'NA':
-            self.runlist.append("%s %s %s %s %s" % ( self.BouquetsCPBin, j00zekConfig.BouquetsCP.value, \
-                                j00zekConfig.BouquetsAction.value, self.ZapCP, self.ExcludeSIDS))
+            self.runlist.append("%s %s %s %s %s '%s'" % ( self.BouquetsCPBin, j00zekConfig.BouquetsCP.value, \
+                                j00zekConfig.BouquetsAction.value, self.ZapCP, self.ExcludeSIDS, j00zekConfig.Znacznik.value))
             if self.ZapTo == "":
                 self.ZapTo = self.ZapCP
         if j00zekConfig.BouquetsAction.value in ("1st","all") and  j00zekConfig.Clear1st.value == True:
