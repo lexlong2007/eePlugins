@@ -6955,8 +6955,8 @@
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="41,850" size="35,27" alphatest="blend"/>
     <widget source="key_red" render="Label" position="91,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
   </screen>
-  <!-- ########## IPTVPLAYER ########## -->
-  <screen name="IPTVPlayerWidget" position="199,29" size="1522,1022" title=" " flags="wfNoBorder" backgroundColor="transparent">
+  <!-- ########## E2iPlayer akka IPTVPLAYER ########## -->
+  <screen name="E2iPlayerWidget" position="199,29" size="1522,1022" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1522,1022" pixmap="BlackHarmony/bg_design/wizard.png"/>
     <widget source="global.CurrentTime" render="Label" position="44,50" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Default</convert>

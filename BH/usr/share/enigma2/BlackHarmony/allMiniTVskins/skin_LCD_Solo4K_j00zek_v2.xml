@@ -46,10 +46,7 @@
 	</screen>
 
 	<screen name="InfoBarSummary" position="0,0" size="480,320">
-                <widget position="320,5" size="150,50" font="FdLcD;50" noWrap="1" foregroundColor="#ccffff" backgroundColor="#000000" render="Label" source="session.MSNWeather" zPosition="1" halign="right" transparent="1">
-                    <convert type="MSNWeather">temperature_current</convert>
-                </widget>
-		<widget source="session.CurrentService" render="Label" position="0,2"  zPosition="5" size="480,50" font="FdLcD;45" halign="center" valign="center" foregroundColor="#05F7F3" noWrap="1" >
+		<widget source="session.CurrentService" render="Label" position="0,2" size="480,50" font="FdLcD;45" halign="center" valign="center" foregroundColor="#05F7F3" >
 			<convert type="ServiceName">Name</convert>
 		</widget>
 		<widget source="session.Event_Now" render="Label" position="0,50" size="480,160" font="FdLcD;50" halign="center" valign="center" foregroundColor="#FFFF00">
@@ -336,4 +333,15 @@
 			<convert type="ClockToText">Format:%d.%m.%Y</convert>
 		</widget>
 	</screen>
+	<!-- LCD screen IPTVExtMoviePlayerSummary -->
+    <screen name="IPTVExtMoviePlayerSummary" position="0,0" size="480,320">
+        <widget source="parent.Title" render="Label" position="10,5" size="460,210" font="Regular;42" halign="center" valign="center" foregroundColor="#FFFF00"/>
+		<widget source="session.CurrentService"  render="Progress" position="10,220" size="460,10" borderWidth="1" >
+			<convert type="j00zekE2iPlayer">Progress</convert>
+		</widget>
+        <widget source="session.CurrentService" render="Label" font="Roboto_HD; 45" position="210,230" size="260,80" halign="right" valign="center" backgroundColor="black" transparent="1" >
+            <convert type="j00zekE2iPlayer">RemindedMinutes</convert>
+        </widget>
+    <panel name="SummaryBigClockBottomLeftPanel" />
+    </screen>
 </skin>
