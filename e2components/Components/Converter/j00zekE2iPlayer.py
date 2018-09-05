@@ -3,6 +3,9 @@
 #    Converter for Enigma2
 #    Coded by j00zek (c)2018
 #
+#    Uszanuj moja prace i nie kasuj/zmieniaj informacji kto jest autorem konwertera
+#    Please respect my work and don't delete/change name of the converter author
+#
 #    This program is free software; you can redistribute it and/or
 #    modify it under the terms of the GNU General Public License
 #    as published by the Free Software Foundation; either version 2

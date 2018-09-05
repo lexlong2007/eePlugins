@@ -610,7 +610,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
     <eLabel text="https://github.com/openatv" position="840,470" size="350,30" font="Roboto_HD; 20" halign="center" transparent="0" zPosition="1" />
     <eLabel text="https://github.com/oe-alliance" position="840,520" size="350,30" font="Roboto_HD; 20" halign="center" transparent="0" zPosition="1" />
     <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="lemon" position="65,760" size="210,32" text="Support for skin:" transparent="1" />
-    <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="285,759" size="430,32" text="http://www.blackharmony.pl" transparent="1" />
+    <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="285,759" size="430,32" text="http://forum.dvhk.pl" transparent="1" />
     <eLabel backgroundColor="background" font="HD_Thin; 28" position="997,741" size="70,30" text="v3.3" transparent="0" zPosition="5" foregroundColor="light_yellow" />
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="50,850" size="35,27" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="230,850" size="35,27" alphatest="blend" />

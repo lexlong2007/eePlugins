@@ -49,7 +49,7 @@
     <eLabel position="65,190" size="1095,1" backgroundColor="linie" zPosition="1" foregroundColor="linie"/>
     <eLabel position="65,510" size="1095,1" backgroundColor="linie" zPosition="1" foregroundColor="linie"/>
     <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="lemon" position="65,760" size="210,32" text="Support for skin:" transparent="1"/>
-    <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="285,759" size="430,32" text="http://www.blackharmony.pl" transparent="1"/>
+    <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="285,759" size="430,32" text="http://forum.dvhk.pl" transparent="1"/>
     <eLabel backgroundColor="background" font="HD_Thin; 28" position="997,741" size="70,30" text="v4.3" transparent="0" zPosition="5" foregroundColor="light_yellow"/>
   </screen>
   <screen name="SubtitleDisplay" position="0,0" size="1920,1080" zPosition="-1" backgroundColor="transparent" flags="wfNoBorder"/>
@@ -7524,7 +7524,7 @@
     </widget>
     <widget name="AboutScrollLabel" font="Regular; 25" position="66,122" size="750,625" zPosition="2" halign="left" />
     <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="lemon" position="65,760" size="210,32" text="Support for skin:" transparent="1" />
-    <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="285,759" size="430,32" text="http://www.blackharmony.pl" transparent="1" />
+    <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="285,759" size="430,32" text="http://forum.dvhk.pl" transparent="1" />
     <eLabel backgroundColor="background" font="HD_Thin; 28" position="997,741" size="70,30" text="v3.3" transparent="0" zPosition="5" foregroundColor="light_yellow" />
   </screen>
   <screen name="Infopanel" position="345,93" size="1240,908" title="Info Panel" backgroundColor="transparent" flags="wfNoBorder">
@@ -7652,7 +7652,7 @@
     <widget name="key_red" position="141,999" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget name="key_green" position="478,999" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
   </screen>
-  <!-- openATV MENU SCREENS -->
+  <!-- MENU SCREENS -->
   <screen name="menu_mainmenu" position="70,75" size="1920,1080" title="Main menu" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="710,950" pixmap="BlackHarmony/bg_design/menubg.png"/>
     <widget source="global.CurrentTime" render="Label" position="55,50" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">

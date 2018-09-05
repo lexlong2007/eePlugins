@@ -34,7 +34,7 @@
     <convert type="BlackHarmonyMSNWeather">temperature_low,day1</convert>
   </widget>
   <eLabel backgroundColor="black" font="HD_Thin; 32" foregroundColor="light_yellow" position="1137,797" size="493,50" text="Support for skin:" transparent="1" halign="center" />
-  <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="1137,845" size="493,50" text="http://www.blackharmony.pl" transparent="1" halign="center" />
+  <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="1137,845" size="493,50" text="http://forum.dvhk.pl" transparent="1" halign="center" />
   <ePixmap pixmap="BlackHarmony/gfx/other.png" position="1258,477" size="256,256" />
 </screen>
 <screen name="menu_mainmenu" position="0,0" size="1920,1080" title="Main menu" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
@@ -72,7 +72,7 @@
     <convert type="BlackHarmonyMSNWeather">temperature_low,day1</convert>
   </widget>
   <eLabel backgroundColor="black" font="HD_Thin; 32" foregroundColor="light_yellow" position="1137,797" size="493,50" text="Support for skin:" transparent="1" halign="center" />
-  <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="1137,845" size="493,50" text="http://www.blackharmony.pl" transparent="1" halign="center" />
+  <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="1137,845" size="493,50" text="http://forum.dvhk.pl" transparent="1" halign="center" />
   <widget source="menu" render="Pixmap" pixmap="BlackHarmony/gfx/timer.png" position="1258,477" size="256,256">
     <convert type="MenuEntryCompare">timer_edit</convert>
     <convert type="ConditionalShowHide" />
@@ -122,7 +122,7 @@
     <convert type="ConditionalShowHide" />
   </widget>
 </screen>
-<screen name="menu_inforamtion" position="0,0" size="1920,1080" title="Main menu" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+<screen name="menu_information" position="0,0" size="1920,1080" title="Main menu" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
   <ePixmap position="0,0" zPosition="-10" size="1920,1080" pixmap="BlackHarmony/bg_design/menu_icon.png" />
   <widget source="global.CurrentTime" render="Label" position="1137,265" size="493,100" font="Cyfry; 80" backgroundColor="black" transparent="1" halign="center" foregroundColor="white">
     <convert type="ClockToText">Default</convert>
@@ -157,7 +157,7 @@
     <convert type="BlackHarmonyMSNWeather">temperature_low,day1</convert>
   </widget>
   <eLabel backgroundColor="black" font="HD_Thin; 32" foregroundColor="light_yellow" position="1137,797" size="493,50" text="Support for skin:" transparent="1" halign="center" />
-  <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="1137,845" size="493,50" text="http://www.blackharmony.pl" transparent="1" halign="center" />
+  <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="1137,845" size="493,50" text="http://forum.dvhk.pl" transparent="1" halign="center" />
   <ePixmap pixmap="BlackHarmony/gfx/info.png" position="1258,477" size="256,256" />
 </screen>
 <screen name="menu_setup" position="0,0" size="1920,1080" title="Main menu" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
@@ -195,7 +195,7 @@
     <convert type="BlackHarmonyMSNWeather">temperature_low,day1</convert>
   </widget>
   <eLabel backgroundColor="black" font="HD_Thin; 32" foregroundColor="light_yellow" position="1137,797" size="493,50" text="Support for skin:" transparent="1" halign="center" />
-  <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="1138,845" size="493,50" text="http://www.blackharmony.pl" transparent="1" halign="center" />
+  <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="1138,845" size="493,50" text="http://forum.dvhk.pl" transparent="1" halign="center" />
   <ePixmap pixmap="BlackHarmony/gfx/setup.png" position="1258,477" size="256,256" />
 </screen>
 <screen name="menu_shutdown" position="0,0" size="1920,1080" title="Main menu" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
@@ -233,7 +233,40 @@
     <convert type="BlackHarmonyMSNWeather">temperature_low,day1</convert>
   </widget>
   <eLabel backgroundColor="black" font="HD_Thin; 32" foregroundColor="light_yellow" position="1137,797" size="493,50" text="Support for skin:" transparent="1" halign="center" />
-  <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="1137,845" size="493,50" text="http://www.blackharmony.pl" transparent="1" halign="center" />
+  <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="1137,845" size="493,50" text="http://forum.dvhk.pl" transparent="1" halign="center" />
   <ePixmap pixmap="BlackHarmony/gfx/power.png" position="1258,477" size="256,256" />
 </screen>
+  <screen name="menu_harddisk" position="0,0" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+        <panel name="menu_mainmenu" /> 
+  </screen>
+  <screen name="menu_scan" position="0,0" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+        <panel name="menu_mainmenu" /> 
+  </screen>
+  <screen name="menu_system" position="0,0" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+        <panel name="menu_mainmenu" /> 
+  </screen>
+  <screen name="menu_extended" position="0,0" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+        <panel name="menu_mainmenu" /> 
+  </screen>
+  <screen name="menu_network" position="0,0" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+        <panel name="menu_mainmenu" /> 
+  </screen>
+  <screen name="menu_video_menu" position="0,0" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+        <panel name="menu_mainmenu" /> 
+  </screen>
+  <screen name="menu_audio_menu" position="0,0" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+        <panel name="menu_mainmenu" /> 
+  </screen>
+  <screen name="menu_rec" position="0,0" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+        <panel name="menu_mainmenu" /> 
+  </screen>
+  <screen name="menu_epg" position="0,0" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+        <panel name="menu_mainmenu" /> 
+  </screen>
+  <screen name="menu_cam" position="0,0" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+        <panel name="menu_mainmenu" /> 
+  </screen>
+  <screen name="menu_display" position="0,0" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+        <panel name="menu_mainmenu" /> 
+  </screen>
 </skin>
