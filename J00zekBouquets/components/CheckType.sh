@@ -20,7 +20,6 @@ myPath=$rootPath/$platform
 if [ -f $myPath/dvbsnoop ] && [ ! -e /usr/bin/dvbsnoop ] && [ ! -e /usr/sbin/dvbsnoop ];then
     aqq=`opkg install dvbsnoop1 2>&1 1>/dev/null`
     [ $? -gt 0 ] && cp -f $myPath/dvbsnoop /usr/bin/dvbsnoop 2>/dev/null
-  fi
 fi
 
 if [ -f $myPath/platformtester-$platform ]; then
