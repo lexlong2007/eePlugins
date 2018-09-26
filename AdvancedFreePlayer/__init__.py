@@ -169,7 +169,13 @@ myConfig.Version = ConfigSelection(default = "public", choices = [("debug", _("e
 #
 # hidden atributes to store configuration data
 #
-myConfig.FileListLastFolder = ConfigText(default = "/hdd/movie/", fixed_size = False)
+if os_path.exists("/hdd/movie/"):
+    myConfig.FileListLastFolder = ConfigText(default = "/hdd/movie/", fixed_size = False)
+else:
+    myConfig.FileListLastFolder = ConfigText(default = "/", fixed_size = False)
+if not os_path.exists(myConfig.FileListLastFolder.value):
+    myConfig.FileListLastFolder.value = '/'
+    
 myConfig.StoreLastFolder = ConfigYesNo(default = True)
 myConfig.Inits = ConfigText(default = "540,60,Regular,0,1,0", fixed_size = False)
 #position,size,type,color,visibility,background
