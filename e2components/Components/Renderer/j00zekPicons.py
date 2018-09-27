@@ -18,29 +18,36 @@ searchPaths = ['/usr/share/enigma2/']
 lastPiconsDict = {}
 #piconType = 'picon'
 
+##### write log in /tmp folder #####
 DBG = False
-from Components.j00zekComponents import j00zekDEBUG
+try:
+    from Components.j00zekComponents import j00zekDEBUG
+except Exception:
+    def j00zekDEBUG(myText=None):
+        if not myText is None:
+            print(myText)
+#####
 
 def initPiconPaths():
     for part in harddiskmanager.getMountedPartitions():
-        if DBG: j00zekDEBUG('MountedPartitions:' + part.mountpoint)
+        if DBG: j00zekDEBUG('[j00zekPicons]:[initPiconPaths] MountedPartitions:' + part.mountpoint)
         addPiconPath(part.mountpoint)
     if pathExists("/proc/mounts"):
         with open("/proc/mounts", "r") as f:
             for line in f:
                 if line.startswith('/dev/sd'):
                     mountpoint = line.split(' ')[1]
-                    if DBG: j00zekDEBUG('mounts:' + mountpoint)
+                    if DBG: j00zekDEBUG('[j00zekPicons]:[initPiconPaths] mounts:' + mountpoint)
                     addPiconPath(mountpoint)
 
 def addPiconPath(mountpoint):
-    if DBG: j00zekDEBUG('mountpoint=' + mountpoint)
+    if DBG: j00zekDEBUG('[j00zekPicons] mountpoint=' + mountpoint)
     if mountpoint == '/':
         return
     global searchPaths
     try:
         if mountpoint not in searchPaths:
-            if DBG: j00zekDEBUG('mountpoint not in searchPaths')
+            if DBG: j00zekDEBUG('[j00zekPicons] mountpoint not in searchPaths')
             for pp in os.listdir(mountpoint):
                 lpp = os.path.join(mountpoint, pp) + '/'
                 if pp.find('picon') >= 0 and os.path.isdir(lpp): #any folder *picon*
@@ -50,16 +57,16 @@ def addPiconPath(mountpoint):
                                 searchPaths.append(mountpoint)
                             else:
                                 searchPaths.append(mountpoint + '/')
-                            if DBG: j00zekDEBUG('mountpoint appended to searchPaths')
+                            if DBG: j00zekDEBUG('[j00zekPicons] mountpoint appended to searchPaths')
                             break
                     else:
                         continue
                     break
     except Exception, e:
-        if DBG: j00zekDEBUG('Exception:' + str(e))
+        if DBG: j00zekDEBUG('[j00zekPicons] Exception:' + str(e))
 
 def onPartitionChange(why, part):
-    if DBG: j00zekDEBUG('>>>')
+    if DBG: j00zekDEBUG('[j00zekPicons] onPartitionChange>>>')
     global searchPaths
     if why == 'add' and part.mountpoint not in searchPaths:
         addPiconPath(part.mountpoint)
@@ -70,7 +77,7 @@ def onPartitionChange(why, part):
 def findPicon(serviceName, selfPiconType = 'picon'):
     if serviceName is None or serviceName == '':
         return None
-    if DBG: j00zekDEBUG('serviceName=' + str(serviceName))
+    if DBG: j00zekDEBUG('[j00zekPicons] serviceName=' + str(serviceName))
     pngname = None
     findPiconTypeName='%s%s' % (selfPiconType,serviceName)
     if findPiconTypeName in lastPiconsDict:
@@ -80,6 +87,10 @@ def findPicon(serviceName, selfPiconType = 'picon'):
             sPath = path + selfPiconType + '/'
             if pathExists(sPath + serviceName + '.png'):
                 pngname = sPath + serviceName + '.png'
+                lastPiconsDict[findPiconTypeName] = pngname
+                break
+            elif pathExists(sPath + serviceName + '.gif'):
+                pngname = sPath + serviceName + '.gif'
                 lastPiconsDict[findPiconTypeName] = pngname
                 break
     return pngname
@@ -109,7 +120,7 @@ def getPiconName(serviceName, selfPiconType):
             if not pngname and len(name) > 2 and name.endswith('hd'):
                 pngname = findPicon(name[:-2], selfPiconType)
     if DBG:
-        j00zekDEBUG('serviceName=%s, picon=%s, %s, piconFile=%s' %(str(serviceName), sname, name, str(pngname)) )
+        j00zekDEBUG('[j00zekPicons] serviceName=%s, picon=%s, %s, piconFile=%s' %(str(serviceName), sname, name, str(pngname)) )
     return pngname
 
 
@@ -122,6 +133,7 @@ class j00zekPicons(Renderer):
         self.piconsize = (0, 0)
         self.pngname = ''
         self.piconType = 'picon'
+        self.GifsPath = 'animatedGIFpicons'
         return
 
     def addPath(self, value):
@@ -161,10 +173,13 @@ class j00zekPicons(Renderer):
     def changed(self, what):
         if self.instance:
             pngname = None
+            gifname = None
             try:
                 if not what[0] is self.CHANGED_CLEAR:
                     if self.source.text is not None and self.source.text != '':
+                        gifname = getPiconName(self.source.text, self.GifsPath)
                         pngname = getPiconName(self.source.text, self.piconType)
+                        if DBG: j00zekDEBUG('[j00zekPicons]:[changed] gifname=%s, pngname=%s' %(gifname,pngname))
                     if pngname is None:
                         pngname = findPicon('picon_default', self.piconType)
                         if pngname is None and pathExists(resolveFilename(SCOPE_CURRENT_SKIN, 'picon_default.png')):
@@ -177,9 +192,9 @@ class j00zekPicons(Renderer):
                         else:
                             self.instance.hide()
                         self.pngname = pngname
-                    if DBG: j00zekDEBUG('piconType=' + self.piconType + ', pngname=' + str(pngname))
+                    if DBG: j00zekDEBUG('[j00zekPicons]:[changed] piconType=' + self.piconType + ', pngname=' + str(pngname))
             except Exception, e:
-                j00zekDEBUG('Exception:' + str(e))
+                j00zekDEBUG('[j00zekPicons]:[changed] Exception:' + str(e))
 
 
 harddiskmanager.on_partition_list_change.append(onPartitionChange)

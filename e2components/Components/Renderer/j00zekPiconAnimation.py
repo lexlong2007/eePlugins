@@ -34,34 +34,40 @@ from Renderer import Renderer
 from enigma import ePixmap, eTimer
 from Tools.Directories import fileExists, SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, resolveFilename
 from Components.config import config
-from Components.Converter.Poll import Poll
 from Components.Harddisk import harddiskmanager
 import os
 
+##### write log in /tmp folder #####
 DBG = True
+try:
+    from Components.j00zekComponents import j00zekDEBUG
+except Exception:
+    def j00zekDEBUG(myText=None):
+        if not myText is None:
+            print(myText)
+#####
 
 searchPaths = ['/usr/share/enigma2/']
 
 def initPiconPaths():
+    if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[initPiconPaths] >>>')
     for part in harddiskmanager.getMountedPartitions():
-        if DBG: print('j00zekPiconAnimation:initPiconPaths MountedPartitions:' + part.mountpoint)
         addPiconPath(part.mountpoint)
     if os.path.exists("/proc/mounts"):
         with open("/proc/mounts", "r") as f:
             for line in f:
                 if line.startswith('/dev/sd'):
                     mountpoint = line.split(' ')[1]
-                    if DBG: print('j00zekPiconAnimation:mounts:' + mountpoint)
                     addPiconPath(mountpoint)
 
 def addPiconPath(mountpoint):
-    if DBG: print('j00zekPiconAnimation:addPiconPath >>> mountpoint=' + mountpoint)
+    if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[addPiconPath] >>> mountpoint=' + mountpoint)
     if mountpoint == '/':
         return
     global searchPaths
     try:
         if mountpoint not in searchPaths:
-            if DBG: print('j00zekPiconAnimation:addPiconPath mountpoint not in searchPaths')
+            if DBG: j00zekDEBUG('j00zekPiconAnimation]:[addPiconPath] mountpoint not in searchPaths')
             for pp in os.listdir(mountpoint):
                 lpp = os.path.join(mountpoint, pp) + '/'
                 if pp.find('picon') >= 0 and os.path.isdir(lpp): #any folder *picon*
@@ -71,39 +77,41 @@ def addPiconPath(mountpoint):
                                 searchPaths.append(mountpoint)
                             else:
                                 searchPaths.append(mountpoint + '/')
-                            if DBG: print('j00zekPiconAnimation:addPiconPath mountpoint appended to searchPaths')
+                            if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[addPiconPath] mountpoint appended to searchPaths')
                             break
                     else:
                         continue
                     break
     except Exception, e:
-        if DBG: print('j00zekPiconAnimation:Exception:' + str(e))
+        if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[addPiconPath] Exception:' + str(e))
 
 def onPartitionChange(why, part):
-    if DBG: print('j00zekPiconAnimation:onPartitionChange >>>')
+    if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[onPartitionChange] >>>')
     global searchPaths
     if why == 'add' and part.mountpoint not in searchPaths:
         addPiconPath(part.mountpoint)
     elif why == 'remove' and part.mountpoint in searchPaths:
         searchPaths.remove(part.mountpoint)
 
-class j00zekPiconAnimation(Renderer, Poll):
+class j00zekPiconAnimation(Renderer):
     __module__ = __name__
 
     def __init__(self):
-        Poll.__init__(self)
         Renderer.__init__(self)
-        self.pixmaps = 'animatedPicons/'
-        self.pixdelay = 100
-        self.anim = False
+        self.pixmaps = 'animatedPicons'
+        self.pixdelay = 50
+        self.doAnim = False
+        self.animCounter = 0
         self.count = 0
+        self.slideIcon = 0
         self.pixstep = 1
         self.pics = []
         self.animTimer = eTimer()
         self.animTimer.callback.append(self.timerEvent)
+        self.what = ['CHANGED_DEFAULT','CHANGED_ALL','CHANGED_CLEAR','CHANGED_SPECIFIC','CHANGED_POLL']
 
     def applySkin(self, desktop, parent):
-        if DBG: print('[j00zekPiconAnimation:applySkin]')
+        if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[applySkin] >>>')
         #Load attribs
         attribs = []
         for attrib, value in self.skinAttributes:
@@ -111,6 +119,8 @@ class j00zekPiconAnimation(Renderer, Poll):
                 self.pixmaps = value
             elif attrib == 'pixdelay':
                 self.pixdelay = int(value)
+                if self.pixdelay < 50:
+                    self.pixdelay = 50
             else:
                 attribs.append((attrib, value))
 
@@ -122,39 +132,56 @@ class j00zekPiconAnimation(Renderer, Poll):
                 pngfiles = [f for f in os.listdir(self.pixmaps) if (os.path.isfile(os.path.join(self.pixmaps, f)) and f.endswith(".png"))]
                 pngfiles.sort()
                 for x in pngfiles:
-                    if DBG: print('[j00zekPiconAnimation] read image ' + x)
-                    self.pics.append(LoadPixmap(self.pixmaps + x))
+                    if DBG: j00zekDEBUG('[j00zekPiconAnimation] read image %s' % os.path.join(self.pixmaps, x))
+                    self.pics.append(LoadPixmap(os.path.join(self.pixmaps, x)))
                 if len(self.pics) > 1:
                     self.count = len(self.pics)
-                    self.anim = True
+                    self.doAnim = True
                 break
-        print('[j00zekPiconAnimation:applySkin] Loaded pics=%s, path=%s, pixdelay=%s, step=%s' % (self.count,self.pixmaps,self.pixdelay,self.pixstep))
+        if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[applySkin] Loaded pics=%s, path=%s, pixdelay=%s, step=%s' % (self.count,self.pixmaps,self.pixdelay,self.pixstep))
         return Renderer.applySkin(self, desktop, parent)
 
     GUI_WIDGET = ePixmap
 
-    def changed(self, what):
-        if DBG: print('[j00zekPiconAnimation:changed]')
-        self.poll_interval = 4000
-        #self.poll_enabled = True
-        if self.instance:
-            if DBG: print('[j00zekPiconAnimation:changed]what[0]=%s, self.anim=%s' % (what[0],self.anim))
-            #if what[0] == self.CHANGED_POLL: # a timer expired
-            #    try: self.animTimer.stop()
-            #    except Exception: pass
-            if what[0] != self.CHANGED_CLEAR:
-                self.runAnim()
+    def postWidgetCreate(self, instance):
+        if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[postWidgetCreate] >>>')
+#self.changed((self.CHANGED_DEFAULT,))
+        return
 
-    def runAnim(self):
-        if DBG: print('[j00zekPiconAnimation:runAnim]')
-        if self.anim == True:
-            self.anim = False
-            self.slideIcon = 0
-            self.instance.show()
-            self.animTimer.start(self.pixdelay, True)
+    def preWidgetRemove(self, instance):
+        if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[preWidgetRemove] >>>')
+        if not self.animTimer is None:
+            self.animTimer.stop()
+            self.animTimer.callback.remove(self.timerEvent)
+            self.animTimer = None
+
+    def connect(self, source):
+        Renderer.connect(self, source)
+
+    def doSuspend(self, suspended):
+        if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[doSuspend] >>> suspended=%s' % suspended)
+        if suspended:
+        	self.changed((self.CHANGED_CLEAR,))
+        else:
+        	self.changed((self.CHANGED_DEFAULT,))
+            
+    def changed(self, what):
+        if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[changed] >>>')
+        if self.instance:
+            if DBG: j00zekDEBUG('\t\t what[0]=%s(%s), self.doAnim=%s' % (self.what[int(what[0])], what[0], self.doAnim))
+            if what[0] == self.CHANGED_CLEAR:
+                if not self.animTimer is None: self.animTimer.stop()
+                self.instance.hide()
+                self.slideIcon = 0
+                self.doAnim = True
+            elif self.doAnim == True:
+                self.doAnim = False
+                self.slideIcon = 0
+                self.instance.show()
+                self.animTimer.start(self.pixdelay, True)
 
     def timerEvent(self):
-        if DBG: print('[j00zekPiconAnimation:timerEvent] self.slideIcon=%s' % self.slideIcon)
+        if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[timerEvent] >>> self.slideIcon=%s' % self.slideIcon)
         self.animTimer.stop()
         if self.slideIcon < self.count:
             self.instance.setPixmap(self.pics[self.slideIcon])
@@ -162,9 +189,11 @@ class j00zekPiconAnimation(Renderer, Poll):
             if self.slideIcon > self.count: self.slideIcon = self.count
             self.animTimer.start(self.pixdelay, True)
         elif self.slideIcon == self.count: #Note last frame does NOT exists
-            if DBG: print('[j00zekPiconAnimation:timerEvent] stop animation')
+            if DBG: j00zekDEBUG('\t\t stop animation')
             self.instance.hide()
-            self.anim = True
+            self.doAnim = True
+            self.animCounter = self.animCounter + 1
+        if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[timerEvent] <<<')
 
 harddiskmanager.on_partition_list_change.append(onPartitionChange)
 initPiconPaths()

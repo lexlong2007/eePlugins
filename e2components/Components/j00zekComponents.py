@@ -1,5 +1,6 @@
 import inspect
 from os import path, system
+from datetime import datetime
 
 append2file=False
 myDEBUG='/tmp/j00zekComponents.log'
@@ -23,22 +24,21 @@ def isImageType(imgName = ''):
 	else:
 		return False
 
-def j00zekDEBUG(myText = ''):
+def j00zekDEBUG(myText = None):
 	global append2file, myDEBUG
 	if myDEBUG is None:
 		return
+	if myText is None:
+		return
 	try:
-		myFUNC = '%s(l%s)' % (inspect.stack()[1][3], inspect.stack()[1][2] )
 		if append2file == False:
 			append2file = True
 			f = open(myDEBUG, 'w')
 		else:
 			f = open(myDEBUG, 'a')
-		if myText[0:1] == '[':
-			f.write('%s\n' % myText)
-		else:
-			f.write('[%s] %s\n' % ( myFUNC, myText ))
-		f.close
+		f.write('%s\t%s\n' % (str(datetime.now()),myText))
+		f.close()
+        #print(myText)
 	except Exception, e:
 		system('echo "Exception:%s" >> %s' %( str(e), myDEBUG ))
 	return
