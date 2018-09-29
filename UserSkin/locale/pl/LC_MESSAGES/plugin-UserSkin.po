@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UserSkin v0.1\n"
 "POT-Creation-Date: 2013-08-16 18:44+0100\n"
-"PO-Revision-Date: 2016-02-12 10:03+0100\n"
+"PO-Revision-Date: 2018-09-29 00:00+0100\n"
 "Last-Translator: j00zek\n"
 "Language-Team: j00zek\n"
 "Language: de\n"
@@ -470,6 +470,12 @@ msgstr "Stworzone przez"
 
 msgid "default"
 msgstr "standardowy"
+
+msgid "animated_zzpicon"
+msgstr "z animacją zzpikony"
+
+msgid "animated_picon"
+msgstr "z animacją pikony"
 
 msgid "aqq"
 msgstr ""
