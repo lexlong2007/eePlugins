@@ -5715,7 +5715,7 @@
     <widget source="key_yellow" render="Label" position="1100,990" size="300,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget source="key_blue" render="Label" position="1530,990" size="300,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
   </screen>
-  <screen name="GOSMenuChannels" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
+  <screen name="J00zekMenuChannels" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png"/>
     <widget source="global.CurrentTime" render="Label" position="40,25" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Default</convert>
@@ -5723,7 +5723,7 @@
     <widget source="global.CurrentTime" render="Label" position="125,25" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="GOSMenuChannels" position="865,25" size="320,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <eLabel text="J00zekMenuChannels" position="865,25" size="320,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget name="config" font="Roboto_HD; 27" position="65,145" size="1095,630" itemHeight="35" selectionPixmap="BlackHarmony/menu/sel_1095_35.png" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" scrollbarMode="showOnDemand" backgroundColor="background"/>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="41,850" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="328,850" size="35,27" alphatest="blend"/>
@@ -7181,7 +7181,7 @@
       <convert type="ClockToText">Format:%A, %d.%m.%Y</convert>
     </widget>
   </screen>
-  <screen name="GOSopkg" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
+  <screen name="Jopkg" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png"/>
     <widget source="global.CurrentTime" render="Label" position="40,25" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Default</convert>
@@ -7189,7 +7189,7 @@
     <widget source="global.CurrentTime" render="Label" position="125,25" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="GOSopkg" position="760,25" size="420,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <eLabel text="Jopkg" position="760,25" size="420,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget source="list" render="Listbox" position="65,125" size="1095,675" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_1095_75.png" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" transparent="1" enableWrapAround="1">
       <convert type="TemplatedMultiContent" transparent="1">
 				{"template":
@@ -7215,7 +7215,7 @@
     <widget name="key_blue" position="952,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget name="whatUPDATED" position="65,125" size="1095,675" font="Roboto_HD; 27" transparent="1"/>
   </screen>
-  <screen name="GOSconsole" position="365,145" size="1200,800" title="Command execution...">
+  <screen name="Jconsole" position="365,145" size="1200,800" title="Command execution...">
     <widget name="text" position="20,20" size="1160,800" font="Roboto_HD; 25" backgroundColor="background" transparent="1"/>
   </screen>
   <screen name="Configure" position="344,86" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
