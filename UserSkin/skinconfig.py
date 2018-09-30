@@ -79,6 +79,19 @@ config.plugins.UserSkin.AdvancedMode = ConfigSelection(default="copyScreens", ch
 				("mergeScreens", _("Advanced (merge screens)"))
 				])
 config.plugins.UserSkin.FontScale = ConfigSelectionNumber(default=100, min=50, max=200, stepwidth=1)
+config.plugins.UserSkin.AnimatedPiconsUserPathEnabled = ConfigYesNo(default = False)
+config.plugins.UserSkin.AnimatedPiconsUseUserPath = ConfigDirectory(default = "/usr/share/enigma2")
+config.plugins.UserSkin.AnimatedPiconsMode = ConfigSelection(default="skin", choices = [
+                                ("skin", _("Controled by skin definition")),
+                                ("useAnimatedPicons", _("show animation over picon")),
+                                ("growing", _("Growing picon")),
+                                ("moveRight", _("Picon moving right")),
+                                ("moveUp", _("Picon moving up")),
+                                ("flipHorizon", _("Flipping picon horizontaly")),
+                                ("flipVert", _("Flipping picon verticaly")),
+                                ("useGifs", _("use animated GIF picons when available")),
+                                ("random", _("random effect selection"))
+                                ])
 
 
 imageType=None
@@ -264,7 +277,14 @@ class UserSkin_Config(Screen, ConfigListScreen):
 		if isSlowCPU() == True:
 			self.list.append(getConfigListEntry(_("No JPG previews:"), config.plugins.UserSkin.jpgPreview))
 		self.list.append(getConfigListEntry(_("LCD/VFD skin:"), config.plugins.UserSkin.LCDmode))
-		self["config"].list = self.list
+                if path.exists(resolveFilename(SCOPE_PLUGINS, '../Components/Renderer/j00zekPiconAnimation.py')) or \
+                        path.exists(resolveFilename(SCOPE_PLUGINS, '../Components/Renderer/j00zekPiconAnimation.pyo')) or \
+                        path.exists(resolveFilename(SCOPE_PLUGINS, '../Components/Renderer/j00zekPiconAnimation.pyc')):
+                        self.list.append(getConfigListEntry(_("---Picons animations---"), self.myUserSkin_fake_entry))
+                        self.list.append(getConfigListEntry(_("Enable user path:"), config.plugins.UserSkin.AnimatedPiconsUserPathEnabled))
+                        self.list.append(getConfigListEntry(_("User path:"), config.plugins.UserSkin.AnimatedPiconsUseUserPath))
+                        self.list.append(getConfigListEntry(_("Animation mode:"), config.plugins.UserSkin.AnimatedPiconsMode))
+                self["config"].list = self.list
 		self["config"].l.setList(self.list)
 		if self.myUserSkin_active.value:
 			self["key_yellow"].setText(_("User skins"))
