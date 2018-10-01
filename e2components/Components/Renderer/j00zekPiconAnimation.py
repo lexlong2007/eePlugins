@@ -6,6 +6,8 @@
 #    Uszanuj moja prace i nie kasuj/zmieniaj informacji kto jest autorem renderera
 #    Please respect my work and don't delete/change name of the renderer author
 #
+#    Nie zgadzam sie na wykorzystywanie tego renderera w projektach platnych jak np. Graterlia!!!
+#
 #    This program is free software; you can redistribute it and/or
 #    modify it under the terms of the GNU General Public License
 #    as published by the Free Software Foundation; either version 2
@@ -33,10 +35,13 @@ from Components.Pixmap import Pixmap
 from Renderer import Renderer
 from enigma import ePixmap, eTimer
 from Tools.Directories import fileExists, SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, resolveFilename
-from Components.config import config
+from Components.config import config, ConfigSubsection, ConfigYesNo, ConfigDirectory
 from Components.Harddisk import harddiskmanager
 import os
 
+config.plugins.j00zekPiconAnimation = ConfigSubsection() 
+config.plugins.j00zekPiconAnimation.UserPathEnabled = ConfigYesNo(default = False) 
+config.plugins.j00zekPiconAnimation.UserPath = ConfigDirectory(default = "")  
 ##### write log in /tmp folder #####
 DBG = True
 try:
@@ -126,19 +131,16 @@ class j00zekPiconAnimation(Renderer):
 
         self.skinAttributes = attribs
         #Load animation into memory
-        for path in searchPaths:
-            if os.path.exists(os.path.join(path, self.pixmaps)):
-                self.pixmaps = os.path.join(path, self.pixmaps)
-                pngfiles = [f for f in os.listdir(self.pixmaps) if (os.path.isfile(os.path.join(self.pixmaps, f)) and f.endswith(".png"))]
-                pngfiles.sort()
-                for x in pngfiles:
-                    if DBG: j00zekDEBUG('[j00zekPiconAnimation] read image %s' % os.path.join(self.pixmaps, x))
-                    self.pics.append(LoadPixmap(os.path.join(self.pixmaps, x)))
-                if len(self.pics) > 1:
-                    self.count = len(self.pics)
-                    self.doAnim = True
-                break
-        if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[applySkin] Loaded pics=%s, path=%s, pixdelay=%s, step=%s' % (self.count,self.pixmaps,self.pixdelay,self.pixstep))
+        try:
+            if config.plugins.j00zekPiconAnimation.UserPathEnabled.value == True:
+                if os.path.exists(config.plugins.j00zekPiconAnimation.UserPath.value):
+                    self.loadPNGsAnim(config.plugins.j00zekPiconAnimation.UserPath.value)
+                elif DBG: j00zekDEBUG('[j00zekPiconAnimation]:[applySkin] User path "%s" selected but does NOT exist' % config.plugins.j00zekPiconAnimation.UserPath.value)
+            else:
+                for path in searchPaths:
+                    self.loadPNGsAnim(os.path.join(path, self.pixmaps))
+        except Exception, e:
+            if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[applySkin] Exception %s' % str(e))
         return Renderer.applySkin(self, desktop, parent)
 
     GUI_WIDGET = ePixmap
@@ -161,10 +163,27 @@ class j00zekPiconAnimation(Renderer):
     def doSuspend(self, suspended):
         if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[doSuspend] >>> suspended=%s' % suspended)
         if suspended:
-        	self.changed((self.CHANGED_CLEAR,))
+                self.changed((self.CHANGED_CLEAR,))
         else:
-        	self.changed((self.CHANGED_DEFAULT,))
+                self.changed((self.CHANGED_DEFAULT,))
             
+    def loadPNGsAnim(self, animPath):
+        if os.path.exists(animPath) and animPath != self.pixmaps:
+            self.pixmaps = animPath
+            pngfiles = [f for f in os.listdir(self.pixmaps) if (os.path.isfile(os.path.join(self.pixmaps, f)) and f.endswith(".png"))]
+            pngfiles.sort()
+            self.pics = []
+            self.doAnim = False
+            for x in pngfiles:
+                if DBG: j00zekDEBUG('[j00zekPiconAnimation]]:[loadPNGsAnim] read image %s' % os.path.join(self.pixmaps, x))
+                self.pics.append(LoadPixmap(os.path.join(self.pixmaps, x)))
+            if len(self.pics) > 1:
+                self.count = len(self.pics)
+                self.doAnim = True
+            if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[loadPNGsAnim] Loaded from path=%s, pics=%s, pixdelay=%s, step=%s' % (self.pixmaps,self.count,self.pixdelay,self.pixstep))
+        else:
+            if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[loadPNGsAnim] Path "%s" does NOT exist.' % (animPath))
+      
     def changed(self, what):
         if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[changed] >>>')
         if self.instance:
