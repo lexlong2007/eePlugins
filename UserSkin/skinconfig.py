@@ -79,20 +79,6 @@ config.plugins.UserSkin.AdvancedMode = ConfigSelection(default="copyScreens", ch
                 ("mergeScreens", _("Advanced (merge screens)"))
                 ])
 config.plugins.UserSkin.FontScale = ConfigSelectionNumber(default=100, min=50, max=200, stepwidth=1)
-#config.plugins.UserSkin.AnimatedPiconsUserPathEnabled = ConfigYesNo(default = False)
-#config.plugins.UserSkin.AnimatedPiconsUseUserPath = ConfigDirectory(default = "/usr/share/enigma2")
-#config.plugins.UserSkin.AnimatedPiconsMode = ConfigSelection(default="skin", choices = [
-#                                ("skin", _("Controled by skin definition")),
-#                                ("useAnimatedPicons", _("show animation over picon")),
-#                                ("growing", _("Growing picon")),
-#                                ("moveRight", _("Picon moving right")),
-#                                ("moveUp", _("Picon moving up")),
-#                                ("flipHorizon", _("Flipping picon horizontaly")),
-#                                ("flipVert", _("Flipping picon verticaly")),
-#                                ("useGifs", _("use animated GIF picons when available")),
-#                                ("random", _("random effect selection"))
-#                                ])
-
 
 imageType=None
 def isImageType(imgName = ''):
@@ -283,16 +269,12 @@ class UserSkin_Config(Screen, ConfigListScreen):
                     path.exists(resolveFilename(SCOPE_PLUGINS, '../Components/Renderer/j00zekPiconAnimation.pyc'))) and \
                     not config.plugins.j00zekPiconAnimation.UserPath is None and \
                     not config.plugins.j00zekPiconAnimation.UserPathEnabled is None:
-                self.list.append(getConfigListEntry(_("---Picons animations settings---"), self.myUserSkin_fake_entry))
+                self.list.append(getConfigListEntry(_("---Picons animations optional settings---"), self.myUserSkin_fake_entry))
                 self.list.append(getConfigListEntry(_("Force using custom path:"), config.plugins.j00zekPiconAnimation.UserPathEnabled))
                 if config.plugins.j00zekPiconAnimation.UserPathEnabled.value == True:
                     self.list.append(getConfigListEntry(_("Custom path:"), config.plugins.j00zekPiconAnimation.UserPath))
         except Exception, e:
             printDEBUG("[UserSkin:createConfigList] Exception %s" % str(e))
-        if path.exists(resolveFilename(SCOPE_PLUGINS, '../Components/Renderer/j00zekAnimatedPicons.py')) or \
-                path.exists(resolveFilename(SCOPE_PLUGINS, '../Components/Renderer/j00zekAnimatedPicons.pyo')) or \
-                path.exists(resolveFilename(SCOPE_PLUGINS, '../Components/Renderer/j00zekAnimatedPicons.pyc')):
-            self.list.append(getConfigListEntry(_("Animation mode:"), config.plugins.UserSkin.AnimatedPiconsMode))
         self["config"].list = self.list
         self["config"].l.setList(self.list)
         if self.myUserSkin_active.value:

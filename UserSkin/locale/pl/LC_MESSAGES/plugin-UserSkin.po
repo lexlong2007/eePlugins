@@ -477,44 +477,17 @@ msgstr "z animacją zzpikony"
 msgid "animated_picon"
 msgstr "z animacją pikony"
 
-msgid "---Picons animations---"
-msgstr "--- Animacja pikon ---"
-
-msgid "Enable user path:"
-msgstr "Aktywuj Ścieżkę użytkownika:"
-
-msgid "User path:"
-msgstr "Ścieżka użytkownika:"
-
-msgid "Animation mode:"
-msgstr "Tryb animacji pikon:"
-
-msgid "Controled by skin definition"
-msgstr "Kontrolowany przez skórkę"
-
-msgid "Growing picon"
-msgstr "Rosnąca"
-
-msgid "Picon moving right"
-msgstr "Pojawiająca się od lewej"
-
-msgid "Picon moving up"
-msgstr "Pojawiająca się od dołu"
-
-msgid "Flipping picon horizontaly"
-msgstr "Obracająca się poziomo"
-
-msgid "Flipping picon verticaly"
-msgstr "Obracająca się pionowo"
-
-msgid "show animation over picon"
-msgstr "Wyświetl animację"
-
-msgid "use animated GIF picons when available"
-msgstr "Wyświetl animowanego GIF-a, gdy dostępny"
-
-msgid "random effect selection"
-msgstr "Wybierz efekt losowo"
-
 msgid "LCD/VFD skin:"
 msgstr "Skórka LCD/VFD:"
+
+msgid "Do you want to update your skin modification?"
+msgstr "Czy chcesz zaktualizować modyfickację skórki?"
+
+msgid "---Picons animations optional settings---"
+msgstr "---Opcjonalne ustawenia animacji pikon---"
+
+msgid "Force using custom path:"
+msgstr "Wymuś użycie ścieżki użytkownika:"
+
+msgid "Custom path:"
+msgstr "Ścieżka użytkownika:"
