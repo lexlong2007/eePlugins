@@ -29,6 +29,16 @@
 #                  -  size="X,Y" should be the same like size of a picon in skin definition
 #                  -  zPosition="Z" should be bigger than zPosition of a picon in skin definition, to display animation over the picon.
 #
+#    OPTIONAL animations control:
+#       - to set speed put '.ctrl' file  in the pngs folder containing 'delay=TIME' where TIME is miliseconds to wait between frames
+#       - to overwrite skin setting use config attributes from your own plugin or use UserSkin which has GUI to present them
+#       - to disable user settings (see above) put lockpath="True" attribute in widget definition
+#       - to randomize animations put all in the subfolders of main empy animations folder 
+#                 Example:
+#                         create /usr/shareenigma2/animatedPicons/ EMPTY folder
+#                         create /usr/shareenigma2/animatedPicons/Flara subfolder with animation png's
+#                         create /usr/shareenigma2/animatedPicons/OldMovie subfolder with second animation png's
+#
 ####################################################################### 
 from Tools.LoadPixmap import LoadPixmap
 from Components.Pixmap import Pixmap
@@ -37,19 +47,21 @@ from enigma import ePixmap, eTimer
 from Tools.Directories import fileExists, SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, resolveFilename
 from Components.config import config, ConfigSubsection, ConfigYesNo, ConfigDirectory
 from Components.Harddisk import harddiskmanager
+from random import randint
 import os
 
 config.plugins.j00zekPiconAnimation = ConfigSubsection() 
 config.plugins.j00zekPiconAnimation.UserPathEnabled = ConfigYesNo(default = False) 
 config.plugins.j00zekPiconAnimation.UserPath = ConfigDirectory(default = "")  
 ##### write log in /tmp folder #####
-DBG = True
+DBG = False
 try:
     from Components.j00zekComponents import j00zekDEBUG
 except Exception:
     def j00zekDEBUG(myText=None):
         if not myText is None:
-            print(myText)
+            try: print(myText)
+            except Exception: pass
 #####
 
 searchPaths = ['/usr/share/enigma2/']
@@ -106,11 +118,13 @@ class j00zekPiconAnimation(Renderer):
         self.pixmaps = 'animatedPicons'
         self.pixdelay = 50
         self.doAnim = False
+        self.doLockPath = False
         self.animCounter = 0
         self.count = 0
         self.slideIcon = 0
         self.pixstep = 1
         self.pics = []
+        self.picsFolder = []
         self.animTimer = eTimer()
         self.animTimer.callback.append(self.timerEvent)
         self.what = ['CHANGED_DEFAULT','CHANGED_ALL','CHANGED_CLEAR','CHANGED_SPECIFIC','CHANGED_POLL']
@@ -122,9 +136,12 @@ class j00zekPiconAnimation(Renderer):
         for attrib, value in self.skinAttributes:
             if attrib == 'pixmaps':
                 self.pixmaps = value
+            elif attrib == 'lockpath':
+                if value == 'True':
+                    self.doLockPath = True
             elif attrib == 'pixdelay':
                 self.pixdelay = int(value)
-                if self.pixdelay < 50:
+                if self.pixdelay < 40:
                     self.pixdelay = 50
             else:
                 attribs.append((attrib, value))
@@ -132,13 +149,16 @@ class j00zekPiconAnimation(Renderer):
         self.skinAttributes = attribs
         #Load animation into memory
         try:
-            if config.plugins.j00zekPiconAnimation.UserPathEnabled.value == True:
+            if config.plugins.j00zekPiconAnimation.UserPathEnabled.value == True and self.doLockPath == False:
                 if os.path.exists(config.plugins.j00zekPiconAnimation.UserPath.value):
                     self.loadPNGsAnim(config.plugins.j00zekPiconAnimation.UserPath.value)
+                    self.loadPNGsSubFolders(config.plugins.j00zekPiconAnimation.UserPath.value)
                 elif DBG: j00zekDEBUG('[j00zekPiconAnimation]:[applySkin] User path "%s" selected but does NOT exist' % config.plugins.j00zekPiconAnimation.UserPath.value)
             else:
                 for path in searchPaths:
-                    self.loadPNGsAnim(os.path.join(path, self.pixmaps))
+                    if self.loadPNGsAnim(os.path.join(path, self.pixmaps)) == True:
+                        break
+                self.loadPNGsSubFolders(os.path.join(path, self.pixmaps))
         except Exception, e:
             if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[applySkin] Exception %s' % str(e))
         return Renderer.applySkin(self, desktop, parent)
@@ -167,8 +187,20 @@ class j00zekPiconAnimation(Renderer):
         else:
                 self.changed((self.CHANGED_DEFAULT,))
             
+    def loadPNGsSubFolders(self, animPath):
+        self.picsFolder = []
+        if len(self.pics) == 0 and os.path.exists(animPath):
+            picsFolder = [f for f in os.listdir(animPath) if os.path.isdir(os.path.join(animPath, f))]
+            for x in picsFolder:
+                for f in os.listdir(os.path.join(animPath, x)):
+                    if f.endswith(".png"):
+                        self.picsFolder.append(os.path.join(animPath, x))
+                        if DBG: j00zekDEBUG('[j00zekPiconAnimation]]:[loadPNGsSubFolders] found *.png in subfolder "%s"' % os.path.join(animPath, x))
+                        break
+                    
     def loadPNGsAnim(self, animPath):
-        if os.path.exists(animPath) and animPath != self.pixmaps:
+        if animPath == self.pixmaps: return False
+        if os.path.exists(animPath):
             self.pixmaps = animPath
             pngfiles = [f for f in os.listdir(self.pixmaps) if (os.path.isfile(os.path.join(self.pixmaps, f)) and f.endswith(".png"))]
             pngfiles.sort()
@@ -177,16 +209,31 @@ class j00zekPiconAnimation(Renderer):
             for x in pngfiles:
                 if DBG: j00zekDEBUG('[j00zekPiconAnimation]]:[loadPNGsAnim] read image %s' % os.path.join(self.pixmaps, x))
                 self.pics.append(LoadPixmap(os.path.join(self.pixmaps, x)))
-            if len(self.pics) > 1:
+            if len(self.pics) > 0:
                 self.count = len(self.pics)
                 self.doAnim = True
-            if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[loadPNGsAnim] Loaded from path=%s, pics=%s, pixdelay=%s, step=%s' % (self.pixmaps,self.count,self.pixdelay,self.pixstep))
+                if os.path.exists(os.path.join(animPath,'.ctrl')):
+                    with open(os.path.join(animPath,'.ctrl')) as cf:
+                        try:
+                            myDelay=cf.readline().strip()
+                            cf.close()
+                            self.pixdelay = int(myDelay.split('=')[1])
+                            if self.pixdelay < 40: self.pixdelay = 40
+                        except Exception, e:
+                            if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[loadPNGsAnim] Exception "%s" loading .ctrl' % str(e))
+                if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[loadPNGsAnim] Loaded from path=%s, pics=%s, pixdelay=%s, step=%s' % (self.pixmaps,self.count,self.pixdelay,self.pixstep))
+                return True
+            else:
+                if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[loadPNGsAnim] No *.png in given path "%s".' % (animPath))
         else:
             if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[loadPNGsAnim] Path "%s" does NOT exist.' % (animPath))
+        return False
+         
       
     def changed(self, what):
         if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[changed] >>>')
         if self.instance:
+            self.instance.setScale(1) 
             if DBG: j00zekDEBUG('\t\t what[0]=%s(%s), self.doAnim=%s' % (self.what[int(what[0])], what[0], self.doAnim))
             if what[0] == self.CHANGED_CLEAR:
                 if not self.animTimer is None: self.animTimer.stop()
@@ -212,6 +259,9 @@ class j00zekPiconAnimation(Renderer):
             self.instance.hide()
             self.doAnim = True
             self.animCounter = self.animCounter + 1
+            if len(self.picsFolder) > 1:
+                if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[timerEvent] change animation')
+                self.loadPNGsAnim(self.picsFolder[randint(0, len(self.picsFolder)-1)])
         if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[timerEvent] <<<')
 
 harddiskmanager.on_partition_list_change.append(onPartitionChange)
