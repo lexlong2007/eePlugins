@@ -73,7 +73,7 @@ class Jopkg(Screen):
                 }
             </convert>
         </widget>
-        <widget name="whatUPDATED"  position="5,60" size="690,400" font="Regular;18" transparent="1"/>
+        <widget name="whatUPDATED"  position="5,75" size="690,330" font="Regular;18" transparent="1"/>
 
     </screen>"""
 

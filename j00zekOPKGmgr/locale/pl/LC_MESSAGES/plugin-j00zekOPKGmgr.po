@@ -213,3 +213,19 @@ msgstr "Komenda 'opkg update' zwróciła błąd %s :("
 
 msgid "show channels only"
 msgstr "Listy kanałów"
+
+msgid "Show DVB USB modules only"
+msgstr "DVB dla USB"
+
+msgid "\nUse up/down arrows to scroll text. OK closes window"
+msgstr "\nUżyj strzałek góra/dół aby przewinąc tekst.Klawisz OK zamyka okno"
+
+msgid "Downloading"
+msgstr "Pobieram"
+
+msgid "Inflating"
+msgstr "Przetwarzam"
+
+msgid "Installing"
+msgstr "Instaluję"
+

@@ -39,6 +39,8 @@ def __(txt):
             index += 1
             if index == 10:
                 break
+    for x in ['Downloading', 'Inflating' , 'Installing']:
+        txt = txt.replace(x, _(x))
 
     return txt
 
