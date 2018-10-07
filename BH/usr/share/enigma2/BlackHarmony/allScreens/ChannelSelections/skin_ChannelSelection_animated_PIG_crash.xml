@@ -51,14 +51,11 @@
   <ePixmap position="1540,998" size="60,30" pixmap="BlackHarmony/buttons/key_menu.png" alphatest="blend" />
   <ePixmap position="1720,998" size="60,30" pixmap="BlackHarmony/buttons/key_info.png" alphatest="blend" />
   <ePixmap position="1452,152" zPosition="1" size="379,202" pixmap="BlackHarmony/gfx/pig.png" />
-  <!--PIG-->
   <eLabel position="1455,155" zPosition="3" size="373,196" backgroundColor="picture" />
   <widget source="session.VideoPicture" render="Pig" position="1455,155" zPosition="3" size="373,196" backgroundColor="picture" transparent="0">
     <convert type="ConfigEntryTest"></convert>
     <convert type="ConditionalShowHide" />
   </widget>
-  <!-- Animacja -->
-  <widget source="session.CurrentService" render="j00zekPiconAnimation" pixmaps="BlackHarmony/pixAnims/Klisza" pixdelay="50" lockpath="True" loop="True" loopdelay="50" position="1455,155" size="373,196" zPosition="5" transparent="1" alphatest="blend" />
   <widget alphatest="blend" position="1195,185" render="j00zekPicons" picontype="picon" size="220,132" source="ServiceEvent" transparent="1" zPosition="4">
     <convert type="ServiceName">Reference</convert>
   </widget>

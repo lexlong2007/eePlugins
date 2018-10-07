@@ -7190,7 +7190,7 @@
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
     <eLabel text="Jopkg" position="760,25" size="420,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
-    <widget source="list" render="Listbox" position="65,125" size="1095,675" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_1095_75.png" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" transparent="1" enableWrapAround="1">
+    <widget source="list" render="Listbox" position="65,125" size="1095,675" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_1095_75.png" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f">
       <convert type="TemplatedMultiContent" transparent="1">
 				{"template":
 					[
@@ -7213,7 +7213,7 @@
     <widget name="key_green" position="378,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget name="key_yellow" position="665,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget name="key_blue" position="952,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
-    <widget name="whatUPDATED" position="65,125" size="1095,675" font="Roboto_HD; 27" transparent="1"/>
+    <widget name="whatUPDATED" position="65,210" size="1095,590" font="Roboto_HD; 27" transparent="1"/>
   </screen>
   <screen name="Jconsole" position="365,145" size="1200,800" title="Command execution...">
     <widget name="text" position="20,20" size="1160,800" font="Roboto_HD; 25" backgroundColor="background" transparent="1"/>
