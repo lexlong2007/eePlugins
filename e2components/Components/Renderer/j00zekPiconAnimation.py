@@ -25,15 +25,22 @@
 #       - include J00zekPiconAnimation widget in the infobar skin definition.
 #             E.g. <widget source="session.CurrentService" render="j00zekPiconAnimation" position="30,30" size="220,132" zPosition="5" transparent="1" alphatest="blend" />
 #             NOTE:
-#                  -  position="X,Y" should be the same like position of a picon in skin definition
-#                  -  size="X,Y" should be the same like size of a picon in skin definition
-#                  -  zPosition="Z" should be bigger than zPosition of a picon in skin definition, to display animation over the picon.
+#                   -  position="X,Y" should be the same like position of a picon in skin definition
+#                   -  size="X,Y" should be the same like size of a picon in skin definition
+#                   -  zPosition="Z" should be bigger than zPosition of a picon in skin definition, to display animation over the picon.
+#
+#             OTHER PARAMETERS:
+#                   - pixmaps           : name of the directory, default 'animatedPicons'
+#                   - pixdelay          : delay between showing frames, default 50ms
+#                   - lockpath="True"   : always use path defined in skin, default "False" - very usefull if skin author want to have many different animations
+#                   - loop="True"       : run animation in a loop, default "False"
+#                   - loopdelay         : delay between showing frames, default 50ms, default 5* pixdelay
 #
 #    OPTIONAL animations control:
 #       - to set speed put '.ctrl' file  in the pngs folder containing 'delay=TIME' where TIME is miliseconds to wait between frames
 #       - to overwrite skin setting use config attributes from your own plugin or use UserSkin which has GUI to present them
 #       - to disable user settings (see above) put lockpath="True" attribute in widget definition
-#       - to randomize animations put all in the subfolders of main empy animations folder 
+#       - to randomize animations put all in the subfolders of main empy animations folder. If you want to disable any just put ".off" at the end of the folder name
 #                 Example:
 #                         create /usr/shareenigma2/animatedPicons/ EMPTY folder
 #                         create /usr/shareenigma2/animatedPicons/Flara subfolder with animation png's
@@ -43,8 +50,7 @@
 from Tools.LoadPixmap import LoadPixmap
 from Components.Pixmap import Pixmap
 from Renderer import Renderer
-from enigma import ePixmap, eTimer
-from Tools.Directories import fileExists, SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, resolveFilename
+from enigma import ePixmap, eTimer, iPlayableService
 from Components.config import config, ConfigSubsection, ConfigYesNo, ConfigDirectory
 from Components.Harddisk import harddiskmanager
 from random import randint
@@ -116,18 +122,26 @@ class j00zekPiconAnimation(Renderer):
     def __init__(self):
         Renderer.__init__(self)
         self.pixmaps = 'animatedPicons'
-        self.pixdelay = 50
+        self.delayBetweenFrames = 50
+        self.delayBetweenLoops = self.delayBetweenFrames * 5
         self.doAnim = False
         self.doLockPath = False
+        self.doInLoop = False
         self.animCounter = 0
-        self.count = 0
-        self.slideIcon = 0
-        self.pixstep = 1
-        self.pics = []
-        self.picsFolder = []
+        self.FramesCount = 0
+        self.slideFrame = 0
+        self.FramesList = []
+        self.animationsFoldersList = []
         self.animTimer = eTimer()
         self.animTimer.callback.append(self.timerEvent)
-        self.what = ['CHANGED_DEFAULT','CHANGED_ALL','CHANGED_CLEAR','CHANGED_SPECIFIC','CHANGED_POLL']
+        self.what = ['CHANGED_DEFAULT', 'CHANGED_ALL', 'CHANGED_CLEAR', 'CHANGED_SPECIFIC', 'CHANGED_POLL']
+        self.whatDescr = ['# initial "pull" state ', '# really everything changed ',
+                    '# we are expecting a real update soon. do not bother polling NOW, but clear data. ',
+                    '# second tuple will specify what exactly changed ', '# a timer expired ']
+        self.CH_SP_ev = ['evStart', 'evEnd', 'evTunedIn', 'evTuneFailed', 'evUpdatedEventInfo', 'evUpdatedInfo', 'evSeekableStatusChanged',
+                        'evEOF', 'evSOF', 'evCuesheetChanged','evUpdatedRadioText', 'evUpdatedRtpText', 'evUpdatedRassSlidePic',
+                        'evUpdatedRassInteractivePicMask', 'evVideoSizeChanged', 'evVideoFramerateChanged', 'evVideoProgressiveChanged',
+                        'evBuffering', 'evStopped', 'evHBBTVInfo', 'evFccFailed', 'evUser']
 
     def applySkin(self, desktop, parent):
         if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[applySkin] >>>')
@@ -136,25 +150,35 @@ class j00zekPiconAnimation(Renderer):
         for attrib, value in self.skinAttributes:
             if attrib == 'pixmaps':
                 self.pixmaps = value
-            elif attrib == 'lockpath':
-                if value == 'True':
-                    self.doLockPath = True
+                if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[applySkin] self.pixmaps=%s' % value)
             elif attrib == 'pixdelay':
-                self.pixdelay = int(value)
-                if self.pixdelay < 40:
-                    self.pixdelay = 50
+                self.delayBetweenFrames = int(value)
+                if self.delayBetweenFrames < 40: self.delayBetweenFrames = 40
+                if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[applySkin] self.delayBetweenFrames=%s' % self.delayBetweenFrames)
+            elif attrib == 'lockpath':
+                if value == 'True': self.doLockPath = True
+                if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[applySkin] self.doLockPath=%s' % self.doLockPath)
+            elif attrib == 'loop':
+                if value == 'True': self.doInLoop = True
+                if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[applySkin] self.doInLoop=%s' % self.doInLoop)
+            elif attrib == 'loopdelay':
+                self.delayBetweenLoops = int(value)
+                if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[applySkin] self.delayBetweenLoops=%s' % self.delayBetweenLoops)
             else:
                 attribs.append((attrib, value))
+                if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[applySkin] unknown %s=%s' % (attrib,value))
 
         self.skinAttributes = attribs
         #Load animation into memory
         try:
             if config.plugins.j00zekPiconAnimation.UserPathEnabled.value == True and self.doLockPath == False:
+                if DBG: j00zekDEBUG('if config.plugins.j00zekPiconAnimation.UserPathEnabled.value == True and self.doLockPath == False:')
                 if os.path.exists(config.plugins.j00zekPiconAnimation.UserPath.value):
                     self.loadPNGsAnim(config.plugins.j00zekPiconAnimation.UserPath.value)
                     self.loadPNGsSubFolders(config.plugins.j00zekPiconAnimation.UserPath.value)
                 elif DBG: j00zekDEBUG('[j00zekPiconAnimation]:[applySkin] User path "%s" selected but does NOT exist' % config.plugins.j00zekPiconAnimation.UserPath.value)
             else:
+                if DBG: j00zekDEBUG('if self.doLockPath == True:')
                 for path in searchPaths:
                     if self.loadPNGsAnim(os.path.join(path, self.pixmaps)) == True:
                         break
@@ -188,13 +212,13 @@ class j00zekPiconAnimation(Renderer):
                 self.changed((self.CHANGED_DEFAULT,))
             
     def loadPNGsSubFolders(self, animPath):
-        self.picsFolder = []
-        if len(self.pics) == 0 and os.path.exists(animPath):
-            picsFolder = [f for f in os.listdir(animPath) if os.path.isdir(os.path.join(animPath, f))]
+        self.animationsFoldersList = []
+        if len(self.FramesList) == 0 and os.path.exists(animPath):
+            picsFolder = [f for f in os.listdir(animPath) if (os.path.isdir(os.path.join(animPath, f)) and not f.endswith(".off"))]
             for x in picsFolder:
                 for f in os.listdir(os.path.join(animPath, x)):
                     if f.endswith(".png"):
-                        self.picsFolder.append(os.path.join(animPath, x))
+                        self.animationsFoldersList.append(os.path.join(animPath, x))
                         if DBG: j00zekDEBUG('[j00zekPiconAnimation]]:[loadPNGsSubFolders] found *.png in subfolder "%s"' % os.path.join(animPath, x))
                         break
                     
@@ -204,24 +228,24 @@ class j00zekPiconAnimation(Renderer):
             self.pixmaps = animPath
             pngfiles = [f for f in os.listdir(self.pixmaps) if (os.path.isfile(os.path.join(self.pixmaps, f)) and f.endswith(".png"))]
             pngfiles.sort()
-            self.pics = []
+            self.FramesList = []
             self.doAnim = False
             for x in pngfiles:
-                if DBG: j00zekDEBUG('[j00zekPiconAnimation]]:[loadPNGsAnim] read image %s' % os.path.join(self.pixmaps, x))
-                self.pics.append(LoadPixmap(os.path.join(self.pixmaps, x)))
-            if len(self.pics) > 0:
-                self.count = len(self.pics)
+                if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[loadPNGsAnim] read image %s' % os.path.join(self.pixmaps, x))
+                self.FramesList.append(LoadPixmap(os.path.join(self.pixmaps, x)))
+            if len(self.FramesList) > 0:
+                self.FramesCount = len(self.FramesList)
                 self.doAnim = True
                 if os.path.exists(os.path.join(animPath,'.ctrl')):
                     with open(os.path.join(animPath,'.ctrl')) as cf:
                         try:
                             myDelay=cf.readline().strip()
                             cf.close()
-                            self.pixdelay = int(myDelay.split('=')[1])
-                            if self.pixdelay < 40: self.pixdelay = 40
+                            self.delayBetweenFrames = int(myDelay.split('=')[1])
+                            if self.delayBetweenFrames < 40: self.delayBetweenFrames = 40
                         except Exception, e:
                             if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[loadPNGsAnim] Exception "%s" loading .ctrl' % str(e))
-                if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[loadPNGsAnim] Loaded from path=%s, pics=%s, pixdelay=%s, step=%s' % (self.pixmaps,self.count,self.pixdelay,self.pixstep))
+                if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[loadPNGsAnim] Loaded from path=%s, pics=%s, pixdelay=%s' % (self.pixmaps,self.FramesCount,self.delayBetweenFrames))
                 return True
             else:
                 if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[loadPNGsAnim] No *.png in given path "%s".' % (animPath))
@@ -231,38 +255,61 @@ class j00zekPiconAnimation(Renderer):
          
       
     def changed(self, what):
-        if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[changed] >>>')
         if self.instance:
             self.instance.setScale(1) 
-            if DBG: j00zekDEBUG('\t\t what[0]=%s(%s), self.doAnim=%s' % (self.what[int(what[0])], what[0], self.doAnim))
-            if what[0] == self.CHANGED_CLEAR:
+            if DBG: 
+                try:
+                    if what[0] == self.CHANGED_SPECIFIC:
+                        j00zekDEBUG('[j00zekPiconAnimation]:[changed] > what(%s,%s)=%s:%s, self.doAnim=%s' % (what[0],
+                                                                                                        what[1],
+                                                                                                        self.what[int(what[0])],
+                                                                                                        self.CH_SP_ev[int(what[1])],
+                                                                                                        self.doAnim)
+                                                                                                        )
+                    else: 
+                        j00zekDEBUG('[j00zekPiconAnimation]:[changed] > what(%s)=%s %s, self.doAnim=%s' % (what[0],
+                                                                                                        self.what[int(what[0])],
+                                                                                                        self.whatDescr[int(what[0])],
+                                                                                                        self.doAnim)
+                                                                                                        )
+                except Exception as e:
+                    j00zekDEBUG('[j00zekPiconAnimation]:[changed]  exception %s' % str(e))
+            if what[0] == self.CHANGED_CLEAR: #we are expecting a real update soon. do not bother polling NOW, but clear data
                 if not self.animTimer is None: self.animTimer.stop()
                 self.instance.hide()
-                self.slideIcon = 0
+                self.slideFrame = 0
                 self.doAnim = True
+            elif what[0] == self.CHANGED_SPECIFIC and what[1] not in (iPlayableService.evStart,): #Do nothing for some CHANGED_SPECIFIC codes
+                    if DBG: j00zekDEBUG('CHANGED_SPECIFIC is not iPlayableService.evStart')
+                    pass
             elif self.doAnim == True:
                 self.doAnim = False
-                self.slideIcon = 0
+                self.slideFrame = 0
                 self.instance.show()
-                self.animTimer.start(self.pixdelay, True)
+                self.animTimer.start(self.delayBetweenFrames, True)
 
     def timerEvent(self):
-        if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[timerEvent] >>> self.slideIcon=%s' % self.slideIcon)
+        if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[timerEvent] >>> self.slideFrame=%s' % self.slideFrame)
         self.animTimer.stop()
-        if self.slideIcon < self.count:
-            self.instance.setPixmap(self.pics[self.slideIcon])
-            self.slideIcon = self.slideIcon + self.pixstep
-            if self.slideIcon > self.count: self.slideIcon = self.count
-            self.animTimer.start(self.pixdelay, True)
-        elif self.slideIcon == self.count: #Note last frame does NOT exists
-            if DBG: j00zekDEBUG('\t\t stop animation')
-            self.instance.hide()
-            self.doAnim = True
-            self.animCounter = self.animCounter + 1
-            if len(self.picsFolder) > 1:
-                if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[timerEvent] change animation')
-                self.loadPNGsAnim(self.picsFolder[randint(0, len(self.picsFolder)-1)])
-        if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[timerEvent] <<<')
+        if self.slideFrame < self.FramesCount:
+            self.instance.setPixmap(self.FramesList[self.slideFrame])
+            self.slideFrame += 1
+            if self.slideFrame >= self.FramesCount: self.slideFrame = self.FramesCount
+            self.animTimer.start(self.delayBetweenFrames, True)
+        elif self.slideFrame == self.FramesCount: #Note last frame does NOT exists
+            if self.doInLoop == True:
+                self.slideFrame = 0
+                self.animTimer.start(self.delayBetweenLoops, True)
+                if DBG: j00zekDEBUG('\t\t\t loop animation')
+            else:
+                if DBG: j00zekDEBUG('\t\t\t Finished stop animation')
+                self.instance.hide()
+                self.doAnim = True
+                self.animCounter = self.animCounter + 1
+                if len(self.animationsFoldersList) > 1:
+                    if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[timerEvent] change animation')
+                    self.loadPNGsAnim(self.animationsFoldersList[randint(0, len(self.animationsFoldersList)-1)])
+        #if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[timerEvent] <<<')
 
 harddiskmanager.on_partition_list_change.append(onPartitionChange)
 initPiconPaths()
