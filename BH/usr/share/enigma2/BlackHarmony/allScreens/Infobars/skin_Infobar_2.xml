@@ -1,10 +1,10 @@
 <skin>
 <screen name="InfoBar" position="0,52" size="1920,1080" title="InfoBar" flags="wfNoBorder" backgroundColor="transparent">
-<ePixmap position="30,721" zPosition="-2" size="1900,300" pixmap="BlackHarmony/bg_design/infobar_crash.png" />
+  <ePixmap position="30,721" zPosition="-2" size="1900,300" pixmap="BlackHarmony/bg_design/infobar_crash.png" />
   <ePixmap position="1373,810" zPosition="10" size="1,165" pixmap="BlackHarmony/gfx/linia_IB_crash.png" />
   <widget source="session.CurrentService" render="Pixmap" position="899,770" zPosition="3" size="20,20" pixmap="BlackHarmony/icons/update.png" alphatest="blend">
-    <convert type="BlackHarmonyVersionConverter">Blink</convert>
-    <convert type="ConditionalShowHide" />
+      <convert type="j00zekOPKGupgradeCheck"/>
+      <convert type="ConditionalShowHide" >Blink</convert>
   </widget>
   <widget source="session.CurrentService" render="Pixmap" pixmap="BlackHarmony/icons/ico_dvb_c.png" position="969,770" size="44,20" zPosition="3" alphatest="blend">
     <convert type="BlackHarmonyServiceInfoEX">IsCable</convert>

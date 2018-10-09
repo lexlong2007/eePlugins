@@ -1,12 +1,12 @@
 <skin>
 <screen name="InfoBar" position="0,52" size="1920,1080" title="InfoBar" flags="wfNoBorder" backgroundColor="transparent">
   <widget alphatest="blend" position="1630,805" render="j00zekPicons" picontype="picon" size="220,132" source="session.CurrentService" transparent="1" zPosition="4">
-  <convert type="ServiceName">Reference</convert>
-</widget>
+    <convert type="ServiceName">Reference</convert>
+  </widget>
   <ePixmap position="30,721" zPosition="-2" size="1900,300" pixmap="BlackHarmony/bg_design/infobar_epg.png" />
   <widget source="session.CurrentService" render="Pixmap" position="919,750" zPosition="3" size="20,20" pixmap="BlackHarmony/icons/update.png" alphatest="blend">
-    <convert type="BlackHarmonyVersionConverter">Blink</convert>
-    <convert type="ConditionalShowHide" />
+      <convert type="j00zekOPKGupgradeCheck"/>
+      <convert type="ConditionalShowHide" >Blink</convert>
   </widget>
   <widget source="session.CurrentService" render="Label" position="983,796" size="60,25" font="Roboto_HD; 22" halign="right" backgroundColor="black" transparent="1">
     <convert type="ServiceInfo">VideoWidth</convert>

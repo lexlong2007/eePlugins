@@ -49,8 +49,8 @@
 
   <ePixmap pixmap="BlackHarmony/bg_design/infobar_weather.png" position="25,761" size="1928,300" zPosition="-2" />
   <widget alphatest="blend" pixmap="BlackHarmony/icons/update.png" position="775,805" render="Pixmap" size="20,20" source="session.CurrentService" zPosition="3">
-    <convert type="BlackHarmonyVersionConverter">Blink</convert>
-    <convert type="ConditionalShowHide" />
+      <convert type="j00zekOPKGupgradeCheck"/>
+      <convert type="ConditionalShowHide" >Blink</convert>
   </widget>
   <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_lan_on.png" position="1175,805" render="Pixmap" size="17,20" source="session.CurrentService" transparent="1" zPosition="2">
     <convert type="BlackHarmonyRouteInfo">Lan</convert>

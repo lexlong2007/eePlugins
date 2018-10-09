@@ -4,8 +4,8 @@
   <eLabel position="45,786" size="1835,2" backgroundColor="foreground" halign="center" />
   <ePixmap position="32,721" zPosition="-2" size="1900,300" pixmap="BlackHarmony/bg_design/infobar_epg.png" />
   <widget source="session.CurrentService" render="Pixmap" position="919,750" zPosition="3" size="20,20" pixmap="BlackHarmony/icons/update.png" alphatest="blend">
-    <convert type="BlackHarmonyVersionConverter">Blink</convert>
-    <convert type="ConditionalShowHide" />
+      <convert type="j00zekOPKGupgradeCheck"/>
+      <convert type="ConditionalShowHide" >Blink</convert>
   </widget>
   <widget source="session.CurrentService" render="Label" position="724,750" size="60,25" font="Roboto_HD; 22" halign="right" backgroundColor="black" transparent="1">
     <convert type="ServiceInfo">VideoWidth</convert>

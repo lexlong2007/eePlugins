@@ -3,8 +3,8 @@
     <ePixmap position="30,761" zPosition="-2" size="1928,300" pixmap="BlackHarmony/bg_design/infobar_weather.png" />
     <ePixmap position="1176,11" zPosition="-2" size="720,120" pixmap="BlackHarmony/bg_design/infobar_pogodam.png" />
     <widget source="session.CurrentService" render="Pixmap" position="810,805" zPosition="3" size="20,20" pixmap="BlackHarmony/icons/update.png" alphatest="blend">
-      <convert type="BlackHarmonyVersionConverter">Blink</convert>
-      <convert type="ConditionalShowHide" />
+      <convert type="j00zekOPKGupgradeCheck"/>
+      <convert type="ConditionalShowHide" >Blink</convert>
     </widget>
     <widget source="session.CurrentService" render="Pixmap" pixmap="BlackHarmony/icons/ico_lan_on.png" position="1380,805" zPosition="2" size="17,20" transparent="1" alphatest="blend">
       <convert type="BlackHarmonyRouteInfo">Lan</convert>

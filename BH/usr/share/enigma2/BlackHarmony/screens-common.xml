@@ -128,8 +128,8 @@
     <ePixmap position="30,721" zPosition="-2" size="1900,300" pixmap="BlackHarmony/bg_design/infobar.png"/>
     <ePixmap position="1410,828" zPosition="10" size="450,1" pixmap="BlackHarmony/gfx/linia_IB.png"/>
     <widget source="session.CurrentService" render="Pixmap" position="876,770" zPosition="3" size="20,20" pixmap="BlackHarmony/icons/update.png" alphatest="blend">
-      <convert type="BlackHarmonyVersionConverter">Blink</convert>
-      <convert type="ConditionalShowHide"/>
+      <convert type="j00zekOPKGupgradeCheck"/>
+      <convert type="ConditionalShowHide" >Blink</convert>
     </widget>
     <widget source="session.CurrentService" render="Pixmap" pixmap="BlackHarmony/icons/ico_lan_on.png" position="1319,770" zPosition="2" size="17,20" transparent="1" alphatest="blend">
       <convert type="BlackHarmonyRouteInfo">Lan</convert>
@@ -457,8 +457,8 @@
     <ePixmap position="30,721" zPosition="-2" size="1900,300" pixmap="BlackHarmony/bg_design/infobar.png"/>
     <ePixmap position="1410,828" zPosition="10" size="450,1" pixmap="BlackHarmony/gfx/linia_IB.png"/>
     <widget source="session.CurrentService" render="Pixmap" position="876,770" zPosition="3" size="20,20" pixmap="BlackHarmony/icons/update.png" alphatest="blend">
-      <convert type="BlackHarmonyVersionConverter">Blink</convert>
-      <convert type="ConditionalShowHide"/>
+      <convert type="j00zekOPKGupgradeCheck"/>
+      <convert type="ConditionalShowHide" >Blink</convert>
     </widget>
     <ePixmap position="946,770" size="38,20" pixmap="BlackHarmony/icons/ico_iptv_off.png" alphatest="blend" zPosition="1"/>
     <widget position="946,770" size="38,20" source="session.CurrentService" render="Pixmap" pixmap="BlackHarmony/icons/ico_iptv_on.png" alphatest="blend" zPosition="2">

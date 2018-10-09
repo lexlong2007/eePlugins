@@ -4,15 +4,15 @@
   <widget source="session.CurrentService" render="Label" position="1170,470" size="110,30" backgroundColor="black" transparent="1" zPosition="1" text="DVB-S" font="Roboto_HD; 26" foregroundColor="white" halign="left">
   <convert type="ServiceOrbitalPosition">
   </convert>
-</widget>
-<ePixmap position="1310,437" zPosition="5" size="64,64" pixmap="BlackHarmony/icons/scan-s.png" alphatest="blend" />
-<widget source="session.CurrentService" render="Label" position="511,524" size="890,60" font="HD_Thin; 17" backgroundColor="black" transparent="1" halign="left" valign="center" foregroundColor="lemon">
+  </widget>
+  <ePixmap position="1310,437" zPosition="5" size="64,64" pixmap="BlackHarmony/icons/scan-s.png" alphatest="blend" />
+  <widget source="session.CurrentService" render="Label" position="511,524" size="890,60" font="HD_Thin; 17" backgroundColor="black" transparent="1" halign="left" valign="center" foregroundColor="lemon">
   <convert type="PliExtraInfo">ServiceInfo</convert>
-</widget>
-<widget source="session.FrontendStatus" render="Progress" position="681,320" pixmap="BlackHarmony/gfx/bar_snr.png" size="470,25" borderWidth="1" borderColor="dark_grey" transparent="1">
+  </widget>
+  <widget source="session.FrontendStatus" render="Progress" position="681,320" pixmap="BlackHarmony/gfx/bar_snr.png" size="470,25" borderWidth="1" borderColor="dark_grey" transparent="1">
     <convert type="FrontendInfo">SNR</convert>
   </widget>
-<eLabel name="snr" text="SNRdB:" position="550,370" size="120,30" font="Roboto_HD; 26" halign="right" backgroundColor="black" transparent="1" foregroundColor="yellow" />
+  <eLabel name="snr" text="SNRdB:" position="550,370" size="120,30" font="Roboto_HD; 26" halign="right" backgroundColor="black" transparent="1" foregroundColor="yellow" />
   <eLabel text="Pozycja Orbitalna  :" position="827,470" size="320,30" font="Roboto_HD; 26" halign="right" backgroundColor="background" transparent="1" foregroundColor="yellow" />
   <eLabel text="Szczegółowe Parametry Obecnej Pozycji" position="526,232" size="880,35" font="Roboto_HD; 30" halign="center" backgroundColor="dark_grey" transparent="1" />
   <widget source="session.FrontendStatus" render="Label" position="1170,320" size="120,30" zPosition="2" backgroundColor="black" halign="left" transparent="1" font="Roboto_HD; 26">
@@ -45,8 +45,8 @@
   <ePixmap position="30,721" zPosition="-2" size="1900,300" pixmap="BlackHarmony/bg_design/infobar.png" />
   <ePixmap position="1410,828" zPosition="10" size="450,1" pixmap="BlackHarmony/gfx/linia_IB.png" />
   <widget source="session.CurrentService" render="Pixmap" position="876,770" zPosition="3" size="20,20" pixmap="BlackHarmony/icons/update.png" alphatest="blend">
-    <convert type="BlackHarmonyVersionConverter">Blink</convert>
-    <convert type="ConditionalShowHide" />
+      <convert type="j00zekOPKGupgradeCheck"/>
+      <convert type="ConditionalShowHide" >Blink</convert>
   </widget>
   <ePixmap position="946,770" size="38,20" pixmap="BlackHarmony/icons/ico_iptv_off.png" alphatest="blend" zPosition="1" />
   <widget position="946,770" size="38,20" source="session.CurrentService" render="Pixmap" pixmap="BlackHarmony/icons/ico_iptv_on.png" alphatest="blend" zPosition="2">
