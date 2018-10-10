@@ -313,7 +313,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
 
     def cancel(self):
         if self["config"].isChanged():
-            self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Save settings?"), MessageBox.TYPE_YESNO, default = False)
+            self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Do you really want to cancel?"), MessageBox.TYPE_YESNO, default = False)
         else:
             for x in self["config"].list:
                 x[1].cancel()
@@ -378,9 +378,9 @@ class UserSkin_Config(Screen, ConfigListScreen):
     
     def keyOk(self):
         if self["config"].isChanged() or self.updateEntries == True or self.changed_screens:
-            self.session.openWithCallback(self.keyOkret,MessageBox, "Do you want to update your skin modification?", MessageBox.TYPE_YESNO, default = True)
+            self.session.openWithCallback(self.keyOkret,MessageBox, _("Do you want to update your skin modification?"), MessageBox.TYPE_YESNO, default = True)
         else:
-            self.session.openWithCallback(self.keyOkret,MessageBox, "Do you want to update your skin modification?", MessageBox.TYPE_YESNO, default = False)
+            self.session.openWithCallback(self.keyOkret,MessageBox, _("Do you want to update your skin modification?"), MessageBox.TYPE_YESNO, default = False)
     def keyOkret(self, ret = False):
         printDEBUG(">>>")
         if ret == True:

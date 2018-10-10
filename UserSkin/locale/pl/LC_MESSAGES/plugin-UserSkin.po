@@ -491,3 +491,6 @@ msgstr "Wymuś użycie ścieżki użytkownika:"
 
 msgid "Custom path:"
 msgstr "Ścieżka użytkownika:"
+
+msgid "Do you really want to cancel?"
+msgstr "Naprawdę chcesz anulować wszystkie zmiany?"
