@@ -8,6 +8,11 @@ from Renderer import Renderer
 from enigma import ePixmap, ePicLoad, eSize, iServiceInformation
 from Tools.Directories import pathExists, SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, resolveFilename
 
+DBG = False
+try:
+    if DBG: from Components.j00zekComponents import j00zekDEBUG
+except Exception: DBG = False
+    
 class j00zekVRicon(Renderer):
    
     def __init__(self):
@@ -19,6 +24,7 @@ class j00zekVRicon(Renderer):
         self.iconHDready = 'ico_hd_on_720.png'
         self.icon960 = 'ico_hd_on_960.png'
         self.iconSD = 'ico_sd_on_576.png'
+        self.currIcon = ''
 
     def applySkin(self, desktop, parent):
         attribs = self.skinAttributes[:]
@@ -58,13 +64,14 @@ class j00zekVRicon(Renderer):
                             tmpIcon = '%s/%s' % (self.iconPath, self.iconHDready) #HDready - 1280x720
                         elif x > 0 and y > 0:
                             tmpIcon = '%s/%s' % (self.iconPath, self.iconSD) #SD - 720 x 576 / 768 x 576 / 720 x 480
-                        
-                        if tmpIcon != '' and pathExists(tmpIcon):
-                            #print "Rendering icon '%s'" % tmpIcon
+                        else:
+                            return #no video size = nothing played = nothing to do
+                        if not pathExists(tmpIcon):
+                            self.instance.hide()
+                            if DBG: j00zekDEBUG("[j00zekVRicon:changed] Icon '%s' not found" % tmpIcon)
+                        elif tmpIcon != self.currIcon:
+                            if DBG: j00zekDEBUG("[j00zekVRicon:changed] displaying icon '%s'" % tmpIcon)
+                            self.currIcon = tmpIcon
                             self.instance.setScale(1)
                             self.instance.setPixmapFromFile(tmpIcon)
                             self.instance.show()
-                        else:
-                            self.instance.hide()
-                            print "Path for icon '%s' not found" % tmpIcon
-                          

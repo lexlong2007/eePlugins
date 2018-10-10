@@ -24,20 +24,22 @@ def isImageType(imgName = ''):
 	else:
 		return False
 
-def j00zekDEBUG(myText = None):
+def j00zekDEBUG(myText = None, Append = True):
 	global append2file, myDEBUG
 	if myDEBUG is None:
 		return
 	if myText is None:
 		return
 	try:
-		if append2file == False:
+		if append2file == False or Append == False:
 			append2file = True
 			f = open(myDEBUG, 'w')
 		else:
 			f = open(myDEBUG, 'a')
 		f.write('%s\t%s\n' % (str(datetime.now()),myText))
 		f.close()
+                if path.getsize(myDEBUG) > 100000:
+                        system('sed -i -e 1,10d %s' % myDEBUG)
         #print(myText)
 	except Exception, e:
 		system('echo "Exception:%s" >> %s' %( str(e), myDEBUG ))
