@@ -6,22 +6,7 @@
       <convert type="j00zekOPKGupgradeCheck"/>
       <convert type="ConditionalShowHide" >Blink</convert>
   </widget>
-  <widget source="session.CurrentService" render="Pixmap" pixmap="BlackHarmony/icons/ico_dvb_c.png" position="969,770" size="44,20" zPosition="3" alphatest="blend">
-    <convert type="BlackHarmonyServiceInfoEX">IsCable</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-  <widget source="session.CurrentService" render="Pixmap" pixmap="BlackHarmony/icons/ico_dvb_s.png" position="969,770" size="44,20" zPosition="3" alphatest="blend">
-    <convert type="BlackHarmonyServiceInfoEX">IsSatelliteS</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-  <widget source="session.CurrentService" render="Pixmap" pixmap="BlackHarmony/icons/ico_dvb_s2.png" position="969,770" size="44,20" zPosition="3" alphatest="blend">
-    <convert type="BlackHarmonyServiceInfoEX">IsSatelliteS2</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-  <widget source="session.CurrentService" render="Pixmap" pixmap="BlackHarmony/icons/ico_dvb_t.png" position="969,770" size="44,20" zPosition="3" alphatest="blend">
-    <convert type="BlackHarmonyServiceInfoEX">IsTerrestrial</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
+  <widget source="session.CurrentService" render="j00zekFEicon" position="969,770" size="44,20" zPosition="3" alphatest="blend"/> 
   <widget source="session.CurrentService" render="Pixmap" pixmap="BlackHarmony/icons/ico_lan_on.png" position="1295,770" zPosition="2" size="44,20" transparent="1" alphatest="blend">
     <convert type="BlackHarmonyRouteInfo">Lan</convert>
     <convert type="ConditionalShowHide" />

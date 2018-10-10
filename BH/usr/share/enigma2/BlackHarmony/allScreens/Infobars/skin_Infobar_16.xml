@@ -237,31 +237,7 @@
     <widget source="session.CurrentService" render="Label" position="1724,950" size="150,25" font="Roboto_HD; 22" halign="left" zPosition="3" backgroundColor="black" transparent="1">
       <convert type="BlackHarmonyBitrate_BH">VideoBitrateUnits</convert>
     </widget>
-    <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_uhd_on.png" position="1035,805" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="5">
-      <convert type="ServiceInfo">VideoHeight</convert>
-      <convert type="ValueRange">1921,2160</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_hd_on_1080.png" position="1035,805" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="4">
-      <convert type="ServiceInfo">VideoHeight</convert>
-      <convert type="ValueRange">1001,1080</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_hd_on_960.png" position="1035,805" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="3">
-      <convert type="ServiceInfo">VideoHeight</convert>
-      <convert type="ValueRange">960,1000</convert>
-      <convert type="ConditionalShowHide"/>
-    </widget>
-    <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_hd_on_720.png" position="1035,805" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="2">
-      <convert type="ServiceInfo">VideoHeight</convert>
-      <convert type="ValueRange">720,950</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_sd_on_576.png" position="1035,805" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="1">
-      <convert type="ServiceInfo">VideoWidth</convert>
-      <convert type="ValueRange">0,1279</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
+    <widget source="session.CurrentService" render="j00zekVRicon" position="1035,805" size="37,20" zPosition="5" alphatest="blend"/> 
     <widget source="session.CurrentService" render="VtiEmuInfo" position="1666,997" size="210,25" zPosition="3" font="HD_Thin;22" halign="haling" valign="center" backgroundColor="background" foregroundColor="grey" transparent="1" />
     <widget source="session.CurrentService" render="Label" position="1445,798" size="80,45" font="Wetter; 24" valign="center" backgroundColor="black" noWrap="1" transparent="1" zPosition="9">
       <convert type="VWeather">currentWeatherCode</convert>

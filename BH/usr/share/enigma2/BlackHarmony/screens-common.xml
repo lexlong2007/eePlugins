@@ -50,7 +50,9 @@
     <eLabel position="65,510" size="1095,1" backgroundColor="linie" zPosition="1" foregroundColor="linie"/>
     <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="lemon" position="65,760" size="210,32" text="Support for skin:" transparent="1"/>
     <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="285,759" size="430,32" text="http://forum.dvhk.pl" transparent="1"/>
-    <eLabel backgroundColor="background" font="HD_Thin; 28" position="997,741" size="70,30" text="v4.3" transparent="0" zPosition="5" foregroundColor="light_yellow"/>
+    <widget source="session.CurrentService" render="Label" position="885,741" size="280,30" font="HD_Thin; 28" halign="center" backgroundColor="background" transparent="1" zPosition="5" foregroundColor="light_yellow">
+      <convert type="j00zekOPKGversionBHcheck"/>
+    </widget>
   </screen>
   <screen name="SubtitleDisplay" position="0,0" size="1920,1080" zPosition="-1" backgroundColor="transparent" flags="wfNoBorder"/>
   <screen name="Subtitles" position="462,128" size="1000,820" title="Subtitles" flags="wfNoBorder" backgroundColor="transparent">
@@ -7512,21 +7514,6 @@
     <widget render="Label" source="key_green" position="260,435" size="120,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
   </screen>
   <!-- openATV READY SPECIFIC SCREENS -->
-  <screen name="AboutOE" position="345,93" size="1232,908" title="About" flags="wfNoBorder" backgroundColor="transparent">
-    <eLabel text="About" position="960,26" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1" />
-    <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png" />
-    <ePixmap position="885,584" zPosition="1" size="280,210" pixmap="BlackHarmony/prev.png" alphatest="blend" />
-    <widget source="global.CurrentTime" render="Label" position="44,26" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
-      <convert type="ClockToText">Default</convert>
-    </widget>
-    <widget source="global.CurrentTime" render="Label" position="129,26" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
-      <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
-    </widget>
-    <widget name="AboutScrollLabel" font="Regular; 25" position="66,122" size="750,625" zPosition="2" halign="left" />
-    <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="lemon" position="65,760" size="210,32" text="Support for skin:" transparent="1" />
-    <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="285,759" size="430,32" text="http://forum.dvhk.pl" transparent="1" />
-    <eLabel backgroundColor="background" font="HD_Thin; 28" position="997,741" size="70,30" text="v3.3" transparent="0" zPosition="5" foregroundColor="light_yellow" />
-  </screen>
   <screen name="Infopanel" position="345,93" size="1240,908" title="Info Panel" backgroundColor="transparent" flags="wfNoBorder">
     <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png" />
     <widget name="Mlist" position="258,128" size="730,680" zPosition="1" selectionPixmap="BlackHarmony/menu/sel_735_75.png" scrollbarMode="showOnDemand" transparent="1" backgroundColorSelected="layer-a-selection-background" />

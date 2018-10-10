@@ -279,31 +279,7 @@
     <widget source="session.CurrentService" render="Label" position="1523,850" size="85,25" font="Roboto_HD; 22" backgroundColor="black" transparent="1" text="DVB-S2" halign="left" zPosition="1" foregroundColor="green">
       <convert type="BlackHarmonyServiceName2">%s </convert>
     </widget>
-    <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_uhd_on.png" position="1034,770" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="4">
-      <convert type="ServiceInfo">VideoHeight</convert>
-      <convert type="ValueRange">1081,1920</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_hd_on_1080.png" position="1034,770" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="3">
-      <convert type="ServiceInfo">VideoHeight</convert>
-      <convert type="ValueRange">1001,1080</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_hd_on_960.png" position="1034,770" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="3">
-      <convert type="ServiceInfo">VideoWidth</convert>
-      <convert type="ValueRange">960,1000</convert>
-      <convert type="ConditionalShowHide"/>
-    </widget>
-    <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_hd_on_720.png" position="1034,770" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="2">
-      <convert type="ServiceInfo">VideoHeight</convert>
-      <convert type="ValueRange">720,1000</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_sd_on_576.png" position="1034,770" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="1">
-      <convert type="ServiceInfo">VideoWidth</convert>
-      <convert type="ValueRange">0,1279</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
+    <widget source="session.CurrentService" render="j00zekVRicon" position="1034,770" size="37,20" zPosition="5" alphatest="blend"/> 
     <ePixmap pixmap="BlackHarmony/icons/ico_sd_off_576.png" position="1034,770" size="37,20" zPosition="0" alphatest="blend" />
   </screen>
   </skin>
