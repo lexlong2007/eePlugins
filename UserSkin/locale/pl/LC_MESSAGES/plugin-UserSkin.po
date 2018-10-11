@@ -481,7 +481,7 @@ msgid "LCD/VFD skin:"
 msgstr "Skórka LCD/VFD:"
 
 msgid "Do you want to update your skin modification?"
-msgstr "Czy chcesz zaktualizować modyfickację skórki?"
+msgstr "Czy chcesz zaktualizować modyfikację skórki?"
 
 msgid "---Picons animations optional settings---"
 msgstr "---Opcjonalne ustawenia animacji pikon---"

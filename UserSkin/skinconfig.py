@@ -13,6 +13,7 @@
 #it without source code (this version and your modifications).
 #This means you also have to distribute
 #source code of your modifications.
+DBG = False
 
 from debug import printDEBUG
 from inits import *
@@ -151,7 +152,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
             if  path.exists('/usr/lib/enigma2/python/Plugins/Extensions/LCDlinux'):
                 mylist.append(("LCDLinux", "LCDLinux"))
             for f in sorted(listdir(SkinPath + "allMiniTVskins/"), key=str.lower):
-                #printDEBUG(f)
+                if DBG == True: printDEBUG(f)
                 if f.startswith('skin_') and f.endswith('.xml'):
                     mylist.append(( f, _(f[5:-4].replace("_", " ")) ))
             config.plugins.UserSkin.LCDmode = ConfigSelection(default="system", choices = mylist)
@@ -286,20 +287,22 @@ class UserSkin_Config(Screen, ConfigListScreen):
 
     def changedEntry(self):
         self.updateEntries = True
-        printDEBUG("[UserSkin:changedEntry]")
-        if self["config"].getCurrent() == self.set_color:
-            self.setPicture(self.myUserSkin_style.value)
-        elif self["config"].getCurrent() == self.set_font:
-            self.setPicture(self.myUserSkin_font.value)
-        elif self["config"].getCurrent() == self.set_bar:
-            self.setPicture(self.myUserSkin_bar.value)
-        elif self["config"].getCurrent() == self.set_myatile:
-            if self.myUserSkin_active.value:
-                self["key_yellow"].setText(_("User skins"))
-            else:
-                self["key_yellow"].setText("")
-        elif self["config"].getCurrent()[1] == config.plugins.j00zekPiconAnimation.UserPathEnabled:
-            self.createConfigList()
+        if DBG == True: printDEBUG("[UserSkin:changedEntry]")
+        try:
+            if self["config"].getCurrent() == self.set_color:
+                self.setPicture(self.myUserSkin_style.value)
+            elif self["config"].getCurrent() == self.set_font:
+                self.setPicture(self.myUserSkin_font.value)
+            elif self["config"].getCurrent() == self.set_bar:
+                self.setPicture(self.myUserSkin_bar.value)
+            elif self["config"].getCurrent() == self.set_myatile:
+                if self.myUserSkin_active.value:
+                    self["key_yellow"].setText(_("User skins"))
+                else:
+                    self["key_yellow"].setText("")
+            elif self["config"].getCurrent()[1] == config.plugins.j00zekPiconAnimation.UserPath:
+                self.createConfigList()
+        except Exception: pass
 
     def selectionChanged(self):
         if self["config"].getCurrent() == self.set_color:
@@ -349,11 +352,11 @@ class UserSkin_Config(Screen, ConfigListScreen):
         elif path.exists(SkinPath + "allPreviews/preview_" + pic + '.png'):
             self.UpdatePreviewPicture(SkinPath + "allPreviews/preview_" + pic + '.png')
         else:
-            printDEBUG("[UserSkin:setPicture] pic for '%s' not found" % pic )
+            if DBG == True: printDEBUG("[UserSkin:setPicture] pic for '%s' not found" % pic )
             self["Picture"].hide()
     
     def UpdatePreviewPicture(self, PreviewFileName):
-            printDEBUG("[UserSkin:UpdatePreviewPicture] pic =" + PreviewFileName)
+            if DBG == True: printDEBUG("[UserSkin:UpdatePreviewPicture] pic =" + PreviewFileName)
             self["Picture"].instance.setScale(1)
             self["Picture"].instance.setPixmap(LoadPixmap(path=PreviewFileName))
             self["Picture"].show()
@@ -365,7 +368,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
             self["config"].setCurrentIndex(0)
 
     def LocationBoxCB(self,ret):
-        printDEBUG(ret)
+        if DBG == True: printDEBUG(ret)
         if ret:
             config.plugins.j00zekPiconAnimation.UserPath.value = ret
         
@@ -382,7 +385,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
         else:
             self.session.openWithCallback(self.keyOkret,MessageBox, _("Do you want to update your skin modification?"), MessageBox.TYPE_YESNO, default = False)
     def keyOkret(self, ret = False):
-        printDEBUG(">>>")
+        if DBG == True: printDEBUG(">>>")
         if ret == True:
             printDEBUG('self["config"].isChanged()')
             printDEBUG("self.myUserSkin_style.value=" + self.myUserSkin_style.value)
@@ -465,7 +468,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
 
         myMessage = ''
         if self.LackOfFile != '':
-            printDEBUG("missing components: %s" % self.LackOfFile)
+            printDEBUG("Missing components: %s" % self.LackOfFile)
             myMessage += _("Missing components found: %s\n\n") % self.LackOfFile
             myMessage += _("Skin will NOT work properly and GS expected!!!\n\n")
             myMessage += _("Are you sure you want to use it?")
@@ -587,7 +590,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
             printDEBUG("update_user_skin.self.myUserSkin_active.value=True")
             user_skin = ""
             user_parameters = ""
-            printDEBUG("############################################# skin:\n" + user_skin + "\n#############################################\n")        
+            printDEBUG("############################################# Initial skin:\n" + user_skin + "\n#############################################\n")        
             if isImageType('vti') == False or isImageType('openatv') == False:
                 if path.exists(SkinPath + 'skin_user_header.xml'):
                     printDEBUG("- appending skin_user_header.xml")
@@ -595,7 +598,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
                 if path.exists(SkinPath + 'skin_user_colors.xml'):
                     printDEBUG("- appending skin_user_colors.xml")
                     user_skin = user_skin + self.readXMLfile(SkinPath + 'skin_user_colors.xml' , 'ALLSECTIONS')
-            printDEBUG("############################################# skin:\n" + user_skin + "\n#############################################\n")        
+            printDEBUG("############################################# Skin after loading header & colors:\n" + user_skin + "\n#############################################\n")        
             if path.exists(SkinPath + 'UserSkin_Selections'):
                 if config.plugins.UserSkin.AdvancedMode.value == "mergeScreens":
                     printDEBUG("mergeScreens mode !!!")
@@ -660,8 +663,10 @@ class UserSkin_Config(Screen, ConfigListScreen):
                     except Exception, e:
                         printDEBUG('Exception:' + str(e))
 
-            #checking if all renderers are in the system
+            #checking if all scripts are in the system
+            if DBG == True: printDEBUG("########################### Final User Skin\n%s\n##############################################\n" % user_skin)
             self.checkComponent(user_skin, 'render' , resolveFilename(SCOPE_PLUGINS, '../Components/Renderer/') )
+            self.checkComponent(user_skin, 'convert type' , resolveFilename(SCOPE_PLUGINS, '../Components/Converter/') )
             self.checkComponent(user_skin, 'pixmap' , resolveFilename(SCOPE_SKIN, '') )
             self.checkFontColor(user_skin)
 
@@ -684,32 +689,33 @@ class UserSkin_Config(Screen, ConfigListScreen):
         #checking, if all colors defined
         r=re.findall(r'.*[Cc]olor="([^\W#]*)"',myContent)
         r=list(set(r)) #remove duplicates, no need to check for the same component several times
-        print r
         
         if r:
-            print "Found %d definitions" % len(r)
+            printDEBUG("Found %d color definitions" % len(r))
             for myColor in set(r):
                 if myColor not in DefinedColors:
                     updateLackOfColor(myColor)
 
     def checkComponent(self, myContent, look4Component , myPath): #look4Component=render|
         def updateLackOfFile(name, mySeparator =', '):
-            printDEBUG("Missing component found:%s\n" % name)
+            printDEBUG("\tMissing component found:%s\n" % name)
             if self.LackOfFile == '':
                 self.LackOfFile = name
             else:
                 self.LackOfFile += mySeparator + name
             
-        r=re.findall( r' %s="([a-zA-Z0-9_/\.]+)" ' % look4Component , myContent )
+        #2 test:
+        #with open('/tmp/UserSkin.log') as f: myContent="".join(f.readlines())
+        #look4Component='render'
+        r=re.findall( r'[ <]%s="([a-zA-Z0-9_/\.]+)"[ >]' % look4Component , myContent )
         r=list(set(r)) #remove duplicates, no need to check for the same component several times
 
-        printDEBUG("Found %s:\n" % (look4Component))
-        #print r
+        printDEBUG("Found %d definitions of %s:\n" % (len(r),look4Component))
         if r:
             for myComponent in set(r):
-                #print" [UserSkin] checks if %s exists" % myComponent
+                if DBG == True: printDEBUG(" [UserSkin] checks if %s exists" % myComponent)
                 if look4Component == 'pixmap':
-                    #printDEBUG("%s\n%s\n" % (myComponent,myPath + myComponent))
+                    if DBG == True: printDEBUG("%s\n%s\n" % (myComponent,myPath + myComponent))
                     if myComponent.startswith('/'):
                         if not path.exists(myComponent):
                             updateLackOfFile(myComponent, '\n')
@@ -738,10 +744,10 @@ class UserSkin_Config(Screen, ConfigListScreen):
                 if line.find('<skin>') != -1 or line.find('</skin>') != -1:
                     continue
                 if line.find('<%s' % XMLsection) != -1 and sectionmarker == False:
-                    printDEBUG('<%s marker found at %s' % (XMLsection, lineNo))
+                    if DBG == True: printDEBUG('<%s marker found at %s' % (XMLsection, lineNo))
                     sectionmarker = True
                 if line.find('</%s>' %XMLsection) != -1 and sectionmarker == True:
-                    printDEBUG('</%s> marker found at %s' % (XMLsection, lineNo))
+                    if DBG == True: printDEBUG('</%s> marker found at %s' % (XMLsection, lineNo))
                     sectionmarker = False
                     filecontent = filecontent + line
                 if sectionmarker == True:
@@ -821,7 +827,7 @@ class TreeUserSkinScreens(Screen):
         self.allPreviews_dir = SkinPath + "allPreviews/"
         self.UserSkin_Selections_dir = SkinPath + "UserSkin_Selections/"
         if path.exists("%sUserSkinpics/install.png" % SkinPath):
-            printDEBUG("SkinConfig is loading %sUserSkinpics/install.png" % SkinPath)
+            if DBG == True: printDEBUG("SkinConfig is loading %sUserSkinpics/install.png" % SkinPath)
             self.enabled_pic = LoadPixmap(cached=True, path="%sUserSkinpics/install.png" % SkinPath)
         else:
             self.enabled_pic = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/UserSkin/pic/install.png"))
@@ -833,16 +839,16 @@ class TreeUserSkinScreens(Screen):
             if isPreview >= 2:
                 break
         if self.currentSkin == "infinityHD-nbox-tux-full" and isPreview < 2:
-            printDEBUG("no preview files :(")
+            if DBG == True: printDEBUG("no preview files :(")
             if path.exists("%sUserSkinpics/install.png" % SkinPath):
-                printDEBUG("SkinConfig is loading %sUserSkinpics/opkg.png" % SkinPath)
+                if DBG == True: printDEBUG("SkinConfig is loading %sUserSkinpics/opkg.png" % SkinPath)
                 self.disabled_pic = LoadPixmap(cached=True, path="%sUserSkinpics/opkg.png" % SkinPath)
             else:
                 self.disabled_pic = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/UserSkin/pic/opkg.png"))
             self['key_blue'].setText(_('Install from OPKG'))
         else:
             if path.exists("%sUserSkinpics/install.png" % SkinPath):
-                printDEBUG("SkinConfig is loading %sUserSkinpics/remove.png" % SkinPath)
+                if DBG == True: printDEBUG("SkinConfig is loading %sUserSkinpics/remove.png" % SkinPath)
                 self.disabled_pic = LoadPixmap(cached=True, path="%sUserSkinpics/remove.png" % SkinPath)
             else:
                 self.disabled_pic = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/UserSkin/pic/remove.png"))
@@ -1038,7 +1044,7 @@ class TreeUserSkinScreens(Screen):
                     self.session.openWithCallback(self.keyBlueRet, ChoiceBox, title = _("Select screen:"), list = screensList)
 
     def keyBlueRet(self, ret = ('fake',0) ):
-        printDEBUG(ret)
+        if DBG == True: printDEBUG(ret)
         if ret and ret[1] > 0:
             self.session.openWithCallback(self.doNothing, UserSkinPreviewSkin, self.filelist.getCurrentDirectory() + '/' + self.filelist.getFilename(), ret[1])
 
