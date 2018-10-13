@@ -292,7 +292,7 @@
     <widget source="session.CurrentService" render="Label" position="1551,958" size="50,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" zPosition="3">
       <convert type="BlackHarmonyCpuUsage_BH">Total</convert>
     </widget>
-    <widget source="session.CurrentService" render="BlackHarmonyAnimatedPicsmap" pixmaps="BlackHarmony/anim1" pixdelay="400" count="16" control="1" position="355,820" size="80, 150" zPosition="1" transparent="1" alphatest="on" />
+    <widget source="session.CurrentService" render="BlackHarmonyAnimatedPicsmap" pixmaps="BlackHarmony/pixAnims/choinka" pixdelay="400" control="1" position="355,820" size="80, 150" zPosition="1" transparent="1" alphatest="on" />
     <widget source="global.CurrentTime" render="Label" position="1384,768" size="348,26" font="Regular; 19" halign="right" transparent="1" backgroundColor="black" foregroundColor="grey" zPosition="3" noWrap="1">
       <convert type="BlackHarmonyimieniny" />
     </widget>

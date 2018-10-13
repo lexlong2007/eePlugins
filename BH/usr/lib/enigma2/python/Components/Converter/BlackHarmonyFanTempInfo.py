@@ -5,6 +5,12 @@ from Components.Converter.Converter import Converter
 from Components.Element import cached
 from Tools.Directories import fileExists
 
+DBG = False
+try:
+    if DBG: from Components.j00zekComponents import j00zekDEBUG
+except Exception:
+    DBG = False 
+    
 class BlackHarmonyFanTempInfo(Poll, Converter, object):
     FanInfo = 0
     TempInfo = 1
@@ -16,47 +22,64 @@ class BlackHarmonyFanTempInfo(Poll, Converter, object):
         Poll.__init__(self)
         if type == "FanInfo":
             self.type = self.FanInfo
+        elif type == "FanInfoHeader":
+            self.type = self.FanInfoHeader
         elif type == "TempInfo":
             self.type = self.TempInfo
+        elif type == "TempInfoHeader":
+            self.type = self.TempInfoHeader
         self.poll_interval = 2000
         self.poll_enabled = True
+        
         if fileExists("/proc/stb/fp/fan_speed"):
             self.FanHeader = 'FAN:'
         else:
             self.FanHeader = ''
             
+        self.TempPath = ''
         self.TempHeader = ''
-        self.TempUnit = ''
-        if fileExists("/proc/stb/sensors/temp0/value") and fileExists("/proc/stb/sensors/temp0/unit"):
-            self.TempPath = "/proc/stb/sensors/temp0/value"
-            self.TempHeader = 'TMP:'
-            self.TempUnit = open("/proc/stb/sensors/temp0/unit").read().strip('\n')
-        elif fileExists('/sys/devices/virtual/thermal/thermal_zone0/temp'):
-            try:
-                open("/sys/devices/virtual/thermal/thermal_zone0/temp").read() #check if it can be read, onsolo4k it doesn't
-                self.TempPath = "/proc/stb/sensors/temp0/value"
-                self.TempHeader = 'TMP:'
-                self.TempUnit = 'C'
-            except Exception:
-                pass
-    
+        self.TempUnit = 'C'
+        for myPath in ( '/proc/stb/sensors/temp0/value',
+                        '/sys/devices/virtual/thermal/thermal_zone0/temp',
+                        '/proc/stb/fp/temp_sensor',
+                        '/proc/stb/fp/temp_sensor_avs'):
+            if fileExists(myPath):
+                try:
+                    open(myPath).read() #check if it can be read
+                    self.TempPath = myPath
+                except Exception, e:
+                    if DBG: j00zekDEBUG("[BlackHarmonyFanTempInfo:__init__] Exception '%s'" % str(e))
+                break
+        
+        if self.TempPath != '': self.TempHeader = 'TMP:'
+        else: self.poll_enabled = False
+        if DBG: j00zekDEBUG("[BlackHarmonyFanTempInfo:__init__]TempPath='%s', TempHeader='%s', FanHeader='%s'" % (self.TempPath, self.TempHeader, self.FanHeader))
+        
     @cached
     def getText(self):
+        retText = ''
         try:
             if self.type == self.FanInfoHeader:
-                    return self.FanHeader
+                    retText = self.FanHeader
             elif self.type == self.FanInfo and self.FanHeader != '':
-                return open("/proc/stb/fp/fan_speed").read().strip('\n')
+                retText = open("/proc/stb/fp/fan_speed").read().strip('\n')
             elif self.type == self.TempInfoHeader:
-                    return self.TempHeader
+                    retText = self.TempHeader
             elif self.type == self.TempInfo and self.TempHeader != '':
-                return "%s%s%s" % (open().read(self.TempPath).strip('\n')[:2], unichr(176).encode("latin-1"), self.TempUnit )
-        except Exception:
-            pass
-        return ''
+                retText = "%s%s%s" % (open(self.TempPath).read().strip()[:2], unichr(176).encode("latin-1"), self.TempUnit )
+            if DBG: j00zekDEBUG("[BlackHarmonyFanTempInfo:getText] type(%s)='%s'" % (self.type,retText))
+        except Exception, e:
+            if DBG: j00zekDEBUG("[BlackHarmonyFanTempInfo:getText] Exception '%s' for type(%s)" % (str(e),self.type))
+        return retText
     
     text = property(getText)
     
     def changed(self, what):
         if what[0] == self.CHANGED_POLL:
             self.downstream_elements.changed(what)
+            
+    def doSuspend(self, suspended): 
+        if suspended: 
+            self.poll_enabled = False 
+        elif self.TempHeader != '': 
+            self.poll_enabled = True 
