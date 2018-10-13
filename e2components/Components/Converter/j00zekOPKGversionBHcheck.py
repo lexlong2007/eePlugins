@@ -1,36 +1,49 @@
 #
 # j00zek 2018 
 #
-from enigma import eConsoleAppContainer, eTimer
+from enigma import eConsoleAppContainer
 from Components.Converter.Converter import Converter
 from Components.Element import cached
+from Poll import Poll
 
-DBG = True
+DBG = False
 if DBG: from Components.j00zekComponents import j00zekDEBUG
 
-class j00zekOPKGversionBHcheck(Converter, object):
+BlackHarmonyVersion = '?'
+
+class j00zekOPKGversionBHcheck(Poll, Converter, object):
+
     def __init__(self, arg):
-        Converter.__init__(self, arg)
         if DBG: j00zekDEBUG('[j00zekOPKGversionBHcheck:__init__] >>>')
-        self.currVersion = '?'
+
+        Converter.__init__(self, arg)
+        Poll.__init__(self) 
+        self.poll_interval = 1000
+        
+        if BlackHarmonyVersion == '?': self.poll_enabled = True
+        else: self.poll_enabled = False
+        
         self.retstr = ''
-        self.container = eConsoleAppContainer()
-        self.container.appClosed.append(self.appClosed)
-        self.container.dataAvail.append(self.dataAvail)
-        self.checkTimer = eTimer()
-        self.checkTimer.callback.append(self.checkOPKG)
-        self.checkTimer.start(30000, True) #check version with small delay after GUI starts
+        if BlackHarmonyVersion == '?':
+            self.container = eConsoleAppContainer()
+            self.container.appClosed.append(self.appClosed)
+            self.container.dataAvail.append(self.dataAvail)
+            self.checkOPKG()
 
     @cached
     def getText(self):
-        if DBG: j00zekDEBUG('[j00zekOPKGversionBHcheck:getText] self.currVersion=%s' % self.currVersion)
-        return self.currVersion
+        if DBG: j00zekDEBUG('[j00zekOPKGversionBHcheck:getText] BlackHarmonyVersion=%s' % BlackHarmonyVersion)
+        return BlackHarmonyVersion
 
     text = property(getText) 
     
+    def changed(self, what):
+        if what[0] == self.CHANGED_POLL:
+            if BlackHarmonyVersion != '?': self.poll_enabled = False
+            self.downstream_elements.changed(what)
+            
     def checkOPKG(self):
         if DBG: j00zekDEBUG('[j00zekOPKGversionBHcheck:checkOPKG] >>>')
-        self.checkTimer.stop() 
         self.retstr = ''
         cmd=[]
         cmd.append('opkg update > /dev/null')
@@ -40,9 +53,10 @@ class j00zekOPKGversionBHcheck(Converter, object):
     def appClosed(self, retval):
         if DBG: j00zekDEBUG("[j00zekOPKGversionBHcheck:appClosed] retval=%s, retstr='%s'" % (str(retval), self.retstr))
         if self.retstr.find('enigma2-plugin-skins--j00zeks-blackharmonyfhd') >= 0:
-            self.currVersion = self.retstr.replace('enigma2-plugin-skins--j00zeks-blackharmonyfhd','').split('-')[1].strip()
+            global BlackHarmonyVersion
+            BlackHarmonyVersion = self.retstr.replace('enigma2-plugin-skins--j00zeks-blackharmonyfhd','').split('-')[1].strip()
         self.retstr = ''
-        if DBG: j00zekDEBUG("[j00zekOPKGversionBHcheck:appClosed] self.currVersion='%s'" % self.currVersion)
+        if DBG: j00zekDEBUG("[j00zekOPKGversionBHcheck:appClosed] BlackHarmonyVersion='%s'" % BlackHarmonyVersion)
 
     def dataAvail(self, str):
         if DBG: j00zekDEBUG("[j00zekOPKGversionBHcheck:dataAvail] %s" % str)
