@@ -8,7 +8,7 @@ from Components.Element import cached
 from Components.j00zekComponents import isImageType
 import os
 
-DBG = True
+DBG = False
 if DBG: from Components.j00zekComponents import j00zekDEBUG
 
 class j00zekBitrate_BH(Converter, object):
