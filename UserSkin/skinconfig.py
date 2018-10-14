@@ -885,6 +885,7 @@ class TreeUserSkinScreens(Screen):
         elif path.exists(self.allPreviews_dir + pic + '.jpg'):
             UpdatePreviewPicture(self.allPreviews_dir + pic + '.jpg')
         else:
+            printDEBUG("[UserSkin:PreviewTimerCB] '%s.jpg' not found" % pic )
             self["PreviewPicture"].hide()
     
     def runMenuEntry(self):
