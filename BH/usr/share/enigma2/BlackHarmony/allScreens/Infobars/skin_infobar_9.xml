@@ -268,7 +268,7 @@
     <eLabel text="CPU:" position="1665,910" size="65,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" foregroundColor="light_red" />
     <eLabel text="BTR:" position="1665,950" size="65,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" foregroundColor="blue" />
     <widget source="session.CurrentService" render="Label" position="1724,950" size="150,25" font="Roboto_HD; 22" halign="left" zPosition="3" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonyBitrate_BH">VideoBitrateUnits</convert>
+      <convert type="j00zekBitrate_BH">VideoBitrateUnits</convert>
     </widget>
     <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_uhd_on.png" position="1135,805" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="4">
       <convert type="ServiceInfo">VideoHeight</convert>

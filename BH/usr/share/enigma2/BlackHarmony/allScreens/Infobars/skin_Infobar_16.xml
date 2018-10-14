@@ -235,7 +235,7 @@
     <eLabel text="CPU:" position="1665,910" size="65,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" foregroundColor="light_red" />
     <eLabel text="BTR:" position="1665,950" size="65,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" foregroundColor="blue" />
     <widget source="session.CurrentService" render="Label" position="1724,950" size="150,25" font="Roboto_HD; 22" halign="left" zPosition="3" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonyBitrate_BH">VideoBitrateUnits</convert>
+      <convert type="j00zekBitrate_BH">VideoBitrateUnits</convert>
     </widget>
     <widget source="session.CurrentService" render="j00zekVRicon" position="1035,805" size="37,20" zPosition="5" alphatest="blend"/> 
     <widget source="session.CurrentService" render="VtiEmuInfo" position="1666,997" size="210,25" zPosition="3" font="HD_Thin;22" halign="haling" valign="center" backgroundColor="background" foregroundColor="grey" transparent="1" />

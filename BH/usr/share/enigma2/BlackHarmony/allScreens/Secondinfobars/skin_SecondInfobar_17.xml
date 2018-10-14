@@ -325,7 +325,7 @@
     <convert type="FrontendInfo">AGC</convert>
   </widget>
   <widget source="session.CurrentService" render="Label" position="1734,997" size="150,25" font="Roboto_HD; 22" halign="left" zPosition="3" backgroundColor="black" transparent="1">
-    <convert type="BlackHarmonyBitrate_BH">VideoBitrateUnits</convert>
+    <convert type="j00zekBitrate_BH">VideoBitrateUnits</convert>
   </widget>
   <eLabel backgroundColor="black" font="Roboto_HD; 22" foregroundColor="yellow" halign="left" position="1757,917" size="65,25" text="AGC:" transparent="1" />
   <eLabel backgroundColor="black" font="Roboto_HD; 22" foregroundColor="red" halign="left" position="1757,957" size="65,25" text="TMP:" transparent="1" />

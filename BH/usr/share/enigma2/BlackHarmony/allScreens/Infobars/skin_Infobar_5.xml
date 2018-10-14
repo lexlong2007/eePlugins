@@ -289,7 +289,7 @@
   <eLabel text="CPU:" position="1675,878" size="65,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" foregroundColor="yellow" />
   <eLabel text="BTR:" position="1675,913" size="65,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" foregroundColor="blue" />
   <widget source="session.CurrentService" render="Label" position="1740,913" size="130,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1">
-    <convert type="BlackHarmonyBitrate_BH">VideoBitrateUnits</convert>
+    <convert type="j00zekBitrate_BH">VideoBitrateUnits</convert>
   </widget>
 </screen>
 </skin>

@@ -287,7 +287,7 @@
     <eLabel text="CPU :" position="1489,958" size="65,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" foregroundColor="yellow" />
     <eLabel text="BTR :" position="1610,958" size="65,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" foregroundColor="blue" />
     <widget source="session.CurrentService" render="Label" position="1669,958" size="130,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonyBitrate_BH">VideoBitrateUnits</convert>
+      <convert type="j00zekBitrate_BH">VideoBitrateUnits</convert>
     </widget>
     <widget source="session.CurrentService" render="Label" position="1551,958" size="50,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" zPosition="3">
       <convert type="BlackHarmonyCpuUsage_BH">Total</convert>

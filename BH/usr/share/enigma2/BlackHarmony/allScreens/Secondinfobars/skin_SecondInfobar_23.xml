@@ -49,7 +49,7 @@
     <convert type="BlackHarmonyCpuUsage_BH">Total</convert>
   </widget>
   <widget source="session.CurrentService" render="Label" position="1658,612" size="160,30" font="Roboto_HD; 24" halign="left" backgroundColor="black" transparent="1">
-    <convert type="BlackHarmonyBitrate_BH">VideoBitrateUnits</convert>
+    <convert type="j00zekBitrate_BH">VideoBitrateUnits</convert>
   </widget>
   <widget font="Roboto_HD; 24" backgroundColor="black" halign="right" position="870,612" render="Label" size="170,30" source="session.CurrentService" transparent="1" foregroundColor="white">
       <convert type="j00zekVR">VideoResolution</convert>
