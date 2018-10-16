@@ -1,6 +1,6 @@
 <skin>
   <!-- ########## IPTVPLAYER ########## -->
-  <screen name="IPTVPlayerWidget" position="center,center" size="1980,1080" title=" " flags="wfNoBorder" backgroundColor="transparent">
+  <screen name="E2iPlayerWidget" position="center,center" size="1980,1080" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="1,0" zPosition="-10" size="1980,1080" pixmap="BlackHarmony/bg_design/movie.png" />
     <widget source="global.CurrentTime" render="Label" position="80,55" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Default</convert>
