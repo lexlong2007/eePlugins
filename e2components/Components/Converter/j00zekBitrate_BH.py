@@ -69,6 +69,7 @@ class j00zekBitrate_BH(Converter, object):
         try:
             stream = self.source.service.stream()
             if stream:
+                if DBG: j00zekDEBUG("[j00zekBitrate_BH:runBitrate] Collecting stream data...")
                 streamdata = stream.getStreamingData()
                 if streamdata:
                     if 'demux' in streamdata:
@@ -79,9 +80,13 @@ class j00zekBitrate_BH(Converter, object):
                         if adapter < 0: adapter = 0
         except Exception, e:
             if DBG: j00zekDEBUG("[j00zekBitrate_BH:runBitrate] Exception collecting stream data: %s" % str(e))
-        info = self.source.service.info()
-        vpid = info.getInfo(iServiceInformation.sVideoPID)
-        apid = info.getInfo(iServiceInformation.sAudioPID)
+        try:
+            info = self.source.service.info()
+            vpid = info.getInfo(iServiceInformation.sVideoPID)
+            apid = info.getInfo(iServiceInformation.sAudioPID)
+        except Exception, e:
+            if DBG: j00zekDEBUG("[j00zekBitrate_BH:runBitrate] Exception collecting service info: %s" % str(e))
+            return #bitrate cannot be run without vpid and apid
         if vpid >= 0 and apid >= 0:
             if isImageType('vti'):
                 cmd = 'killall -9 bitrate > /dev/null 2>&1; nice bitrate %i %i %i' % ( demux, vpid, vpid )
