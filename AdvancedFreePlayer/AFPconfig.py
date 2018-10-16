@@ -46,7 +46,7 @@ class AdvancedFreePlayerConfig(Screen, ConfigListScreen):
 
         self["key_green"] = Label(_("Save"))
         self["key_red"] = Label(_("Cancel"))
-        self["key_blue"] = Label(_("Update"))
+        self["key_blue"] = Label() # _("Update"))
 
         self.list = [ ]
         myConfig.separator = NoSave(ConfigNothing())
@@ -94,18 +94,6 @@ class AdvancedFreePlayerConfig(Screen, ConfigListScreen):
         self.setTitle(_("%s %s Config") %(PluginName,PluginInfo))
         
     def keyBlue(self):
-        def doNothing():
-            pass
-        def goUpdate(ret):
-            if ret is True:
-                runlist = []
-                runlist.append( ('chmod 755 %s/scripts/Update*.sh' % PluginPath) )
-                runlist.append( ('cp -a %s/scripts/UpdatePlugin.sh /tmp/AFPUpdate.sh' % PluginPath) ) #to have clear path of updating this script too ;)
-                runlist.append( ('/tmp/AFPUpdate.sh %s "%s"' % (config.plugins.AdvancedFreePlayer.Version.value,PluginInfo)) )
-                runlist.append( ('%s/scripts/UpdateDMnapi.sh %s "%s"' % (PluginPath,config.plugins.AdvancedFreePlayer.Version.value,PluginInfo)) )
-                self.session.openWithCallback(doNothing, AdvancedFreePlayerConsole, title = _("Updating plugin"), cmdlist = runlist)
-                return
-        self.session.openWithCallback(goUpdate, MessageBox,_("Do you want to update plugin?"),  type = MessageBox.TYPE_YESNO, timeout = 10, default = False)
         return
 
     def keyOK(self):

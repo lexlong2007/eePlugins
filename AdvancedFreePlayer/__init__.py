@@ -24,6 +24,7 @@ PluginLanguageDomain = "plugin-" + PluginName
 PluginLanguagePath = resolveFilename(SCOPE_PLUGINS, '%s/%s/locale' % (PluginGroup,PluginFolder))
 
 #DEBUG
+from datetime import datetime
 myDEBUG=True
 myDEBUGfile = '/tmp/%s.log' % PluginName
 
@@ -33,14 +34,14 @@ def printDEBUG( myText , myFUNC = ''):
         myFUNC = ':' + myFUNC
     global append2file
     if myDEBUG:
-        print ("[%s%s] %s" % (PluginName,myFUNC,myText))
+        print ("[%s:%s] %s" % (PluginName, myFUNC, myText))
         try:
             if append2file == False:
                 append2file = True
                 f = open(myDEBUGfile, 'w')
             else:
                 f = open(myDEBUGfile, 'a')
-            f.write('[%s%s] %s\n' %(PluginName,myFUNC,myText))
+            f.write('%s [%s] %s\n' %(str(datetime.now()), myFUNC, myText))
             f.close
         except:
             pass
@@ -110,7 +111,7 @@ def LoadSkin(SkinName):
         printDEBUG("%s does not exists" % SkinName)
     return skinDef
 
-##################################################### TŁUMACZENIA #####################################################
+##################################################### TĹUMACZENIA #####################################################
 #printDEBUG("LanguageGOS not detected")
 from Components.Language import language
 import gettext

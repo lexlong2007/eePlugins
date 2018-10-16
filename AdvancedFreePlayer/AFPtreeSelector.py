@@ -718,7 +718,8 @@ class AdvancedFreePlayerStart(Screen):
                     coverUrl = ''
                     vote_average=''
                     for myItem in list['results']:
-                        coverPath=myItem['poster_path'].encode('ascii','ignore')
+                        if not myItem['poster_path'] is None:
+                            coverPath=myItem['poster_path'].encode('ascii','ignore')
                         overview=myItem['overview']
                         release_date=myItem['release_date']
                         id=myItem['id']
