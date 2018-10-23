@@ -49,6 +49,9 @@ else
 fi
 echo '</skin>' >> /usr/share/enigma2/BlackHarmony/skin.xml
 sync
+#
+[ -e /usr/share/enigma2/BlackHarmony/mySkin/skin_user_BlackHarmony.xml ] && rm -f /usr/share/enigma2/BlackHarmony/mySkin/skin_user_BlackHarmony.xml
+[ -e /etc/enigma2/skin_user_BlackHarmony.xml ] && rm -f /etc/enigma2/skin_user_BlackHarmony.xml
 #final message
 if [ -e /usr/share/enigma2/BlackHarmony/UserSkin_Selections/ ];then
   if `ls /usr/share/enigma2/BlackHarmony/UserSkin_Selections/ |grep -q '.xml'`;then
