@@ -77,26 +77,30 @@ def onPartitionChange(why, part):
 def findPicon(serviceName, selfPiconType = 'picon'):
     if serviceName is None or serviceName == '':
         return None
-    if DBG: j00zekDEBUG('[j00zekPicons] serviceName=' + str(serviceName))
     pngname = None
     findPiconTypeName='%s%s' % (selfPiconType,serviceName)
     if findPiconTypeName in lastPiconsDict:
         pngname = lastPiconsDict[findPiconTypeName]
+        if DBG: j00zekDEBUG('[j00zekPicons:findPicon] found in lastPiconsDict[%s] = %s' % (findPiconTypeName,pngname) )
     else:
         for path in searchPaths:
             sPath = path + selfPiconType + '/'
+            if DBG: j00zekDEBUG('[j00zekPicons:findPicon] searching for %s%s.[png|gif]' % (sPath,serviceName) )
             if pathExists(sPath + serviceName + '.png'):
                 pngname = sPath + serviceName + '.png'
                 lastPiconsDict[findPiconTypeName] = pngname
+                if DBG: j00zekDEBUG('[j00zekPicons:findPicon] lastPiconsDict[%s] = %s' % (findPiconTypeName, pngname) )
                 break
             elif pathExists(sPath + serviceName + '.gif'):
                 pngname = sPath + serviceName + '.gif'
                 lastPiconsDict[findPiconTypeName] = pngname
+                if DBG: j00zekDEBUG('[j00zekPicons:findPicon] lastPiconsDict[%s] = %s' % (findPiconTypeName, pngname) )
                 break
     return pngname
 
 
 def getPiconName(serviceName, selfPiconType):
+    if DBG: j00zekDEBUG('[j00zekPicons:getPiconName] >>>')
     name = 'unknown'
     sname = '_'.join(GetWithAlternative(serviceName).split(':', 10)[:10])
     pngname = findPicon(sname, selfPiconType)
@@ -120,7 +124,8 @@ def getPiconName(serviceName, selfPiconType):
             if not pngname and len(name) > 2 and name.endswith('hd'):
                 pngname = findPicon(name[:-2], selfPiconType)
     if DBG:
-        j00zekDEBUG('[j00zekPicons] serviceName=%s, picon=%s, %s, piconFile=%s' %(str(serviceName), sname, name, str(pngname)) )
+        j00zekDEBUG('[j00zekPicons:getPiconName] serviceName=%s, picon=%s, %s, piconFile=%s, selfPiconType=%s' %(str(serviceName),
+                                                                sname, name, str(pngname), selfPiconType) )
     return pngname
 
 
@@ -134,14 +139,17 @@ class j00zekPicons(Renderer):
         self.pngname = ''
         self.piconType = 'picon'
         self.GifsPath = 'animatedGIFpicons'
+        self.ShowDefault = True
+        self.GIFsupport = False
         return
 
     def addPath(self, value):
-        if pathExists(value):
-            if not value.endswith('/'):
-                value += '/'
-            if value not in searchPaths:
-                searchPaths.append(value)
+        if DBG: j00zekDEBUG('[j00zekPicons:addPath] %s' % value)
+        global searchPaths
+        if not value.endswith('/'):
+            value += '/'
+        if value not in searchPaths:
+            searchPaths.append(value)
 
     def applySkin(self, desktop, parent):
         attribs = self.skinAttributes[:]
@@ -154,8 +162,15 @@ class j00zekPicons(Renderer):
             elif attrib == 'picontype':
                 self.piconType = value
                 attribs.remove((attrib, value))
+            elif attrib == 'showdefaultpic':
+                if value in ('False','no'): self.ShowDefault = False
+                attribs.remove((attrib, value))
+            elif attrib == 'gifsupport':
+                if value in ('True','yes'): self.GIFsupport = True
+                attribs.remove((attrib, value))
 
         self.skinAttributes = attribs
+        if DBG: j00zekDEBUG('[j00zekPicons:applySkin] self.piconType=%s, self.ShowDefault=%s' % (self.piconType,self.ShowDefault))
         return Renderer.applySkin(self, desktop, parent)
 
     GUI_WIDGET = ePixmap
@@ -177,14 +192,16 @@ class j00zekPicons(Renderer):
             try:
                 if not what[0] is self.CHANGED_CLEAR:
                     if self.source.text is not None and self.source.text != '':
-                        gifname = getPiconName(self.source.text, self.GifsPath)
+                        if self.GIFsupport == True: gifname = getPiconName(self.source.text, self.GifsPath)
                         pngname = getPiconName(self.source.text, self.piconType)
                         if DBG: j00zekDEBUG('[j00zekPicons]:[changed] gifname=%s, pngname=%s' %(gifname,pngname))
-                    if pngname is None:
+                    if pngname is None and self.ShowDefault == True:
                         pngname = findPicon('picon_default', self.piconType)
                         if pngname is None and pathExists(resolveFilename(SCOPE_CURRENT_SKIN, 'picon_default.png')):
                             pngname = resolveFilename(SCOPE_CURRENT_SKIN, 'picon_default.png')
-                    if self.pngname != pngname:
+                    if pngname is None:
+                        self.instance.hide()
+                    elif self.pngname != pngname:
                         if pngname:
                             self.instance.setScale(1)
                             self.instance.setPixmapFromFile(pngname)
