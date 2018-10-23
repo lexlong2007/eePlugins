@@ -2,9 +2,9 @@ Package: enigma2-plugin-extensions--j00zeks-msnweather
 Priority: optional
 Section: utils
 Depends: 
-Description: wtyczka MSN weather dla VTI
+Description: wtyczka MSN weather dla VTI mod j00zek
 Maintainer: dr.best@dreambox-tools.info
 Source: 
-Version: 18.01.13.0816
+Version: 18.10.20.0622
 Architecture: all
 DestinationPath: /usr/lib/enigma2/python/
