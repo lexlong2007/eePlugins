@@ -1,0 +1,33 @@
+<!-- STATEICON -->
+        <widget position="20,130" size="64,64" source="session.CurrentService" render="j00zekPicons" path="/usr/lib/enigma2/python/Plugins/Extensions/ShareLCDwithKODI"  picontype="icons" showdefaultpic="no" zPosition="5" alphatest="blend"> 
+            <convert type="j00zekLCD4KODI">stateicon</convert>
+        </widget>
+<!-- FULL INFO -->
+        <widget position="140,200" size="600,24" font="Regular;22" zPosition="5" transparent="1" foregroundColor="white" render="Label" source="session.CurrentService" valign="center">
+            <convert type="j00zekLCD4KODI">fullInfo</convert>
+        </widget>
+<!-- TITLE -->
+        <widget position="140,240" size="600,24" font="Regular;22" zPosition="5" transparent="1" foregroundColor="white" render="Label" source="session.CurrentService" valign="center">
+            <convert type="j00zekLCD4KODI">title</convert>
+        </widget>
+<!-- Movie Length/DURATION -->
+        <widget position="140,280" size="600,24" font="Regular;22" zPosition="5" transparent="1" foregroundColor="white" render="Label" source="session.CurrentService" valign="center">
+            <convert type="j00zekLCD4KODI">duration</convert>
+        </widget>
+<!-- PLAYED TIME -->
+        <widget position="140,320" size="600,24" font="Regular;22" zPosition="5" transparent="1" foregroundColor="white" render="Label" source="session.CurrentService" valign="center">
+            <convert type="j00zekLCD4KODI">playedtime</convert>
+        </widget>
+<!-- LEFT TIME -->
+        <widget position="140,360" size="600,24" font="Regular;22" zPosition="5" transparent="1" foregroundColor="white" render="Label" source="session.CurrentService" valign="center">
+            <convert type="j00zekLCD4KODI">lefttime</convert>
+        </widget>
+<!-- Progress -->
+        <ePixmap position="140,417" size="480,6" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ShareLCDwithKODI/icons/progress_gray.png" zPosition="1" alphatest="blend" />
+        <widget position="140,417" size="480,6" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ShareLCDwithKODI/icons/progress_infobar.png" zPosition="5" source="session.CurrentService" render="Progress" transparent="1">
+            <convert type="j00zekLCD4KODI">progress</convert>
+        </widget>
+<!-- LEFT MINS -->
+        <widget position="320,360" size="600,24" font="Regular;22" zPosition="5" transparent="1" foregroundColor="white" render="Label" source="session.CurrentService" valign="center">
+            <convert type="j00zekLCD4KODI">leftmins</convert>
+        </widget>
