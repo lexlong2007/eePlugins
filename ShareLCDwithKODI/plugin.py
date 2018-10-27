@@ -22,13 +22,13 @@
 from __init__ import *
 _ = mygettext
 
-from Screens.Screen import Screen
-from Components.config import config, ConfigSubsection, ConfigIP, ConfigNumber
-from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap
-from Components.Sources.StaticText import StaticText
-from Components.config import config, getConfigListEntry
+from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigIP, ConfigNumber
+from Components.ConfigList import ConfigListScreen
+from Components.Label import Label
+#from Components.Sources.StaticText import StaticText
 from Plugins.Plugin import PluginDescriptor
+from Screens.Screen import Screen
 from Screens.Setup import SetupSummary
 
 config.plugins.ShareLCDwithKODI = ConfigSubsection()
@@ -51,6 +51,11 @@ class ShareLCDwithKODIconfig(Screen, ConfigListScreen):
         <!-- STATEICON -->
         <widget position="20,130" size="64,64" source="session.CurrentService" render="j00zekPicons" path="/usr/lib/enigma2/python/Plugins/Extensions/ShareLCDwithKODI"  picontype="icons" showdefaultpic="no" zPosition="5" alphatest="blend"> 
             <convert type="j00zekLCD4KODI">stateicon</convert>
+        </widget>
+        <!-- KODI icon ON/OFF when playing -->
+        <widget source="session.CurrentService" render="Pixmap" position="530,130" size="100,40" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ShareLCDwithKODI/logo.png" alphatest="blend">
+            <convert type="j00zekLCD4KODI">showWhenKODIplaying</convert>
+            <convert type="ConditionalShowHide"/>
         </widget>
         <!-- FULL INFO -->
         <eLabel position="20,200" size="130,40" font="HD_Thin; 27" zPosition="5" transparent="1" foregroundColor="yellow" noWrap="1" text="Full info:"/> 
@@ -78,18 +83,30 @@ class ShareLCDwithKODIconfig(Screen, ConfigListScreen):
             <convert type="j00zekLCD4KODI">lefttime</convert>
         </widget>
         <!-- LEFT MINS -->
-        <eLabel position="290,360" size="100,40" font="HD_Thin; 27" zPosition="5" transparent="1" foregroundColor="yellow" text="/"/> 
-        <widget position="320,360" size="600,24" font="Regular;22" zPosition="5" transparent="1" foregroundColor="white" render="Label" source="session.CurrentService" valign="center">
+        <eLabel position="320,360" size="100,40" font="HD_Thin; 27" zPosition="5" transparent="1" foregroundColor="yellow" text="/"/> 
+        <widget position="340,360" size="600,24" font="Regular;22" zPosition="5" transparent="1" foregroundColor="white" render="Label" source="session.CurrentService" valign="center">
             <convert type="j00zekLCD4KODI">leftmins</convert>
         </widget>
-        <!-- Progress -->
+        <!-- Standard Progress ON/OFF -->
         <eLabel position="20,400" size="120,40" font="HD_Thin; 27" zPosition="5" transparent="1" foregroundColor="yellow" text="Progress:"/> 
-        <ePixmap position="140,417" size="480,6" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ShareLCDwithKODI/icons/progress_gray.png" zPosition="1" alphatest="blend" />
-        <widget position="140,417" size="480,6" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ShareLCDwithKODI/icons/progress_infobar.png" zPosition="5" source="session.CurrentService" render="Progress" transparent="1">
-            <convert type="j00zekLCD4KODI">progress</convert>
+        <widget position="140,415" size="480,10" zPosition="5" source="session.CurrentService" render="Progress" borderWidth="2" transparent="1">
+            <convert type="j00zekLCD4KODI">progress,hideWhenKODInotPlaying</convert>
         </widget>
-        <widget name="key_red" position="0,365" zPosition="12" size="200,35" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="red" />
-        <widget name="key_green" position="220,365" zPosition="12" size="200,35" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="green" />
+        <!-- UserQuery for available values -->
+        <eLabel position="20,440" size="160,40" font="HD_Thin; 27" zPosition="5" transparent="1" foregroundColor="yellow" text="video:"/> 
+        <widget position="140,440" size="120,24" font="Regular;22" zPosition="5" transparent="1" foregroundColor="white" render="Label" source="session.CurrentService" valign="center">
+            <convert type="j00zekLCD4KODI">query,KODIstateTable['VideoPlayerState']['item']['streamdetails']['video'][0]['codec']</convert>
+        </widget>
+        <widget position="240,440" size="120,24" font="Regular;22" zPosition="5" transparent="1" foregroundColor="white" render="Label" source="session.CurrentService" valign="center">
+            <convert type="j00zekLCD4KODI">query,KODIstateTable['VideoPlayerState']['item']['streamdetails']['video'][0]['width']</convert>
+        </widget>
+        <eLabel position="290,440" size="160,40" font="HD_Thin; 27" zPosition="5" transparent="1" foregroundColor="yellow" text="x"/> 
+        <widget position="310,440" size="120,24" font="Regular;22" zPosition="5" transparent="1" foregroundColor="white" render="Label" source="session.CurrentService" valign="center">
+            <convert type="j00zekLCD4KODI">query,KODIstateTable['VideoPlayerState']['item']['streamdetails']['video'][0]['height']</convert>
+        </widget>
+
+        <widget name="key_red" position="0,470" zPosition="5" size="320,30" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="red" />
+        <widget name="key_green" position="320,470" zPosition="5" size="320,30" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="green" />
     </screen>"""
     
     def __init__(self, session):
@@ -99,8 +116,8 @@ class ShareLCDwithKODIconfig(Screen, ConfigListScreen):
         self.onChangedEntry = []
 
         # Buttons
-        self["key_red"] = StaticText("Cancel")
-        self["key_green"] = StaticText("OK")
+        self["key_red"] = Label(_("Cancel"))
+        self["key_green"] = Label("OK")
 
         # Define Actions
         self["actions"] = ActionMap(["SetupActions"],
