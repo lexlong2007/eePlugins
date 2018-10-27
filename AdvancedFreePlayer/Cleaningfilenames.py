@@ -21,10 +21,10 @@ def cleanFile(text, ReturnMovieYear = True):
         movieYear=''
     
     #removing exact character combinations
-    ExactCutList = ['(\_|\-|\.|\+|\()[12][09][0-9][0-9](\_|\-|\.|\+|\))','\[HD\]', 'Lektor[ ]*[-]*[ ]*PL',
+    ExactCutList = ['(\_|\-|\.|\+|\()[12][09][0-9][0-9](\_|\-|\.|\+|\))','\[HD\]', 'Lektor[ ]*[-]*[ ]*PL','\(Lektor\)',
                     '^psig-','^[12][09][0-9]* [0-9][0-9]* - .* - ', '-[ ]*zwiastun','[-,]*[ ]*Lektor[ ]*$']
     for word in ExactCutList:
-        text = re.sub(word,'', text, flags=re.I) #assumtion is everything after garbage is garbadge too. ;)
+        text = re.sub(word,'', text, flags=re.I) 
         
     text = re.sub('(\_|\-|\.|\+)',' ', text, flags=re.I) #cleaning
     text = re.sub('(  [ ]*)',' ', text, flags=re.I) #merge multiple (2+) spaces into one

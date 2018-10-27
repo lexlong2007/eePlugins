@@ -2,7 +2,7 @@
 from __init__ import *
 from __init__ import translate as _
 from Cleaningfilenames import *
-from cueSheetHelper import getCut, resetMoviePlayState
+from cueSheetHelper import getCut, clearLastPosition
 
 from Screens.Screen import Screen
 
@@ -26,6 +26,8 @@ from skin import parseColor
 from time import *
 from j00zekFileList import FileList, EXTENSIONS
 import json
+import datetime
+import time
 
 class AdvancedFreePlayerStarter(Screen):
 
@@ -60,8 +62,8 @@ class AdvancedFreePlayerStarter(Screen):
                 self.session.openWithCallback(self.ClearCuts, MessageBox, _("Do you want to resume this playback?"), timeout=10, default=True)
 
     def ClearCuts(self, ret):
-        if ret == False:
-            resetMoviePlayState(self.openmovie + '.cuts')
+        if not ret:
+            clearLastPosition(self.openmovie)
         self.SelectFramework()
 
     def SelectFramework(self):
@@ -203,6 +205,10 @@ class AdvancedFreePlayerStart(Screen):
         
         self.onLayoutFinish.append(self.__onLayoutFinish)
         self.GetCoverTimer = eTimer()
+        #TZ LOCAL TIME offset
+        now_timestamp = time.time()
+        #self.TZoffset = datetime.datetime.fromtimestamp(now_timestamp) - datetime.datetime.utcfromtimestamp(now_timestamp)
+        self.TZoffset = divmod((datetime.datetime.fromtimestamp(now_timestamp) - datetime.datetime.utcfromtimestamp(now_timestamp)).seconds,3600)[0]
 
     def __onLayoutFinish(self):
         self.GetCoverTimer.callback.append(self.__refreshFilelist)
@@ -266,11 +272,7 @@ class AdvancedFreePlayerStart(Screen):
             return
         def deleteRet(ret):
             selection = self["filelist"].getSelection()
-            if myConfig.MoveToTrash.value == True:
-                print 'mv -f %s/%s* %s/' % (self.filelist.getCurrentDirectory(),selection[0][:-4], myConfig.TrashFolder.value)
-            else:
-                print 'rm -rf %s/%s*' % (self.filelist.getCurrentDirectory(),selection[0][:-4])
-            print ret
+            printDEBUG("playORdelete>deleteRet ret=%s" % str(ret))
             if ret:
                 self["Cover"].hide()
                 self["Description"].setText('')
@@ -333,8 +335,9 @@ class AdvancedFreePlayerStart(Screen):
                 self.session.openWithCallback(self.ClearCuts, MessageBox, _("Do you want to resume this playback?"), timeout=10, default=True)
 
     def ClearCuts(self, ret):
-        if ret == False:
-            resetMoviePlayState(self.openmovie + '.cuts')
+        printDEBUG("ClearCuts ret='%s'" % str(ret))
+        if not ret:
+            clearLastPosition(self.openmovie + '.cuts')
             self.lastPosition = 0
         self.SelectFramework()
 
@@ -554,7 +557,9 @@ class AdvancedFreePlayerStart(Screen):
                 data = descrTXT.read() #[19:].replace('\00','\n')
                 ### Below is based on EMC handlers, thanks to author!!!
                 e = struct.unpack(">HHBBBBBBH", data[0:12])
-                myDescr = _('Recorded: %s %02d:%02d:%02d\n') % (parseMJD(e[1]), unBCD(e[2]), unBCD(e[3]), unBCD(e[4]) )
+                TZhour = unBCD(e[2]) + self.TZoffset
+                if TZhour >= 24: TZhour -= 24
+                myDescr = _('Recorded: %s %02d:%02d:%02d\n') % (parseMJD(e[1]), TZhour, unBCD(e[3]), unBCD(e[4]) )
                 myDescr += _('Lenght: %02d:%02d:%02d\n\n') % (unBCD(e[5]), unBCD(e[6]), unBCD(e[7]) )
                 extended_event_descriptor = []
                 EETtxt = ''
@@ -694,7 +699,7 @@ class AdvancedFreePlayerStart(Screen):
             self.gettingDataFromWEB = False
             return
             
-        def readTmBD(data, movieYear, isMovie):
+        def readTmBD(data, movieYear, isMovie,myMovie):
             #print 'readTmBD'
             f = open('/tmp/TmBD.AFP.webdata', 'w')
             f.write(data)
@@ -717,22 +722,39 @@ class AdvancedFreePlayerStart(Screen):
                     popularity=''
                     coverUrl = ''
                     vote_average=''
-                    for myItem in list['results']:
-                        if not myItem['poster_path'] is None:
-                            coverPath=myItem['poster_path'].encode('ascii','ignore')
-                        overview=myItem['overview']
-                        release_date=myItem['release_date']
-                        id=myItem['id']
-                        otitle=myItem['original_title']
-                        original_language=myItem['original_language']
-                        title=myItem['title']
-                        popularity='{:.2f}'.format(myItem['popularity'])
-                        vote_average='{:.2f}'.format(myItem['vote_average'])
-                        if movieYear != '':
-                            printDEBUG("filtering movies list by release year %s" % movieYear)
-                            if movieYear in release_date:
-                                printDEBUG("filtered movies list by release year %s" % movieYear)
-                                break
+                    #>>>>>>>>>>>>>>>>>>>>>>>>>>>> znajdowanie najlepszego kandydata z listy
+                    selectedIndex = 0
+                    selectedIndexScore = 0
+                    currIndex = 0
+                    myMovieLC =myMovie.decode('utf-8', 'ignore').lower()
+                    if list['total_results'] > 1:
+                        for myItem in list['results']:
+                            currScore = 0
+                            if myMovieLC == myItem['original_title'].decode('utf-8', 'ignore').lower(): currScore += 10 #jesli org tytul jest taki sam to najwyzszy priorytet
+                            if myMovieLC == myItem['title'].decode('utf-8', 'ignore').lower(): currScore += 5 #jesli tytul jest taki sam to drugi najwyzszy priorytet
+                            if movieYear != '' and movieYear == myItem['release_date']: currScore += 5 #w efekcie daje w polaczeniu z title takia sama wage jak ortitle
+                            if myItem['original_language'] == 'pl': currScore += 4 #wybor wedlug priorytetu jezyka
+                            elif myItem['original_language'] == 'en': currScore += 3
+                            elif myItem['original_language'] == 'de': currScore += 2
+                            elif myItem['original_language'] == 'fr': currScore += 1
+                            printDEBUG(">>> film '%s'-analiza indeksu %d(%s): currScore=%d, selIndex=%d, selScore=%d" %(myMovie,
+                                                        currIndex, myItem['title'],currScore, selectedIndex, selectedIndexScore))
+                            if currScore > selectedIndexScore:
+                                selectedIndexScore = currScore
+                                selectedIndex = currIndex
+                            currIndex += 1
+                    # pobieranie danych dla wybranego filmu
+                    myItem = list['results'][selectedIndex]
+                    if not myItem['poster_path'] is None:
+                        coverPath=myItem['poster_path'].encode('ascii','ignore')
+                    overview=myItem['overview']
+                    release_date=myItem['release_date']
+                    id=myItem['id']
+                    otitle=myItem['original_title']
+                    original_language=myItem['original_language']
+                    title=myItem['title']
+                    popularity='{:.2f}'.format(myItem['popularity'])
+                    vote_average='{:.2f}'.format(myItem['vote_average'])
                     if coverPath != '':
                         coverUrl = "http://image.tmdb.org/t/p/%s%s" % (myConfig.coverfind_themoviedb_coversize.value, coverPath)
                         coverUrl = coverUrl.replace('\/','/')
@@ -806,7 +828,7 @@ class AdvancedFreePlayerStart(Screen):
         else:
             printDEBUG("[GetFromTMDBbyName] url: " + url) #DEBUG
             self.gettingDataFromWEB = True
-            getPage(url, headers={'Content-Type':'application/x-www-form-urlencoded'}).addCallback(readTmBD,movieYear,isMovie).addErrback(dataError)
+            getPage(url, headers={'Content-Type':'application/x-www-form-urlencoded'}).addCallback(readTmBD,movieYear,isMovie,myMovie).addErrback(dataError)
         
 ##################################################################### SUBTITLES >>>>>>>>>>
     def runDMnapi(self):

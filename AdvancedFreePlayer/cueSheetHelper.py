@@ -41,7 +41,7 @@ def getCut(cutsFileName):
 
 def resetMoviePlayState(cutsFileName, CUT_LAST_VALUE = None, CUT_LENG_VALUE = None):
     if CUT_LAST_VALUE is None or CUT_LENG_VALUE is None:
-        printDEBUG('resetMoviePlayState(%s, CUT_LAST_VALUE=None, CUT_LENG_VALUE=None):' % (cutsFileName))
+        printDEBUG('resetMoviePlayState(%s, CUT_LAST_VALUE=None, CUT_LENG_VALUE=None) >>> exiting!!!' % (cutsFileName))
         return
     else:
         printDEBUG('resetMoviePlayState(%s, CUT_LAST_VALUE=%s, CUT_LENG_VALUE=%s):' % (cutsFileName, ':'.join(x.encode('hex') for x in CUT_LAST_VALUE), ':'.join(x.encode('hex') for x in CUT_LENG_VALUE) ))
@@ -58,17 +58,41 @@ def resetMoviePlayState(cutsFileName, CUT_LAST_VALUE = None, CUT_LENG_VALUE = No
                     cutlist.append(data)
             f.close()
         except Exception, e:
-            printDEBUG('resetMoviePlayState exception reading cuts sile %s' % str(e))
+            printDEBUG('resetMoviePlayState exception reading cuts file %s' % str(e))
     cutlist.append(CUT_LAST_VALUE)
     cutlist.append(CUT_LENG_VALUE)
     try:
-        f = open(cutsFileName, 'wb')
         if len(cutlist) > 0:
+            f = open(cutsFileName, 'wb')
             f.write(''.join(cutlist))
-        printDEBUG('resetMoviePlayState is writing cutsFileName len(cutlist)=%d, cutlist=%s' % ( len(cutlist), ':'.join(x.encode('hex') for x in ''.join(cutlist))))
-        printDEBUG(''.join(cutlist))
-        f.close()
+            f.close()
+            printDEBUG('resetMoviePlayState has written cutsFileName len(cutlist)=%d, cutlist=%s' % ( len(cutlist), ':'.join(x.encode('hex') for x in ''.join(cutlist))))
+            printDEBUG(''.join(cutlist))
     except Exception, e:
         printDEBUG('resetMoviePlayState exception writing cuts file %s' % str(e))
 
+def clearLastPosition(cutsFileName):
+    cutlist = []
+    if os_path.exists(cutsFileName):
+        try:
+            f = open(cutsFileName, 'rb')
+            while 1:
+                data = f.read(cutsParser.size)
+                if len(data) < cutsParser.size:
+                    break
+                cut, cutType = cutsParser.unpack(data)
+                if cutType not in [CUT_TYPE_LAST]:
+                    cutlist.append(data)
+            f.close()
+        except Exception, e:
+            printDEBUG('clearLastPosition exception reading cuts file %s' % str(e))
+        try:
+            if len(cutlist) > 0:
+                f = open(cutsFileName, 'wb')
+                f.write(''.join(cutlist))
+                f.close()
+                printDEBUG('clearLastPosition has written cutsFileName len(cutlist)=%d, cutlist=%s' % ( len(cutlist), ':'.join(x.encode('hex') for x in ''.join(cutlist))))
+                printDEBUG(''.join(cutlist))
+        except Exception, e:
+            printDEBUG('clearLastPosition exception writing cuts file %s' % str(e))
         
