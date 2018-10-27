@@ -40,7 +40,7 @@
       <convert type="ServiceName">Name</convert>
     </widget>
     <widget alphatest="blend" render="BlackHarmonyEventListDisplay" position="1165,838" size="690,140" source="ServiceEvent" rowHeight="32" column0="0,70,green,Roboto_HD,25,0,0" column1="80,545,white,Roboto_HD,25,0,1" primetimeoffset="10">
-      <convert type="BlackHarmonyEventList">primetime=yes,eventcount=3</convert>
+      <convert type="BlackHarmonyEventList">primetime=yes,eventcount=4</convert>
     </widget>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="90,1016" size="35,27" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="390,1016" size="35,27" alphatest="blend" />
