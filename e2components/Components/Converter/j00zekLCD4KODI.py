@@ -60,7 +60,7 @@ def _(text):
     return translationsDict.get(text,text)
         
 #STATE global TABLE
-statesDefRable = {'powerOn': False,
+statesDefTable = {'powerOn': False,
                   'isIdle': True,
                   'isPlaying': False,
                   'state': '',
@@ -70,9 +70,10 @@ statesDefRable = {'powerOn': False,
                   'activePlayerType': 'unknown',
                   'title': '',
                   'duration': 0,
-                  'progress': 0
+                  'progress': 0,
+                  'VideoPlayerState': {}
                  }
-KODIstateTable = statesDefRable
+KODIstateTable = statesDefTable.copy() 
 
 class j00zekLCD4KODI(Poll, Converter, object):
     UNKNOWN = 0
@@ -87,6 +88,9 @@ class j00zekLCD4KODI(Poll, Converter, object):
     PLAYEDTIME = 9
     LEFTTIME = 10
     LEFTMINS = 11
+    HIDEWHENPLAYING = 12
+    SHOWHENAPLAYING = 13
+    QUERY = 14
     
     def __init__(self, arg):
         Converter.__init__(self, arg)
@@ -95,17 +99,26 @@ class j00zekLCD4KODI(Poll, Converter, object):
         self.kodi = remoteKODI(KODI_IP, KODI_PORT) 
         self.running = False
         self.isSuspended = False
-        if arg in ('fullInfo','kodinameversionstate'): self.requested = self.FULLINFO
-        elif arg == 'name': self.requested = self.NAME
-        elif arg == 'version': self.requested = self.VERSION
-        elif arg == 'state': self.requested = self.STATE
-        elif arg == 'title': self.requested = self.TITLE
-        elif arg == 'duration': self.requested = self.DURATION
-        elif arg == 'progress': self.requested = self.PROGRESS
-        elif arg == 'stateicon': self.requested = self.STATEICON
-        elif arg == 'playedtime': self.requested = self.PLAYEDTIME
-        elif arg == 'lefttime': self.requested = self.LEFTTIME
-        elif arg == 'leftmins': self.requested = self.LEFTMINS
+        self.userAttribute = ''
+        args = arg.split(',')
+        self.hideWhenNotplaying = "hideWhenKODInotPlaying" in args 
+        if 'fullInfo' in args: self.requested = self.FULLINFO
+        elif 'kodinameversionstate' in args: self.requested = self.FULLINFO
+        elif 'name' in args: self.requested = self.NAME
+        elif 'version' in args: self.requested = self.VERSION
+        elif 'state' in args: self.requested = self.STATE
+        elif 'title' in args: self.requested = self.TITLE
+        elif 'duration' in args: self.requested = self.DURATION
+        elif 'progress' in args: self.requested = self.PROGRESS
+        elif 'stateicon' in args: self.requested = self.STATEICON
+        elif 'playedtime' in args: self.requested = self.PLAYEDTIME
+        elif 'lefttime' in args: self.requested = self.LEFTTIME
+        elif 'leftmins' in args: self.requested = self.LEFTMINS
+        elif 'hideWhenKODIplaying' in args: self.requested = self.HIDEWHENPLAYING
+        elif 'showWhenKODIplaying' in args: self.requested = self.SHOWHENAPLAYING
+        elif 'query' in args[0]: 
+            self.requested = self.QUERY
+            self.userQuery = args[1]
         else: self.requested = self.UNKNOWN
         
         self.poll_interval = 1000 
@@ -127,13 +140,30 @@ class j00zekLCD4KODI(Poll, Converter, object):
             self.running = True
             self.checkState()
             self.running = False
-            if DBG: j00zekDEBUG("[j00zekLCD4KODI:getText] changed=")
+            if DBG: j00zekDEBUG("[j00zekLCD4KODI:getText]")
+            if self.hideWhenNotplaying and len(self.downstream_elements):
+                if KODIstateTable['isPlaying']:
+                    self.downstream_elements[0].visible = True
+                else:
+                    self.downstream_elements[0].visible = False
             self.downstream_elements.changed(what) 
 
     def resetKODIstateTable(self):
-        global KODIstateTable, statesDefRable
-        KODIstateTable = statesDefRable
+        global KODIstateTable, statesDefTable
+        KODIstateTable = statesDefTable.copy()
         self.poll_interval = 30000 #check state once a 30s when Kodi not running
+    
+    @cached
+    def getBoolean(self):
+        retBool = False
+        if self.requested == self.HIDEWHENPLAYING:
+            retBool = not KODIstateTable['isPlaying']
+        elif self.requested == self.SHOWHENAPLAYING:
+            retBool = KODIstateTable['isPlaying']
+        if DBG: j00zekDEBUG("[j00zekLCD4KODI:getBoolean] self.requested=%s, retBool='%s'" % (self.requested, retBool))
+        return retBool
+
+    boolean = property(getBoolean)
     
     @cached
     def getValue(self):
@@ -179,7 +209,13 @@ class j00zekLCD4KODI(Poll, Converter, object):
                 retTXT = str(timedelta(seconds=p))
             elif self.requested == self.LEFTMINS:
                 p = int(KODIstateTable['duration'] - (KODIstateTable['duration'] * (KODIstateTable['progress'] /100)))
-                retTXT = '+ %s min' % int(p/60)
+                retTXT = '+%s min' % int(p/60)
+            elif self.requested == self.QUERY and self.userQuery != '':
+                if DBG: j00zekDEBUG("[j00zekLCD4KODI:checkState] executing retTXT=%s" %  self.userQuery)
+                exec("retTXT=str(%s)" % self.userQuery)
+                #retTXT=str(KODIstateTable['VideoPlayerState']['item']['streamdetails']['video'][0]['codec'])+' '+str(KODIstateTable['VideoPlayerState']['item']['streamdetails']['video'][0]['width']) 
+            else:
+                retTXT = ''
             
         except Exception as e:
             if DBG: j00zekDEBUG("[j00zekLCD4KODI:getText] Exception='%s'" % str(e))
@@ -228,6 +264,7 @@ class j00zekLCD4KODI(Poll, Converter, object):
                 return
             elif response.get('playerid', -1) == -1:
                 KODIstateTable['isPlaying'] = False
+                KODIstateTable['title'] = ''
                 return
             else:
                 KODIstateTable['activePlayerID'] = response.get('playerid', -1)
@@ -242,6 +279,7 @@ class j00zekLCD4KODI(Poll, Converter, object):
                 if response.get('isError',True):
                     return
                 else:
+                    KODIstateTable['VideoPlayerState'] = response
                     if response['item']['showtitle'] != '': KODIstateTable['title'] = response['item']['showtitle']
                     elif response['item']['title'] != '': KODIstateTable['title'] = response['item']['title']
                     if response['item']['label'] != '': KODIstateTable['title'] = response['item']['label']
