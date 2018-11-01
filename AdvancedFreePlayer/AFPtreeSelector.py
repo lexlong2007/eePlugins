@@ -275,6 +275,7 @@ class AdvancedFreePlayerStart(Screen):
             printDEBUG("playORdelete>deleteRet ret=%s" % str(ret))
             if ret:
                 self["Cover"].hide()
+                self.session.summary.LCD_hide('LCDpic')
                 self["Description"].setText('')
                 selection = self["filelist"].getSelection()
                 if selection[1] == True: # isDir
@@ -526,14 +527,17 @@ class AdvancedFreePlayerStart(Screen):
             self["Cover"].instance.setScale(1)
             self["Cover"].instance.setPixmap(LoadPixmap(path=temp + '.jpg'))
             self["Cover"].show()
+            self.session.summary.LCD_showPic('LCDpic', temp + '.jpg')
             FoundCover = True
         elif path.exists(WebCoverFile) and myConfig.PermanentCoversDescriptons.value == False:
             self["Cover"].instance.setScale(1)
             self["Cover"].instance.setPixmap(LoadPixmap(path=WebCoverFile))
             self["Cover"].show()
+            self.session.summary.LCD_showPic('LCDpic', WebCoverFile)
             FoundCover = True
         else:
             self["Cover"].hide()
+            self.session.summary.LCD_hide('LCDpic')
         WebDescrFile='/tmp/%s.AFP.txt' % getNameWithoutExtension(self.filelist.getFilename())
         ### DESCRIPTION from EIT ###
         if path.exists(temp + '.eit'):
@@ -643,11 +647,13 @@ class AdvancedFreePlayerStart(Screen):
         #first we check if file selected, if no, cleaning everything
         if self["filelist"].getSelection()[1] == True: # isDir
             self["Cover"].hide()
+            self.session.summary.LCD_hide('LCDpic')
             self["Description"].setText('')
             return
         extension = self.getExtension(self.filelist.getFilename())[1:]
         if not EXTENSIONS.has_key(extension) or EXTENSIONS[extension] != "movie":
             self["Cover"].hide()
+            self.session.summary.LCD_hide('LCDpic')
             self["Description"].setText('')
             return
             
@@ -693,6 +699,7 @@ class AdvancedFreePlayerStart(Screen):
             self["Cover"].instance.setScale(1)
             self["Cover"].instance.setPixmap(LoadPixmap(path=WebCoverFile))
             self["Cover"].show()
+            self.session.summary.LCD_showPic('LCDpic', WebCoverFile)
             return
         def dataError(error = ''):
             printDEBUG("Error downloading data %s" % str(error))
@@ -872,7 +879,39 @@ class AdvancedFreePlayerStart(Screen):
         return AdvancedFreePlayerStartLCD
 ##################################################################### LCD Screens <<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 class AdvancedFreePlayerStartLCD(Screen):
-    skin = LoadSkin('AdvancedFreePlayerStartLCD')
-                
+    def __init__(self, session, parent):
+        self.skin = LoadSkin('AdvancedFreePlayerStartLCD')
+        Screen.__init__(self, session)
+        try:
+            self["text1"] =  Label(PluginName)
+            self["text2"] = Label(PluginInfo)
+            self["LCDpic"] = Pixmap()
+            self["AFPlogo"] = Pixmap()
+            self.onShow.append(self.showLogo)
+        except Exception: pass
+        
 
-##################################################################### CLASS ENDS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    def showLogo(self):
+        self.LCD_showPic('AFPlogo' ,"/usr/lib/enigma2/python/Plugins/Extensions/AdvancedFreePlayer/AdvancedFreePlayer.png")
+    
+    def setText(self, text):
+        printDEBUG("setText(%s)" % text)
+        try:
+            self["text2"].setText(text[0:39])
+        except Exception: pass
+
+    def LCD_showPic(self, widgetName, picPath):
+        printDEBUG("LCD_showPic(%s, picPath=%s)" % (widgetName,picPath))
+        try:
+            self[widgetName].instance.setScale(1)
+            self[widgetName].instance.setPixmap(LoadPixmap(picPath))
+            self[widgetName].show()
+        except Exception: pass
+
+    def LCD_hide(self, widgetName):
+        printDEBUG("LCD_hide(%s)" % widgetName)
+        try:
+            self[widgetName].hide()
+        except Exception: pass
+                
+##################################################################### CLASS ENDS <<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
