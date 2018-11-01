@@ -1,0 +1,10 @@
+Package: enigma2-plugin-extensions--j00zeks-mod-pictureplayer
+Priority: optional
+Section: utils
+Depends: python-imaging
+Description: wersja z automatycznym obrotem zdjec
+Maintainer: j00zek
+Source: http://github.com/j00zek/eePlugins
+Version: 18.10.31.0902
+Architecture: all
+DestinationPath: /usr/lib/enigma2/python/Plugins/Extensions/PicturePlayer
