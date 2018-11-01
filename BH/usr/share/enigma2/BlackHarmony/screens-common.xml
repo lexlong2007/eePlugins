@@ -6668,9 +6668,6 @@
       <convert type="ServicePosition">Position</convert>
     </widget>
   </screen>
-  <screen name="AdvancedFreePlayerStartLCD" position="0,0" size="132,32" title="AFP">
-    <eLabel text="AFP" position="0,0" size="132,64" transparent="1" font="HD_Thin; 30" valign="top" halign="center"/>
-  </screen>
   <screen name="YouTubeMain" position="204,34" size="1522,1022" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1522,1022" pixmap="BlackHarmony/bg_design/wizard.png"/>
     <widget source="global.CurrentTime" render="Label" position="44,50" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
