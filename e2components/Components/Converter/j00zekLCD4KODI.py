@@ -35,11 +35,11 @@ from Poll import Poll
 from datetime import timedelta
 
 #if enabled log into /tmp/e2components.log
-DBG = True
+DBG = False
 if DBG: from Components.j00zekComponents import j00zekDEBUG
 
 from Components.j00zekKodistate import remoteKODI, AppProperties, XBMCInfoBool, GetActivePlayers, \
-                                        AudioPlayerState, VideoPlayerState, VideoPlayerTime
+                                        AudioPlayerItem, VideoPlayerItem, VideoPlayerProperties, AudioPlayerProperties
 try:
     from Components.config import config
     KODI_IP = config.plugins.ShareLCDwithKODI.IP.value
@@ -71,7 +71,8 @@ statesDefTable = {'powerOn': False,
                   'title': '',
                   'duration': 0,
                   'progress': 0,
-                  'VideoPlayerState': {}
+                  'PlayerItem': {},
+                  'PlayerProperties': {}
                  }
 KODIstateTable = statesDefTable.copy() 
 
@@ -245,7 +246,7 @@ class j00zekLCD4KODI(Poll, Converter, object):
                 KODIstateTable['name'] = response.get('name','KODI')
                 KODIstateTable['version'] = "%s.%s" % (response['version']['major'], response['version']['minor'])
             ########## step2: check if kodi is my sleeping ########## 
-            self.poll_interval = 10000 #check state once a 10s when Kodi is running
+            self.poll_interval = 2000 #check state once a 2s when Kodi is running
             response = self.getData(XBMCInfoBool)
             if response.get('isError',True):
                 self.resetKODIstateTable()
@@ -271,25 +272,40 @@ class j00zekLCD4KODI(Poll, Converter, object):
                 KODIstateTable['activePlayerType'] = response.get('type', 'unknown')
                 KODIstateTable['state'] = 'is playing'
                 KODIstateTable['isPlaying'] = True
-            ########## step4: get data for active player ##########
-            if KODIstateTable['activePlayerID'] == 0: #audio
-                response = self.getData(AudioPlayerState)
+            ########## step4: active player definitions ##########
+            if KODIstateTable['activePlayerID'] not in [0, 1]:
+                return
+            elif KODIstateTable['activePlayerID'] == 0: #audio
+                PlayerItem = AudioPlayerItem
+                PlayerProperties = AudioPlayerProperties
             elif KODIstateTable['activePlayerID'] == 1: #video
-                response = self.getData(VideoPlayerState)
-                if response.get('isError',True):
-                    return
-                else:
-                    KODIstateTable['VideoPlayerState'] = response
-                    if response['item']['showtitle'] != '': KODIstateTable['title'] = response['item']['showtitle']
-                    elif response['item']['title'] != '': KODIstateTable['title'] = response['item']['title']
-                    if response['item']['label'] != '': KODIstateTable['title'] = response['item']['label']
-                    else: KODIstateTable['title'] = response['item']['file']
-                    KODIstateTable['duration'] = int(response['item']['streamdetails']['video'][0]['duration'])
-                response = self.getData(VideoPlayerTime)
-                if response.get('isError',True):
-                    return
-                else:
-                    KODIstateTable['progress'] = float(response['percentage'])
+                PlayerItem = VideoPlayerItem
+                PlayerProperties = VideoPlayerProperties
+            ########## step5: get data for active player ##########
+            response = self.getData(PlayerItem)
+            if response.get('isError',True):
+                return
+            else:
+                KODIstateTable['PlayerItem'] = response
+            response = self.getData(PlayerProperties)
+            if response.get('isError',True):
+                return
+            else:
+                KODIstateTable['PlayerProperties'] = response
+            ########## step6: assigning values ##########
+            #title
+            if KODIstateTable['PlayerItem']['item']['showtitle'] != '':
+                KODIstateTable['title'] = KODIstateTable['PlayerItem']['item']['showtitle']
+            elif KODIstateTable['PlayerItem']['item']['title'] != '':
+                KODIstateTable['title'] = KODIstateTable['PlayerItem']['item']['title']
+            if KODIstateTable['PlayerItem']['item']['label'] != '':
+                KODIstateTable['title'] = KODIstateTable['PlayerItem']['item']['label']
+            else:
+                KODIstateTable['title'] = KODIstateTable['PlayerItem']['item']['file']
+                
+            KODIstateTable['duration'] = int(KODIstateTable['PlayerItem']['item']['streamdetails']['video'][0]['duration'])
+            KODIstateTable['progress'] = float(KODIstateTable['PlayerProperties']['percentage'])
+             
         except Exception, e:
             if DBG: j00zekDEBUG("[j00zekLCD4KODI:checkState] Exception = '%s'" %  str(e))
         if DBG: j00zekDEBUG('[j00zekLCD4KODI:checkState] <<<')

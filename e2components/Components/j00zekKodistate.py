@@ -28,9 +28,10 @@ KODI_PORT = '8123'
 AppProperties    = '{"jsonrpc": "2.0", "method": "Application.GetProperties", "params": {"properties": ["version", "name"]}, "id": 1 }'
 XBMCInfoBool     = '{"jsonrpc": "2.0", "method": "XBMC.GetInfoBooleans", "params": { "booleans": ["System.ScreenSaverActive ","System.IdleTime(600) "] }, "id": 1}'
 GetActivePlayers = '{"jsonrpc": "2.0", "method": "Player.GetActivePlayers", "id": 1}'
-AudioPlayerState = '{"jsonrpc": "2.0", "method": "Player.GetItem", "params": {"playerid":0 }, "id": 1}'
-VideoPlayerState = '{"jsonrpc": "2.0", "method": "Player.GetItem", "params": {"properties": ["title","album","artist","season","episode","duration","showtitle","tvshowid","thumbnail","file","fanart","streamdetails"],"playerid":1 }, "id": 1}'
-VideoPlayerTime  = '{"jsonrpc": "2.0", "method": "Player.GetProperties","params":{"playerid":1,"properties":["percentage"]},"id":"1"}'
+AudioPlayerItem = '{"jsonrpc": "2.0", "method": "Player.GetItem", "params": {"properties": ["title", "album", "artist", "duration", "thumbnail", "file", "fanart", "streamdetails"], "playerid": 0 }, "id": 0}'
+VideoPlayerItem = '{"jsonrpc": "2.0", "method": "Player.GetItem", "params": {"properties": ["title","album","artist","season","episode","duration","showtitle","tvshowid","thumbnail","file","fanart","streamdetails"],"playerid":1 }, "id": 1}'
+VideoPlayerProperties  = '{"jsonrpc": "2.0", "method": "Player.GetProperties","params":{"playerid":1,"properties":["audiostreams","currentaudiostream","currentsubtitle","currentvideostream","percentage","subtitleenabled","subtitles","videostreams"]},"id": 1}' 
+AudioPlayerProperties  = '{"jsonrpc": "2.0", "method": "Player.GetProperties","params":{"playerid":0,"properties":["audiostreams","currentaudiostream","currentsubtitle","currentvideostream","percentage","subtitleenabled","subtitles","videostreams"]},"id": 0}' 
 
 import json
 import urllib2

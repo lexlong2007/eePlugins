@@ -6,7 +6,7 @@ from enigma import eTimer
 from Components.Converter.Converter import Converter
 from Components.Element import cached
 from Components.Language import language
-from decimal import Decimal as dec
+#from decimal import Decimal as dec
 import math, datetime
 
 DBG = True
@@ -49,7 +49,7 @@ class j00zekMoon(Converter, object):
         return days/lunar_cycle
     
     def currPhase(self, CyclePerc): 
-        index = (CyclePerc * dec(8)) + dec("0.5")
+        index = CyclePerc * 8 + 0.5
         index = math.floor(index)
         return MoonPhasesDict[int(index) & 7]
    

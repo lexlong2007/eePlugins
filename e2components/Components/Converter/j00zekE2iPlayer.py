@@ -78,8 +78,11 @@ class j00zekE2iPlayer(Poll, Converter, object):
     range = 100
     
     def changed(self, what):
-        if what[0] == self.CHANGED_POLL:
-            self.downstream_elements.changed(what)
+        try:
+            if what[0] == self.CHANGED_POLL:
+                self.downstream_elements.changed(what)
+        except Exception: pass
+                
 
 
 
