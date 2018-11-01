@@ -43,73 +43,11 @@ def Plugins(**kwargs):
                 where=PluginDescriptor.WHERE_PLUGINMENU, icon="logo.png", fnc=main))]
 ######################################################################################################
 class ShareLCDwithKODIconfig(Screen, ConfigListScreen):
-
-    skin = """
-    <screen name="ShareLCDwithKODIconfig" position="center,center" size="640,500" title="Share LCD with KODI" backgroundColor="#20606060" >
-        <widget name="config" position="10,10" size="620,100" zPosition="-1" transparent="0" scrollbarMode="showOnDemand" />
-        <eLabel position="10,120" size="620,350" zPosition="-1" backgroundColor="#00222222" /> 
-        <!-- STATEICON -->
-        <widget position="20,130" size="64,64" source="session.CurrentService" render="j00zekPicons" path="/usr/lib/enigma2/python/Plugins/Extensions/ShareLCDwithKODI"  picontype="icons" showdefaultpic="no" zPosition="5" alphatest="blend"> 
-            <convert type="j00zekLCD4KODI">stateicon</convert>
-        </widget>
-        <!-- KODI icon ON/OFF when playing -->
-        <widget source="session.CurrentService" render="Pixmap" position="530,130" size="100,40" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ShareLCDwithKODI/logo.png" alphatest="blend">
-            <convert type="j00zekLCD4KODI">showWhenKODIplaying</convert>
-            <convert type="ConditionalShowHide"/>
-        </widget>
-        <!-- FULL INFO -->
-        <eLabel position="20,200" size="130,40" font="HD_Thin; 27" zPosition="5" transparent="1" foregroundColor="yellow" noWrap="1" text="Full info:"/> 
-        <widget position="140,200" size="600,24" font="Regular;22" zPosition="5" transparent="1" foregroundColor="white" render="Label" source="session.CurrentService" valign="center">
-            <convert type="j00zekLCD4KODI">fullInfo</convert>
-        </widget>
-        <!-- TITLE -->
-        <eLabel position="20,240" size="90,40" font="HD_Thin; 27" zPosition="5" transparent="1" foregroundColor="yellow" text="Title:"/> 
-        <widget position="140,240" size="600,24" font="Regular;22" zPosition="5" transparent="1" foregroundColor="white" render="Label" source="session.CurrentService" valign="center">
-            <convert type="j00zekLCD4KODI">title</convert>
-        </widget>
-        <!-- Movie Length/DURATION -->
-        <eLabel position="20,280" size="100,40" font="HD_Thin; 27" zPosition="5" transparent="1" foregroundColor="yellow" text="Length:"/> 
-        <widget position="140,280" size="600,24" font="Regular;22" zPosition="5" transparent="1" foregroundColor="white" render="Label" source="session.CurrentService" valign="center">
-            <convert type="j00zekLCD4KODI">duration</convert>
-        </widget>
-        <!-- PLAYED TIME -->
-        <eLabel position="20,320" size="100,40" font="HD_Thin; 27" zPosition="5" transparent="1" foregroundColor="yellow" text="Played:"/> 
-        <widget position="140,320" size="600,24" font="Regular;22" zPosition="5" transparent="1" foregroundColor="white" render="Label" source="session.CurrentService" valign="center">
-            <convert type="j00zekLCD4KODI">playedtime</convert>
-        </widget>
-        <!-- LEFT TIME -->
-        <eLabel position="20,360" size="100,40" font="HD_Thin; 27" zPosition="5" transparent="1" foregroundColor="yellow" text="Left:"/> 
-        <widget position="140,360" size="600,24" font="Regular;22" zPosition="5" transparent="1" foregroundColor="white" render="Label" source="session.CurrentService" valign="center">
-            <convert type="j00zekLCD4KODI">lefttime</convert>
-        </widget>
-        <!-- LEFT MINS -->
-        <eLabel position="320,360" size="100,40" font="HD_Thin; 27" zPosition="5" transparent="1" foregroundColor="yellow" text="/"/> 
-        <widget position="340,360" size="600,24" font="Regular;22" zPosition="5" transparent="1" foregroundColor="white" render="Label" source="session.CurrentService" valign="center">
-            <convert type="j00zekLCD4KODI">leftmins</convert>
-        </widget>
-        <!-- Standard Progress ON/OFF -->
-        <eLabel position="20,400" size="120,40" font="HD_Thin; 27" zPosition="5" transparent="1" foregroundColor="yellow" text="Progress:"/> 
-        <widget position="140,415" size="480,10" zPosition="5" source="session.CurrentService" render="Progress" borderWidth="2" transparent="1">
-            <convert type="j00zekLCD4KODI">progress,hideWhenKODInotPlaying</convert>
-        </widget>
-        <!-- UserQuery for available values -->
-        <eLabel position="20,440" size="160,40" font="HD_Thin; 27" zPosition="5" transparent="1" foregroundColor="yellow" text="video:"/> 
-        <widget position="140,440" size="120,24" font="Regular;22" zPosition="5" transparent="1" foregroundColor="white" render="Label" source="session.CurrentService" valign="center">
-            <convert type="j00zekLCD4KODI">query,KODIstateTable['VideoPlayerState']['item']['streamdetails']['video'][0]['codec']</convert>
-        </widget>
-        <widget position="240,440" size="120,24" font="Regular;22" zPosition="5" transparent="1" foregroundColor="white" render="Label" source="session.CurrentService" valign="center">
-            <convert type="j00zekLCD4KODI">query,KODIstateTable['VideoPlayerState']['item']['streamdetails']['video'][0]['width']</convert>
-        </widget>
-        <eLabel position="290,440" size="160,40" font="HD_Thin; 27" zPosition="5" transparent="1" foregroundColor="yellow" text="x"/> 
-        <widget position="310,440" size="120,24" font="Regular;22" zPosition="5" transparent="1" foregroundColor="white" render="Label" source="session.CurrentService" valign="center">
-            <convert type="j00zekLCD4KODI">query,KODIstateTable['VideoPlayerState']['item']['streamdetails']['video'][0]['height']</convert>
-        </widget>
-
-        <widget name="key_red" position="0,470" zPosition="5" size="320,30" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="red" />
-        <widget name="key_green" position="320,470" zPosition="5" size="320,30" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="green" />
-    </screen>"""
-    
+        
     def __init__(self, session):
+        with open('/usr/lib/enigma2/python/Plugins/Extensions/ShareLCDwithKODI/skin.xml','r') as f:
+            self.skin = f.read()
+            f.close
         Screen.__init__(self, session)
         # Summary
         self.setup_title = _("Share LCD with KODI %s" % Info )

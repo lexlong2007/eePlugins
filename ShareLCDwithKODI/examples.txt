@@ -46,17 +46,42 @@
         </widget>
 <!-- UserQuery for available values explanation and examples
   data is in the python dictionary called KODIstateTable.it has the following structure
-    {u'item': {u'album': u'', u'tvshowid': -1, u'episode': -1, u'artist': [], u'fanart': u'', u'season': -1, u'title': u'', u'label': u'Cicha noc.mp4', u'file': u'/storage/sdcard1/Cicha noc.mp4', u'type': u'unknown', u'thumbnail': u'image://video@%2fstorage%2fsdcard1%2fCicha%20noc.mp4/', u'showtitle': u'', u'streamdetails': {u'video': [{u'language': u'und', u'stereomode': u'', u'width': 640, u'codec': u'h264', u'aspect': 2.3529410362243652, u'duration': 5793, u'height': 272}], u'audio': [{u'channels': 2, u'codec': u'aac', u'language': u'und'}], u'subtitle': []}}, 'isError': False, 'ErrorDescr': 'OK-dict'}
+  
+    for PlayerItem:
+      {u'item': {u'album': u'', u'tvshowid': -1, u'episode': -1, u'artist': [], u'fanart': u'', u'season': -1, u'title': u'', u'label': u'',
+       u'file': u'', u'type': u'unknown', u'thumbnail': u'', u'showtitle': u'', 
+       u'streamdetails': {u'video': [{u'language': u'und', u'stereomode': u'', u'width': 640, u'codec': u'h264', u'aspect': 2.3529410362243652, u'duration': 5793, u'height': 272}],
+                          u'audio': [{u'channels': 2, u'codec': u'aac', u'language': u'und'}],
+                          u'subtitle': []}},
+       'isError': False, 'ErrorDescr': 'OK-dict'
+      }
+
+    for PlayerProperties:
+      {u'videostreams': [{u'index': 0, u'name': u'', u'language': u'und', u'height': 272, u'width': 640, u'codec': u'h264'}],
+       u'currentvideostream': {u'index': 0, u'name': u'', u'language': u'und', u'height': 272, u'width': 640, u'codec': u'h264'},
+       u'audiostreams': [{u'index': 0, u'name': u'Stereo', u'language': u'und', u'channels': 2, u'codec': u'aac', u'bitrate': 64575}],
+       u'currentaudiostream': {u'index': 0, u'name': u'Stereo', u'language': u'und', u'channels': 2, u'codec': u'aac', u'bitrate': 64575},
+       u'subtitles': [],
+       u'currentsubtitle': {},
+       u'subtitleenabled': True, u'percentage': 21.477985382080078,
+       'isError': False, 'ErrorDescr': 'OK-dict'
+      }
+
   query option simply queries this dictionary in python like on examples. All attirbutes from above dictionary are accessible when correctly requested
 -->
         <eLabel position="20,440" size="160,40" font="HD_Thin; 27" zPosition="5" transparent="1" foregroundColor="yellow" text="video:"/> 
         <widget position="140,440" size="120,24" font="Regular;22" zPosition="5" transparent="1" foregroundColor="white" render="Label" source="session.CurrentService" valign="center">
-            <convert type="j00zekLCD4KODI">query,KODIstateTable['VideoPlayerState']['item']['streamdetails']['video'][0]['codec']</convert>
+            <convert type="j00zekLCD4KODI">query,KODIstateTable['PlayerItem']['item']['streamdetails']['video'][0]['codec']</convert>
         </widget>
         <widget position="240,440" size="120,24" font="Regular;22" zPosition="5" transparent="1" foregroundColor="white" render="Label" source="session.CurrentService" valign="center">
-            <convert type="j00zekLCD4KODI">query,KODIstateTable['VideoPlayerState']['item']['streamdetails']['video'][0]['width']</convert>
+            <convert type="j00zekLCD4KODI">query,KODIstateTable['PlayerItem']['item']['streamdetails']['video'][0]['width']</convert>
         </widget>
         <eLabel position="290,440" size="160,40" font="HD_Thin; 27" zPosition="5" transparent="1" foregroundColor="yellow" text="x"/> 
         <widget position="310,440" size="120,24" font="Regular;22" zPosition="5" transparent="1" foregroundColor="white" render="Label" source="session.CurrentService" valign="center">
-            <convert type="j00zekLCD4KODI">query,KODIstateTable['VideoPlayerState']['item']['streamdetails']['video'][0]['height']</convert>
+            <convert type="j00zekLCD4KODI">query,KODIstateTable['PlayerItem']['item']['streamdetails']['video'][0]['height']</convert>
+        </widget>
+<!-- current audio codec -->
+        <eLabel position="300,440" size="160,40" font="HD_Thin; 27" zPosition="5" transparent="1" foregroundColor="yellow" text="Audio:"/> 
+        <widget position="460,440" size="120,24" font="Regular;22" zPosition="5" transparent="1" foregroundColor="white" render="Label" source="session.CurrentService" valign="center">
+            <convert type="j00zekLCD4KODI">query,KODIstateTable['PlayerProperties']['currentaudiostream']['codec']</convert>
         </widget>
