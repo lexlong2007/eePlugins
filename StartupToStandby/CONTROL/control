@@ -1,0 +1,10 @@
+Package: enigma2-plugin-extensions--j00zeks-mod-startuptostandby
+Priority: optional
+Section: utils
+Depends: enigma2---j00zeks-components
+Description: usypia tuner po restarcie tylko gdy tuner wczesniej spal
+Maintainer: j00zek
+Source: http://github.com/j00zek/eePlugins
+Version: 18.10.30.0849
+Architecture: all
+DestinationPath: /usr/lib/enigma2/python/Plugins/Extensions/StartupToStandby
