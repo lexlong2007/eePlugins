@@ -39,7 +39,7 @@ from urllib import quote as urllib_quote
 
 def initWeatherPluginEntryConfig():
     s = ConfigSubsection()
-    s.city = ConfigText(default = "Heidelberg", visible_width = 100, fixed_size = False)
+    s.city = ConfigText(default = "Warszawa", visible_width = 100, fixed_size = False)
     s.degreetype = ConfigSelection(choices = [("C", _("metric system")), ("F", _("imperial system"))], default = "C")
     s.weatherlocationcode = ConfigText(default = "", visible_width = 100, fixed_size = False)
     s.geolatitude = ConfigText(default = "auto", visible_width = 100, fixed_size = False)
