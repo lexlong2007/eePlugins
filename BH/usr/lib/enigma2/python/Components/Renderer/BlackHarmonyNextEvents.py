@@ -1,3 +1,5 @@
+# j00zek: this file has changed name just to avoid errors using opkg (situation when file was installed by different pockage)
+#
 from Components.VariableText import VariableText
 from Renderer import Renderer
 from enigma import eLabel, eEPGCache

@@ -1,4 +1,5 @@
-# Embedded file name: /usr/lib/enigma2/python/Components/Converter/EventPosition.py
+# j00zek: this file has changed name just to avoid errors using opkg (situation when file was installed by different pockage)
+#
 from Converter import Converter
 from Poll import Poll
 from Components.Element import cached

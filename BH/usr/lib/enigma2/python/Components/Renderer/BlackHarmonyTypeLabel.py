@@ -1,3 +1,5 @@
+# j00zek: this file has changed name just to avoid errors using opkg (situation when file was installed by different pockage)
+#
 #
 # BlackHarmonyTypeLabel Renderer for Enigma2 Dreamboxes (TypeLabel.py)
 # Coded by vlamo (c) 2011

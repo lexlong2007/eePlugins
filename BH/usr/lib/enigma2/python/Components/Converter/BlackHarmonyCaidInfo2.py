@@ -3,6 +3,9 @@
 #  ver 1.2.2 28.12.2014
 #
 #  Coded by bigroma & 2boom
+#
+# j00zek: this file has changed name just to avoid errors using opkg (situation when file was installed by different pockage)
+#
 
 from Components.Converter.Converter import Converter
 from enigma import iServiceInformation, iPlayableService

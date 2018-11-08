@@ -5,6 +5,8 @@
 # Version: 0.4 (11.04.2012 14:05)
 # Support: http://dream.altmaster.net/
 #
+# j00zek: this file has changed name just to avoid errors using opkg (situation when file was installed by different pockage)
+#
 
 from Converter import Converter
 from Poll import Poll

@@ -1,3 +1,6 @@
+#
+# j00zek: this file has changed name just to avoid errors using opkg (situation when file was installed by different pockage)
+#
 # BlackHarmonyRouteInfo
 # Copyright (c) 2boom 2012-13
 # v.0.8

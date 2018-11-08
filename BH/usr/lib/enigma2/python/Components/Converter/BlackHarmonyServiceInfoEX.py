@@ -14,7 +14,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
-# mods by j00zek:
+#
+# j00zek: this file has changed name just to avoid errors using opkg (situation when file was installed by different pockage)
+#
 
 from Poll import Poll
 from Components.Converter.Converter import Converter

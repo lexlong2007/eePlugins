@@ -39,6 +39,7 @@ elif [ -e /usr/lib/enigma2/python/Plugins/Extensions/Infopanel ];then
   echo 'openATV image'
 elif [ -e /usr/lib/enigma2/python/Blackhole ];then
   cat /usr/share/enigma2/BlackHarmony/screens-BlackHole_specific.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
+  sed -i 's/if compat == "passed"/if compat == compat/g' /usr/lib/enigma2/python/Plugins/SystemPlugins/SkinSelector/plugin.py
   echo 'VTI BlackHole image'
 elif [ -e //etc/init.d/start_pkt.sh ];then
   cat /usr/share/enigma2/BlackHarmony/screens-PKT_specific.xml >> /usr/share/enigma2/BlackHarmony/skin.xml

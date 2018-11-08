@@ -1,4 +1,6 @@
-# Embedded file name: /usr/lib/enigma2/python/Components/Converter/imieniny.py
+#
+# j00zek: this file has changed name just to avoid errors using opkg (situation when file was installed by different pockage)
+#
 from time import localtime, strftime
 from Components.Converter.Converter import Converter
 from Components.Element import cached

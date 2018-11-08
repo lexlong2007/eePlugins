@@ -1,4 +1,5 @@
 # BlackHarmonyFanTempInfo Converter  v.0.4
+#
 
 from Poll import Poll
 from Components.Converter.Converter import Converter

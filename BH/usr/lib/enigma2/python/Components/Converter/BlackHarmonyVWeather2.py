@@ -13,6 +13,9 @@
 # THX to iMaxxx (c) 2013 for base idea
 # Extended MOD atreyou & deso1208 (c) Mai 2016
 #######################################################################
+#
+# j00zek: this file has changed name just to avoid errors using opkg (situation when file was installed by different pockage)
+#
 
 from Components.Converter.Converter import Converter
 from Components.Element import cached

@@ -19,6 +19,8 @@
 # If you want to use or modify the code or parts of it,
 # you have to keep MY license and inform me about the modifications by mail.
 #
+# j00zek: this file has changed name just to avoid errors using opkg (situation when file was installed by different pockage)
+#
 
 from Components.Converter.Converter import Converter
 from Components.Element import cached

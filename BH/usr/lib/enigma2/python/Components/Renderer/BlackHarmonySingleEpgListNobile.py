@@ -1,4 +1,5 @@
-# Embedded file name: /usr/lib/enigma2/python/Components/Renderer/SingleEpgListNobile.py
+# j00zek: this file has changed name just to avoid errors using opkg (situation when file was installed by different pockage)
+#
 from Components.VariableText import VariableText
 from enigma import eLabel, eEPGCache
 from Renderer import Renderer

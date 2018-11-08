@@ -18,6 +18,8 @@
 # Version: 1.6 (14.10.2014) add Tricolor Sibir prov - 2boom
 # Support: http://dream.altmaster.net/ & http://gisclub.tv & http://2boom-2boom.blogspot.com
 #
+# j00zek: this file has changed name just to avoid errors using opkg (situation when file was installed by different pockage)
+#
 
 from Components.Converter.Converter import Converter
 from enigma import iServiceInformation, iPlayableService, iPlayableServicePtr, eServiceReference, eServiceCenter, eTimer, getBestPlayableServiceReference

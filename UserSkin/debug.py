@@ -1,4 +1,10 @@
-from inits import myDEBUG, myDEBUGfile, PluginName
+try:
+    from inits import myDEBUG, myDEBUGfile, PluginName
+except Exception:
+    PluginName = 'debug'
+    myDEBUG=True
+    myDEBUGfile = '/tmp/%s.log' % PluginName
+
 import inspect
 
 append2file=False

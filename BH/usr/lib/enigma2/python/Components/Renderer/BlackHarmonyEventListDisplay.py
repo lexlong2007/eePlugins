@@ -2,6 +2,8 @@
 #
 # BlackHarmonyEventListDisplay - Renderer
 #
+# j00zek: this file has changed name just to avoid errors using opkg (situation when file was installed by different pockage)
+#
 # Coded by Dr.Best (c) 2013
 # Support: www.dreambox-tools.info
 # E-Mail: dr.best@dreambox-tools.info

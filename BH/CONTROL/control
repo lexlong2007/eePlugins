@@ -5,6 +5,6 @@ Depends: enigma2---j00zeks-components
 Description: crash BlackHarmonyFHD mod by j00zek for OpenATV, and other images
 Maintainer: j00zek
 Source: NA
-Version: 18.11.02.1424
+Version: 18.11.06.1902
 Architecture: all
 DestinationPath: /
