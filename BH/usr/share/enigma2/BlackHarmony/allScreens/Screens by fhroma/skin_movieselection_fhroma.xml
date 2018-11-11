@@ -11,11 +11,11 @@
     </widget>
 	<widget name="waitingtext" position="80,400" size="760,35" zPosition="4" font="Roboto_HD;30" halign="center" valign="center" transparent="1" />
 		
-		<widget name="list" font="Regular;28" position="140,200" size="910,630" columnsOriginal="300,320" columnsCompactDescription="200,320,70" compactColumn="80,320" itemHeights="113,68,40" fontSizesOriginal="26,22,20" fontSizesCompact="26,22" fontSizesMinimal="26,22" zPosition="2" scrollbarMode="showOnDemand" enableWrapAround="1" selectionPixmap="BlackHarmony/menu/sel_920_40.png" transparent="1"/>
+		<widget name="list" font="Regular;22" position="140,200" size="920,660"    zPosition="2" scrollbarMode="showOnDemand" enableWrapAround="1" selectionPixmap="BlackHarmony/menu/sel_920_45.png" transparent="1"/>
  
 		
 		<widget name="freeDiskSpace" position="318,919" zPosition="4" size="660,40" font="Roboto_HD;24" halign="left" foregroundColor="#66CC99" backgroundColor="transpBlack" transparent="1"/>
-			<widget source="Service" render="Label" position="294,859" zPosition="4" size="350,50" font="Roboto_HD;26" halign="center" foregroundColor="#66CC99" backgroundColor="transpBlack" transparent="1" >
+			<widget source="Service" render="Label" position="1200,170" zPosition="4" size="550,35" font="Roboto_HD;26" halign="center" foregroundColor="#66CC99" backgroundColor="transpBlack" transparent="1" >
 			<convert type="MovieInfo">RecordServiceName</convert>
 		</widget>
 		<widget source="Service" render="Label" position="190,859" size="140,30" font="Roboto_HD;26" foregroundColor="#66CC99" transparent="1">
@@ -25,13 +25,13 @@
 			<convert type="ServiceTime">Duration</convert>
 			<convert type="ClockToText">AsLength</convert>
 		</widget>
-		 <widget render="BlackHarmonyMaggyRunningText" source="Service" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=6000,wrap" halign="left" backgroundColor="background" position="1100,500" size="680,430" font="Roboto_HD; 24" transparent="1">
+		 <widget render="BlackHarmonyMaggyRunningText" source="Service" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=6000,wrap" halign="left" backgroundColor="background" position="1100,550" size="680,400" font="Roboto_HD; 24" transparent="1">
     <convert type="EventName">ExtendedDescription</convert>
   </widget>
-	<widget source="Service" render="j00zekPicons" picontype="picon" position="1480,200" zPosition="10" size="220,132" transparent="1" alphatest="blend">
+	<widget source="Service" render="j00zekPicons" picontype="picon" position="1480,250" zPosition="10" size="220,132" transparent="1" alphatest="blend">
     <convert type="BlackHarmonyMovieReference" />
   </widget>
-		<widget source="Service" render="BlackHarmonyCover" position="1170,170" size="280,300" zPosition="3" alphatest="blend" />
+		<widget source="Service" render="BlackHarmonyCover" position="1170,220" size="280,300" zPosition="3" alphatest="blend" />
 			   <ePixmap pixmap="BlackHarmony/buttons/red.png" position="110,991" size="35,27" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="500,991" size="35,27" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="890,991" size="35,27" alphatest="blend" />

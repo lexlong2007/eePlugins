@@ -44,7 +44,7 @@
     <widget source="session.FrontendStatus" render="Progress" position="1465,972" size="345,8" zPosition="1" pixmap="BlackHarmony/gfx/bar_snr1.png" transparent="1">
       <convert type="FrontendInfo">AGC</convert>
     </widget>
-<widget source="session.CurrentService" render="Label" position="1542,773" size="220,60" font="Regular;22" backgroundColor="background" valign="center" halign="center" transparent="1">
+<widget source="session.CurrentService" render="Label" position="1512,773" size="270,60" font="Regular;22" backgroundColor="background" valign="center" halign="center" transparent="1">
 <convert type="ServiceName">Provider</convert>
 </widget>
   <widget source="session.CurrentService" render="Label" position="1413,825" zPosition="1" size="460,25" font="Roboto_HD; 22" halign="center" backgroundColor="black" transparent="1">
