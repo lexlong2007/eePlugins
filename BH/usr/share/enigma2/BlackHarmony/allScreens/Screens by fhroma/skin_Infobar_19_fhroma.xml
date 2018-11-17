@@ -43,10 +43,10 @@
     <widget source="session.FrontendStatus" render="Label" position="1500,790" size="60,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" zPosition="1" foregroundColor="green">
       <convert type="FrontendInfo">AGC</convert>
     </widget>
-		    <widget source="session.FrontendStatus" render="Progress" position="1645,800" size="130,8" zPosition="5"  pixmap="BlackHarmony/gfx/bar_snr_s.png" transparent="1">
+		    <widget source="session.FrontendStatus" render="Progress" position="1645,800" size="130,8" zPosition="5"  pixmap="BlackHarmony/gfx/bar_snr_130x15.png" transparent="1">
       <convert type="FrontendInfo">SNR</convert>
     </widget>
-    <widget source="session.FrontendStatus" render="Progress" position="1363,800" size="130,8" zPosition="5"  pixmap="BlackHarmony/gfx/bar_snr_s.png" transparent="1">
+    <widget source="session.FrontendStatus" render="Progress" position="1363,800" size="130,8" zPosition="5"  pixmap="BlackHarmony/gfx/bar_snr_130x15.png" transparent="1">
       <convert type="FrontendInfo">AGC</convert>
     </widget>
     <widget source="session.CurrentService" render="Label" position="500,790" zPosition="1" size="380,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1">
@@ -333,7 +333,7 @@
     <widget source="session.BlackHarmonyMSNWeather" render="Label" position="1305,72" size="140,30" font="Roboto_HD; 20" halign="center" valign="center" transparent="1" zPosition="3">
       <convert type="BlackHarmonyMSNWeather">temperature_heigh_low,day3</convert>
     </widget>
-    <ePixmap position="1260,8" zPosition="-2" size="625,120" pixmap="BlackHarmony/bg_design/infobar_kpogoda.png" />
+    <ePixmap position="1260,8" zPosition="-2" size="625,120" pixmap="BlackHarmony/bg_design/infobar_pogoda.png" />
     <eLabel name="new eLabel" position="1630,30" size="130,30" text="Pojutrze" font="Roboto_HD; 24" transparent="1" zPosition="3" foregroundColor="green" backgroundColor="black" />
     <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1780,27" size="85,85" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
       <convert type="BlackHarmonyMSNWeather">weathericon,day4</convert>

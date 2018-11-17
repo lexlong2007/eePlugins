@@ -86,7 +86,7 @@
     <convert type="ServiceInfo">IsCrypted</convert>
     <convert type="ConditionalShowHide" />
   </widget>
-  <widget source="session.CurrentService" render="Label" position="64,757" size="625,48" font="HD_Thin; 42" valign="top" noWrap="1" backgroundColor="black" transparent="1" halign="left">
+  <widget source="session.CurrentService" render="Label" position="64,757" size="605,48" font="HD_Thin; 42" valign="top" noWrap="1" backgroundColor="black" transparent="1" halign="left">
     <convert type="BlackHarmonygExtraTuner">ServiceName</convert>
   </widget>
   <eLabel text="SNR:" position="1746,850" size="55,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" />
@@ -149,7 +149,8 @@
   <widget source="session.CurrentService" render="Label" position="474,955" size="60,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1">
     <convert type="BlackHarmonygExtraInfo">sid</convert>
   </widget>
-  <widget source="session.CurrentService" render="Label" position="696,763" size="290,36" zPosition="0" font="HD_Thin; 26" valign="top" noWrap="1" backgroundColor="black" transparent="1" foregroundColor="lemon" halign="right">
+  <!--Provider-->
+  <widget source="session.CurrentService" render="Label" position="676,763" size="290,36" zPosition="0" font="HD_Thin; 26" valign="top" noWrap="1" backgroundColor="black" transparent="1" foregroundColor="lemon" halign="right">
     <convert type="BlackHarmonyServiceName2">%P</convert>
   </widget>
   <widget source="session.CurrentService" render="Label" position="599,955" zPosition="2" size="750,25" font="Roboto_HD; 22" valign="top" halign="left" transparent="1" backgroundColor="black">

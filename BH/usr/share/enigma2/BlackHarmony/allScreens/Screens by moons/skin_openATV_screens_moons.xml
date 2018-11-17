@@ -567,7 +567,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
     <widget name="Tuner" position="25,206" size="55,20" zPosition="2" font="Roboto_HD; 16" halign="left" foregroundColor="white" borderWidth="1" borderColor="black" transparent="1" />
     <widget name="tunerName" position="85,206" size="70,20" zPosition="2" font="Roboto_HD; 16" halign="left" foregroundColor="white" borderWidth="1" borderColor="black" transparent="1" />
     <widget name="turnSpeed" position="25,230" size="120,20" zPosition="2" font="Roboto_HD; 16" halign="left" foregroundColor="white" borderWidth="1" borderColor="black" transparent="1" />
-    <widget source="session.FrontendStatus" render="Progress" position="25,255" size="130,15" pixmap="BlackHarmony/gfx/bar_snr_s.png" zPosition="2" borderWidth="1" borderColor="dark_grey">
+    <widget source="session.FrontendStatus" render="Progress" position="25,255" size="130,15" pixmap="BlackHarmony/gfx/bar_snr_130x15.png" zPosition="2" borderWidth="1" borderColor="dark_grey">
       <convert type="FrontendInfo">SNR</convert>
     </widget>
   </screen>

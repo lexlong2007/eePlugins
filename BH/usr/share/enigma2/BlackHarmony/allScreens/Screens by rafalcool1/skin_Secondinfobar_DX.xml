@@ -9,7 +9,7 @@
   <widget source="session.CurrentService" render="Label" position="511,524" size="890,60" font="HD_Thin; 17" backgroundColor="black" transparent="1" halign="left" valign="center" foregroundColor="lemon">
   <convert type="PliExtraInfo">ServiceInfo</convert>
   </widget>
-  <widget source="session.FrontendStatus" render="Progress" position="681,320" pixmap="BlackHarmony/gfx/bar_snr.png" size="470,25" borderWidth="1" borderColor="dark_grey" transparent="1">
+  <widget source="session.FrontendStatus" render="Progress" position="681,320" pixmap="BlackHarmony/gfx/bar_snr_470x25.png" size="470,25" borderWidth="1" borderColor="dark_grey" transparent="1">
     <convert type="FrontendInfo">SNR</convert>
   </widget>
   <eLabel name="snr" text="SNRdB:" position="550,370" size="120,30" font="Roboto_HD; 26" halign="right" backgroundColor="black" transparent="1" foregroundColor="yellow" />
@@ -19,7 +19,7 @@
     <convert type="FrontendInfo">SNRdB</convert>
   </widget>
   <eLabel name="snr" text="SNR:" position="590,320" size="80,30" font="Roboto_HD; 26" halign="right" backgroundColor="black" transparent="1" foregroundColor="yellow" />
-  <widget source="session.FrontendStatus" render="Progress" position="680,370" pixmap="BlackHarmony/gfx/bar_snr.png" size="470,25" borderWidth="1" borderColor="dark_grey" transparent="1">
+  <widget source="session.FrontendStatus" render="Progress" position="680,370" pixmap="BlackHarmony/gfx/bar_snr_470x25.png" size="470,25" borderWidth="1" borderColor="dark_grey" transparent="1">
     <convert type="FrontendInfo">SNR</convert>
   </widget>
   <widget source="session.FrontendStatus" render="Label" position="1166,370" size="120,30" font="Roboto_HD; 26" backgroundColor="black" transparent="1">
