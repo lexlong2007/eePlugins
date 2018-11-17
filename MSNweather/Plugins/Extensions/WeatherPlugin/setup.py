@@ -23,16 +23,14 @@
 # for localized messages
 from . import _
 
-from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, \
-    RT_VALIGN_CENTER
+from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_VALIGN_CENTER
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Components.MenuList import MenuList
 from Components.Sources.StaticText import StaticText
 from Components.ActionMap import ActionMap
 from Components.ConfigList import ConfigList, ConfigListScreen
-from Components.config import ConfigSubsection, ConfigText, ConfigSelection, \
-    getConfigListEntry, config, configfile
+from Components.config import ConfigSubsection, ConfigText, ConfigSelection, getConfigListEntry, config, configfile
 from xml.etree.cElementTree import fromstring as cet_fromstring
 from twisted.web.client import getPage
 from urllib import quote as urllib_quote
