@@ -17,7 +17,7 @@ config.plugins.startuptostandby.WhenWasInStandbyOnly = ConfigEnableDisable(defau
 statusFile='/etc/enigma2/inStandby'
 
 #DEBUG
-DBG=True
+DBG=False
 append2file=False
 if DBG:
     def printDEBUG( myText):

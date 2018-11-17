@@ -85,3 +85,7 @@
         <widget position="460,440" size="120,24" font="Regular;22" zPosition="5" transparent="1" foregroundColor="white" render="Label" source="session.CurrentService" valign="center">
             <convert type="j00zekLCD4KODI">query,KODIstateTable['PlayerProperties']['currentaudiostream']['codec']</convert>
         </widget>
+<!-- current Time -->
+        <widget source="global.CurrentTime" render="Label" position="10,10" size="160,25" font="Regular;22" halign="center" valign="center" noWrap="1">
+            <convert type="j00zekLCD4KODI">currentTime,hideWhenKODInotPlaying</convert>
+        </widget>
