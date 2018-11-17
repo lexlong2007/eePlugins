@@ -3,7 +3,7 @@
 # e.g. picontype="zzpicon"
 import os, re, unicodedata
 from Renderer import Renderer
-from enigma import ePixmap, ePicLoad
+from enigma import ePixmap #, ePicLoad
 from Tools.Alternatives import GetWithAlternative
 from Tools.Directories import pathExists, SCOPE_SKIN_IMAGE, resolveFilename
 try:
@@ -133,8 +133,8 @@ class j00zekPicons(Renderer):
 
     def __init__(self):
         Renderer.__init__(self)
-        self.PicLoad = ePicLoad()
-        self.PicLoad.PictureData.get().append(self.updatePicon)
+        #self.PicLoad = ePicLoad()
+        #self.PicLoad.PictureData.get().append(self.updatePicon)
         self.piconsize = (0, 0)
         self.pngname = ''
         self.piconType = 'picon'
@@ -178,12 +178,12 @@ class j00zekPicons(Renderer):
     def postWidgetCreate(self, instance):
         self.changed((self.CHANGED_DEFAULT,))
 
-    def updatePicon(self, picInfo = None):
-        ptr = self.PicLoad.getData()
-        if ptr is not None:
-            self.instance.setPixmap(ptr.__deref__())
-            self.instance.show()
-        return
+    #def updatePicon(self, picInfo = None):
+    #    ptr = self.PicLoad.getData()
+    #    if ptr is not None:
+    #        self.instance.setPixmap(ptr.__deref__())
+    #        self.instance.show()
+    #    return
 
     def changed(self, what):
         if self.instance:

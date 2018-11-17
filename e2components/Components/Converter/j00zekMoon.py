@@ -5,6 +5,7 @@
 from enigma import eTimer
 from Components.Converter.Converter import Converter
 from Components.Element import cached
+from Components.j00zekMoonCalculations import phase, get_julian_datetime, phase_string
 from Components.Language import language
 #from decimal import Decimal as dec
 import math, datetime
@@ -14,17 +15,22 @@ if DBG: from Components.j00zekComponents import j00zekDEBUG
 
 #simple and dirty translation
 if language.getLanguage() == 'pl_PL':
-    MoonPhasesDict = { 0: "N\xc3\xb3w", 1: "Sierp przybywaj\xc4\x85cy", 2: "I kwadra", 3: "Przybywaj\xc4\x85cy ksi\xc4\x99\xc5\xbcyc garbaty", 
-                       4: "Pe\xc5\x82nia", 5: "Ubywaj\xc4\x85cy ksi\xc4\x99\xc5\xbcyc garbaty", 6: "III kwadra", 7: "Sierp ubywaj\xc4\x85cy"}
+    MoonPhasesDict = {  "New Moon": "N\xc3\xb3w", "Waxing Crescent": "Sierp przybywaj\xc4\x85cy", "First Quarter": "I kwadra",
+                        "Waxing Gibbous": "Przybywaj\xc4\x85cy ksi\xc4\x99\xc5\xbcyc garbaty", "Full Moon": "Pe\xc5\x82nia",
+                        "Waning Gibbous": "Ubywaj\xc4\x85cy ksi\xc4\x99\xc5\xbcyc garbaty", "Last Quarter": "III kwadra",
+                        "Waning Crescent": "Sierp ubywaj\xc4\x85cy"}
 else:
-    MoonPhasesDict = { 0: "New Moon", 1: "Waxing Crescent", 2: "First Quarter", 3: "Waxing Gibbous",
-                       4: "Full Moon", 5: "Waning Gibbous", 6: "Last Quarter", 7: "Waning Crescent"}
+    MoonPhasesDict = { "New Moon": "New Moon", "Waxing Crescent": "Waxing Crescent", "First Quarter": "First Quarter",
+                        "Waxing Gibbous": "Waxing Gibbous", "Full Moon": "Full Moon",
+                        "Waning Gibbous": "Waning Gibbous", "Last Quarter": "Last Quarter",
+                        "Waning Crescent": "Waning Crescent"}
 
 
 class j00zekMoon(Converter, object):
     PHASE = 0
     ICON = 1
     LUMINATION = 2
+    LUMINATION3 = 3
     
     def __init__(self, arg):
         Converter.__init__(self, arg)
@@ -35,46 +41,31 @@ class j00zekMoon(Converter, object):
             self.type = self.ICON
         elif arg in ('lumination', 'oswietlenie'):
             self.type = self.LUMINATION
+        elif arg in ('lumination3', 'oswietlenie3'):
+            self.type = self.LUMINATION3
         else:
             self.type = 'unknown'
-        
-
-    def currCyclePerc(self): 
-        date = datetime.date.today()
-        known_new_moon = datetime.date(2017,1,28)
-        lunar_cycle = 29.530588853   # days per lunation
-        phase_length = lunar_cycle/8 # days per phase
-        days = (date - known_new_moon).days - 1 #we count from next day of newmoon
-        days = math.fmod(days + phase_length/2, lunar_cycle)
-        return days/lunar_cycle
-    
-    def currPhase(self, CyclePerc): 
-        index = CyclePerc * 8 + 0.5
-        index = math.floor(index)
-        return MoonPhasesDict[int(index) & 7]
-   
+            
     def myRound(self, x, base=5):
         return int(base * round(float(x)/base))
         
-    def currPhaseIcon(self, CyclePerc): 
-        return self.myRound(CyclePerc * 100)
-        
-    def currPhaseLuma(self, CyclePerc):
-        return (math.cos(((CyclePerc + .5) / .5 * math.pi)) + 1) * .5 * 100
-      
     @cached
     def getText(self):
-        CyclePerc = self.currCyclePerc()
+        phaseDict = phase(get_julian_datetime(datetime.datetime.now()))
         if self.type == self.PHASE:
-            retTXT = self.currPhase(CyclePerc)
-            if DBG: j00zekDEBUG("[j00zekMoon:getText] currentPhase: %s (%s)" % (retTXT, CyclePerc))
+            retTXT = MoonPhasesDict[phase_string(phaseDict['phase'])]
+            if DBG: j00zekDEBUG("[j00zekMoon:getText] currentPhase: %s" % (retTXT))
         elif self.type == self.ICON:
-            retTXT = self.currPhaseIcon(CyclePerc)
-            if DBG: j00zekDEBUG("[j00zekMoon:getText] phaseIcon: %s (%s)" % (retTXT, CyclePerc))
+            retTXT = self.myRound(phaseDict['illuminated'] * 100, 5)
+            if DBG: j00zekDEBUG("[j00zekMoon:getText] phaseIcon: %s" % (retTXT))
         elif self.type == self.LUMINATION:
-            retTXT = self.currPhaseLuma(CyclePerc)
+            retTXT = phaseDict['illuminated'] * 100
             retTXT = str(round(retTXT,1)) + '%'
-            if DBG: j00zekDEBUG("[j00zekMoon:getText] moon Lumination: %s (%s)" % (retTXT, CyclePerc))
+            if DBG: j00zekDEBUG("[j00zekMoon:getText] moon Lumination: %s" % (retTXT))
+        elif self.type == self.LUMINATION3:
+            retTXT = phaseDict['illuminated'] * 100
+            retTXT = str(round(retTXT,3)) + '%'
+            if DBG: j00zekDEBUG("[j00zekMoon:getText] moon Lumination3: %s" % (retTXT))
         else:
             if DBG: j00zekDEBUG("[j00zekMoon:getText] Unknown type requested")
             retTXT = "---"

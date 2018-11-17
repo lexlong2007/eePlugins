@@ -33,6 +33,7 @@ from Components.Element import cached
 from Components.Language import language
 from Poll import Poll 
 from datetime import timedelta
+from time import localtime
 
 #if enabled log into /tmp/e2components.log
 DBG = False
@@ -74,7 +75,13 @@ statesDefTable = {'powerOn': False,
                   'PlayerItem': {},
                   'PlayerProperties': {}
                  }
-KODIstateTable = statesDefTable.copy() 
+KODIstateTable = statesDefTable.copy()
+
+def getState(itemName):
+    try:
+        return KODIstateTable[itemName]
+    except:
+        return None
 
 class j00zekLCD4KODI(Poll, Converter, object):
     UNKNOWN = 0
@@ -92,6 +99,7 @@ class j00zekLCD4KODI(Poll, Converter, object):
     HIDEWHENPLAYING = 12
     SHOWHENAPLAYING = 13
     QUERY = 14
+    CURRENTTIME = 15
     
     def __init__(self, arg):
         Converter.__init__(self, arg)
@@ -117,6 +125,7 @@ class j00zekLCD4KODI(Poll, Converter, object):
         elif 'leftmins' in args: self.requested = self.LEFTMINS
         elif 'hideWhenKODIplaying' in args: self.requested = self.HIDEWHENPLAYING
         elif 'showWhenKODIplaying' in args: self.requested = self.SHOWHENAPLAYING
+        elif 'currentTime' in args: self.requested = self.CURRENTTIME
         elif 'query' in args[0]: 
             self.requested = self.QUERY
             self.userQuery = args[1]
@@ -141,7 +150,7 @@ class j00zekLCD4KODI(Poll, Converter, object):
             self.running = True
             self.checkState()
             self.running = False
-            if DBG: j00zekDEBUG("[j00zekLCD4KODI:getText]")
+            if DBG: j00zekDEBUG("[j00zekLCD4KODI:changed]")
             if self.hideWhenNotplaying and len(self.downstream_elements):
                 if KODIstateTable['isPlaying']:
                     self.downstream_elements[0].visible = True
@@ -174,7 +183,7 @@ class j00zekLCD4KODI(Poll, Converter, object):
             val = 0
         elif self.requested == self.PROGRESS:
             val = KODIstateTable['progress']
-        if DBG: j00zekDEBUG("[j00zekLCD4KODI:getText] self.requested=%s, val='%s'" % (self.requested, val))
+        if DBG: j00zekDEBUG("[j00zekLCD4KODI:getValue] self.requested=%s, val='%s'" % (self.requested, val))
         return int(val)
 
     value = property(getValue)
@@ -215,6 +224,11 @@ class j00zekLCD4KODI(Poll, Converter, object):
                 if DBG: j00zekDEBUG("[j00zekLCD4KODI:checkState] executing retTXT=%s" %  self.userQuery)
                 exec("retTXT=str(%s)" % self.userQuery)
                 #retTXT=str(KODIstateTable['VideoPlayerState']['item']['streamdetails']['video'][0]['codec'])+' '+str(KODIstateTable['VideoPlayerState']['item']['streamdetails']['video'][0]['width']) 
+            elif self.requested == self.CURRENTTIME:
+                time = self.source.time
+                if not time is None:
+                    t = localtime(time)
+                    retTXT = "%2d:%02d" % (t.tm_hour, t.tm_min)
             else:
                 retTXT = ''
             
