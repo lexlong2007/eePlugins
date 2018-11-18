@@ -35,11 +35,11 @@
     <convert type="BlackHarmonygExtraTuner">ServiceNumberName</convert>
   </widget>
   <eLabel text="SNR:" position="1408,933" size="55,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" />
-  <widget source="session.FrontendStatus" render="Label" position="1804,937" size="60,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" zPosition="1" foregroundColor="green">
+  <widget source="session.FrontendStatus" render="Label" position="1820,937" size="60,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" zPosition="1" foregroundColor="green">
     <convert type="FrontendInfo">SNR</convert>
   </widget>
   <eLabel text="AGC:" position="1408,960" size="55,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" />
-  <widget source="session.FrontendStatus" render="Label" position="1804,962" size="60,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" zPosition="1" foregroundColor="green">
+  <widget source="session.FrontendStatus" render="Label" position="1820,962" size="60,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" zPosition="1" foregroundColor="green">
     <convert type="FrontendInfo">AGC</convert>
   </widget>
       <widget source="session.FrontendStatus" render="Progress" position="1465,945" size="345,8" zPosition="1" pixmap="BlackHarmony/gfx/bar_snr_345x8.png" transparent="1">
@@ -414,87 +414,87 @@
     </widget>
     <eLabel name="snr" text="TERAZ:" position="50,40" size="130,50" font="HD_Thin; 30" halign="left" backgroundColor="black" transparent="1" foregroundColor="green" />
     <eLabel name="snr" text="POTEM:" position="50,390" size="165,50" font="HD_Thin; 30" halign="left" backgroundColor="black" transparent="1" foregroundColor="red" />
-    <widget noWrap="1" font="HD_Thin; 32" render="Label" position="979,40" size="850,50" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" foregroundColor="yellow" backgroundColor="black">
-      <convert type="MSNWeather">city</convert>
+    <widget noWrap="1" font="HD_Thin; 32" render="Label" position="979,40" size="850,50" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="center" transparent="1" foregroundColor="yellow" backgroundColor="black">
+      <convert type="BlackHarmonyMSNWeather">city</convert>
     </widget>
     <!-- Week 2 -->
-    <widget alphatest="blend" render="MSNWeatherPixmap" position="997,453" size="150,150" source="session.MSNWeather" transparent="1" zPosition="8">
-      <convert type="MSNWeather">weathericon,day2,/usr/share/enigma2/BlackHarmony/weather_icons/,png</convert>
+    <widget alphatest="blend" render="MSNWeatherPixmap" position="997,453" size="150,150" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="8">
+      <convert type="BlackHarmonyMSNWeather">weathericon,day2,/usr/share/enigma2/BlackHarmony/weather_icons/,png</convert>
     </widget>
-    <widget noWrap="1" foregroundColor="pastel" backgroundColor="background" font="HD_Thin; 23" render="Label" position="1188,415" size="75,35" source="session.MSNWeather" zPosition="3" halign="center" transparent="1">
-      <convert type="MSNWeather">temperature_high,day3</convert>
+    <widget noWrap="1" foregroundColor="pastel" backgroundColor="background" font="HD_Thin; 23" render="Label" position="1188,415" size="75,35" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="center" transparent="1">
+      <convert type="BlackHarmonyMSNWeather">temperature_high,day3</convert>
     </widget>
-    <widget noWrap="1" backgroundColor="black" font="HD_Thin; 24" render="Label" position="1187,378" size="225,35" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" foregroundColor="pastel">
-      <convert type="MSNWeather">weekday,day3</convert>
+    <widget noWrap="1" backgroundColor="black" font="HD_Thin; 24" render="Label" position="1187,378" size="225,35" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="center" transparent="1" foregroundColor="pastel">
+      <convert type="BlackHarmonyMSNWeather">weekday,day3</convert>
     </widget>
-    <widget noWrap="1" foregroundColor="blue" backgroundColor="background" font="HD_Thin; 23" render="Label" position="1337,415" size="75,35" source="session.MSNWeather" zPosition="3" halign="center" transparent="1">
-      <convert type="MSNWeather">temperature_low,day3</convert>
+    <widget noWrap="1" foregroundColor="blue" backgroundColor="background" font="HD_Thin; 23" render="Label" position="1337,415" size="75,35" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="center" transparent="1">
+      <convert type="BlackHarmonyMSNWeather">temperature_low,day3</convert>
     </widget>
-    <widget alphatest="blend" render="MSNWeatherPixmap" position="1226,453" size="150,150" source="session.MSNWeather" transparent="1" zPosition="8">
-      <convert type="MSNWeather">weathericon,day3,/usr/share/enigma2/BlackHarmony/weather_icons/,png</convert>
+    <widget alphatest="blend" render="MSNWeatherPixmap" position="1226,453" size="150,150" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="8">
+      <convert type="BlackHarmonyMSNWeather">weathericon,day3,/usr/share/enigma2/BlackHarmony/weather_icons/,png</convert>
     </widget>
-    <widget noWrap="1" foregroundColor="pastel" backgroundColor="background" font="HD_Thin; 23" render="Label" position="960,415" size="75,35" source="session.MSNWeather" zPosition="3" halign="center" transparent="1">
-      <convert type="MSNWeather">temperature_high,day2</convert>
+    <widget noWrap="1" foregroundColor="pastel" backgroundColor="background" font="HD_Thin; 23" render="Label" position="960,415" size="75,35" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="center" transparent="1">
+      <convert type="BlackHarmonyMSNWeather">temperature_high,day2</convert>
     </widget>
-    <widget noWrap="1" backgroundColor="black" font="HD_Thin; 24" render="Label" position="960,378" size="225,35" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" foregroundColor="pastel">
-      <convert type="MSNWeather">weekday,day2</convert>
+    <widget noWrap="1" backgroundColor="black" font="HD_Thin; 24" render="Label" position="960,378" size="225,35" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="center" transparent="1" foregroundColor="pastel">
+      <convert type="BlackHarmonyMSNWeather">weekday,day2</convert>
     </widget>
-    <widget noWrap="1" foregroundColor="blue" backgroundColor="background" font="HD_Thin; 23" render="Label" position="1110,415" size="75,35" source="session.MSNWeather" zPosition="3" halign="center" transparent="1">
-      <convert type="MSNWeather">temperature_low,day2</convert>
+    <widget noWrap="1" foregroundColor="blue" backgroundColor="background" font="HD_Thin; 23" render="Label" position="1110,415" size="75,35" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="center" transparent="1">
+      <convert type="BlackHarmonyMSNWeather">temperature_low,day2</convert>
     </widget>
-    <widget alphatest="blend" render="MSNWeatherPixmap" position="1455,453" size="150,150" source="session.MSNWeather" transparent="1" zPosition="8">
-      <convert type="MSNWeather">weathericon,day4,/usr/share/enigma2/BlackHarmony/weather_icons/,png</convert>
+    <widget alphatest="blend" render="MSNWeatherPixmap" position="1455,453" size="150,150" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="8">
+      <convert type="BlackHarmonyMSNWeather">weathericon,day4,/usr/share/enigma2/BlackHarmony/weather_icons/,png</convert>
     </widget>
-    <widget noWrap="1" foregroundColor="pastel" backgroundColor="background" font="HD_Thin; 23" render="Label" position="1414,415" size="75,35" source="session.MSNWeather" zPosition="3" halign="center" transparent="1">
-      <convert type="MSNWeather">temperature_high,day4</convert>
+    <widget noWrap="1" foregroundColor="pastel" backgroundColor="background" font="HD_Thin; 23" render="Label" position="1414,415" size="75,35" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="center" transparent="1">
+      <convert type="BlackHarmonyMSNWeather">temperature_high,day4</convert>
     </widget>
-    <widget noWrap="1" backgroundColor="black" font="HD_Thin; 24" render="Label" position="1414,378" size="225,35" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" foregroundColor="pastel">
-      <convert type="MSNWeather">weekday,day4</convert>
+    <widget noWrap="1" backgroundColor="black" font="HD_Thin; 24" render="Label" position="1414,378" size="225,35" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="center" transparent="1" foregroundColor="pastel">
+      <convert type="BlackHarmonyMSNWeather">weekday,day4</convert>
     </widget>
-    <widget noWrap="1" foregroundColor="blue" backgroundColor="background" font="HD_Thin; 23" render="Label" position="1565,415" size="75,35" source="session.MSNWeather" zPosition="3" halign="center" transparent="1">
-      <convert type="MSNWeather">temperature_low,day4</convert>
+    <widget noWrap="1" foregroundColor="blue" backgroundColor="background" font="HD_Thin; 23" render="Label" position="1565,415" size="75,35" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="center" transparent="1">
+      <convert type="BlackHarmonyMSNWeather">temperature_low,day4</convert>
     </widget>
-    <widget alphatest="blend" render="MSNWeatherPixmap" position="1683,453" size="150,150" source="session.MSNWeather" transparent="1" zPosition="8">
-      <convert type="MSNWeather">weathericon,day5,/usr/share/enigma2/BlackHarmony/weather_icons/,png</convert>
+    <widget alphatest="blend" render="MSNWeatherPixmap" position="1683,453" size="150,150" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="8">
+      <convert type="BlackHarmonyMSNWeather">weathericon,day5,/usr/share/enigma2/BlackHarmony/weather_icons/,png</convert>
     </widget>
-    <widget noWrap="1" foregroundColor="blue" backgroundColor="background" font="HD_Thin; 23" render="Label" position="1793,415" size="75,35" source="session.MSNWeather" zPosition="3" halign="center" transparent="1">
-      <convert type="MSNWeather">temperature_low,day5</convert>
+    <widget noWrap="1" foregroundColor="blue" backgroundColor="background" font="HD_Thin; 23" render="Label" position="1793,415" size="75,35" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="center" transparent="1">
+      <convert type="BlackHarmonyMSNWeather">temperature_low,day5</convert>
     </widget>
-    <widget noWrap="1" backgroundColor="black" font="HD_Thin; 24" render="Label" position="1642,378" size="225,35" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" foregroundColor="pastel">
-      <convert type="MSNWeather">weekday,day5</convert>
+    <widget noWrap="1" backgroundColor="black" font="HD_Thin; 24" render="Label" position="1642,378" size="225,35" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="center" transparent="1" foregroundColor="pastel">
+      <convert type="BlackHarmonyMSNWeather">weekday,day5</convert>
     </widget>
-    <widget noWrap="1" foregroundColor="pastel" backgroundColor="background" font="HD_Thin; 23" render="Label" position="1642,415" size="75,35" source="session.MSNWeather" zPosition="3" halign="center" transparent="1">
-      <convert type="MSNWeather">temperature_high,day5</convert>
+    <widget noWrap="1" foregroundColor="pastel" backgroundColor="background" font="HD_Thin; 23" render="Label" position="1642,415" size="75,35" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="center" transparent="1">
+      <convert type="BlackHarmonyMSNWeather">temperature_high,day5</convert>
     </widget>
-    <widget alphatest="blend" render="MSNWeatherPixmap" position="981,104" size="200,200" source="session.MSNWeather" transparent="1" zPosition="5">
-      <convert type="MSNWeather">weathericon,current,/usr/share/enigma2/BlackHarmony/weather_icons/,png</convert>
+    <widget alphatest="blend" render="MSNWeatherPixmap" position="981,104" size="200,200" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+      <convert type="BlackHarmonyMSNWeather">weathericon,current,/usr/share/enigma2/BlackHarmony/weather_icons/,png</convert>
     </widget>
-    <widget noWrap="1" backgroundColor="black" font="HD_Thin; 38" render="Label" position="1265,98" size="201,60" source="session.MSNWeather" zPosition="3" halign="left" transparent="1" foregroundColor="lemon">
-      <convert type="MSNWeather">temperature_current</convert>
+    <widget noWrap="1" backgroundColor="black" font="HD_Thin; 38" render="Label" position="1265,98" size="201,60" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="left" transparent="1" foregroundColor="lemon">
+      <convert type="BlackHarmonyMSNWeather">temperature_current</convert>
     </widget>
-    <widget noWrap="1" backgroundColor="background" font="HD_Thin; 28" render="Label" position="1265,158" size="600,50" source="session.MSNWeather" zPosition="3" halign="left" transparent="1">
-      <convert type="MSNWeather">temperature_text,current</convert>
+    <widget noWrap="1" backgroundColor="background" font="HD_Thin; 28" render="Label" position="1265,158" size="600,50" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="left" transparent="1">
+      <convert type="BlackHarmonyMSNWeather">temperature_text,current</convert>
     </widget>
     <eLabel name="new eLabel" position="1265,206" size="90,40" font="HD_Thin; 28" foregroundColor="white" backgroundColor="black" transparent="1" halign="left" text="maks." />
-    <widget noWrap="1" backgroundColor="black" font="HD_Thin; 30" render="Label" position="1354,206" size="90,40" source="session.MSNWeather" zPosition="3" halign="left" transparent="1" foregroundColor="pastel">
-      <convert type="MSNWeather">temperature_high,day1</convert>
+    <widget noWrap="1" backgroundColor="black" font="HD_Thin; 30" render="Label" position="1354,206" size="90,40" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="left" transparent="1" foregroundColor="pastel">
+      <convert type="BlackHarmonyMSNWeather">temperature_high,day1</convert>
     </widget>
     <eLabel name="new eLabel" position="1449,206" size="90,40" font="HD_Thin; 28" foregroundColor="white" backgroundColor="black" transparent="1" halign="left" text="min." />
-    <widget noWrap="1" backgroundColor="black" font="HD_Thin; 30" render="Label" position="1517,206" size="90,40" source="session.MSNWeather" zPosition="3" halign="left" transparent="1" foregroundColor="blue">
-      <convert type="MSNWeather">temperature_low,day1</convert>
+    <widget noWrap="1" backgroundColor="black" font="HD_Thin; 30" render="Label" position="1517,206" size="90,40" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="left" transparent="1" foregroundColor="blue">
+      <convert type="BlackHarmonyMSNWeather">temperature_low,day1</convert>
     </widget>
     <ePixmap position="1492,415" size="70,28" pixmap="BlackHarmony/weather_icons/temp_high_low1.png" alphatest="blend" zPosition="22" />
     <ePixmap position="1265,415" size="70,28" pixmap="BlackHarmony/weather_icons/temp_high_low1.png" alphatest="blend" zPosition="22" />
     <ePixmap position="1721,415" size="70,28" pixmap="BlackHarmony/weather_icons/temp_high_low1.png" alphatest="blend" zPosition="22" />
     <ePixmap position="1039,415" size="70,28" pixmap="BlackHarmony/weather_icons/temp_high_low1.png" alphatest="blend" zPosition="22" />
-    <widget noWrap="1" backgroundColor="background" font="HD_Thin; 28" render="Label" position="1265,265" size="569,40" source="session.MSNWeather" zPosition="8" halign="left" transparent="1">
-      <convert type="MSNWeather">winddisplay</convert>
+    <widget noWrap="1" backgroundColor="background" font="HD_Thin; 28" render="Label" position="1265,265" size="569,40" source="session.BlackHarmonyMSNWeather" zPosition="8" halign="left" transparent="1">
+      <convert type="BlackHarmonyMSNWeather">winddisplay</convert>
     </widget>
     <ePixmap pixmap="BlackHarmony/weather_icons/wind.png" position="1211,256" zPosition="1" size="50,50" alphatest="blend" name="lend" />
     <ePixmap pixmap="BlackHarmony/weather_icons/umbrella.png" position="1203,313" zPosition="1" size="50,50" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/weather_icons/temp.png" position="1198,102" zPosition="1" size="50,50" alphatest="blend" />
-    <widget noWrap="1" backgroundColor="background" font="HD_Thin; 28" render="Label" position="1266,323" size="106,50" source="session.MSNWeather" zPosition="8" halign="left" transparent="1" valign="bottom">
-      <convert type="MSNWeather">humidity</convert>
+    <widget noWrap="1" backgroundColor="background" font="HD_Thin; 28" render="Label" position="1266,323" size="106,50" source="session.BlackHarmonyMSNWeather" zPosition="8" halign="left" transparent="1" valign="bottom">
+      <convert type="BlackHarmonyMSNWeather">humidity</convert>
     </widget>
 	 <eLabel text="%" position="1320,323" size="55,25" font="Roboto_HD; 26" backgroundColor="black" halign="left" transparent="1" />
  
@@ -510,7 +510,7 @@
   <ePixmap pixmap="BlackHarmony/icons/Weather/wsch.png" position="1770,175" zPosition="1" size="99,50" alphatest="blend" />
   <ePixmap pixmap="BlackHarmony/icons/Weather/zach.png" position="1770,270" zPosition="1" size="99,50" alphatest="blend" />
   
-  <widget backgroundColor="background" font="Regular; 19" foregroundColor="light_yellow" halign="center" position="1717,25" render="Label" size="208,25" source="global.CurrentTime" transparent="1" zPosition="1">
+  <widget backgroundColor="background" font="Regular; 19" foregroundColor="light_yellow" halign="center" position="1670,25" render="Label" size="208,25" source="global.CurrentTime" transparent="1" zPosition="1">
 <convert type="j00zekMoon">faza</convert>
 </widget> 
 <widget alphatest="on" path="/usr/share/enigma2/BlackHarmony/icons" picontype="MoonPhase" position="1775,55" render="j00zekPicons" showdefaultpic="no" size="90,90" source="global.CurrentTime" zPosition="8">

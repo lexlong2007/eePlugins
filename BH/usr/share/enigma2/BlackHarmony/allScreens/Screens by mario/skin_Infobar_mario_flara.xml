@@ -288,7 +288,7 @@
   <widget backgroundColor="black" font="Roboto_HD; 22" foregroundColor="yellow" halign="left" position="995,796" render="Label" size="170,25" source="session.CurrentService" transparent="1">
   <convert type="j00zekVR">VideoResolution</convert>
   </widget>
-  <widget backgroundColor="black" font="Roboto_HD; 28" foregroundColor="blue" halign="left" noWrap="1" position="635,740" render="Label" size="450,60" source="global.CurrentTime" transparent="1" zPosition="3">
+  <widget backgroundColor="black" font="Roboto_HD; 28" foregroundColor="blue" halign="right" noWrap="1" position="635,740" render="Label" size="450,60" source="global.CurrentTime" transparent="1" zPosition="3">
   <convert type="BlackHarmonyimieniny" />
   </widget> 
 #--pogoda--# 
@@ -699,7 +699,7 @@
   <widget backgroundColor="black" font="Roboto_HD; 22" foregroundColor="yellow" halign="left" position="995,796" render="Label" size="170,25" source="session.CurrentService" transparent="1">
    <convert type="j00zekVR">VideoResolution</convert>
   </widget>
-  <widget backgroundColor="black" font="Roboto_HD; 28" foregroundColor="blue" halign="left" noWrap="1" position="635,740" render="Label" size="450,60" source="global.CurrentTime" transparent="1" zPosition="3">
+  <widget backgroundColor="black" font="Roboto_HD; 28" foregroundColor="blue" halign="right" noWrap="1" position="635,740" render="Label" size="450,60" source="global.CurrentTime" transparent="1" zPosition="3">
     <convert type="BlackHarmonyimieniny" />
   </widget>
 </screen>
