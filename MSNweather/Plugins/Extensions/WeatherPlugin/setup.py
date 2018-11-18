@@ -30,10 +30,11 @@ from Components.MenuList import MenuList
 from Components.Sources.StaticText import StaticText
 from Components.ActionMap import ActionMap
 from Components.ConfigList import ConfigList, ConfigListScreen
-from Components.config import ConfigSubsection, ConfigText, ConfigSelection, getConfigListEntry, config, configfile
+from Components.config import ConfigSubsection, ConfigText, ConfigSelection, getConfigListEntry, config, configfile, ConfigEnableDisable
 from xml.etree.cElementTree import fromstring as cet_fromstring
 from twisted.web.client import getPage
 from urllib import quote as urllib_quote
+import os
 
 def initWeatherPluginEntryConfig():
     s = ConfigSubsection()
@@ -42,6 +43,11 @@ def initWeatherPluginEntryConfig():
     s.weatherlocationcode = ConfigText(default = "", visible_width = 100, fixed_size = False)
     s.geolatitude = ConfigText(default = "auto", visible_width = 100, fixed_size = False)
     s.geolongitude = ConfigText(default = "auto", visible_width = 100, fixed_size = False)
+    if os.path.exists('/usr/share/enigma2/animatedWeatherIcons'):
+        s.AnimInPluginEnabled = ConfigEnableDisable(default = False)
+    else:
+        s.AnimInPluginEnabled = ConfigEnableDisable(default = True)
+    s.AnimInInfobarEnabled = ConfigEnableDisable(default = False)
     config.plugins.WeatherPlugin.Entry.append(s)
     return s
 
@@ -199,7 +205,9 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
             getConfigListEntry(_("Location code"), self.current.weatherlocationcode),
             getConfigListEntry(_("System"), self.current.degreetype),
             getConfigListEntry(_("Geo Latitude"), self.current.geolatitude),
-            getConfigListEntry(_("Geo Longitude"), self.current.geolongitude)
+            getConfigListEntry(_("Geo Longitude"), self.current.geolongitude),
+            getConfigListEntry(_("Animated plugin icons"), self.current.AnimInPluginEnabled),
+            getConfigListEntry(_("Animated infobar icons"), self.current.AnimInInfobarEnabled)
         ]
 
         ConfigListScreen.__init__(self, cfglist, session)
@@ -276,8 +284,6 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
             self.current.weatherlocationcode.value = result[0]
             self.current.city.value = result[1]
     
-        
-        
 class MSNWeatherPluginSearch(Screen):
     skin = """
         <screen name="MSNWeatherPluginSearch" position="center,center" size="550,400">
@@ -317,7 +323,6 @@ class MSNWeatherPluginSearch(Screen):
         except: sel = None
         self.close(sel)
         
-
 class MSNWeatherPluginSearchResultList(MenuList):
     def __init__(self, list, enableWrapAround = True):
         MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)

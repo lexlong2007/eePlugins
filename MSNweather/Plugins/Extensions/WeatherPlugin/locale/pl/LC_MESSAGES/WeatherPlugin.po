@@ -103,3 +103,9 @@ msgstr "Stopnie Fahrenheita "
 
 msgid "metric system"
 msgstr "Stopnie Celsjusza"
+
+msgid "Animated plugin icons"
+msgstr "Animacja ikon we wtyczce"
+
+msgid "Animated infobar icons"
+msgstr "Animacja ikon na infobarze"

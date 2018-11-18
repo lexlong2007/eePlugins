@@ -1,4 +1,4 @@
-DBG=True
+DBG=False
 myDEBUGfile = '/tmp/WeatherPlugin.log'
 
 append2file=False
