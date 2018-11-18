@@ -10,7 +10,7 @@ from Components.Language import language
 #from decimal import Decimal as dec
 import math, datetime
 
-DBG = True
+DBG = False
 if DBG: from Components.j00zekComponents import j00zekDEBUG
 
 #simple and dirty translation
@@ -56,7 +56,7 @@ class j00zekMoon(Converter, object):
             retTXT = MoonPhasesDict[phase_string(phaseDict['phase'])]
             if DBG: j00zekDEBUG("[j00zekMoon:getText] currentPhase: %s" % (retTXT))
         elif self.type == self.ICON:
-            retTXT = self.myRound(phaseDict['illuminated'] * 100, 5)
+            retTXT = self.myRound(phaseDict['phase'] * 100, 5)
             if DBG: j00zekDEBUG("[j00zekMoon:getText] phaseIcon: %s" % (retTXT))
         elif self.type == self.LUMINATION:
             retTXT = phaseDict['illuminated'] * 100
