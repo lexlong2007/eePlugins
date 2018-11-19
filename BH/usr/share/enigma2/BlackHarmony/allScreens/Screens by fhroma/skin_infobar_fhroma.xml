@@ -31,11 +31,11 @@
     <convert type="BlackHarmonygExtraTuner">ServiceNumberName</convert>
   </widget>
   <eLabel text="SNR:" position="1408,933" size="55,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" />
-  <widget source="session.FrontendStatus" render="Label" position="1804,937" size="60,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" zPosition="1" foregroundColor="green">
+  <widget source="session.FrontendStatus" render="Label" position="1820,937" size="60,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" zPosition="1" foregroundColor="green">
     <convert type="FrontendInfo">SNR</convert>
   </widget>
   <eLabel text="AGC:" position="1408,960" size="55,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" />
-  <widget source="session.FrontendStatus" render="Label" position="1804,962" size="60,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" zPosition="1" foregroundColor="green">
+  <widget source="session.FrontendStatus" render="Label" position="1820,962" size="60,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" zPosition="1" foregroundColor="green">
     <convert type="FrontendInfo">AGC</convert>
   </widget>
       <widget source="session.FrontendStatus" render="Progress" position="1465,945" size="345,8" zPosition="1" pixmap="BlackHarmony/gfx/bar_snr_345x8.png" transparent="1">
