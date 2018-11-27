@@ -84,6 +84,8 @@ find /usr/share/enigma2/BlackHarmony/allScreens -iname skin_secondinfobar_*.xml|
   fi
 done
 sync
+#bing image if not exists
+[ -e /usr/share/enigma2/BlackHarmony/icons/BingPicOfTheDay.jpg ] || /usr/lib/enigma2/python/Components/j00zekBING.py
 #final message
 if [ -e /usr/share/enigma2/BlackHarmony/UserSkin_Selections/ ];then
   if `ls /usr/share/enigma2/BlackHarmony/UserSkin_Selections/ |grep -q '.xml'`;then
