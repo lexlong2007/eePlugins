@@ -1,8 +1,8 @@
-DBG=False
+DBG=True
 myDEBUGfile = '/tmp/WeatherPlugin.log'
 
 append2file=False
-def printDEBUG( myFUNC , myText ):
+def printDEBUG( myFUNC = '' , myText = '' ):
     global append2file
     if DBG:
         print ("[%s] %s" % (myFUNC,myText))

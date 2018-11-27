@@ -36,6 +36,9 @@ from twisted.web.client import getPage
 from urllib import quote as urllib_quote
 import os
 
+DBG = False
+if DBG: from debug import printDEBUG
+
 def initWeatherPluginEntryConfig():
     s = ConfigSubsection()
     s.city = ConfigText(default = "Warszawa", visible_width = 100, fixed_size = False)
@@ -43,6 +46,8 @@ def initWeatherPluginEntryConfig():
     s.weatherlocationcode = ConfigText(default = "", visible_width = 100, fixed_size = False)
     s.geolatitude = ConfigText(default = "auto", visible_width = 100, fixed_size = False)
     s.geolongitude = ConfigText(default = "auto", visible_width = 100, fixed_size = False)
+    s.weatherSearchFullName = ConfigText(default = "", visible_width = 100, fixed_size = False)
+    s.thingSpeakChannelID = ConfigText(default = "", visible_width = 100, fixed_size = False)
     if os.path.exists('/usr/share/enigma2/animatedWeatherIcons'):
         s.AnimInPluginEnabled = ConfigEnableDisable(default = False)
     else:
@@ -203,9 +208,11 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
         cfglist = [
             getConfigListEntry(_("City"), self.current.city),
             getConfigListEntry(_("Location code"), self.current.weatherlocationcode),
+            getConfigListEntry(_("Location Full name"), self.current.weatherSearchFullName),
             getConfigListEntry(_("System"), self.current.degreetype),
             getConfigListEntry(_("Geo Latitude"), self.current.geolatitude),
             getConfigListEntry(_("Geo Longitude"), self.current.geolongitude),
+            getConfigListEntry(_("thingSpreak meteo channel ID"), self.current.thingSpeakChannelID),
             getConfigListEntry(_("Animated plugin icons"), self.current.AnimInPluginEnabled),
             getConfigListEntry(_("Animated infobar icons"), self.current.AnimInInfobarEnabled)
         ]
@@ -263,6 +270,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
         
         
     def xmlCallback(self, xmlstring):
+        if DBG: printDEBUG('MSNWeatherPluginEntryConfigScreen:xmlCallback','>>>')
         if xmlstring:
             errormessage = ""
             root = cet_fromstring(xmlstring)
@@ -279,10 +287,13 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
         if error is not None:
             print error
         
-    def searchCallback(self, result):
+    def searchCallback(self, result): # result=(weatherlocationcode, searchlocation, weatherSearchFullName, geolatitude, geolongitude)
         if result:
             self.current.weatherlocationcode.value = result[0]
             self.current.city.value = result[1]
+            self.current.weatherSearchFullName.value = result[2]
+            self.current.geolatitude.value = result[3]
+            self.current.geolongitude.value = result[4]
     
 class MSNWeatherPluginSearch(Screen):
     skin = """
@@ -337,20 +348,25 @@ class MSNWeatherPluginSearchResultList(MenuList):
         return self.instance.getCurrentIndex()
 
     def buildList(self, xml):
+        if DBG: printDEBUG('MSNWeatherPluginSearchResultList:buildList(%s)' % xml,'>>>')
         root = cet_fromstring(xml)
         searchlocation = ""
-        searchresult = ""
         weatherlocationcode = ""
+        weatherSearchFullName = ""
+        geolatitude = ""
+        geolongitude = ""
         list = []
         for childs in root:
             if childs.tag == "weather":
-                searchlocation = childs.attrib.get("weatherlocationname").encode("utf-8", 'ignore')
-                searchresult = childs.attrib.get("weatherfullname").encode("utf-8", 'ignore')
                 weatherlocationcode = childs.attrib.get("weatherlocationcode").encode("utf-8", 'ignore')
+                searchlocation = childs.attrib.get("weatherlocationname").encode("utf-8", 'ignore')
+                weatherSearchFullName = childs.attrib.get("weatherfullname").encode("utf-8", 'ignore')
+                geolatitude = childs.attrib.get("lat").encode("utf-8", 'ignore')
+                geolongitude = childs.attrib.get("long").encode("utf-8", 'ignore')
                 res = [
-                    (weatherlocationcode, searchlocation),
+                    (weatherlocationcode, searchlocation, weatherSearchFullName, geolatitude, geolongitude),
                     (eListboxPythonMultiContent.TYPE_TEXT, 5, 0, 500, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, searchlocation),
-                    (eListboxPythonMultiContent.TYPE_TEXT, 5, 22, 500, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, searchresult),
+                    (eListboxPythonMultiContent.TYPE_TEXT, 5, 22, 500, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, '%s , (lat=%s, long=%s)' % (weatherSearchFullName, geolatitude, geolongitude)),
                 ]
                 list.append(res)
         self.list = list

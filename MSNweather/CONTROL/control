@@ -5,6 +5,6 @@ Depends:
 Description: wtyczka MSN weather dla VTI mod j00zek
 Maintainer: dr.best@dreambox-tools.info
 Source: 
-Version: 18.11.18.0818
+Version: 18.11.27.1326
 Architecture: all
 DestinationPath: /usr/lib/enigma2/python/

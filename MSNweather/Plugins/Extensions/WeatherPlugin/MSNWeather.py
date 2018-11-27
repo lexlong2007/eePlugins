@@ -1,5 +1,6 @@
+# -*- coding: utf-8 -*-
 from . import _
-from debug import printDEBUG, DBG
+from debug import printDEBUG
 from xml.etree.cElementTree import fromstring as cet_fromstring
 from twisted.internet import defer
 from twisted.web.client import getPage, downloadPage
@@ -8,6 +9,11 @@ from os import path as os_path, mkdir as os_mkdir, remove as os_remove, listdir 
 from Components.config import config
 from Tools.Directories import resolveFilename, SCOPE_SKIN
 from urllib import quote as urllib_quote
+import webRegex
+DBG = False
+DBGxml = False
+DBGthingSpeak = False
+DBGweb = True
 
 class WeatherIconItem:
 
@@ -38,7 +44,6 @@ class MSNWeatherItem:
         self.shortday = ''
         self.iconFilename = ''
         self.code = ''
-
 
 class MSNWeather:
     ERROR = 0
@@ -81,6 +86,10 @@ class MSNWeather:
         self.imagerelativeurl = ''
         self.url = ''
         self.weatherItems = {}
+        self.thingSpeakItems = {}
+        self.WebCurrentItems = {}
+        self.WebhourlyItems = {}
+        self.WebDailyItems = {}
         self.callback = None
         self.callbackShowIcon = None
         self.callbackAllIconsDownloaded = None
@@ -101,7 +110,26 @@ class MSNWeather:
     def setIconExtension(self, iconextension):
         self.iconextension = iconextension
 
-    def getWeatherData(self, degreetype, locationcode, city, callback, callbackShowIcon, callbackAllIconsDownloaded = None):
+    def returnDict(self, dictName): #weatherItems,thingSpeakItems,WebhourlyItems,WebDailyItems
+        if DBG: printDEBUG('MSNWeather:returnDict(dictName=%s)' % dictName ,'>>>')
+        if dictName is None:
+            return {}
+        elif dictName == 'weatherItems':
+            return self.weatherItems
+        elif dictName == 'thingSpeakItems':
+            if DBG: printDEBUG('\t' ,'len(thingSpeakItems)=%s' % len(self.thingSpeakItems))
+            return self.thingSpeakItems
+        elif dictName == 'WebCurrentItems':
+            return self.WebCurrentItems
+        elif dictName == 'WebhourlyItems':
+            return self.WebhourlyItems
+        elif dictName == 'WebDailyItems':
+            return self.WebDailyItems
+        else:
+            return {}
+        
+    def getWeatherData(self, degreetype, locationcode, city, weatherSearchFullName, thingSpeakChannelID, callback, callbackShowIcon, callbackAllIconsDownloaded = None):
+        if DBG: printDEBUG('MSNWeather:getWeatherData' ,'>>>')
         self.initialize()
         language = config.osd.language.value.replace('_', '-')
         if language == 'en-EN':
@@ -114,13 +142,27 @@ class MSNWeather:
         self.callbackAllIconsDownloaded = callbackAllIconsDownloaded
         url = 'http://weather.service.msn.com/data.aspx?src=windows&weadegreetype=%s&culture=%s&wealocations=%s' % (degreetype, language, urllib_quote(locationcode))
         getPage(url).addCallback(self.xmlCallback).addErrback(self.error)
+        if DBGxml: printDEBUG('\t url_xml=' ,'%s' % url)
+        if weatherSearchFullName != '':
+            url2 = 'http://www.msn.com/weather/we-city?culture=%s&form=PRWLAS&q=%s' % (language, urllib_quote(weatherSearchFullName))
+            getPage(url2).addCallback(self.webCallback).addErrback(self.webError)
+            if DBGweb: printDEBUG('\t url_web=' ,'%s' % url2)
+        if thingSpeakChannelID != '':
+            url3 = 'https://thingspeak.com/channels/%s/feeds.xml?average=10&results=1' % thingSpeakChannelID
+            if DBGthingSpeak: printDEBUG('\t url_thingSpeak=' ,'%s' % url3)
+            getPage(url3).addCallback(self.thingSpeakCallback).addErrback(self.thingSpeakError)
 
     def getDefaultWeatherData(self, callback = None, callbackAllIconsDownloaded = None):
         self.initialize()
         weatherPluginEntryCount = config.plugins.WeatherPlugin.entrycount.value
         if weatherPluginEntryCount >= 1:
             weatherPluginEntry = config.plugins.WeatherPlugin.Entry[0]
-            self.getWeatherData(weatherPluginEntry.degreetype.value, weatherPluginEntry.weatherlocationcode.value, weatherPluginEntry.city.value, callback, None, callbackAllIconsDownloaded)
+            self.getWeatherData(weatherPluginEntry.degreetype.value,
+                                weatherPluginEntry.weatherlocationcode.value,
+                                weatherPluginEntry.city.value,
+                                weatherPluginEntry.weatherSearchFullName.value,
+                                weatherPluginEntry.thingSpeakChannelID.value,
+                                callback, None, callbackAllIconsDownloaded)
             return 1
         else:
             return 0
@@ -154,6 +196,7 @@ class MSNWeather:
         return
 
     def xmlCallback(self, xmlstring):
+        if DBGxml: printDEBUG('MSNWeather:xmlCallback' ,'%s' % xmlstring)
         IconDownloadList = []
         root = cet_fromstring(xmlstring)
         index = 0
@@ -219,6 +262,71 @@ class MSNWeather:
             self.callback(self.OK, None)
         return
 
+    def thingSpeakCallback(self, xmlstring):
+        if DBGthingSpeak: printDEBUG('MSNWeather:thingSpeakCallback' ,'%s' % xmlstring)
+        try:
+            root = cet_fromstring(xmlstring)
+            for childs in root:
+                if DBGthingSpeak: printDEBUG('\titem= ' ,'%s' % childs.tag)
+                if childs.tag in ('name','description'):
+                    self.thingSpeakItems[childs.tag] = childs.text
+                elif childs.tag == 'field1':
+                    self.thingSpeakItems['field1Name'] = childs.text
+                elif childs.tag == 'field2':
+                    self.thingSpeakItems['field2Name'] = childs.text
+                elif childs.tag == 'feeds':
+                    for feeds in childs:
+                        if DBGthingSpeak: printDEBUG('\tfeeds= ' ,'%s' % feeds.tag)
+                        if feeds.tag == 'feed':
+                            for feed in feeds:
+                                if DBGthingSpeak: printDEBUG('\tfeed= ' ,'%s' % feed.tag)
+                                if feed.tag == 'created-at':
+                                    self.thingSpeakItems['ObservationTime'] = feed.text
+                                elif feed.tag == 'field1':
+                                    val = int(float(feed.text) + 0.5)
+                                    if   val <= 12 : stat = 'Bardzo dobry'
+                                    elif val <= 36 : stat = 'Dobry'
+                                    elif val <= 60 : stat = 'Umiarkowany'
+                                    elif val <= 84 : stat = 'Dostateczny'
+                                    elif val <=120 : stat = 'Zły'
+                                    else: stat = 'Bardzo zły'
+                                    self.thingSpeakItems['field1Value'] = val
+                                    self.thingSpeakItems['field1Status'] = stat
+                                elif feed.tag == 'field2':
+                                    val = int(float(feed.text) + 0.5)
+                                    if   val <= 20 : stat = 'Bardzo dobry'
+                                    elif val <= 60 : stat = 'Dobry'
+                                    elif val <=100 : stat = 'Umiarkowany'
+                                    elif val <=140 : stat = 'Dostateczny'
+                                    elif val <=200 : stat = 'Zły'
+                                    else: stat = 'Bardzo zły'
+                                    self.thingSpeakItems['field2Value'] = val
+                                    self.thingSpeakItems['field2Status'] = stat
+            if DBGthingSpeak:
+                printDEBUG('\t len(self.thingSpeakItems)=' ,'%s' % len(self.thingSpeakItems))
+                for item in self.thingSpeakItems:
+                    printDEBUG("\t\t self.thingSpeakItems['%s'] =" % item ,'%s' % self.thingSpeakItems[item])
+        except Exception as e:
+            self.thingSpeakItems = {}
+            self.thingSpeakItems['name'] = 'xml error'
+            self.thingSpeakItems['description'] = str(e)
+
+    def thingSpeakError(self, error = None):
+        if DBGthingSpeak: printDEBUG('MSNWeather:thingSpeakError' ,'%s' % error)
+        return
+
+    def webCallback(self, string):
+        #if DBGweb: printDEBUG('MSNWeather:webCallback' ,'%s' % string)
+        reload(webRegex)
+        self.WebCurrentItems, self.WebhourlyItems, self.WebDailyItems = webRegex.getWeather(string) 
+        if DBGweb: printDEBUG('MSNWeather:webCallback' ,'len(WebCurrentItems)= %s, len(WebhourlyItems)= %s, len(WebDailyItems)= %s' % ( \
+                                                         len(self.WebCurrentItems),
+                                                                                   len(self.WebhourlyItems),
+                                                                                                            len(self.WebDailyItems)))
+        return
+
+    def webError(self, error = None):
+        if DBGweb: printDEBUG('MSNWeather:webError' ,'%s' % error)
 
 def download(item):
     if DBG: printDEBUG('download','>>>')

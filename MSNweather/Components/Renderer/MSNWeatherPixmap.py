@@ -20,73 +20,101 @@
 # you have to keep MY license and inform me about the modifications by mail.
 #
 
-from Renderer import Renderer
-from enigma import ePixmap
 from Components.AVSwitch import AVSwitch
-from enigma import eEnv, ePicLoad, eRect, eSize, gPixmapPtr
+from Components.config import config
+from enigma import ePixmap, eSize, eTimer
+from random import randint
+from Renderer import Renderer
+from Tools.LoadPixmap import LoadPixmap
+import os
+
+DBG = False 
+if DBG:
+    from Plugins.Extensions.WeatherPlugin.debug import printDEBUG
+
 
 class MSNWeatherPixmap(Renderer):
-	def __init__(self):
-		Renderer.__init__(self)
-		self.picload = ePicLoad()
-		self.picload.PictureData.get().append(self.paintIconPixmapCB)
-		self.iconFileName = ""
+    def __init__(self):
+        Renderer.__init__(self)
+        self.pixdelay = int((randint(70,150) + randint(70,150)) / 2)
+        self.picsIcons = []
+        self.picsIconsCount = 0
+        self.slideIcon = 0
+        self.lastPic = ''
+        self.timer = eTimer()
+        self.timer.callback.append(self.timerEvent)
+        self.pngAnimPath='/usr/share/enigma2/animatedWeatherIcons'
+        if config.plugins.WeatherPlugin.entrycount.value > 0 and config.plugins.WeatherPlugin.Entry[0].AnimInInfobarEnabled.value and os.path.exists(self.pngAnimPath):
+            self.doAnimation = True
+        else:
+            self.doAnimation = False
+        if DBG: printDEBUG('WeatherIcon' , '__init__ pixdelay=%s' % self.pixdelay)
 
-	GUI_WIDGET = ePixmap
+    GUI_WIDGET = ePixmap
 
-	def postWidgetCreate(self, instance):
-		for (attrib, value) in self.skinAttributes:
-			if attrib == "size":
-				x, y = value.split(',')
-				self._scaleSize = eSize(int(x), int(y))
-				break
-		sc = AVSwitch().getFramebufferScale()
-		self._aspectRatio = eSize(sc[0], sc[1])
-		self.picload.setPara((self._scaleSize.width(), self._scaleSize.height(), sc[0], sc[1], True, 2, '#ff000000'))
-		
-	def disconnectAll(self):
-		self.picload.PictureData.get().remove(self.paintIconPixmapCB)
-		self.picload = None
-		Renderer.disconnectAll(self)
-		
-	def paintIconPixmapCB(self, picInfo=None):
-		ptr = self.picload.getData()
-		if ptr is not None:
-			pic_scale_size = eSize()
-			# To be added in the future:
-			if 'scale' in eSize.__dict__ and self._scaleSize.isValid() and self._aspectRatio.isValid():
-				pic_scale_size = ptr.size().scale(self._scaleSize, self._aspectRatio)
-			# To be removed in the future:
-			elif 'scaleSize' in gPixmapPtr.__dict__:
-				pic_scale_size = ptr.scaleSize()
-			if pic_scale_size.isValid():
-				pic_scale_width = pic_scale_size.width()
-				pic_scale_height = pic_scale_size.height()
-				dest_rect = eRect(0, 0, pic_scale_width, pic_scale_height)
-				self.instance.setScale(1)
-				self.instance.setScaleDest(dest_rect)
-			else:
-				self.instance.setScale(0)
-			self.instance.setPixmap(ptr)
-		else:
-			self.instance.setPixmap(None)
-		
-	def doSuspend(self, suspended):
-		if suspended:
-			self.changed((self.CHANGED_CLEAR,))
-		else:
-			self.changed((self.CHANGED_DEFAULT,))
-			
-			
-	def updateIcon(self, filename):
-		new_IconFileName = filename
-		if (self.iconFileName != new_IconFileName):
-			self.iconFileName = new_IconFileName
-			self.picload.startDecode(self.iconFileName)
+    def postWidgetCreate(self, instance):
+        for (attrib, value) in self.skinAttributes:
+            if attrib == "size":
+                x, y = value.split(',')
+                self._scaleSize = eSize(int(x), int(y))
+                break
+        sc = AVSwitch().getFramebufferScale()
+        self._aspectRatio = eSize(sc[0], sc[1])
+        
+    def doSuspend(self, suspended):
+        if suspended:
+            self.timer.stop()
+            self.changed((self.CHANGED_CLEAR,))
+        else:
+            if self.picsIconsCount > 0: 
+                self.timer.start(self.pixdelay, True)
+            self.changed((self.CHANGED_DEFAULT,))
+            
+    def changed(self, what):
+        if what[0] != self.CHANGED_CLEAR:
+            if self.instance:
+                self.instance.setScale(1)
+                self.updateIcon(self.source.iconfilename)
 
-	def changed(self, what):
-		if what[0] != self.CHANGED_CLEAR:
-			if self.instance:
-				self.updateIcon(self.source.iconfilename)
-		else:
-			self.picload.startDecode("")
+    def updateIcon(self, filename):
+        if DBG: printDEBUG('WeatherIcon','updateIcon(%s) lastPic= %s' % (filename,self.lastPic))
+        if self.lastPic != filename and filename[-4:].lower() in ('.png','.jpg'):
+            self.lastPic = filename
+            self.instance.setPixmap(LoadPixmap(path=self.lastPic))
+            IconName = os.path.basename(self.lastPic)
+            pngAnimPath = os.path.join(self.pngAnimPath, IconName)[:-4]
+            if DBG: printDEBUG('WeatherIcon','updateIcon pngAnimPath=%s' % pngAnimPath)
+            if self.doAnimation and os.path.exists(pngAnimPath):
+                reverseSlides = False
+                if DBG: printDEBUG('WeatherIcon','updateIcon pngAnimPath exists')
+                if os.path.exists(os.path.join(pngAnimPath,'.ctrl')):
+                    with open(os.path.join(pngAnimPath,'.ctrl')) as cf:
+                        for line in cf:
+                            lineArray = line.strip().split('=')
+                            if lineArray[0] == 'delay':
+                                self.pixdelay = int(lineArray[1])
+                            if lineArray[0] == 'revert' and lineArray[1] == 'True':
+                                reverseSlides = True
+                        cf.close()
+                      
+                self.slideIcon = 0
+                self.picsIcons = []
+                pngfiles = [f for f in os.listdir(pngAnimPath) if (os.path.isfile(os.path.join(pngAnimPath, f)) and f.endswith(".png"))]
+                pngfiles.sort()
+                if reverseSlides:
+                    pngfiles.reverse()
+                for x in pngfiles:
+                    self.picsIcons.append(LoadPixmap(os.path.join(pngAnimPath, x)))
+                self.picsIconsCount = len(self.picsIcons)
+                if self.picsIconsCount > 0: 
+                    self.timer.start(self.pixdelay, True)
+                    if DBG: printDEBUG('WeatherIcon','updateIcon picsIconsCount=%s' % self.picsIconsCount)
+            
+
+    def timerEvent(self):
+        self.timer.stop()
+        self.slideIcon += 1
+        if self.slideIcon >= self.picsIconsCount:
+                self.slideIcon = 0
+        self.instance.setPixmap(self.picsIcons[self.slideIcon])
+        self.timer.start(self.pixdelay, True)

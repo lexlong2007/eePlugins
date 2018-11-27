@@ -25,7 +25,6 @@ from Components.ActionMap import ActionMap
 from Components.config import ConfigSubsection, ConfigSubList, ConfigInteger, config
 from Components.Pixmap import Pixmap
 from Components.Sources.StaticText import StaticText
-from debug import printDEBUG, DBG
 from enigma import eTimer
 from MSNWeather import MSNWeather
 from Plugins.Plugin import PluginDescriptor
@@ -33,8 +32,12 @@ from random import randint
 from Screens.Screen import Screen
 from setup import initConfig, MSNWeatherPluginEntriesListConfigScreen
 from Tools.LoadPixmap import LoadPixmap
+from Components.j00zekBING import getPicOfTheDay
 
 import time, os
+
+DBG = False
+if DBG: from debug import printDEBUG
 
 try:
     from Components.WeatherMSN import weathermsn
@@ -144,7 +147,13 @@ class MSNWeatherPlugin(Screen):
                 self.weatherData.cancel()
                 self.weatherData = None
             self.weatherData = MSNWeather()
-            self.weatherData.getWeatherData(self.weatherPluginEntry.degreetype.value, self.weatherPluginEntry.weatherlocationcode.value, self.weatherPluginEntry.city.value, self.getWeatherDataCallback, self.showIcon)
+            self.weatherData.getWeatherData(self.weatherPluginEntry.degreetype.value,
+                                            self.weatherPluginEntry.weatherlocationcode.value,
+                                            self.weatherPluginEntry.city.value,
+                                            self.weatherPluginEntry.weatherSearchFullName.value,
+                                            self.weatherPluginEntry.thingSpeakChannelID.value,
+                                            self.getWeatherDataCallback,
+                                            self.showIcon)
         else:
             self["statustext"].text = _("No locations defined...\nPress 'Menu' to do that.")
 
@@ -265,7 +274,7 @@ class WeatherIcon(Pixmap):
         self.timer = eTimer()
         self.timer.callback.append(self.timerEvent)
         self.pngAnimPath='/usr/share/enigma2/animatedWeatherIcons'
-        if config.plugins.WeatherPlugin.Entry[0].AnimInPluginEnabled.value and os.path.exists(self.pngAnimPath):
+        if config.plugins.WeatherPlugin.entrycount.value > 0 and config.plugins.WeatherPlugin.Entry[0].AnimInPluginEnabled.value and os.path.exists(self.pngAnimPath):
             self.doAnimation = True
         else:
             self.doAnimation = False
@@ -284,11 +293,24 @@ class WeatherIcon(Pixmap):
             pngAnimPath = os.path.join(self.pngAnimPath, IconName)[:-4]
             if DBG: printDEBUG('WeatherIcon','updateIcon pngAnimPath=%s' % pngAnimPath)
             if self.doAnimation and os.path.exists(pngAnimPath):
+                reverseSlides = False
                 if DBG: printDEBUG('WeatherIcon','updateIcon pngAnimPath exists')
+                if os.path.exists(os.path.join(pngAnimPath,'.ctrl')):
+                    with open(os.path.join(pngAnimPath,'.ctrl')) as cf:
+                        for line in cf:
+                            lineArray = line.strip().split('=')
+                            if lineArray[0] == 'delay':
+                                self.pixdelay = int(lineArray[1])
+                            if lineArray[0] == 'revert' and lineArray[1] == 'True':
+                                reverseSlides = True
+                        cf.close()
+                      
                 self.slideIcon = 0
                 self.picsIcons = []
                 pngfiles = [f for f in os.listdir(pngAnimPath) if (os.path.isfile(os.path.join(pngAnimPath, f)) and f.endswith(".png"))]
-                pngfiles.sort() 
+                pngfiles.sort()
+                if reverseSlides:
+                    pngfiles.reverse()
                 for x in pngfiles:
                     self.picsIcons.append(LoadPixmap(os.path.join(pngAnimPath, x)))
                 self.picsIconsCount = len(self.picsIcons)
