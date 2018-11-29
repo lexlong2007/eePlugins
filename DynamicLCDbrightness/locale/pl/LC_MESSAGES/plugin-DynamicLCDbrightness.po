@@ -1,0 +1,48 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: tuxbox-enigma 0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-10-01 13:01+0000\n"
+"PO-Revision-Date: 2018-10-08 14:30+0100\n"
+"Last-Translator: \n"
+"Language-Team: j00zek\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: polish\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 1.5.5\n"
+
+msgid "Dynamic LCD brightness"
+msgstr "Dynamiczna regulacja jasności LCD"
+
+msgid "Cancel"
+msgstr "Anuluj"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "DynamicLCDbrightness v %s Configuration"
+msgstr "Konfiguracja dynamicznej regulacji jasności LCD v.%s"
+
+msgid "LCD not detected"
+msgstr "LCD nie wykryty"
+
+msgid "State:"
+msgstr "Status:"
+
+msgid "Brightness in standby:"
+msgstr "Jasność w uśpieniu:"
+
+msgid "Brightness in night standby:"
+msgstr "Jasność w nocnym uśpieniu:"
+
+msgid "Night standby period:"
+msgstr "Okres nocnego uśpienia:"
+
+msgid "between 23:30-4:30"
+msgstr "pomiędzy 23:30 a 4:30"
+
+msgid "30min after sunset-30min before sunrise"
+msgstr "30min po zachodzie i 30min przed wschodem"

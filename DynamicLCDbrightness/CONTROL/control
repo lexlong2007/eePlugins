@@ -1,0 +1,10 @@
+Package: enigma2-plugin-extensions--j00zeks-dynamiclcdbrightness
+Priority: optional
+Section: utils
+Depends: 
+Description: dynamiczna regulacja jasności LCD
+Maintainer: j00zek
+Source: http://github.com/j00zek/eePlugins
+Version: 18.10.28.1159
+Architecture: all
+DestinationPath: /usr/lib/enigma2/python/Plugins/Extensions/DynamicLCDbrightness
