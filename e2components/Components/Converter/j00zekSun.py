@@ -13,15 +13,6 @@ from decimal import Decimal as dec
 DBG = False
 if DBG: from Components.j00zekComponents import j00zekDEBUG
 
-try:
-    from twisted.web.client import getPage
-    from twisted.web.client import downloadPage
-    from twisted.web import client, error as weberror
-    TWISTED = True
-except:
-    if DBG: j00zekDEBUG("Error importing twisted. Something wrong with the image?")
-    TWISTED = False
-
 import math
 import datetime
 import json
@@ -160,24 +151,22 @@ class j00zekSun(Converter, object):
         else:
             self.type = self.UNKNOWN
         try:
-            Position['latitude'] = float(config.plugins.WeatherPlugin.Entry[0].geolatitude.value)
-            Position['longitude'] = float(config.plugins.WeatherPlugin.Entry[0].geolongitude.value)
-            if DBG: j00zekDEBUG("[j00zekSun:__init__] configured latitude=%s, longitude=%s" % (Position['latitude'],Position['longitude']))
+            config.plugins.WeatherPlugin.currEntry.addNotifier(self.setLocation, initial_call=True) 
         except Exception, e:
-            if DBG: j00zekDEBUG("[j00zekSun:getWebData] >>> Error getting configured data: '%s'" % str(e))
-            self.checkTimer = eTimer()
-            self.checkTimer.callback.append(self.getWebData)
-            if TWISTED:
-                TWISTED = False
-                self.checkTimer.start(2000, True)
+            if DBG: j00zekDEBUG("[j00zekSun:__init__] >>> Exception: '%s'" % str(e))
 
+    def setLocation(self, configElement = None): 
+        global Position
+        if DBG: j00zekDEBUG("[j00zekSun:setLocation]")
+        currEntry = int(config.plugins.WeatherPlugin.currEntry.value)
+        Position['latitude'] = float(config.plugins.WeatherPlugin.Entry[currEntry].geolatitude.value)
+        Position['longitude'] = float(config.plugins.WeatherPlugin.Entry[currEntry].geolongitude.value)
+        if DBG: j00zekDEBUG("[j00zekSun:setLocation] latitude='%s' , longitude='%s'" % (Position['latitude'],Position['longitude']))
+   
     @cached
     def getText(self):
         global Position
         try:
-            if DBG: 
-                j00zekDEBUG("[j00zekSun:getText]latitude='%s'" % Position['latitude'])
-                j00zekDEBUG("[j00zekSun:getText]longitude='%s'" % Position['longitude'])
             if self.type == self.SUNSET:
                 retTXT = str(sun.getSunsetTime(Position['longitude'], Position['latitude'] )['TZtime'])
             elif self.type == self.SUNRISE:
@@ -190,26 +179,5 @@ class j00zekSun(Converter, object):
         return str(retTXT)
 
     text = property(getText)
-    
-    def getWebData(self):
-        if DBG: j00zekDEBUG('[j00zekSun:getWebData] >>>')
-        self.checkTimer.stop()
-        
-        def dataError(error = ''):
-            if DBG: j00zekDEBUG("[j00zekSun:getWebData] Error downloading data %s, trying again" % str(error))
-            self.checkTimer.start(60000, True) #try again after a minute
-            return
-          
-        def readData(data):
-            if DBG: j00zekDEBUG("[j00zekSun:getWebData] >>> Received data: '%s'" % str(data))
-            global TWISTED, Position
-            try: 
-                Position = json.loads(data.strip()[1:-1])
-                if DBG: 
-                    j00zekDEBUG("latitude='%s'" % Position['latitude'])
-                    j00zekDEBUG("longitude='%s'" % Position['longitude'])
-            except Exception, e: j00zekDEBUG("[j00zekSun:getWebData] >>> Exception: '%s'" % str(e))
-        getPage('https://dcinfos.abtasty.com/geolocAndWeather.php').addCallback(readData).addErrback(dataError)
-        return
     
 sun = Sun()
