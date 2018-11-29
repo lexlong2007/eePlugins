@@ -23,8 +23,20 @@ from Components.Converter.Converter import Converter
 from Components.Element import cached
 from enigma import eTimer
 from Plugins.Extensions.WeatherPlugin.debug import printDEBUG
+from Plugins.Extensions.WeatherPlugin.__init__ import _
 import os
+import datetime
+
 DBG = False
+DBGText = False
+DBGIcons = False
+
+iconsMap={
+    '1' : '29.png', #zachmurzenie ma³e
+    '2' : '30.png', #Czêœciowo s³onecznie
+    'BBih5H' : '32.png', #S³onecznie
+    '4' : '34.png', #Przewa¿nie s³onecznie
+    }
 
 class MSNWeatherWebDaily(Converter, object):
     def __init__(self, type):
@@ -43,34 +55,36 @@ class MSNWeatherWebDaily(Converter, object):
             self.WebDailyItems = WebDailyItems
     
     @cached
-    def getText(self): #self.mode = ('name','description','field1Name','field2Name','ObservationTime','field1Value','field1Status','field2Value','field2Status')
-        if DBG: printDEBUG('MSNWeatherWebDaily:getText','>>> self.mode="%s"' % self.mode)
+    def getText(self):
+        if DBGText: printDEBUG('MSNWeatherWebDaily:getText','>>> self.mode="%s"' % self.mode)
         self.syncItems()
         retTXT = '?'
         #if DBG: printDEBUG('','######\n%s\n#####' % self.WebDailyItems)
         if len(self.WebDailyItems) > 0:
             try:
                 mode = self.mode.split(',')
-                if DBG: printDEBUG('\t','len(mode) =%s' % str(len(mode)))
+                if DBGText: printDEBUG('\t','len(mode) =%s' % str(len(mode)))
                 if len(mode) >= 2:
                     record = mode[0]
+                    day = int(record.split('=')[1])
+                    Month = _((datetime.date.today() + datetime.timedelta(days=day)).strftime("%b"))
                     item =  mode[1]
                     line = self.WebDailyItems.get(record, [('', '', '', '', '')])
                     line = line[0]
                     if item ==  'date':
-                        retTXT = str('%s. %s' % (line[1].strip().lower(), line[2].strip()))
+                        retTXT = str('%s. %s %s' % (line[1].strip().lower(), line[2].strip(), Month))
                     elif item ==  'info':
-                        retTXT = str('%sC | %s\n%s' % (line[5].strip(), line[6].strip(), line[4].strip()))
+                        retTXT = str('%s %s %s\n%s' % (line[6].strip(), line[7].strip(), line[8].strip(), line[4].strip()))
             except Exception as e:
-                if DBG: printDEBUG('\t','Exception %s' % str(e))
-        if DBG: printDEBUG('\t','retTXT=%s' % retTXT)
+                if DBGText: printDEBUG('\t','Exception %s' % str(e))
+        if DBGText: printDEBUG('\t','retTXT=%s' % retTXT)
         return retTXT
         
     text = property(getText)
     
     @cached
     def getIconFilename(self):
-        if DBG: printDEBUG('MSNWeatherWebDaily:getIconFilename','>>> self.mode="%s"' % self.mode)
+        if DBGIcons: printDEBUG('MSNWeatherWebDaily:getIconFilename','>>> self.mode="%s"' % self.mode)
         self.syncItems()
         iconFileName = 'fake.png'
         if len(self.WebDailyItems) > 0:
@@ -78,16 +92,22 @@ class MSNWeatherWebDaily(Converter, object):
                 line = self.WebDailyItems.get(self.mode, [('', '', '', '', '')])
                 line = line[0]
                 url = str('%s' % line[3].strip())
-                if DBG: printDEBUG('\t','url=%s' % url)
-                iconFileName = '%s/%s.png' % (self.path, url.split('?')[0].split('/')[-1][:-4])
-                if not os.path.exists(iconFileName):
-                    import urllib
-                    if 'url'[:4] != 'http': url = 'http:' + url
-                    if DBG: printDEBUG('\t','downloading %s' % url)
-                    urllib.urlretrieve(url, iconFileName)
+                if DBGIcons: printDEBUG('MSNWeatherWebDaily:getIconFilename','url=%s' % url)
+                icon = '%s' % (url.split('?')[0].split('/')[-1][:-4])
+                iconpng = iconsMap.get(icon, icon)
+                if icon == iconpng: #no mapping exists
+                    iconFileName = '%s/%s.png' % (self.path, icon)
+                    if not os.path.exists(iconFileName):
+                        import urllib
+                        if 'url'[:4] != 'http': url = 'http:' + url
+                        if DBGIcons: printDEBUG('MSNWeatherWebDaily:getIconFilename','downloading %s' % url)
+                        urllib.urlretrieve(url, iconFileName)
+                else:
+                    if DBGIcons: printDEBUG('MSNWeatherWebDaily:getIconFilename','icon %s translated to %s' % (icon,iconpng))
+                    iconFileName = '/usr/share/enigma2/BlackHarmony/weather_icons/%s' % (iconpng)
             except Exception as e:
-                if DBG: printDEBUG('\t','Exception %s' % str(e))
-        if DBG: printDEBUG('\t','iconFileName=%s' % iconFileName)
+                if DBGIcons: printDEBUG('MSNWeatherWebDaily:getIconFilename','Exception %s' % str(e))
+        if DBGIcons: printDEBUG('MSNWeatherWebDaily:getIconFilename','iconFileName=%s' % iconFileName)
         return iconFileName
             
     iconfilename = property(getIconFilename)

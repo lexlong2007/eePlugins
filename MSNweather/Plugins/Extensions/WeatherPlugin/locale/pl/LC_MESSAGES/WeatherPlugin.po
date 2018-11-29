@@ -109,3 +109,45 @@ msgstr "Animacja ikon we wtyczce"
 
 msgid "Animated infobar icons"
 msgstr "Animacja ikon na infobarze"
+
+msgid "Jan"
+msgstr "sty"
+
+msgid "Feb"
+msgstr "lut"
+
+msgid "Mar"
+msgstr "mar"
+
+msgid "Apr"
+msgstr "kwi"
+
+msgid "May"
+msgstr "maj"
+
+msgid "Jun"
+msgstr "cze"
+
+msgid "Jul"
+msgstr "lip"
+
+msgid "Aug"
+msgstr "sie"
+
+msgid "Sep"
+msgstr "wrz"
+
+msgid "Oct"
+msgstr "paz"
+
+msgid "Nov"
+msgstr "lis"
+
+msgid "Dec"
+msgstr "gru"
+
+msgid "Location Full name"
+msgstr "Pełna nazwa lokalizacji"
+
+msgid "thingSpeak meteo channel ID"
+msgstr "Numer kanału meteo w serwisie thingSpeak"

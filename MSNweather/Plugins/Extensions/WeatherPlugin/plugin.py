@@ -22,7 +22,7 @@
 
 from . import _
 from Components.ActionMap import ActionMap
-from Components.config import ConfigSubsection, ConfigSubList, ConfigInteger, config
+from Components.config import ConfigSubsection, ConfigSubList, ConfigInteger, config, NoSave
 from Components.Pixmap import Pixmap
 from Components.Sources.StaticText import StaticText
 from enigma import eTimer
@@ -48,6 +48,7 @@ except Exception as e:
 
 config.plugins.WeatherPlugin = ConfigSubsection()
 config.plugins.WeatherPlugin.entrycount =  ConfigInteger(0)
+config.plugins.WeatherPlugin.currEntry =  NoSave(ConfigInteger(0))
 config.plugins.WeatherPlugin.Entry = ConfigSubList()
 initConfig()
 
@@ -122,6 +123,7 @@ class MSNWeatherPlugin(Screen):
         
 
         self.weatherPluginEntryIndex = -1
+        config.plugins.WeatherPlugin.currEntry.value = 0
         self.weatherPluginEntryCount = config.plugins.WeatherPlugin.entrycount.value
         if self.weatherPluginEntryCount >= 1:
             self.weatherPluginEntry = config.plugins.WeatherPlugin.Entry[0]
@@ -175,6 +177,7 @@ class MSNWeatherPlugin(Screen):
 
     def setItem(self):
         self.weatherPluginEntry = config.plugins.WeatherPlugin.Entry[self.weatherPluginEntryIndex-1]
+        config.plugins.WeatherPlugin.currEntry.value = self.weatherPluginEntryIndex-1
         self.clearFields()
         self.startRun()
 
@@ -225,10 +228,11 @@ class MSNWeatherPlugin(Screen):
                 else:
                     index = weatherData[0]
                     c = time.strptime(item.date,"%Y-%m-%d")
-                    self["weekday%s" % index].text = "%s\n%s" % (item.day, time.strftime("%d. %b",c))
+                    self["weekday%s" % index].text = "%s. %s\n%s" % (item.day, time.strftime("%d",c), _(time.strftime("%b",c)))
                     lowTemp = item.low
                     highTemp = item.high
-                    self["weekday%s_temp" % index].text = "%s°%s|%s°%s\n%s" % (highTemp, self.weatherData.degreetype, lowTemp, self.weatherData.degreetype, item.skytextday)
+                    #self["weekday%s_temp" % index].text = "%s°%s|%s°%s\n%s" % (highTemp, self.weatherData.degreetype, lowTemp, self.weatherData.degreetype, item.skytextday)
+                    self["weekday%s_temp" % index].text = "%s°|%s°\n%s" % (highTemp, lowTemp, item.skytextday)
         
         if self.weatherPluginEntryIndex == 1 and WeatherMSNComp is not None:
             WeatherMSNComp.updateWeather(self.weatherData, result, errortext)

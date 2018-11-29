@@ -10,10 +10,11 @@ from Components.config import config
 from Tools.Directories import resolveFilename, SCOPE_SKIN
 from urllib import quote as urllib_quote
 import webRegex
+
 DBG = False
 DBGxml = False
-DBGthingSpeak = False
-DBGweb = True
+DBGthingSpeak = True
+DBGweb = False
 
 class WeatherIconItem:
 
@@ -270,10 +271,23 @@ class MSNWeather:
                 if DBGthingSpeak: printDEBUG('\titem= ' ,'%s' % childs.tag)
                 if childs.tag in ('name','description'):
                     self.thingSpeakItems[childs.tag] = childs.text
-                elif childs.tag == 'field1':
-                    self.thingSpeakItems['field1Name'] = childs.text
-                elif childs.tag == 'field2':
-                    self.thingSpeakItems['field2Name'] = childs.text
+                elif childs.tag.startswith('field'):
+                    if DBGthingSpeak: printDEBUG('\t' ,"childs.tag.startswith('field'):")
+                    tmpName = '%sName' % childs.tag
+                    self.thingSpeakItems[tmpName] = childs.text
+                    tmpTXT = childs.text.lower().replace(' ','').replace('.','').replace(',','')
+                    if DBGthingSpeak: printDEBUG('\t tmpTXT = ' ,"'%s'" % tmpTXT)
+                    if tmpTXT.find('pm') >= 0 and tmpTXT.find('25') >= 0:
+                        if DBGthingSpeak: printDEBUG('\t' ,'tmpTXT.find(pm) and tmpTXT.find(25):')
+                        self.thingSpeakItems['PM2.5'] = childs.tag
+                        self.thingSpeakItems['PM2.5Name'] = childs.text
+                    elif tmpTXT.find('pm') >= 0 and tmpTXT.find('10') >= 0:
+                        if DBGthingSpeak: printDEBUG('\t' ,'tmpTXT.find(pm) and tmpTXT.find(10):')
+                        self.thingSpeakItems['PM10'] = childs.tag
+                        self.thingSpeakItems['PM10Name'] = childs.text
+                    elif tmpTXT.find('pm') and tmpTXT.find('1'):
+                        self.thingSpeakItems['PM1'] = childs.tag
+                        self.thingSpeakItems['PM1Name'] = childs.text
                 elif childs.tag == 'feeds':
                     for feeds in childs:
                         if DBGthingSpeak: printDEBUG('\tfeeds= ' ,'%s' % feeds.tag)
@@ -282,26 +296,15 @@ class MSNWeather:
                                 if DBGthingSpeak: printDEBUG('\tfeed= ' ,'%s' % feed.tag)
                                 if feed.tag == 'created-at':
                                     self.thingSpeakItems['ObservationTime'] = feed.text
-                                elif feed.tag == 'field1':
-                                    val = int(float(feed.text) + 0.5)
-                                    if   val <= 12 : stat = 'Bardzo dobry'
-                                    elif val <= 36 : stat = 'Dobry'
-                                    elif val <= 60 : stat = 'Umiarkowany'
-                                    elif val <= 84 : stat = 'Dostateczny'
-                                    elif val <=120 : stat = 'Zły'
-                                    else: stat = 'Bardzo zły'
-                                    self.thingSpeakItems['field1Value'] = val
-                                    self.thingSpeakItems['field1Status'] = stat
-                                elif feed.tag == 'field2':
-                                    val = int(float(feed.text) + 0.5)
-                                    if   val <= 20 : stat = 'Bardzo dobry'
-                                    elif val <= 60 : stat = 'Dobry'
-                                    elif val <=100 : stat = 'Umiarkowany'
-                                    elif val <=140 : stat = 'Dostateczny'
-                                    elif val <=200 : stat = 'Zły'
-                                    else: stat = 'Bardzo zły'
-                                    self.thingSpeakItems['field2Value'] = val
-                                    self.thingSpeakItems['field2Status'] = stat
+                                elif feed.tag.startswith('field'):
+                                    tmpName = '%sValue' % feed.tag
+                                    self.thingSpeakItems[tmpName] = feed.text
+                                    if feed.tag == self.thingSpeakItems.get('PM2.5', '?!?!?!?'):
+                                        self.thingSpeakItems['PM2.5Value'] = feed.text
+                                    elif feed.tag == self.thingSpeakItems.get('PM10', '?!?!?!?'):
+                                        self.thingSpeakItems['PM10Value'] = feed.text
+                                    elif feed.tag == self.thingSpeakItems.get('PM1', '?!?!?!?'):
+                                        self.thingSpeakItems['PM1Value'] = feed.text
             if DBGthingSpeak:
                 printDEBUG('\t len(self.thingSpeakItems)=' ,'%s' % len(self.thingSpeakItems))
                 for item in self.thingSpeakItems:

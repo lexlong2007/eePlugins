@@ -46,7 +46,7 @@ class MSNWeatherWebhourly(Converter, object):
     def getText(self): #self.mode = ('name','description','field1Name','field2Name','ObservationTime','field1Value','field1Status','field2Value','field2Status')
         if DBG: printDEBUG('MSNWeatherWebhourly:getText','>>> self.mode="%s"' % self.mode)
         self.syncItems()
-        retTXT = '?'
+        retTXT = ''
         #if DBG: printDEBUG('','######\n%s\n#####' % self.WebhourlyItems)
         if len(self.WebhourlyItems) > 0:
             try:

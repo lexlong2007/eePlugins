@@ -212,7 +212,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
             getConfigListEntry(_("System"), self.current.degreetype),
             getConfigListEntry(_("Geo Latitude"), self.current.geolatitude),
             getConfigListEntry(_("Geo Longitude"), self.current.geolongitude),
-            getConfigListEntry(_("thingSpreak meteo channel ID"), self.current.thingSpeakChannelID),
+            getConfigListEntry(_("thingSpeak meteo channel ID"), self.current.thingSpeakChannelID),
             getConfigListEntry(_("Animated plugin icons"), self.current.AnimInPluginEnabled),
             getConfigListEntry(_("Animated infobar icons"), self.current.AnimInInfobarEnabled)
         ]
@@ -292,8 +292,8 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
             self.current.weatherlocationcode.value = result[0]
             self.current.city.value = result[1]
             self.current.weatherSearchFullName.value = result[2]
-            self.current.geolatitude.value = result[3]
-            self.current.geolongitude.value = result[4]
+            self.current.geolatitude.value = result[3].replace(',','.')
+            self.current.geolongitude.value = result[4].replace(',','.')
     
 class MSNWeatherPluginSearch(Screen):
     skin = """
