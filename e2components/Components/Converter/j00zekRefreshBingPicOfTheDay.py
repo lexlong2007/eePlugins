@@ -11,14 +11,14 @@ if DBG: from Components.j00zekComponents import j00zekDEBUG
 class j00zekRefreshBingPicOfTheDay(Converter, object):
     def __init__(self, arg):
         Converter.__init__(self, arg)
-        if DBG: j00zekDEBUG('[j00zekRefreshBingPicOfTheDay:__init__] >>>')
+        if DBG: j00zekDEBUG('j00zekRefreshBingPicOfTheDay(Converter).__init__ >>>')
         self.Init = True
         self.checkTimer = eTimer()
         self.checkTimer.callback.append(self.refreshPic)
         self.checkTimer.start(10000, True)
 
     def refreshPic(self):
-        if DBG: j00zekDEBUG('[j00zekRefreshBingPicOfTheDay:refreshPic] >>>')
+        if DBG: j00zekDEBUG('j00zekRefreshBingPicOfTheDay(Converter).refreshPic >>>')
         if self.Init == True:
             self.checkTimer.stop()
             self.Init = False

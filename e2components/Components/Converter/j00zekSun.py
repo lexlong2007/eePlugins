@@ -158,9 +158,12 @@ class j00zekSun(Converter, object):
     def setLocation(self, configElement = None): 
         global Position
         if DBG: j00zekDEBUG("[j00zekSun:setLocation]")
-        currEntry = int(config.plugins.WeatherPlugin.currEntry.value)
-        Position['latitude'] = float(config.plugins.WeatherPlugin.Entry[currEntry].geolatitude.value)
-        Position['longitude'] = float(config.plugins.WeatherPlugin.Entry[currEntry].geolongitude.value)
+        try:
+            currEntry = int(config.plugins.WeatherPlugin.currEntry.value)
+            Position['latitude'] = float(config.plugins.WeatherPlugin.Entry[currEntry].geolatitude.value)
+            Position['longitude'] = float(config.plugins.WeatherPlugin.Entry[currEntry].geolongitude.value)
+        except Exception, e:
+            if DBG: j00zekDEBUG("[j00zekSun:setLocation] >>> Exception: '%s'" % str(e))
         if DBG: j00zekDEBUG("[j00zekSun:setLocation] latitude='%s' , longitude='%s'" % (Position['latitude'],Position['longitude']))
    
     @cached
