@@ -23,6 +23,10 @@
 import time
 from Source import Source
 from Components.WeatherMSN import weathermsn
+from Plugins.Extensions.WeatherPlugin.__init__ import _ 
+
+DBG = False
+if DBG: from Plugins.Extensions.WeatherPlugin.debug import printDEBUG 
 
 class MSNWeather(Source):
 
@@ -71,7 +75,7 @@ class MSNWeather(Source):
     def getTemperature_Heigh(self, key):
         skey = str(key)
         if skey == "-1":
-            skey = "1"
+            skey = "2"
         if weathermsn.weatherData.weatherItems.has_key(skey):
             item = weathermsn.weatherData.weatherItems[skey]
             highTemp = item.high
@@ -83,7 +87,7 @@ class MSNWeather(Source):
     def getTemperature_Low(self, key):
         skey = str(key)
         if skey == "-1":
-            skey = "1"
+            skey = "2"
         if weathermsn.weatherData.weatherItems.has_key(skey):
             item = weathermsn.weatherData.weatherItems[skey]
             lowTemp = item.low
@@ -94,7 +98,7 @@ class MSNWeather(Source):
     def getTemperature_Heigh_Low(self, key):
         skey = str(key)
         if skey == "-1":
-            skey = "1"
+            skey = "2"
         if weathermsn.weatherData.weatherItems.has_key(skey):
             item = weathermsn.weatherData.weatherItems[skey]
             highTemp = item.high
@@ -148,7 +152,7 @@ class MSNWeather(Source):
     def getWeekday(self, key, short):
         skey = str(key)
         if skey == "-1":
-            skey = "1"
+            skey = "2"
         if weathermsn.weatherData.weatherItems.has_key(skey):
             item = weathermsn.weatherData.weatherItems[skey]
             if short:
@@ -161,11 +165,26 @@ class MSNWeather(Source):
     def getDate(self, key):
         skey = str(key)
         if skey == "-1":
-            skey = "1"
+            skey = "2"
         if weathermsn.weatherData.weatherItems.has_key(skey):
             item = weathermsn.weatherData.weatherItems[skey]
             c = time.strptime(item.date,"%Y-%m-%d")
             return time.strftime("%d. %b",c)
+        else:
+            return _("n/a")
+            
+    def getFullDate(self, key):
+        if DBG: printDEBUG("MSNWeather(Source).getFullDate(key=%s)" % key)
+        skey = str(key)
+        if skey == "-1":
+            skey = "2"
+        if weathermsn.weatherData.weatherItems.has_key(skey):
+            item = weathermsn.weatherData.weatherItems[skey]
+            c = time.strptime(item.date,"%Y-%m-%d")
+            Day = time.strftime("%d",c)
+            weekday = _(item.day)
+            Month = _(time.strftime("%b",c)) 
+            return str('%s. %s %s' % (weekday, Day, Month))
         else:
             return _("n/a")
             

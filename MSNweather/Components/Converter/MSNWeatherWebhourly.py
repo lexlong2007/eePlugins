@@ -19,32 +19,30 @@
 #     
 ####################################################################### 
 
+from Components.config import config 
 from Components.Converter.Converter import Converter
 from Components.Element import cached
 from enigma import eTimer
-from Plugins.Extensions.WeatherPlugin.debug import printDEBUG
+
 import os
 DBG = False
+if DBG: from Plugins.Extensions.WeatherPlugin.debug import printDEBUG
 
 class MSNWeatherWebhourly(Converter, object):
     def __init__(self, type):
-        if DBG: printDEBUG('MSNWeatherWebhourly','__init__')
+        if DBG: printDEBUG('MSNWeatherWebhourly(Converter).__init__ >>>')
         Converter.__init__(self, type)
         self.mode = type
         self.WebhourlyItems = {}
         self.path = '/usr/lib/enigma2/python/Plugins/Extensions/WeatherPlugin/icons'
-
+            
     def syncItems(self):
-        try:
-            WebhourlyItems = self.source.getWebhourlyItems()
-        except Exception as e:
-            if DBG: printDEBUG('\t','Exception %s' % str(e))
-        if len(WebhourlyItems) > 0:
-            self.WebhourlyItems = WebhourlyItems
+        if DBG: printDEBUG('MSNWeatherWebhourly(Converter).syncItems >>>')
+        self.WebhourlyItems = self.source.getWebhourlyItems().copy()
     
     @cached
     def getText(self): #self.mode = ('name','description','field1Name','field2Name','ObservationTime','field1Value','field1Status','field2Value','field2Status')
-        if DBG: printDEBUG('MSNWeatherWebhourly:getText','>>> self.mode="%s"' % self.mode)
+        if DBG: printDEBUG('MSNWeatherWebhourly(Converter).getText >>> self.mode="%s"' % self.mode)
         self.syncItems()
         retTXT = ''
         #if DBG: printDEBUG('','######\n%s\n#####' % self.WebhourlyItems)
@@ -68,7 +66,7 @@ class MSNWeatherWebhourly(Converter, object):
     
     @cached
     def getIconFilename(self):
-        if DBG: printDEBUG('MSNWeatherWebhourly:getIconFilename','>>> self.mode="%s"' % self.mode)
+        if DBG: printDEBUG('MSNWeatherWebhourly(Converter).getIconFilename >>> self.mode="%s"' % self.mode)
         self.syncItems()
         iconFileName = 'fake.png'
         if len(self.WebhourlyItems) > 0:

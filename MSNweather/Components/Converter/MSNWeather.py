@@ -48,6 +48,7 @@ class MSNWeather(Converter, object):
 	TEMPERATURE_HEIGH_LOW = 19
 	CODE = 20
 	PATH = 21
+	FULLDATE = 13
 
 	def __init__(self, type):
 		Converter.__init__(self, type)
@@ -86,6 +87,8 @@ class MSNWeather(Converter, object):
 				self.mode = self.WEEKSHORTDAY
 			elif type.find("date") != -1:
 				self.mode = self.DATE
+			elif type.find("fulldate") != -1:
+				self.mode = self.FULLDATE
 			if self.mode is not None:
 				dd = type.split(",")
 				if len(dd) >= 2:
@@ -141,6 +144,8 @@ class MSNWeather(Converter, object):
 			return self.source.getWeekday(self.index, True)
 		elif self.mode == self.DATE and self.index is not None:
 			return self.source.getDate(self.index)
+		elif self.mode == self.FULLDATE and self.index is not None:
+			return self.source.getFullDate(self.index)
 		else:
 			return ""
 	

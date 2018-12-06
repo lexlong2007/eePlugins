@@ -151,3 +151,27 @@ msgstr "Pełna nazwa lokalizacji"
 
 msgid "thingSpeak meteo channel ID"
 msgstr "Numer kanału meteo w serwisie thingSpeak"
+
+msgid "Pressure %s"
+msgstr "Ciśnienie %s"
+
+msgid "pon."
+msgstr "pn."
+
+msgid "wto."
+msgstr "wt."
+
+msgid "Sro."
+msgstr "śr."
+
+msgid "czw."
+msgstr "cz."
+
+msgid "pią."
+msgstr "pt."
+
+msgid "sob."
+msgstr "so."
+
+msgid "niedz."
+msgstr "n."

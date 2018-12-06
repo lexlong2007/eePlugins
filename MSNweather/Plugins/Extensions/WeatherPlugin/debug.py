@@ -12,7 +12,10 @@ def printDEBUG( myFUNC = '' , myText = '' ):
                 f = open(myDEBUGfile, 'w')
             else:
                 f = open(myDEBUGfile, 'a')
-            f.write('[%s] %s\n' %(myFUNC,myText))
+            if myText == '':
+                f.write('%s\n' %(myFUNC))
+            else:
+                f.write('[%s] %s\n' %(myFUNC,myText))
             f.close
         except Exception:
             pass

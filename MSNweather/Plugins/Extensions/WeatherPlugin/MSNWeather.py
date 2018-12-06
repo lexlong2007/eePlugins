@@ -1,20 +1,23 @@
 # -*- coding: utf-8 -*-
 from . import _
+from Components.config import config
 from debug import printDEBUG
-from xml.etree.cElementTree import fromstring as cet_fromstring
-from twisted.internet import defer
-from twisted.web.client import getPage, downloadPage
 from enigma import eEnv
 from os import path as os_path, mkdir as os_mkdir, remove as os_remove, listdir as os_listdir
-from Components.config import config
 from Tools.Directories import resolveFilename, SCOPE_SKIN
+from twisted.internet import defer
+from twisted.web.client import getPage, downloadPage
 from urllib import quote as urllib_quote
+from xml.etree.cElementTree import fromstring as cet_fromstring
+
 import webRegex
 
 DBG = False
 DBGxml = False
-DBGthingSpeak = True
+DBGthingSpeak = False
 DBGweb = False
+DBGwebFull = False
+DBGicon = True
 
 class WeatherIconItem:
 
@@ -45,6 +48,7 @@ class MSNWeatherItem:
         self.shortday = ''
         self.iconFilename = ''
         self.code = ''
+        self.rainprecip = ''
 
 class MSNWeather:
     ERROR = 0
@@ -147,7 +151,7 @@ class MSNWeather:
         if weatherSearchFullName != '':
             url2 = 'http://www.msn.com/weather/we-city?culture=%s&form=PRWLAS&q=%s' % (language, urllib_quote(weatherSearchFullName))
             getPage(url2).addCallback(self.webCallback).addErrback(self.webError)
-            if DBGweb: printDEBUG('\t url_web=' ,'%s' % url2)
+            if DBGweb: printDEBUG('\t url_web="%s"' % url2)
         if thingSpeakChannelID != '':
             url3 = 'https://thingspeak.com/channels/%s/feeds.xml?average=10&results=1' % thingSpeakChannelID
             if DBGthingSpeak: printDEBUG('\t url_thingSpeak=' ,'%s' % url3)
@@ -238,12 +242,14 @@ class MSNWeather:
                     weather = MSNWeatherItem()
                     weather.date = items.attrib.get('date').encode('utf-8', 'ignore')
                     weather.day = items.attrib.get('day').encode('utf-8', 'ignore')
-                    weather.shortday = items.attrib.get('shortday').encode('utf-8', 'ignore')
+                    weather.shortday = _(items.attrib.get('shortday').encode('utf-8', 'ignore'))
                     weather.low = items.attrib.get('low').encode('utf-8', 'ignore')
                     weather.high = items.attrib.get('high').encode('utf-8', 'ignore')
                     weather.skytextday = items.attrib.get('skytextday').encode('utf-8', 'ignore')
                     weather.skycodeday = '%s%s' % (items.attrib.get('skycodeday').encode('utf-8', 'ignore'), self.iconextension)
                     weather.code = items.attrib.get('skycodeday').encode('utf-8', 'ignore')
+                    weather.rainprecip = items.attrib.get('precip', '').encode('utf-8', 'ignore')
+                    if weather.rainprecip != '': weather.rainprecip += '%'
                     filename = '%s%s' % (self.iconpath, weather.skycodeday)
                     weather.iconFilename = filename
                     if not os_path.exists(filename):
@@ -252,6 +258,21 @@ class MSNWeather:
                     else:
                         self.showIcon(index, filename)
                     self.weatherItems[str(index)] = weather
+                    if DBGxml:
+                        printDEBUG('MSNWeather:MSNWeatherItem()' , '')
+                        printDEBUG('\t\t' , 'index = %s' % index)
+                        printDEBUG('\t\t' , 'weather.date = %s' % weather.date)
+                        printDEBUG('\t\t' , 'weather.day = %s' % weather.day)
+                        printDEBUG('\t\t' , 'weather.shortday = %s' % weather.shortday)
+                        printDEBUG('\t\t' , 'weather.low = %s' % weather.low)
+                        printDEBUG('\t\t' , 'weather.high = %s' % weather.high)
+                        printDEBUG('\t\t' , 'weather.skytextday = %s' % weather.skytextday)
+                        printDEBUG('\t\t' , 'weather.rainprecip = %s' % weather.rainprecip)
+                        printDEBUG('\t\t' , 'weather.code = %s' % weather.code)
+                        printDEBUG('\t\t' , 'weather.code = %s' % weather.code)
+                        printDEBUG('\t\t' , 'weather.iconFilename = %s' % weather.iconFilename)
+                    if DBGicon and str(items.attrib.get('skycodeday').encode('utf-8', 'ignore')) not in ('9','11','16','26','27','28','30','31','32','34'):
+                        printDEBUG('MSNWeather.MSNWeatherItem()' , 'missing icon translation for icon=%s, info=%s' %(weather.skycodeday, weather.skytextday))
 
         if len(IconDownloadList) != 0:
             ds = defer.DeferredSemaphore(tokens=len(IconDownloadList))
@@ -319,14 +340,12 @@ class MSNWeather:
         return
 
     def webCallback(self, string):
-        #if DBGweb: printDEBUG('MSNWeather:webCallback' ,'%s' % string)
+        if DBGwebFull: printDEBUG('MSNWeather:webCallback' ,'%s' % string)
         reload(webRegex)
         self.WebCurrentItems, self.WebhourlyItems, self.WebDailyItems = webRegex.getWeather(string) 
         if DBGweb: printDEBUG('MSNWeather:webCallback' ,'len(WebCurrentItems)= %s, len(WebhourlyItems)= %s, len(WebDailyItems)= %s' % ( \
-                                                         len(self.WebCurrentItems),
-                                                                                   len(self.WebhourlyItems),
-                                                                                                            len(self.WebDailyItems)))
-        return
+                                                         len(self.WebCurrentItems),len(self.WebhourlyItems),len(self.WebDailyItems)))
+        config.plugins.WeatherPlugin.callbacksCount.value += 1
 
     def webError(self, error = None):
         if DBGweb: printDEBUG('MSNWeather:webError' ,'%s' % error)

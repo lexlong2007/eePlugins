@@ -80,7 +80,6 @@ class MSNWeatherPixmap(Renderer):
         if DBG: printDEBUG('WeatherIcon','updateIcon(%s) lastPic= %s' % (filename,self.lastPic))
         if self.lastPic != filename and filename[-4:].lower() in ('.png','.jpg'):
             self.lastPic = filename
-            self.instance.setPixmap(LoadPixmap(path=self.lastPic))
             IconName = os.path.basename(self.lastPic)
             pngAnimPath = os.path.join(self.pngAnimPath, IconName)[:-4]
             if DBG: printDEBUG('WeatherIcon','updateIcon pngAnimPath=%s' % pngAnimPath)
@@ -109,7 +108,9 @@ class MSNWeatherPixmap(Renderer):
                 if self.picsIconsCount > 0: 
                     self.timer.start(self.pixdelay, True)
                     if DBG: printDEBUG('WeatherIcon','updateIcon picsIconsCount=%s' % self.picsIconsCount)
-            
+            else:
+                self.instance.setPixmap(LoadPixmap(path=self.lastPic))
+              
 
     def timerEvent(self):
         self.timer.stop()

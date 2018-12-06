@@ -36,7 +36,7 @@ from Components.j00zekBING import getPicOfTheDay
 
 import time, os
 
-DBG = False
+DBG = True
 if DBG: from debug import printDEBUG
 
 try:
@@ -49,6 +49,7 @@ except Exception as e:
 config.plugins.WeatherPlugin = ConfigSubsection()
 config.plugins.WeatherPlugin.entrycount =  ConfigInteger(0)
 config.plugins.WeatherPlugin.currEntry =  NoSave(ConfigInteger(0))
+config.plugins.WeatherPlugin.callbacksCount =  NoSave(ConfigInteger(0))
 config.plugins.WeatherPlugin.Entry = ConfigSubList()
 initConfig()
 
@@ -116,6 +117,7 @@ class MSNWeatherPlugin(Screen):
         i = 1
         while i <= 5:
             self["weekday%s" % i] = StaticText()
+            self["weekday%s_date" % i] = StaticText()
             self["weekday%s_icon" %i] = WeatherIcon()
             self["weekday%s_temp" % i] = StaticText()
             i += 1
@@ -137,11 +139,18 @@ class MSNWeatherPlugin(Screen):
         self.weatherData = None
         self.onLayoutFinish.append(self.startRun)
         self.onClose.append(self.__onClose)
+        config.plugins.WeatherPlugin.callbacksCount.addNotifier(self.refreshWeatherMSNComp, initial_call=False)
         
     def __onClose(self):
         if self.weatherData is not None:
             self.weatherData.cancel()
-
+            self.weatherData = None
+        try:
+            config.plugins.WeatherPlugin.callbacksCount.notifiers.remove(self.refreshWeatherMSNComp)
+        except Exception as e:
+            if DBG: printDEBUG('__onClose exception removing notifier %s' % str(e))
+        #config.plugins.WeatherPlugin.callbacksCount.removeNotifier(self.refreshWeatherMSNComp)
+        
     def startRun(self):
         if self.weatherPluginEntry is not None:
             self["statustext"].text = _("Getting weather information...")
@@ -207,11 +216,23 @@ class MSNWeatherPlugin(Screen):
             self["currenticon"].updateIcon(filename)
             self["currenticon"].show()
 
+    def refreshWeatherMSNComp(self, configElement = None):
+        if WeatherMSNComp is not None:
+            if self.weatherData is not None:
+                if DBG: printDEBUG('refreshWeatherMSNComp is invoking WeatherMSNComp.updateWeather')
+                WeatherMSNComp.updateWeather(self.weatherData, MSNWeather.OK, None) #update data source again
+            else:
+                if DBG: printDEBUG('refreshWeatherMSNComp self.weatherData is None =  no WeatherMSNComp update!!!')
+        else:
+            if DBG: printDEBUG('refreshWeatherMSNComp WeatherMSNComp is None - nothing to update!!!')
+    
     def getWeatherDataCallback(self, result, errortext):
         self["statustext"].text = ""
         if result == MSNWeather.ERROR:
+            if DBG: printDEBUG('getWeatherDataCallback result == MSNWeather.ERROR')
             self.error(errortext)
         else:
+            if DBG: printDEBUG('getWeatherDataCallback result == %s' % result)
             self["caption"].text = self.weatherData.city
             self.webSite = self.weatherData.url
             for weatherData in self.weatherData.weatherItems.items():
@@ -229,13 +250,15 @@ class MSNWeatherPlugin(Screen):
                     index = weatherData[0]
                     c = time.strptime(item.date,"%Y-%m-%d")
                     self["weekday%s" % index].text = "%s. %s\n%s" % (item.day, time.strftime("%d",c), _(time.strftime("%b",c)))
+                    self["weekday%s_date" % index].text = "%s %s %s" % (item.shortday, time.strftime("%-d",c), _(time.strftime("%b",c)))
                     lowTemp = item.low
                     highTemp = item.high
                     #self["weekday%s_temp" % index].text = "%s°%s|%s°%s\n%s" % (highTemp, self.weatherData.degreetype, lowTemp, self.weatherData.degreetype, item.skytextday)
-                    self["weekday%s_temp" % index].text = "%s°|%s°\n%s" % (highTemp, lowTemp, item.skytextday)
+                    self["weekday%s_temp" % index].text = "%s°/ %s°/ %s\n%s" % (highTemp, lowTemp, item.rainprecip, item.skytextday)
         
-        if self.weatherPluginEntryIndex == 1 and WeatherMSNComp is not None:
-            WeatherMSNComp.updateWeather(self.weatherData, result, errortext)
+        if WeatherMSNComp is not None:
+            if DBG: printDEBUG('getWeatherDataCallback invoking WeatherMSNComp.updateWeather')
+            WeatherMSNComp.updateWeather(self.weatherData, result, errortext) #update data source
 
     def config(self):
         self.session.openWithCallback(self.setupFinished, MSNWeatherPluginEntriesListConfigScreen)
@@ -292,7 +315,6 @@ class WeatherIcon(Pixmap):
         if DBG: printDEBUG('WeatherIcon','updateIcon(%s) lastPic= %s' % (filename,self.lastPic))
         if self.lastPic != filename:
             self.lastPic = filename
-            self.instance.setPixmap(LoadPixmap(path=self.lastPic))
             IconName = os.path.basename(self.lastPic)
             pngAnimPath = os.path.join(self.pngAnimPath, IconName)[:-4]
             if DBG: printDEBUG('WeatherIcon','updateIcon pngAnimPath=%s' % pngAnimPath)
@@ -321,7 +343,8 @@ class WeatherIcon(Pixmap):
                 if self.picsIconsCount > 0: 
                     self.timer.start(self.pixdelay, True)
                     if DBG: printDEBUG('WeatherIcon','updateIcon picsIconsCount=%s' % self.picsIconsCount)
-            
+            else:
+                self.instance.setPixmap(LoadPixmap(path=self.lastPic))
 
     def timerEvent(self):
         self.timer.stop()

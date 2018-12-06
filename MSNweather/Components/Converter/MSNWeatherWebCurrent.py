@@ -21,29 +21,26 @@
 
 from Components.Converter.Converter import Converter
 from Components.Element import cached
-from enigma import eTimer
-from Plugins.Extensions.WeatherPlugin.debug import printDEBUG
+from Plugins.Extensions.WeatherPlugin.__init__ import _
 
 DBG = False
+if DBG: from Plugins.Extensions.WeatherPlugin.debug import printDEBUG
 
 class MSNWeatherWebCurrent(Converter, object):
     def __init__(self, type):
-        if DBG: printDEBUG('MSNWeatherWebCurrent','__init__')
+        if DBG: printDEBUG('MSNWeatherWebCurrent(Converter).__init__')
         Converter.__init__(self, type)
         self.mode = type
         self.WebCurrentItems = {}
-
+            
     def syncItems(self):
-        try:
-            WebCurrentItems = self.source.getWebCurrentItems()
-        except Exception as e:
-            if DBG: printDEBUG('\t','Exception %s' % str(e))
-        if len(WebCurrentItems) > 0:
-            self.WebCurrentItems = WebCurrentItems
+        if DBG: printDEBUG('MSNWeatherWebCurrent(Converter).syncItems >>')
+        self.WebCurrentItems = self.source.getWebCurrentItems().copy()
     
     @cached
     def getText(self): #self.mode = ('name','description','field1Name','field2Name','ObservationTime','field1Value','field1Status','field2Value','field2Status')
-        if DBG: printDEBUG('MSNWeatherWebCurrent:getText','>>> self.mode="%s"' % self.mode)
+        self.syncItems()
+        if DBG: printDEBUG('MSNWeatherWebCurrent(Converter).getText >>> self.mode="%s"' % self.mode)
         self.syncItems()
         retTXT = ''
         if DBG: printDEBUG('','######\n%s\n#####' % self.WebCurrentItems)
@@ -51,7 +48,7 @@ class MSNWeatherWebCurrent(Converter, object):
             try:
                 for line in self.WebCurrentItems.get('nowData', []):
                     if line[0].lower() == self.mode.lower() and self.mode.lower() == 'barometr':
-                        retTXT = str('Ciœnienie %s' % (line[1].strip()))
+                        retTXT = str(_('Pressure %s') % (line[1].strip()))
                     elif line[0].lower() == self.mode.lower(): #available: 'Temperatura odczuwalna','Wiatr','Barometr','Widoczno\xc5\x9b\xc4\x87','Wilgotno\xc5\x9b\xc4\x87','Temperatura punktu rosy'
                         retTXT = str('%s: %s' % (line[0].strip(), line[1].strip()))
             except Exception as e:
@@ -63,7 +60,7 @@ class MSNWeatherWebCurrent(Converter, object):
     
     @cached
     def getIconFilename(self):
-        if DBG: printDEBUG('MSNWeatherWebCurrent:getIconFilename','>>> self.mode="%s"' % self.mode)
+        if DBG: printDEBUG('MSNWeatherWebCurrent(Converter).getIconFilename >>> self.mode="%s"' % self.mode)
         self.syncItems()
         return ""
             

@@ -270,7 +270,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
         
         
     def xmlCallback(self, xmlstring):
-        if DBG: printDEBUG('MSNWeatherPluginEntryConfigScreen:xmlCallback','>>>')
+        if DBG: printDEBUG('MSNWeatherPluginEntryConfigScreen().xmlCallback >>>')
         if xmlstring:
             errormessage = ""
             root = cet_fromstring(xmlstring)
