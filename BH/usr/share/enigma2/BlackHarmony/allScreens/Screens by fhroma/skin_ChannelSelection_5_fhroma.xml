@@ -12,21 +12,22 @@
     <widget source="global.CurrentTime" render="Label" position="180,35" size="360,35" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <widget source="Title" render="Label" position="200,110" size="1025,45" font="Roboto_HD; 27" backgroundColor="black" foregroundColor="yellow" transparent="1" halign="left"  />
+    <widget source="Title" render="Label" position="200,120" size="1025,45" font="Roboto_HD; 27" backgroundColor="black" foregroundColor="yellow" transparent="1" halign="left"  />
 	 
-		<ePixmap position="1058,140" zPosition="2" size="35,680" pixmap="BlackHarmony/gfx/scroll.png" alphatest="blend" transparent="1" />
-    <widget name="list" position="55,155" size="1025,635" serviceItemHeight="45" selectionPixmap="BlackHarmony/menu/channel_sel.png" scrollbarMode="showOnDemand" enableWrapAround="1" colorServiceDescription="#99CC99" colorServiceDescriptionSelected="lemon" colorEventProgressbarBorder="border" colorEventProgressbarBorderSelected="border" picServiceEventProgressbar="BlackHarmony/gfx/progcl.png" foregroundColorServiceNotAvail="#777777" serviceNumberFont="Roboto_HD;28" serviceNameFont="Roboto_HD;28" serviceInfoFont="Roboto_HD;24"  transparent="0" />
-    <widget font="Roboto_HD; 26" position="1711,705" render="Label" size="90,30" source="ServiceEvent" transparent="1" zPosition="2" halign="left" backgroundColor="black">
-      <convert type="EventTime">Remaining</convert>
-      <convert type="RemainingToText">NoSeconds</convert>
-    </widget>
-    <widget source="ServiceEvent" render="Label" position="1145,705" size="100,35" font="Roboto_HD; 26" backgroundColor="background" transparent="1">
+		<ePixmap position="1058,175" zPosition="2" size="35,800" pixmap="BlackHarmony/gfx/scroll.png" alphatest="blend" transparent="1" />
+    <widget name="list" position="55,175" size="1025,770" serviceItemHeight="45" selectionPixmap="BlackHarmony/menu/channel_sel.png" scrollbarMode="showOnDemand" enableWrapAround="1" colorServiceDescription="#99CC99" colorServiceDescriptionSelected="lemon" colorEventProgressbarBorder="border" colorEventProgressbarBorderSelected="border" picServiceEventProgressbar="BlackHarmony/gfx/progcl.png" foregroundColorServiceNotAvail="#777777" serviceNumberFont="Roboto_HD;28" serviceNameFont="Roboto_HD;28" serviceInfoFont="Roboto_HD;24"  transparent="0" />
+
+    <widget source="ServiceEvent" render="Label" position="1115,685" size="100,35" zPosition="5" font="Roboto_HD; 26" backgroundColor="background" transparent="1">
       <convert type="EventTime">StartTime</convert>
       <convert type="ClockToText" />
     </widget>
-    <widget source="ServiceEvent" render="Label" position="1217,705" size="105,30" font="Roboto_HD; 26" backgroundColor="background" transparent="1">
+    <widget source="ServiceEvent" render="Label" position="1210,685" size="105,30"  zPosition="5" font="Roboto_HD; 26" backgroundColor="background" transparent="1">
       <convert type="EventTime">EndTime</convert>
       <convert type="ClockToText">Format:- %H:%M</convert>
+    </widget>
+    <widget font="Roboto_HD; 26" position="1720,685" render="Label" size="90,30" source="ServiceEvent" zPosition="5" transparent="1"  halign="left" backgroundColor="black">
+      <convert type="EventTime">Remaining</convert>
+      <convert type="RemainingToText">NoSeconds</convert>
     </widget>
     <!--widget source="ServiceEvent" render="Label" position="105,515" size="635,300" font="Roboto_HD; 26" backgroundColor="background" transparent="1">
     <convert type="EventName">ExtendedDescription</convert>
@@ -34,25 +35,25 @@
     <widget source="ServiceEvent" render="Label" position="1205,45" size="635,20" font="Roboto_HD; 25" backgroundColor="dark_grey" transparent="1" halign="right" noWrap="1" valign="center" text="19.2E  DVB-S2  10627 27500 3/4 8PSK" zPosition="3">
       <convert type="BlackHarmonyServiceName2">%O  %s  %F %p %Y %f %M %b</convert>
     </widget>
-    <widget render="BlackHarmonyMaggyRunningText" source="ServiceEvent" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=4,startdelay=6000,wrap" halign="left" font="Roboto_HD; 24" backgroundColor="background" position="55,815" size="1025,140" transparent="1">
+    <widget render="BlackHarmonyMaggyRunningText" source="ServiceEvent" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=4,startdelay=6000,wrap" halign="left" font="Roboto_HD; 24" backgroundColor="background"  position="1110,734" size="725,145" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
-	 <eLabel position="1318,719" size="376,2" backgroundColor="linie" foregroundColor="linie" />
-    <widget source="ServiceEvent" render="Progress" position="1318,717" size="376,6" pixmap="BlackHarmony/gfx/progress_cs.png" transparent="1">
+	 <eLabel position="1315,702" size="376,2" backgroundColor="linie"  zPosition="5" foregroundColor="linie" />
+    <widget source="ServiceEvent" render="Progress" position="1315,700" size="376,6"  zPosition="5" pixmap="BlackHarmony/gfx/progress_cs.png" transparent="1">
       <convert type="EventTime">Progress</convert>
     </widget>
-    <widget source="ServiceEvent" render="Label" position="1260,650" size="445,50" zPosition="5" font="Roboto_HD; 38" backgroundColor="background" transparent="1" foregroundColor="#66CC99" halign="center">
+    <widget source="ServiceEvent" render="Label" position="1260,115" size="445,50" zPosition="5" font="Roboto_HD; 38" backgroundColor="background" transparent="1" foregroundColor="#66CC99" halign="center">
       <convert type="ServiceName">Name</convert>
     </widget>
-		<widget source="ServiceEvent" render="Label" position="1230,740" size="500,35" zPosition="2" halign="center" font="Regular;28" foregroundColor="green" backgroundColor="transpBlack" transparent="1" >
+		<widget source="ServiceEvent" render="Label" position="1115,645" size="700,35" zPosition="5" halign="center" font="Regular;28" foregroundColor="green" backgroundColor="transpBlack" transparent="1" >
 			<convert type="EventName">Name</convert>
-					</widget>	
-   <eLabel position="70,800" size="960,1" backgroundColor="linie" foregroundColor="linie" />
-   <eLabel position="1130,800" size="690,1" backgroundColor="linie" foregroundColor="linie" />
+		</widget>	
+    <eLabel position="1130,726" size="690,1" backgroundColor="linie" foregroundColor="lemon" />
+	 <eLabel position="1130,897" size="690,1" backgroundColor="linie" foregroundColor="lemon" />
     <!--eLabel text="Potem:" position="1058,815" size="100,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1" foregroundColor="#66CC99" /-->
 
-    <widget alphatest="blend" render="BlackHarmonyEventListDisplay" position="1185,810" size="655,170" source="ServiceEvent" rowHeight="32" column0="0,70,green,Roboto_HD,24,0,0" column1="80,545,white,Roboto_HD,24,0,1" primetimeoffset="10">
-      <convert type="BlackHarmonyEventList">eventcount=5</convert>
+    <widget alphatest="blend" render="BlackHarmonyEventListDisplay" position="1185,900" size="655,170" source="ServiceEvent" rowHeight="32" column0="0,70,green,Roboto_HD,24,0,0" column1="80,545,white,Roboto_HD,24,0,1" primetimeoffset="10">
+      <convert type="BlackHarmonyEventList">eventcount=2</convert>
     </widget>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="95,1001" size="35,27" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="430,1001" size="35,27" alphatest="blend" />

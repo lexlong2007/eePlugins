@@ -3,6 +3,7 @@
 
 from Poll import Poll
 from Components.Converter.Converter import Converter
+from Components.Language import language
 from Components.Element import cached
 from Tools.Directories import fileExists
 
@@ -58,7 +59,8 @@ class BlackHarmonyFanTempInfo(Poll, Converter, object):
         
     @cached
     def getText(self):
-        retText = ''
+        if language.getLanguage()[:2] == 'pl': retText = 'Brak sensora'
+        else: retText = _('No sensor')
         try:
             if self.type == self.FanInfoHeader:
                     retText = self.FanHeader

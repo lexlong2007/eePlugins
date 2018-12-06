@@ -1,4 +1,91 @@
   <!-- >>>>>>>>>> VTI SPECIFIC SCREENS <<<<<<<<<< -->
+<!-- About -->  
+  <screen name="About" position="345,93" size="1232,908" title="About" flags="wfNoBorder" backgroundColor="transparent">
+    <eLabel text="About" position="960,26" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png"/>
+    <widget source="global.CurrentTime" render="Label" position="44,26" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="129,26" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+    </widget>
+    <widget font="Roboto_HD; 24" position="65,125" render="Label" size="550,26" source="EnigmaVersion" transparent="1" backgroundColor="black" foregroundColor="blue"/>
+    <widget font="Roboto_HD; 24" position="560,125" render="Label" size="550,26" source="ImageVersion" transparent="1" backgroundColor="black"/>
+    <widget font="Roboto_HD; 24" position="65,155" render="Label" size="320,26" source="FPVersion" transparent="1" backgroundColor="black" foregroundColor="yellow"/>
+
+    <eLabel position="65,190" size="1095,1" backgroundColor="linie" zPosition="1" foregroundColor="linie"/>
+
+    <widget source="session.CurrentService" render="Label" backgroundColor="black" font="Roboto_HD; 26" foregroundColor="light_yellow" position="65,210" size="210,32" transparent="1">
+      <!-- zamiast elabel - widget source="session.CurrentService" render="Label"-->
+      <convert type="j00zekTranslator">Box Type:</convert>
+    </widget>
+    <widget font="Roboto_HD; 26" halign="left" position="285,210" render="Label" size="550,32" source="session.CurrentService" zPosition="1" transparent="1" backgroundColor="black" foregroundColor="white">
+      <convert type="BlackHarmonyBoxInfo">BoxTypeValue</convert>
+    </widget>
+
+    <widget source="session.CurrentService" render="Label" backgroundColor="black" font="Roboto_HD; 26" position="65,252" size="210,32" transparent="1" foregroundColor="light_yellow">
+      <!-- zamiast elabel - widget source="session.CurrentService" render="Label"-->
+      <convert type="j00zekTranslator">Uptime:</convert>
+    </widget>
+    <widget font="Roboto_HD; 26" halign="left" position="285,252" render="Label" size="700,32" source="session.CurrentService" zPosition="1" transparent="1" backgroundColor="black">
+      <convert type="BlackHarmonyBoxInfo">UptimeValue</convert>
+    </widget>
+
+    <widget source="session.CurrentService" render="Label" backgroundColor="black" font="Roboto_HD; 26" foregroundColor="light_yellow" position="64,294" size="210,32" transparent="1">
+      <!-- zamiast elabel - widget source="session.CurrentService" render="Label"-->
+      <convert type="j00zekTranslator">Memory:</convert>
+    </widget>
+    <widget font="Roboto_HD; 26" halign="left" position="285,295" render="Label" size="940,32" source="session.CurrentService" zPosition="1" backgroundColor="black" transparent="1">
+      <convert type="BlackHarmonyBoxInfo">MemInfoValue</convert>
+    </widget>
+
+    <widget source="session.CurrentService" render="Label" backgroundColor="black" font="Roboto_HD; 26" position="65,336" size="210,32" transparent="1" foregroundColor="light_yellow">
+      <convert type="j00zekTranslator">Flash:</convert>
+    </widget>
+    <widget font="Roboto_HD; 26" halign="left" position="285,336" render="Label" size="940,32" source="session.CurrentService" transparent="1" backgroundColor="black">
+      <convert type="BlackHarmonymFlashInfo">Long</convert>
+    </widget>
+
+    <widget source="session.CurrentService" render="Label" backgroundColor="black" font="Roboto_HD; 26" position="65,378" size="210,32" transparent="1" foregroundColor="light_yellow">
+      <!-- zamiast elabel - widget source="session.CurrentService" render="Label"-->
+      <convert type="j00zekTranslator">Load Avg:</convert>
+    </widget>
+    <widget font="Roboto_HD; 26" halign="left" position="285,378" render="Label" size="550,32" source="session.CurrentService" zPosition="1" backgroundColor="black" transparent="1">
+      <convert type="BlackHarmonyBoxInfo">LoadAverageValue</convert>
+    </widget>
+
+    <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="light_yellow" position="65,420" size="210,32" text="Temp CPU:" transparent="1"/>
+    <widget font="Roboto_HD; 26" halign="left" position="285,420" render="Label" size="550,32" source="session.CurrentService" zPosition="1" backgroundColor="black" transparent="1">
+      <convert type="BlackHarmonyFanTempInfo">TempInfo</convert>
+    </widget>
+    
+    <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="light_yellow" position="65,462" size="210,32" text="Temp HDD:" transparent="1"/>
+    <widget font="Roboto_HD; 26" halign="left" position="285,462" render="Label" size="550,32" source="session.CurrentService" zPosition="1" backgroundColor="black" transparent="1">
+      <convert type="BlackHarmonyHddTempInfo"></convert>
+    </widget>
+
+    <eLabel position="65,510" size="1095,1" backgroundColor="linie" zPosition="1" foregroundColor="linie"/>
+
+    <widget font="Roboto_HD; 26" position="65,530" render="Label" size="200,32" source="TunerHeader" transparent="1" backgroundColor="black" foregroundColor="light_yellow"/>
+    <widget font="Roboto_HD; 26" position="285,530" render="Label" size="390,32" source="Tuner0" transparent="1" backgroundColor="black"/>
+    <widget font="Roboto_HD; 26" position="675,530" render="Label" size="390,32" source="Tuner1" transparent="1" backgroundColor="black"/>
+    <widget font="Roboto_HD; 26" position="285,572" render="Label" size="390,32" source="Tuner2" transparent="1" backgroundColor="black"/>
+    <widget font="Roboto_HD; 26" position="675,572" render="Label" size="390,32" source="Tuner3" transparent="1" backgroundColor="black"/>
+    <widget font="Roboto_HD; 26" position="65,660" render="Label" size="200,32" source="HDDHeader" transparent="1" backgroundColor="black" foregroundColor="light_yellow"/>
+    <widget font="Roboto_HD; 26" position="285,660" render="Label" size="550,100" source="hddA" transparent="1" backgroundColor="black" valign="top"/>
+    
+    <widget source="session.CurrentService" render="Label" backgroundColor="black" font="Roboto_HD; 26" foregroundColor="lemon" position="65,770" size="210,32"  transparent="1">
+      <convert type="j00zekTranslator">Support for skin:</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="285,770" size="430,32" transparent="1">
+      <convert type="j00zekTranslator">http://forum.dvhk.pl</convert>
+    </widget>
+    <ePixmap position="990,620" zPosition="1" size="280,210" pixmap="BlackHarmony/prev.png" alphatest="blend"/>
+    <widget source="session.CurrentService" render="Label" position="995,770" size="280,30" font="HD_Thin; 28" backgroundColor="background" transparent="1" zPosition="5" foregroundColor="light_yellow">
+      <convert type="j00zekOPKGversionBHcheck"/>
+    </widget>
+  </screen>
+<!-- PluginBrowser -->  
   <screen name="PluginBrowser" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png"/>
     <widget source="global.CurrentTime" render="Label" position="40,25" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">

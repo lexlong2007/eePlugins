@@ -84,6 +84,15 @@ find /usr/share/enigma2/BlackHarmony/allScreens -iname skin_secondinfobar_*.xml|
   fi
 done
 sync
+find /usr/share/enigma2/BlackHarmony/allScreens -iname skin_volume_*.xml|while read f; do
+  #echo "$f"
+  if [ `echo "$f"|grep -c '/Volume/'` -eq 0 ]; then
+    f2="`echo \"$f\"|sed 's;\(^.*/allScreens/\).*\(/skin_*\);\1Volume\2;'`"
+    #echo "$f2"
+    ln -sf "$f" "$f2"
+  fi
+done
+sync
 #bing image if not exists
 [ -e /usr/share/enigma2/BlackHarmony/icons/BingPicOfTheDay.jpg ] || /usr/lib/enigma2/python/Components/j00zekBING.py
 #final message

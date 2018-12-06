@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #
 #  FlashInfo - Converter
 #
@@ -20,61 +21,69 @@
 # j00zek: this file has changed name just to avoid errors using opkg (situation when file was installed by different pockage)
 #
 
+from Components.config import config
 from Components.Converter.Converter import Converter
 from Components.Element import cached
+from Components.Language import language
 from os import statvfs
 from Poll import Poll
-from Components.config import config
+
+def _(text):
+    if language.getLanguage()[:2] == 'pl':
+        tmp = text.replace('Size','Wielkość').replace('Used','zajęte').replace('Available','wolne').replace('free','wolne').replace('in Use','wykorzystano').replace('No infos available','Brak informacji')
+    else:
+        tmp = _(text)
+    return tmp
 
 class BlackHarmonymFlashInfo(Poll, Converter, object):
-	def __init__(self, type):
-		Converter.__init__(self, type)
-		Poll.__init__(self)
-		self.path = "/"
-		if type == "DefaultRecordingPath":
-			self.path = config.usage.default_path.value
-			self.long_display = 1
-		elif type == "Long":
-			self.long_display = 1
-		else:
- 			self.long_display = 0
-		self.poll_interval = 5000
-		self.poll_enabled = True
+    def __init__(self, type):
+        Converter.__init__(self, type)
+        Poll.__init__(self)
+        self.path = "/"
+        if type == "DefaultRecordingPath":
+            self.path = config.usage.default_path.value
+            self.long_display = 1
+        elif type == "Long":
+            self.long_display = 1
+        else:
+             self.long_display = 0
+        self.poll_interval = 5000
+        self.poll_enabled = True
 
-	@cached
-	def getText(self):
-		try:
-			# Deprecated since version 2.6: The statvfs module has been removed in Python 3.
-			st = statvfs(self.path)
-		except OSError:
-			st = None
-			
-		if st is not None:
-			size = st.f_bsize * st.f_blocks
-			available = st.f_bsize * st.f_bavail
-			used = size - available
-			if (size > 0):
-				usedpercent = "%d %%" % int(used * 100 / size)
-			else:
-				usedpercent = "n/a"
-			if self.long_display == 1:
-				return _("Size: %s Used: %s Available: %s Use%%: %s") % (self.formatFileSize(size),self.formatFileSize(used),self.formatFileSize(available),usedpercent)
-			else:
-				return _("%s free, %s in Use") % (self.formatFileSize(available),usedpercent)
-		else:
-			return "No infos available"
+    @cached
+    def getText(self):
+        try:
+            # Deprecated since version 2.6: The statvfs module has been removed in Python 3.
+            st = statvfs(self.path)
+        except OSError:
+            st = None
+            
+        if st is not None:
+            size = st.f_bsize * st.f_blocks
+            available = st.f_bsize * st.f_bavail
+            used = size - available
+            if (size > 0):
+                usedpercent = "%d %%" % int(used * 100 / size)
+            else:
+                usedpercent = "n/a"
+            if self.long_display == 1:
+                return _("Size: %s, Used: %s (%s), Available: %s") % (self.formatFileSize(size),self.formatFileSize(used),usedpercent,self.formatFileSize(available))
+            else:
+                return _("%s free, %s in Use") % (self.formatFileSize(available),usedpercent)
+        else:
+            return _("No infos available")
 
-	text = property(getText)
+    text = property(getText)
 
 
-	def formatFileSize(self, size):
-		filesize = size
-		suffix = ('bytes', 'KB', 'MB', 'GB', 'TB')
-		index = 0
-		while filesize > 1024:
-			filesize = float(filesize) / 1024.0
-			index += 1
-		filesize_string = "%.2f" % filesize
-		if not filesize_string:
-			filesize_string = '0'
-		return "%s %s" % (filesize_string, suffix[min(index, 4)])
+    def formatFileSize(self, size):
+        filesize = size
+        suffix = ('B', 'KB', 'MB', 'GB', 'TB')
+        index = 0
+        while filesize > 1024:
+            filesize = float(filesize) / 1024.0
+            index += 1
+        filesize_string = "%.2f" % filesize
+        if not filesize_string:
+            filesize_string = '0'
+        return "%s %s" % (filesize_string, suffix[min(index, 4)])
