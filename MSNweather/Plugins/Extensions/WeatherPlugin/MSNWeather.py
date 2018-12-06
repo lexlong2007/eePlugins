@@ -17,7 +17,7 @@ DBGxml = False
 DBGthingSpeak = False
 DBGweb = False
 DBGwebFull = False
-DBGicon = True
+DBGicon = False
 
 class WeatherIconItem:
 

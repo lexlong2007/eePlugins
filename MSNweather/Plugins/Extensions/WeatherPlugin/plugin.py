@@ -36,7 +36,7 @@ from Components.j00zekBING import getPicOfTheDay
 
 import time, os
 
-DBG = True
+DBG = False
 if DBG: from debug import printDEBUG
 
 try:
