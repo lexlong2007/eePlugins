@@ -2,9 +2,9 @@ Package: enigma2-plugin-picons--j00zeks-msnweather-animated-icons
 Priority: optional
 Section: utils
 Depends: enigma2-plugin-skins--j00zeks-blackharmonyfhd
-Description: Animowane ikony pogody dla skórki BlackHarmony
+Description: Animowane ikony pogody dla skórki BlackHarmony, deszcz bez parasolki
 Maintainer: j00zek
 Source: http://github.com/j00zek/eePlugins
-Version: 18.11.22.0929
+Version: 18.12.08.1237
 Architecture: all
 DestinationPath: /usr/share/enigma2/animatedWeatherIcons
