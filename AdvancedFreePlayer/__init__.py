@@ -43,7 +43,7 @@ def printDEBUG( myText , myFUNC = ''):
                 f = open(myDEBUGfile, 'a')
             f.write('%s [%s] %s\n' %(str(datetime.now()), myFUNC, myText))
             f.close
-        except:
+        except Exception:
             pass
 
 printDBG=printDEBUG
@@ -72,6 +72,25 @@ def getPlatform():
      
 def getChoicesList():
     return choicesList
+    
+def isINETworking():
+    try:
+        import socket
+        socket.setdefaulttimeout(0.5)
+        socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect(('8.8.8.8', 53))#connection with google dns service
+        return True
+    except Exception as e:
+        printDEBUG("%s" % str(e))
+    try:
+        import socket
+        socket.setdefaulttimeout(0.5)
+        socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect(('8.8.4.4', 53))#connection with google dns2 service
+        return True
+    except Exception as e:
+        printDEBUG("%s" % str(e))
+    printDEBUG("Error no internet connection. > %s" % str(e))
+    return False
+
 ##################################################### LOAD SKIN DEFINITION #####################################################
 def LoadSkin(SkinName):
     printDEBUG("LoadSkin >>> %s" % SkinName)

@@ -234,6 +234,7 @@ class AdvancedFreePlayerStart(Screen):
             self["key_red"].setText(_("Play"))
       
     def pageUp(self):
+        self.GetCoverTimer.stop()
         if self["filelist"].getSelectedIndex() == 0:
             self["filelist"].moveToIndex(len(self["filelist"].getFileList())-1)
         else:
@@ -243,6 +244,7 @@ class AdvancedFreePlayerStart(Screen):
 
 
     def pageDown(self):
+        self.GetCoverTimer.stop()
         if self["filelist"].getSelectedIndex() == (len(self["filelist"].getFileList())-1):
             self["filelist"].moveToIndex(0)
         else:
@@ -251,6 +253,7 @@ class AdvancedFreePlayerStart(Screen):
         self.GetCoverTimer.start(self.ShowDelay,False)
 
     def lineUp(self):
+        self.GetCoverTimer.stop()
         if self["filelist"].getSelectedIndex() == 0:
             self["filelist"].moveToIndex(len(self["filelist"].getFileList())-1)
         else:
@@ -259,6 +262,7 @@ class AdvancedFreePlayerStart(Screen):
         self.GetCoverTimer.start(self.ShowDelay,False)
 
     def lineDown(self):
+        self.GetCoverTimer.stop()
         if self["filelist"].getSelectedIndex() == (len(self["filelist"].getFileList())-1):
             self["filelist"].moveToIndex(0)
         else:
@@ -300,6 +304,7 @@ class AdvancedFreePlayerStart(Screen):
                             system('rm -rf "%s/%s"*' % (self.filelist.getCurrentDirectory(),selection[0][:-4]))
             self["filelist"].refresh()
             self.buttonsNames()
+            self.GetCoverTimer.stop()
             self.GetCoverTimer.start(self.ShowDelay,False)
             return
         
@@ -684,12 +689,7 @@ class AdvancedFreePlayerStart(Screen):
             self["Description"].setText(_("Error importing twisted package. Seems something wrong with the image. :("))
             return
         # checking if network connection is working
-        try:
-            import socket
-            socket.setdefaulttimeout(0.5)
-            socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect(('8.8.8.8', 53))#connection with google dns service
-        except:
-            printDEBUG("Error no internet connection.")
+        if not isINETworking():
             self["Description"].setText(_("No internet connection. :("))
             return
             

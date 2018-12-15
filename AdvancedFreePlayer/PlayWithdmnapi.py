@@ -37,7 +37,7 @@ up/down - position subtitle\n\
 left/right - size subtitle\n\
 channel up/down - seek+/- subtitle\n\
 ???3/6/9 - seek+ 30sek/2min/5min movie\n\
-???1/4/7 - seek- 30sek/2min/5min movie\n\
+???1/4/7 - seek- 15sek/2min/5min movie\n\
 F1 - change ascpect ratio\n\
 F2 - change background color\n\
 F3 - change type font\n\
@@ -53,8 +53,8 @@ else:
 up/down - position subtitle\n\
 left/right - size subtitle\n\
 channel up/down - seek+/- subtitle\n\
-3/6/9 - seek+ 30sek/2min/5min movie\n\
-1/4/7 - seek- 30sek/2min/5min movie\n\
+3/6/9 - seek+ 30s/2min/5min movie\n\
+1/4/7 - seek- 15s/2min/5min movie\n\
 play - pause on/off\n\
 red - change aspect ratio\n\
 green - change background color\n\
@@ -850,7 +850,7 @@ class AdvancedFreePlayer(Screen):
 
     def BackF30s(self):
         if self.stateplay == "Play":
-            self.doSeekRelative(- 30 * 90000)
+            self.doSeekRelative(- 15 * 90000)
 
     def BackF120s(self):
         if self.stateplay == "Play":
