@@ -1,6 +1,6 @@
 ################################################################################
 #
-# j00zek: this file has changed name just to avoid errors using opkg (situation when file was installed by different pockage)
+# j00zek: this file has changed name just to avoid errors using opkg (situation when file was installed by different package)
 #
 #    RunningText.py - Running Text Renderer for Enigma2
 #    Version: 1.5 (04.04.2012 23:40)

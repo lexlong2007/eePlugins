@@ -1,6 +1,6 @@
 #######################################################################
 #
-# j00zek: this file has changed name just to avoid errors using opkg (situation when file was installed by different pockage)
+# j00zek: this file has changed name just to avoid errors using opkg (situation when file was installed by different package)
 #
 #    Volume Text Renderer for Dreambox/Enigma-2
 #    Coded by Vali (c)2010

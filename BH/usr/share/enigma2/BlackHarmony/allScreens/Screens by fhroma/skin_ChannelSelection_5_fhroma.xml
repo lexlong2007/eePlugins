@@ -35,7 +35,7 @@
     <widget source="ServiceEvent" render="Label" position="1205,45" size="635,20" font="Roboto_HD; 25" backgroundColor="dark_grey" transparent="1" halign="right" noWrap="1" valign="center" text="19.2E  DVB-S2  10627 27500 3/4 8PSK" zPosition="3">
       <convert type="BlackHarmonyServiceName2">%O  %s  %F %p %Y %f %M %b</convert>
     </widget>
-    <widget render="BlackHarmonyMaggyRunningText" source="ServiceEvent" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=4,startdelay=6000,wrap" halign="left" font="Roboto_HD; 24" backgroundColor="background"  position="1110,734" size="725,145" transparent="1">
+    <widget render="BlackHarmonyRunningText" source="ServiceEvent" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=4,startdelay=6000,wrap" halign="left" font="Roboto_HD; 24" backgroundColor="background"  position="1110,734" size="725,145" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
 	 <eLabel position="1315,702" size="376,2" backgroundColor="linie"  zPosition="5" foregroundColor="linie" />

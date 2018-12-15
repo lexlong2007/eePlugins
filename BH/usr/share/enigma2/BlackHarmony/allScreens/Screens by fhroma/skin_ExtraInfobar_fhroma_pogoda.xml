@@ -392,10 +392,10 @@
   </widget>
 
 
-   <widget render="BlackHarmonyMaggyRunningText" source="session.Event_Now" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=3,startdelay=6000,wrap" halign="left" font="Roboto_HD; 26" zPosition="1" foregroundColor="foreground" backgroundColor="black" position="60,90" size="900,250" transparent="1">
+   <widget render="BlackHarmonyRunningText" source="session.Event_Now" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=3,startdelay=6000,wrap" halign="left" font="Roboto_HD; 26" zPosition="1" foregroundColor="foreground" backgroundColor="black" position="60,90" size="900,250" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
-    <widget render="BlackHarmonyMaggyRunningText" source="session.Event_Next" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=3,startdelay=6000,wrap" halign="left" font="Roboto_HD; 26" zPosition="1" foregroundColor="white" backgroundColor="black" position="60,440" size="880,225" transparent="1">
+    <widget render="BlackHarmonyRunningText" source="session.Event_Next" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=3,startdelay=6000,wrap" halign="left" font="Roboto_HD; 26" zPosition="1" foregroundColor="white" backgroundColor="black" position="60,440" size="880,225" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
     <widget backgroundColor="black" font="HD_Thin; 28" halign="left" noWrap="1" position="165,40" render="Label" size="600,50" source="session.Event_Now" zPosition="1" transparent="1" foregroundColor="blue">

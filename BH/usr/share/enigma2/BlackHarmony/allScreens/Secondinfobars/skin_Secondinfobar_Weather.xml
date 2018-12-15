@@ -50,7 +50,7 @@
   <widget backgroundColor="background" font="HD_Thin; 32" foregroundColor="light_yellow" position="75,118" render="Label" size="850,40" source="session.Event_Now" transparent="0">
     <convert type="EventName">Name</convert>
   </widget>
-  <widget backgroundColor="background" halign="left" render="BlackHarmonyMaggyRunningText" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=10000,wrap" font="Roboto_HD; 28" foregroundColor="white" position="76,175" size="850,365" source="session.Event_Now" transparent="1">
+  <widget backgroundColor="background" halign="left" render="BlackHarmonyRunningText" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=10000,wrap" font="Roboto_HD; 28" foregroundColor="white" position="76,175" size="850,365" source="session.Event_Now" transparent="1">
     <convert type="EventName">ExtendedDescription</convert>
   </widget>
   <eLabel backgroundColor="black" font="HD_Thin; 27" foregroundColor="blue" position="997,55" size="100,40" text="Potem:" transparent="1" />
@@ -69,7 +69,7 @@
   <widget backgroundColor="black" font="HD_Thin; 32" foregroundColor="light_yellow" position="997,118" render="Label" size="850,40" source="session.Event_Next" transparent="1">
     <convert type="EventName">Name</convert>
   </widget>
-  <widget backgroundColor="background" halign="left" render="BlackHarmonyMaggyRunningText" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=10000,wrap" font="Roboto_HD; 28" foregroundColor="white" position="997,175" size="850,365" source="session.Event_Next" transparent="1">
+  <widget backgroundColor="background" halign="left" render="BlackHarmonyRunningText" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=10000,wrap" font="Roboto_HD; 28" foregroundColor="white" position="997,175" size="850,365" source="session.Event_Next" transparent="1">
     <convert type="EventName">ExtendedDescription</convert>
   </widget>
   <ePixmap position="30,761" zPosition="-2" size="1928,300" pixmap="BlackHarmony/bg_design/infobar_weather.png" />

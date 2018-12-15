@@ -1,4 +1,4 @@
-# j00zek: this file has changed name just to avoid errors using opkg (situation when file was installed by different pockage)
+# j00zek: this file has changed name just to avoid errors using opkg (situation when file was installed by different package)
 #
 #
 # BlackHarmonyTypeLabel Renderer for Enigma2 Dreamboxes (TypeLabel.py)
