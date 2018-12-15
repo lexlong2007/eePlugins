@@ -193,3 +193,6 @@ msgstr "Ikony skórki"
 
 msgid "animated Icons"
 msgstr "Animowane ikony"
+
+msgid "Debug log file size:"
+msgstr "Wielkość pliku loga"

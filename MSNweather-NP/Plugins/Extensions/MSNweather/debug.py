@@ -1,4 +1,5 @@
 from datetime import datetime
+from os import path, system
 
 def printDEBUG( myFUNC = '' , myText = '' ):
     try:
@@ -12,5 +13,7 @@ def printDEBUG( myFUNC = '' , myText = '' ):
                 f = open(myDEBUGfile, 'a')
             f.write('[%s] %s%s\n' % (str(datetime.now()), myFUNC, myText))
             f.close
+            if path.getsize(myDEBUGfile) > int(config.plugins.WeatherPlugin.DebugSize.value):
+                system('sed -i -e 1,10d %s' % myDEBUGfile)
     except Exception:
         pass

@@ -2,9 +2,9 @@ Package: enigma2-plugin-extensions--j00zeks-msnweather-np
 Priority: optional
 Section: utils
 Depends: 
-Description: wersja niepubliczna i NIEWSPIERANA na forum!!!
+Description: wersja NIEWSPIERANA w wątku BH!!!
 Maintainer: j00zek
 Source: 
-Version: 18.12.14.0753
+Version: 18.12.15.0701
 Architecture: all
 DestinationPath: /usr/lib/enigma2/python/
