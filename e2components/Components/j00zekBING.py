@@ -23,24 +23,26 @@ import json
 import urllib
 import urllib2
 from os.path import exists as OsPathExists
+from Components.j00zekComponents import isINETworking
 
 def getPicOfTheDay(CountryCode = 'pl_PL', downloadPathAndFileName = '/usr/share/enigma2/BlackHarmony/icons/BingPicOfTheDay.jpg'):
     retVal = False
     url = 'http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=%s' % CountryCode
 
     try:
-        response = urllib2.urlopen(url, timeout=1)
-        response = response.read()
-        response = json.loads(response)
-        #print response
-        if 'images' in response:
-            images = response['images']
-            for i in range(len(images)):
-                url = 'http://www.bing.com' + images[i]['url']
-                urllib.urlretrieve(url, downloadPathAndFileName)
-                if OsPathExists(downloadPathAndFileName):
-                    retVal = True
-                    break
+        if isINETworking():
+            response = urllib2.urlopen(url, timeout=1)
+            response = response.read()
+            response = json.loads(response)
+            #print response
+            if 'images' in response:
+                images = response['images']
+                for i in range(len(images)):
+                    url = 'http://www.bing.com' + images[i]['url']
+                    urllib.urlretrieve(url, downloadPathAndFileName)
+                    if OsPathExists(downloadPathAndFileName):
+                        retVal = True
+                        break
     except Exception as e:
         print e
        
