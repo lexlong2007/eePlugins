@@ -17,7 +17,7 @@
     </widget>
     <widget render="Label" source="currentTemp" font="Roboto_HD; 40" position="285,234" size="140,45" backgroundColor="black" zPosition="3" transparent="1" halign="right" valign="center" foregroundColor="light_yellow"/>
     <widget source="session.BlackHarmonyMSNWeather" render="Label" position="120,330" size="340,35" font="HD_Thin; 26" halign="center" valign="center" transparent="1" backgroundColor="black">
-        <convert type="MSNWeatherWebCurrent">title</convert>
+        <convert type="BlackHarmonyMSNWeather">temperature_text,current</convert>
     </widget>
 <!-- top second from left -->
     <widget source="session.BlackHarmonyMSNWeather" render="Label" position="550,247" size="370,180" font="HD_Thin; 26" halign="left" valign="top" transparent="1" backgroundColor="black" noWrap="1" >
@@ -236,4 +236,8 @@
     <widget source="session.BlackHarmonyMSNWeather" render="Label" font="Roboto_HD; 26" position="1620,860" size="190,110" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top">
       <convert type="MSNWeatherWebDaily">Record=8,info</convert>
     </widget>
+    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="1650,980" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/small_left.png" position="1700,980" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/small_right.png" position="1750,980" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/small_menu.png" position="1800,980" size="35,27" alphatest="blend"/>
 </screen>

@@ -326,7 +326,7 @@
         <widget position="320,5" size="150,50" font="FdLcD;50" noWrap="1" foregroundColor="#ccffff" backgroundColor="#000000" render="Label" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="right" transparent="1">
             <convert type="MSNWeather">temperature_current</convert>
         </widget>
-        <widget source="session.BlackHarmonyMSNWeather" render="Label" position="10,5" size="250,40" font="FdLcD;50" halign="left" transparent="1" backgroundColor="black">
+        <widget source="session.BlackHarmonyMSNWeather" render="Label" position="10,5" size="250,50" font="FdLcD;50" halign="left" transparent="1" backgroundColor="black">
             <convert type="MSNWeatherWebCurrent">barometrValue</convert>
         </widget>
 		<widget backgroundColor="#000000" font="FdLcD;140" foregroundColor="white" halign="center" position="0,85" render="Label" size="480,155" source="global.CurrentTime" transparent="0" zPosition="2">
@@ -336,6 +336,10 @@
 			<convert type="ClockToText">Format:%d.%m.%Y</convert>
 		</widget>
 	</screen>
+        <!-- LCD simple summary -->
+        <screen name="SimpleSummary" position="0,0" size="480,320">
+            <panel name="StandbySummary" />
+        </screen>
 	<!-- LCD screen IPTVExtMoviePlayerSummary -->
     <screen name="IPTVExtMoviePlayerSummary" position="0,0" size="480,320">
         <widget source="parent.Title" render="Label" position="10,5" size="460,210" font="Regular;42" halign="center" valign="center" foregroundColor="#FFFF00"/>
@@ -345,6 +349,6 @@
         <widget source="session.CurrentService" render="Label" font="Roboto_HD; 45" position="210,230" size="260,80" halign="right" valign="center" backgroundColor="black" transparent="1" >
             <convert type="j00zekE2iPlayer">RemindedMinutes</convert>
         </widget>
-    <panel name="SummaryBigClockBottomLeftPanel" />
+        <panel name="SummaryBigClockBottomLeftPanel" />
     </screen>
 </skin>

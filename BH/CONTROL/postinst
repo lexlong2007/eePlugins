@@ -7,11 +7,11 @@ if [ ! -e /usr/lib/enigma2/python/Plugins/Extensions/WeatherPlugin ]; then
   if `grep -q 'osd.language=pl_PL' </etc/enigma2/settings`; then
     echo
     echo "UWAGA:"
-    echo "Aby działało w skórce wyświetlanie pogody, musisz doinstalować wtyczkę enigma2-plugin-extensions-weatherplugin"
+    echo "Aby działało w skórce wyświetlanie pogody, musisz doinstalować wtyczkę z pogodą MSN"
   else
     echo
     echo "ATTENTION:"
-    echo "You need to install enigma2-plugin-extensions-weatherplugin plugin to use weather components in skin"
+    echo "You need to install eMSN weather plugin plugin to use weather components in skin"
   fi
 fi
 
