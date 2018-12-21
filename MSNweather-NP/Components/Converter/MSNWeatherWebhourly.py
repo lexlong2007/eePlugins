@@ -56,12 +56,12 @@ class MSNWeatherWebhourly(Converter, object):
         if len(self.WebhourlyItems) > 0:
             try:
                 if self.mode.lower() == 'title':
-                    line = self.WebhourlyItems.get('title', [('', '', '')])
+                    line = self.WebhourlyItems.get('title', [('', '', '', '', '', '', '', '')])
                     self.DEBUG('MSNWeatherWebhourly(Converter).getText line=%s' % line)
                     line = line[0]
                     retTXT = '%s %s %s' % (line[0].strip(), line[1].strip(), line[2].strip())
                 else:
-                    line = self.WebhourlyItems.get(self.mode, [('', '', '', '', '')])
+                    line = self.WebhourlyItems.get(self.mode, [('', '', '', '', '', '', '', '')])
                     line = line[0]
                     retTXT = str('%s\n\n\n%s\nTemp. %s\nOpady %s' % (line[0].strip(), line[1].strip(), line[3].strip(), line[4].strip()))
             except Exception as e:
@@ -78,7 +78,7 @@ class MSNWeatherWebhourly(Converter, object):
         iconFileName = 'fake.png'
         if len(self.WebhourlyItems) > 0:
             try:
-                line = self.WebhourlyItems.get(self.mode, [('', '', '', '', '')])
+                line = self.WebhourlyItems.get(self.mode, [('', '', '', '', '', '', '', '')])
                 line = line[0]
                 url = str('%s' % line[2].strip())
                 self.DEBUG('MSNWeatherWebhourly(Converter).getIconFilename url=%s' % url)

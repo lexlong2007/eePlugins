@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from . import _
 from Components.config import config
+from datetime import datetime
 from enigma import eEnv
 from os import path as os_path, mkdir as os_mkdir, remove as os_remove, listdir as os_listdir
 from threading import Event
@@ -50,12 +51,13 @@ class getWeather:
     def __init__(self):
         paths = (os_path.dirname(resolveFilename(SCOPE_SKIN, config.skin.primary_skin.value)) + '/weather_icons/'
                     ,'/etc/enigma2/weather_icons/',
-                    eEnv.resolve('${libdir}/enigma2/python/Plugins/Extensions/WeatherPlugin/icons/')
+                    eEnv.resolve('${libdir}/enigma2/python/Plugins/Extensions/MSNweather/icons/')
                 )
         self.iconextension = '.png'
         for path in paths:
-            if not os_path.exists(path):
+            if os_path.exists(path):
                 self.iconpath = path
+                break
         self.initialize(True)
 
     def EXCEPTIONDEBUG(self, myFUNC = '' , myText = '' ):
@@ -101,6 +103,7 @@ class getWeather:
             self.WebCurrentItems = {}
             self.WebhourlyItems = {}
             self.WebDailyItems = {}
+        self.collectDataForHistogram = False
         return
 
     def cancel(self):
@@ -127,9 +130,10 @@ class getWeather:
         else:
             return {}
         
-    def getWeatherData(self, degreetype, locationcode, city, weatherSearchFullName, thingSpeakChannelID, callback, callbackShowIcon, callbackAllIconsDownloaded = None):
+    def getWeatherData(self, degreetype, locationcode, city, weatherSearchFullName, thingSpeakChannelID, callback, callbackShowIcon, callbackAllIconsDownloaded = None, Histogram = False):
         self.DEBUG('getWeather().getWeatherData' ,'>>>')
         self.initialize()
+        self.collectDataForHistogram = Histogram
         language = config.osd.language.value.replace('_', '-')
         if language == 'en-EN':
             language = 'en-US'
@@ -162,7 +166,7 @@ class getWeather:
                                 weatherPluginEntry.city.value,
                                 weatherPluginEntry.weatherSearchFullName.value,
                                 weatherPluginEntry.thingSpeakChannelID.value,
-                                callback, None, callbackAllIconsDownloaded)
+                                callback, None, callbackAllIconsDownloaded, True)
             return 1
         else:
             return 0
@@ -301,6 +305,30 @@ class getWeather:
         self.DEBUGweb('getWeather().webCallback len(WebCurrentItems)= %s, len(WebhourlyItems)= %s, len(WebDailyItems)= %s' % ( \
                                                          len(self.WebCurrentItems),len(self.WebhourlyItems),len(self.WebDailyItems)))
         #final callback
+        if self.collectDataForHistogram:
+            myFile = eEnv.resolve('${libdir}/enigma2/python/Plugins/Extensions/MSNweather/histograms.data')
+            record = datetime.now().strftime('%H:%M')
+            data = self.WebCurrentItems.get('nowData', None)
+            if data is not None:
+                record = "%s|%s=%s|%s=%s|%s=%s|%s=%s" % (record, data[0][0], data[0][1].strip(),
+                                                                 data[1][0], data[1][1].strip(),
+                                                                 data[2][0], data[2][1].strip(),
+                                                                 data[4][0], data[4][1].strip()
+                                     )
+                self.DEBUGweb('getWeather().webCallback storing current data for histogram in %s' % myFile)
+                self.DEBUGweb(record)
+                data = []
+                if os_path.exists(myFile):
+                    with open(myFile, "r") as f:
+                        for line in f:
+                            if len(line.strip()) > 0:
+                                data.append(line.strip())
+                        f.close()
+                data.append(record)
+                with open(myFile, "w") as f:
+                    f.write("\n".join(data))
+                    f.close()
+        
         config.plugins.WeatherPlugin.callbacksCount.value += 1
         self.DEBUGweb('MSNWeather().xmlCallback() invoking callback')
         if self.callback is not None:

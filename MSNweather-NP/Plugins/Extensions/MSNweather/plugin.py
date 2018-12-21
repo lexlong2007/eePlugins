@@ -2,9 +2,8 @@
 #
 # WeatherPlugin E2
 #
-# Coded by Dr.Best (c) 2012
-# Support: www.dreambox-tools.info
-# E-Mail: dr.best@dreambox-tools.info
+# Initially coded by Dr.Best (c) 2012
+# Modified by j00zek 2018/2019
 #
 # This plugin is open source but it is NOT free software.
 #
@@ -23,16 +22,15 @@
 from . import _
 from Components.ActionMap import ActionMap
 from Components.config import ConfigSubsection, ConfigSubList, ConfigInteger, config, NoSave, ConfigEnableDisable, ConfigSelection
-from Components.j00zekBING import getPicOfTheDay
 from Components.Pixmap import Pixmap
 from Components.Sources.StaticText import StaticText
 from debug import printDEBUG
-from datetime import datetime, timedelta
+#from datetime import datetime, timedelta
 from Tools.Directories import resolveFilename, SCOPE_SKIN
-from enigma import eTimer
+#from enigma import eTimer
 from getWeather import getWeather
 from Plugins.Plugin import PluginDescriptor
-from random import randint
+#from random import randint
 from Screens.Screen import Screen
 from setup import initConfig, MSNWeatherEntriesListConfigScreen
 from Tools.LoadPixmap import LoadPixmap
@@ -52,8 +50,10 @@ if os.path.exists(os.path.dirname(resolveFilename(SCOPE_SKIN, config.skin.primar
 if os.path.exists('/usr/share/enigma2/animatedWeatherIcons'): availableOptions.append(("animIcons", _("animated Icons")))
 config.plugins.WeatherPlugin.IconsType = ConfigSelection(choices = availableOptions, default = "serviceIcons")
 
+config.plugins.WeatherPlugin.BuildHistograms = ConfigEnableDisable(default = False)
+
 config.plugins.WeatherPlugin.DebugEnabled = ConfigEnableDisable(default = False)
-config.plugins.WeatherPlugin.DebugSize = ConfigSelection(choices = [ ("10000", "10KB"), ("100000", "100000KB"), ("1000000", "1MB"), ], default = "10000")
+config.plugins.WeatherPlugin.DebugSize = ConfigSelection(choices = [ ("10000", "10KB"), ("100000", "100KB"), ("1000000", "1MB"), ], default = "10000")
 
 config.plugins.WeatherPlugin.DebugWeatherMSNupdater = ConfigEnableDisable(default = False)
 config.plugins.WeatherPlugin.DebugMSNWeatherSource = ConfigEnableDisable(default = False)
@@ -117,13 +117,14 @@ class MSNweather(Screen):
     def __init__(self, session):
         Screen.__init__(self, session)
         self.title = _("MSN weather NP")
-        self["actions"] = ActionMap(["SetupActions", "DirectionActions", "MenuActions"],
+        self["actions"] = ActionMap(["SetupActions", "DirectionActions", "MenuActions", "ColorActions"],
         {
             "cancel": self.close,
             "menu": self.config,
             "right": self.nextItem,
             "left": self.previousItem,
-            "info": self.showWebsite
+            "info": self.showWebsite,
+            "yellow": self.ShowHistograms
         }, -1)
 
         self["statustext"] = StaticText()
@@ -279,6 +280,10 @@ class MSNweather(Screen):
             if self.webSite:
                 self.session.open(Browser, config.plugins.WebBrowser.fullscreen.value, self.webSite, False)
         except: pass # I dont care if browser is installed or not...
+        
+    def ShowHistograms(self):
+        from histograms import MSNweatherHistograms
+        self.session.open(MSNweatherHistograms)
 
 class WeatherIcon(Pixmap):
     def __init__(self):

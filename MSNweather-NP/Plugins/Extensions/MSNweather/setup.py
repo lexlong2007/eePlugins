@@ -381,6 +381,7 @@ class MSNWeatherConfiguration(Screen, ConfigListScreen):
         self["actions"] = ActionMap(["SetupActions"], { "cancel": self.keyCancel, "save": self.keySave, })
         ConfigList = []
         ConfigList.append(getConfigListEntry(_("Icons type:"), config.plugins.WeatherPlugin.IconsType))
+        ConfigList.append(getConfigListEntry(_("Build histograms:"), config.plugins.WeatherPlugin.BuildHistograms))
         ConfigList.append(getConfigListEntry(_("Debug (require restart):"), config.plugins.WeatherPlugin.DebugEnabled))
         ConfigList.append(getConfigListEntry(_("Debug log file size:"), config.plugins.WeatherPlugin.DebugSize))
         ConfigList.append(getConfigListEntry("> MSNWeather(Source):", config.plugins.WeatherPlugin.DebugMSNWeatherSource))

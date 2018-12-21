@@ -196,3 +196,7 @@ msgstr "Animowane ikony"
 
 msgid "Debug log file size:"
 msgstr "Wielkość pliku loga"
+
+msgid "Build histograms:"
+msgstr "Twórz histogramy"
+

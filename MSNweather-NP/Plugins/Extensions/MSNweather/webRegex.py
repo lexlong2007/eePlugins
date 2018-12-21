@@ -28,7 +28,7 @@ iconsMap={
     "niewielkieopadysniegu" :   '13.png', 
     'snieg'                 :   '16.png',
     "zachmurzeniecalkowite" :   '26.png',
-    'zachmurzenieduze'      :   '27.png',
+    'zachmurzenieduze'      :   '28.png',
     'zachmurzeniemale'      :   '29.png',
     'czesciowoslonecznie'   :   '30.png',
     'bezchmurnie'           :   '31.png',
@@ -72,9 +72,9 @@ iconsMap={
     }
 
 def plTOansi(text):
-    text = text.replace(" ","").replace("ś","s").replace("ł","l").strip()
-    text = text.replace("ę","e").replace("ć","c").replace("ó","o").strip()
-    return text
+    text = text.replace(" ","").replace("Ś","s").replace("ś","s").replace("ł","l").strip()
+    text = text.replace("ę","e").replace("ć","c").replace("ó","o").strip().replace("ż","z").strip()
+    return text.lower()
   
 import re
 # instantiate the parser and fed it some HTML
@@ -124,7 +124,7 @@ def getWeather(webContent, DBGnow = False, DBGhourly = False, DBGdaily = False):
         if DBGdaily: print '---------------------------------- Line ----------------------\n' , Line
         dailyDict['Record=%s' % id] = getList([], Line, 'role="button" href="\?(.*?)".*<span>(.*?)<.*<span>(.*?)<.*src="(.*?)".*alt="(.*?)" .*data-icon="(.*?)".*daytemphigh">(.*?)<.*<p>(.*?)</p>.*<span>(.*?)<')
         try:
-            weatherIconName = plTOansi(dailyDict['Record=%s' % id][0][4].lower())
+            weatherIconName = plTOansi(dailyDict['Record=%s' % id][0][4])
             dailyDict['WeatherIcon4Record=%s' % id] = iconsMap.get(weatherIconName, '')
         except Exception:
             dailyDict['WeatherIcon4Record=%s' % id] = ''

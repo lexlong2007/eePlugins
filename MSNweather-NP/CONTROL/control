@@ -5,6 +5,6 @@ Depends:
 Description: wersja NIEWSPIERANA w wątku BH!!!
 Maintainer: j00zek
 Source: 
-Version: 18.12.15.0701
+Version: 18.12.20.0558
 Architecture: all
 DestinationPath: /usr/lib/enigma2/python/

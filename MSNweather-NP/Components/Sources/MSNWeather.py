@@ -106,7 +106,7 @@ class MSNWeather(Source):
                 #self.DEBUG('MSNWeather(Source) getTemperature_Heigh skey = "%s"' % skey)
                 line = self.getWebDailyItems().get("Record=%s" % skey, [('day=UNKNOWN', '', '', '', '', '', '', '', '')])[0]
                 self.DEBUG('MSNWeather(Source) getTemperature_Heigh "Record=%s" = "%s"' % (skey,str(line)))
-                retVal = line[6].strip()
+                retVal = "%s%s" % (line[6].strip(), weathermsn.weatherData.degreetype)
             except Exception as e:
                 self.EXCEPTIONDEBUG('MSNWeather(Source) Exception %s' % str(e) )
         self.DEBUG('MSNWeather(Source) getTemperature_Heigh(%s) = "%s"' % (str(key),retVal))
@@ -127,7 +127,7 @@ class MSNWeather(Source):
                 #self.DEBUG('MSNWeather(Source) getTemperature_Low skey = "%s"' % skey)
                 line = self.getWebDailyItems().get("Record=%s" % skey, [('day=UNKNOWN', '', '', '', '', '', '', '', '')])[0]
                 self.DEBUG('MSNWeather(Source) getTemperature_Low "Record=%s" = "%s"' % (skey,str(line)))
-                retVal = line[7].strip()
+                retVal = "%s%s" % (line[7].strip(), weathermsn.weatherData.degreetype)
             except Exception as e:
                 self.EXCEPTIONDEBUG('MSNWeather(Source) getTemperature_Low Exception %s' % str(e) )
         self.DEBUG('MSNWeather(Source) getTemperature_Low(%s) = "%s"' % (str(key),retVal))
@@ -141,7 +141,7 @@ class MSNWeather(Source):
             highTemp = item.high
             lowTemp = item.low
             if highTemp != '' and lowTemp != '':
-                retVal = "%s°%s - %s°%s" % (highTemp, weathermsn.weatherData.degreetype, lowTemp, weathermsn.weatherData.degreetype)
+                retVal = "%s°%s | %s°%s" % (highTemp, weathermsn.weatherData.degreetype, lowTemp, weathermsn.weatherData.degreetype)
         if retVal == '':
             try:
                 if skey == '-1': skey = "0"
@@ -149,7 +149,7 @@ class MSNWeather(Source):
                 #self.DEBUG('MSNWeather(Source) getTemperature_Heigh_Low skey = "%s"' % skey)
                 line = self.getWebDailyItems().get("Record=%s" % skey, [('day=UNKNOWN', '', '', '', '', '', '', '', '')])[0]
                 self.DEBUG('MSNWeather(Source) getTemperature_Heigh_Low "Record=%s" = "%s"' % (skey,str(line)))
-                retVal = "%s°%s - %s°%s" % (line[6].strip(), weathermsn.weatherData.degreetype, line[7].strip(), weathermsn.weatherData.degreetype)
+                retVal = "%s%s | %s%s" % (line[6].strip(), weathermsn.weatherData.degreetype, line[7].strip(), weathermsn.weatherData.degreetype)
             except Exception as e:
                 self.EXCEPTIONDEBUG('MSNWeather(Source) getTemperature_Heigh_Low Exception %s' % str(e) )
         self.DEBUG('MSNWeather(Source) getTemperature_Heigh_Low(%s) = "%s"' % (str(key),retVal))
