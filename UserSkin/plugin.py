@@ -32,7 +32,19 @@ from Tools.LoadPixmap import LoadPixmap
 #from Tools import Notifications
 #import shutil
 #import re
-        
+from os import path, remove
+
+if path.exists('/etc/enigma2/skinModified'):        
+    try: remove('/etc/enigma2/skinModified')
+    except Exception: pass
+if path.exists('/etc/enigma2/dvbappHungMarker'):        
+    try: 
+        remove('/etc/enigma2/dvbappHungMarker')
+        with open ('/tmp/safeMode.log', 'a') as f:
+            f.write('dvbapp restarted successfully :)')
+            f.close()
+    except Exception: pass
+
 def Plugins(**kwargs):
     return [PluginDescriptor(name=_("UserSkin Setup"), description=_("Personalize your Skin"), where = PluginDescriptor.WHERE_MENU, fnc=menu)]
 
@@ -43,7 +55,12 @@ def menu(menuid, **kwargs):
 
 def main(session, **kwargs):
     printDEBUG("Opening UserSkin%s menu ..." % UserSkinInfo)
-    session.open(UserSkin_Menu)
+    skinHistory, skinUpdate, skinAddOns, skinComponents = readSkinConfig()
+    if skinHistory or skinUpdate or skinAddOns or skinComponents:
+        session.open(UserSkin_Menu)
+    else:
+        from skinconfig import UserSkin_Config
+        session.open(UserSkin_Config)
 
 def readSkinConfig():
     skinHistory = False
@@ -97,18 +114,18 @@ class UserSkin_Menu(Screen):
                 skinHistory, skinUpdate, skinAddOns, skinComponents = readSkinConfig()
                 l = [(self.buildListEntry(_("Skin personalization"), "config.png",'config'))]
                 
-                if pathExists(resolveFilename(SCOPE_PLUGINS,'Extensions/MiniTVUserSkinMaker')):
-                    l.append(self.buildListEntry(_("miniTV skin creator"), "lcd.png",'LCDskin'))
-                else:
-                    try:
-                        from enigma import getDesktop
-                        if getDesktop(1).size().width() > 132:
-                            l.append(self.buildListEntry(_("Install miniTV skin creator"), "lcd.png",'LCDskinInstall'))
-                        else:
-                            l.append(self.buildListEntry(_("LCD/VFD too small to use miniTV skin creator"), "lcd.png",'fakeParam'))
-                           
-                    except Exception:
-                        pass
+                if 0:
+                    if pathExists(resolveFilename(SCOPE_PLUGINS,'Extensions/MiniTVUserSkinMaker')):
+                        l.append(self.buildListEntry(_("miniTV skin creator"), "lcd.png",'LCDskin'))
+                    else:
+                        try:
+                            from enigma import getDesktop
+                            if getDesktop(1).size().width() > 132:
+                                l.append(self.buildListEntry(_("Install miniTV skin creator"), "lcd.png",'LCDskinInstall'))
+                            else:
+                                l.append(self.buildListEntry(_("LCD/VFD too small to use miniTV skin creator"), "lcd.png",'fakeParam'))
+                        except Exception:
+                            pass
                     
                 if skinUpdate:
                     l.append(self.buildListEntry(_("Update main skin"), "skin.png",'getskin')),
@@ -120,11 +137,11 @@ class UserSkin_Menu(Screen):
                 if skinComponents:
                     l.append(self.buildListEntry(_("Download additional Components/plugins"), "plugin.png",'getcomponents'))
 
-                l.append(self.buildListEntry(_("List loaded screens"), "import.png",'ListScreens')),
+                #l.append(self.buildListEntry(_("List loaded screens"), "import.png",'ListScreens')),
 
                 if skinHistory:
                     l.append(self.buildListEntry(_("History of changes"), "history.png",'history')),
-                l.append(self.buildListEntry(_("Import foreign skin"), "import.png",'importskin')),
+                #l.append(self.buildListEntry(_("Import foreign skin"), "import.png",'importskin')),
                 l.append(self.buildListEntry(_("About"), "about.png",'about')),
                 self["list"].list = l
 

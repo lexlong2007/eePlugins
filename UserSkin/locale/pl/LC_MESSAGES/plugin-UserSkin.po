@@ -494,3 +494,9 @@ msgstr "Ścieżka użytkownika:"
 
 msgid "Do you really want to cancel?"
 msgstr "Naprawdę chcesz anulować wszystkie zmiany?"
+
+msgid "Safe mode (reset on GS):"
+msgstr "Tryb bezpieczny (reset po GS):"
+
+msgid "Report automatically skin GS:"
+msgstr "Automatyczne raporty GS-ów skórki:"

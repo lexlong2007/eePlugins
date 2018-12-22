@@ -4,7 +4,7 @@
 #
 # maintainer: j00zek
 #
-# extension for openpli, all skins, descriptions, bar selections and other @j00zek 2014/2017
+# extension for openpli, all skins, descriptions, bar selections and other @j00zek 2014/2019
 # Uszanuj czyjąś pracę i NIE przywłaszczaj sobie autorstwa!
 
 #This plugin is free software, you are allowed to
@@ -80,7 +80,8 @@ config.plugins.UserSkin.AdvancedMode = ConfigSelection(default="copyScreens", ch
                 ("mergeScreens", _("Advanced (merge screens)"))
                 ])
 config.plugins.UserSkin.FontScale = ConfigSelectionNumber(default=100, min=50, max=200, stepwidth=1)
-
+config.plugins.UserSkin.SafeMode = ConfigYesNo(default = False)
+config.plugins.UserSkin.ReportGS = ConfigYesNo(default = False)
 imageType=None
 def isImageType(imgName = ''):
     global imageType
@@ -214,6 +215,11 @@ class UserSkin_Config(Screen, ConfigListScreen):
         self.myUserSkin_fake_entry = NoSave(ConfigNothing())
         self.LackOfFile = ''
         
+        if path.exists('/usr/bin/enigma2_pre_start.sh'):
+            config.plugins.UserSkin.SafeMode.value = True
+        else:
+            config.plugins.UserSkin.SafeMode.value = False
+        
         self.list = []
         ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
 
@@ -246,6 +252,11 @@ class UserSkin_Config(Screen, ConfigListScreen):
         self.set_myatile = getConfigListEntry(_("Enable skin personalization:"), self.myUserSkin_active)
         self.list = []
         self.list.append(self.set_myatile)
+        if isImageType('vti'):
+            self.list.append(getConfigListEntry(_("Safe mode (reset on GS):"), config.plugins.UserSkin.SafeMode ))
+            printDEBUG("'%s'" % CurrentSkinName)
+            if CurrentSkinName == 'BlackHarmonyDISABLED' and config.plugins.UserSkin.SafeMode.value:
+                self.list.append(getConfigListEntry(_("Automatic skin GS reporting:"), config.plugins.UserSkin.ReportGS ))
         self.list.append(getConfigListEntry(_("Personalization mode:"), config.plugins.UserSkin.AdvancedMode ))
         self.list.append(self.set_color)
         self.list.append(self.set_font)
@@ -280,7 +291,8 @@ class UserSkin_Config(Screen, ConfigListScreen):
         self["config"].l.setList(self.list)
         if self.myUserSkin_active.value:
             self["key_yellow"].setText(_("User skins"))
-            self["key_blue"].setText(_("Extract from skin.xml"))
+            if 0: self["key_blue"].setText(_("Extract from skin.xml"))
+            else: self["key_blue"].setText(_("About"))
         else:
             self["key_yellow"].setText("")
             self["key_blue"].setText("")
@@ -301,6 +313,8 @@ class UserSkin_Config(Screen, ConfigListScreen):
                 else:
                     self["key_yellow"].setText("")
             elif self["config"].getCurrent()[1] == config.plugins.j00zekPiconAnimation.UserPath:
+                self.createConfigList()
+            elif self["config"].getCurrent()[1] == config.plugins.UserSkin.SafeMode:
                 self.createConfigList()
         except Exception: pass
 
@@ -396,6 +410,13 @@ class UserSkin_Config(Screen, ConfigListScreen):
             for x in self["config"].list:
                 x[1].save()
             configfile.save()
+            ################################ SAFE MODE 
+            self.UserSkinToolSet.ClearMemory()
+            if config.plugins.UserSkin.SafeMode.value:
+                system("ln -sf %s/scripts/safeMode.sh /usr/bin/enigma2_pre_start.sh;touch /etc/enigma2/skinModified" %(PluginPath)) #for safety, nicely manage overwrite ;)
+                
+            else:
+                system("rm -f /usr/bin/enigma2_pre_start.sh") #for safety, nicely manage overwrite ;)
             #we change current folder to active skin folder
             chdir(SkinPath)
             #### FONTS
@@ -479,6 +500,14 @@ class UserSkin_Config(Screen, ConfigListScreen):
         restartbox.setTitle(_("Message"))
 
     def keyBlue(self):
+        def doNothing(ret=None):
+            return
+          
+        if 1:
+            from about import UserSkin_About
+            self.session.openWithCallback(doNothing,UserSkin_About)
+            return
+
         import xml.etree.cElementTree as ET
         from Screens.VirtualKeyBoard import VirtualKeyBoard
         
@@ -838,20 +867,11 @@ class TreeUserSkinScreens(Screen):
                 isPreview += 1
             if isPreview >= 2:
                 break
-        if self.currentSkin == "infinityHD-nbox-tux-full" and isPreview < 2:
-            if DBG == True: printDEBUG("no preview files :(")
-            if path.exists("%sUserSkinpics/install.png" % SkinPath):
-                if DBG == True: printDEBUG("SkinConfig is loading %sUserSkinpics/opkg.png" % SkinPath)
-                self.disabled_pic = LoadPixmap(cached=True, path="%sUserSkinpics/opkg.png" % SkinPath)
-            else:
-                self.disabled_pic = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/UserSkin/pic/opkg.png"))
-            self['key_blue'].setText(_('Install from OPKG'))
+        if path.exists("%sUserSkinpics/install.png" % SkinPath):
+            if DBG == True: printDEBUG("SkinConfig is loading %sUserSkinpics/remove.png" % SkinPath)
+            self.disabled_pic = LoadPixmap(cached=True, path="%sUserSkinpics/remove.png" % SkinPath)
         else:
-            if path.exists("%sUserSkinpics/install.png" % SkinPath):
-                if DBG == True: printDEBUG("SkinConfig is loading %sUserSkinpics/remove.png" % SkinPath)
-                self.disabled_pic = LoadPixmap(cached=True, path="%sUserSkinpics/remove.png" % SkinPath)
-            else:
-                self.disabled_pic = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/UserSkin/pic/remove.png"))
+            self.disabled_pic = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/UserSkin/pic/remove.png"))
         
         self.filelist = FileList(self.allScreens_dir)
         self["filelist"] = self.filelist
