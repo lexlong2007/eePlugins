@@ -398,6 +398,7 @@ class MSNWeatherConfiguration(Screen, ConfigListScreen):
         ConfigList.append(getConfigListEntry("> getWeather web component:", config.plugins.WeatherPlugin.DebugGetWeatherWEB))
         ConfigList.append(getConfigListEntry("> getWeather thingSpeak component:", config.plugins.WeatherPlugin.DebugGetWeatherTS))
         ConfigList.append(getConfigListEntry("> getWeather raw data:", config.plugins.WeatherPlugin.DebugGetWeatherFULL))
+        ConfigList.append(getConfigListEntry("> MSNweatherHistograms:", config.plugins.WeatherPlugin.DebugMSNweatherHistograms))
 
         ConfigListScreen.__init__(self, ConfigList, session = session, on_change = self.changed)
         self.changed()

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from . import _
 from Components.config import config
-from datetime import datetime
 from enigma import eEnv
 from os import path as os_path, mkdir as os_mkdir, remove as os_remove, listdir as os_listdir
 from threading import Event
@@ -11,6 +10,7 @@ from twisted.web.client import getPage, downloadPage
 from urllib import quote as urllib_quote
 from xml.etree.cElementTree import fromstring as cet_fromstring
 
+import time
 import webRegex
 
 class WeatherIconItem:
@@ -307,10 +307,11 @@ class getWeather:
         #final callback
         if self.collectDataForHistogram:
             myFile = eEnv.resolve('${libdir}/enigma2/python/Plugins/Extensions/MSNweather/histograms.data')
-            record = datetime.now().strftime('%H:%M')
+            currTime = int(time.time())
             data = self.WebCurrentItems.get('nowData', None)
             if data is not None:
-                record = "%s|%s=%s|%s=%s|%s=%s|%s=%s" % (record, data[0][0], data[0][1].strip(),
+                record = "%s|%s|%s=%s|%s=%s|%s=%s|%s=%s" % (currTime, time.strftime("%H", time.localtime(currTime)),
+                                                                 data[0][0], data[0][1].strip(),
                                                                  data[1][0], data[1][1].strip(),
                                                                  data[2][0], data[2][1].strip(),
                                                                  data[4][0], data[4][1].strip()
@@ -322,7 +323,12 @@ class getWeather:
                     with open(myFile, "r") as f:
                         for line in f:
                             if len(line.strip()) > 0:
-                                data.append(line.strip())
+                                if len(line.split('|')) > 2:
+                                    try:
+                                        storedTime = int(line.split('|')[0])
+                                        if storedTime > (currTime - 86400):
+                                            data.append(line.strip())
+                                    except Exception: pass
                         f.close()
                 data.append(record)
                 with open(myFile, "w") as f:

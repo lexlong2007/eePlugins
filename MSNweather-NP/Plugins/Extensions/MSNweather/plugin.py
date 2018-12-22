@@ -71,6 +71,7 @@ config.plugins.WeatherPlugin.DebugGetWeatherXML = ConfigEnableDisable(default = 
 config.plugins.WeatherPlugin.DebugGetWeatherWEB = ConfigEnableDisable(default = False)
 config.plugins.WeatherPlugin.DebugGetWeatherTS = ConfigEnableDisable(default = False)
 config.plugins.WeatherPlugin.DebugGetWeatherFULL = ConfigEnableDisable(default = False)
+config.plugins.WeatherPlugin.DebugMSNweatherHistograms = ConfigEnableDisable(default = False)
 
 printDEBUG('INIT', ' MSNweather NP plugin')
 printDEBUG('config.plugins.WeatherPlugin.IconsType = "%s"' % config.plugins.WeatherPlugin.IconsType.value)
