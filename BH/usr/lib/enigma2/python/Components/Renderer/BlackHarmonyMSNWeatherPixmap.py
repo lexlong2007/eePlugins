@@ -13,6 +13,6 @@ class fakeRendererMSNWeatherPixmap(Renderer):
 	GUI_WIDGET = ePixmap
 
 try:
-    from Components.Renderer.MSNWeatherPixmap import MSNWeatherPixmap as BlackHarmonyMSNWeatherPixmap
+    from Components.Renderer.MSNWeatherPixmapNP import MSNWeatherPixmapNP as BlackHarmonyMSNWeatherPixmap
 except Exception:
     BlackHarmonyMSNWeatherPixmap = fakeRendererMSNWeatherPixmap  

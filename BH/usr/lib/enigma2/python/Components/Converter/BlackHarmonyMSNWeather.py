@@ -14,6 +14,6 @@ class fakeConverterMSNWaether(Converter, object):
 	iconfilename = property(getIconFilename)
 
 try:
-    from Components.Converter.MSNWeather import MSNWeather as BlackHarmonyMSNWeather
+    from Components.Converter.MSNWeatherNP import MSNWeatherNP as BlackHarmonyMSNWeather
 except Exception:
     BlackHarmonyMSNWeather = fakeConverterMSNWaether  

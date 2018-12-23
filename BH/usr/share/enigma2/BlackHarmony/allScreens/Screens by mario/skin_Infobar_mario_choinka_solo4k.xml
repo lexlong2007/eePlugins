@@ -515,7 +515,7 @@
   </widget>
 #--pogoda--# 
     <widget alphatest="blend" position="1650,840" render="BlackHarmonyMSNWeatherPixmap" size="128,128" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
-    <convert type="MSNWeather">weathericon,current</convert>
+    <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
   </widget>
   <widget backgroundColor="black" font="HD_Thin; 34" foregroundColor="lemon" halign="left" noWrap="1" position="1785,840" render="Label" size="85,40" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="3">
     <convert type="BlackHarmonyMSNWeather">temperature_current</convert>

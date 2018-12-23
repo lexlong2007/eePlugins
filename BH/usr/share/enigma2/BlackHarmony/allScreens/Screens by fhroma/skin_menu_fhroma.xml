@@ -16,22 +16,22 @@
 			</convert>
     </widget>
     <widget source="title" render="Label" position="85,140" size="370,40" font="HD_Thin; 36" halign="left" foregroundColor="#66cc99" backgroundColor="black" transparent="1"/>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="70,723" size="135,135" source="session.MSNWeather" transparent="1" zPosition="5">
-      <convert type="MSNWeather">weathericon,current</convert>
+    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="70,723" size="135,135" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+      <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
     </widget>
-    <widget noWrap="1" backgroundColor="background" font="HD_Thin; 24" render="Label" position="215,735" size="110,30" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" foregroundColor="lemon">
-      <convert type="MSNWeather">temperature_current</convert>
+    <widget noWrap="1" backgroundColor="background" font="HD_Thin; 24" render="Label" position="215,735" size="110,30" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="center" transparent="1" foregroundColor="lemon">
+      <convert type="BlackHarmonyMSNWeather">temperature_current</convert>
     </widget>
-    <widget noWrap="1" backgroundColor="background" font="HD_Thin; 24" render="Label" position="240,801" size="400,32" source="session.MSNWeather" zPosition="3" halign="left" transparent="1">
-      <convert type="MSNWeather">temperature_text,current</convert>
+    <widget noWrap="1" backgroundColor="background" font="HD_Thin; 24" render="Label" position="240,801" size="400,32" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="left" transparent="1">
+      <convert type="BlackHarmonyMSNWeather">temperature_text,current</convert>
     </widget>
     <eLabel name="new eLabel" position="335,735" size="80,30" font="HD_Thin; 24" foregroundColor="white" backgroundColor="black" transparent="1" halign="left" text="maks."/>
-    <widget noWrap="1" backgroundColor="black" font="HD_Thin; 24" render="Label" position="409,735" size="70,30" source="session.MSNWeather" zPosition="3" halign="left" transparent="1" foregroundColor="yellow">
-      <convert type="MSNWeather">temperature_high,day1</convert>
+    <widget noWrap="1" backgroundColor="black" font="HD_Thin; 24" render="Label" position="409,735" size="70,30" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="left" transparent="1" foregroundColor="yellow">
+      <convert type="BlackHarmonyMSNWeather">temperature_high,day1</convert>
     </widget>
     <eLabel name="new eLabel" position="495,735" size="63,30" font="HD_Thin; 24" foregroundColor="white" backgroundColor="black" transparent="1" halign="left" text="min."/>
-    <widget noWrap="1" backgroundColor="black" font="HD_Thin; 24" render="Label" position="553,735" size="70,30" source="session.MSNWeather" zPosition="3" halign="left" transparent="1" foregroundColor="blue">
-      <convert type="MSNWeather">temperature_low,day1</convert>
+    <widget noWrap="1" backgroundColor="black" font="HD_Thin; 24" render="Label" position="553,735" size="70,30" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="left" transparent="1" foregroundColor="blue">
+      <convert type="BlackHarmonyMSNWeather">temperature_low,day1</convert>
     </widget>
   </screen>
   <screen name="menu_harddisk" position="70,75" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">

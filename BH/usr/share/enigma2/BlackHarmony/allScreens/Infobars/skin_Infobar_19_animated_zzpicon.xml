@@ -267,21 +267,21 @@
       <convert type="ConditionalShowHide" />
     </widget>
     <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1470,27" size="85,85" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="3">
-      <convert type="BlackHarmonyMSNWeather">weathericon,day3</convert>
+      <convert type="BlackHarmonyMSNWeather">weathericon,day2</convert>
     </widget>
     <ePixmap pixmap="BlackHarmony/weather_icons/temp+.png" position="1595,72" size="20,50" zPosition="3" transparent="1" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/weather_icons/temp+.png" position="1285,72" size="20,50" zPosition="3" transparent="1" alphatest="blend" />
     <eLabel name="new eLabel" position="1335,30" size="120,30" text="Jutro" font="HD_Thin; 24" transparent="1" zPosition="3" foregroundColor="lemon" backgroundColor="black" />
     <widget source="session.BlackHarmonyMSNWeather" render="Label" position="1305,72" size="140,30" font="Roboto_HD; 20" halign="center" valign="center" transparent="1" zPosition="3">
-      <convert type="BlackHarmonyMSNWeather">temperature_heigh_low,day3</convert>
+      <convert type="BlackHarmonyMSNWeather">temperature_heigh_low,day2</convert>
     </widget>
     <ePixmap position="1260,8" zPosition="-2" size="625,120" pixmap="BlackHarmony/bg_design/infobar_kpogoda.png" />
     <eLabel name="new eLabel" position="1630,30" size="130,30" text="Pojutrze" font="HD_Thin; 24" transparent="1" zPosition="3" foregroundColor="green" backgroundColor="black" />
     <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1780,27" size="85,85" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
-      <convert type="BlackHarmonyMSNWeather">weathericon,day4</convert>
+      <convert type="BlackHarmonyMSNWeather">weathericon,day3</convert>
     </widget>
     <widget source="session.BlackHarmonyMSNWeather" render="Label" position="1615,72" size="140,30" font="Roboto_HD; 20" halign="center" valign="center" transparent="1" zPosition="3">
-      <convert type="BlackHarmonyMSNWeather">temperature_heigh_low,day4</convert>
+      <convert type="BlackHarmonyMSNWeather">temperature_heigh_low,day3</convert>
     </widget>
     <eLabel text="Pogoda teraz :" position="1660,796" size="200,25" font="Roboto_HD; 23" backgroundColor="black" halign="center" transparent="1" foregroundColor="green" />
     <widget source="global.CurrentTime" render="Label" position="1354,768" size="348,26" font="Regular; 19" halign="center" transparent="1" backgroundColor="black" foregroundColor="grey" zPosition="3" noWrap="1">

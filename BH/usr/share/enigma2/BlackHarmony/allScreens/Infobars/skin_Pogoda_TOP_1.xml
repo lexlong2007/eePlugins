@@ -25,19 +25,19 @@
   <eLabel text="Pojutrze" position="1605,198" size="140,25" font="HD_Thin; 21" backgroundColor="black" halign="center" transparent="1" foregroundColor="light_yellow" />
   <ePixmap pixmap="BlackHarmony/gfx/temp+.png" position="1287,233" size="20,50" zPosition="3" transparent="1" alphatest="blend" />
   <widget source="session.BlackHarmonyMSNWeather" render="Label" position="1307,233" size="140,30" font="Roboto_HD; 21" halign="center" valign="center" transparent="1" zPosition="3" backgroundColor="black">
-    <convert type="BlackHarmonyMSNWeather">temperature_heigh_low,day3</convert>
+    <convert type="BlackHarmonyMSNWeather">temperature_heigh_low,day2</convert>
   </widget>
   <ePixmap pixmap="BlackHarmony/gfx/temp-.png" position="1447,213" size="20,50" zPosition="3" transparent="1" alphatest="blend" />
   <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1488,200" size="70,70" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="3">
-    <convert type="BlackHarmonyMSNWeather">weathericon,day3</convert>
+    <convert type="BlackHarmonyMSNWeather">weathericon,day2</convert>
   </widget>
   <ePixmap pixmap="BlackHarmony/gfx/temp+.png" position="1585,233" size="20,50" zPosition="3" transparent="1" alphatest="blend" />
   <widget source="session.BlackHarmonyMSNWeather" render="Label" position="1605,233" size="140,30" font="Roboto_HD; 21" halign="center" valign="center" transparent="1" zPosition="3" backgroundColor="black">
-    <convert type="BlackHarmonyMSNWeather">temperature_heigh_low,day4</convert>
+    <convert type="BlackHarmonyMSNWeather">temperature_heigh_low,day3</convert>
   </widget>
   <ePixmap pixmap="BlackHarmony/gfx/temp-.png" position="1745,213" size="20,50" zPosition="3" transparent="1" alphatest="blend" />
   <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1786,200" size="70,70" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
-    <convert type="BlackHarmonyMSNWeather">weathericon,day4</convert>
+    <convert type="BlackHarmonyMSNWeather">weathericon,day3</convert>
   </widget>
   <widget source="global.CurrentTime" render="Label" position="1292,23" size="575,26" font="HD_Thin; 24" halign="center" transparent="1" backgroundColor="black" zPosition="3" noWrap="1" foregroundColor="light_yellow">
     <convert type="BlackHarmonyimieniny" />
