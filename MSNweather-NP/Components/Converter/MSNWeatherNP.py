@@ -25,7 +25,7 @@ from Components.Converter.Converter import Converter
 from Components.Element import cached
 from datetime import datetime, timedelta
 
-class MSNWeather(Converter, object):
+class MSNWeatherNP(Converter, object):
 
     CURRENT = -1
     DAY1 = 1

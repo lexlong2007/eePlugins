@@ -27,7 +27,7 @@ from Plugins.Extensions.MSNweather.updater import weathermsn
 from Source import Source
 import time
 
-class MSNWeather(Source):
+class MSNWeatherNP(Source):
 
     def __init__(self):
         self.DEBUG('MSNWeather(Source) __init__')

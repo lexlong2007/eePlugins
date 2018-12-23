@@ -29,7 +29,7 @@ from Tools.LoadPixmap import LoadPixmap
 import os
 
 
-class MSNWeatherPixmap(Renderer):
+class MSNWeatherPixmapNP(Renderer):
     
     def __init__(self):
         Renderer.__init__(self)
