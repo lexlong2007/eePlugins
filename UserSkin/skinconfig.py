@@ -80,7 +80,7 @@ config.plugins.UserSkin.AdvancedMode = ConfigSelection(default="copyScreens", ch
                 ("mergeScreens", _("Advanced (merge screens)"))
                 ])
 config.plugins.UserSkin.FontScale = ConfigSelectionNumber(default=100, min=50, max=200, stepwidth=1)
-config.plugins.UserSkin.SafeMode = ConfigYesNo(default = False)
+config.plugins.UserSkin.SafeMode = ConfigYesNo(default = True)
 config.plugins.UserSkin.ReportGS = ConfigYesNo(default = False)
 imageType=None
 def isImageType(imgName = ''):
@@ -489,11 +489,20 @@ class UserSkin_Config(Screen, ConfigListScreen):
 
         myMessage = ''
         if self.LackOfFile != '':
-            printDEBUG("Missing components: %s" % self.LackOfFile)
-            myMessage += _("Missing components found: %s\n\n") % self.LackOfFile
-            myMessage += _("Skin will NOT work properly and GS expected!!!\n\n")
-            myMessage += _("Are you sure you want to use it?")
-            restartbox = self.session.openWithCallback(restartNotOKcb,MessageBox, myMessage, MessageBox.TYPE_YESNO, default = False)
+            if config.plugins.UserSkin.SafeMode.value:
+                if path.exists(user_skin_file):
+                    remove(user_skin_file)
+                printDEBUG("Missing components: %s" % self.LackOfFile)
+                myMessage += _("Missing components found: %s\n\n") % self.LackOfFile
+                myMessage += _("All modifications have been reverted\n\n")
+                myMessage += _("Restart GUI now?")
+                restartbox = self.session.openWithCallback(restartGUIcb,MessageBox, myMessage, MessageBox.TYPE_YESNO, default = False)
+            else:
+                printDEBUG("Missing components: %s" % self.LackOfFile)
+                myMessage += _("Missing components found: %s\n\n") % self.LackOfFile
+                myMessage += _("Skin will NOT work properly and GS expected!!!\n\n")
+                myMessage += _("Are you sure you want to use it?")
+                restartbox = self.session.openWithCallback(restartNotOKcb,MessageBox, myMessage, MessageBox.TYPE_YESNO, default = False)
         else:
             myMessage += _("Restart GUI now?")
             restartbox = self.session.openWithCallback(restartGUIcb,MessageBox, myMessage, MessageBox.TYPE_YESNO, default = False)

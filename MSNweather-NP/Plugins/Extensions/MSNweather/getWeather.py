@@ -310,7 +310,7 @@ class getWeather:
             currTime = int(time.time())
             data = self.WebCurrentItems.get('nowData', None)
             if data is not None:
-                record = "%s|%s|%s=%s|%s=%s|%s=%s|%s=%s" % (currTime, time.strftime("%H", time.localtime(currTime)),
+                record = "%s|%s|%s=%s|%s=%s|%s=%s|%s=%s" % (currTime, time.strftime("%d%H", time.localtime(currTime)),
                                                                  data[0][0], data[0][1].strip(),
                                                                  data[1][0], data[1][1].strip(),
                                                                  data[2][0], data[2][1].strip(),
@@ -326,7 +326,7 @@ class getWeather:
                                 if len(line.split('|')) > 2:
                                     try:
                                         storedTime = int(line.split('|')[0])
-                                        if storedTime > (currTime - 86400):
+                                        if storedTime > (currTime - 3 * 86400):
                                             data.append(line.strip())
                                     except Exception: pass
                         f.close()

@@ -1,5 +1,6 @@
 <skin>
 	<fonts>
+    <font filename="nmsbd.ttf" name="FdLcD" scale="100"/>
    <font filename="/usr/share/enigma2/BlackHarmony/fonts/roboto.ttf" name="VFD" scale="100" />
 	</fonts>
 	

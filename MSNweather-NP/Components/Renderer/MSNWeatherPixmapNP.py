@@ -79,10 +79,11 @@ class MSNWeatherPixmapNP(Renderer):
                 self.updateIcon(self.source.iconfilename)
 
     def doAnimation(self, pngAnimPath):
-        self.DEBUG('MSNWeatherPixmap(Renderer).doAnimation pngAnimPath = %s' % pngAnimPath)
         if config.plugins.WeatherPlugin.IconsType.value == 'animIcons' and os.path.exists(pngAnimPath):
+            self.DEBUG('MSNWeatherPixmap(Renderer).doAnimation(pngAnimPath=%s) returns True' % pngAnimPath)
             return True
         else:
+            self.DEBUG('MSNWeatherPixmap(Renderer).doAnimation(pngAnimPath=%s) returns False' % pngAnimPath)
             return False
                 
     def updateIcon(self, filename):

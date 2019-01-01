@@ -500,3 +500,6 @@ msgstr "Tryb bezpieczny (reset po GS):"
 
 msgid "Report automatically skin GS:"
 msgstr "Automatyczne raporty GS-ów skórki:"
+
+msgid "All modifications have been reverted\n\n"
+msgstr "Wszystkie zmiany zostały cofnięte\n\n"

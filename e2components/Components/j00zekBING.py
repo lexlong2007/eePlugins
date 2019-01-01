@@ -23,7 +23,10 @@ import json
 import urllib
 import urllib2
 from os.path import exists as OsPathExists
-from Components.j00zekComponents import isINETworking
+try:
+    from Components.j00zekComponents import isINETworking
+except Exception:
+    from j00zekComponents import isINETworking
 
 def getPicOfTheDay(CountryCode = 'pl_PL', downloadPathAndFileName = '/usr/share/enigma2/BlackHarmony/icons/BingPicOfTheDay.jpg'):
     retVal = False

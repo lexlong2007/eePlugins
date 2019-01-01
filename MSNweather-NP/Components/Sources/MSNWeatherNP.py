@@ -45,6 +45,10 @@ class MSNWeatherNP(Source):
             from Plugins.Extensions.MSNweather.debug import printDEBUG
             printDEBUG( myFUNC , myText )
     
+    def getIconPath(self):
+        #self.DEBUG('MSNWeather(Source) getThingSpeakItems')
+        return weathermsn.weatherData.iconpath
+        
     def getThingSpeakItems(self):
         #self.DEBUG('MSNWeather(Source) getThingSpeakItems')
         return weathermsn.weatherData.thingSpeakItems

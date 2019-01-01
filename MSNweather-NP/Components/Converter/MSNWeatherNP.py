@@ -23,7 +23,7 @@
 from Components.config import config
 from Components.Converter.Converter import Converter
 from Components.Element import cached
-from datetime import datetime, timedelta
+from os import path
 
 class MSNWeatherNP(Converter, object):
 
@@ -160,12 +160,17 @@ class MSNWeatherNP(Converter, object):
     
     @cached
     def getIconFilename(self):
+        retVal = ''
         if self.mode == self.ICON and self.index in (self.CURRENT, self.DAY1, self.DAY2, self.DAY3, self.DAY4, self.DAY5):
             if self.path is not None and self.extension is not None:
-                return self.path + self.source.getCode(self.index) + "." + self.extension
+                retVal = self.path + self.source.getCode(self.index) + "." + self.extension
             else:
-                return self.source.getWeatherIconFilename(self.index)
-        else:
-            return ""
+                retVal = self.source.getWeatherIconFilename(self.index)
+                if len(retVal) <= 2:
+                    retVal = retVal + ".png"
+                if len(retVal) <= 6:
+                    retVal = self.source.getIconPath() + retVal
+        
+        return retVal
             
     iconfilename = property(getIconFilename)
