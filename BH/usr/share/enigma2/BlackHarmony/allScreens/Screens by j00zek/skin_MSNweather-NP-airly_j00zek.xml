@@ -48,31 +48,31 @@
     <widget render="Label" position="1010,300" size="390,80" source="caption" font="HD_Thin; 28" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center" foregroundColor="light_yellow"/>
     <widget render="Label" position="1010,372" size="390,80" source="observationpoint" font="Roboto_HD; 24" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top"/>
 <!-- top right AIRLY-->
-    <widget position="1440,220" size="120,120" source="session.CurrentService" render="BlackHarmonyABTCAirlyPixmap" alphatest="blend" transparent="1" zPosition="9">
+    <widget position="1440,207" size="120,120" source="session.CurrentService" render="BlackHarmonyABTCAirlyPixmap" alphatest="blend" transparent="1" zPosition="9">
         <convert type="BlackHarmonyABTCAirlyWidget">indexBackPNG</convert>
     </widget>
-    <widget position="1420,202" size="160,160" source="session.CurrentService" render="Label" font="Roboto_HD; 50" foregroundColor="foreground" backgroundColor="background" halign="center" valign="center" noWrap="1" transparent="1" zPosition="10">
+    <widget position="1420,189" size="160,160" source="session.CurrentService" render="Label" font="Roboto_HD; 50" foregroundColor="foreground" backgroundColor="background" halign="center" valign="center" noWrap="1" transparent="1" zPosition="10">
         <convert type="BlackHarmonyABTCAirlyWidget">caqi</convert>
     </widget>
-    <widget position="1590,214" size="230,35" source="session.CurrentService" render="Label" font="HD_Thin; 27" foregroundColor="foreground" backgroundColor="background" halign="left" valign="center" noWrap="1" transparent="1" zPosition="10">
+    <widget position="1590,204" size="240,35" source="session.CurrentService" render="Label" font="HD_Thin; 27" foregroundColor="foreground" backgroundColor="background" halign="left" valign="center" noWrap="1" transparent="1" zPosition="10">
         <convert type="BlackHarmonyABTCAirlyWidget">pm25</convert>
     </widget>
-    <widget position="1590,245" size="230,35" source="session.CurrentService" render="Label" font="HD_Thin; 27" foregroundColor="foreground" backgroundColor="background" halign="left" valign="center" noWrap="1" transparent="1" zPosition="10">
+    <widget position="1590,235" size="240,35" source="session.CurrentService" render="Label" font="HD_Thin; 27" foregroundColor="foreground" backgroundColor="background" halign="left" valign="center" noWrap="1" transparent="1" zPosition="10">
         <convert type="BlackHarmonyABTCAirlyWidget">pm10</convert>
     </widget>
-    <widget position="1590,276" size="230,35" source="session.CurrentService" render="Label" font="HD_Thin; 27" foregroundColor="foreground" backgroundColor="background" halign="left" valign="center" noWrap="1" transparent="1" zPosition="10">
+    <widget position="1590,266" size="240,35" source="session.CurrentService" render="Label" font="HD_Thin; 27" foregroundColor="foreground" backgroundColor="background" halign="left" valign="center" noWrap="1" transparent="1" zPosition="10">
         <convert type="BlackHarmonyABTCAirlyWidget">pm1</convert>
     </widget>
-    <widget position="1590,311" size="230,35" source="session.CurrentService" render="Label" font="HD_Thin; 25" foregroundColor="green" backgroundColor="background" halign="left" noWrap="1" transparent="1" zPosition="10">
+    <widget position="1590,307" size="240,35" source="session.CurrentService" render="Label" font="Roboto_HD; 26" foregroundColor="green" backgroundColor="background" halign="left" noWrap="1" transparent="1" zPosition="10">
         <convert type="BlackHarmonyABTCAirlyWidget">schtime</convert>
     </widget>
-    <widget position="1430,342" size="350,35" source="session.CurrentService" render="Label" font="HD_Thin; 25" foregroundColor="light_yellow" backgroundColor="background" halign="center" noWrap="1" transparent="1" zPosition="10">
+    <widget position="1430,342" size="390,35" source="session.CurrentService" render="Label" font="HD_Thin; 25" foregroundColor="light_yellow" backgroundColor="background" halign="center" valign="center" noWrap="1" transparent="1" zPosition="10">
         <convert type="BlackHarmonyABTCAirlyWidget">homeid</convert>
     </widget>
-    <widget position="1430,371" size="350,35" source="session.CurrentService" render="Label" font="HD_Thin; 25" foregroundColor="light_yellow" backgroundColor="background" halign="center" noWrap="1" transparent="1" zPosition="10">
+    <widget position="1430,371" size="390,35" source="session.CurrentService" render="Label" font="HD_Thin; 25" foregroundColor="light_yellow" backgroundColor="background" halign="center" valign="center" noWrap="1" transparent="1" zPosition="10">
         <convert type="BlackHarmonyABTCAirlyWidget">city</convert>
     </widget>
-    <widget position="1430,399" size="350,35" source="session.CurrentService" render="Label" font="HD_Thin; 25" foregroundColor="light_yellow" backgroundColor="background" halign="center" noWrap="1" transparent="1" zPosition="10">
+    <widget position="1430,399" size="390,35" source="session.CurrentService" render="Label" font="HD_Thin; 25" foregroundColor="light_yellow" backgroundColor="background" halign="center" valign="center" noWrap="1" transparent="1" zPosition="10">
         <convert type="BlackHarmonyABTCAirlyWidget">street</convert>
     </widget>
 <!--HOURLY DATA-->

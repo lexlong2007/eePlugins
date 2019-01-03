@@ -147,7 +147,8 @@ class getWeather:
         getPage(url).addCallback(self.xmlCallback).addErrback(self.error)
         self.DEBUGxml('\t url_xml=' ,'%s' % url)
         if weatherSearchFullName != '':
-            url2 = 'http://www.msn.com/weather/we-city?culture=%s&form=PRWLAS&q=%s' % (language, urllib_quote(weatherSearchFullName))
+            #url2 = 'http://www.msn.com/weather/we-city?culture=%s&form=PRWLAS&q=%s' % (language, urllib_quote(weatherSearchFullName))
+            url2 = 'https://www.msn.com/%s/weather?culture=%s&form=PRWLAS&q=%s' % (language, language, urllib_quote(weatherSearchFullName))
             self.DEBUG('\t url_web="%s"' % url2)
             getPage(url2).addCallback(self.webCallback).addErrback(self.webError)
         if thingSpeakChannelID != '':
@@ -309,12 +310,15 @@ class getWeather:
             myFile = eEnv.resolve('${libdir}/enigma2/python/Plugins/Extensions/MSNweather/histograms.data')
             currTime = int(time.time())
             data = self.WebCurrentItems.get('nowData', None)
+            currData = self.weatherItems.get('-1', MSNWeatherItem())
             if data is not None:
-                record = "%s|%s|%s=%s|%s=%s|%s=%s|%s=%s" % (currTime, time.strftime("%d%H", time.localtime(currTime)),
+                record = "%s|%s|%s=%s|%s=%s|%s=%s|%s=%s|currTemp=%s|skyCode=%s|observationtime=%s|iconFilename=%s" % (currTime, time.strftime("%d%H", time.localtime(currTime)),
                                                                  data[0][0], data[0][1].strip(),
                                                                  data[1][0], data[1][1].strip(),
                                                                  data[2][0], data[2][1].strip(),
-                                                                 data[4][0], data[4][1].strip()
+                                                                 data[4][0], data[4][1].strip(),
+                                                                 currData.temperature, currData.code,
+                                                                 currData.observationtime, currData.iconFilename
                                      )
                 self.DEBUGweb('getWeather().webCallback storing current data for histogram in %s' % myFile)
                 self.DEBUGweb(record)
@@ -326,7 +330,7 @@ class getWeather:
                                 if len(line.split('|')) > 2:
                                     try:
                                         storedTime = int(line.split('|')[0])
-                                        if storedTime > (currTime - 3 * 86400):
+                                        if storedTime > (currTime - 2 * 86400):
                                             data.append(line.strip())
                                     except Exception: pass
                         f.close()

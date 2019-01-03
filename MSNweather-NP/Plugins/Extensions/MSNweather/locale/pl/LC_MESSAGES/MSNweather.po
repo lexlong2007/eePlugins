@@ -200,3 +200,12 @@ msgstr "Wielkość pliku loga"
 msgid "Build histograms:"
 msgstr "Twórz histogramy"
 
+msgid "What happened in weather during last %s hours?"
+msgstr "Jak zmieniała się pogoda podczas ostatnich %s godzin?"
+
+msgid "Pressure"
+msgstr "Ciśnienie"
+
+msgid "Feelng temperature"
+msgstr "Temp. odczuwalna"
+

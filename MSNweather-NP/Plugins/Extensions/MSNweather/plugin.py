@@ -125,7 +125,8 @@ class MSNweather(Screen):
             "right": self.nextItem,
             "left": self.previousItem,
             "info": self.showWebsite,
-            "yellow": self.ShowHistograms
+            "yellow": self.ShowHistograms,
+            "blue": self.close,
         }, -1)
 
         self["statustext"] = StaticText()

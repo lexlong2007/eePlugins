@@ -17,10 +17,8 @@ elif [ -e '/etc/enigma2/dvbappHungMarker' ];then
 else
     echo "dvbapp restart not connected to skin parts modification"
     echo "dvbapp restart not connected to skin parts modification" >> /tmp/safeMode.log
-    if [ `cat /etc/enigma2/settings|grep -c 'config.plugins.UserSkin.ReportGS'` -ge 1 ];then
     echo "initiating reportGS script"
     echo "initiating reportGS script" >> /tmp/safeMode.log
-        /usr/lib/enigma2/python/Plugins/Extensions/UserSkin/scripts/reportGS.sh &
-    fi
+    /usr/lib/enigma2/python/Plugins/Extensions/UserSkin/scripts/reportGS.sh &
 fi
 exit 0

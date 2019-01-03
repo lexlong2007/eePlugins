@@ -20,11 +20,14 @@ do
         lastGScount=$((lastGScount+1))
     fi
     #echo $filename created $diffEPOC minutes ago, skipping
-    cat $filename|grep 'File*UserSkin'
+    cat $filename|sed -n '/^Traceback/,/^[\*]*KERNEL LOG/p' > $filename.Traceback
+    rm -f $filename
     #if [ `cat $filename|grep -c 'File*UserSkin'` -gt 0 ];then
     #    echo aqq
     #fi
 done
+#if [ `cat /etc/enigma2/settings|grep -c 'config.plugins.UserSkin.ReportGS'` -ge 1 ];then
+
 if [ $lastGScount -gt 1 ];then
     echo "Analyzed $GScont GS logs." >> /tmp/safeMode.log
     echo "Multiple GS's ($lastGScount) in short time detected !!!"
