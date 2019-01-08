@@ -34,6 +34,7 @@ from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from setup import initConfig, MSNWeatherEntriesListConfigScreen
 from Tools.LoadPixmap import LoadPixmap
+from version import Version
 
 import time, os
 
@@ -117,7 +118,7 @@ class MSNweather(Screen):
     
     def __init__(self, session):
         Screen.__init__(self, session)
-        self.title = _("MSN weather NP")
+        self.title = _("MSN weather NP @j00zek %s" % Version)
         self["actions"] = ActionMap(["SetupActions", "DirectionActions", "MenuActions", "ColorActions"],
         {
             "cancel": self.close,

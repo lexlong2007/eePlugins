@@ -206,6 +206,6 @@ msgstr "Jak zmieniała się pogoda podczas ostatnich %s godzin?"
 msgid "Pressure"
 msgstr "Ciśnienie"
 
-msgid "Feelng temperature"
-msgstr "Temp. odczuwalna"
+msgid "Temperature | Feelng temperature"
+msgstr "Temperatura | Temp. odczuwalna"
 

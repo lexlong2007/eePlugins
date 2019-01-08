@@ -48,6 +48,9 @@
     <widget render="Label" position="1010,300" size="390,80" source="caption" font="HD_Thin; 28" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center" foregroundColor="light_yellow"/>
     <widget render="Label" position="1010,372" size="390,80" source="observationpoint" font="Roboto_HD; 24" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top"/>
 <!-- top right AIRLY-->
+    <widget position="100,107" size="1710,70" source="session.CurrentService" render="Label" font="Roboto_HD; 27" foregroundColor="foreground" backgroundColor="background" halign="center" noWrap="1" transparent="1" zPosition="10">
+        <convert type="BlackHarmonyABTCAirlyWidget">ldesc</convert>
+    </widget>
     <widget position="1440,207" size="120,120" source="session.CurrentService" render="BlackHarmonyABTCAirlyPixmap" alphatest="blend" transparent="1" zPosition="9">
         <convert type="BlackHarmonyABTCAirlyWidget">indexBackPNG</convert>
     </widget>

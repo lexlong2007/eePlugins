@@ -59,15 +59,6 @@ def FileEntryComponent(name, absolute = None, isDir = False, goBack = False, cur
         info = open(myInfoFile, 'r').read().strip()
         return info
         
-    def translateName(name):
-        import re
-        wordsList=['Channel[ ]*Selections','Channel[ ]*Selection','Infobars','Infobar','_no_']
-        for word in wordsList:
-            name = re.sub(word , _(word), name, flags=re.I)
-        name = re.sub('(\_|\-|\.|\+)',' ', name, flags=re.I) #cleaning
-        name = re.sub('(  [ ]*)',' ', name, flags=re.I) #merge multiple (2+) spaces into one
-        return name
-        
     res = [ (absolute, isDir) ]
     if config.plugins.AdvancedFreePlayer.NamesNOfiles.value and isDir == False:
         res.append((eListboxPythonMultiContent.TYPE_TEXT, DimText0[0], DimText0[1], DimText0[2], DimText0[3], 0, RT_HALIGN_LEFT, cleanFile(name,ReturnMovieYear = False) ))

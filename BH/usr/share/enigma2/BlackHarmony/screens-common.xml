@@ -5708,10 +5708,6 @@
     <widget name="key_blue" position="952,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
   </screen>
   <!-- AdvancedFreePlayer -->
-  <screen name="AdvancedFreePlayer" position="0,0" size="1920,1080" title="InfoBar" backgroundColor="transparent" flags="wfNoBorder">
-    <!-- SubTitles -->
-    <widget name="afpSubtitles" position="0,0" size="1,1" valign="center" halign="center" font="Regular;60" backgroundColor="background" transparent="0"/>
-  </screen>
   <screen name="AdvancedFreePlayerStart" position="center,center" size="1920,1080" title="Advanced Free Player" flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="1,0" zPosition="-5" size="1920,1080" pixmap="BlackHarmony/bg_design/afp.png"/>
     <widget source="global.CurrentTime" render="Label" position="80,55" size="80,32" font="Roboto_HD; 27" backgroundColor="black" transparent="1">

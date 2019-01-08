@@ -5,6 +5,8 @@ cutsParser = struct.Struct('>QI') # big-endian, 64-bit PTS and 32-bit type
 CUT_TYPE_LAST = 3
 CUT_TYPE_LENGTH = 5
 
+DBG = False
+
 def setCut(cutsFileName, LastPosition, Movielength):
     if LastPosition is None or LastPosition == 0 or Movielength is None or Movielength == 0:
         printDEBUG('setCut>LastPosition or Movielength not provided, end')
@@ -16,7 +18,7 @@ def setCut(cutsFileName, LastPosition, Movielength):
     return
 
 def getCut(cutsFileName):
-    printDEBUG('getCut(%s):' % cutsFileName)
+    if DBG: printDEBUG('getCut(%s):' % cutsFileName)
     data = ''
     currpts=0
     currLength=0
@@ -35,7 +37,7 @@ def getCut(cutsFileName):
                     currpts = int(pts/90/1000/60) #in mins
                 elif what == CUT_TYPE_LENGTH and pts > currLength:
                     currLength = int(pts/90/1000/60)
-                printDEBUG("getCuts found: what=%d, pts=%d (%d mins)" %(what, pts, currpts))
+                if DBG: printDEBUG("getCuts found: what=%d, pts=%d (%d mins)" %(what, pts, currpts))
                 pos += 12
     return currpts,currLength
 

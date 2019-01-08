@@ -252,10 +252,13 @@ class AdvancedFreePlayer(Screen):
         self.ShowJumpTimer = eTimer()
         self.ShowJumpTimer.callback.append(self.ShowJumpTimerCallBack)
 
-    def ShowJump(self, seconds):
+    def ShowJump(self, seconds, displayInSeconds = False):
         self.showJumpNumber += seconds #seconds can be positiove or negative
         if self.showJumpNumber != 0:
-            self["showJump"].setText("%02d:%02d" % divmod(self.showJumpNumber,60))
+            if displayInSeconds:
+                self["showJump"].setText("%ss" % self.showJumpNumber)
+            else:
+                self["showJump"].setText("%02d:%02d" % divmod(self.showJumpNumber,60))
             self["showJump"].show()
             self.ShowJumpTimer.stop() #in case ff/rf pressed several timwes
             self.ShowJumpTimer.start(1000 * int(myConfig.InfobarTime.value), True) # singleshot
@@ -421,6 +424,9 @@ class AdvancedFreePlayer(Screen):
         return s
 
     def timerEvent(self):
+        if self.nrsubtitle < 0:
+            self.nrsubtitle += 1
+            return
         lCurrent = self.GetCurrentPosition() or 0
         #printDEBUG("lCurrent=%d" % lCurrent)
         if not lCurrent is None:
@@ -435,7 +441,7 @@ class AdvancedFreePlayer(Screen):
             start=pos[1]
             stop=pos[2]
             text=pos[3]
-            if tim >= start and tim < stop and (nr > self.nrsubtitle  or self.nrsubtitle == 0):
+            if tim >= start and tim < stop and (nr > self.nrsubtitle or self.nrsubtitle == 0):
                 self.nrsubtitle = nr
                 self.setTextForAllLInes(text)
                 self.statesubtitle = self.SHOWNSUBTITLE
@@ -446,15 +452,23 @@ class AdvancedFreePlayer(Screen):
                     self.statesubtitle = self.HIDDENSUBTITLE
                     #printDEBUG ("%d Hide %d %d --> %d\t%s" %(tim, nr, start, stop, text) )
 
-    def usun(self,l):
+    def clearTags(self,l):
         if len(l) > 0:
-            if l[0] == "{":
-                p = l.find("}")
-                if p != -1:
-                    l = l[p+1:]
-                    return l
+            l = l.replace('<b>','').replace('</b>','')
+            l = l.replace('<i>','').replace('</i>','')
+            l = l.replace('<u>','').replace('</u>','')
+            #<font color=”#rrggbb”></font>
+            l = re.sub('<font color=”#......”>', '', l).replace('</font>','')
+            for i in (0, 1):
+                if l[0] == "{":
+                    p = l.find("}")
+                    if p != -1:
+                        l = l[p+1:]
+                else:
+                    break
+            l = l.strip()
         return l
-
+        
     def loadsubtitle(self):
         with open("/proc/sys/vm/drop_caches", "w") as f: f.write("1\n")
         if self.opensubtitle.startswith('http://') and path.exists('/usr/bin/curl') and self.opensubtitle.endswith('.srt'):
@@ -696,8 +710,7 @@ class AdvancedFreePlayer(Screen):
                     #print l
                 else:
                     continue
-                l = self.usun(l)
-                l = self.usun(l)
+                l = self.clearTags(l)
                 self.subtitle.append([int(nr),t1,t2,l])
                 nr = nr + 1
             o.close()
@@ -746,8 +759,7 @@ class AdvancedFreePlayer(Screen):
                                 if len(n) == 0:break
                     else:
                         l = l1
-                    l = self.usun(l)
-                    l = self.usun(l)
+                    l = self.clearTags(l)
                     tim1=tim.split(' ')[0]
                     tim1_h = tim1.split(':')[0]
                     tim1_m = tim1.split(':')[1]
@@ -814,6 +826,8 @@ class AdvancedFreePlayer(Screen):
         seekable.seekTo(pts)
 
     def doSeekRelative(self, pts):
+        if self.enablesubtitle:
+            self.timer.stop()
         print "..- doSeekRelative Start %d" % (pts/90000)
         seekable = self.getSeek()
         if seekable is None:
@@ -823,18 +837,9 @@ class AdvancedFreePlayer(Screen):
         self.nrsubtitle = 0 #reset position
         self.setTextForAllLInes("")
         self.ShowJump(pts/90000)
-
-    def SeekSubtitles(self, position):
-        self.seeksubtitle = self.seeksubtitle + position
-        self.setTextForAllLInes(str(self.seeksubtitle)+" sek")
-        self.nrsubtitle = 0 #reset position
-        self.setTextForAllLInes("")
-
-    def SeekUpSubtitles(self):
-        self.SeekSubtitles(+0.5)
-
-    def SeekDownSubtitles(self):
-        self.SeekSubtitles(-0.5)
+        if self.enablesubtitle:
+            if pts<0: self.nrsubtitle = -1 #skip abs(self.nrsubtitle) number of timerEvent calls
+            self.timer.start(200, False)
 
     def FastF30s(self):
         if self.stateplay == "Play":
@@ -859,6 +864,20 @@ class AdvancedFreePlayer(Screen):
     def BackF300s(self):
         if self.stateplay == "Play":
             self.doSeekRelative(- 5 * 60 * 90000)
+
+##################################################################### SEEK SUBTITLES >>>>>>>>>>
+    def SeekSubtitles(self, position):
+        self.seeksubtitle = self.seeksubtitle + position
+        self.setTextForAllLInes(str(self.seeksubtitle)+" sek")
+        self.nrsubtitle = 0 #reset position
+        self.setTextForAllLInes("")
+        self.ShowJump(position, True)
+
+    def SeekUpSubtitles(self):
+        self.SeekSubtitles(+0.5)
+
+    def SeekDownSubtitles(self):
+        self.SeekSubtitles(-0.5)
 
     def ToggleSubtitles(self):
         if self.enablesubtitle == True:

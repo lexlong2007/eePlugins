@@ -6,9 +6,9 @@
   </convert>
   </widget>
   <ePixmap position="1310,437" zPosition="5" size="64,64" pixmap="BlackHarmony/icons/scan-s.png" alphatest="blend" />
-  <widget source="session.CurrentService" render="Label" position="511,524" size="890,60" font="HD_Thin; 17" backgroundColor="black" transparent="1" halign="left" valign="center" foregroundColor="lemon">
+  <!--widget source="session.CurrentService" render="Label" position="511,524" size="890,60" font="HD_Thin; 17" backgroundColor="black" transparent="1" halign="left" valign="center" foregroundColor="lemon">
   <convert type="PliExtraInfo">ServiceInfo</convert>
-  </widget>
+  </widget-->
   <widget source="session.FrontendStatus" render="Progress" position="681,320" pixmap="BlackHarmony/gfx/bar_snr_470x25.png" size="470,25" borderWidth="1" borderColor="dark_grey" transparent="1">
     <convert type="FrontendInfo">SNR</convert>
   </widget>

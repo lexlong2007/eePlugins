@@ -22,7 +22,7 @@ def cleanFile(text, ReturnMovieYear = True):
     
     #removing exact character combinations
     ExactCutList = ['(\_|\-|\.|\+|\()[12][09][0-9][0-9](\_|\-|\.|\+|\))','\[HD\]', 'Lektor[ ]*[-]*[ ]*PL','\(Lektor\)',
-                    '^psig-','^[12][09][0-9]* [0-9][0-9]* - .* - ', '-[ ]*zwiastun','[-,]*[ ]*Lektor[ ]*$']
+                    '^psig-','^[12][09][0-9]* [0-9][0-9]* - .* - ', '-[ ]*zwiastun','[-,]*[ ]*Lektor[ ]*$','^komediowa sobota']
     for word in ExactCutList:
         text = re.sub(word,'', text, flags=re.I) 
         

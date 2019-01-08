@@ -226,6 +226,8 @@ class AdvancedFreePlayerStart(Screen):
             self["key_red"].setText("")
         elif self.openmovie == '':
             self["key_red"].setText(_("Delete"))
+        elif selection is not None and selection[0].endswith('.url'): # selected different file than chosen movie
+            self["key_red"].setText(_("Play"))
         elif selection is not None and selection[1] == True and self["filelist"].getSelectedIndex() > 0:
             self["key_red"].setText(_("Delete"))
         elif selection is not None and not selection[0] in self.openmovie : # selected different file than chosen movie
@@ -329,11 +331,12 @@ class AdvancedFreePlayerStart(Screen):
                 self.session.openWithCallback(deleteRet, MessageBox, _("Delete '%s' movie?") % selection[0][:-4], timeout=10, default=False)
       
     def PlayMovie(self):
-        if not self.openmovie == "":
-            if myConfig.StoreLastFolder == True:
+        printDEBUG('PlayMovie >>>')
+        if self.openmovie != "":
+            printDEBUG(self["myPath"].getText())
+            if myConfig.StoreLastFolder.value == True:
                 myConfig.FileListLastFolder.value =  self["myPath"].getText()
                 myConfig.FileListLastFolder.save()
-            print self["myPath"].getText()
             self.lastPosition, Length = getCut(self.openmovie + '.cuts') #returns in mins
             if self.lastPosition < 1:
                 self.SelectFramework()
@@ -348,6 +351,7 @@ class AdvancedFreePlayerStart(Screen):
         self.SelectFramework()
 
     def SelectFramework(self):
+        printDEBUG('SelectFramework >>>')
         if myConfig.MultiFramework.value == "select":
             from Screens.ChoiceBox import ChoiceBox
             self.session.openWithCallback(self.SelectedFramework, ChoiceBox, title = _("Select Multiframework"), list = getChoicesList())
@@ -358,6 +362,7 @@ class AdvancedFreePlayerStart(Screen):
                 self.rootID = '4099'
             else:
                 self.rootID = myConfig.MultiFramework.value
+            printDEBUG('Selected framework: %s' % self.rootID)
             self.StartPlayer()
 
     def SelectedFramework(self, ret):
@@ -367,6 +372,7 @@ class AdvancedFreePlayerStart(Screen):
         self.StartPlayer()
       
     def StartPlayer(self):
+        printDEBUG('StartPlayer >>>')
         lastOPLIsetting = None
         
         def EndPlayer():
@@ -449,24 +455,26 @@ class AdvancedFreePlayerStart(Screen):
             f = self.filelist.getFilename()
             printDEBUG("self.selectFile>> " + d + f)
             temp = self.getExtension(f)
-            printDEBUG("self.getExtension(%s) = %s" %(f,temp))
+            printDEBUG("self.getExtension(%s) = '%s'" %(f,temp))
             if temp == ".url":
                 self.opensubtitle = ''
                 self.openmovie = ''
                 with open(d + f,'r') as UrlContent:
                     for data in UrlContent:
-                        print data
+                        #printDEBUG(data)
                         if data.find('movieURL=') > -1: #find instead of startswith to avoid BOM issues ;)
                             self.openmovie = data.split('=')[1].strip()
                             self.URLlinkName = d + f
                         elif data.find('srtURL=') > -1:
                             self.opensubtitle = data.split('=')[1].strip()
-                if self["filemovie"].getText() != (self.movietxt + self.openmovie):
-                    self["filemovie"].setText(self.movietxt + self.openmovie)
-                    self["filesubtitle"].setText(self.subtitletxt + self.opensubtitle)
-                elif myConfig.KeyOK.value == 'play':
+                    UrlContent.close()
+                printDEBUG("myConfig.KeyOK.value='%s', self.openmovie='%s', self.opensubtitle='%s'" % (myConfig.KeyOK.value, self.openmovie, self.opensubtitle))
+                if myConfig.KeyOK.value == 'playmovie' and self.openmovie != '':
                     self.PlayMovie()
                     return
+                elif self["filemovie"].getText() != (self.movietxt + self.openmovie):
+                    self["filemovie"].setText(self.movietxt + self.openmovie)
+                    self["filesubtitle"].setText(self.subtitletxt + self.opensubtitle)
                 else:
                     self.openmovie = ''
                     self["filemovie"].setText(self.movietxt)
@@ -848,8 +856,8 @@ class AdvancedFreePlayerStart(Screen):
             def goUpdate(ret):
                 if ret is True:
                     runlist = []
-                    runlist.append( ('chmod 755 %sUpdate*.sh' % PluginPath) )
-                    runlist.append( ('cp -a %sUpdateDMnapi.sh /tmp/AFPUpdate.sh' % PluginPath) ) #to have clear path of updating this script too ;)
+                    runlist.append( ('chmod 755 %s/scripts/Update*.sh' % PluginPath) )
+                    runlist.append( ('cp -a %s/scripts/UpdateDMnapi.sh /tmp/AFPUpdate.sh' % PluginPath) ) #to have clear path of updating this script too ;)
                     runlist.append( ('/tmp/AFPUpdate.sh %s "%s"' % (config.plugins.AdvancedFreePlayer.Version.value,PluginInfo)) )
                     from AFPconfig import AdvancedFreePlayerConsole
                     self.session.openWithCallback(doNothing, AdvancedFreePlayerConsole, title = _("Installing DMnapi plugin"), cmdlist = runlist)
