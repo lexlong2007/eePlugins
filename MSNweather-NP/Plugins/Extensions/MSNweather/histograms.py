@@ -35,10 +35,10 @@ class MSNweatherHistograms(Screen):
         self.skin = '<screen name="MSNweatherHistograms" position="center,center" size="%s,%s" title="What happened in last 24 hours?">\n' % (WindowWidth,WindowHeight)
         
         self.PressureBarPosY = offset + self.scaleSize
-        self.TempBarPosY = offset + self.scaleSize * 2 + 50 + 80
+        self.TempBarPosY = offset + self.scaleSize * 2 + 50 + 100
         
-        self.skin += '<widget name="TitlePressure" position="0,%s" size="220,25" font="Regular;20" halign="left" foregroundColor="yellow" />\n' %(80)
-        self.skin += '<widget name="TitleTemperature" position="0,%s" size="420,25" font="Regular;20" halign="left" foregroundColor="yellow" />\n' %(self.PressureBarPosY + 80)
+        self.skin += '<widget name="TitlePressure" position="0,%s" size="220,25" font="Regular;20" halign="left" foregroundColor="yellow" />\n' %(100)
+        self.skin += '<widget name="TitleTemperature" position="0,%s" size="420,25" font="Regular;20" halign="left" foregroundColor="yellow" />\n' %(self.PressureBarPosY + 100)
         
         i = 0
         while i < self.maxItems:

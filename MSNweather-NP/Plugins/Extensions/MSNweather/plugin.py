@@ -119,6 +119,7 @@ class MSNweather(Screen):
     def __init__(self, session):
         Screen.__init__(self, session)
         self.title = _("MSN weather NP @j00zek %s" % Version)
+        self.setTitle(_("MSN weather NP @j00zek %s") % Version) 
         self["actions"] = ActionMap(["SetupActions", "DirectionActions", "MenuActions", "ColorActions"],
         {
             "cancel": self.close,

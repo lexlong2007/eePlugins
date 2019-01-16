@@ -1,2 +1,10 @@
 #!/bin/sh
-exit 0
+if [ -e /usr/share/enigma2/Pingu-NavyBlue ] ; then
+  echo "ERROR: incompatible environment found!"
+  exit 1
+elif [ `ls /usr/share/enigma2/|grep -c Pingu-NavyBlue` -gt 0 ] ; then
+  echo "ERROR: incompatible environment found!!"
+  exit 1
+else
+  exit 0
+fi

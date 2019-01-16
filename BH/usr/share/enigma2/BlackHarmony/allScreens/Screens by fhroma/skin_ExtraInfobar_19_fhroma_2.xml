@@ -129,8 +129,8 @@
   <ePixmap pixmap="BlackHarmony/icons/Weather/zach.png" position="1440,595" zPosition="1" size="99,50" alphatest="blend" />
  <eLabel font="Roboto_HD; 22" foregroundColor="green" halign="center" name="new eLabel" position="1560,605" size="200,70" text="ciśnienie atmosferyczne:" transparent="1" zPosition="2" valign="center" backgroundColor="black" />
    
-    <widget source="session.CurrentService" render="Label" position="1720,625" size="142,30" font="Regular;26" zPosition="2" halign="right" valign="center" foregroundColor="lemon" backgroundColor="background" transparent="1" noWrap="1">
-  <convert type="BlackHarmonyVWeather2">atmoPressure</convert>
+    <widget source="session.BlackHarmonyMSNWeather" render="Label" position="1720,625" size="142,30" font="Regular;26" zPosition="2" halign="right" valign="center" foregroundColor="lemon" backgroundColor="background" transparent="1" noWrap="1">
+  <convert type="BlackHarmonyVWeather2">barometrValue</convert>
 </widget> 
   <!--##########################################-->
      <ePixmap position="30,710" zPosition="-2" size="1900,300" pixmap="BlackHarmony/bg_design/infobar_zkpicon.png" />
