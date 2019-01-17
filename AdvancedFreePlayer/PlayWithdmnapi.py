@@ -252,13 +252,19 @@ class AdvancedFreePlayer(Screen):
         self.ShowJumpTimer = eTimer()
         self.ShowJumpTimer.callback.append(self.ShowJumpTimerCallBack)
 
-    def ShowJump(self, seconds, displayInSeconds = False):
+    def ShowJump(self, seconds, subtitlesSeek = False):
         self.showJumpNumber += seconds #seconds can be positiove or negative
         if self.showJumpNumber != 0:
-            if displayInSeconds:
-                self["showJump"].setText("%ss" % self.showJumpNumber)
+            if subtitlesSeek:
+                text = "%ss | %ss" % (self.showJumpNumber,self.seeksubtitle)
             else:
-                self["showJump"].setText("%02d:%02d" % divmod(self.showJumpNumber,60))
+                text = "%02d:%02d" % divmod(self.showJumpNumber,60)
+            #w = self["showJump"].instance.size().width()
+            self["showJump"].setText(text)
+            height = self["showJump"].instance.size().height()
+            width = int(int(fontRenderClass.getInstance().getLineHeight(self["showJump"].instance.getFont())) * len(text) * 0.7)
+            #self["showJump"].instance.resize(eSize(width, linesNO * self.SubtitleLineHeight) )
+            self["showJump"].instance.resize( eSize(width, height) )
             self["showJump"].show()
             self.ShowJumpTimer.stop() #in case ff/rf pressed several timwes
             self.ShowJumpTimer.start(1000 * int(myConfig.InfobarTime.value), True) # singleshot
