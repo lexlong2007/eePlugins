@@ -26,23 +26,20 @@ msgstr "OK"
 msgid "DynamicLCDbrightness v %s Configuration"
 msgstr "Konfiguracja dynamicznej regulacji jasności LCD v.%s"
 
-msgid "LCD not detected"
-msgstr "LCD nie wykryty"
+msgid "no LCD"
+msgstr "brak LCD"
 
 msgid "State:"
 msgstr "Status:"
 
-msgid "Brightness in standby:"
-msgstr "Jasność w uśpieniu:"
+msgid "Control LCD brightness in Standby:"
+msgstr "Kontrola jasności w uśpieniu:"
 
-msgid "Brightness in night standby:"
-msgstr "Jasność w nocnym uśpieniu:"
+msgid "Log to file"
+msgstr "Loguj do pliku"
 
-msgid "Night standby period:"
-msgstr "Okres nocnego uśpienia:"
+msgid "08:00-23:00 (%s)"
+msgstr "08:00-23:00 (%s)"
 
-msgid "between 23:30-4:30"
-msgstr "pomiędzy 23:30 a 4:30"
-
-msgid "30min after sunset-30min before sunrise"
-msgstr "30min po zachodzie i 30min przed wschodem"
+msgid "from %s (%s)"
+msgstr "od %s (%s)"
