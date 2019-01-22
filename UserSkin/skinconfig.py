@@ -387,7 +387,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
             config.plugins.j00zekPiconAnimation.UserPath.value = ret
         
     def keyOkbutton(self):
-        if self["config"].getCurrent()[1] == config.plugins.j00zekPiconAnimation.UserPath:
+        if config.plugins.j00zekPiconAnimation.UserPath is not None and self["config"].getCurrent()[1] == config.plugins.j00zekPiconAnimation.UserPath:
             from Screens.LocationBox import LocationBox
             self.session.openWithCallback(self.LocationBoxCB, LocationBox)
         else:

@@ -16,7 +16,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: ..\n"
 
 msgid "Setup - UserSkin"
-msgstr "Modyfikacja skórki"
+msgstr "'UserSkin' - dla skórki"
 
 msgid "---Weather---"
 msgstr "---Pogoda---"
