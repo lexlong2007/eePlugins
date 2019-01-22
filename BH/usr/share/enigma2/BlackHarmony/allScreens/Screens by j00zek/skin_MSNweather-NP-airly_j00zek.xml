@@ -10,7 +10,7 @@
     <widget source="global.CurrentTime" render="Label" position="170,70" size="460,35" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Pogoda" position="1395,70" size="420,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <eLabel text="Pogoda MSN" position="1395,70" size="420,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
 <!-- top left -->
     <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="208,202" size="128,128" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
         <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>

@@ -8928,7 +8928,7 @@
     <widget source="global.CurrentTime" render="Label" position="130,50" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Pogoda" position="1025,50" size="420,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <eLabel text="Pogoda MSN" position="1025,50" size="420,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <!-- top right corner -->
     <widget render="Label" source="observationtime" font="Roboto_HD; 26" position="1040,270" size="390,70" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center" foregroundColor="green"/>
     <widget render="Label" source="caption" font="HD_Thin; 28" position="1040,300" size="390,80" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center" foregroundColor="light_yellow"/>
