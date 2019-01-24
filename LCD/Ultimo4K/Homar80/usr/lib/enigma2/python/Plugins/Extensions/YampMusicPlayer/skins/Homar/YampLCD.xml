@@ -1,0 +1,26 @@
+<!-- YAMP_v31 -->
+<screen name="YampLCDScreenV31" position="0,0" size="800,480" id="1">
+  <ePixmap pixmap="vfd_skin/Homar/Homar_1.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
+    <widget source="global.CurrentTime" render="Label" position="360,130" size="325,100" font="VFD2;90" foregroundColor="#ffff00" transparent="1" halign="right" valign="top">
+<convert type="ClockToText">Format:%H:%M</convert>
+</widget>
+<widget source="global.CurrentTime" render="Label" position="695,140" size="105,75" font="VFD2;60" foregroundColor="#ffff00" transparent="1" halign="left" valign="top">
+<convert type="ClockToText">Format:%S</convert>
+</widget>
+
+  <widget source="session.CurrentService" render="Progress" pixmap="vfd_skin/Homar/Homar_3.png" position="180,410" size="170,42" borderWidth="6" backgroundColor="#00CFFF">
+    <convert type="ServicePosition">Position</convert>
+  </widget>
+
+<widget source="session.CurrentService" render="Label" position="20,400" size="150,60" font="VFD2;60" foregroundColor="#ffff00" transparent="1" halign="center" valign="top">
+<convert type="ServicePosition">Position</convert>
+</widget>
+<widget source="session.CurrentService" render="Label" position="360,400" size="150,60" font="VFD2;60" foregroundColor="#ffff00" transparent="1" halign="center" zPosition="3">
+<convert type="ServicePosition">Length</convert>
+</widget>
+<widget name="text1" position="20,20" size="770,122" font="RegularLCD;60" foregroundColor="#ffff00" transparent="1" zPosition="3" />
+<widget name="text2" position="20,142" size="480,122" font="RegularLCD;60" foregroundColor="#ffff00" transparent="1" zPosition="3" />
+<widget name="text3" position="20,264" size="480,122" font="RegularLCD;60" foregroundColor="#ffff00" transparent="1" zPosition="3" />
+<widget name="coverArt" pixmap="/tmp/coverlcd.png" position="515,220" zPosition="1" size="285,260" transparent="1" alphatest="blend" />
+
+</screen>
