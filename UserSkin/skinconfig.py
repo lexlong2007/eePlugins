@@ -81,7 +81,10 @@ config.plugins.UserSkin.AdvancedMode = ConfigSelection(default="copyScreens", ch
                 ])
 config.plugins.UserSkin.FontScale = ConfigSelectionNumber(default=100, min=50, max=200, stepwidth=1)
 config.plugins.UserSkin.SafeMode = ConfigYesNo(default = True)
-config.plugins.UserSkin.ReportGS = ConfigYesNo(default = False)
+config.plugins.UserSkin.LCDparts = ConfigYesNo(default = False)
+if config.plugins.UserSkin.AdvancedMode.value == 'copyScreens':
+    config.plugins.UserSkin.LCDparts.value = False
+
 imageType=None
 def isImageType(imgName = ''):
     global imageType
@@ -255,8 +258,6 @@ class UserSkin_Config(Screen, ConfigListScreen):
         if isImageType('vti'):
             self.list.append(getConfigListEntry(_("Safe mode (reset on GS):"), config.plugins.UserSkin.SafeMode ))
             printDEBUG("'%s'" % CurrentSkinName)
-            if CurrentSkinName == 'BlackHarmonyDISABLED' and config.plugins.UserSkin.SafeMode.value:
-                self.list.append(getConfigListEntry(_("Automatic skin GS reporting:"), config.plugins.UserSkin.ReportGS ))
         self.list.append(getConfigListEntry(_("Personalization mode:"), config.plugins.UserSkin.AdvancedMode ))
         self.list.append(self.set_color)
         self.list.append(self.set_font)
@@ -275,6 +276,9 @@ class UserSkin_Config(Screen, ConfigListScreen):
         if isSlowCPU() == True:
             self.list.append(getConfigListEntry(_("No JPG previews:"), config.plugins.UserSkin.jpgPreview))
         self.list.append(getConfigListEntry(_("LCD/VFD skin:"), config.plugins.UserSkin.LCDmode))
+        if isImageType('vti') or isImageType('openatv'):
+            if config.plugins.UserSkin.AdvancedMode.value != 'copyScreens':
+                self.list.append(getConfigListEntry(_("Support LCD parts:"), config.plugins.UserSkin.LCDparts))
         try:
             if (path.exists(resolveFilename(SCOPE_PLUGINS, '../Components/Renderer/j00zekPiconAnimation.py')) or \
                     path.exists(resolveFilename(SCOPE_PLUGINS, '../Components/Renderer/j00zekPiconAnimation.pyo')) or \
@@ -315,6 +319,8 @@ class UserSkin_Config(Screen, ConfigListScreen):
             elif self["config"].getCurrent()[1] == config.plugins.j00zekPiconAnimation.UserPath:
                 self.createConfigList()
             elif self["config"].getCurrent()[1] == config.plugins.UserSkin.SafeMode:
+                self.createConfigList()
+            elif self["config"].getCurrent()[1] == config.plugins.UserSkin.AdvancedMode:
                 self.createConfigList()
         except Exception: pass
 
@@ -673,7 +679,9 @@ class UserSkin_Config(Screen, ConfigListScreen):
                     myFile.write(user_skin)
                     myFile.flush()
                     myFile.close()
-                    if isImageType('vti') == True or isImageType('openatv') == True: #VTI i openATV czytaja, to nie musimy robic pliku
+                    if config.plugins.UserSkin.LCDparts.value and config.plugins.UserSkin.LCDmode.value != 'LCDLinux': #this means we have to create skin_user in the /etc/enigma2
+                        system('ln -sf %s %s' % (user_skin_file, resolveFilename(SCOPE_CONFIG, 'skin_user' + self.currentSkin + '.xml')))
+                    elif (isImageType('vti') == True or isImageType('openatv') == True) and config.plugins.UserSkin.LCDparts.value: #VTI i openATV czytaja, to nie musimy robic pliku
                         pass #VTI/openatv standardowo laduja pliki z SkinPath + 'mySkin/skin_user' + self.currentSkin + '.xml'
                     elif isImageType('blackhole') == True:
                         system('ln -sf %s /etc/enigma2/skin_user.xml' % user_skin_file) #Blackhole ma jedynie standardowy mechanizm

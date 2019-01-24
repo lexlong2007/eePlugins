@@ -408,6 +408,9 @@ msgstr "Listy kanałów"
 msgid "Infobar"
 msgstr "Pasek informacyjny"
 
+msgid "SecondInfobar"
+msgstr "Drugi pasek informacyjny"
+
 msgid "Infobars"
 msgstr "Paski informacyjne"
 
@@ -503,3 +506,6 @@ msgstr "Automatyczne raporty GS-ów skórki:"
 
 msgid "All modifications have been reverted\n\n"
 msgstr "Wszystkie zmiany zostały cofnięte\n\n"
+
+msgid "(Advanced mode)"
+msgstr "(Tryb zaawansowany)"

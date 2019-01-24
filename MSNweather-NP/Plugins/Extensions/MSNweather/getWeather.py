@@ -144,7 +144,7 @@ class getWeather:
         self.callbackShowIcon = callbackShowIcon
         self.callbackAllIconsDownloaded = callbackAllIconsDownloaded
         url = 'http://weather.service.msn.com/data.aspx?src=windows&weadegreetype=%s&culture=%s&wealocations=%s' % (degreetype, language, urllib_quote(locationcode))
-        getPage(url).addCallback(self.xmlCallback).addErrback(self.error)
+        getPage(url).addCallback(self.xmlCallback).addErrback(self.xmlError)
         self.DEBUGxml('\t url_xml=' ,'%s' % url)
         if weatherSearchFullName != '':
             #url2 = 'http://www.msn.com/weather/we-city?culture=%s&form=PRWLAS&q=%s' % (language, urllib_quote(weatherSearchFullName))
@@ -171,15 +171,15 @@ class getWeather:
             return 1
         else:
             return 0
-            return
 
-    def error(self, error = None):
+    def xmlError(self, error = None):
         errormessage = ''
         if error is not None:
             errormessage = str(error.getErrorMessage())
-            self.EXCEPTIONDEBUG('getWeather().error() >>> %s' % errormessage)
+            self.EXCEPTIONDEBUG('getWeather().xmlError() >>> %s' % errormessage)
         if self.callback is not None:
             self.callback(self.ERROR, errormessage)
+        self.DEBUG('getWeather().xmlError() <<<')
         return
 
     def errorIconDownload(self, error = None, item = None):
@@ -243,9 +243,10 @@ class getWeather:
         if len(IconDownloadList) != 0:
             ds = defer.DeferredSemaphore(tokens=len(IconDownloadList))
             downloads = [ ds.run(download, item).addErrback(self.errorIconDownload, item).addCallback(self.finishedIconDownload, item) for item in IconDownloadList ]
-            finished = defer.DeferredList(downloads).addErrback(self.error).addCallback(self.finishedAllDownloadFiles)
+            finished = defer.DeferredList(downloads).addErrback(self.xmlError).addCallback(self.finishedAllDownloadFiles)
         else:
             self.finishedAllDownloadFiles(None)
+        self.DEBUG('getWeather().xmlCallback() <<<')
         return
 
     def thingSpeakCallback(self, xmlstring):
@@ -253,21 +254,21 @@ class getWeather:
         try:
             root = cet_fromstring(xmlstring)
             for childs in root:
-                self.DEBUG('\titem= ' ,'%s' % childs.tag)
+                #self.DEBUG('\titem= ' ,'%s' % childs.tag)
                 if childs.tag in ('name','description'):
                     self.thingSpeakItems[childs.tag] = childs.text
                 elif childs.tag.startswith('field'):
-                    self.DEBUG('\t' ,"childs.tag.startswith('field'):")
+                    #self.DEBUG('\t' ,"childs.tag.startswith('field'):")
                     tmpName = '%sName' % childs.tag
                     self.thingSpeakItems[tmpName] = childs.text
                     tmpTXT = childs.text.lower().replace(' ','').replace('.','').replace(',','')
-                    self.DEBUG('\t tmpTXT = ' ,"'%s'" % tmpTXT)
+                    #self.DEBUG('\t tmpTXT = ' ,"'%s'" % tmpTXT)
                     if tmpTXT.find('pm') >= 0 and tmpTXT.find('25') >= 0:
-                        self.DEBUG('\t' ,'tmpTXT.find(pm) and tmpTXT.find(25):')
+                        #self.DEBUG('\t' ,'tmpTXT.find(pm) and tmpTXT.find(25):')
                         self.thingSpeakItems['PM2.5'] = childs.tag
                         self.thingSpeakItems['PM2.5Name'] = childs.text
                     elif tmpTXT.find('pm') >= 0 and tmpTXT.find('10') >= 0:
-                        self.DEBUG('\t' ,'tmpTXT.find(pm) and tmpTXT.find(10):')
+                        #self.DEBUG('\t' ,'tmpTXT.find(pm) and tmpTXT.find(10):')
                         self.thingSpeakItems['PM10'] = childs.tag
                         self.thingSpeakItems['PM10Name'] = childs.text
                     elif tmpTXT.find('pm') and tmpTXT.find('1'):
@@ -275,10 +276,10 @@ class getWeather:
                         self.thingSpeakItems['PM1Name'] = childs.text
                 elif childs.tag == 'feeds':
                     for feeds in childs:
-                        self.DEBUG('\tfeeds= ' ,'%s' % feeds.tag)
+                        #self.DEBUG('\tfeeds= ' ,'%s' % feeds.tag)
                         if feeds.tag == 'feed':
                             for feed in feeds:
-                                self.DEBUG('\tfeed= ' ,'%s' % feed.tag)
+                                #self.DEBUG('\tfeed= ' ,'%s' % feed.tag)
                                 if feed.tag == 'created-at':
                                     self.thingSpeakItems['ObservationTime'] = feed.text
                                 elif feed.tag.startswith('field'):
@@ -295,6 +296,7 @@ class getWeather:
             self.thingSpeakItems['name'] = 'xml error'
             self.thingSpeakItems['description'] = str(e)
             EXCEPTIONDEBUG('getWeather().thingSpeakCallback EXCEPTIONDEBUG %s' % str(e))
+        self.DEBUG('getWeather().thingSpeakCallback() <<<')
         
     def thingSpeakError(self, error = None):
         self.EXCEPTIONDEBUG('getWeather().thingSpeakError %s' % error)
@@ -340,9 +342,10 @@ class getWeather:
                     f.close()
         
         config.plugins.WeatherPlugin.callbacksCount.value += 1
-        self.DEBUGweb('MSNWeather().xmlCallback() invoking callback')
         if self.callback is not None:
+            self.DEBUG('MSNWeather().webCallback() invoking callback')
             self.callback(self.OK, None)
+        self.DEBUG('MSNWeather().webCallback() <<<')
         
     def webError(self, error = None):
         self.EXCEPTIONDEBUG('getWeather().webError %s' % error)

@@ -174,12 +174,12 @@ class MSNWeatherNP(Source):
             return '-?-'
             
     def getTemperature_Current(self):
-        retVal = ''
+        retVal = '-?-'
         skey = "-1"
         if weathermsn.weatherData.weatherItems.has_key(skey):
-            return "%s°%s" % (weathermsn.weatherData.weatherItems[skey].temperature, weathermsn.weatherData.degreetype)
-        else:
-            return '-?-'
+            retVal = "%s°%s" % (weathermsn.weatherData.weatherItems[skey].temperature, weathermsn.weatherData.degreetype)
+        self.DEBUG('MSNWeather(Source) getTemperature_Current() = "%s"' % (retVal))
+        return retVal
             
     def getFeelslike(self):
         retVal = ''

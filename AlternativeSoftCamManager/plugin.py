@@ -103,16 +103,19 @@ def Plugins(**kwargs):
 
 def isCamRunning(cam):
     status = False
-    pids = [pid for pid in os_listdir('/proc') if pid.isdigit()]
-    for pid in pids:
-        cmdFile = os_path.join('/proc', pid, 'cmdline')
-        if os_path.exists(cmdFile):
-            with open(cmdFile, "r") as f:
-                fc = f.read()
-                f.close()
-            if fc.find('oscam') > 0:
-                status = True
-                break
+    try:
+        pids = [pid for pid in os_listdir('/proc') if pid.isdigit()]
+        for pid in pids:
+            cmdFile = os_path.join('/proc', pid, 'cmdline')
+            if os_path.exists(cmdFile):
+                with open(cmdFile, "r") as f:
+                    fc = f.read()
+                    f.close()
+                if fc.find('oscam') > 0:
+                    status = True
+                    break
+    except Exception:
+        pass
     return status
 
 ######################################################################################

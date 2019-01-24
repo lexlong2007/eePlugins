@@ -36,6 +36,7 @@ else
 fi
 sed -i "s/^Version\:.*/Version: $version/" $plugAbsPath//CONTROL/control
 [ -e $plugAbsPath/version.py ] && echo "Version='$version'" > $plugAbsPath/version.py
+[ -e $plugAbsPath/Plugins/Extensions/MSNweather/version.py ] && echo "Version='$version'" > $plugAbsPath/Plugins/Extensions/MSNweather/version.py
 find $plugAbsPath/ -type f -name *.po  -exec bash -c 'msgfmt "$1" -o "${1%.po}".mo' - '{}' \;
 
 [ -e $ipkdir ] && sudo rm -rf $ipkdir

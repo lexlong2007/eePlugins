@@ -79,7 +79,7 @@
         <convert type="BlackHarmonyABTCAirlyWidget">street</convert>
     </widget>
 <!--HOURLY DATA-->
-    <ePixmap pixmap="BlackHarmony/gfx/line.png" position="410,455" size="1200,2" zPosition="3" transparent="1" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/gfx/line.png" position="420,455" size="1200,2" zPosition="3" transparent="1" alphatest="blend"/>
     <widget position="100,440" size="350,30" zPosition="3" halign="left" valign="top" render="Label" source="session.BlackHarmonyMSNWeather" font="Roboto_HD; 24" transparent="1" foregroundColor="green">
       <convert type="BlackHarmonyMSNWeatherWebhourly">title</convert>
     </widget>

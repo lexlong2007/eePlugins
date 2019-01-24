@@ -321,21 +321,7 @@
 		<panel name="SummaryTunerStatusPanel" />
 		<panel name="SummaryClockPanel" />
 	</screen>
-	<!-- LCD screen STANDBY -->
-	<screen name="StandbySummary" position="0,0" size="480,320">
-        <widget position="320,5" size="150,50" font="FdLcD;50" noWrap="1" foregroundColor="#ccffff" backgroundColor="#000000" render="Label" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="right" transparent="1">
-            <convert type="BlackHarmonyMSNWeather">temperature_current</convert>
-        </widget>
-        <widget source="session.BlackHarmonyMSNWeather" render="Label" position="10,5" size="250,50" font="FdLcD;50" halign="left" transparent="1" backgroundColor="black">
-            <convert type="MSNWeatherWebCurrent">barometrValue</convert>
-        </widget>
-		<widget backgroundColor="#000000" font="FdLcD;140" foregroundColor="white" halign="center" position="0,85" render="Label" size="480,155" source="global.CurrentTime" transparent="0" zPosition="2">
-			<convert type="ClockToText">Format:%-H:%M</convert>
-		</widget>
-		<widget backgroundColor="#000000" font="FdLcD;44" foregroundColor="#FFFF00" halign="center" position="0,260" render="Label" size="480,55" source="global.CurrentTime" transparent="0" zPosition="2">
-			<convert type="ClockToText">Format:%d.%m.%Y</convert>
-		</widget>
-	</screen>
+	<!-- Create own LCD STANDBY screen selecting components you want in the UserSkin-->
         <!-- LCD simple summary -->
         <screen name="SimpleSummary" position="0,0" size="480,320">
             <panel name="StandbySummary" />
