@@ -157,7 +157,7 @@ class getWeather:
             getPage(url3).addCallback(self.thingSpeakCallback).addErrback(self.thingSpeakError)
 
     def getDefaultWeatherData(self, callback = None, callbackAllIconsDownloaded = None):
-        self.DEBUG('getWeather()getDefaultWeatherData()')
+        self.DEBUG('getWeather().getDefaultWeatherData()')
         self.initialize()
         weatherPluginEntryCount = config.plugins.WeatherPlugin.entrycount.value
         if weatherPluginEntryCount >= 1:
@@ -232,7 +232,7 @@ class getWeather:
                     currentWeather.code = items.attrib.get('skycode').encode('utf-8', 'ignore')
                     filename = '%s%s' % (self.iconpath, currentWeather.skycode)
                     currentWeather.iconFilename = filename
-                    self.DEBUG('MSNWeather().xmlCallback() currentText = %s, currentIcon = %s' % (currentWeather.skytext, filename))
+                    self.DEBUG('MSNWeather().xmlCallback() current: temp=%s, humidity=%s, wind=%s' % (currentWeather.temperature, currentWeather.humidity, currentWeather.winddisplay))
                     if not os_path.exists(filename):
                         url = '%s%s' % (self.imagerelativeurl, currentWeather.skycode)
                         IconDownloadList.append(WeatherIconItem(url=url, filename=filename, index=-1))

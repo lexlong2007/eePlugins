@@ -81,9 +81,6 @@ config.plugins.UserSkin.AdvancedMode = ConfigSelection(default="copyScreens", ch
                 ])
 config.plugins.UserSkin.FontScale = ConfigSelectionNumber(default=100, min=50, max=200, stepwidth=1)
 config.plugins.UserSkin.SafeMode = ConfigYesNo(default = True)
-config.plugins.UserSkin.LCDparts = ConfigYesNo(default = False)
-if config.plugins.UserSkin.AdvancedMode.value == 'copyScreens':
-    config.plugins.UserSkin.LCDparts.value = False
 
 imageType=None
 def isImageType(imgName = ''):
@@ -247,6 +244,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
         
         self.createConfigList()
         self.updateEntries = False
+        self.LCD_widgets_selected = False
         
     def createConfigList(self):
         self.set_bar = getConfigListEntry(_("Selector bar style:"), self.myUserSkin_bar)
@@ -276,9 +274,6 @@ class UserSkin_Config(Screen, ConfigListScreen):
         if isSlowCPU() == True:
             self.list.append(getConfigListEntry(_("No JPG previews:"), config.plugins.UserSkin.jpgPreview))
         self.list.append(getConfigListEntry(_("LCD/VFD skin:"), config.plugins.UserSkin.LCDmode))
-        if isImageType('vti') or isImageType('openatv'):
-            if config.plugins.UserSkin.AdvancedMode.value != 'copyScreens':
-                self.list.append(getConfigListEntry(_("Support LCD parts:"), config.plugins.UserSkin.LCDparts))
         try:
             if (path.exists(resolveFilename(SCOPE_PLUGINS, '../Components/Renderer/j00zekPiconAnimation.py')) or \
                     path.exists(resolveFilename(SCOPE_PLUGINS, '../Components/Renderer/j00zekPiconAnimation.pyo')) or \
@@ -643,12 +638,16 @@ class UserSkin_Config(Screen, ConfigListScreen):
                     printDEBUG("- appending skin_user_colors.xml")
                     user_skin = user_skin + self.readXMLfile(SkinPath + 'skin_user_colors.xml' , 'ALLSECTIONS')
             printDEBUG("############################################# Skin after loading header & colors:\n" + user_skin + "\n#############################################\n")        
+            self.LCD_widgets_selected = False
             if path.exists(SkinPath + 'UserSkin_Selections'):
                 if config.plugins.UserSkin.AdvancedMode.value == "mergeScreens":
                     printDEBUG("mergeScreens mode !!!")
                     # get list of screens in file
                     user_screens = []
                     for f in listdir(SkinPath + "UserSkin_Selections/"):
+                        if not self.LCD_widgets_selected and f.find('LCD_widget') > -1:
+                            self.LCD_widgets_selected = True
+                            printDEBUG("found LCD widget file in %smySkin/%s" % (SkinPath,f))
                         printDEBUG("reading file %smySkin/%s" % (SkinPath,f))
                         user_parameters += readParametersContent(SkinPath + "UserSkin_Selections/" + f)
                         for screen in getScreenNames(SkinPath + "UserSkin_Selections/" + f):
@@ -679,10 +678,10 @@ class UserSkin_Config(Screen, ConfigListScreen):
                     myFile.write(user_skin)
                     myFile.flush()
                     myFile.close()
-                    if config.plugins.UserSkin.LCDparts.value and config.plugins.UserSkin.LCDmode.value != 'LCDLinux': #this means we have to create skin_user in the /etc/enigma2
-                        system('ln -sf %s %s' % (user_skin_file, resolveFilename(SCOPE_CONFIG, 'skin_user' + self.currentSkin + '.xml')))
-                    elif (isImageType('vti') == True or isImageType('openatv') == True) and config.plugins.UserSkin.LCDparts.value: #VTI i openATV czytaja, to nie musimy robic pliku
-                        pass #VTI/openatv standardowo laduja pliki z SkinPath + 'mySkin/skin_user' + self.currentSkin + '.xml'
+                    if (isImageType('vti') == True or isImageType('openatv') == True) and not self.LCD_widgets_selected: #VTI i openATV czytaja, to nie musimy robic pliku
+                        #VTI/openatv standardowo laduja pliki z SkinPath + 'mySkin/skin_user' + self.currentSkin + '.xml'
+                        if path.exists(resolveFilename(SCOPE_CONFIG, 'skin_user' + self.currentSkin + '.xml')):
+                            remove(resolveFilename(SCOPE_CONFIG, 'skin_user' + self.currentSkin + '.xml'))
                     elif isImageType('blackhole') == True:
                         system('ln -sf %s /etc/enigma2/skin_user.xml' % user_skin_file) #Blackhole ma jedynie standardowy mechanizm
                     elif config.plugins.UserSkin.LCDmode.value == 'LCDLinux':
