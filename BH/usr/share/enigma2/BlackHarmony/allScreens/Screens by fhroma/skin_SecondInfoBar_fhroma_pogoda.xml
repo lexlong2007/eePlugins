@@ -1,11 +1,7 @@
 <skin>
 <screen name="SecondInfoBar" backgroundColor="transparent" flags="wfNoBorder" position="0,52" size="1920,1080">
   <ePixmap position="10,5" zPosition="-2" size="1920,699" pixmap="BlackHarmony/bg_design/secondinfobar2.png" />
-
-
-  <!--##########################################-->
-    <ePixmap position="30,721" zPosition="-2" size="1900,300" pixmap="BlackHarmony/bg_design/infobar_medium.png" />
-
+  <ePixmap position="30,721" zPosition="-2" size="1900,300" pixmap="BlackHarmony/bg_design/infobar_medium.png" />
   <widget source="session.CurrentService" render="Pixmap" position="1052,750" zPosition="3" size="20,20" pixmap="BlackHarmony/icons/update.png" alphatest="blend">
     <convert type="j00zekOPKGupgradeCheck" />
     <convert type="ConditionalShowHide">Blink</convert>
@@ -517,14 +513,14 @@
       <convert type="BlackHarmonyMSNWeather">temperature_text,current</convert>
     </widget>
 	
-	 <ePixmap position="1400,210" size="70,28" pixmap="BlackHarmony/weather_icons/temp_high_low1.png" alphatest="blend" zPosition="22" />
+	 <ePixmap position="1430,210" size="70,28" pixmap="BlackHarmony/weather_icons/temp_high_low1.png" alphatest="blend" zPosition="22" />
   
     <eLabel name="new eLabel" position="1265,206" size="90,40" font="HD_Thin; 28" foregroundColor="white" backgroundColor="black" transparent="1" halign="left" text="maks." />
     <widget noWrap="1" backgroundColor="black" font="HD_Thin; 30" render="Label" position="1354,206" size="90,40" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="left" transparent="1" foregroundColor="pastel">
       <convert type="BlackHarmonyMSNWeather">temperature_high,current</convert>
     </widget>
-    <eLabel name="new eLabel" position="1490,206" size="90,40" font="HD_Thin; 28" foregroundColor="white" backgroundColor="black" transparent="1" halign="left" text="min." />
-    <widget noWrap="1" backgroundColor="black" font="HD_Thin; 30" render="Label" position="1560,206" size="90,40" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="left" transparent="1" foregroundColor="blue">
+    <eLabel name="new eLabel" position="1520,206" size="90,40" font="HD_Thin; 28" foregroundColor="white" backgroundColor="black" transparent="1" halign="left" text="min." />
+    <widget noWrap="1" backgroundColor="black" font="HD_Thin; 30" render="Label" position="1590,206" size="90,40" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="left" transparent="1" foregroundColor="blue">
       <convert type="BlackHarmonyMSNWeather">temperature_low,current</convert>
     </widget>
 
@@ -564,7 +560,7 @@
     <widget source="session.BlackHarmonyMSNWeather" render="Label" position="1570,615" size="290,30" font="Regular;22" zPosition="2" halign="right" valign="center" foregroundColor="lemon" backgroundColor="background" transparent="1" noWrap="1">
       <convert type="MSNWeatherWebCurrent">Barometr</convert>
 </widget>
-   <eLabel text="Imieniny :" position="1050,595" size="255,28" font="Roboto_HD; 24" backgroundColor="black" foregroundColor="green" halign="left" transparent="1" />
+   <eLabel text="Imieniny :" position="1080,595" size="255,28" font="Roboto_HD; 24" backgroundColor="black" foregroundColor="green" halign="left" transparent="1" />
   <widget source="global.CurrentTime" render="Label" position="930,630" size="375,60" font="Roboto_HD; 22" halign="center" transparent="1" backgroundColor="black" zPosition="3" noWrap="1">
     <convert type="BlackHarmonyimieniny" />
   </widget>

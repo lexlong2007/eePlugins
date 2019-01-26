@@ -96,5 +96,5 @@
     <convert type="ValueRange">3,3</convert>
     <convert type="ConditionalShowHide" />
   </widget>
-  <widget source="session.CurrentService" render="j00zekFEicon" position="1530,160" size="44,20" zPosition="3" alphatest="blend"/> 
+  <!--widget source="session.CurrentService" render="j00zekFEicon" position="1530,160" size="44,20" zPosition="3" alphatest="blend"/--> 
 </screen>

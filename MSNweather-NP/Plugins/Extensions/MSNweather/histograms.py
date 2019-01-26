@@ -129,8 +129,12 @@ class MSNweatherHistograms(Screen):
         self.DEBUG('MSNweatherHistograms(Screen).startRun >>>')
         minPressure = 9999
         maxPressure = 99
+        diffPressure = 0
+        stepPressure = 1
         minTemp = 99
         maxTemp = -99
+        diffTemp = 0
+        stepTemp = 1
         myData = []
         myFile = '/usr/lib/enigma2/python/Plugins/Extensions/MSNweather/histograms.data'
         if path.exists(myFile):
@@ -157,10 +161,12 @@ class MSNweatherHistograms(Screen):
                                 if maxTemp < currtemp: maxTemp = currtemp
                 f.close()
         diffPressure = maxPressure - minPressure
-        stepPressure = int(self.scaleSize / diffPressure)
+        if diffPressure > 0:
+            stepPressure = int(self.scaleSize / diffPressure)
         self.DEBUG('\t\t minPressure=%s, maxPressure=%s, diffPressure=%s, stepPressure%s' % (minPressure, maxPressure, diffPressure, stepPressure))
         diffTemp = maxTemp - minTemp
-        stepTemp = int(self.scaleSize / diffTemp)
+        if diffTemp > 0:
+            stepTemp = int(self.scaleSize / diffTemp)
         self.DEBUG('\t\t minTemp=%s, maxTemp=%s, diffTemp=%s, stepTemp%s' % (minTemp, maxTemp, diffTemp, stepTemp))
         
         myDataCount = len(myData)
