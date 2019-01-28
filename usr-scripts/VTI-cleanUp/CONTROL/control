@@ -2,9 +2,9 @@ Package: enigma2-plugin-extensions--j00zeks-vti-cleanup
 Priority: optional
 Section: utils
 Depends: 
-Description: automatycznie odinstalowuje 'smieci' z systemu VTI
+Description: automatycznie odinstalowuje 'smieci' z systemu VTI. Pełna lista na forum DVHK
 Maintainer: j00zek
 Source: http://github.com/j00zek/eePlugins
-Version: 19.01.18.0724
+Version: 19.01.28.0750
 Architecture: all
 DestinationPath: /usr/bin

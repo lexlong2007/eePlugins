@@ -1,5 +1,11 @@
 #!/bin/sh
+echo "############################################" >> /tmp/enigma2_cleanUp.log
+echo "enigma2_cleanUp.sh initiated and waiting 30s" >> /tmp/enigma2_cleanUp.log
+echo "############################################" >> /tmp/enigma2_cleanUp.log
 sleep 30
+PacketsCount=0
+UninstalledCount=0
+
 Zainstalowane_Komponenty="`opkg list-installed`"
 
 # >>>> Lista_pakietow_do_odinstalowania
@@ -55,11 +61,12 @@ enigma2-plugin-systemplugins-zappingmodeselection
 
 for pakiet in $lista;
 do
+ PacketsCount=$((PacketsCount+1))
  if [ "`echo $Zainstalowane_Komponenty| grep -c $pakiet`" -gt 0 ]; then
-    echo "Odinstalowuje $pakiet..." >> /tmp/enigma2_pre_start.sh.log
+    echo "Uninstalling $pakiet..." >> /tmp/enigma2_cleanUp.log
     nice -n 10 opkg remove --force-depends $pakiet
+    UninstalledCount=$((UninstalledCount+1))
  fi
 done
 
-# >>>> kasowanie katalogow i plikow ktorych nie da sie odinstalowac
-rm -rf /usr/lib/enigma2/python/Plugins/Extensions/Tuxtxt
+echo "Analyzed $PacketsCount packets, uninstalled $UninstalledCount" >> /tmp/enigma2_cleanUp.log

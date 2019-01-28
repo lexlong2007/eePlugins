@@ -144,13 +144,13 @@ class getWeather:
         self.callbackShowIcon = callbackShowIcon
         self.callbackAllIconsDownloaded = callbackAllIconsDownloaded
         url = 'http://weather.service.msn.com/data.aspx?src=windows&weadegreetype=%s&culture=%s&wealocations=%s' % (degreetype, language, urllib_quote(locationcode))
-        getPage(url).addCallback(self.xmlCallback).addErrback(self.xmlError)
-        self.DEBUGxml('\t url_xml=' ,'%s' % url)
         if weatherSearchFullName != '':
+            getPage(url).addCallback(self.xmlCallback).addErrback(self.xmlError)
+            self.DEBUG('\t url_xml=' ,'%s' % url)
             #url2 = 'http://www.msn.com/weather/we-city?culture=%s&form=PRWLAS&q=%s' % (language, urllib_quote(weatherSearchFullName))
-            url2 = 'https://www.msn.com/%s/weather?culture=%s&form=PRWLAS&q=%s' % (language, language, urllib_quote(weatherSearchFullName))
-            self.DEBUG('\t url_web="%s"' % url2)
-            getPage(url2).addCallback(self.webCallback).addErrback(self.webError)
+            self.urlWeb = 'https://www.msn.com/%s/weather?culture=%s&form=PRWLAS&q=%s' % (language, language, urllib_quote(weatherSearchFullName))
+            self.DEBUG('\t url_web="%s"' % self.urlWeb)
+            #getPage(url2).addCallback(self.webCallback).addErrback(self.webError)
         if thingSpeakChannelID != '':
             url3 = 'https://thingspeak.com/channels/%s/feeds.xml?average=10&results=1' % thingSpeakChannelID
             self.DEBUG('\t url_thingSpeak=' ,'%s' % url3)
@@ -247,6 +247,7 @@ class getWeather:
         else:
             self.finishedAllDownloadFiles(None)
         self.DEBUG('getWeather().xmlCallback() <<<')
+        getPage(self.urlWeb).addCallback(self.webCallback).addErrback(self.webError)
         return
 
     def thingSpeakCallback(self, xmlstring):

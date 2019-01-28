@@ -89,15 +89,15 @@ def delayedStandbyActions():
             hour = int(currTime[3])
             Minutes = int(currTime[4])
             hourAndMinutes = time.strftime('%H:%M', currTime)
-            if hour == 23:val = config.plugins.dynamicLCD.NightStandbyBrightness23.value
-            if hour == 0: val = config.plugins.dynamicLCD.NightStandbyBrightness00.value
-            if hour == 1: val = config.plugins.dynamicLCD.NightStandbyBrightness01.value
-            if hour == 2: val = config.plugins.dynamicLCD.NightStandbyBrightness02.value
-            if hour == 3: val = config.plugins.dynamicLCD.NightStandbyBrightness03.value
-            if hour == 4: val = config.plugins.dynamicLCD.NightStandbyBrightness04.value
-            if hour == 5: val = config.plugins.dynamicLCD.NightStandbyBrightness05.value
-            if hour == 6: val = config.plugins.dynamicLCD.NightStandbyBrightness06.value
-            if hour == 7: val = config.plugins.dynamicLCD.NightStandbyBrightness07.value
+            if hour == 23:  val = config.plugins.dynamicLCD.NightStandbyBrightness23.value
+            elif hour == 0: val = config.plugins.dynamicLCD.NightStandbyBrightness00.value
+            elif hour == 1: val = config.plugins.dynamicLCD.NightStandbyBrightness01.value
+            elif hour == 2: val = config.plugins.dynamicLCD.NightStandbyBrightness02.value
+            elif hour == 3: val = config.plugins.dynamicLCD.NightStandbyBrightness03.value
+            elif hour == 4: val = config.plugins.dynamicLCD.NightStandbyBrightness04.value
+            elif hour == 5: val = config.plugins.dynamicLCD.NightStandbyBrightness05.value
+            elif hour == 6: val = config.plugins.dynamicLCD.NightStandbyBrightness06.value
+            elif hour == 7: val = config.plugins.dynamicLCD.NightStandbyBrightness07.value
             else: val = config.plugins.dynamicLCD.NightStandbyBrightness.value
             eDBoxLCD.getInstance().setLCDBrightness(int(val))
             if DBG: printDEBUG("delayedStandbyActions() at %s has set LCD brightess to %s and waits %s minutes for next invoke" % (hourAndMinutes, val,(60 - Minutes)) )
