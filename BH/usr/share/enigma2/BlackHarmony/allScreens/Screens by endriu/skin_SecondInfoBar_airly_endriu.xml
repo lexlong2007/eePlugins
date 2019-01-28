@@ -1,6 +1,6 @@
 <skin>
  <screen backgroundColor="transparent" flags="wfNoBorder" name="SecondInfoBar" position="0,52" size="1920,1080" title="InfoBar">
-  <ePixmap pixmap="BlackHarmony/bg_design/secondinfobar4.png" position="0,0" size="1920,1080" zPosition="-2" />
+  <ePixmap pixmap="BlackHarmony/bg_design/secondinfobar5.png" position="0,0" size="1920,1080" zPosition="-2" />
 
   <widget alphatest="blend" pixmap="BlackHarmony/icons/update.png" position="850,745" render="Pixmap" size="20,20" source="session.CurrentService" zPosition="3">
     <convert type="j00zekOPKGupgradeCheck" />

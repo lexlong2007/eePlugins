@@ -1,26 +1,26 @@
 <!-- YAMP_v31 -->
 <screen name="YampLCDScreenV31" position="0,0" size="800,480" id="1">
   <ePixmap pixmap="vfd_skin/Homar/Homar_1.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
-    <widget source="global.CurrentTime" render="Label" position="360,130" size="325,100" font="VFD2;90" foregroundColor="#ffff00" transparent="1" halign="right" valign="top">
-<convert type="ClockToText">Format:%H:%M</convert>
-</widget>
-<widget source="global.CurrentTime" render="Label" position="695,140" size="105,75" font="VFD2;60" foregroundColor="#ffff00" transparent="1" halign="left" valign="top">
-<convert type="ClockToText">Format:%S</convert>
-</widget>
-
-  <widget source="session.CurrentService" render="Progress" pixmap="vfd_skin/Homar/Homar_3.png" position="180,410" size="170,42" borderWidth="6" backgroundColor="#00CFFF">
+  <widget source="global.CurrentTime" render="Label" position="460,36" size="300,75" font="VFD;78" transparent="1" halign="right" valign="center">
+  <convert type="ClockToText">Format:%H:%M:%S</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Progress" pixmap="vfd_skin/Homar/Homar_7.png" position="230,411" size="350,50" borderWidth="6" backgroundColor="#00CFFF">
     <convert type="ServicePosition">Position</convert>
   </widget>
-
-<widget source="session.CurrentService" render="Label" position="20,400" size="150,60" font="VFD2;60" foregroundColor="#ffff00" transparent="1" halign="center" valign="top">
+<widget source="session.CurrentService" render="RollerCharLCD" position="16,308" size="740,96" halign="left" noWrap="1" font="VFD;80" foregroundColor="#ffff00" zPosition="3" transparent="1">
+    <convert type="ServiceName">Name</convert>
+  </widget>
+<widget source="session.CurrentService" render="Label" position="20,390" size="230,88" font="VFD;74" foregroundColor="#ffff00" transparent="1" halign="left" valign="center">
 <convert type="ServicePosition">Position</convert>
 </widget>
-<widget source="session.CurrentService" render="Label" position="360,400" size="150,60" font="VFD2;60" foregroundColor="#ffff00" transparent="1" halign="center" zPosition="3">
+<widget source="session.CurrentService" render="Label" position="520,390" size="230,88" font="VFD;74" foregroundColor="#ffff00" transparent="1" halign="right" valign="top" zPosition="3">
 <convert type="ServicePosition">Length</convert>
 </widget>
-<widget name="text1" position="20,20" size="770,122" font="RegularLCD;60" foregroundColor="#ffff00" transparent="1" zPosition="3" />
-<widget name="text2" position="20,142" size="480,122" font="RegularLCD;60" foregroundColor="#ffff00" transparent="1" zPosition="3" />
-<widget name="text3" position="20,264" size="480,122" font="RegularLCD;60" foregroundColor="#ffff00" transparent="1" zPosition="3" />
-<widget name="coverArt" pixmap="/tmp/coverlcd.png" position="515,220" zPosition="1" size="285,260" transparent="1" alphatest="blend" />
-
+<widget name="text2" position="380,122" size="780,200" halign="right" noWrap="1" font="VFD;45" foregroundColor="#ffff00" zPosition="3" transparent="1">
+      <convert type="ServiceName">Name</convert>
+    </widget>
+<widget name="text3" position="380,244" size="780,200" halign="right" noWrap="1" font="VFD;45" foregroundColor="#ffff00" zPosition="3" transparent="1">
+       <convert type="ServiceName">Name</convert>
+    </widget>
+<widget name="coverArt" pixmap="/tmp/coverlcd.png" position="0,0" zPosition="1" size="380,320" transparent="1" alphatest="blend" />
 </screen>

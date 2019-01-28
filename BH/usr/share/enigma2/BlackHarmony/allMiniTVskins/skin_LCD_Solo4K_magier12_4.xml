@@ -30,18 +30,15 @@
 </windowstyle>
 
 <screen name="LCDWetterStandbyTemplate">
- <widget foregroundColor="foreground" backgroundColor="background" font="VFD;50" render="Label" halign="center" valign="center" noWrap="1" transparent="1" source="global.CurrentTime" position="10,00" size="460,60" zPosition="5">
- 		<convert type="BlackHarmonyMSNWeather">observationpoint</convert>
+ <widget foregroundColor="foreground" backgroundColor="background" font="VFD;50" render="Label" halign="center" valign="center" noWrap="1" transparent="1" source="session.BlackHarmonyMSNWeather" position="10,00" size="460,60" zPosition="5">
+ 		<convert type="BlackHarmonyMSNWeather">city</convert>
  </widget> 
- <widget font="Meteo;60" render="Label" halign="center" valign="center" noWrap="1" transparent="1" source="global.CurrentTime" position="295,60" size="60,60" zPosition="7" foregroundColor="foreground" backgroundColor="background">
- 		<convert type="BlackHarmonyMSNWeather">temperature_text,current</convert>
- </widget>
- <widget foregroundColor="foreground" backgroundColor="background" font="VFD;60" render="Label" halign="right" valign="center" noWrap="1" transparent="1" source="global.CurrentTime" position="135,60" size="80,60" zPosition="5">
+ <widget foregroundColor="foreground" backgroundColor="background" font="VFD;60" render="Label" halign="right" valign="center" noWrap="1" transparent="1" source="session.BlackHarmonyMSNWeather" position="135,60" size="100,60" zPosition="5">
  		<convert type="BlackHarmonyMSNWeather">temperature_current</convert>
  </widget>
- <!--widget foregroundColor="foreground" backgroundColor="background" font="VFD;60" render="Label" halign="left" valign="center" noWrap="1" transparent="1" source="global.CurrentTime" position="215,60" size="60,60" zPosition="6">
- 		<convert type="BlackHarmonyMSNWeather">CF</convert>
- </widget-->
+ <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="245,60" size="60,60" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+    <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
+ </widget>
  </screen>
  
 	<screen name="LCD09TunerTemplate">
@@ -277,14 +274,14 @@
 
 <!-- InfoBar -->
 <screen name="InfoBarSummary" position="0,0" size="480,320" id="1">
-  <widget source="session.CurrentService" render="Picon" position="20,45" size="220,132" zPosition="4" transparent="1" alphatest="blend">
+  <widget source="session.CurrentService" render="j00zekPicons" position="20,45" size="220,132" zPosition="4" transparent="1" alphatest="blend">
     <convert type="ServiceName">Reference</convert>
   </widget>
   
   <panel name="LCD09TunerTemplate" />
   <panel name="LCDTunerTemplate" />  
   
-  <widget source="session.Event_Now" render="VRunningText" options="movetype=running,startpoint=0,direction=left,step=2,steptime=10,repeat=5000,startdelay=0,pause=0,always=0,oneshot=3500" noWrap="1" position="20,186" size="440,60" font="VFD;55" halign="left" valign="top">
+  <widget source="session.Event_Now" render="BlackHarmonyRunningText" options="movetype=running,startpoint=0,direction=left,step=2,steptime=10,repeat=5000,startdelay=0,pause=0,always=0,oneshot=3500" noWrap="1" position="20,186" size="440,60" font="VFD;55" halign="left" valign="top">
     <convert type="EventName">Name</convert>
   </widget>
   
@@ -316,15 +313,12 @@
     <convert type="ClockToText">Format:%m.</convert>
   </widget>
   
-  <widget font="Meteo;60" render="Label" halign="center" valign="center" noWrap="1" transparent="1" source="global.CurrentTime" position="400,105" size="60,60" zPosition="7" foregroundColor="foreground" backgroundColor="background">
- 		<convert type="BlackHarmonyMSNWeather">temperature_text,current</convert>
-  </widget>
-  <widget foregroundColor="foreground" backgroundColor="background" font="VFD;60" render="Label" halign="right" valign="center" noWrap="1" transparent="1" source="global.CurrentTime" position="240,105" size="80,60" zPosition="5">
+  <widget foregroundColor="foreground" backgroundColor="background" font="VFD;60" render="Label" halign="right" valign="top" noWrap="0" transparent="1" source="session.BlackHarmonyMSNWeather" position="240,105" size="100,60" zPosition="5">
  		<convert type="BlackHarmonyMSNWeather">temperature_current</convert>
   </widget>
-  <!--widget foregroundColor="foreground" backgroundColor="background" font="VFD;60" render="Label" halign="left" valign="center" noWrap="1" transparent="1" source="global.CurrentTime" position="320,105" size="60,60" zPosition="6">
- 		<convert type="BlackHarmonyMSNWeather">CF</convert>
-  </widget-->
+ <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="350,105" size="60,60" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+    <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
+ </widget>
   <widget source="session.Event_Now" render="Label" position="285,160" size="130,35" font="VFD;33" halign="right" valign="top" foregroundColor="#00d0dda8">
   <convert type="EventTime">Duration</convert>
   <convert type="ClockToText">InMinutes</convert>
@@ -342,10 +336,10 @@
 
 <!-- ChannelSelection -->
 <screen name="ChannelSelection_summary" position="0,0" size="480,320" id="1">
-  <widget source="parent.ServiceEvent" render="Picon" position="20,45" size="220,132" zPosition="4" transparent="1" alphatest="blend">
+  <widget source="parent.ServiceEvent" render="j00zekPicons" position="20,45" size="220,132" zPosition="4" transparent="1" alphatest="blend">
     <convert type="ServiceName">Reference</convert>
   </widget>
-  <widget source="parent.ServiceEvent" render="VRunningText" options="movetype=running,startpoint=0,direction=left,step=2,steptime=10,repeat=5000,startdelay=0,pause=0,always=0,oneshot=3500" noWrap="1" position="20,184" size="440,60" font="VFD;55" halign="left" valign="top">
+  <widget source="parent.ServiceEvent" render="BlackHarmonyRunningText" options="movetype=running,startpoint=0,direction=left,step=2,steptime=10,repeat=5000,startdelay=0,pause=0,always=0,oneshot=3500" noWrap="1" position="20,184" size="440,60" font="VFD;55" halign="left" valign="top">
     <convert type="EventName">Name</convert>
   </widget>
   <eLabel name="progress" position="15,253" size="455,6" backgroundColor="#00FFFFFF" />
@@ -395,7 +389,7 @@
   <widget source="session.CurrentService" render="Label" position="260,108" size="200,60" font="VFD;55" halign="right" valign="top">
     <convert type="ServicePosition">Remaining,Negate,Length</convert>
   </widget>
-  <!--<widget source="session.CurrentService" render="Picon" position="20,35" size="220,132" zPosition="0" alphatest="blend">
+  <!--<widget source="session.CurrentService" render="j00zekPicons" position="20,35" size="220,132" zPosition="0" alphatest="blend">
     <convert type="MovieBarInfo">Reference</convert>
   </widget>-->
 </screen>
@@ -496,7 +490,7 @@
   <widget source="session.CurrentService" render="Label" position="260,108" size="200,60" font="VFD;55" halign="right" valign="top">
     <convert type="ServicePosition">Remaining,Negate,Length</convert>
   </widget>
-  <widget source="session.CurrentService" render="Picon" position="20,35" size="220,132" zPosition="0" alphatest="blend">
+  <widget source="session.CurrentService" render="j00zekPicons" position="20,35" size="220,132" zPosition="0" alphatest="blend">
     <convert type="MovieBarInfo">Reference</convert>
   </widget>
 </screen>

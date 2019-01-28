@@ -7,7 +7,7 @@ if [ ! -e /usr/lib/enigma2/python/Plugins/Extensions/MSNweather ]; then
   if `grep -q 'osd.language=pl_PL' </etc/enigma2/settings`; then
     echo
     echo "UWAGA:"
-    echo "Aby działało w skórce wyświetlanie pogody, musisz doinstalować wtyczkę z pogodą MSN"
+    echo "Aby działało w skórce wyświetlanie pogody, musisz doinstalować wtyczkę z pogodą MSN (enigma2-plugin-extensions--j00zeks-msnweather-np)"
   else
     echo
     echo "ATTENTION:"
@@ -90,7 +90,13 @@ sync
 #deleting skin_user when his components modified
 UserSkinDate=`date -r /usr/share/enigma2/BlackHarmony/mySkin/skin_user_BlackHarmony.xml +"%s"`
 find /usr/share/enigma2/BlackHarmony/UserSkin_Selections/ -iname skin_*.xml|while read f; do
-  widgetDate=`date -r $f +"%s"`
+  if [ -e $f ]; then 
+    widgetDate=`date -r $f +"%s"`
+  else
+    rm -f $f
+    [ -e /usr/share/enigma2/BlackHarmony/mySkin/skin_user_BlackHarmony.xml ] && rm -f /usr/share/enigma2/BlackHarmony/mySkin/skin_user_BlackHarmony.xml
+    [ -e /etc/enigma2/skin_user_BlackHarmony.xml ] && rm -f /etc/enigma2/skin_user_BlackHarmony.xml
+  fi
   if [[ $UserSkinDate -lt $widgetDate ]]; then
     [ -e /usr/share/enigma2/BlackHarmony/mySkin/skin_user_BlackHarmony.xml ] && rm -f /usr/share/enigma2/BlackHarmony/mySkin/skin_user_BlackHarmony.xml
     [ -e /etc/enigma2/skin_user_BlackHarmony.xml ] && rm -f /etc/enigma2/skin_user_BlackHarmony.xml
