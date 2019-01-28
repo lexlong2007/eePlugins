@@ -59,6 +59,8 @@ if config.plugins.dynamicLCD.debug.value:
             f.write('%s %s\n' %(str(datetime.now()), myText))
             f.close
         except: pass
+else:
+    DBG=False
 
 def leaveStandby():
     if DBG: printDEBUG('leaveStandby, stop timer')
@@ -144,11 +146,10 @@ class DynamicLCDbrightnessInStandbyConfiguration(Screen, ConfigListScreen):
 
         ConfigList = self.buildConfigList()
         
-        ConfigListScreen.__init__(self, ConfigList, session = session, on_change = self.changed)
+        ConfigListScreen.__init__(self, ConfigList, session = session, on_change = self.changedValue)
 
-        # Trigger change
-        #self.changed()
-
+        if not self.selectionChanged in self["config"].onSelectionChanged:
+            self["config"].onSelectionChanged.append(self.selectionChanged)
         self.onLayoutFinish.append(self.__layoutFinished)
         self.onClose.append(self.__onClose)
 
@@ -184,18 +185,24 @@ class DynamicLCDbrightnessInStandbyConfiguration(Screen, ConfigListScreen):
         except Exception:
             pass
     
-    def changed(self):
-        for x in self.onChangedEntry:
-            x()
+    def setLCDBrightness(self):
         if self.getCurrentEntryConfig() != config.plugins.dynamicLCD.enabled:
-            currValue = self.getCurrentValue()
             try:
+                currValue = self.getCurrentValue()
                 currValue = int(currValue.split('/')[0].strip())
                 eDBoxLCD.getInstance().setLCDBrightness(currValue)
             except Exception as e:
                 if DBG: printDEBUG("Exception: %s" % str(e), True)
             if DBG: printDEBUG("%s > %s" % (self.getCurrentEntry(), currValue), True)
-            self["config"].list = self.buildConfigList()
+    
+    def selectionChanged(self):
+        self.setLCDBrightness()
+
+    def changedValue(self):
+        for x in self.onChangedEntry:
+            x()
+        self.setLCDBrightness()
+        self["config"].list = self.buildConfigList()
 
     def getCurrentEntry(self):
         return self["config"].getCurrent()[0]
