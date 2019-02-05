@@ -1,7 +1,7 @@
 <skin>
   <fonts>
     <!-- pick a funky name for the font, so we don't conflict  -->
-    <font filename="nmsbd.ttf" name="FdLcD" scale="100"/>
+    <font filename="/usr/share/enigma2/BlackHarmony/fonts/nmsbd.ttf" name="FdLcD" scale="100"/>
   </fonts>
   <windowstyle id="1" type="skinned">
     <title offset="15,10" font="FdLcD;42"/>

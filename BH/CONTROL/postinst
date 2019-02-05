@@ -88,21 +88,23 @@ sync
 #bing image if not exists
 [ -e /usr/share/enigma2/BlackHarmony/icons/BingPicOfTheDay.jpg ] || /usr/lib/enigma2/python/Components/j00zekBING.py
 #deleting skin_user when his components modified
-UserSkinDate=`date -r /usr/share/enigma2/BlackHarmony/mySkin/skin_user_BlackHarmony.xml +"%s"`
-find /usr/share/enigma2/BlackHarmony/UserSkin_Selections/ -iname skin_*.xml|while read f; do
-  if [ -e $f ]; then 
-    widgetDate=`date -r $f +"%s"`
-  else
-    rm -f $f
-    [ -e /usr/share/enigma2/BlackHarmony/mySkin/skin_user_BlackHarmony.xml ] && rm -f /usr/share/enigma2/BlackHarmony/mySkin/skin_user_BlackHarmony.xml
-    [ -e /etc/enigma2/skin_user_BlackHarmony.xml ] && rm -f /etc/enigma2/skin_user_BlackHarmony.xml
-  fi
-  if [[ $UserSkinDate -lt $widgetDate ]]; then
-    [ -e /usr/share/enigma2/BlackHarmony/mySkin/skin_user_BlackHarmony.xml ] && rm -f /usr/share/enigma2/BlackHarmony/mySkin/skin_user_BlackHarmony.xml
-    [ -e /etc/enigma2/skin_user_BlackHarmony.xml ] && rm -f /etc/enigma2/skin_user_BlackHarmony.xml
-    break
-  fi
-done
+if [ -e /usr/share/enigma2/BlackHarmony/mySkin/skin_user_BlackHarmony.xml ];then
+  UserSkinDate=`date -r /usr/share/enigma2/BlackHarmony/mySkin/skin_user_BlackHarmony.xml +"%s"`
+  find /usr/share/enigma2/BlackHarmony/UserSkin_Selections/ -iname skin_*.xml|while read f; do
+    if [ -e $f ]; then 
+      widgetDate=`date -r $f +"%s"`
+    else
+      rm -f $f
+      [ -e /usr/share/enigma2/BlackHarmony/mySkin/skin_user_BlackHarmony.xml ] && rm -f /usr/share/enigma2/BlackHarmony/mySkin/skin_user_BlackHarmony.xml
+      [ -e /etc/enigma2/skin_user_BlackHarmony.xml ] && rm -f /etc/enigma2/skin_user_BlackHarmony.xml
+    fi
+    if [[ $UserSkinDate -lt $widgetDate ]]; then
+      [ -e /usr/share/enigma2/BlackHarmony/mySkin/skin_user_BlackHarmony.xml ] && rm -f /usr/share/enigma2/BlackHarmony/mySkin/skin_user_BlackHarmony.xml
+      [ -e /etc/enigma2/skin_user_BlackHarmony.xml ] && rm -f /etc/enigma2/skin_user_BlackHarmony.xml
+      break
+    fi
+  done
+fi
 #set GS marker
 if `grep -q 'config.plugins.UserSkin.SafeMode=true' </etc/enigma2/settings`; then
   touch /etc/enigma2/skinModified

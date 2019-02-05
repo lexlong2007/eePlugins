@@ -8,7 +8,7 @@
 </colors>
 <fonts>
 		<font filename="analog.ttf" name="VFD2" scale="90"/>
-    <font filename="nmsbd.ttf" name="VFD" scale="90"/>
+    <font filename="/usr/share/enigma2/BlackHarmony/fonts/nmsbd.ttf" name="VFD" scale="90"/>
 		<font filename="MyriadPro-Regular.otf" name="RegularLCD" scale="100" />
 		<font filename="MyriadPro-Semibold.otf" name="SemiboldLCD" scale="100" />
 		<font filename="MyriadPro-SemiboldIt.otf" name="SemiboldLCDit" scale="100" />

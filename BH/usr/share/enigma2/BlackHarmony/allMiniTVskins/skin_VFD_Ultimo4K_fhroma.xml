@@ -5,7 +5,7 @@
 		<color name="lemon" value="#00c0f000" />
 	</colors>
 	<fonts>
-                <font filename="nmsbd.ttf" name="FdLcD" scale="100"/>
+                <font filename="/usr/share/enigma2/BlackHarmony/fonts/nmsbd.ttf" name="FdLcD" scale="100"/>
 		<font filename="MyriadPro-Regular.otf" name="RegularLCD" scale="100" />
 		<font filename="MyriadPro-Semibold.otf" name="SemiboldLCD" scale="100" />
 		<font filename="MyriadPro-SemiboldIt.otf" name="SemiboldLCDit" scale="100" />

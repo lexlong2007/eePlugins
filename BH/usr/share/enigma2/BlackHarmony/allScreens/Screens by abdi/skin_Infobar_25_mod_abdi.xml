@@ -1,5 +1,4 @@
 <skin>
-<!--skin_Infobar_25.xml-->
 <screen name="InfoBar" position="-2,-20" size="1920,1080" title="InfoBar" flags="wfNoBorder" backgroundColor="transparent">
   <ePixmap position="35,723" zPosition="-2" size="1850,375" pixmap="BlackHarmony/bg_design/infobar_big.png" />
     
@@ -8,15 +7,10 @@
     <convert type="BlackHarmonyRouteInfo">Lan</convert>
     <convert type="ConditionalShowHide" />
   </widget>
-    
-  <!--widget source="session.CurrentService" render="Pixmap" pixmap="BlackHarmony/icons/ico_lan_on.png" position="1812,1029" zPosition="2" size="44,20" transparent="1" alphatest="blend">
-    <convert type="BlackHarmonyRouteInfo">Lan</convert>
-    <convert type="ConditionalShowHide" />
-  </widget-->
-  <!--widget source="session.CurrentService" render="Pixmap" pixmap="BlackHarmony/icons/ico_wifi_on.png" position="1812,1029" zPosition="3" size="44,20" transparent="1" alphatest="blend">
+  <widget source="session.CurrentService" render="Pixmap" pixmap="BlackHarmony/icons/ico_wifi_on.png" position="1812,1029" zPosition="3" size="44,20" transparent="1" alphatest="blend">
     <convert type="BlackHarmonyRouteInfo">Wifi</convert>
     <convert type="ConditionalShowHide" />
-  </widget-->
+  </widget>
   <ePixmap position="1645,1029" size="57,20" zPosition="1" pixmap="BlackHarmony/icons/ico_dolby_off.png" alphatest="blend" />
   <widget source="session.CurrentService" render="Pixmap" position="1645,1029" size="57,20" zPosition="2" pixmap="BlackHarmony/icons/ico_dolby_on.png" alphatest="blend">
     <convert type="ServiceInfo">IsMultichannel</convert>
@@ -53,6 +47,9 @@
   </widget>
   <widget source="session.Event_Now" render="Progress" position="356,940" zPosition="1" size="1242,6" pixmap="BlackHarmony/gfx/progress_infobar.png" transparent="1">
     <convert type="EventTime">Progress</convert>
+  </widget>
+  <widget pointer="BlackHarmony/gfx/seekbutton.png:14,1" position="358,930" render="BlackHarmonyPositionGauge" size="1242,25" source="session.Event_Now" transparent="1" zPosition="3">
+      <convert type="BlackHarmonyEventPosition">Gauge</convert>
   </widget>
   <widget source="session.Event_Now" render="Label" position="354,880" size="120,45" font="HD_Thin; 36" halign="left" backgroundColor="background" transparent="1">
     <convert type="EventTime">StartTime</convert>
@@ -137,6 +134,10 @@
     <convert type="BlackHarmonyServiceInfoEX">IsFta</convert>
     <convert type="ConditionalShowHide" />
   </widget>
+  <widget source="session.CurrentService" render="FixedLabel" text="-  Free-to-air" font="Roboto_HD; 22" position="807,1028" size="140,25" halign="center" backgroundColor="black" foregroundColor="white" zPosition="1" valign="center" transparent="1">
+    <convert type="BlackHarmonyServiceInfoEX">IsFta</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
   <widget source="session.CurrentService" render="FixedLabel" text="NET" font="Roboto_HD; 22" position="752,1028" size="60,25" halign="center" backgroundColor="black" foregroundColor="green" zPosition="2" valign="center" transparent="1">
     <convert type="BlackHarmonyCaidInfo2">Net</convert>
     <convert type="ConditionalShowHide" />
@@ -191,13 +192,13 @@
     <convert type="ValueRange">0,1279</convert>
     <convert type="ConditionalShowHide" />
   </widget>
-  <eLabel text="EX" font="Roboto_HD; 22" position="375,1028" size="40,25" halign="center" backgroundColor="black" foregroundColor="white" transparent="1" valign="center" zPosition="1" />
-  <widget source="session.CurrentService" render="FixedLabel" text="EX" font="Roboto_HD; 22" position="375,1028" size="40,25" halign="center" backgroundColor="black" foregroundColor="yellow" zPosition="2" valign="center" transparent="1">
-    <convert type="BlackHarmonyCaidInfo2">ExsCrypt</convert>
+  <eLabel text="VM" font="Roboto_HD; 22" position="375,1028" size="40,25" halign="center" backgroundColor="black" foregroundColor="white" transparent="1" valign="center" zPosition="1" />
+  <widget source="session.CurrentService" render="FixedLabel" text="VM" font="Roboto_HD; 22" position="375,1028" size="40,25" halign="center" backgroundColor="black" foregroundColor="yellow" zPosition="2" valign="center" transparent="1">
+    <convert type="BlackHarmonyCaidInfo2">VrmCrypt</convert>
     <convert type="ConditionalShowHide" />
   </widget>
-  <widget source="session.CurrentService" render="FixedLabel" text="EX" font="Roboto_HD; 22" position="375,1028" size="40,25" halign="center" backgroundColor="black" foregroundColor="green" zPosition="3" valign="center" transparent="1">
-    <convert type="BlackHarmonyCaidInfo2">ExsEcm</convert>
+  <widget source="session.CurrentService" render="FixedLabel" text="VM" font="Roboto_HD; 22" position="375,1028" size="40,25" halign="center" backgroundColor="black" foregroundColor="green" zPosition="3" valign="center" transparent="1">
+    <convert type="BlackHarmonyCaidInfo2">VrmEcm</convert>
     <convert type="ConditionalShowHide" />
   </widget>
   <eLabel text="BE" font="Roboto_HD; 22" position="50,1028" size="40,25" halign="center" backgroundColor="black" foregroundColor="white" valign="center" zPosition="1" transparent="1" />
@@ -209,13 +210,13 @@
     <convert type="BlackHarmonyCaidInfo2">BetaEcm</convert>
     <convert type="ConditionalShowHide" />
   </widget>
-  <eLabel text="DR" font="Roboto_HD; 22" position="87,1028" size="40,25" halign="center" backgroundColor="black" foregroundColor="white" valign="center" zPosition="1" transparent="1" />
-  <widget source="session.CurrentService" render="FixedLabel" text="DR" font="Roboto_HD; 22" position="87,1028" size="40,25" halign="center" backgroundColor="black" foregroundColor="yellow" zPosition="2" valign="center" transparent="1">
-    <convert type="BlackHarmonyCaidInfo2">DreamCrypt</convert>
+  <eLabel text="PV" font="Roboto_HD; 22" position="87,1028" size="40,25" halign="center" backgroundColor="black" foregroundColor="white" valign="center" zPosition="1" transparent="1" />
+  <widget source="session.CurrentService" render="FixedLabel" text="PV" font="Roboto_HD; 22" position="87,1028" size="40,25" halign="center" backgroundColor="black" foregroundColor="yellow" zPosition="2" valign="center" transparent="1">
+    <convert type="BlackHarmonyCaidInfo2">PwuCrypt</convert>
     <convert type="ConditionalShowHide" />
   </widget>
-  <widget source="session.CurrentService" render="FixedLabel" text="DR" font="Roboto_HD; 22" position="87,1028" size="40,25" halign="center" backgroundColor="black" foregroundColor="green" zPosition="3" valign="center" transparent="1">
-    <convert type="BlackHarmonyCaidInfo2">DreamEcm</convert>
+  <widget source="session.CurrentService" render="FixedLabel" text="PV" font="Roboto_HD; 22" position="87,1028" size="40,25" halign="center" backgroundColor="black" foregroundColor="green" zPosition="3" valign="center" transparent="1">
+    <convert type="BlackHarmonyCaidInfo2">PwuEcm</convert>
     <convert type="ConditionalShowHide" />
   </widget>
   <eLabel text="I" font="Roboto_HD; 22" position="125,1028" size="25,25" halign="center" backgroundColor="black" foregroundColor="white" valign="center" zPosition="1" transparent="1" />
@@ -333,5 +334,7 @@
   <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1583,783" size="70,70" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="3">
     <convert type="BlackHarmonyMSNWeather">weathericon,day2</convert>
   </widget>
+  
 </screen>
 </skin>
+

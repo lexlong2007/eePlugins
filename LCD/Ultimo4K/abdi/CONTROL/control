@@ -1,0 +1,10 @@
+Package: enigma2-plugin-skins--j00zeks-abdi-axhd51
+Priority: optional
+Section: utils
+Depends: 
+Description: skórka VFD do openATV-AXHD51 kolegi abdi
+Maintainer: j00zek
+Source: NA
+Version: 19.02.03.0752
+Architecture: axhd51
+DestinationPath: /usr/share/enigma2/

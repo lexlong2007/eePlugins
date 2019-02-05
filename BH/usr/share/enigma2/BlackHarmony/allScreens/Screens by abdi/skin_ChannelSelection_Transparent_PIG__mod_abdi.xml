@@ -1,7 +1,6 @@
 <skin>
-<!--skin_ChannelSelection_Transparent_PIG.xml-->
-    <screen name="ChannelSelection" position="center,center" size="1920,1110" title="Channel Selection" flags="wfNoBorder" backgroundColor="black">
-        <ePixmap position="0,1" zPosition="-7" size="1920,10110" pixmap="BlackHarmony/bg_design/cs_pig.png" />
+<screen name="ChannelSelection" position="center,center" size="1920,1110" title="Channel Selection" flags="wfNoBorder" backgroundColor="black">
+  <ePixmap position="0,1" zPosition="-7" size="1920,10110" pixmap="BlackHarmony/bg_design/cs_pig.png" />
   <widget source="global.CurrentTime" render="Label" position="50,50" size="120,30" font="Roboto_HD; 30" backgroundColor="white" transparent="1">
     <convert type="ClockToText">Format:%H:%M:%S</convert>
   </widget>
@@ -55,6 +54,9 @@
   <widget source="ServiceEvent" render="Progress" position="1358,768" size="376,6" pixmap="BlackHarmony/gfx/progress_cs.png" transparent="1">
     <convert type="EventTime">Progress</convert>
   </widget>
+  <!--widget pointer="BlackHarmony/gfx/seekbutton.png:14,1" position="1360,763" render="BlackHarmonyPositionGauge" size="376,15" source="session.Event_Now" transparent="1" zPosition="3">
+      <convert type="BlackHarmonyEventPosition">Gauge</convert>
+  </widget-->
   <widget source="ServiceEvent" render="Label" position="1170,450" size="685,35" font="HD_Thin; 32" backgroundColor="black" transparent="1" halign="left" noWrap="1" foregroundColor="light_yellow">
     <convert type="EventName">Name</convert>
   </widget>
@@ -79,10 +81,11 @@
   <ePixmap position="1375,1016" size="60,30" pixmap="BlackHarmony/buttons/key_ok.png" alphatest="blend" />
   <ePixmap position="1550,1016" size="60,30" pixmap="BlackHarmony/buttons/key_menu.png" alphatest="blend" />
   <ePixmap position="1730,1016" size="60,30" pixmap="BlackHarmony/buttons/key_info.png" alphatest="blend" />
-  <widget source="session.VideoPicture" render="Pig" position="1468,175" zPosition="3" size="369,207" backgroundColor="picture">
+  <widget source="session.VideoPicture" render="Pig" position="1472,177" zPosition="3" size="370,207" backgroundColor="picture">
     <convert type="ConfigEntryTest"></convert>
     <convert type="ConditionalShowHide" />
   </widget>
 <eLabel position="1461,169" zPosition="2" size="384,220" backgroundColor="black" transparent="0" />
 </screen>
 </skin>
+

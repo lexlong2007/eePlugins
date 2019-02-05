@@ -36,7 +36,7 @@ from datetime import timedelta
 from time import localtime
 
 #if enabled log into /tmp/e2components.log
-DBG = False
+DBG = True
 if DBG: from Components.j00zekComponents import j00zekDEBUG
 
 from Components.j00zekKodistate import remoteKODI, AppProperties, XBMCInfoBool, GetActivePlayers, \
@@ -50,6 +50,12 @@ try:
 except Exception:
     if DBG: j00zekDEBUG('[j00zekLCD4KODI] using config from j00zekKodistate: %s:%s' %(KODI_IP,KODI_PORT))
     from Components.j00zekKodistate import KODI_IP, KODI_PORT
+
+try:
+    setLCDbrightness = config.plugins.dynamicLCD.KODIsupport.value # no|playingOn
+except Exception as e:
+    setLCDbrightness = 'no'
+    if DBG: j00zekDEBUG('[j00zekLCD4KODI] exception getting KODIsupport value: %s' % str(e))
 
 #simple and dirty translation
 if language.getLanguage() == 'pl_PL':
@@ -156,6 +162,12 @@ class j00zekLCD4KODI(Poll, Converter, object):
                     self.downstream_elements[0].visible = True
                 else:
                     self.downstream_elements[0].visible = False
+            #LCDbrightness
+            if not KODIstateTable['powerOn']: config.plugins.dynamicLCD.KODIstate.value = 'powerOff'
+            elif KODIstateTable['powerOn']: config.plugins.dynamicLCD.KODIstate.value = 'powerOn'
+            elif not KODIstateTable['isIdle']: config.plugins.dynamicLCD.KODIstate.value = 'isNOTidle'
+            elif KODIstateTable['isPlaying']: config.plugins.dynamicLCD.KODIstate.value = 'isPlaying'
+            else: 'unknown'
             self.downstream_elements.changed(what) 
 
     def resetKODIstateTable(self):

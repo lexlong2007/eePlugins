@@ -1,10 +1,10 @@
 #
-#  BlackHarmonyCaidInfo2 - Converter
-#  ver 1.2.2 28.12.2014
+#  CaidInfo2 - Converter
+#  ver 1.2.5 02.08.2016
 #
 #  Coded by bigroma & 2boom
 #
-# j00zek: this file has changed name just to avoid errors using opkg (situation when file was installed by different pockage)
+#  j00zek: this file has changed name just to avoid errors using opkg (situation when file was installed by different pockage)
 #
 
 from Components.Converter.Converter import Converter
@@ -34,28 +34,32 @@ class BlackHarmonyCaidInfo2(Poll, Converter, object):
     NDS = 13
     SECA = 14
     VIA = 15
-    BETA_C = 16
-    CONAX_C = 17
-    CRW_C = 18
-    DRE_C = 19
-    IRD_C = 20
-    NAGRA_C = 21
-    NDS_C = 22
-    SECA_C = 23
-    VIA_C = 24
-    BISS = 25
-    BISS_C = 26
-    EXS = 27
-    EXS_C = 28
-    HOST = 29
-    DELAY = 30
-    FORMAT = 31
-    CRYPT2 = 32
-    CRD = 33
-    CRDTXT = 34
-    SHORT = 35
-    IS_FTA = 36
-    IS_CRYPTED = 37
+    PWR = 16
+    VERI = 17
+    BETA_C = 18
+    CONAX_C = 19
+    CRW_C = 20
+    DRE_C = 21
+    IRD_C = 22
+    NAGRA_C = 23
+    NDS_C = 24
+    SECA_C = 25
+    VIA_C = 26
+    PWR_C = 27
+    VERI_C = 28    
+    BISS = 29
+    BISS_C = 30
+    EXS = 31
+    EXS_C = 32
+    HOST = 33
+    DELAY = 34
+    FORMAT = 35
+    CRYPT2 = 36
+    CRD = 37
+    CRDTXT = 38
+    SHORT = 39
+    IS_FTA = 40
+    IS_CRYPTED = 41
     my_interval = 1000
 
 
@@ -100,6 +104,10 @@ class BlackHarmonyCaidInfo2(Poll, Converter, object):
             self.type = self.SECA
         elif type == "ViaCrypt":
             self.type = self.VIA
+        elif type == "PwuCrypt":
+            self.type = self.PWR
+        elif type == "VrmCrypt":
+            self.type = self.VERI
         elif type == "BetaEcm":
             self.type = self.BETA_C
         elif type == "ConaxEcm":
@@ -120,6 +128,10 @@ class BlackHarmonyCaidInfo2(Poll, Converter, object):
             self.type = self.SECA_C
         elif type == "ViaEcm":
             self.type = self.VIA_C
+        elif type == "PwuEcm":
+            self.type = self.PWR_C
+        elif type == "VrmEcm":
+            self.type = self.VERI_C
         elif type == "BisCrypt":
             self.type = self.BISS
         elif type == "BisEcm":
@@ -145,7 +157,7 @@ class BlackHarmonyCaidInfo2(Poll, Converter, object):
             "01" : "Seca Mediaguard",
             "06" : "Irdeto",
             "17" : "BetaCrypt",
-            "05" : "Viacces",
+            "05" : "Viaccess",
             "18" : "Nagravision",
             "09" : "NDS-Videoguard",
             "0B" : "Conax",
@@ -153,6 +165,7 @@ class BlackHarmonyCaidInfo2(Poll, Converter, object):
             "4A" : "DRE-Crypt",
             "27" : "ExSet",
             "0E" : "PowerVu",
+            "10" : "Tandberg",
             "22" : "Codicrypt",
             "07" : "DigiCipher",
             "56" : "Verimatrix",
@@ -171,7 +184,10 @@ class BlackHarmonyCaidInfo2(Poll, Converter, object):
             "0D" : "CRW",
             "27" : "EXS",
             "7B" : "DRE",
-            "4A" : "DRE" }
+            "4A" : "DRE",
+            "0E" : "PWR",
+            "10" : "TAN",
+            "56" : "VERI" }
 
     @cached
     def getBoolean(self):
@@ -240,6 +256,16 @@ class BlackHarmonyCaidInfo2(Poll, Converter, object):
                     if ("%0.4X" % int(caid))[:2] == "05":
                         return True
                 return False
+            if self.type == self.PWR:
+                for caid in caids:
+                    if ("%0.4X" % int(caid))[:2] == "0E":
+                        return True
+                return False
+            if self.type == self.VERI:
+                for caid in caids:
+                    if ("%0.4X" % int(caid))[:2] == "56":
+                        return True
+                return False
             if self.type == self.BISS:
                 for caid in caids:
                     if ("%0.4X" % int(caid))[:2] == "26":
@@ -293,6 +319,14 @@ class BlackHarmonyCaidInfo2(Poll, Converter, object):
                     if caid == "05":
                         return True
                     return False
+                if self.type == self.PWR_C:
+                    if caid == "0E":
+                        return True
+                    return False
+                if self.type == self.VERI_C:
+                    if caid == "56":
+                        return True
+                    return False
                 if self.type == self.BISS_C:
                     if caid == "26":
                         return True
@@ -308,7 +342,7 @@ class BlackHarmonyCaidInfo2(Poll, Converter, object):
                     if source == "sci":
                         return True
                     #wicardd
-                    if source != "cache" and source != "net" and source.find("emu") == -1:
+                    if source != "cache" and source != "net" and source != "emu":
                         return True
                     return False
                 source = ecm_info.get("source", "")
@@ -316,13 +350,12 @@ class BlackHarmonyCaidInfo2(Poll, Converter, object):
                     return using == "emu" or source == "emu" or source == "card" or reader == "emu" or source.find("card") > -1 or source.find("emu") > -1 or source.find("biss") > -1 or source.find("cache") > -1
                 source = ecm_info.get("source", "")
                 if self.type == self.IS_NET:
-                    if using == "CCcam-s2s":
+                    if using == "CCcam":
                         return 1
                     else:
                         if source != "cache" and source == "net" and source.find("emu") == -1:
                             return True
-                        #return  (source != None and source == "net") or (source != None and source != "sci") or (source != None and source != "emu") or (reader != None and reader != "emu") or (source != None and source != "card") 
-                        
+                           #return  (source != None and source == "net") or (source != None and source != "sci") or (source != None and source != "emu") or (reader != None and reader != "emu") or (source != None and source != "card") 
                 else:
                     return False
 
@@ -339,6 +372,10 @@ class BlackHarmonyCaidInfo2(Poll, Converter, object):
             if self.type == self.CRYPT2:
                 self.poll_interval = self.my_interval
                 self.poll_enabled = True
+                info = service and service.info()
+                if info:
+                    if not info.getInfoObject(iServiceInformation.sCAIDs):
+                        return 'fta'
                 ecm_info = self.ecmfile()
                 if fileExists("/tmp/ecm.info"):
                     try:
@@ -495,10 +532,10 @@ class BlackHarmonyCaidInfo2(Poll, Converter, object):
                                     pass
                     else:
                         if self.type == self.ALL or self.type == self.SHORT or (self.type == self.FORMAT and (self.sfmt.count("%") > 3 )):
-                            textvalue = "No parse cannot emu"
+                            textvalue = _("No parse cannot emu")
                 else:
                     if self.type == self.ALL or self.type == self.SHORT or (self.type == self.FORMAT and (self.sfmt.count("%") > 3 )):
-                        textvalue = "Free-to-air"
+                        textvalue = _("Free-to-air")
         return textvalue
 
     text = property(getText)
@@ -542,21 +579,20 @@ class BlackHarmonyCaidInfo2(Poll, Converter, object):
                                 info["source"] = "net"
                                 it_tmp = item[1].strip().split(" ")
                                 info["ecm time"] = "%s msec" % it_tmp[0]
+                                info["reader"] = it_tmp[-1].strip('R0[').strip(']')
                                 y = it_tmp[-1].find('[')
                                 if y !=-1:
                                     info["server"] = it_tmp[-1][:y]
                                     info["protocol"] = it_tmp[-1][y+1:-1]
-                                #item[0]="port"
-                                #item[1] = ""
                                 y = it_tmp[-1].find('(')
                                 if y !=-1:
                                     info["server"] = it_tmp[-1].split("(")[-1].split(":")[0]
                                     info["port"] = it_tmp[-1].split("(")[-1].split(":")[-1].rstrip(")")
+                                    info["reader"] = it_tmp[-2]
                                 elif y == -1:
                                     item[0] = "source"
                                     item[1] = "sci"
-                                #y = it_tmp[-1].find('emu')
-                                if it_tmp[-1].find('emu') >-1 or it_tmp[-1].find('cache') > -1 or it_tmp[-1].find('card') > -1 or it_tmp[-1].find('biss') > -1:
+                                if it_tmp[-1].find('emu') >-1 or it_tmp[-1].find('EMU') >-1 or it_tmp[-1].find('cache') > -1 or it_tmp[-1].find('card') > -1 or it_tmp[-1].find('biss') > -1:
                                     item[0] = "source"
                                     item[1] = "emu"
                             elif item[0] == "hops":
