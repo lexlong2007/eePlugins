@@ -4,7 +4,7 @@ from version import Version
 
 from enigma import eTimer, eDBoxLCD
 from Components.ActionMap import ActionMap
-from Components.config import config, ConfigSubsection, ConfigEnableDisable, ConfigSlider, ConfigSelection, ConfigNothing, getConfigListEntry, NoSave
+from Components.config import config, ConfigSubsection, ConfigEnableDisable, ConfigSlider, ConfigSelection, ConfigNothing, getConfigListEntry, NoSave, ConfigText
 from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
 from datetime import datetime
@@ -20,6 +20,26 @@ config.plugins.dynamicLCD = ConfigSubsection()
 if eDBoxLCD.getInstance().detected():
     config.plugins.dynamicLCD.enabled = ConfigEnableDisable(default = False)
     config.plugins.dynamicLCD.debug = ConfigEnableDisable(default = False)
+    config.plugins.dynamicLCD.ConfigNothing = ConfigNothing()
+    config.plugins.dynamicLCD.KODIsupport = ConfigSelection(default = "no",choices = [("no", _("No")),
+                                                                            ("powerOn", _("LCD brighter when KODI is running")),
+                                                                            ("isNOTidle", _("LCD brighter when KODI is running and not spleeping")),
+                                                                            ("playingOn", _("LCD brighter when KODI is playing"))])
+    config.plugins.dynamicLCD.KODIstate = NoSave(ConfigText(default = "powerOff"))
+    SunPeriodsNames = {
+        "sunrise-30": "from 30mins before sunrise time",
+        "30-sunrise": "from sunrise time to 30 mins after",
+        "8-sunrise":  "from sunrise time till 8:00",
+        "sunrise-30,30-sunrise": "from 30mins before to 30 mins after sunrise",
+        "sunrise-30,8-sunrise": "from 30mins before sunrise till 8:00"
+    }
+    config.plugins.dynamicLCD.useSunRiseTime = ConfigSelection(default = "no",choices = [("no", _("No")),("sunrise-30", _(SunPeriodsNames['sunrise-30'])),
+                                                                                                          ("30-sunrise", _(SunPeriodsNames['30-sunrise'])),
+                                                                                                          ("8-sunrise", _(SunPeriodsNames['8-sunrise'])),
+                                                                                                          ("sunrise-30,30-sunrise", _(SunPeriodsNames['sunrise-30,30-sunrise'])),
+                                                                                                          ("sunrise-30,8-sunrise", _(SunPeriodsNames['sunrise-30,8-sunrise']))
+                                                                                                          ])
+
     val = int(config.lcd.standby.value * 255 / 10)
     if val > 255:
         val = 255
@@ -29,23 +49,32 @@ if eDBoxLCD.getInstance().detected():
     config.plugins.dynamicLCD.NightStandbyBrightness01 = ConfigSlider(default=config.lcd.standby.value, limits=(0, 255))
     config.plugins.dynamicLCD.NightStandbyBrightness02 = ConfigSlider(default=config.lcd.standby.value, limits=(0, 255))
     config.plugins.dynamicLCD.NightStandbyBrightness03 = ConfigSlider(default=config.lcd.standby.value, limits=(0, 255))
+
+    config.plugins.dynamicLCD.SunRise30minsBefore = ConfigSlider(default=config.lcd.standby.value, limits=(0, 255))
+    config.plugins.dynamicLCD.SunRise30minsAfter = ConfigSlider(default=config.lcd.standby.value, limits=(0, 255))
+
     config.plugins.dynamicLCD.NightStandbyBrightness04 = ConfigSlider(default=config.lcd.standby.value, limits=(0, 255))
     config.plugins.dynamicLCD.NightStandbyBrightness05 = ConfigSlider(default=config.lcd.standby.value, limits=(0, 255))
     config.plugins.dynamicLCD.NightStandbyBrightness06 = ConfigSlider(default=config.lcd.standby.value, limits=(0, 255))
     config.plugins.dynamicLCD.NightStandbyBrightness07 = ConfigSlider(default=config.lcd.standby.value, limits=(0, 255))
+    
+    config.plugins.dynamicLCD.NightStandbyBrightness08 = ConfigSlider(default=config.plugins.dynamicLCD.NightStandbyBrightness.value, limits=(0, 255))
+    config.plugins.dynamicLCD.NightStandbyBrightness09 = ConfigSlider(default=config.plugins.dynamicLCD.NightStandbyBrightness.value, limits=(0, 255))
+    config.plugins.dynamicLCD.NightStandbyBrightness10 = ConfigSlider(default=config.plugins.dynamicLCD.NightStandbyBrightness.value, limits=(0, 255))
+    config.plugins.dynamicLCD.NightStandbyBrightness11 = ConfigSlider(default=config.plugins.dynamicLCD.NightStandbyBrightness.value, limits=(0, 255))
+    config.plugins.dynamicLCD.NightStandbyBrightness12 = ConfigSlider(default=config.plugins.dynamicLCD.NightStandbyBrightness.value, limits=(0, 255))
+    config.plugins.dynamicLCD.NightStandbyBrightness13 = ConfigSlider(default=config.plugins.dynamicLCD.NightStandbyBrightness.value, limits=(0, 255))
+    config.plugins.dynamicLCD.NightStandbyBrightness14 = ConfigSlider(default=config.plugins.dynamicLCD.NightStandbyBrightness.value, limits=(0, 255))
+    config.plugins.dynamicLCD.NightStandbyBrightness15 = ConfigSlider(default=config.plugins.dynamicLCD.NightStandbyBrightness.value, limits=(0, 255))
+    config.plugins.dynamicLCD.NightStandbyBrightness16 = ConfigSlider(default=config.plugins.dynamicLCD.NightStandbyBrightness.value, limits=(0, 255))
+    config.plugins.dynamicLCD.NightStandbyBrightness17 = ConfigSlider(default=config.plugins.dynamicLCD.NightStandbyBrightness.value, limits=(0, 255))
+    config.plugins.dynamicLCD.NightStandbyBrightness18 = ConfigSlider(default=config.plugins.dynamicLCD.NightStandbyBrightness.value, limits=(0, 255))
+    config.plugins.dynamicLCD.NightStandbyBrightness19 = ConfigSlider(default=config.plugins.dynamicLCD.NightStandbyBrightness.value, limits=(0, 255))
+    config.plugins.dynamicLCD.NightStandbyBrightness20 = ConfigSlider(default=config.plugins.dynamicLCD.NightStandbyBrightness.value, limits=(0, 255))
+    config.plugins.dynamicLCD.NightStandbyBrightness21 = ConfigSlider(default=config.plugins.dynamicLCD.NightStandbyBrightness.value, limits=(0, 255))
+    config.plugins.dynamicLCD.NightStandbyBrightness22 = ConfigSlider(default=config.plugins.dynamicLCD.NightStandbyBrightness.value, limits=(0, 255))
 else:
     config.plugins.dynamicLCD.enabled = NoSave(ConfigSelection(default = "0",choices = [("0", _("no LCD"))]))
-    config.plugins.dynamicLCD.debug = ConfigNothing()
-    config.plugins.dynamicLCD.NightStandbyBrightness = ConfigNothing()
-    config.plugins.dynamicLCD.NightStandbyBrightness23 = ConfigNothing()
-    config.plugins.dynamicLCD.NightStandbyBrightness00 = ConfigNothing()
-    config.plugins.dynamicLCD.NightStandbyBrightness01 = ConfigNothing()
-    config.plugins.dynamicLCD.NightStandbyBrightness02 = ConfigNothing()
-    config.plugins.dynamicLCD.NightStandbyBrightness03 = ConfigNothing()
-    config.plugins.dynamicLCD.NightStandbyBrightness04 = ConfigNothing()
-    config.plugins.dynamicLCD.NightStandbyBrightness05 = ConfigNothing()
-    config.plugins.dynamicLCD.NightStandbyBrightness06 = ConfigNothing()
-    config.plugins.dynamicLCD.NightStandbyBrightness07 = ConfigNothing()
 
 #DEBUG
 if config.plugins.dynamicLCD.debug.value:
@@ -61,6 +90,15 @@ if config.plugins.dynamicLCD.debug.value:
         except: pass
 else:
     DBG=False
+
+if DBG: printDEBUG("Loaded", False)
+try:
+    from Components.j00zekSunCalculations import Sun, geo
+    sunRiseAvailable = True
+    myGeo = geo()
+except Exception as e:
+    sunRiseAvailable = False
+    if DBG: printDEBUG('Exception importing j00zekSunCalculations: %s' % str(e))
 
 def leaveStandby():
     if DBG: printDEBUG('leaveStandby, stop timer')
@@ -86,30 +124,75 @@ def delayedStandbyActions():
     MyTimer.stop()
     #tutaj logika ktore wlaczyc
     if eDBoxLCD.getInstance().detected():
+        currTime = time.localtime()
+        hour = int(currTime[3])
+        Minutes = int(currTime[4])
+        hourAndMinutes = time.strftime('%H:%M', currTime)
+        MinutesSinceMidnight = hour * 60 + Minutes
+        if hour == 0:    val = config.plugins.dynamicLCD.NightStandbyBrightness00.value
+        elif hour == 1:  val = config.plugins.dynamicLCD.NightStandbyBrightness01.value
+        elif hour == 2:  val = config.plugins.dynamicLCD.NightStandbyBrightness02.value
+        elif hour == 3:  val = config.plugins.dynamicLCD.NightStandbyBrightness03.value
+        elif hour == 4:  val = config.plugins.dynamicLCD.NightStandbyBrightness04.value
+        elif hour == 5:  val = config.plugins.dynamicLCD.NightStandbyBrightness05.value
+        elif hour == 6:  val = config.plugins.dynamicLCD.NightStandbyBrightness06.value
+        elif hour == 7:  val = config.plugins.dynamicLCD.NightStandbyBrightness07.value
+        elif hour == 8:  val = config.plugins.dynamicLCD.NightStandbyBrightness08.value
+        elif hour == 9:  val = config.plugins.dynamicLCD.NightStandbyBrightness09.value
+        elif hour == 10: val = config.plugins.dynamicLCD.NightStandbyBrightness10.value
+        elif hour == 11: val = config.plugins.dynamicLCD.NightStandbyBrightness11.value
+        elif hour == 12: val = config.plugins.dynamicLCD.NightStandbyBrightness12.value
+        elif hour == 13: val = config.plugins.dynamicLCD.NightStandbyBrightness13.value
+        elif hour == 14: val = config.plugins.dynamicLCD.NightStandbyBrightness14.value
+        elif hour == 15: val = config.plugins.dynamicLCD.NightStandbyBrightness15.value
+        elif hour == 16: val = config.plugins.dynamicLCD.NightStandbyBrightness16.value
+        elif hour == 17: val = config.plugins.dynamicLCD.NightStandbyBrightness17.value
+        elif hour == 18: val = config.plugins.dynamicLCD.NightStandbyBrightness18.value
+        elif hour == 19: val = config.plugins.dynamicLCD.NightStandbyBrightness19.value
+        elif hour == 20: val = config.plugins.dynamicLCD.NightStandbyBrightness20.value
+        elif hour == 21: val = config.plugins.dynamicLCD.NightStandbyBrightness21.value
+        elif hour == 22: val = config.plugins.dynamicLCD.NightStandbyBrightness22.value
+        elif hour == 23: val = config.plugins.dynamicLCD.NightStandbyBrightness23.value
+        else: val = config.plugins.dynamicLCD.NightStandbyBrightness.value
+        timerWaitingTime = (60 - Minutes)
+        if sunRiseAvailable and config.plugins.dynamicLCD.useSunRiseTime.value != 'no':
+            try:
+                latitude = myGeo.getLatitude()
+                longitude = myGeo.getLongitude()
+                sunriseTime = Sun().getSunriseTime(longitude, latitude)['TZtime'].split(':')
+                MinutesToSunrise = MinutesSinceMidnight - (int(sunriseTime[0]) * 60 + int(sunriseTime[0]))
+                if DBG: printDEBUG("delayedStandbyActions() MinutesToSunrise='%s', configured='%s'" % (str(MinutesToSunrise),SunPeriodsNames[config.plugins.dynamicLCD.useSunRiseTime.value]))
+                if MinutesToSunrise >= -30 and hour < 8:
+                    if MinutesToSunrise < 0 and config.plugins.dynamicLCD.useSunRiseTime.value.startswith('sunrise-30'):
+                        val = config.plugins.dynamicLCD.SunRise30minsBefore.value
+                        timerWaitingTime = abs(MinutesToSunrise)
+                        if DBG: printDEBUG("\t val=SunRise30minsBefore.value='%s'" % str(val))
+                    elif MinutesToSunrise <= 30 and config.plugins.dynamicLCD.useSunRiseTime.value.endswith('30-sunrise'):
+                        val = config.plugins.dynamicLCD.SunRise30minsAfter.value
+                        timerWaitingTime = MinutesToSunrise + 1
+                        if DBG: printDEBUG("\t val=SunRise30minsAfter.value='%s'" % str(val))
+                    elif MinutesToSunrise > 30 and config.plugins.dynamicLCD.useSunRiseTime.value.endswith('8-sunrise'):
+                        val = config.plugins.dynamicLCD.SunRise30minsAfter.value
+                        timerWaitingTime += (8 - hour) * 60
+                        if DBG: printDEBUG("\t till 8 val=SunRise30minsAfter.value='%s'" % str(val))
+                elif (timerWaitingTime - 30) < (abs(MinutesToSunrise) - 30):
+                    if DBG: printDEBUG("\t timerWaitingTime correction")
+                    timerWaitingTime = abs(MinutesToSunrise) - 30
+            except Exception as e:
+                if DBG: printDEBUG("delayedStandbyActions() Exception getting MinutesToSunrise: %s" % str(e))
+        if DBG: printDEBUG("delayedStandbyActions() at %s sets LCD brightess to %s and waits %s minutes for next invoke" % (hourAndMinutes, val,timerWaitingTime) )
         try:
-            currTime = time.localtime()
-            hour = int(currTime[3])
-            Minutes = int(currTime[4])
-            hourAndMinutes = time.strftime('%H:%M', currTime)
-            if hour == 23:  val = config.plugins.dynamicLCD.NightStandbyBrightness23.value
-            elif hour == 0: val = config.plugins.dynamicLCD.NightStandbyBrightness00.value
-            elif hour == 1: val = config.plugins.dynamicLCD.NightStandbyBrightness01.value
-            elif hour == 2: val = config.plugins.dynamicLCD.NightStandbyBrightness02.value
-            elif hour == 3: val = config.plugins.dynamicLCD.NightStandbyBrightness03.value
-            elif hour == 4: val = config.plugins.dynamicLCD.NightStandbyBrightness04.value
-            elif hour == 5: val = config.plugins.dynamicLCD.NightStandbyBrightness05.value
-            elif hour == 6: val = config.plugins.dynamicLCD.NightStandbyBrightness06.value
-            elif hour == 7: val = config.plugins.dynamicLCD.NightStandbyBrightness07.value
-            else: val = config.plugins.dynamicLCD.NightStandbyBrightness.value
             eDBoxLCD.getInstance().setLCDBrightness(int(val))
-            if DBG: printDEBUG("delayedStandbyActions() at %s has set LCD brightess to %s and waits %s minutes for next invoke" % (hourAndMinutes, val,(60 - Minutes)) )
         except Exception as e:
             if DBG: printDEBUG("delayedStandbyActions() Exception: %s" % str(e))
-        MyTimer.start((60 - Minutes) * 60 * 1000,True)
+        MyTimer.start(timerWaitingTime * 60 * 1000, True)
         
 MyTimer = eTimer()
 MyTimer.callback.append(delayedStandbyActions)
 
+def kodiStateChanged(): #powerOff|powerOn|isNOTidle|isPlaying
+    if DBG: printDEBUG("kodiStateChanged(KODIstate='%s'" % config.plugins.dynamicLCD.KODIstate.value)
+    
 # sessionstart
 def sessionstart(reason, session = None):
     if DBG: printDEBUG("autostart")
@@ -117,6 +200,7 @@ def sessionstart(reason, session = None):
     if reason == 0 and eDBoxLCD.getInstance().detected() and config.plugins.dynamicLCD.enabled.value:
         if DBG: printDEBUG('reason == 0 and dynamicLCD.enabled')
         config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
+        config.plugins.dynamicLCD.KODIstate.addNotifier(kodiStateChanged, initial_call=False)
         #MyTimer.start(10000,True)
 
 def Plugins(path, **kwargs):
@@ -156,17 +240,43 @@ class DynamicLCDbrightnessInStandbyConfiguration(Screen, ConfigListScreen):
     def buildConfigList(self):
         ConfigList = [getConfigListEntry(_("Control LCD brightness in Standby:"), config.plugins.dynamicLCD.enabled)]
         if eDBoxLCD.getInstance().detected():
-            ConfigList.append(getConfigListEntry(_("Log to file"), config.plugins.dynamicLCD.debug))
-            ConfigList.append(getConfigListEntry(_("08:00-23:00 (%s)") % config.plugins.dynamicLCD.NightStandbyBrightness.value, config.plugins.dynamicLCD.NightStandbyBrightness))
-            ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('23:00',config.plugins.dynamicLCD.NightStandbyBrightness23.value), config.plugins.dynamicLCD.NightStandbyBrightness23))
-            ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('00:00',config.plugins.dynamicLCD.NightStandbyBrightness00.value), config.plugins.dynamicLCD.NightStandbyBrightness00))
-            ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('01:00',config.plugins.dynamicLCD.NightStandbyBrightness01.value), config.plugins.dynamicLCD.NightStandbyBrightness01))
-            ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('02:00',config.plugins.dynamicLCD.NightStandbyBrightness02.value), config.plugins.dynamicLCD.NightStandbyBrightness02))
-            ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('03:00',config.plugins.dynamicLCD.NightStandbyBrightness03.value), config.plugins.dynamicLCD.NightStandbyBrightness03))
-            ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('04:00',config.plugins.dynamicLCD.NightStandbyBrightness04.value), config.plugins.dynamicLCD.NightStandbyBrightness04))
-            ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('05:00',config.plugins.dynamicLCD.NightStandbyBrightness05.value), config.plugins.dynamicLCD.NightStandbyBrightness05))
-            ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('06:00',config.plugins.dynamicLCD.NightStandbyBrightness06.value), config.plugins.dynamicLCD.NightStandbyBrightness06))
-            ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('07:00',config.plugins.dynamicLCD.NightStandbyBrightness07.value), config.plugins.dynamicLCD.NightStandbyBrightness07))
+            if config.plugins.dynamicLCD.enabled.value:
+                ConfigList.append(getConfigListEntry(_("Support 'Share LCD with KODI' plugin:"), config.plugins.dynamicLCD.KODIsupport))
+                ConfigList.append(getConfigListEntry(_("Log to file"), config.plugins.dynamicLCD.debug))
+                ConfigList.append(getConfigListEntry(_("Night hours..."), config.plugins.dynamicLCD.ConfigNothing))
+                ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('23:00',config.plugins.dynamicLCD.NightStandbyBrightness23.value), config.plugins.dynamicLCD.NightStandbyBrightness23))
+                ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('00:00',config.plugins.dynamicLCD.NightStandbyBrightness00.value), config.plugins.dynamicLCD.NightStandbyBrightness00))
+                ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('01:00',config.plugins.dynamicLCD.NightStandbyBrightness01.value), config.plugins.dynamicLCD.NightStandbyBrightness01))
+                ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('02:00',config.plugins.dynamicLCD.NightStandbyBrightness02.value), config.plugins.dynamicLCD.NightStandbyBrightness02))
+                ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('03:00',config.plugins.dynamicLCD.NightStandbyBrightness03.value), config.plugins.dynamicLCD.NightStandbyBrightness03))
+                ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('04:00',config.plugins.dynamicLCD.NightStandbyBrightness04.value), config.plugins.dynamicLCD.NightStandbyBrightness04))
+                ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('05:00',config.plugins.dynamicLCD.NightStandbyBrightness05.value), config.plugins.dynamicLCD.NightStandbyBrightness05))
+                ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('06:00',config.plugins.dynamicLCD.NightStandbyBrightness06.value), config.plugins.dynamicLCD.NightStandbyBrightness06))
+                ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('07:00',config.plugins.dynamicLCD.NightStandbyBrightness07.value), config.plugins.dynamicLCD.NightStandbyBrightness07))
+                if sunRiseAvailable:
+                    ConfigList.append(getConfigListEntry(_("Sunrise time..."), config.plugins.dynamicLCD.ConfigNothing))
+                    ConfigList.append(getConfigListEntry(_("Use sunrise time"), config.plugins.dynamicLCD.useSunRiseTime))
+                    if config.plugins.dynamicLCD.useSunRiseTime.value.startswith('sunrise-30'):
+                        ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('-30m',config.plugins.dynamicLCD.SunRise30minsBefore.value), config.plugins.dynamicLCD.SunRise30minsBefore))
+                    if config.plugins.dynamicLCD.useSunRiseTime.value.endswith('-sunrise'):
+                        ConfigList.append(getConfigListEntry(_("to %s (%s)") % ('+30m',config.plugins.dynamicLCD.SunRise30minsAfter.value), config.plugins.dynamicLCD.SunRise30minsAfter))
+                ConfigList.append(getConfigListEntry(_("Day hours..."), config.plugins.dynamicLCD.ConfigNothing))
+                ConfigList.append(getConfigListEntry(_("08:00-23:00 (%s)") % config.plugins.dynamicLCD.NightStandbyBrightness.value, config.plugins.dynamicLCD.NightStandbyBrightness))
+                ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('08:00',config.plugins.dynamicLCD.NightStandbyBrightness08.value), config.plugins.dynamicLCD.NightStandbyBrightness08))
+                ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('09:00',config.plugins.dynamicLCD.NightStandbyBrightness09.value), config.plugins.dynamicLCD.NightStandbyBrightness09))
+                ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('10:00',config.plugins.dynamicLCD.NightStandbyBrightness10.value), config.plugins.dynamicLCD.NightStandbyBrightness10))
+                ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('11:00',config.plugins.dynamicLCD.NightStandbyBrightness11.value), config.plugins.dynamicLCD.NightStandbyBrightness11))
+                ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('12:00',config.plugins.dynamicLCD.NightStandbyBrightness12.value), config.plugins.dynamicLCD.NightStandbyBrightness12))
+                ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('13:00',config.plugins.dynamicLCD.NightStandbyBrightness13.value), config.plugins.dynamicLCD.NightStandbyBrightness13))
+                ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('14:00',config.plugins.dynamicLCD.NightStandbyBrightness14.value), config.plugins.dynamicLCD.NightStandbyBrightness14))
+                ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('15:00',config.plugins.dynamicLCD.NightStandbyBrightness15.value), config.plugins.dynamicLCD.NightStandbyBrightness15))
+                ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('16:00',config.plugins.dynamicLCD.NightStandbyBrightness16.value), config.plugins.dynamicLCD.NightStandbyBrightness16))
+                ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('17:00',config.plugins.dynamicLCD.NightStandbyBrightness17.value), config.plugins.dynamicLCD.NightStandbyBrightness17))
+                ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('18:00',config.plugins.dynamicLCD.NightStandbyBrightness18.value), config.plugins.dynamicLCD.NightStandbyBrightness18))
+                ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('19:00',config.plugins.dynamicLCD.NightStandbyBrightness19.value), config.plugins.dynamicLCD.NightStandbyBrightness19))
+                ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('20:00',config.plugins.dynamicLCD.NightStandbyBrightness20.value), config.plugins.dynamicLCD.NightStandbyBrightness20))
+                ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('21:00',config.plugins.dynamicLCD.NightStandbyBrightness21.value), config.plugins.dynamicLCD.NightStandbyBrightness21))
+                ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('22:00',config.plugins.dynamicLCD.NightStandbyBrightness22.value), config.plugins.dynamicLCD.NightStandbyBrightness22))
         return ConfigList
         
     def __layoutFinished(self):
@@ -186,7 +296,11 @@ class DynamicLCDbrightnessInStandbyConfiguration(Screen, ConfigListScreen):
             pass
     
     def setLCDBrightness(self):
-        if self.getCurrentEntryConfig() != config.plugins.dynamicLCD.enabled:
+        if self.getCurrentEntryConfig() != config.plugins.dynamicLCD.enabled and \
+                self.getCurrentEntryConfig() != config.plugins.dynamicLCD.debug and \
+                self.getCurrentEntryConfig() != config.plugins.dynamicLCD.ConfigNothing and \
+                self.getCurrentEntryConfig() != config.plugins.dynamicLCD.KODIsupport and \
+                self.getCurrentEntryConfig() != config.plugins.dynamicLCD.useSunRiseTime:
             try:
                 currValue = self.getCurrentValue()
                 currValue = int(currValue.split('/')[0].strip())
@@ -202,6 +316,22 @@ class DynamicLCDbrightnessInStandbyConfiguration(Screen, ConfigListScreen):
         for x in self.onChangedEntry:
             x()
         self.setLCDBrightness()
+        if self.getCurrentEntryConfig() == config.plugins.dynamicLCD.NightStandbyBrightness:
+            config.plugins.dynamicLCD.NightStandbyBrightness08.value = config.plugins.dynamicLCD.NightStandbyBrightness.value
+            config.plugins.dynamicLCD.NightStandbyBrightness09.value = config.plugins.dynamicLCD.NightStandbyBrightness.value
+            config.plugins.dynamicLCD.NightStandbyBrightness10.value = config.plugins.dynamicLCD.NightStandbyBrightness.value
+            config.plugins.dynamicLCD.NightStandbyBrightness11.value = config.plugins.dynamicLCD.NightStandbyBrightness.value
+            config.plugins.dynamicLCD.NightStandbyBrightness12.value = config.plugins.dynamicLCD.NightStandbyBrightness.value
+            config.plugins.dynamicLCD.NightStandbyBrightness13.value = config.plugins.dynamicLCD.NightStandbyBrightness.value
+            config.plugins.dynamicLCD.NightStandbyBrightness14.value = config.plugins.dynamicLCD.NightStandbyBrightness.value
+            config.plugins.dynamicLCD.NightStandbyBrightness15.value = config.plugins.dynamicLCD.NightStandbyBrightness.value
+            config.plugins.dynamicLCD.NightStandbyBrightness16.value = config.plugins.dynamicLCD.NightStandbyBrightness.value
+            config.plugins.dynamicLCD.NightStandbyBrightness17.value = config.plugins.dynamicLCD.NightStandbyBrightness.value
+            config.plugins.dynamicLCD.NightStandbyBrightness18.value = config.plugins.dynamicLCD.NightStandbyBrightness.value
+            config.plugins.dynamicLCD.NightStandbyBrightness19.value = config.plugins.dynamicLCD.NightStandbyBrightness.value
+            config.plugins.dynamicLCD.NightStandbyBrightness20.value = config.plugins.dynamicLCD.NightStandbyBrightness.value
+            config.plugins.dynamicLCD.NightStandbyBrightness21.value = config.plugins.dynamicLCD.NightStandbyBrightness.value
+            config.plugins.dynamicLCD.NightStandbyBrightness22.value = config.plugins.dynamicLCD.NightStandbyBrightness.value
         self["config"].list = self.buildConfigList()
 
     def getCurrentEntry(self):
@@ -222,4 +352,3 @@ class dynamicLCDsummary(Screen):
         Screen.__init__(self, session)
         self.skinName = [ "StandbySummary", ]
 ##################################################################### CLASS ENDS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<         
-if DBG: printDEBUG("Loaded", False)

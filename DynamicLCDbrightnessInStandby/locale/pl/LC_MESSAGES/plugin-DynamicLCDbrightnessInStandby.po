@@ -43,3 +43,33 @@ msgstr "08:00-23:00 (%s)"
 
 msgid "from %s (%s)"
 msgstr "od %s (%s)"
+
+msgid "LCD brighter when KODI is playing"
+msgstr "Rozjaśń LCD gdy KODI odtwarza"
+
+msgid "Night hours..."
+msgstr "Godziny nocne..."
+
+msgid "Day hours..."
+msgstr "Godziny dzienne..."
+
+msgid "Support 'Share LCD with KODI' plugin:"
+msgstr "Wsparcie wtyczki 'LCD dla KODI':"
+
+msgid "Sunrise time..."
+msgstr "Wschód słońca..."
+
+msgid "Use sunrise time"
+msgstr "Użyj czas wschodu słońca"
+
+msgid "to %s (%s)"
+msgstr "do %s (%s)"
+
+msgid "from 30mins before sunrise time"
+msgstr "od 30min przed wschodem do wschodu"
+
+msgid "from sunrise time to 30 mins after"
+msgstr "od wschodu do 30min po wschodzie"
+
+msgid "from 30mins before to 30 mins after sunrise"
+msgstr "od 30min przed i do 30min po wschodzie"

@@ -1,5 +1,5 @@
 #### tlumaczenia
-PluginName = 'DynamicLCDbrightness'
+PluginName = 'DynamicLCDbrightnessInStandby'
 
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 PluginLanguageDomain = "plugin-" + PluginName
