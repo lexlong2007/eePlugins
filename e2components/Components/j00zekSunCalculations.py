@@ -8,7 +8,7 @@ from Components.config import config
 from Components.Element import cached
 from decimal import Decimal as dec
 
-DBG = True
+DBG = False
 if DBG: from Components.j00zekComponents import j00zekDEBUG
 
 import math

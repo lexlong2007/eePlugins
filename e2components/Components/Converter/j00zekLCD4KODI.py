@@ -36,7 +36,7 @@ from datetime import timedelta
 from time import localtime
 
 #if enabled log into /tmp/e2components.log
-DBG = True
+DBG = False
 if DBG: from Components.j00zekComponents import j00zekDEBUG
 
 from Components.j00zekKodistate import remoteKODI, AppProperties, XBMCInfoBool, GetActivePlayers, \
@@ -52,10 +52,11 @@ except Exception:
     from Components.j00zekKodistate import KODI_IP, KODI_PORT
 
 try:
-    setLCDbrightness = config.plugins.dynamicLCD.KODIsupport.value # no|playingOn
+    from Plugins.Extensions.DynamicLCDbrightnessInStandby.plugin import setKODIbrightness as setLCDbrightness, calculateLCDbrightness
 except Exception as e:
-    setLCDbrightness = 'no'
-    if DBG: j00zekDEBUG('[j00zekLCD4KODI] exception getting KODIsupport value: %s' % str(e))
+    if DBG: j00zekDEBUG('[j00zekLCD4KODI] exception loading delayedStandbyActions as setLCDbrightness: %s' % str(e))
+    def setLCDbrightness(stateTXT = ''):
+        if DBG: j00zekDEBUG('[j00zekLCD4KODI] fake setLCDbrightness(%s)' % str(stateTXT))
 
 #simple and dirty translation
 if language.getLanguage() == 'pl_PL':
@@ -139,7 +140,7 @@ class j00zekLCD4KODI(Poll, Converter, object):
         
         self.poll_interval = 1000 
         self.poll_enabled = True
-
+        
     def doSuspend(self, suspended): 
         if DBG: j00zekDEBUG('[j00zekLCD4KODI] doSuspend(%s) >>> ' % suspended)
         if suspended == 1: 
@@ -163,11 +164,14 @@ class j00zekLCD4KODI(Poll, Converter, object):
                 else:
                     self.downstream_elements[0].visible = False
             #LCDbrightness
-            if not KODIstateTable['powerOn']: config.plugins.dynamicLCD.KODIstate.value = 'powerOff'
-            elif KODIstateTable['powerOn']: config.plugins.dynamicLCD.KODIstate.value = 'powerOn'
-            elif not KODIstateTable['isIdle']: config.plugins.dynamicLCD.KODIstate.value = 'isNOTidle'
-            elif KODIstateTable['isPlaying']: config.plugins.dynamicLCD.KODIstate.value = 'isPlaying'
-            else: 'unknown'
+            
+            if KODIstateTable['isPlaying']: stateTxT = 'isPlaying'
+            elif not KODIstateTable['isIdle']: stateTxT = 'isNOTidle'
+            elif KODIstateTable['powerOn']: stateTxT = 'powerOn'
+            elif not KODIstateTable['powerOn']: stateTxT = 'powerOff'
+            else: stateTxT = 'unknown'
+            setLCDbrightness(stateTxT)
+            if DBG: j00zekDEBUG("[j00zekLCD4KODI:changed] KODIstate='%s'" % stateTxT)
             self.downstream_elements.changed(what) 
 
     def resetKODIstateTable(self):

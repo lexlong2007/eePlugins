@@ -5,6 +5,6 @@ Depends:
 Description: automatycznie odinstalowuje 'smieci' z systemu VTI. Pełna lista na forum DVHK
 Maintainer: j00zek
 Source: http://github.com/j00zek/eePlugins
-Version: 19.01.28.0750
+Version: 19.02.07.1646
 Architecture: all
 DestinationPath: /usr/bin

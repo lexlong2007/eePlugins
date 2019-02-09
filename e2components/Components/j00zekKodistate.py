@@ -35,7 +35,7 @@ AudioPlayerProperties  = '{"jsonrpc": "2.0", "method": "Player.GetProperties","p
 
 import json
 import urllib2
-DBG = True
+DBG = False
 
 class remoteKODI():
     def __init__(self, host, port):

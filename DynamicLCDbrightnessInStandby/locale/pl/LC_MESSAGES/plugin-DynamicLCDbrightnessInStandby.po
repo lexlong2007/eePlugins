@@ -73,3 +73,12 @@ msgstr "od wschodu do 30min po wschodzie"
 
 msgid "from 30mins before to 30 mins after sunrise"
 msgstr "od 30min przed i do 30min po wschodzie"
+
+msgid "from 30mins before sunrise till 8:00"
+msgstr "od 30min przed wschodem i do 8:00"
+
+msgid "LCD brighter when KODI is running"
+msgstr "Rozjaśń LCD gdy KODI jest uruchomione"
+
+msgid "LCD brighter when KODI is running and not spleeping"
+msgstr "Rozjaśń LCD gdy KODI jest uruchomione i aktywne"

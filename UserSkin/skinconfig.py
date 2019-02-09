@@ -215,10 +215,10 @@ class UserSkin_Config(Screen, ConfigListScreen):
         self.myUserSkin_fake_entry = NoSave(ConfigNothing())
         self.LackOfFile = ''
         
-        if path.exists('/usr/bin/enigma2_pre_start.sh'):
-            config.plugins.UserSkin.SafeMode.value = True
-        else:
-            config.plugins.UserSkin.SafeMode.value = False
+        #if path.exists('/usr/bin/enigma2_pre_start.sh'):
+        #    config.plugins.UserSkin.SafeMode.value = True
+        #else:
+        #    config.plugins.UserSkin.SafeMode.value = False
         
         self.list = []
         ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
@@ -253,9 +253,6 @@ class UserSkin_Config(Screen, ConfigListScreen):
         self.set_myatile = getConfigListEntry(_("Enable skin personalization:"), self.myUserSkin_active)
         self.list = []
         self.list.append(self.set_myatile)
-        if isImageType('vti'):
-            self.list.append(getConfigListEntry(_("Safe mode (reset on GS):"), config.plugins.UserSkin.SafeMode ))
-            printDEBUG("'%s'" % CurrentSkinName)
         self.list.append(getConfigListEntry(_("Personalization mode:"), config.plugins.UserSkin.AdvancedMode ))
         self.list.append(self.set_color)
         self.list.append(self.set_font)
@@ -313,8 +310,8 @@ class UserSkin_Config(Screen, ConfigListScreen):
                     self["key_yellow"].setText("")
             elif self["config"].getCurrent()[1] == config.plugins.j00zekPiconAnimation.UserPath:
                 self.createConfigList()
-            elif self["config"].getCurrent()[1] == config.plugins.UserSkin.SafeMode:
-                self.createConfigList()
+            #elif self["config"].getCurrent()[1] == config.plugins.UserSkin.SafeMode:
+            #    self.createConfigList()
             elif self["config"].getCurrent()[1] == config.plugins.UserSkin.AdvancedMode:
                 self.createConfigList()
         except Exception: pass
@@ -413,11 +410,8 @@ class UserSkin_Config(Screen, ConfigListScreen):
             configfile.save()
             ################################ SAFE MODE 
             self.UserSkinToolSet.ClearMemory()
-            if config.plugins.UserSkin.SafeMode.value:
-                system("ln -sf %s/scripts/safeMode.sh /usr/bin/enigma2_pre_start.sh;touch /etc/enigma2/skinModified" %(PluginPath)) #for safety, nicely manage overwrite ;)
-                
-            else:
-                system("rm -f /usr/bin/enigma2_pre_start.sh") #for safety, nicely manage overwrite ;)
+            if isImageType('vti'):
+                system("touch /etc/enigma2/skinModified") #for safety, nicely manage overwrite ;)
             #we change current folder to active skin folder
             chdir(SkinPath)
             #### FONTS
@@ -490,20 +484,11 @@ class UserSkin_Config(Screen, ConfigListScreen):
 
         myMessage = ''
         if self.LackOfFile != '':
-            if config.plugins.UserSkin.SafeMode.value:
-                if path.exists(user_skin_file):
-                    remove(user_skin_file)
-                printDEBUG("Missing components: %s" % self.LackOfFile)
-                myMessage += _("Missing components found: %s\n\n") % self.LackOfFile
-                myMessage += _("All modifications have been reverted\n\n")
-                myMessage += _("Restart GUI now?")
-                restartbox = self.session.openWithCallback(restartGUIcb,MessageBox, myMessage, MessageBox.TYPE_YESNO, default = False)
-            else:
-                printDEBUG("Missing components: %s" % self.LackOfFile)
-                myMessage += _("Missing components found: %s\n\n") % self.LackOfFile
-                myMessage += _("Skin will NOT work properly and GS expected!!!\n\n")
-                myMessage += _("Are you sure you want to use it?")
-                restartbox = self.session.openWithCallback(restartNotOKcb,MessageBox, myMessage, MessageBox.TYPE_YESNO, default = False)
+            printDEBUG("Missing components: %s" % self.LackOfFile)
+            myMessage += _("Missing components found: %s\n\n") % self.LackOfFile
+            myMessage += _("Skin will NOT work properly and GS expected!!!\n\n")
+            myMessage += _("Are you sure you want to use it?")
+            restartbox = self.session.openWithCallback(restartNotOKcb,MessageBox, myMessage, MessageBox.TYPE_YESNO, default = False)
         else:
             myMessage += _("Restart GUI now?")
             restartbox = self.session.openWithCallback(restartGUIcb,MessageBox, myMessage, MessageBox.TYPE_YESNO, default = False)
