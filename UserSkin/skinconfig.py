@@ -75,16 +75,26 @@ if isSlowCPU() == False:
 else:
     config.plugins.UserSkin.jpgPreview = ConfigYesNo(default = False)
 
-config.plugins.UserSkin.AdvancedMode = ConfigSelection(default="copyScreens", choices = [
-                ("copyScreens", _("Generic")),
-                ("mergeScreens", _("Advanced (merge screens)"))
-                ])
 config.plugins.UserSkin.FontScale = ConfigSelectionNumber(default=100, min=50, max=200, stepwidth=1)
 config.plugins.UserSkin.SafeMode = ConfigYesNo(default = True)
 
 imageType=None
 def isImageType(imgName = ''):
     global imageType
+    #check using opkg
+    if imageType is None:
+        if path.exists('/etc/opkg/all-feed.conf'):
+            with open('/etc/opkg/all-feed.conf', 'r') as file:
+                fileContent = file.read()
+                file.close()
+                fileContent = fileContent.lower()
+                if fileContent.find('VTi') > -1:
+                    imageType = 'vti'
+                elif fileContent.find('openatv') > -1:
+                    imageType = 'openatv'
+                    if fileContent.find('/5.3/') > -1:
+                        imageType += '5.3'
+    #check using specifics
     if imageType is None:
         if path.exists(resolveFilename(SCOPE_PLUGINS, 'SystemPlugins/VTIPanel/')):
             imageType = 'vti'
@@ -253,7 +263,6 @@ class UserSkin_Config(Screen, ConfigListScreen):
         self.set_myatile = getConfigListEntry(_("Enable skin personalization:"), self.myUserSkin_active)
         self.list = []
         self.list.append(self.set_myatile)
-        self.list.append(getConfigListEntry(_("Personalization mode:"), config.plugins.UserSkin.AdvancedMode ))
         self.list.append(self.set_color)
         self.list.append(self.set_font)
         #self.list.append(getConfigListEntry(_("Font scale (50-200)%:"), config.plugins.UserSkin.FontScale))
@@ -312,8 +321,6 @@ class UserSkin_Config(Screen, ConfigListScreen):
                 self.createConfigList()
             #elif self["config"].getCurrent()[1] == config.plugins.UserSkin.SafeMode:
             #    self.createConfigList()
-            elif self["config"].getCurrent()[1] == config.plugins.UserSkin.AdvancedMode:
-                self.createConfigList()
         except Exception: pass
 
     def selectionChanged(self):
@@ -606,6 +613,16 @@ class UserSkin_Config(Screen, ConfigListScreen):
             remove(SkinPath + 'mySkin')
             mkdir(SkinPath + 'mySkin')       
 
+        #checking if any self.LCD_widgets_selected = we need to merge
+        self.LCD_widgets_selected = False
+        for f in listdir(SkinPath + "UserSkin_Selections/"):
+            if not self.LCD_widgets_selected and f.lower().find('widget') > -1:
+                self.LCD_widgets_selected = True
+                break
+        if self.LCD_widgets_selected:
+            printDEBUG("self.LCD_widgets_selected = True")
+        else:
+            printDEBUG("self.LCD_widgets_selected = False")
         user_skin_file = SkinPath + 'mySkin/skin_user' + self.currentSkin + '.xml' #standardowo zapisujemy gotowa skorke w katalogu BH
         if path.exists(user_skin_file):
             remove(user_skin_file)
@@ -623,16 +640,12 @@ class UserSkin_Config(Screen, ConfigListScreen):
                     printDEBUG("- appending skin_user_colors.xml")
                     user_skin = user_skin + self.readXMLfile(SkinPath + 'skin_user_colors.xml' , 'ALLSECTIONS')
             printDEBUG("############################################# Skin after loading header & colors:\n" + user_skin + "\n#############################################\n")        
-            self.LCD_widgets_selected = False
             if path.exists(SkinPath + 'UserSkin_Selections'):
-                if config.plugins.UserSkin.AdvancedMode.value == "mergeScreens":
+                if self.LCD_widgets_selected:
                     printDEBUG("mergeScreens mode !!!")
                     # get list of screens in file
                     user_screens = []
                     for f in listdir(SkinPath + "UserSkin_Selections/"):
-                        if not self.LCD_widgets_selected and f.find('LCD_widget') > -1:
-                            self.LCD_widgets_selected = True
-                            printDEBUG("found LCD widget file in %smySkin/%s" % (SkinPath,f))
                         printDEBUG("reading file %smySkin/%s" % (SkinPath,f))
                         user_parameters += readParametersContent(SkinPath + "UserSkin_Selections/" + f)
                         for screen in getScreenNames(SkinPath + "UserSkin_Selections/" + f):
@@ -667,12 +680,14 @@ class UserSkin_Config(Screen, ConfigListScreen):
                         #VTI/openatv standardowo laduja pliki z SkinPath + 'mySkin/skin_user' + self.currentSkin + '.xml'
                         if path.exists(resolveFilename(SCOPE_CONFIG, 'skin_user' + self.currentSkin + '.xml')):
                             remove(resolveFilename(SCOPE_CONFIG, 'skin_user' + self.currentSkin + '.xml'))
-                    elif isImageType('blackhole') == True:
-                        system('ln -sf %s /etc/enigma2/skin_user.xml' % user_skin_file) #Blackhole ma jedynie standardowy mechanizm
-                    elif config.plugins.UserSkin.LCDmode.value == 'LCDLinux':
-                        system('ln -sf %s /etc/enigma2/skin_user.xml' % user_skin_file) #Blackhole ma jedynie standardowy mechanizm
+                    elif (isImageType('vti') == True and self.LCD_widgets_selected) or \
+                          isImageType('blackhole') == True or \
+                          config.plugins.UserSkin.LCDmode.value == 'LCDLinux': #BlackHole,LCDLinux korzystają jedynie ze standardowego mechanizmu
+                        #system('ln -sf %s /etc/enigma2/skin_user.xml' % user_skin_file) 
+                        system('mv -f %s /etc/enigma2/skin_user.xml' % user_skin_file)
                     else: # inne oparte o pli obsluguja skorki spersonalizowane dla kazdej wybranej osobno
-                        system('ln -sf %s %s' % (user_skin_file, resolveFilename(SCOPE_CONFIG, 'skin_user' + self.currentSkin + '.xml')))
+                        #system('ln -sf %s %s' % (user_skin_file, resolveFilename(SCOPE_CONFIG, 'skin_user' + self.currentSkin + '.xml')))
+                        system('mv -f %s %s' % (user_skin_file, resolveFilename(SCOPE_CONFIG, 'skin_user' + self.currentSkin + '.xml')))
               
             if config.plugins.UserSkin.LCDmode.value not in ('LCDLinux',"system"):
                 #if path.exists(resolveFilename(SCOPE_SKIN, 'display')):

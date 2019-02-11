@@ -53,7 +53,7 @@ alphatest="blend" zPosition="1" >
   <ePixmap pixmap="vfd_skin/Homar/Homar_4.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
   <widget source="session.CurrentService" render="jOOzekPiconAnimation" pixmaps="vfd_skin/Homar/animated" position="20,40" size="580,260" zPosition="5" transparent="1" alphatest="blend" />
   <widget alphatest="blend" render="jOOzekPicons" picontype="zzpicon" position="20,40" size="580,260" source="session.CurrentService" zPosition="4" transparent="1">
-    <convert type="ServiceName">Reference</convert>
+    <convert type="ServiceName2">Reference</convert>
   </widget>
   <widget source="session.Event_Now" render="BlackHarmonyRunningText" 
 options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,startdelay=200,always=0,oneshot=0" noWrap="1" position="16,308" size="740,96" font="VFD;80" transparent="1" halign="left" valign="top" foregroundColor="#ffff00">
@@ -93,10 +93,10 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
 <screen name="ChannelSelection_summary" position="0,0" size="800,480" id="1">
   <ePixmap pixmap="vfd_skin/Homar/Homar_4.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
 <widget source="parent.ServiceEvent" render="Picon" position="0,70" size="285,145" zPosition="4" transparent="1" alphatest="blend">
-  <convert type="ServiceName">Reference</convert>
+  <convert type="ServiceName2">Reference</convert>
 </widget>
 <widget source="parent.ServiceEvent" render="BlackHarmonyRunningText" 
-options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=2,startdelay=800,always=0,oneshot=0" noWrap="1" position="16,308" size="740,96" font="VFD;80" transparent="1" halign="left" valign="top" foregroundColor="#ffff00" >
+options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,startdelay=800,always=0,oneshot=0" noWrap="1" position="16,308" size="740,96" font="VFD;80" transparent="1" halign="left" valign="top" foregroundColor="#ffff00" >
   <convert type="EventName">Name</convert>
 </widget>
 <widget source="parent.ServiceEvent" render="Label" noWrap="1" position="20,390" size="230,88" font="VFD;78" transparent="1" halign="left" valign="center" foregroundColor="#ffff66">
@@ -161,7 +161,7 @@ pixmap="vfd_skin/Homar/Homar_7.png" position="170,421" size="350,40" borderWidth
 <widget source="session.CurrentService" render="Label" position="20,390" size="230,88" font="VFD;72" transparent="1" halign="left" valign="center">
     <convert type="ServicePosition">Position,ShowNoSeconds,ShowHours</convert>
   </widget>
-  <widget source="session.CurrentService" render="Label" position="570,235" size="200,96" font="VFD;78" transparent="1" halign="right" valign="top" foregroundColor="#ff3333">
+  <widget source="session.CurrentService" render="Label" position="560,235" size="200,96" font="VFD;78" transparent="1" halign="right" valign="top" foregroundColor="#ff3333">
     <convert type="ServicePosition">EndTime,ShowHours,ShowNoSeconds</convert>
   </widget>
 <widget source="session.RecordState" render="Pixmap" pixmap="vfd_skin/Homar/Homar_2.png" position="630,110" size="120,30" zPosition="3" alphatest="blend">
@@ -170,7 +170,7 @@ pixmap="vfd_skin/Homar/Homar_7.png" position="170,421" size="350,40" borderWidth
      </widget>
     <widget source="session.CurrentService" render="BlackHarmonyRunningText" 
 options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,startdelay=200,always=0,oneshot=0" noWrap="1" position="16,305" size="740,100" font="VFD;85" transparent="1" halign="left" valign="top" foregroundColor="#ffff00" >
-    <convert type="ServiceName">Name</convert>
+    <convert type="ServiceName2">Name</convert>
   </widget>
      <widget source="session.CurrentService" render="Pixmap" pixmap="vfd_skin/Homar/SD.png" position="620,150" zPosition="1" size="130,40" alphatest="blend">
 	 <convert type="ServiceInfo">VideoWidth</convert>
@@ -200,44 +200,47 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
   <widget source="global.CurrentTime" render="Label" position="560,20" size="200,96" font="VFD;78" transparent="1" halign="right" valign="center">
     <convert type="ClockToText">Format:%H:%M</convert>
   </widget>
-  <widget source="session.CurrentService" render="Cover" position="0,0" size="526,320" zPosition="5" transparent="0" alphatest="off" />
-  <widget source="session.CurrentService" render="jOOzekPiconAnimation" pixmaps="vfd_skin/Homar/animated_1" position="50,0" size="480,320" zPosition="5" transparent="1" alphatest="blend" />
-  <widget source="session.CurrentService" render="Picon" position="50,0" size="480,320" zPosition="4" transparent="1" alphatest="blend">
+  <ePixmap pixmap="vfd_skin/Homar/kamera.png" position="160,50" size="800,480" zPosition="-1" alphatest="blend" />
+  <widget source="session.CurrentService" render="BlackHarmonyCover" position="0,0" size="526,320" zPosition="5" transparent="0" alphatest="off" />
+  <widget source="session.CurrentService" render="jOOzekPiconAnimation" pixmaps="vfd_skin/Homar/animated_1" position="0,0" size="526,320" zPosition="5" transparent="1" alphatest="blend" />
+  <widget source="session.CurrentService" render="Picon" position="10,0" size="516,320" zPosition="4" transparent="5" alphatest="off">
   <convert type="MovieBarInfo">Reference</convert>
   </widget>
-</screen>
+  </screen>
 
 <!-- EMC Hauptmenü -->
-        <screen id="1" name="EMCSelectionSummary" position="0,0" size="800,480">
-<ePixmap pixmap="vfd_skin/Homar/Homar_1.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
-<widget source="global.CurrentTime" render="Label" position="20,44" size="450,75" font="RegularLCD;66" transparent="1" halign="center" valign="center" foregroundColor="#ffff00"  >
-    <convert type="ClockToText">Format:%a, %d.%m.%Y</convert>
+<screen id="1" name="EMCSelectionSummary" position="0,0" size="800,480">
+   <ePixmap pixmap="vfd_skin/Homar/kino.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
+<widget source="global.CurrentTime" render="Label" position="20,11" size="450,75" font="RegularLCD;66" transparent="1" halign="center" valign="center" foregroundColor="#ffff00" >
+  <convert type="ClockToText">Format:%a, %d.%m.%Y</convert>
   </widget>
-  <widget source="global.CurrentTime" render="Label" position="460,36" size="300,75" font="VFD;78" transparent="1" halign="right" valign="center">
+  <widget source="global.CurrentTime" render="Label" position="460,9" size="300,75" font="VFD;76" transparent="1" halign="right" valign="center" foregroundColor="#ffff00" >
   <convert type="ClockToText">Format:%H:%M:%S</convert>
   </widget>
-        <widget font="RegularLCD;54" halign="center" valign="Top" position="40,110" render="Label" size="390,120" source="parent.spacefree" transparent="1" />
-		<widget font="RegularLCD;56" foregroundColor="#ffff00" halign="center" valign="Top" position="15,210" render="Label" size="770,120" source="parent.Service" transparent="1" >
-		<convert type="ServiceName">Name</convert>
-		</widget>
-		<widget font="RegularLCD;56" halign="center" valign="center" position="20,380" render="Label" foregroundColor="#ffff00" transparent="1" zPosition="2" size="390,180" source="parent.name_disp" />
-        <widget font="RegularLCD;54" position="40,380" render="Label" size="300,64" source="parent.Service" transparent="1" >
-		<convert type="MovieInfo">FileSize</convert>
-		</widget>
-		<widget font="RegularLCD;54" position="100,280" render="Label" transparent="1" zPosition="2" size="200,64" source="parent.size_disp" />
-		<widget font="RegularLCD;54" halign="left" position="600,380" render="Label" transparent="1" zPosition="2" size="200,64" source="parent.Service">
+<widget font="RegularLCD;52" halign="center" valign="Top" position="220,420" render="Label" size="390,120" source="parent.spacefree" transparent="1" />
+  <widget render="BlackHarmonyRunningText" source="parent.Service" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=0,startdelay=6000,wrap" foregroundColor="#111111" font="VFD;56" position="165,86" size="470,270" transparent="1">
+  <convert type="ServiceName2">Name</convert>
+  </widget>
+<widget source="parent.Service" render="BlackHarmonyCover" position="0,75" size="148,240" zPosition="5" transparent="0" alphatest="blend" />
+<widget source="parent.Service" render="BlackHarmonyCover" position="645,73" size="148,240" zPosition="5" transparent="0" alphatest="blend" />
+   <widget font="RegularLCD;56" halign="center" valign="center" position="20,380" render="Label" foregroundColor="#00ff00" transparent="1" zPosition="2" size="390,180" source="parent.name_disp" />
+  <widget font="RegularLCD;54" position="40,380" render="Label" size="300,64" source="parent.Service" transparent="1" > 
+  <convert type="MovieInfo">FileSize</convert>
+  </widget>
+  <widget font="RegularLCD;54" position="100,280" render="Label" transparent="1" zPosition="2" size="200,64" source="parent.size_disp" />
+  <widget font="RegularLCD;54" halign="left" position="600,380" render="Label" transparent="1" zPosition="2" size="200,64" source="parent.Service">
 		<widget font="RegularLCD;54" halign="left" position="600,380" render="Label" transparent="1" zPosition="2" size="200,64" source="parent.runtime_disp" />
-		<convert type="EMCServiceTime">Duration</convert>
-		<convert type="EMCClockToText">InMinutes</convert>
-		</widget>
-		</screen>
+   <convert type="EMCServiceTime">Duration</convert>
+   <convert type="EMCClockToText">InMinutes</convert>
+   </widget>
+   </screen>
 
 <!-- MediaPlayer -->
 <screen name="MediaPlayerLCDScreen" position="0,0" size="800,480" id="1">
   <ePixmap pixmap="vfd_skin/Homar/Homar_1.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
 <widget name="text1" position="20,125" size="740,190" font="VFD;45" halign="left" valign="center" transparent="1" />
   <widget source="session.CurrentService" render="BlackHarmonyRunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,startdelay=200,always=0,oneshot=0" position="16,305" size="740,100" font="VFD;85" foregroundColor="#ffff00" noWrap="1" halign="left" valign="top" transparent="1" zPosition="2">
-    <convert type="ServiceName">Name</convert>
+    <convert type="ServiceName2">Name</convert>
   </widget>
 <widget source="session.CurrentService" render="Label" position="520,394" size="250,90" font="VFD;72" transparent="1" halign="right" valign="top">
     <convert type="ServicePosition">Remaining,Negate,ShowHours</convert>
@@ -270,7 +273,7 @@ pixmap="vfd_skin/Homar/Homar_7.png" position="170,421" size="350,40" borderWidth
 <widget source="session.CurrentService" render="Label" position="20,390" size="230,88" font="VFD;72" transparent="1" halign="left" valign="center">
     <convert type="ServicePosition">Position,ShowNoSeconds,ShowHours</convert>
   </widget>
-  <widget source="session.CurrentService" render="Label" position="570,235" size="200,96" font="VFD;78" transparent="1" halign="right" valign="top" foregroundColor="#ff3333">
+  <widget source="session.CurrentService" render="Label" position="560,235" size="200,96" font="VFD;78" transparent="1" halign="right" valign="top" foregroundColor="#ff3333">
     <convert type="ServicePosition">EndTime,ShowHours,ShowNoSeconds</convert>
   </widget>
 <widget source="session.RecordState" render="Pixmap" pixmap="vfd_skin/Homar/Homar_2.png" position="630,110" size="120,30" zPosition="3" alphatest="blend">
@@ -279,7 +282,7 @@ pixmap="vfd_skin/Homar/Homar_7.png" position="170,421" size="350,40" borderWidth
      </widget>
     <widget source="session.CurrentService" render="BlackHarmonyRunningText" 
 options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,startdelay=200,always=0,oneshot=0" noWrap="1" position="16,305" size="740,100" font="VFD;85" transparent="1" halign="left" valign="top" foregroundColor="#ffff00" >
-    <convert type="ServiceName">Name</convert>
+    <convert type="ServiceName2">Name</convert>
   </widget>
      <widget source="session.CurrentService" render="Pixmap" pixmap="vfd_skin/Homar/SD.png" position="620,150" zPosition="1" size="130,40" alphatest="blend">
 	 <convert type="ServiceInfo">VideoWidth</convert>
@@ -309,25 +312,28 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
   <widget source="global.CurrentTime" render="Label" position="560,20" size="200,96" font="VFD;78" transparent="1" halign="right" valign="center">
     <convert type="ClockToText">Format:%H:%M</convert>
   </widget>
-  <widget source="session.CurrentService" render="Cover" position="0,0" size="526,320" zPosition="5" transparent="0" alphatest="off" />
-  <widget source="session.CurrentService" render="jOOzekPiconAnimation" pixmaps="vfd_skin/Homar/animated_1" position="50,0" size="480,320" zPosition="5" transparent="1" alphatest="blend" />
-  <widget source="session.CurrentService" render="Picon" position="50,0" size="480,320" zPosition="4" transparent="1" alphatest="blend">
+  <ePixmap pixmap="vfd_skin/Homar/kamera.png" position="160,50" size="800,480" zPosition="-1" alphatest="blend" />
+  <widget source="session.CurrentService" render="BlackHarmonyCover" position="0,0" size="526,320" zPosition="5" transparent="0" alphatest="off" />
+  <widget source="session.CurrentService" render="jOOzekPiconAnimation" pixmaps="vfd_skin/Homar/animated_1" position="0,0" size="526,320" zPosition="5" transparent="1" alphatest="blend" />
+  <widget source="session.CurrentService" render="Picon" position="10,0" size="516,320" zPosition="4" transparent="5" alphatest="off">
   <convert type="MovieBarInfo">Reference</convert>
   </widget>
-</screen>
+  </screen>
 
 <!-- MovieSelection_summary -->
 <screen name="MovieSelection_summary" position="0,0" size="800,480" id="1">
-   <ePixmap pixmap="vfd_skin/Homar/Homar_1.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
-<widget source="global.CurrentTime" render="Label" position="20,44" size="450,75" font="RegularLCD;66" transparent="1" halign="center" valign="center" foregroundColor="#ffff00" >
+   <ePixmap pixmap="vfd_skin/Homar/kino.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
+<widget source="global.CurrentTime" render="Label" position="20,11" size="450,75" font="RegularLCD;66" transparent="1" halign="center" valign="center" foregroundColor="#ffff00" >
     <convert type="ClockToText">Format:%a, %d.%m.%Y</convert>
   </widget>
-  <widget source="global.CurrentTime" render="Label" position="460,36" size="300,75" font="VFD;78" transparent="1" halign="right" valign="center">
+  <widget source="global.CurrentTime" render="Label" position="460,9" size="300,75" font="VFD;76" transparent="1" halign="right" valign="center" foregroundColor="#ffff00" >
   <convert type="ClockToText">Format:%H:%M:%S</convert>
   </widget>
-<widget source="parent.Service" render="Label" position="15,100" size="770,270" font="VFD;56" transparent="1" halign="center" valign="center" foregroundColor="#ffff00" >
-    <convert type="ServiceName">Name</convert>
+<widget render="BlackHarmonyRunningText" source="parent.Service" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=0,startdelay=6000,wrap" foregroundColor="#111111" font="VFD;56" position="165,86" size="470,270" transparent="1">
+    <convert type="ServiceName2">Name</convert>
   </widget>
+<widget source="parent.Service" render="BlackHarmonyCover" position="0,75" size="148,240" zPosition="5" transparent="0" alphatest="blend" />
+<widget source="parent.Service" render="BlackHarmonyCover" position="645,73" size="148,240" zPosition="5" transparent="0" alphatest="blend" />
 <widget source="parent.Service" render="Label" position="40,380" size="300,58" font="VFD;56" transparent="1" halign="left" valign="center">
 		<convert type="MovieInfo">FileSize</convert>
 		</widget>
@@ -340,7 +346,8 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
 <!-- SHOUTcast -->
   <screen name="SHOUTcastLCDScreen" position="0,0" size="800,480" id="1">
   <ePixmap pixmap="vfd_skin/Homar/Homar_1.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
-  <ePixmap pixmap="vfd_skin/Homar/Homar.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
+  <ePixmap pixmap="vfd_skin/Homar/Homar.png" position="50,0" size="800,480" zPosition="-1" alphatest="blend" />
+  <ePixmap pixmap="vfd_skin/Homar/radio.png" position="10,300" size="800,480" zPosition="-1" alphatest="blend" />
   <widget source="global.CurrentTime" render="Label" position="20,44" size="450,75" font="RegularLCD;66" transparent="1" halign="center" valign="center" foregroundColor="#ffff00"  >
     <convert type="ClockToText">Format:%a, %d.%m.%Y</convert>
   </widget>
@@ -379,7 +386,7 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
     <convert type="ServicePosition">Position</convert>
   </widget>
 <widget source="session.CurrentService" render="RollerCharLCDLong" position="16,308" size="740,96" halign="left" noWrap="1" font="VFD;80" foregroundColor="#ffff00" zPosition="3" transparent="1">
-    <convert type="ServiceName">Name</convert>
+    <convert type="ServiceName2">Name</convert>
   </widget>
 <widget source="session.CurrentService" render="Label" position="15,390" size="230,88" font="VFD;74" foregroundColor="#ffff00" transparent="1" halign="left" valign="center">
 <convert type="ServicePosition">Position</convert>
@@ -388,10 +395,10 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
 <convert type="ServicePosition">Length</convert>
 </widget>
 <widget name="text2" position="380,110" size="400,100" halign="left" font="VFD;45" foregroundColor="#ffff00" zPosition="3" transparent="1">
-      <convert type="ServiceName">Name</convert>
+      <convert type="ServiceName2">Name</convert>
     </widget>
 <widget name="text3" position="380,215" size="400,100" halign="left" font="VFD;45" foregroundColor="#ffff00" zPosition="3" transparent="1">
-       <convert type="ServiceName">Name</convert>
+       <convert type="ServiceName2">Name</convert>
     </widget>
 <widget name="coverArt" pixmap="/tmp/coverlcd.png" position="0,0" zPosition="1" size="380,320" transparent="1" alphatest="blend" />
 </screen>
@@ -401,14 +408,14 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
 <ePixmap pixmap="vfd_skin/Homar/Homar_1.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
 <widget source="parent.ServiceEvent" render="j00zekPiconAnimation" pixmaps="vfd_skin/Homar/animated" position="100,40" size="580,260" zPosition="5" transparent="1" alphatest="blend" />
 <widget source="parent.ServiceEvent" render="jOOzekPicons" picontype="zzpicon" position="100,40" size="580,260" zPosition="4" transparent="1" alphatest="blend">
-  <convert type="ServiceName">Reference</convert>
+  <convert type="ServiceName2">Reference</convert>
   </widget>
 <widget source="session.RecordState" render="Pixmap" pixmap="vfd_skin/Homar/Homar_2.png" position="680,20" size="120,30" zPosition="3" alphatest="blend">
       <convert type="ConfigEntryTest">config.usage.blinking_rec_symbol_during_recording,True,CheckSourceBoolean</convert>
       <convert type="ConditionalShowHide">Blink</convert>
      </widget>
     <widget source="parent.ServiceEvent" render="BlackHarmonyRunningText" 
-options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=2,startdelay=800,always=0,oneshot=0" noWrap="1" position="16,308" size="740,96" font="VFD;80" transparent="1" halign="left" valign="top" foregroundColor="#ffff00" >
+options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,startdelay=800,always=0,oneshot=0" noWrap="1" position="16,308" size="740,96" font="VFD;80" transparent="1" halign="left" valign="top" foregroundColor="#ffff00" >
   <convert type="EventName">Name</convert>
 </widget>
 <widget source="parent.ServiceEvent" render="Label" noWrap="1" position="20,390" size="230,88" font="VFD;78" transparent="1" halign="left" valign="center" foregroundColor="#ffff66">
