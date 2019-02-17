@@ -82,3 +82,9 @@ msgstr "Rozjaśń LCD gdy KODI jest uruchomione"
 
 msgid "LCD brighter when KODI is running and not spleeping"
 msgstr "Rozjaśń LCD gdy KODI jest uruchomione i aktywne"
+
+msgid "Other settings..."
+msgstr "Inne ustawienia..."
+
+msgid "Disabled - no required components found!!!"
+msgstr "Wyłączono-brak potrzebnych komponentów!!!"

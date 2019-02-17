@@ -4,12 +4,7 @@
 #    https://stackoverflow.com/questions/19615350/calculate-sunrise-and-sunset-times-for-a-given-gps-coordinate-within-postgresql
 # plus automatically recognizes the coordinates
 
-from Components.config import config
-from Components.Element import cached
 from decimal import Decimal as dec
-
-DBG = False
-if DBG: from Components.j00zekComponents import j00zekDEBUG
 
 import math
 import datetime
@@ -133,47 +128,49 @@ class Sun:
         
 class geo():
     Position = {}
-    def __init__(self):
-        if DBG: j00zekDEBUG('[geo:__init__] >>>')
-        if len(geo.Position) == 0:
-            self.getPosition()
-            
-    def getPosition(self):
-        if DBG: j00zekDEBUG('[self:getPosition] >>>')
+    def __init__(self, DBG = False):
+        self.DBG = DBG
+        if self.DBG: print('[geo:__init__] >>>')
         try:
+            from Components.config import config
             geo.Position['latitude'] = float(config.plugins.WeatherPlugin.Entry[0].geolatitude.value)
             geo.Position['longitude'] = float(config.plugins.WeatherPlugin.Entry[0].geolongitude.value)
-            if DBG: j00zekDEBUG("[self:getPosition] configured latitude=%s, longitude=%s" % (geo.Position['latitude'],geo.Position['longitude']))
+            if self.DBG: print("[self:getPosition] configured latitude=%s, longitude=%s" % (geo.Position['latitude'],geo.Position['longitude']))
         except Exception, e:
-            if DBG: j00zekDEBUG("[self:getPosition] >>> Error getting configured data: '%s'" % str(e))
-            try:
-                from twisted.web.client import getPage
-                from twisted.web.client import downloadPage
-                from twisted.web import client, error as weberror
-            except:
-                if DBG: j00zekDEBUG("Error importing twisted. Something wrong with the image?")
-            self.getWebData()
+            if self.DBG: print("[self:getPosition] >>> Error getting configured data: '%s'" % str(e))
+
+    def readWebData(self):
+        try:
+            import urllib2
+            response = urllib2.urlopen('https://dcinfos.abtasty.com/geolocAndWeather.php', timeout=1)
+            response = response.read()
+            geo.Position = json.loads(response.strip()[1:-1])
+        except Exception as e:
+            print(str(e))
+            if self.DBG: print("Error importing twisted. Something wrong with the image?")
+            
 
     def getLatitude(self):
-        if DBG: j00zekDEBUG("self:getLatitude()='%s'" % geo.Position['latitude'])
-        return geo.Position['latitude']
+        retVal = geo.Position.get('latitude', None)
+        if retVal is None:
+            self.readWebData()
+            retVal = geo.Position.get('latitude', '?')
+            if self.DBG: print("from Web getLatitude()='%s'" % retVal)
+        else:
+            if self.DBG: print("Read getLatitude()='%s'" % retVal)
+        return retVal
         
     def getLongitude(self):
-        if DBG: j00zekDEBUG("self:getLongitude()='%s'" % geo.Position['longitude'])
-        return geo.Position['longitude']
-        
-    def getWebData(self):
-        if DBG: j00zekDEBUG('[geo:getWebData] >>>')
-        
-        def dataError(error = ''):
-            if DBG: j00zekDEBUG("[geo:getWebData] Error downloading data %s, trying again" % str(error))
-          
-        def readData(data):
-            if DBG: j00zekDEBUG("[geo:getWebData] >>> Received data: '%s'" % str(data))
-            try: 
-                geo.Position = json.loads(data.strip()[1:-1])
-                if DBG: 
-                    j00zekDEBUG("latitude='%s'" % geo.Position['latitude'])
-                    j00zekDEBUG("longitude='%s'" % geo.Position['longitude'])
-            except Exception, e: j00zekDEBUG("[geo:getWebData] >>> Exception: '%s'" % str(e))
-        getPage('https://dcinfos.abtasty.com/geolocAndWeather.php').addCallback(readData).addErrback(dataError)
+        retVal = geo.Position.get('longitude', None)
+        if retVal is None:
+            self.readWebData()
+            retVal = geo.Position.get('longitude', '?')
+            if self.DBG: print("from Web longitude()='%s'" % retVal)
+        else:
+            if self.DBG: print("Read longitude()='%s'" % retVal)
+        return retVal
+
+#for tests outside e2
+if __name__ == '__main__':
+    print geo(True).getLatitude()
+    print geo(True).getLongitude()

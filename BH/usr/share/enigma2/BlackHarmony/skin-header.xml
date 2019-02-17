@@ -68,6 +68,7 @@
     <font filename="/usr/share/enigma2/BlackHarmony/fonts/BebasNeue.ttf" name="BebasNeue" scale="100" />
 </fonts>
   <parameters>
+    <parameter name="ConfigListSeperator" value="250"/>
     <!--             MovieList                                  -->
     <parameter name="MovieListProgress" value="1200,17,80,13"/>
     <parameter name="MovieListProgressPercent" value="1250,8,80,37"/>

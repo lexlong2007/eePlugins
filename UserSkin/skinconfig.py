@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 # UserSkin, based on AtileHD concept by schomi & plnick
 #
@@ -39,6 +40,7 @@ from Tools import Notifications
 from os import listdir, remove, rename, system, path, symlink, chdir, rmdir, mkdir
 import shutil
 import re
+from twisted.web.client import downloadPage
 
 from translate import _
 
@@ -52,11 +54,6 @@ config.plugins.AtileHD.tempUnit = ConfigSelection(default="Celsius", choices = [
                 ])
 config.plugins.UserSkin = ConfigSubsection()
 config.plugins.UserSkin.refreshInterval = ConfigNumber(default=30) #in minutes
-config.plugins.UserSkin.woeid = ConfigNumber(default=523920) #Location Warsaw (visit weather.yahoo.com)
-config.plugins.UserSkin.tempUnit = ConfigSelection(default="Celsius", choices = [
-                ("Celsius", _("Celsius")),
-                ("Fahrenheit", _("Fahrenheit"))
-                ])
        
 def isSlowCPU():
     fc=''
@@ -267,16 +264,6 @@ class UserSkin_Config(Screen, ConfigListScreen):
         self.list.append(self.set_font)
         #self.list.append(getConfigListEntry(_("Font scale (50-200)%:"), config.plugins.UserSkin.FontScale))
         self.list.append(self.set_bar)
-        if 0:
-            if path.exists(resolveFilename(SCOPE_PLUGINS, '../Components/Renderer/VWeatherUpdater.py')) or \
-                path.exists(resolveFilename(SCOPE_PLUGINS, '../Components/Renderer/VWeatherUpdater.pyo')) or \
-                path.exists(resolveFilename(SCOPE_PLUGINS, '../Components/Converter/inHDGOSVWeather2.pyo')) or \
-                path.exists(resolveFilename(SCOPE_PLUGINS, '../Components/Renderer/MetrixHDWeatherUpdaterStandalone.pyo')) or \
-                path.exists(resolveFilename(SCOPE_PLUGINS, '../Components/Renderer/VWeatherUpdater.pyc')):
-                self.list.append(getConfigListEntry(_("---Yahoo Weather---"), self.myUserSkin_fake_entry))
-                self.list.append(getConfigListEntry(_("Refresh interval in minutes:"), config.plugins.AtileHD.refreshInterval))
-                self.list.append(getConfigListEntry(_("Location # (http://weather.yahoo.com/):"), config.plugins.AtileHD.woeid))
-                self.list.append(getConfigListEntry(_("Temperature unit:"), config.plugins.AtileHD.tempUnit))
         if isSlowCPU() == True:
             self.list.append(getConfigListEntry(_("No JPG previews:"), config.plugins.UserSkin.jpgPreview))
         self.list.append(getConfigListEntry(_("LCD/VFD skin:"), config.plugins.UserSkin.LCDmode))
@@ -319,8 +306,6 @@ class UserSkin_Config(Screen, ConfigListScreen):
                     self["key_yellow"].setText("")
             elif self["config"].getCurrent()[1] == config.plugins.j00zekPiconAnimation.UserPath:
                 self.createConfigList()
-            #elif self["config"].getCurrent()[1] == config.plugins.UserSkin.SafeMode:
-            #    self.createConfigList()
         except Exception: pass
 
     def selectionChanged(self):
@@ -410,8 +395,6 @@ class UserSkin_Config(Screen, ConfigListScreen):
             printDEBUG("self.myUserSkin_style.value=" + self.myUserSkin_style.value)
             printDEBUG("self.myUserSkin_bar.value=" + self.myUserSkin_bar.value)
             config.plugins.UserSkin.refreshInterval.value = config.plugins.AtileHD.refreshInterval.value
-            config.plugins.UserSkin.woeid.value = config.plugins.AtileHD.woeid.value
-            config.plugins.UserSkin.tempUnit.value = config.plugins.AtileHD.tempUnit.value
             for x in self["config"].list:
                 x[1].save()
             configfile.save()
@@ -895,16 +878,34 @@ class TreeUserSkinScreens(Screen):
         self.onLayoutFinish.append(self.__onLayoutFinish)
         self.PreviewTimer = eTimer()
         self.PreviewTimer.callback.append(self.PreviewTimerCB)
+        self.PreviewsURL = None
+        if pathExists("%s%s" % (SkinPath,'skin.config')):
+            with open("%s%s" % (SkinPath,'skin.config'), 'r') as cf:
+                for cfg in cf:
+                    if cfg.startswith("allPreviews="):
+                        self.PreviewsURL = cfg.split('=')[1].strip().replace("'","")
+                        break
+                    elif cfg.startswith("#allPreviews="):
+                        break
 
     def endrun(self):
         return
      
     def PreviewTimerCB(self):
         def UpdatePreviewPicture(PreviewFileName):
+            printDEBUG("[UserSkin:PreviewTimerCB:] UpdatePreviewPicture('%s')" % PreviewFileName )
             self["PreviewPicture"].instance.setScale(1)
             self["PreviewPicture"].instance.setPixmap(LoadPixmap(path=PreviewFileName))
             self["PreviewPicture"].show()
 
+        def webPreview(response = None):
+            printDEBUG("[UserSkin:PreviewTimerCB] downloaded '%s%s.jpg'" % (self.PreviewsURL, pic) )
+            UpdatePreviewPicture('/tmp/preview.jpg')
+        
+        def webError(response = None):
+            printDEBUG("[UserSkin:PreviewTimerCB] webError('%s')" % str(response) )
+            self["PreviewPicture"].hide()
+        
         self.PreviewTimer.stop()
         
         if self["filelist"].getSelection()[1] == True: # isDir
@@ -921,8 +922,13 @@ class TreeUserSkinScreens(Screen):
         elif path.exists(self.allPreviews_dir + pic + '.jpg'):
             UpdatePreviewPicture(self.allPreviews_dir + pic + '.jpg')
         else:
-            printDEBUG("[UserSkin:PreviewTimerCB] '%s.jpg' not found" % pic )
-            self["PreviewPicture"].hide()
+            if path.exists('/tmp/preview.jpg'):
+                remove('/tmp/preview.jpg')
+            if self.PreviewsURL is not None:
+                downloadPage('%s%s.jpg' % (self.PreviewsURL, pic), file('/tmp/preview.jpg', 'wb')).addCallback(webPreview).addErrback(webError)
+            else:
+                printDEBUG("[UserSkin:PreviewTimerCB] '%s.jpg' not found" % pic )
+                self["PreviewPicture"].hide()
     
     def runMenuEntry(self):
         selection = self["filelist"].getSelection()
@@ -978,6 +984,8 @@ class TreeUserSkinScreens(Screen):
             print "Nothing to Delete ;)"
             
     def keyCancel(self):
+        if path.exists('/tmp/preview.jpg'):
+            remove('/tmp/preview.jpg')
         self.close()
 ####################### FOR NEW TREE SELECTOR ###################################
     def __onLayoutFinish(self):

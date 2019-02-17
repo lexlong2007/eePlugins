@@ -28,20 +28,6 @@ if eDBoxLCD.getInstance().detected():
                                                                             ])
     config.plugins.dynamicLCD.KODIstate = NoSave(ConfigText(default = ""))
     
-    SunPeriodsNames = {
-        "sunrise-30": "from 30mins before sunrise time",
-        "30-sunrise": "from sunrise time to 30 mins after",
-        "8-sunrise":  "from sunrise time till 8:00",
-        "sunrise-30,30-sunrise": "from 30mins before to 30 mins after sunrise",
-        "sunrise-30,8-sunrise": "from 30mins before sunrise till 8:00"
-    }
-    config.plugins.dynamicLCD.useSunRiseTime = ConfigSelection(default = "no",choices = [("no", _("No")),("sunrise-30", _(SunPeriodsNames['sunrise-30'])),
-                                                                                                          ("30-sunrise", _(SunPeriodsNames['30-sunrise'])),
-                                                                                                          ("8-sunrise", _(SunPeriodsNames['8-sunrise'])),
-                                                                                                          ("sunrise-30,30-sunrise", _(SunPeriodsNames['sunrise-30,30-sunrise'])),
-                                                                                                          ("sunrise-30,8-sunrise", _(SunPeriodsNames['sunrise-30,8-sunrise']))
-                                                                                                          ])
-
     val = int(config.lcd.standby.value * 255 / 10)
     if val > 255:
         val = 255
@@ -97,9 +83,23 @@ if DBG: printDEBUG("Loaded", False)
 try:
     from Components.j00zekSunCalculations import Sun, geo
     sunRiseAvailable = True
-    myGeo = geo()
+    SunPeriodsNames = {
+        "sunrise-30": "from 30mins before sunrise time",
+        "30-sunrise": "from sunrise time to 30 mins after",
+        "8-sunrise":  "from sunrise time till 8:00",
+        "sunrise-30,30-sunrise": "from 30mins before to 30 mins after sunrise",
+        "sunrise-30,8-sunrise": "from 30mins before sunrise till 8:00"
+    }
+    config.plugins.dynamicLCD.useSunRiseTime = ConfigSelection(default = "no",choices = [("no", _("No")),("sunrise-30", _(SunPeriodsNames['sunrise-30'])),
+                                                                                                          ("30-sunrise", _(SunPeriodsNames['30-sunrise'])),
+                                                                                                          ("8-sunrise", _(SunPeriodsNames['8-sunrise'])),
+                                                                                                          ("sunrise-30,30-sunrise", _(SunPeriodsNames['sunrise-30,30-sunrise'])),
+                                                                                                          ("sunrise-30,8-sunrise", _(SunPeriodsNames['sunrise-30,8-sunrise']))
+                                                                                                          ])
+
 except Exception as e:
     sunRiseAvailable = False
+    config.plugins.dynamicLCD.useSunRiseTime = ConfigSelection(default = "no",choices = [("no", _("Disabled - no required components found!!!"))])
     if DBG: printDEBUG('Exception importing j00zekSunCalculations: %s' % str(e))
 
 def leaveStandby():
@@ -159,8 +159,8 @@ def calculateLCDbrightness(DBGtext = ''):
     timerWaitingTime = (60 - Minutes)
     if sunRiseAvailable and config.plugins.dynamicLCD.useSunRiseTime.value != 'no' and hour < 8:
         try:
-            latitude = myGeo.getLatitude()
-            longitude = myGeo.getLongitude()
+            latitude = geo().getLatitude()
+            longitude = geo().getLongitude()
             sunriseTime = Sun().getSunriseTime(longitude, latitude)['TZtime'].split(':')
             sunriseMinutesSinceMidnight = (int(sunriseTime[0]) * 60 + int(sunriseTime[0]))
             MinutesToSunrise = MinutesSinceMidnight - sunriseMinutesSinceMidnight
@@ -258,9 +258,18 @@ def Plugins(path, **kwargs):
             PluginDescriptor(name="DynamicLCDbrightness", where = PluginDescriptor.WHERE_SESSIONSTART, fnc = sessionstart, needsRestart = False, weight = -1)]
 
 class DynamicLCDbrightnessInStandbyConfiguration(Screen, ConfigListScreen):
+    skin = """
+    <screen name="DynamicLCDbrightnessInStandbyConfiguration" position="center,center" size="640,500" title="DynamicLCDbrightnessInStandby Config" backgroundColor="#20606060" >
+
+            <widget name="config" position="10,10" size="620,450" zPosition="1" transparent="0" scrollbarMode="showOnDemand" />
+            <widget name="key_red" position="0,465" zPosition="2" size="200,35" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="red" />
+            <widget name="key_green" position="220,465" zPosition="2" size="200,35" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="green" />
+            <widget name="key_blue" position="440,465" zPosition="2" size="200,35" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="#202673ec" />
+
+    </screen>"""
     def __init__(self, session):
         Screen.__init__(self, session)
-        self.skinName = [ "Setup", ]
+        #self.skinName = [ "Setup", ]
 
         # Summary
         self.setup_title = _("DynamicLCDbrightness v %s Configuration") % Version
@@ -291,8 +300,6 @@ class DynamicLCDbrightnessInStandbyConfiguration(Screen, ConfigListScreen):
         ConfigList = [getConfigListEntry(_("Control LCD brightness in Standby:"), config.plugins.dynamicLCD.enabled)]
         if eDBoxLCD.getInstance().detected():
             if config.plugins.dynamicLCD.enabled.value:
-                ConfigList.append(getConfigListEntry(_("Support 'Share LCD with KODI' plugin:"), config.plugins.dynamicLCD.KODIsupport))
-                ConfigList.append(getConfigListEntry(_("Log to file"), config.plugins.dynamicLCD.debug))
                 ConfigList.append(getConfigListEntry(_("Night hours..."), config.plugins.dynamicLCD.ConfigNothing))
                 ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('23:00',config.plugins.dynamicLCD.NightStandbyBrightness23.value), config.plugins.dynamicLCD.NightStandbyBrightness23))
                 ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('00:00',config.plugins.dynamicLCD.NightStandbyBrightness00.value), config.plugins.dynamicLCD.NightStandbyBrightness00))
@@ -303,9 +310,9 @@ class DynamicLCDbrightnessInStandbyConfiguration(Screen, ConfigListScreen):
                 ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('05:00',config.plugins.dynamicLCD.NightStandbyBrightness05.value), config.plugins.dynamicLCD.NightStandbyBrightness05))
                 ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('06:00',config.plugins.dynamicLCD.NightStandbyBrightness06.value), config.plugins.dynamicLCD.NightStandbyBrightness06))
                 ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('07:00',config.plugins.dynamicLCD.NightStandbyBrightness07.value), config.plugins.dynamicLCD.NightStandbyBrightness07))
+                ConfigList.append(getConfigListEntry(_("Sunrise time..."), config.plugins.dynamicLCD.ConfigNothing))
+                ConfigList.append(getConfigListEntry(_("Use sunrise time"), config.plugins.dynamicLCD.useSunRiseTime))
                 if sunRiseAvailable:
-                    ConfigList.append(getConfigListEntry(_("Sunrise time..."), config.plugins.dynamicLCD.ConfigNothing))
-                    ConfigList.append(getConfigListEntry(_("Use sunrise time"), config.plugins.dynamicLCD.useSunRiseTime))
                     if config.plugins.dynamicLCD.useSunRiseTime.value.startswith('sunrise-30'):
                         ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('-30m',config.plugins.dynamicLCD.SunRise30minsBefore.value), config.plugins.dynamicLCD.SunRise30minsBefore))
                     if config.plugins.dynamicLCD.useSunRiseTime.value.endswith('30-sunrise'):
@@ -329,13 +336,17 @@ class DynamicLCDbrightnessInStandbyConfiguration(Screen, ConfigListScreen):
                 ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('20:00',config.plugins.dynamicLCD.NightStandbyBrightness20.value), config.plugins.dynamicLCD.NightStandbyBrightness20))
                 ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('21:00',config.plugins.dynamicLCD.NightStandbyBrightness21.value), config.plugins.dynamicLCD.NightStandbyBrightness21))
                 ConfigList.append(getConfigListEntry(_("from %s (%s)") % ('22:00',config.plugins.dynamicLCD.NightStandbyBrightness22.value), config.plugins.dynamicLCD.NightStandbyBrightness22))
+                
+                ConfigList.append(getConfigListEntry(_("Other settings..."), config.plugins.dynamicLCD.ConfigNothing))
+                ConfigList.append(getConfigListEntry(_("Support 'Share LCD with KODI' plugin:"), config.plugins.dynamicLCD.KODIsupport))
+                ConfigList.append(getConfigListEntry(_("Log to file"), config.plugins.dynamicLCD.debug))
         return ConfigList
         
     def __layoutFinished(self):
         self.setTitle(self.setup_title)
         try:
             self["title"]=StaticText(self.setup_title)
-        except:
+        except Exception:
             pass
 
     def __onClose(self):

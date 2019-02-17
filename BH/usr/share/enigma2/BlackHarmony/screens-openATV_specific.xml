@@ -56,7 +56,7 @@
     <widget source="global.CurrentTime" render="Label" position="129,26" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <widget name="AboutScrollLabel" font="Regular; 25" position="66,122" size="750,625" zPosition="2" halign="left" />
+    <widget name="AboutScrollLabel" font="Roboto_HD; 25" position="66,122" size="750,625" zPosition="2" halign="left" />
     <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="lemon" position="65,760" size="210,32" text="Support for skin:" transparent="1" />
     <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="285,759" size="430,32" text="http://forum.dvhk.pl" transparent="1" />
     <widget source="session.CurrentService" render="Label" position="885,741" size="280,30" font="HD_Thin; 28" halign="center" backgroundColor="background" transparent="1" zPosition="5" foregroundColor="light_yellow">
@@ -137,8 +137,8 @@
     <widget name="key_green" position="478,999" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget name="key_yellow" position="808,999" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <eLabel text="Quick Launch Menu" position="1114,68" size="747,43" font="Regular; 27" halign="right" backgroundColor="black" transparent="1" />
-    <widget name="list" position="334,140" size="550,700" itemHeight="75" font="Replacement; 18" selectionPixmap="BlackHarmony/menu/sel_735_75.png" scrollbarMode="showNever" transparent="1" backgroundColor="background" foregroundColor="foreground" foregroundColorSelected="lemon" />
-    <widget name="sublist" position="976,140" size="580,700" itemHeight="75" font="Conslole; 15" selectionPixmap="BlackHarmony/menu/sel_735_75.png" scrollbarMode="showNever" transparent="1" backgroundColor="background" foregroundColor="foreground" foregroundColorSelected="lemon" />
+    <widget name="list" position="280,150" size="640,700" itemHeight="75" font="Replacement; 18" selectionPixmap="BlackHarmony/menu/sel_735_75.png" scrollbarMode="showNever" transparent="1" backgroundColor="background" foregroundColor="foreground" foregroundColorSelected="lemon" />
+    <widget name="sublist" position="1040,150" size="640,700" itemHeight="75" font="Conslole; 15" selectionPixmap="BlackHarmony/menu/sel_735_75.png" scrollbarMode="showNever" transparent="1" backgroundColor="background" foregroundColor="foreground" foregroundColorSelected="lemon" />
     <ePixmap position="center,center" zPosition="-7" size="1922,1080" pixmap="BlackHarmony/bg_design/cool.png" />
     <widget source="global.CurrentTime" render="Label" position="81,68" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Default</convert>
