@@ -620,7 +620,7 @@ class BlackHarmonyCaidInfo2(Poll, Converter, object):
                                 if item[1].strip() == "emu":
                                     item[0] = "source"
                             elif item[0] == "from":
-                                if item[1].strip() == "local":
+                                if item[1].lower().find("local") > -1: #some oscams return also number of local
                                     item[1] = "sci"
                                     item[0] = "source"
                                 else:

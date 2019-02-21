@@ -57,6 +57,12 @@ enigma2-plugin-skin-stylefhd
 enigma2-plugin-systemplugins-ui3dsetup
 enigma2-plugin-systemplugins-uipositionsetup
 enigma2-plugin-systemplugins-zappingmodeselection
+enigma2-plugin-systemplugins-3gmodemmanager
+enigma2-plugin-systemplugins-autoshutdown
+enigma2-plugin-systemplugins-crashreport
+enigma2-plugin-systemplugins-ui3dsetup
+enigma2-plugin-systemplugins-uipositionsetup
+enigma2-plugin-systemplugins-zappingmodeselection
 "
 
 for pakiet in $lista;

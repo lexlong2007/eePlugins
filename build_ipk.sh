@@ -23,8 +23,14 @@ fi
 plugAbsPath=$(readlink -fn "$1")
 PluginName_lower=`grep 'Package:' < $plugAbsPath/CONTROL/control|cut -d ':' -f2|xargs`
 PluginPath=`grep 'DestinationPath:' < $plugAbsPath/CONTROL/control|cut -d ':' -f2|xargs`
-rm -f $plugAbsPath/*.pyo 2>/dev/null
-rm -f $plugAbsPath/*.pyc 2>/dev/null
+find $plugAbsPath -iname "*.py" | 
+  while read F 
+  do
+    [ -e "${F/.py/.pyo}" ] || touch "${F/.py/.pyo}"
+    [ -e "${F/.py/.pyc}" ] && rm -f "${F/.py/.pyc}"
+    [ -e "${F/.py/.py~}" ] && rm -f "${F/.py/.py~}"
+    [ -e "$F" ] && rm -f "${F/.py/.pyo}"
+  done
 if [ -z $2 ]; then
   echo "Info: no version provided, date &time of last modification will be used"
   #version=`ls -atR --full-time "$plugAbsPath/"|egrep -v '^dr|version.py|control|*.mo'|grep -m 1 -o '20[12][5678].[0-9]*.[0-9]* [0-9]*\:[0-9]*'|sed 's/^20//'|sed 's/ /./'|sed 's/-/./g'|sed 's/\://g'`

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# -*- coding: utf-8 -*-
 
 # UserSkin, based on AtileHD concept by schomi & plnick
 #
@@ -87,6 +86,8 @@ def isImageType(imgName = ''):
                 fileContent = fileContent.lower()
                 if fileContent.find('VTi') > -1:
                     imageType = 'vti'
+                elif fileContent.find('code.vuplus.com') > -1:
+                    imageType = 'vuplus'
                 elif fileContent.find('openatv') > -1:
                     imageType = 'openatv'
                     if fileContent.find('/5.3/') > -1:
@@ -361,7 +362,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
     
     def UpdatePreviewPicture(self, PreviewFileName):
             if DBG == True: printDEBUG("[UserSkin:UpdatePreviewPicture] pic =" + PreviewFileName)
-            self["Picture"].instance.setScale(1)
+            if isImageType('vuplus') == False: self["Picture"].instance.setScale(1)
             self["Picture"].instance.setPixmap(LoadPixmap(path=PreviewFileName))
             self["Picture"].show()
             
@@ -400,7 +401,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
             configfile.save()
             ################################ SAFE MODE 
             self.UserSkinToolSet.ClearMemory()
-            if isImageType('vti'):
+            if isImageType('vti') or isImageType('vuplus'):
                 system("touch /etc/enigma2/skinModified") #for safety, nicely manage overwrite ;)
             #we change current folder to active skin folder
             chdir(SkinPath)
@@ -665,6 +666,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
                             remove(resolveFilename(SCOPE_CONFIG, 'skin_user' + self.currentSkin + '.xml'))
                     elif (isImageType('vti') == True and self.LCD_widgets_selected) or \
                           isImageType('blackhole') == True or \
+                          isImageType('vuplus') == True or \
                           config.plugins.UserSkin.LCDmode.value == 'LCDLinux': #BlackHole,LCDLinux korzystają jedynie ze standardowego mechanizmu
                         #system('ln -sf %s /etc/enigma2/skin_user.xml' % user_skin_file) 
                         system('mv -f %s /etc/enigma2/skin_user.xml' % user_skin_file)
@@ -894,7 +896,7 @@ class TreeUserSkinScreens(Screen):
     def PreviewTimerCB(self):
         def UpdatePreviewPicture(PreviewFileName):
             printDEBUG("[UserSkin:PreviewTimerCB:] UpdatePreviewPicture('%s')" % PreviewFileName )
-            self["PreviewPicture"].instance.setScale(1)
+            if isImageType('vuplus') == False: self["PreviewPicture"].instance.setScale(1)
             self["PreviewPicture"].instance.setPixmap(LoadPixmap(path=PreviewFileName))
             self["PreviewPicture"].show()
 
