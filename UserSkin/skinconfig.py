@@ -209,12 +209,15 @@ class UserSkin_Config(Screen, ConfigListScreen):
                     mylist.append((f, _(friendly_name)))
             if len(mylist) == 0:
                 mylist.append(("default", _("default") ))
-            if path.exists(SkinPath + 'skin_user_bar'):
-                self.myUserSkin_bar = NoSave(ConfigSelection(
+                self.myUserSkin_bar = NoSave(ConfigSelection(default = "default", choices = mylist))
+            else:
+                if path.exists(SkinPath + 'skin_user_bar'):
+                    self.myUserSkin_bar = NoSave(ConfigSelection(
                                         default = path.basename(path.realpath( SkinPath + 'skin_user_bar')),
                                         choices = mylist))
-            else:
-                self.myUserSkin_bar = NoSave(ConfigSelection(default = "default", choices = mylist))
+                else:
+                    mylist.append(("default", _("default") ))
+                    self.myUserSkin_bar = NoSave(ConfigSelection(default = "default", choices = mylist))
         ##########################################################################################################3
         if path.exists(SkinPath + "mySkin"):
             self.myUserSkin_active = NoSave(ConfigYesNo(default= True))
@@ -250,10 +253,20 @@ class UserSkin_Config(Screen, ConfigListScreen):
         if not self.selectionChanged in self["config"].onSelectionChanged:
             self["config"].onSelectionChanged.append(self.selectionChanged)
         
+        try:
+            self.LCDconfigKey = config.skin.display_skin.value
+            self.LCDconfigKey = 'display_skin'
+        except Exception:
+            try:
+                LCDconfigKey = config.skin.primary_vfdskin.value
+                self.LCDconfigKey = 'primary_vfdskin'
+            except Exception:
+                self.LCDconfigKey = 'none'
+        
         self.createConfigList()
         self.updateEntries = False
         self.LCD_widgets_selected = False
-        
+
     def createConfigList(self):
         self.set_bar = getConfigListEntry(_("Selector bar style:"), self.myUserSkin_bar)
         self.set_color = getConfigListEntry(_("Colors:"), self.myUserSkin_style)
@@ -267,7 +280,8 @@ class UserSkin_Config(Screen, ConfigListScreen):
         self.list.append(self.set_bar)
         if isSlowCPU() == True:
             self.list.append(getConfigListEntry(_("No JPG previews:"), config.plugins.UserSkin.jpgPreview))
-        self.list.append(getConfigListEntry(_("LCD/VFD skin:"), config.plugins.UserSkin.LCDmode))
+        if self.LCDconfigKey != 'none':
+            self.list.append(getConfigListEntry(_("Display skin:"), config.plugins.UserSkin.LCDmode))
         try:
             if (path.exists(resolveFilename(SCOPE_PLUGINS, '../Components/Renderer/j00zekPiconAnimation.py')) or \
                     path.exists(resolveFilename(SCOPE_PLUGINS, '../Components/Renderer/j00zekPiconAnimation.pyo')) or \
@@ -679,19 +693,16 @@ class UserSkin_Config(Screen, ConfigListScreen):
                 #    system('ln -sf %s %s/%s' % (SkinPath + "allMiniTVskins/" + config.plugins.UserSkin.LCDmode.value,
                 #                    resolveFilename(SCOPE_SKIN, 'display'),
                 #                    config.plugins.UserSkin.LCDmode.value)
-                try:
+                if self.LCDconfigKey == 'display_skin':
                     config.skin.display_skin.value = '../BlackHarmony/allMiniTVskins/' + config.plugins.UserSkin.LCDmode.value #openXYZ
                     config.skin.display_skin.save()
                     configfile.save()
                     printDEBUG('Set config.skin.display_skin.value=' + config.plugins.UserSkin.LCDmode.value)
-                except Exception:
-                    try:
-                        config.skin.primary_vfdskin.value = 'BlackHarmony/allMiniTVskins/' + config.plugins.UserSkin.LCDmode.value
-                        config.skin.primary_vfdskin.save()
-                        configfile.save()
-                        printDEBUG('Set config.skin.display_skin.value=')
-                    except Exception, e:
-                        printDEBUG('Exception:' + str(e))
+                elif self.LCDconfigKey == 'primary_vfdskin':
+                    config.skin.primary_vfdskin.value = 'BlackHarmony/allMiniTVskins/' + config.plugins.UserSkin.LCDmode.value
+                    config.skin.primary_vfdskin.save()
+                    configfile.save()
+                    printDEBUG('Set config.skin.display_skin.value=')
 
             #checking if all scripts are in the system
             if DBG == True: printDEBUG("########################### Final User Skin\n%s\n##############################################\n" % user_skin)

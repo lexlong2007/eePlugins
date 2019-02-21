@@ -15,7 +15,7 @@ if [ ! -e /usr/lib/enigma2/python/Plugins/Extensions/MSNweather ]; then
   fi
 fi
 
-if [ -e /usr/lib/enigma2/python/skin.py ];then #patching BlackHole skin.py to be less resstrictive, similar rules to openATV
+if [ -e /usr/lib/enigma2/python/skin.py ];then #patching BlackHole/Vuplus skin.py to be less resstrictive, similar rules to openATV
   sed -i 's/\(^[ \t]*\)raise SkinError\(.*pixmap file %s not found!.*\)/\1print\2/' /usr/lib/enigma2/python/skin.py
   sed -i 's/\(^[ \t]*\)raise SkinError\(.*need color and name, got %s %s.*\)/\1print\2/' /usr/lib/enigma2/python/skin.py
   sed -i 's/\(^[ \t]*\)raise SkinError\(.*component with name .* was not found in skin of screen.*\)/\1print\2/' /usr/lib/enigma2/python/skin.py
@@ -23,8 +23,12 @@ if [ -e /usr/lib/enigma2/python/skin.py ];then #patching BlackHole skin.py to be
   sed -i 's/\(^[ \t]*\)raise SkinError\(.*source .* was not found in screen.*\)/\1print\2/' /usr/lib/enigma2/python/skin.py
   sed -i 's/\(^[ \t]*\)raise SkinError\(.*you must define a renderer with render= for source.*\)/\1print\2/' /usr/lib/enigma2/python/skin.py
   sed -i 's/\(^[ \t]*\)raise SkinError\(.*applet type .* unknown!.*\)/\1print\2/' /usr/lib/enigma2/python/skin.py
-  if [ "`cat /etc/opkg/all-feed.conf 2> /dev/null|grep -c 'config.skin.primary_vfdskin[ ]*=[ ]*ConfigText'`" -eq 0 ];then
-     sed -i 's/\(^config.skin.primary_skin[ ]*=[ ]*ConfigText.default[ ]*=[ ]*DEFAULT_SKIN.*$\)/\1\nconfig.skin.primary_vfdskin = ConfigText(default="vfd_skin\/skin_vfd.xml")/' /usr/lib/enigma2/python/skin.py
+  if [ "`grep -c 'config.skin.primary_vfdskin[ ]*=[ ]*ConfigText' < /usr/lib/enigma2/python/skin.py`" -eq 0 ];then
+    [ -e /usr/share/enigma2/vfd_skin ] || mkdir -p /usr/share/enigma2/vfd_skin
+    sed -i 's/\(^config.skin.primary_skin[ ]*=[ ]*ConfigText.default[ ]*=[ ]*DEFAULT_SKIN.*$\)/\1\nconfig.skin.primary_vfdskin = ConfigText(default="vfd_skin\/skin_vfd.xml")/' /usr/lib/enigma2/python/skin.py
+  fi
+  if [ "`grep -c 'profile("LoadSkinLCD")' < /usr/lib/enigma2/python/skin.py`" -eq 0 ];then
+    sed -i 's/\(^.*not loading user skin.*$\)/\1\n\nprofile("LoadSkinLCD")\ntry: loadSkin("\/usr\/share\/enigma2\/" + config.skin.primary_vfdskin.value, SCOPE_CONFIG)\nexcept (SkinError, IOError, AssertionError), err: print "not loading LCD skin: ", err/' /usr/lib/enigma2/python/skin.py
   fi
   echo
   echo '/usr/lib/enigma2/python/skin.py patched'
