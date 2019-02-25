@@ -728,7 +728,7 @@
   <screen name="MoviePlayer" position="center,center" size="1920,1080" title="InfoBar" flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="220,850" zPosition="-1" size="1529,213" pixmap="BlackHarmony/bg_design/infobarmovie.png"/>
     <widget source="session.CurrentService" render="BlackHarmonyAudioIcon" path="icons/audio" position="1260,981" size="60,20" zPosition="4" alphatest="blend">
-      <convert type="VAudioInfo">AudioIcon</convert>
+      <convert type="BlackHarmonyVAudioInfo">AudioIcon</convert>
     </widget>
     <ePixmap position="1387,981" size="36,20" pixmap="BlackHarmony/icons/ico_format_off.png" zPosition="1" alphatest="blend"/>
     <widget source="session.CurrentService" render="Pixmap" position="1387,981" size="36,20" pixmap="BlackHarmony/icons/ico_format_on.png" zPosition="2" alphatest="blend">
@@ -5783,7 +5783,7 @@
       <convert type="ServicePosition">Remaining,Negate</convert>
     </widget>
     <widget source="session.CurrentService" render="BlackHarmonyAudioIcon" path="icons/audio" position="1360,991" size="60,20" zPosition="4" alphatest="blend">
-      <convert type="VAudioInfo">AudioIcon</convert>
+      <convert type="BlackHarmonyVAudioInfo">AudioIcon</convert>
     </widget>
     <ePixmap position="1304,991" size="36,20" pixmap="BlackHarmony/icons/ico_format_off.png" zPosition="1" alphatest="blend"/>
     <widget source="session.CurrentService" render="Pixmap" position="1304,991" size="36,20" pixmap="BlackHarmony/icons/ico_format_on.png" zPosition="2" alphatest="blend">

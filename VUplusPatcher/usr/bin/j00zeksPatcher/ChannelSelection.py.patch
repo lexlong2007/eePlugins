@@ -1,0 +1,45 @@
+--- /usr/lib/enigma2/python/Screens/ChannelSelection.py.org
++++ /usr/lib/enigma2/python/Screens/ChannelSelection.py
+@@ -1234,6 +1234,7 @@
+ config.radio.lastroot = ConfigText()
+ config.servicelist = ConfigSubsection()
+ config.servicelist.lastmode = ConfigText(default = "tv")
++config.servicelist.previewMode = ConfigText(default = "True")
+ 
+ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelectionEPG, SelectionEventInfo):
+ 	def __init__(self, session):
+@@ -1346,10 +1347,31 @@
+ 		elif not (ref.flags & eServiceReference.isMarker): # no marker
+ 			root = self.getRoot()
+ 			if not root or not (root.flags & eServiceReference.isGroup):
+-				self.zap()
+-				self.asciiOff()
+-				self.close(ref)
++				#self.zap()
++				#self.asciiOff()
++				#self.close(ref)
++				self.j00zekZap()
+ 
++	#zap without closing = review mode
++	def j00zekZap(self):
++		self.revertMode=None
++		ref = self.session.nav.getCurrentlyPlayingServiceReference()
++		nref = self.getCurrentSelection()
++		doClose = True
++		if ref is None or ref != nref:
++			self.new_service_played = True
++			self.session.nav.playService(nref)
++			if config.servicelist.previewMode.value == 'True': doClose = False
++		if doClose:
++			self.saveRoot()
++			self.saveChannel(nref)
++			config.servicelist.lastmode.save()
++			self.addToHistory(nref)
++			self.asciiOff()
++			self.close(ref)
++		else:
++			self.asciiOff()
++			
+ 	#called from infoBar and channelSelected
+ 	def zap(self):
+ 		self.revertMode=None

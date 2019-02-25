@@ -1,0 +1,8 @@
+#!/bin/sh
+patcherDir='/usr/bin/j00zeksPatcher'
+for patchFile in $patcherDir/*.patch
+do
+    patch -N -p1 -i $patchFile 2>/dev/null
+    [ $? -gt 0 ]  && echo "file already pathed :)"
+done
+exit 0
