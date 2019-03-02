@@ -13,14 +13,14 @@ from Screens.MessageBox import MessageBox
 from Components.ActionMap import ActionMap
 from Components.AVSwitch import eAVSwitch
 from Components.Label import Label
-from Components.Pixmap import Pixmap
+#from Components.Pixmap import Pixmap
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.Sources.StaticText import StaticText
 #from Components.ProgressBar import ProgressBar
 from Components.config import *
 #from Components.GUIComponent import GUIComponent
 #from Components.Converter.ConditionalShowHide import ConditionalShowHide
-from Tools.LoadPixmap import LoadPixmap
+#from Tools.LoadPixmap import LoadPixmap
 from os import path, remove, listdir, symlink, system, access, W_OK
 import re
 

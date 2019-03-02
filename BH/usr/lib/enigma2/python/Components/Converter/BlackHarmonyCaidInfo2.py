@@ -157,6 +157,7 @@ class BlackHarmonyCaidInfo2(Poll, Converter, object):
             "01" : "Seca Mediaguard",
             "06" : "Irdeto",
             "17" : "BetaCrypt",
+            "55" : "BulCrypt",
             "05" : "Viaccess",
             "18" : "Nagravision",
             "09" : "NDS-Videoguard",
@@ -169,13 +170,14 @@ class BlackHarmonyCaidInfo2(Poll, Converter, object):
             "22" : "Codicrypt",
             "07" : "DigiCipher",
             "56" : "Verimatrix",
-            "7B" : "DRE-Crypt",
+            "4B" : "DG-Crypt",
             "A1" : "Rosscrypt"}
 
         self.systemCaids = {
             "26" : "BiSS",
             "01" : "SEC",
             "06" : "IRD",
+            "55" : "BET",
             "17" : "BET",
             "05" : "VIA",
             "18" : "NAG",
@@ -183,7 +185,7 @@ class BlackHarmonyCaidInfo2(Poll, Converter, object):
             "0B" : "CON",
             "0D" : "CRW",
             "27" : "EXS",
-            "7B" : "DRE",
+            "4B" : "DRE",
             "4A" : "DRE",
             "0E" : "PWR",
             "10" : "TAN",
@@ -214,7 +216,7 @@ class BlackHarmonyCaidInfo2(Poll, Converter, object):
                 return False
             if self.type == self.BETA:
                 for caid in caids:
-                    if ("%0.4X" % int(caid))[:2] == "17":
+                    if ("%0.4X" % int(caid))[:2] == "55" or ("%0.4X" % int(caid))[:2] == "17" :
                         return True
                 return False
             if self.type == self.CONAX:
@@ -229,7 +231,7 @@ class BlackHarmonyCaidInfo2(Poll, Converter, object):
                 return False
             if self.type == self.DRE:
                 for caid in caids:
-                    if ("%0.4X" % int(caid))[:2] == "7B" or ("%0.4X" % int(caid))[:2] == "4A" :
+                    if ("%0.4X" % int(caid))[:2] == "4B" or ("%0.4X" % int(caid))[:2] == "4A" :
                         return True
                 return False
             if self.type == self.EXS:
@@ -284,7 +286,7 @@ class BlackHarmonyCaidInfo2(Poll, Converter, object):
                         return True
                     return False
                 if self.type == self.BETA_C:
-                    if caid == "17":
+                    if caid == "17" or caid == "55":
                         return True
                     return False
                 if self.type == self.CONAX_C:
@@ -296,7 +298,7 @@ class BlackHarmonyCaidInfo2(Poll, Converter, object):
                         return True
                     return False
                 if self.type == self.DRE_C:
-                    if caid == "4A" or caid == "7B":
+                    if caid == "4A" or caid == "4B":
                         return True
                     return False
                 if self.type == self.EXS_C:
@@ -532,7 +534,7 @@ class BlackHarmonyCaidInfo2(Poll, Converter, object):
                                     pass
                     else:
                         if self.type == self.ALL or self.type == self.SHORT or (self.type == self.FORMAT and (self.sfmt.count("%") > 3 )):
-                            textvalue = _("No parse cannot emu")
+                            textvalue = _("no data from the emulator")
                 else:
                     if self.type == self.ALL or self.type == self.SHORT or (self.type == self.FORMAT and (self.sfmt.count("%") > 3 )):
                         textvalue = _("Free-to-air")

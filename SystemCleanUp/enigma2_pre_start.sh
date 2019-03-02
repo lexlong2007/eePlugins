@@ -41,7 +41,4 @@ done
 #		<key id="KEY_EXIT_OFF" mapto="show_hide_pip" flags="l" />
 #	</map>
 
-if [ -e /usr/lib/enigma2/python/Plugins/Extensions/UserSkin/scripts/reportGS.sh ]; then
-    /usr/lib/enigma2/python/Plugins/Extensions/UserSkin/scripts/reportGS.sh
-fi 
 nice -n 10 /usr/bin/enigma2_cleanUp.sh &

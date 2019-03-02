@@ -611,16 +611,20 @@ class UserSkin_Config(Screen, ConfigListScreen):
             remove(SkinPath + 'mySkin')
             mkdir(SkinPath + 'mySkin')       
 
-        #checking if any self.LCD_widgets_selected = we need to merge
-        self.LCD_widgets_selected = False
+        
+        self.LCD_widgets_selected = False #checking if any self.LCD_widgets_selected = we need to upload to different location
+        self.widgets_selected = False #checking if any self._widgets_selected = we need to merge
+        
         for f in listdir(SkinPath + "UserSkin_Selections/"):
-            if not self.LCD_widgets_selected and f.lower().find('widget') > -1:
+            if f.lower().find('LCD_widget') > -1:
                 self.LCD_widgets_selected = True
+                self.widgets_selected = True
+            elif f.lower().find('widget') > -1:
+                self.widgets_selected = True
+            if self.widgets_selected and self.LCD_widgets_selected:
                 break
-        if self.LCD_widgets_selected:
-            printDEBUG("self.LCD_widgets_selected = True")
-        else:
-            printDEBUG("self.LCD_widgets_selected = False")
+        printDEBUG("self.LCD_widgets_selected = %s\nself.widgets_selected = %s" % (str(self.LCD_widgets_selected), str(self.widgets_selected)))
+        
         user_skin_file = SkinPath + 'mySkin/skin_user' + self.currentSkin + '.xml' #standardowo zapisujemy gotowa skorke w katalogu BH
         if path.exists(user_skin_file):
             remove(user_skin_file)
@@ -639,7 +643,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
                     user_skin = user_skin + self.readXMLfile(SkinPath + 'skin_user_colors.xml' , 'ALLSECTIONS')
             printDEBUG("############################################# Skin after loading header & colors:\n" + user_skin + "\n#############################################\n")        
             if path.exists(SkinPath + 'UserSkin_Selections'):
-                if self.LCD_widgets_selected:
+                if self.widgets_selected:
                     printDEBUG("mergeScreens mode !!!")
                     # get list of screens in file
                     user_screens = []

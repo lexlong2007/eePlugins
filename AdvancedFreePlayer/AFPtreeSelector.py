@@ -11,11 +11,15 @@ from Screens.InputBox import InputBox
 from Screens.MessageBox import MessageBox
 
 from Components.ActionMap import ActionMap
+try:
+    from Components.j00zekAccellPixmap import j00zekAccellPixmap
+except Exception:
+    from j00zekAccellPixmap import j00zekAccellPixmap
 from Components.Label import Label
-from Components.Pixmap import Pixmap
+#from Components.Pixmap import Pixmap
 from Components.Sources.StaticText import StaticText
 from Components.config import *
-from Tools.LoadPixmap import LoadPixmap
+#from Tools.LoadPixmap import LoadPixmap
 from os import path, remove, listdir, symlink, system, access, W_OK
 import re
 
@@ -148,7 +152,7 @@ class AdvancedFreePlayerStart(Screen):
         self["key_red"] = StaticText()
         from PlayWithdmnapi import KeyMapInfo #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
         self["Description"] = Label(KeyMapInfo)
-        self["Cover"] = Pixmap()
+        self["Cover"] = j00zekAccellPixmap()
         
         if path.exists(ExtPluginsPath + '/DMnapi/DMnapi.pyo') or path.exists(ExtPluginsPath +'/DMnapi/DMnapi.pyc') or path.exists(ExtPluginsPath +'/DMnapi/DMnapi.py'):
             self.DmnapiInstalled = True
@@ -430,7 +434,9 @@ class AdvancedFreePlayerStart(Screen):
 
     def selectFile(self):
         selection = self["filelist"].getSelection()
-        if selection[1] == True: # isDir
+        if selection is None:
+            return
+        elif selection[1] == True: # isDir
             if selection[0] is not None and self.filelist.getCurrentDirectory() is not None and \
                     len(selection[0]) > len(self.filelist.getCurrentDirectory()) or self.LastFolderSelected == None:
                 self.LastFolderSelected = selection[0]
@@ -537,14 +543,12 @@ class AdvancedFreePlayerStart(Screen):
         WebCoverFile='/tmp/%s.AFP.jpg' % getNameWithoutExtension(self.filelist.getFilename())
         ### COVER ###
         if path.exists(temp + '.jpg'):
-            self["Cover"].instance.setScale(1)
-            self["Cover"].instance.setPixmap(LoadPixmap(path=temp + '.jpg'))
+            self["Cover"].updateIcon(temp + '.jpg')
             self["Cover"].show()
             self.session.summary.LCD_showPic('LCDpic', temp + '.jpg')
             FoundCover = True
         elif path.exists(WebCoverFile) and myConfig.PermanentCoversDescriptons.value == False:
-            self["Cover"].instance.setScale(1)
-            self["Cover"].instance.setPixmap(LoadPixmap(path=WebCoverFile))
+            self["Cover"].updateIcon(WebCoverFile)
             self["Cover"].show()
             self.session.summary.LCD_showPic('LCDpic', WebCoverFile)
             FoundCover = True
@@ -704,8 +708,7 @@ class AdvancedFreePlayerStart(Screen):
         def WebCover(ret):
             print "[AdvancedFreePlayer] WebCover >>>"
             self.gettingDataFromWEB = False
-            self["Cover"].instance.setScale(1)
-            self["Cover"].instance.setPixmap(LoadPixmap(path=WebCoverFile))
+            self["Cover"].updateIcon(WebCoverFile)
             self["Cover"].show()
             self.session.summary.LCD_showPic('LCDpic', WebCoverFile)
             return
@@ -893,11 +896,12 @@ class AdvancedFreePlayerStartLCD(Screen):
         try:
             self["text1"] =  Label(PluginName)
             self["text2"] = Label(PluginInfo)
-            self["LCDpic"] = Pixmap()
-            self["AFPlogo"] = Pixmap()
+            self["LCDpic"] = j00zekAccellPixmap()
+            self["AFPlogo"] = j00zekAccellPixmap()
+            printDEBUG("AdvancedFreePlayerStartLCD:__init__ using j00zekAccellPixmap()")
             self.onShow.append(self.showLogo)
-        except Exception: pass
-        
+        except Exception as e:
+            printDEBUG("AdvancedFreePlayerStartLCD:__init__ Exception %s" % str(e))
 
     def showLogo(self):
         self.LCD_showPic('AFPlogo' ,"/usr/lib/enigma2/python/Plugins/Extensions/AdvancedFreePlayer/AdvancedFreePlayer.png")
@@ -909,10 +913,9 @@ class AdvancedFreePlayerStartLCD(Screen):
         except Exception: pass
 
     def LCD_showPic(self, widgetName, picPath):
-        printDEBUG("LCD_showPic(%s, picPath=%s)" % (widgetName,picPath))
+        printDEBUG("AdvancedFreePlayerStartLCD:LCD_showPic(%s, picPath=%s)" % (widgetName,picPath))
         try:
-            self[widgetName].instance.setScale(1)
-            self[widgetName].instance.setPixmap(LoadPixmap(picPath))
+            self[widgetName].updateIcon(picPath)
             self[widgetName].show()
         except Exception: pass
 
