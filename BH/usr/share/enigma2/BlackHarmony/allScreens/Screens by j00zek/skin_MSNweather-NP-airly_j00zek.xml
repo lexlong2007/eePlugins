@@ -251,6 +251,7 @@
     <widget source="session.BlackHarmonyMSNWeather" render="Label" font="Roboto_HD; 26" position="1620,860" size="190,110" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top">
       <convert type="BlackHarmonyMSNWeatherWebDaily">Record=8,info</convert>
     </widget>
+    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="1600,980" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="1650,980" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/small_left.png" position="1700,980" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/small_right.png" position="1750,980" size="35,27" alphatest="blend"/>

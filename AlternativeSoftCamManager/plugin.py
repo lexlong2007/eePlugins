@@ -320,6 +320,11 @@ class AltCamManager(Screen):
             self.camstart = self["list"].getCurrent()[0]
             if self.camstart != self.actcam:
                 print "[Alternative SoftCam Manager] Start SoftCam"
+                try: 
+                    with open("/proc/sys/vm/drop_caches", "w") as f: f.write("1\n")
+                except Exception:
+                    pass
+                self.Console.ePopen("chmod 755 %s/*oscam*" % config.plugins.AltSoftcam.camdir.value)
                 self.camstartcmd = getcamcmd(self.camstart)
                 msg = _("Starting %s") % self.camstart
                 self.mbox = self.session.open(MessageBox, msg, MessageBox.TYPE_INFO)
@@ -331,11 +336,15 @@ class AltCamManager(Screen):
 
     def stop(self):
         if self.actcam != "none":
+            try: 
+                with open("/proc/sys/vm/drop_caches", "w") as f: f.write("1\n")
+            except Exception:
+                pass
             self.Console.ePopen("/etc/init.d/softcam stop;killall -9 %s" % self.actcam)
             print "[Alternative SoftCam Manager] stop ", self.actcam
             try:
                 remove("/tmp/ecm.info")
-            except:
+            except Exception:
                 pass
             msg  = _("Stopping %s") % self.actcam
             self.actcam = "none"
@@ -379,7 +388,7 @@ class AltCamManager(Screen):
                 remove("/tmp/ecm.info")
             if pathExists("/tmp/pmt.tmp"):
                 remove("/tmp/pmt.tmp")
-        except:
+        except Exception:
             pass
         self.actcam = self.camstart
         service = self.session.nav.getCurrentlyPlayingServiceReference()

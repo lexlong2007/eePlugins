@@ -509,3 +509,6 @@ msgstr "Wszystkie zmiany zostały cofnięte\n\n"
 
 msgid "(Advanced mode)"
 msgstr "(Tryb zaawansowany)"
+
+msgid "Display skin:"
+msgstr "Skórka LCD:"

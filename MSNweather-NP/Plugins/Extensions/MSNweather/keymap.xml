@@ -1,0 +1,13 @@
+<keymap>
+  <map context="MSNweatherMapsActions">
+    <key id="KEY_ESC" mapto="keyCancel" flags="m" />
+    <key id="KEY_EXIT" mapto="keyCancel" flags="m" />
+    <key id="KEY_HOME" mapto="keyCancel" flags="m" />
+    <key id="KEY_STOP" mapto="keyCancel" flags="m" />
+    <key id="KEY_OK" mapto="keyOk" flags="m" />
+    <key id="KEY_RED" mapto="keyRed" flags="m" />
+    <key id="KEY_GREEN" mapto="keyGreen" flags="m" />
+    <key id="KEY_YELLOW" mapto="keyYellow" flags="m" />
+    <key id="KEY_BLUE" mapto="keyBlue" flags="m" />
+  </map>
+</keymap>

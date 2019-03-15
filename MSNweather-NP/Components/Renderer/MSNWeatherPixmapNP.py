@@ -22,7 +22,8 @@
 
 from Components.AVSwitch import AVSwitch
 from Components.config import config
-from enigma import ePixmap, eSize, eTimer
+from Components.j00zekAccellPixmap import j00zekAccellPixmap 
+from enigma import ePixmap, eSize, eTimer, ePicLoad
 from random import randint
 from Renderer import Renderer
 from Tools.LoadPixmap import LoadPixmap
@@ -41,6 +42,12 @@ class MSNWeatherPixmapNP(Renderer):
         self.timer = eTimer()
         self.timer.callback.append(self.timerEvent)
         self.pngAnimPath='/usr/share/enigma2/animatedWeatherIcons'
+        if config.plugins.WeatherPlugin.ScalePicType.value == "self.instance.setScale":
+            self.ePicLoadScale = False
+        else:
+            self.ePicLoadScale = True
+        self.picload = ePicLoad()
+        #self.picload.PictureData.get().append(self.paintIconPixmapCB)
         self.DEBUG('MSNWeatherPixmap(Renderer)__init__ pixdelay=%s' % self.pixdelay)
 
     GUI_WIDGET = ePixmap
@@ -62,6 +69,7 @@ class MSNWeatherPixmapNP(Renderer):
                 break
         sc = AVSwitch().getFramebufferScale()
         self._aspectRatio = eSize(sc[0], sc[1])
+        self.picload.setPara((self._scaleSize.width(), self._scaleSize.height(), sc[0], sc[1], True, 2, '#ff000000')) 
         
     def doSuspend(self, suspended):
         if suspended:
@@ -75,7 +83,8 @@ class MSNWeatherPixmapNP(Renderer):
     def changed(self, what):
         if what[0] != self.CHANGED_CLEAR:
             if self.instance:
-                self.instance.setScale(1)
+                if self.ePicLoadScale == False:
+                    self.instance.setScale(1)
                 self.updateIcon(self.source.iconfilename)
 
     def doAnimation(self, pngAnimPath):

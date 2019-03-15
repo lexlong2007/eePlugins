@@ -380,33 +380,14 @@ class MSNWeatherConfiguration(Screen, ConfigListScreen):
         self["key_green"] = StaticText(_("OK"))
         self["actions"] = ActionMap(["SetupActions"], { "cancel": self.keyCancel, "save": self.keySave, })
         ConfigList = []
-        ConfigList.append(getConfigListEntry(_("Icons type:"), config.plugins.WeatherPlugin.IconsType))
-        ConfigList.append(getConfigListEntry(_("Build histograms:"), config.plugins.WeatherPlugin.BuildHistograms))
-        ConfigList.append(getConfigListEntry(_("Debug (require restart):"), config.plugins.WeatherPlugin.DebugEnabled))
-        ConfigList.append(getConfigListEntry(_("Debug log file size:"), config.plugins.WeatherPlugin.DebugSize))
-        ConfigList.append(getConfigListEntry("> MSNWeather(Source):", config.plugins.WeatherPlugin.DebugMSNWeatherSource))
-        ConfigList.append(getConfigListEntry("> MSNWeather(Converter):", config.plugins.WeatherPlugin.DebugMSNWeatherConverter))
-        ConfigList.append(getConfigListEntry("> MSNWeatherThingSpeak(Converter):", config.plugins.WeatherPlugin.DebugMSNWeatherThingSpeakConverter))
-        ConfigList.append(getConfigListEntry("> MSNWeatherWebCurrent(Converter):", config.plugins.WeatherPlugin.DebugMSNWeatherWebCurrentConverter))
-        ConfigList.append(getConfigListEntry("> MSNWeatherWebhourly(Converter):", config.plugins.WeatherPlugin.DebugMSNWeatherWebhourlyConverter))
-        ConfigList.append(getConfigListEntry("> MSNWeatherWebDaily(Converter):", config.plugins.WeatherPlugin.DebugMSNWeatherWebDailyConverter))
-        ConfigList.append(getConfigListEntry("> MSNWeatherPixmap(Renderer):", config.plugins.WeatherPlugin.DebugMSNWeatherPixmapRenderer))
-        ConfigList.append(getConfigListEntry("> WeatherMSN updater:", config.plugins.WeatherPlugin.DebugWeatherMSNupdater))
-        #ConfigList.append(getConfigListEntry("> :", config.plugins.WeatherPlugin.))
-        ConfigList.append(getConfigListEntry("> getWeather basic:", config.plugins.WeatherPlugin.DebugGetWeatherBasic))
-        ConfigList.append(getConfigListEntry("> getWeather xml component:", config.plugins.WeatherPlugin.DebugGetWeatherXML))
-        ConfigList.append(getConfigListEntry("> getWeather web component:", config.plugins.WeatherPlugin.DebugGetWeatherWEB))
-        ConfigList.append(getConfigListEntry("> getWeather thingSpeak component:", config.plugins.WeatherPlugin.DebugGetWeatherTS))
-        ConfigList.append(getConfigListEntry("> getWeather raw data:", config.plugins.WeatherPlugin.DebugGetWeatherFULL))
-        ConfigList.append(getConfigListEntry("> MSNweatherHistograms:", config.plugins.WeatherPlugin.DebugMSNweatherHistograms))
-
         ConfigListScreen.__init__(self, ConfigList, session = session, on_change = self.changed)
         self.changed()
         self.onLayoutFinish.append(self.layoutFinished)
 
     def layoutFinished(self):
         self.setTitle(self.setup_title)
-
+        self.runSetup()
+        
     def changed(self):
         for x in self.onChangedEntry:
             x()
@@ -416,3 +397,45 @@ class MSNWeatherConfiguration(Screen, ConfigListScreen):
 
     def getCurrentValue(self):
         return str(self["config"].getCurrent()[1].getText())
+
+    def keyLeft(self):
+        ConfigListScreen.keyLeft(self)
+        self.keyRightLeftActions()
+
+    def keyRight(self):
+        ConfigListScreen.keyRight(self)
+        self.keyRightLeftActions()
+            
+    def keyRightLeftActions(self):
+        if self["config"].getCurrent()[1] == config.plugins.WeatherPlugin.DebugEnabled:
+            self.runSetup()
+            
+    def runSetup(self):
+        ConfigList = []
+        ConfigList.append(getConfigListEntry(_("Icons type:"), config.plugins.WeatherPlugin.IconsType))
+        ConfigList.append(getConfigListEntry(_("Icons scaling engine:"), config.plugins.WeatherPlugin.ScalePicType))
+        ConfigList.append(getConfigListEntry(_("Build histograms:"), config.plugins.WeatherPlugin.BuildHistograms))
+        ConfigList.append(getConfigListEntry(_("Debug (require restart):"), config.plugins.WeatherPlugin.DebugEnabled))
+        if config.plugins.WeatherPlugin.DebugEnabled.value:
+            ConfigList.append(getConfigListEntry(_("Debug log file size:"), config.plugins.WeatherPlugin.DebugSize))
+            ConfigList.append(getConfigListEntry("> MSNWeather(Source):", config.plugins.WeatherPlugin.DebugMSNWeatherSource))
+            ConfigList.append(getConfigListEntry("> MSNWeather(Converter):", config.plugins.WeatherPlugin.DebugMSNWeatherConverter))
+            ConfigList.append(getConfigListEntry("> MSNWeatherThingSpeak(Converter):", config.plugins.WeatherPlugin.DebugMSNWeatherThingSpeakConverter))
+            ConfigList.append(getConfigListEntry("> MSNWeatherWebCurrent(Converter):", config.plugins.WeatherPlugin.DebugMSNWeatherWebCurrentConverter))
+            ConfigList.append(getConfigListEntry("> MSNWeatherWebhourly(Converter):", config.plugins.WeatherPlugin.DebugMSNWeatherWebhourlyConverter))
+            ConfigList.append(getConfigListEntry("> MSNWeatherWebDaily(Converter):", config.plugins.WeatherPlugin.DebugMSNWeatherWebDailyConverter))
+            ConfigList.append(getConfigListEntry("> MSNWeatherPixmap(Renderer):", config.plugins.WeatherPlugin.DebugMSNWeatherPixmapRenderer))
+            ConfigList.append(getConfigListEntry("> WeatherMSN updater:", config.plugins.WeatherPlugin.DebugWeatherMSNupdater))
+            ConfigList.append(getConfigListEntry("> getWeather basic:", config.plugins.WeatherPlugin.DebugGetWeatherBasic))
+            ConfigList.append(getConfigListEntry("> getWeather xml component:", config.plugins.WeatherPlugin.DebugGetWeatherXML))
+            ConfigList.append(getConfigListEntry("> getWeather web component:", config.plugins.WeatherPlugin.DebugGetWeatherWEB))
+            ConfigList.append(getConfigListEntry("> getWeather thingSpeak component:", config.plugins.WeatherPlugin.DebugGetWeatherTS))
+            ConfigList.append(getConfigListEntry("> getWeather raw data:", config.plugins.WeatherPlugin.DebugGetWeatherFULL))
+            ConfigList.append(getConfigListEntry("> MSNweatherHistograms:", config.plugins.WeatherPlugin.DebugMSNweatherHistograms))
+            ConfigList.append(getConfigListEntry("> MSNweatherMaps:", config.plugins.WeatherPlugin.DebugMSNweatherHistograms))
+            #ConfigList.append(getConfigListEntry("> :", config.plugins.WeatherPlugin.))
+        try:
+            self["config"].list = ConfigList
+            self["config"].setList(ConfigList)
+        except Exception:
+            pass

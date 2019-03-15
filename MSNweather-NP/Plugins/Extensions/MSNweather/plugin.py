@@ -22,7 +22,8 @@
 from . import _
 from Components.ActionMap import ActionMap
 from Components.config import ConfigSubsection, ConfigSubList, ConfigInteger, config, NoSave, ConfigEnableDisable, ConfigSelection
-from Components.Pixmap import Pixmap
+#from Components.Pixmap import Pixmap
+from Components.j00zekAccellPixmap import j00zekAccellPixmap
 from Components.Sources.StaticText import StaticText
 from debug import printDEBUG
 #from datetime import datetime, timedelta
@@ -50,6 +51,7 @@ availableOptions = [("serviceIcons", _("MSN service icons"))]
 if os.path.exists(os.path.dirname(resolveFilename(SCOPE_SKIN, config.skin.primary_skin.value)) + '/weather_icons/'): availableOptions.append(("weatherIcons", _("skin Icons")))
 if os.path.exists('/usr/share/enigma2/animatedWeatherIcons'): availableOptions.append(("animIcons", _("animated Icons")))
 config.plugins.WeatherPlugin.IconsType = ConfigSelection(choices = availableOptions, default = "serviceIcons")
+config.plugins.WeatherPlugin.ScalePicType = ConfigSelection(choices = [ ("self.instance.setScale", _("internal E2")), ("ePicLoad", _("ePicLoad (E.g. Vu+ org)")) ], default = "self.instance.setScale")
 
 config.plugins.WeatherPlugin.BuildHistograms = ConfigEnableDisable(default = False)
 
@@ -73,6 +75,7 @@ config.plugins.WeatherPlugin.DebugGetWeatherWEB = ConfigEnableDisable(default = 
 config.plugins.WeatherPlugin.DebugGetWeatherTS = ConfigEnableDisable(default = False)
 config.plugins.WeatherPlugin.DebugGetWeatherFULL = ConfigEnableDisable(default = False)
 config.plugins.WeatherPlugin.DebugMSNweatherHistograms = ConfigEnableDisable(default = False)
+config.plugins.WeatherPlugin.DebugMSNweatherMaps = ConfigEnableDisable(default = True)
 
 printDEBUG('INIT', ' MSNweather NP plugin %s' % Version)
 printDEBUG('config.plugins.WeatherPlugin.IconsType = "%s"' % config.plugins.WeatherPlugin.IconsType.value)
@@ -127,12 +130,13 @@ class MSNweather(Screen):
             "right": self.nextItem,
             "left": self.previousItem,
             "info": self.showWebsite,
+            "green": self.ShowMaps,
             "yellow": self.ShowHistograms,
             "blue": self.close,
         }, -1)
 
         self["statustext"] = StaticText()
-        self["currenticon"] = WeatherIcon()
+        self["currenticon"] = j00zekAccellPixmap()
         self["caption"] = StaticText()
         self["currentTemp"] = StaticText()
         self["condition"] = StaticText()
@@ -289,17 +293,6 @@ class MSNweather(Screen):
         from histograms import MSNweatherHistograms
         self.session.open(MSNweatherHistograms)
 
-class WeatherIcon(Pixmap):
-    def __init__(self):
-        Pixmap.__init__(self)
-        self.lastPic = ''
-
-    def onShow(self):
-        Pixmap.onShow(self)
-        self.instance.setScale(1)
-
-    def updateIcon(self, filename):
-        if DBG: printDEBUG('WeatherIcon(Pixmap).updateIcon(%s) lastPic= %s' % (filename,self.lastPic))
-        if self.lastPic != filename:
-            self.lastPic = filename
-            self.instance.setPixmap(LoadPixmap(path=self.lastPic))
+    def ShowMaps(self):
+        from maps import MSNweatherMaps
+        self.session.open(MSNweatherMaps)

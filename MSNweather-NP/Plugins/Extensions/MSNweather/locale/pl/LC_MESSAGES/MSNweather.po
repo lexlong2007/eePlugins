@@ -209,3 +209,71 @@ msgstr "Ciśnienie"
 msgid "Temperature | Feelng temperature"
 msgstr "Temperatura | Temp. odczuwalna"
 
+msgid "Icons scaling engine:"
+msgstr "Silnik skalowanie ikon:"
+
+msgid "internal E2"
+msgstr "wewnętrzny E2"
+
+msgid "ePicLoad (E.g. Vu+ org)"
+msgstr "ePicLoad (np. Vu+ org)"
+
+msgid "Weather maps"
+msgstr "Mapy pogody"
+
+msgid "Temperature"
+msgstr "Temperatura"
+
+msgid "Precipation"
+msgstr "Opady"
+
+msgid "Satellite"
+msgstr "Satelita"
+
+msgid "Cloud"
+msgstr "Zachmurzenie"
+
+msgid "temperature_today"
+msgstr "Dzisiejsza temperatura"
+
+msgid "precipitation_forecast"
+msgstr "Prognoza opadów"
+
+msgid "satellite_observation"
+msgstr "Mapa satelitarna"
+
+msgid "clouds_forecast"
+msgstr "Prognoza zachmurzenia"
+
+msgid "Feature not available in this system!!!"
+msgstr "Funkcja niedostępna na tym systemie!!!"
+
+msgid "Downloading today's temperature maps..."
+msgstr "Pobieranie map z dzisiejszą temperaturą..."
+
+msgid "Downloading precipitation forecast maps..."
+msgstr "Pobieranie map z prognozą opadów..."
+
+msgid "Downloading satellite observation maps..."
+msgstr "Pobieranie map satelitarnych..."
+
+msgid "Downloading clouds forecast maps..."
+msgstr "Pobieranie map z prognozą zachmurzenia..."
+
+msgid "General Error"
+msgstr "Nieznany błąd"
+
+msgid "Error wrong input data"
+msgstr "Błąd, podano złe dane"
+
+msgid "Error sychronizing web data"
+msgstr "Błąd synchonizacji danych"
+
+msgid "Error analyzing web data"
+msgstr "Błąd analizy danych"
+
+msgid "Exception %s"
+msgstr "Wyjątek %s"
+
+msgid "Error sychronizing webMaps data"
+msgstr "Błąd synchronizacji danych o mapach"

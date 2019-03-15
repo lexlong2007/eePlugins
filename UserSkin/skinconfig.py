@@ -88,6 +88,8 @@ def isImageType(imgName = ''):
                     imageType = 'vti'
                 elif fileContent.find('code.vuplus.com') > -1:
                     imageType = 'vuplus'
+                elif fileContent.find('openpli-7') > -1:
+                    imageType = 'openpli7'
                 elif fileContent.find('openatv') > -1:
                     imageType = 'openatv'
                     if fileContent.find('/5.3/') > -1:
@@ -262,6 +264,13 @@ class UserSkin_Config(Screen, ConfigListScreen):
                 self.LCDconfigKey = 'primary_vfdskin'
             except Exception:
                 self.LCDconfigKey = 'none'
+                if os.path.exists('/usr/lib/enigma2/python/skin.pyo') and (os.path.islink('/usr/share/enigma2/skin_box.xml') or not os.path.isfile('/usr/share/enigma2/skin_box.xml')):
+                    with open('/usr/lib/enigma2/python/skin.pyo', 'rb') as f:
+                        fc = f.read()
+                        f.close()
+                    if fc.find('skin_box.xml') > -1:
+                        self.LCDconfigKey = 'skin_box.xml'
+                        
         
         self.createConfigList()
         self.updateEntries = False
@@ -392,10 +401,13 @@ class UserSkin_Config(Screen, ConfigListScreen):
             config.plugins.j00zekPiconAnimation.UserPath.value = ret
         
     def keyOkbutton(self):
-        if config.plugins.j00zekPiconAnimation.UserPath is not None and self["config"].getCurrent()[1] == config.plugins.j00zekPiconAnimation.UserPath:
-            from Screens.LocationBox import LocationBox
-            self.session.openWithCallback(self.LocationBoxCB, LocationBox)
-        else:
+        try:
+            if config.plugins.j00zekPiconAnimation.UserPath is not None and self["config"].getCurrent()[1] == config.plugins.j00zekPiconAnimation.UserPath:
+                from Screens.LocationBox import LocationBox
+                self.session.openWithCallback(self.LocationBoxCB, LocationBox)
+            else:
+                self.keyOk()
+        except Exception:
             self.keyOk()
     
     def keyOk(self):
@@ -415,7 +427,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
             configfile.save()
             ################################ SAFE MODE 
             self.UserSkinToolSet.ClearMemory()
-            if isImageType('vti') or isImageType('vuplus'):
+            if isImageType('vti') or isImageType('vuplus') or isImageType('openpli-7'):
                 system("touch /etc/enigma2/skinModified") #for safety, nicely manage overwrite ;)
             #we change current folder to active skin folder
             chdir(SkinPath)
@@ -616,7 +628,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
         self.widgets_selected = False #checking if any self._widgets_selected = we need to merge
         
         for f in listdir(SkinPath + "UserSkin_Selections/"):
-            if f.lower().find('LCD_widget') > -1:
+            if f.lower().find('lcd_widget') > -1:
                 self.LCD_widgets_selected = True
                 self.widgets_selected = True
             elif f.lower().find('widget') > -1:
@@ -678,10 +690,13 @@ class UserSkin_Config(Screen, ConfigListScreen):
                     myFile.write(user_skin)
                     myFile.flush()
                     myFile.close()
+                    
                     if (isImageType('vti') == True or isImageType('openatv') == True) and not self.LCD_widgets_selected: #VTI i openATV czytaja, to nie musimy robic pliku
                         #VTI/openatv standardowo laduja pliki z SkinPath + 'mySkin/skin_user' + self.currentSkin + '.xml'
                         if path.exists(resolveFilename(SCOPE_CONFIG, 'skin_user' + self.currentSkin + '.xml')):
                             remove(resolveFilename(SCOPE_CONFIG, 'skin_user' + self.currentSkin + '.xml'))
+                        if isImageType('vti') == True and path.exists('/etc/enigma2/skin_user.xml'):
+                            remove('/etc/enigma2/skin_user.xml')
                     elif (isImageType('vti') == True and self.LCD_widgets_selected) or \
                           isImageType('blackhole') == True or \
                           isImageType('vuplus') == True or \
@@ -707,7 +722,11 @@ class UserSkin_Config(Screen, ConfigListScreen):
                     config.skin.primary_vfdskin.save()
                     configfile.save()
                     printDEBUG('Set config.skin.display_skin.value=')
-
+                elif self.LCDconfigKey == 'skin_box.xml':
+                    os.system('ln -sf /usr/share/enigma2/BlackHarmony/allMiniTVskins/%s /usr/share/enigma2/skin_box.xml' % (config.plugins.UserSkin.LCDmode.value) )
+            elif self.LCDconfigKey == 'skin_box.xml' and os.path.exists('/usr/share/enigma2/skin_box.xml'):
+                os.system('rm -f /usr/share/enigma2/skin_box.xml' )
+                
             #checking if all scripts are in the system
             if DBG == True: printDEBUG("########################### Final User Skin\n%s\n##############################################\n" % user_skin)
             self.checkComponent(user_skin, 'render' , resolveFilename(SCOPE_PLUGINS, '../Components/Renderer/') )

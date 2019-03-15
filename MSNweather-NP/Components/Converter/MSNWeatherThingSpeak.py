@@ -31,7 +31,9 @@ class MSNWeatherThingSpeak(Converter, object):
         self.ThingSpeakItems = {}
         try:
             config.plugins.WeatherPlugin.currEntry.addNotifier(self.currEntryChanged, initial_call=True) 
+            self.configReady = True
         except Exception, e:
+            self.configReady = False
             self.EXCEPTIONDEBUG('MSNWeatherThingSpeak:__init__ Exception: %s' % str(e))
 
     def EXCEPTIONDEBUG(self, myFUNC = '' , myText = '' ):
@@ -45,63 +47,76 @@ class MSNWeatherThingSpeak(Converter, object):
 
     def currEntryChanged(self, configElement = None): 
         self.ThingSpeakItems = {}
+        self.configReady = False
+        set2visible = True
         try:
             currEntry = int(config.plugins.WeatherPlugin.currEntry.value)
             self.DEBUG('MSNWeatherThingSpeak:currEntryChanged currEntry = %s' % currEntry)
-            if config.plugins.WeatherPlugin.Entry[currEntry].thingSpeakChannelID.value == '':
-                self.downstream_elements[0].visible = False 
-            else:
-                self.downstream_elements[0].visible = True 
         except Exception as e:
-            self.EXCEPTIONDEBUG("MSNWeatherThingSpeak:currEntryChanged Exception: %s" % str(e))
+            self.EXCEPTIONDEBUG("MSNWeatherThingSpeak:currEntryChanged Exception getting currEntry: %s" % str(e))
+        try:
+            if config.plugins.WeatherPlugin.Entry[currEntry].thingSpeakChannelID.value == '':
+                set2visible = False 
+            else:
+                set2visible = True 
+                self.configReady = True
+            self.DEBUG('MSNWeatherThingSpeak:currEntryChanged thingSpeakChannelID = %s' % config.plugins.WeatherPlugin.Entry[currEntry].thingSpeakChannelID.value)
+        except Exception as e:
+            self.EXCEPTIONDEBUG("MSNWeatherThingSpeak:currEntryChanged Exception getting thingSpeakChannelID: %s" % str(e))
+        try:
+            self.downstream_elements[0].visible = set2visible 
+        except Exception as e:
+            self.DEBUG("MSNWeatherThingSpeak:currEntryChanged Exception setting visibility of downstream_elements: %s" % str(e))
         
     def syncItems(self):
-        self.DEBUG('MSNWeatherWebCurrent(Converter).syncItems >>')
+        self.DEBUG('MSNWeatherThingSpeak(Converter).syncItems >>')
         self.ThingSpeakItems = {}
         self.ThingSpeakItems = self.source.getThingSpeakItems().copy()
     
     @cached
     def getText(self): #self.mode = ('name','description','field1Name','field2Name','ObservationTime','field1Value','field1Status','field2Value','field2Status')
-        self.DEBUG('MSNWeatherThingSpeak:getText','>>> self.mode="%s", currEntry=%s' % (self.mode, config.plugins.WeatherPlugin.currEntry.value))
-        self.syncItems()
         retTXT = ''
-        if len(self.ThingSpeakItems) > 0:
-            try:
-                if self.mode == 'PM2.5':
-                    name = self.ThingSpeakItems.get('PM2.5Name', '')
-                    if name != '':
-                        fval = float(self.ThingSpeakItems.get('PM2.5Value', ''))
-                        val = int(fval + 0.5)
-                        stat = ''
-                        if   val <= 12 : stat = 'Bardzo dobre'
-                        elif val <= 36 : stat = 'Dobre'
-                        elif val <= 60 : stat = 'Umiarkowane'
-                        elif val <= 84 : stat = 'Dostateczne'
-                        elif val <=120 : stat = 'Z쿮'
-                        else: stat = 'Bardzo z쿮'
-                        retTXT = '%s %s %s' %(name, val, stat)
-                elif self.mode == 'PM10':
-                    name = self.ThingSpeakItems.get('PM10Name', "")
-                    if name != '':
-                        fval = float(self.ThingSpeakItems.get('PM10Value', ''))
-                        val = int(fval + 0.5)
-                        stat = ''
-                        if   val <= 20 : stat = 'Bardzo dobre'
-                        elif val <= 60 : stat = 'Dobre'
-                        elif val <=100 : stat = 'Umiarkowane'
-                        elif val <=140 : stat = 'Dostateczne'
-                        elif val <=200 : stat = 'Z쿮'
-                        else: stat = 'Bardzo z쿮'
-                        retTXT = '%s %s %s' %(name, val, stat)
-                elif self.mode == 'field1': retTXT = '%s %s' %( self.ThingSpeakItems.get('field1Name', ""), self.ThingSpeakItems.get('field1Value', '') )
-                elif self.mode == 'field2': retTXT = '%s %s' %( self.ThingSpeakItems.get('field2Name', ""), self.ThingSpeakItems.get('field2Value', '') )
-                elif self.mode == 'field3': retTXT = '%s %s' %( self.ThingSpeakItems.get('field3Name', ""), self.ThingSpeakItems.get('field3Value', '') )
-                elif self.mode == 'field4': retTXT = '%s %s' %( self.ThingSpeakItems.get('field4Name', ""), self.ThingSpeakItems.get('field4Value', '') )
-                elif self.mode == 'field5': retTXT = '%s %s' %( self.ThingSpeakItems.get('field5Name', ""), self.ThingSpeakItems.get('field5Value', '') )
-                else: retTXT = str(self.ThingSpeakItems.get(self.mode, ''))
-            except Exception as e:
-                self.EXCEPTIONDEBUG('MSNWeatherThingSpeak:getText Exception="%s"' % str(e))
-            
+        if self.configReady:
+            self.DEBUG('MSNWeatherThingSpeak:getText','>>> self.mode="%s", currEntry=%s' % (self.mode, config.plugins.WeatherPlugin.currEntry.value))
+            self.syncItems()
+            if len(self.ThingSpeakItems) > 0:
+                try:
+                    if self.mode == 'PM2.5':
+                        name = self.ThingSpeakItems.get('PM2.5Name', '')
+                        if name != '':
+                            fval = float(self.ThingSpeakItems.get('PM2.5Value', ''))
+                            val = int(fval + 0.5)
+                            stat = ''
+                            if   val <= 12 : stat = 'Bardzo dobre'
+                            elif val <= 36 : stat = 'Dobre'
+                            elif val <= 60 : stat = 'Umiarkowane'
+                            elif val <= 84 : stat = 'Dostateczne'
+                            elif val <=120 : stat = 'Z쿮'
+                            else: stat = 'Bardzo z쿮'
+                            retTXT = '%s %s %s' %(name, val, stat)
+                    elif self.mode == 'PM10':
+                        name = self.ThingSpeakItems.get('PM10Name', "")
+                        if name != '':
+                            fval = float(self.ThingSpeakItems.get('PM10Value', ''))
+                            val = int(fval + 0.5)
+                            stat = ''
+                            if   val <= 20 : stat = 'Bardzo dobre'
+                            elif val <= 60 : stat = 'Dobre'
+                            elif val <=100 : stat = 'Umiarkowane'
+                            elif val <=140 : stat = 'Dostateczne'
+                            elif val <=200 : stat = 'Z쿮'
+                            else: stat = 'Bardzo z쿮'
+                            retTXT = '%s %s %s' %(name, val, stat)
+                    elif self.mode == 'field1': retTXT = '%s %s' %( self.ThingSpeakItems.get('field1Name', ""), self.ThingSpeakItems.get('field1Value', '') )
+                    elif self.mode == 'field2': retTXT = '%s %s' %( self.ThingSpeakItems.get('field2Name', ""), self.ThingSpeakItems.get('field2Value', '') )
+                    elif self.mode == 'field3': retTXT = '%s %s' %( self.ThingSpeakItems.get('field3Name', ""), self.ThingSpeakItems.get('field3Value', '') )
+                    elif self.mode == 'field4': retTXT = '%s %s' %( self.ThingSpeakItems.get('field4Name', ""), self.ThingSpeakItems.get('field4Value', '') )
+                    elif self.mode == 'field5': retTXT = '%s %s' %( self.ThingSpeakItems.get('field5Name', ""), self.ThingSpeakItems.get('field5Value', '') )
+                    else: retTXT = str(self.ThingSpeakItems.get(self.mode, ''))
+                except Exception as e:
+                    self.EXCEPTIONDEBUG('MSNWeatherThingSpeak:getText Exception="%s"' % str(e))
+        else:
+            self.DEBUG('MSNWeatherThingSpeak:getText','>>> self.configReady="%s"' % (str(self.configReady)))
         return retTXT
         
     text = property(getText)
