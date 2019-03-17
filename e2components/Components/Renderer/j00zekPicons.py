@@ -1,9 +1,12 @@
-# standard Picon.py modified by @j00zek to support any picon folder name
-# the name can be defined in xml by puttin attri picontype="<foldername>"
+# standard Picon.py modified by @j00zek to support any picon folder name and animations
+# the name can be defined in xml by putting attrib picontype="<foldername>"
 # e.g. picontype="zzpicon"
+# new attrib implemented doAnimationanimation
+#       doAnimationanimation="blink,<showTime>,<hideTime>"
+
 import os, re, unicodedata
 from Renderer import Renderer
-from enigma import ePixmap #, ePicLoad
+from enigma import ePixmap, eTimer #, ePicLoad
 from Tools.Alternatives import GetWithAlternative
 from Tools.Directories import pathExists, SCOPE_SKIN_IMAGE, resolveFilename
 try:
@@ -19,7 +22,7 @@ lastPiconsDict = {}
 #piconType = 'picon'
 
 ##### write log in /tmp folder #####
-DBG = False
+DBG = True
 try:
     from Components.j00zekComponents import j00zekDEBUG
 except Exception:
@@ -141,6 +144,9 @@ class j00zekPicons(Renderer):
         self.GifsPath = 'animatedGIFpicons'
         self.ShowDefault = True
         self.GIFsupport = False
+        self.isVisible = True
+        self.animationType = None
+        self.animTimer = None
         return
 
     def addPath(self, value):
@@ -168,6 +174,27 @@ class j00zekPicons(Renderer):
             elif attrib == 'gifsupport':
                 if value in ('True','yes'): self.GIFsupport = True
                 attribs.remove((attrib, value))
+            elif attrib == 'doAnimation':
+                try:
+                    animVals = value.split(',') # doAnimationanimation="<'blink'|>,<fadeInTime>,<showTime>,<fadeOutTime>,<hideTime>"
+                    self.animationType = animVals[0]
+                    
+                    self.animTimer = eTimer()
+                    if self.animationType == 'blink': #doAnimationanimation="blink,<showTime>,<hideTime>"
+                        self.animTimer.callback.append(self.doBlink)
+                        self.showTime = int(animVals[1])
+                        self.hideTime = int(animVals[2])
+                    else:                    
+                        self.fadeInTime = int(animVals[1])
+                        self.showTime = int(animVals[2])
+                        self.fadeOutTime = int(animVals[3])
+                        self.hideTime = int(animVals[4])
+
+                    self.animTimerInitCall = False
+                    attribs.remove((attrib, value))
+                except Exception as e:
+                    self.animationType = None
+                    if DBG: j00zekDEBUG('[j00zekPicons:applySkin] Exception=%s' % str(e))
 
         self.skinAttributes = attribs
         if DBG: j00zekDEBUG('[j00zekPicons:applySkin] self.piconType=%s, self.ShowDefault=%s' % (self.piconType,self.ShowDefault))
@@ -178,19 +205,23 @@ class j00zekPicons(Renderer):
     def postWidgetCreate(self, instance):
         self.changed((self.CHANGED_DEFAULT,))
 
-    #def updatePicon(self, picInfo = None):
-    #    ptr = self.PicLoad.getData()
-    #    if ptr is not None:
-    #        self.instance.setPixmap(ptr.__deref__())
-    #        self.instance.show()
-    #    return
+    def preWidgetRemove(self, instance):
+        if DBG: j00zekDEBUG('[j00zekPicons]:[preWidgetRemove] >>>')
+        if not self.animTimer is None:
+            self.animTimer.stop()
+            self.animTimer.callback.clear()
+            self.animTimer = None
 
     def changed(self, what):
+        if not self.animTimer is None:
+            self.animTimer.stop()
         if self.instance:
             pngname = None
             gifname = None
             try:
-                if not what[0] is self.CHANGED_CLEAR:
+                if what[0] == self.CHANGED_CLEAR: #we are expecting a real update soon. do not bother polling NOW, but clear data
+                    pass
+                else:
                     if self.source.text is not None and self.source.text != '':
                         if self.GIFsupport == True: gifname = getPiconName(self.source.text, self.GifsPath)
                         pngname = getPiconName(self.source.text, self.piconType)
@@ -200,19 +231,54 @@ class j00zekPicons(Renderer):
                         if pngname is None and pathExists(resolveFilename(SCOPE_CURRENT_SKIN, 'picon_default.png')):
                             pngname = resolveFilename(SCOPE_CURRENT_SKIN, 'picon_default.png')
                     if pngname is None:
-                        self.instance.hide()
-                    elif self.pngname != pngname:
-                        if pngname:
-                            self.instance.setScale(1)
-                            self.instance.setPixmapFromFile(pngname)
-                            self.instance.show()
-                        else:
-                            self.instance.hide()
-                        self.pngname = pngname
+                        self.updatePicon() #  hide it
+                    else:
+                        if self.pngname != pngname:
+                            self.updatePicon(pngname) # show picon
+                        self.initAnim()
+                        
                     if DBG: j00zekDEBUG('[j00zekPicons]:[changed] piconType=' + self.piconType + ', pngname=' + str(pngname))
             except Exception, e:
                 j00zekDEBUG('[j00zekPicons]:[changed] Exception:' + str(e))
 
+    def doSuspend(self, suspended):
+        if DBG: j00zekDEBUG('[j00zekPicons]:[doSuspend] >>> suspended=%s' % suspended)
+        if suspended:
+            self.changed((self.CHANGED_CLEAR,))
+        else:
+            self.changed((self.CHANGED_DEFAULT,))
+            
+    def updatePicon(self, pngname = None):
+        if pngname:
+            self.instance.setScale(1)
+            self.instance.setPixmapFromFile(pngname)
+            self.instance.show()
+            self.isVisible = True
+        else:
+            self.instance.hide()
+            self.isVisible = False
+        self.pngname = pngname
+        
+    def initAnim(self):
+        if not self.animTimer is None:
+            self.animTimerInitCall = True
+            self.animTimer.start(100, True)
+        
+    def doBlink(self):
+        if not self.animTimer is None:
+            if DBG: j00zekDEBUG('[j00zekPicons]:[doBlink] >>> self.animTimerInitCall=%s, self.isVisible=%s' % (self.animTimerInitCall, self.isVisible))
+            self.animTimer.stop()
+            if self.isVisible:
+                if self.animTimerInitCall:
+                    self.animTimerInitCall = False
+                else:
+                    self.instance.hide()
+                    self.isVisible = False
+                self.animTimer.start(self.hideTime, True)
+            else:
+                self.instance.show()
+                self.isVisible = True
+                self.animTimer.start(self.showTime, True)
 
 harddiskmanager.on_partition_list_change.append(onPartitionChange)
 initPiconPaths()

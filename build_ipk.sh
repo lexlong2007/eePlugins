@@ -23,14 +23,16 @@ fi
 plugAbsPath=$(readlink -fn "$1")
 PluginName_lower=`grep 'Package:' < $plugAbsPath/CONTROL/control|cut -d ':' -f2|xargs`
 PluginPath=`grep 'DestinationPath:' < $plugAbsPath/CONTROL/control|cut -d ':' -f2|xargs`
-find $plugAbsPath -iname "*.py" | 
-  while read F 
-  do
-    [ -e "${F/.py/.pyo}" ] || touch "${F/.py/.pyo}"
-    [ -e "${F/.py/.pyc}" ] && rm -f "${F/.py/.pyc}"
-    [ -e "${F/.py/.py~}" ] && rm -f "${F/.py/.py~}"
-    [ -e "$F" ] && rm -f "${F/.py/.pyo}"
-  done
+ExcludeFolder=`grep 'ExcludeFolder' < $plugAbsPath/CONTROL/control|cut -d ':' -f2|xargs`
+
+#find $plugAbsPath -iname "*.py" | 
+#  while read F 
+#  do
+#    [ -e "${F/.py/.pyo}" ] || touch "${F/.py/.pyo}"
+#    [ -e "${F/.py/.pyc}" ] && rm -f "${F/.py/.pyc}"
+#    [ -e "${F/.py/.py~}" ] && rm -f "${F/.py/.py~}"
+#    [ -e "$F" ] && rm -f "${F/.py/.pyo}"
+#  done
 if [ -z $2 ]; then
   echo "Info: no version provided, date &time of last modification will be used"
   #version=`ls -atR --full-time "$plugAbsPath/"|egrep -v '^dr|version.py|control|*.mo'|grep -m 1 -o '20[12][5678].[0-9]*.[0-9]* [0-9]*\:[0-9]*'|sed 's/^20//'|sed 's/ /./'|sed 's/-/./g'|sed 's/\://g'`
@@ -49,15 +51,18 @@ find $plugAbsPath/ -type f -name *.po  -exec bash -c 'msgfmt "$1" -o "${1%.po}".
 mkdir -p $ipkdir$PluginPath/
 cp -a $plugAbsPath/* $ipkdir$PluginPath/
 mv -f $ipkdir$PluginPath/CONTROL $ipkdir/
-if [ -e $ipkdir/usr/lib/enigma2/python ];then
-find $ipkdir/usr/lib/enigma2/python -iname "*.py" | 
+if [ ! -z $ExcludeFolder ] && [ -e $ipkdir/$ExcludeFolder ];then
+  rm -f $ipkdir/$ExcludeFolder
+fi
+#if [ -e $ipkdir/usr/lib/enigma2/python ];then
+find $ipkdir/ -iname "*.py" | 
   while read F 
   do
     [ -e "${F/.py/.pyo}" ] || touch "${F/.py/.pyo}"
     [ -e "${F/.py/.pyc}" ] && rm -f "${F/.py/.pyc}"
     [ -e "${F/.py/.py~}" ] && rm -f "${F/.py/.py~}"
   done
-fi
+#fi
 sudo chmod 755 $ipkdir/CONTROL/post* 2>/dev/null
 sudo chmod 755 $ipkdir/CONTROL/pre* 2>/dev/null
 sudo chown -R root $ipkdir/

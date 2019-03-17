@@ -1,0 +1,11 @@
+Package: enigma2---j00zeks-e2iplayer-4k
+Priority: optional
+Section: utils
+Depends: 
+Description: zawiera zebrane poprawki Mario, mosz_nowy i innych oraz dodane binarki
+Maintainer: j00zek
+Source: http://github.com/j00zek/eePlugins
+Version: 19.02.23.1050
+Architecture: all
+DestinationPath: /
+ExcludeFolder: Sync_and_Patch
