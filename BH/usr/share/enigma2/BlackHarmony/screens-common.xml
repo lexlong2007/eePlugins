@@ -1450,6 +1450,9 @@
     <widget source="global.CurrentTime" render="Label" position="130,30" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
+    <widget source="session.CurrentService" render="Label" position="530,30" size="550,30" font="Roboto_HD; 27" halign="left" foregroundColor="#00FFFF" backgroundColor="black" transparent="1">
+      <convert type="BlackHarmonyBoxInfo">Boxtype</convert>
+    </widget> 
     <eLabel text="Help" position="660,30" size="280,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget name="rc" position="110,150" size="154,500" pixmaps="BlackHarmony/skin_default/rc0.png,BlackHarmony/skin_default/rc1.png,BlackHarmony/skin_default/rc2.png" zPosition="10" alphatest="blend"/>
     <widget name="long_key" position="60,666" size="260,30" font="Roboto_HD; 24" halign="center" backgroundColor="black" transparent="1" foregroundColor="light_yellow"/>

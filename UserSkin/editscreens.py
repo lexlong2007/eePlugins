@@ -376,12 +376,15 @@ class UserSkinEditScreens(Screen):
         #print myfont
         try:
             self["PreviewFont"].instance.setFont(gFont(myfont.split(';')[0], int(myfont.split(';')[1])))
-        except:
+        except Exception:
             printDEBUG("Missing font '%s' definition in skin.xml" % self.root[self.currentScreenID][myIndex].attrib['font'])
-        if 'text' in self.root[self.currentScreenID][myIndex].attrib:
-            self["PreviewFont"].setText('%s' % self.root[self.currentScreenID][myIndex].attrib['text'])
-        else:
-            self["PreviewFont"].setText(_('Sample Text'))
+        try:
+            if 'text' in self.root[self.currentScreenID][myIndex].attrib:
+                self["PreviewFont"].setText('%s' % self.root[self.currentScreenID][myIndex].attrib['text'])
+            else:
+                self["PreviewFont"].setText(_('Sample Text'))
+        except Exception as e:
+            printDEBUG("Exception occured: %s" % str(e))
         if 'foregroundColor' in self.root[self.currentScreenID][myIndex].attrib:
             try:
                 self["PreviewFont"].instance.setForegroundColor(parseColor(self.root[self.currentScreenID][myIndex].attrib['foregroundColor']))            

@@ -1,0 +1,66 @@
+diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/IPTVPlayer/libs/pCommon.py /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/libs/pCommon.py
+--- /enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/IPTVPlayer/libs/pCommon.py	2019-03-25 06:58:25.101606392 +0100
++++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/libs/pCommon.py	2019-03-31 08:09:24.507674279 +0200
+@@ -1,4 +1,4 @@
+-# -*- coding: utf-8 -*-
++﻿# -*- coding: utf-8 -*-
+ 
+ ###################################################
+ # LOCAL import
+@@ -1006,7 +1006,7 @@
+                         verUrl += '?'
+                         for key in get_data:
+                             verUrl += '%s=%s&' % (key, get_data[key])
+-                        verUrl = _getFullUrl( ph.getattr(verData, 'action'), domain) + '?s=%s&jschl_vc=%s&pass=%s&jschl_answer=%s' % (get_data['s'], get_data['jschl_vc'], get_data['pass'], get_data['jschl_answer'])
++                        verUrl = _getFullUrl( ph.getattr(verData, 'action'), domain) + '?jschl_vc=%s&pass=%s&jschl_answer=%s' % (get_data['jschl_vc'], get_data['pass'], get_data['jschl_answer'])
+                         verUrl = _getFullUrl2( verUrl, domain)
+                         params2 = dict(params)
+                         params2['load_cookie'] = True
+diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/IPTVPlayer/setup/iptvsetupimpl.py /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/setup/iptvsetupimpl.py
+--- /enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/IPTVPlayer/setup/iptvsetupimpl.py	2019-03-16 07:17:47.369696001 +0100
++++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/setup/iptvsetupimpl.py	2019-03-31 08:14:25.059149406 +0200
+@@ -97,23 +97,23 @@
+         
+         # subparser
+         self.subparserVersion = 0.5
+-        self.subparserPaths = [resolveFilename(SCOPE_PLUGINS, 'Extensions/IPTVPlayer/libs/iptvsubparser/_subparser.so')]
++        self.subparserPaths = [resolveFilename(SCOPE_PLUGINS, 'Extensions/IPTVPlayer/libs/iptvsubparser%s/_subparser.so' % config.plugins.iptvplayer.plarform.value)]
+ 
+         # e2icjson
+         self.e2icjsonVersion = 10202 #'1.2.2' int(z[0]) * 10000 + int(z[1]) * 100 + int(z[2])
+-        self.e2icjsonPaths = [resolveFilename(SCOPE_PLUGINS, 'Extensions/IPTVPlayer/libs/e2icjson/e2icjson.so')]
++        self.e2icjsonPaths = [resolveFilename(SCOPE_PLUGINS, 'Extensions/IPTVPlayer/libs/e2icjson%s/e2icjson.so' % config.plugins.iptvplayer.plarform.value)]
+ 
+         # hlsdl
+         self.hlsdlVersion = 0.21
+-        self.hlsdlPaths = [resolveFilename(SCOPE_PLUGINS, 'Extensions/IPTVPlayer/bin/hlsdl'), "/usr/bin/hlsdl"]
++        self.hlsdlPaths = [resolveFilename(SCOPE_PLUGINS, 'Extensions/IPTVPlayer/bin/%s/hlsdl' % config.plugins.iptvplayer.plarform.value), "/usr/bin/hlsdl"]
+         
+         # cmdwrap
+         self.cmdwrapVersion = 2
+-        self.cmdwrapPaths = [resolveFilename(SCOPE_PLUGINS, 'Extensions/IPTVPlayer/bin/cmdwrap'), "/usr/bin/cmdwrap"]
++        self.cmdwrapPaths = [resolveFilename(SCOPE_PLUGINS, 'Extensions/IPTVPlayer/bin/%s/cmdwrap' % config.plugins.iptvplayer.plarform.value), "/usr/bin/cmdwrap"]
+         
+         # duk
+         self.dukVersion = 5 # "2.1.99 [experimental]" # real version
+-        self.dukPaths = [resolveFilename(SCOPE_PLUGINS, 'Extensions/IPTVPlayer/bin/duk'), "/usr/bin/duk"]
++        self.dukPaths = [resolveFilename(SCOPE_PLUGINS, 'Extensions/IPTVPlayer/bin/%s/duk' % config.plugins.iptvplayer.plarform.value), "/usr/bin/duk"]
+         
+         self.binaryInstalledSuccessfully = False
+         self.tries = 0
+@@ -698,6 +698,7 @@
+     # STEP: subparser
+     ###################################################
+     def subparserStep(self, ret=None):
++        if config.plugins.iptvplayer.j00zekDontDownloadBins.value: self.e2icjsonStep()
+         printDBG("IPTVSetupImpl.subparserStep")
+ 
+         def _detectCmdBuilder(path):
+@@ -758,6 +759,7 @@
+     # STEP: e2icjson
+     ###################################################
+     def e2icjsonStep(self, ret=None):
++        if config.plugins.iptvplayer.j00zekDontDownloadBins.value: self.hlsdlStep()
+         printDBG("IPTVSetupImpl.e2icjsonStep")
+         
+         def _detectCmdBuilder(path):

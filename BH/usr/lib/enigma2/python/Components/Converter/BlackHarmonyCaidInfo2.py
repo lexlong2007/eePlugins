@@ -51,15 +51,17 @@ class BlackHarmonyCaidInfo2(Poll, Converter, object):
     BISS_C = 30
     EXS = 31
     EXS_C = 32
-    HOST = 33
-    DELAY = 34
-    FORMAT = 35
-    CRYPT2 = 36
-    CRD = 37
-    CRDTXT = 38
-    SHORT = 39
-    IS_FTA = 40
-    IS_CRYPTED = 41
+    TAN = 33
+    TAN_C = 34
+    HOST = 35
+    DELAY = 36
+    FORMAT = 37
+    CRYPT2 = 38
+    CRD = 39
+    CRDTXT = 40
+    SHORT = 41
+    IS_FTA = 42
+    IS_CRYPTED = 43
     my_interval = 1000
 
 
@@ -132,6 +134,10 @@ class BlackHarmonyCaidInfo2(Poll, Converter, object):
             self.type = self.PWR_C
         elif type == "VrmEcm":
             self.type = self.VERI_C
+        elif type == "TanCrypt":
+            self.type = self.TAN
+        elif type == "TanEcm":
+            self.type = self.TAN_C
         elif type == "BisCrypt":
             self.type = self.BISS
         elif type == "BisEcm":
@@ -268,6 +274,11 @@ class BlackHarmonyCaidInfo2(Poll, Converter, object):
                     if ("%0.4X" % int(caid))[:2] == "56":
                         return True
                 return False
+            if self.type == self.TAN:
+                for caid in caids:
+                    if ("%0.4X" % int(caid))[:2] == "10":
+                        return True
+                return False
             if self.type == self.BISS:
                 for caid in caids:
                     if ("%0.4X" % int(caid))[:2] == "26":
@@ -327,6 +338,10 @@ class BlackHarmonyCaidInfo2(Poll, Converter, object):
                     return False
                 if self.type == self.VERI_C:
                     if caid == "56":
+                        return True
+                    return False
+                if self.type == self.TAN_C:
+                    if caid == "10":
                         return True
                     return False
                 if self.type == self.BISS_C:

@@ -52,7 +52,7 @@ mkdir -p $ipkdir$PluginPath/
 cp -a $plugAbsPath/* $ipkdir$PluginPath/
 mv -f $ipkdir$PluginPath/CONTROL $ipkdir/
 if [ ! -z $ExcludeFolder ] && [ -e $ipkdir/$ExcludeFolder ];then
-  rm -f $ipkdir/$ExcludeFolder
+  rm -rf $ipkdir/$ExcludeFolder
 fi
 #if [ -e $ipkdir/usr/lib/enigma2/python ];then
 find $ipkdir/ -iname "*.py" | 

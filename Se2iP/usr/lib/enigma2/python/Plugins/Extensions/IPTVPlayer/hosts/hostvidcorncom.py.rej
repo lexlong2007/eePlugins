@@ -1,0 +1,20 @@
+--- hosts/hostvidcorncom.py	2019-03-30 05:44:19.067042245 +0100
++++ enigma2-pc/e2iplayerGITsSources/forks/e2iplayer-Mosz_Nowy/IPTVPlayer/hosts/hostvidcorncom.py	2019-03-16 08:09:08.025696001 +0100
+@@ -39,7 +39,7 @@
+ ###################################################
+ 
+ def gettytul():
+-    return 'https://vidcorn.tv/'
++    return 'https://vidcorn.com/'
+ 
+ class VidCorn(CBaseHostClass, CaptchaHelper):
+ 
+@@ -49,7 +49,7 @@
+         self.HTTP_HEADER = self.cm.getDefaultHeader(browser='chrome')
+         self.defaultParams = {'header':self.HTTP_HEADER, 'use_cookie': True, 'load_cookie': True, 'save_cookie': True, 'cookiefile': self.COOKIE_FILE}
+ 
+-        self.MAIN_URL    = 'https://vidcorn.tv/'
++        self.MAIN_URL    = 'https://vidcorn.com/'
+         self.DEFAULT_ICON_URL = 'https://www.trackalytics.com/assets/thumbnails/vidcorn.com.jpg'
+ 
+         self.filters = []

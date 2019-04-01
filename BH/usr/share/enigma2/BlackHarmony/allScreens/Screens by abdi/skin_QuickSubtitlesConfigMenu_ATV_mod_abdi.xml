@@ -1,0 +1,7 @@
+<!-- Submenu napisów -->
+<screen name="QuickSubtitlesConfigMenu" position="50,50" size="750,350" title="Subtitle settings" flags="wfNoBorder" backgroundColor="transparent">
+		<eLabel position="0,0" size="750,350" zPosition="-11" backgroundColor="background" />
+		<eLabel position="1,1" size="748,348" zPosition="-10" backgroundColor="background" />
+		<widget name="config" position="5,5" size="740,300" itemHeight="30" font="Roboto_HD; 22" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_1095_35.png" backgroundColor="black" transparent="1"/>
+		<widget name="videofps" position="5,300" size="740,50" zPosition="1" font="Roboto_HD;22" valign="center" halign="center" foregroundColor="foreground" backgroundColor="black" transparent="1"/>
+</screen>

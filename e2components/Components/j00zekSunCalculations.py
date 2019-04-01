@@ -99,6 +99,8 @@ class Sun:
         #10. Return
         hr = self.forceRange(int(UT), 24)
         min = round((UT - int(UT))*60,0)
+        if int(min) >= 60:
+            min = 59
 
         #j00zek return in clock format
         Lhr = self.forceRange(int(LT), 24)

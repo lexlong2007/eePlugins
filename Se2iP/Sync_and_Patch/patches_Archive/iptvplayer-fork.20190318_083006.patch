@@ -1,0 +1,28 @@
+diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/IPTVPlayer/keymap.xml /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/keymap.xml
+--- /enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/IPTVPlayer/keymap.xml	2019-03-16 07:17:47.313696001 +0100
++++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/keymap.xml	2019-03-18 08:03:07.382306000 +0100
+@@ -35,4 +35,23 @@
+         <key id="KEY_OK"    mapto="ok_repeat"    flags="r" />
+         <key id="KEY_RED"   mapto="red_repeat"   flags="r" />
+     </map>
++  <map context="j00zekHostTreeSelector">
++    <key id="KEY_OK"    mapto="selectHost" flags="m" />
++    <key id="KEY_EXIT" mapto="ExitHostSelector" flags="m" />
++    <key id="KEY_HOME" mapto="ExitHostSelector" flags="m" />
++    <key id="KEY_ESC"  mapto="ExitHostSelector" flags="m" />
++    <key id="KEY_RED"  mapto="ExitHostSelector" flags="m" />
++    <key id="KEY_GREEN" mapto="addHostToCategory" flags="m" />
++    <key id="KEY_YELLOW" mapto="deleteCategory" flags="m" />
++    <key id="KEY_BLUE" mapto="newCategory" flags="m" />
++    <key id="KEY_UP" mapto="lineUp" flags="mr" />
++    <key id="KEY_DOWN" mapto="lineDown" flags="mr" />
++    <key id="KEY_LEFT" mapto="pageUp" flags="m" />
++    <key id="KEY_RIGHT" mapto="pageDown" flags="m" />
++    <key id="KEY_PAGEUP" mapto="pageUp" flags="m" />
++    <key id="KEY_PAGEDOWN" mapto="pageDown" flags="m" />
++    <key id="KEY_MENU" mapto="showConfig" flags="m" />
++    <key id="KEY_PLAY" mapto="showLocalMedia" flags="m" />
++    <key id="KEY_RECORD" mapto="showDownloadManager" flags="m" />
++  </map> 
+ </keymap>
+\ Brak znaku nowej linii na końcu pliku

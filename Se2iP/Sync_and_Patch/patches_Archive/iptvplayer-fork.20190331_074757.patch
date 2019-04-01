@@ -1,0 +1,18 @@
+diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/IPTVPlayer/libs/pCommon.py /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/libs/pCommon.py
+--- /enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/IPTVPlayer/libs/pCommon.py	2019-03-25 06:58:25.101606392 +0100
++++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/libs/pCommon.py	2019-03-31 07:47:21.539591874 +0200
+@@ -1,4 +1,4 @@
+-# -*- coding: utf-8 -*-
++﻿# -*- coding: utf-8 -*-
+ 
+ ###################################################
+ # LOCAL import
+@@ -1006,7 +1006,7 @@
+                         verUrl += '?'
+                         for key in get_data:
+                             verUrl += '%s=%s&' % (key, get_data[key])
+-                        verUrl = _getFullUrl( ph.getattr(verData, 'action'), domain) + '?s=%s&jschl_vc=%s&pass=%s&jschl_answer=%s' % (get_data['s'], get_data['jschl_vc'], get_data['pass'], get_data['jschl_answer'])
++                        verUrl = _getFullUrl( ph.getattr(verData, 'action'), domain) + '?jschl_vc=%s&pass=%s&jschl_answer=%s' % (get_data['jschl_vc'], get_data['pass'], get_data['jschl_answer'])
+                         verUrl = _getFullUrl2( verUrl, domain)
+                         params2 = dict(params)
+                         params2['load_cookie'] = True

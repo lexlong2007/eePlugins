@@ -56,8 +56,13 @@ class BlackHarmonyBoxInfo(Poll, Converter, object):
             box_info = HardwareInfoVu().get_device_name().upper()
             retTXT = "VU+ %s" % box_info
         except Exception:
-            if self.justValue: retTXT = "N/A"
-            else: retTXT = "Model: N/A"
+            try:
+                box_info = HardwareInfo().get_device_name().upper()
+                if self.justValue: retTXT = box_info
+                else: retTXT = "Model: %s" % box_info
+            except Exception:
+                if self.justValue: retTXT = "N/A"
+                else: retTXT = "Model: N/A"
         return retTXT
 
     def getLoadAverage(self):

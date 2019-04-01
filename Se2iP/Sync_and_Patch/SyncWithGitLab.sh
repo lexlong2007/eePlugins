@@ -2,38 +2,172 @@
 myPath=$(dirname $0)
 myAbsPath=$(readlink -fn "$myPath")
 
-destE2iplayerPath=usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer
-
-e2iplayerGTIs=/enigma2-pc/e2iplayerGITsSources
-
-cd $e2iplayerGTIs
-############################## Syncing GITLAB ##############################
-for mydir in `find -type d`
-do
- if [ -e $mydir/.git ] ; then
-  echo $mydir
-  cd $mydir
-  git pull
-  if [ $? -gt 0 ];then
-    echo "Error puling fresh git data. END"
-    exit 1
-  fi
-  cd $e2iplayerGTIs
- fi
-done
-############################## Copying master git ##############################
 cd $myAbsPath/../../Se2iP
 if [ $? -gt 0 ];then
   echo "wrong path"
   exit 1
 fi
-rm -rf usr/*
+mySe2iPpath=`echo $PWD`
+
+destE2iplayerPath=$mySe2iPpath/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer
+
+e2iplayerGTIs=/enigma2-pc/e2iplayerGITsSources
+
+curDate=`date +"%Y%m%d"`
+if [ -e $mySe2iPpath/Sync_and_Patch/GITs_sync_time.log ];then
+ . $mySe2iPpath/Sync_and_Patch/GITs_sync_time.log #get sync date
+else
+  syncDate=0
+fi
+
+cd $e2iplayerGTIs
+############################## Syncing GITLAB ##############################
+if [ $curDate -gt $syncDate ];then
+  for mydir in `find -type d`
+  do
+    if [ -e $mydir/.git ] ; then
+      echo $mydir
+      cd $mydir
+      git pull
+      if [ $? -gt 0 ];then
+        echo "Error puling fresh git data. END"
+        exit 1
+      fi
+      cd $e2iplayerGTIs
+    fi
+done
+  echo "syncDate=$curDate" > $mySe2iPpath/Sync_and_Patch/GITs_sync_time.log
+  ############################## building differences list ##############################
+  cd $e2iplayerGTIs/forks
+  for mydir in `ls`
+  do
+    if [ -d $mydir ];then
+      echo $mydir
+      diff -qr $e2iplayerGTIs/SSS/e2iplayer/IPTVPlayer/ $e2iplayerGTIs/forks/$mydir/IPTVPlayer/ -X $mySe2iPpath/Sync_and_Patch/excludeInForksDiff.pats | cut -d ' ' -f2 >$mydir.diffList
+      diff -Naur $e2iplayerGTIs/SSS/e2iplayer/IPTVPlayer/ $e2iplayerGTIs/forks/$mydir/IPTVPlayer/ -X $mySe2iPpath/Sync_and_Patch/excludeInForksDiff.pats >$mydir.diff_full
+      diff -Naur $e2iplayerGTIs/SSS/e2iplayer/IPTVPlayer/ $e2iplayerGTIs/forks/$mydir/IPTVPlayer/  >$mydir.diff_complete
+      [ -s $mydir.diffList ] || rm -f $mydir.diffList
+      [ -s $mydir.diff_full ] || rm -f $mydir.diff_full
+      [ -s $mydir.diff_complete ] || rm -f $mydir.diff_complete
+      
+      [ -e $mydir.diff_full ] && sed -i "s;/enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/;;g" $mydir.diff_full
+    fi
+  done
+fi
+############################## Copying master git ##############################
+rm -rf $mySe2iPpath/usr/*
 mkdir -p $destE2iplayerPath
-cp -rf $e2iplayerGTIs/SSS/e2iplayer/IPTVPlayer/* $destE2iplayerPath
+cp -rf $e2iplayerGTIs/SSS/e2iplayer/IPTVPlayer/* $destE2iplayerPath/
 ############################## Copying & patching pycurl install script ##############################
-cp -rf $e2iplayerGTIs/SSS/www.iptvplayer.gitlab.io/pycurlinstall.py iptvplayer_rootfs/
+cp -rf $e2iplayerGTIs/SSS/www.iptvplayer.gitlab.io/pycurlinstall.py $mySe2iPpath/iptvplayer_rootfs/
 
 ############################## Copying additional hosts ##############################
+cd $e2iplayerGTIs/hosts
+
+for mydir in `ls`
+do
+  echo "Copying host $mydir"
+  [ -e $mydir/hosts/ ] && cp -f $mydir/hosts/* $destE2iplayerPath/hosts/
+  [ -e $mydir/IPTVPlayer/hosts/ ] && cp -f $mydir/IPTVPlayer/hosts/* $destE2iplayerPath/hosts/
+  [ -e $mydir/icons/ ] && cp -f $mydir/hosts/* $destE2iplayerPath/icons/
+  [ -e $mydir/IPTVPlayer/icons ] && cp -f $mydir/IPTVPlayer/hosts/* $destE2iplayerPath/icons/
+done
+############################## Copying local scripts ##############################
+cp -rf $mySe2iPpath/Sync_and_Patch/files-2-copy/* $destE2iplayerPath/
+
+############################## Applying diffs from forks ##############################
+cd $destE2iplayerPath
+for myFile in `ls $e2iplayerGTIs/forks/*.diff_full`
+do
+  if [ -f $myFile ];then
+    echo "> applying $myFile"
+    patch -p1 < $myFile
+  fi
+done
+############################## Applying own patch ##############################
+cd $destE2iplayerPath
+echo ">>> applying own patch"
+sed "s;/enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/;;g" < $mySe2iPpath/Sync_and_Patch/iptvplayer-fork.patch > /tmp/tmp.patch
+patch -p1 < /tmp/tmp.patch
+rm -f /tmp/tmp.patch
+
+############################## Deleting unwanted files ##############################
+rm -rf $destE2iplayerPath/icons/PlayerSelector
+rm -f $destE2iplayerPath/hosts/*.txt
+rm -rf $destE2iplayerPath/bin/armv5t
+rm -rf $destE2iplayerPath/bin/mipsel
+rm -rf $destE2iplayerPath/bin/sh4
+#rm -rf $destE2iplayerPath/bin/i686
+
+############################## Delete some unwanted hosts ##############################
+cd $destE2iplayerPath
+#step 1 remove all definitevely unwanted
+HostsList='chomikuj favourites disabled blocked localmedia wolnelekturypl iptvplayerinfo'
+for myfile in $HostsList
+do
+  rm -rf ./hosts/*$myfile*
+  rm -rf ./icons/*$myfile*
+done
+
+############################## building hosts tree ##############################
+
+HostsCategory='1 - Ulubione'
+HostsList='hostyoutube'
+for host in $HostsList
+do
+  ln -sf /usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/hosts/$host.py "$destE2iplayerPath/hosts/$HostsCategory/$host.py"
+done
+
+
+HostsCategory='2 - Polskie'
+HostsList='hostwptv hostmeczykipl'
+for host in $HostsList
+do
+  ln -sf /usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/hosts/$host.py "$destE2iplayerPath/hosts/$HostsCategory/$host.py"
+done
+
+HostsCategory='3 - Bajki'
+HostsList='hostbajeczkiorg'
+for host in $HostsList
+do
+  ln -sf /usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/hosts/$host.py "$destE2iplayerPath/hosts/$HostsCategory/$host.py"
+done
+
+HostsCategory='4 - Sportowe'
+HostsList='hostsportdeutschland hostmeczykipl hostbbcsport'
+for host in $HostsList
+do
+  ln -sf /usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/hosts/$host.py "$destE2iplayerPath/hosts/$HostsCategory/$host.py"
+done
+
+HostsCategory='5 - Angielskie'
+HostsList='hostbbciplayer'
+for host in $HostsList
+do
+  ln -sf /usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/hosts/$host.py "$destE2iplayerPath/hosts/$HostsCategory/$host.py"
+done
+
+HostsCategory='6 - Niemieckie'
+HostsList='hostzdfmediathek hostsportdeutschland'
+for host in $HostsList
+do
+  ln -sf /usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/hosts/$host.py "$destE2iplayerPath/hosts/$HostsCategory/$host.py"
+done
+
+HostsCategory='9 - Dla dorosłych'
+HostsList=''
+for host in $HostsList
+do
+  ln -sf /usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/hosts/$host.py "$destE2iplayerPath/hosts/$HostsCategory/$host.py"
+done
+
+
+############################## Finally, copy to enigmaPC ##############################
+if [ -e /usr/local/e2/lib/enigma2/python/Plugins/Extensions/ ];then
+  echo copying current version to enigma2-PC
+  [ -e /usr/local/e2/lib/enigma2/python/Plugins/Extensions/IPTVPlayer ] && rm -rf /usr/local/e2/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/* || mkdir -p /usr/local/e2/lib/enigma2/python/Plugins/Extensions/IPTVPlayer
+  cp -rf $destE2iplayerPath/* /usr/local/e2/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/
+fi
 
 exit 0 
 publicGitRoot=$GITroot/crossplatform_iptvplayer
@@ -42,74 +176,7 @@ KaddonDir=$publicGitRoot/addon4KODI/neutrinoIPTV
 NpluginDir=$publicGitRoot/addon4neutrino/neutrinoIPTV
 publicGitDir=$publicGitRoot/IPTVplayer
 
-############################## Syncing GITLAB ##############################
-if [ ! -d ~/Archive/iptvplayer-GitLab-master-version ];then
-  mkdir -p ~/Archive
-  echo 'Cloning...'
-  git clone https://gitlab.com/iptvplayer-for-e2/iptvplayer-for-e2.git ~/Archive/iptvplayer-GitLab-master-version
-else
-  echo 'Syncing GitLab...'
-  cd ~/Archive/iptvplayer-GitLab-master-version
-  git pull
-fi
-if [ ! -d ~/Archive/iptvplayerXXX-GitLab-master-version ];then
-  echo 'Cloning XXX host...'
-  git clone https://gitlab.com/iptv-host-xxx/iptv-host-xxx.git ~/Archive/iptvplayerXXX-GitLab-master-version
-else
-  echo 'Syncing GitLab XXX host...'
-  cd ~/Archive/iptvplayerXXX-GitLab-master-version
-  git pull
-fi
-if [ ! -d ~/Archive/iptvplayer-infoversion-host ];then
-  echo 'Cloning XXX host...'
-  git clone https://gitlab.com/mosz_nowy/infoversion.git ~/Archive/iptvplayer-infoversion-host
-else
-  echo 'Syncing GitLab XXX host...'
-  cd ~/Archive/iptvplayer-infoversion-host
-  git pull
-fi
-if [ ! -d ~/Archive/zdzislaw-iptvplayer-GitLab-version ];then
-  mkdir -p ~/Archive
-  echo 'Cloning...'
-  git clone https://gitlab.com/zdzislaw22/iptvplayer-for-e2.git ~/Archive/zdzislaw-iptvplayer-GitLab-version
-else
-  echo 'Syncing Zdzislaw22 version...'
-  cd ~/Archive/zdzislaw-iptvplayer-GitLab-version
-  git pull
-fi
-############################## Syncing neutrinoIPTV ##############################
-echo 'Syncing neutrinoIPTV...'
-cd ~/Archive/iptvplayer-GitLab-master-version/
-
-subDIR='components'
-  [ -e $publicGitDir/i$subDIR ] && rm -rf $publicGitDir/i$subDIR/* || mkdir -p $publicGitDir/i$subDIR
-  cp -a ~/Archive/iptvplayer-GitLab-master-version/IPTVPlayer/$subDIR/* $publicGitDir/i$subDIR
-subDIR='tools'
-  [ -e $publicGitDir/i$subDIR ] && rm -rf $publicGitDir/i$subDIR/* || mkdir -p $publicGitDir/i$subDIR
-  cp -a ~/Archive/iptvplayer-GitLab-master-version/IPTVPlayer/$subDIR/* $publicGitDir/i$subDIR
-
-  rm -rf $publicGitDir/ihosts
-
-subDIRs="cache icons/logos hosts iptvdm libs locale"
-for subDIR in $subDIRs
-do
-  [ -e $publicGitDir/$subDIR ] && rm -rf $publicGitDir/$subDIR/* || mkdir -p $publicGitDir/$subDIR
-  cp -a ~/Archive/iptvplayer-GitLab-master-version/IPTVPlayer/$subDIR/* $publicGitDir/$subDIR
-done
-
-subDIRs="icomponents itools hosts libs scripts iptvdm"
-for subDIR in $subDIRs
-do
-  #ln -sf ../__init__.py $publicGitDir/$subDIR/__init__.py
-  touch $publicGitDir/$subDIR/__init__.py
-done
-cp -a ~/Archive/iptvplayerXXX-GitLab-master-version/IPTVPlayer/hosts/* $publicGitDir/hosts/
-cp -a ~/Archive/iptvplayer-infoversion-host/hosts/* $publicGitDir/hosts/
-cp -f ~/Archive/iptvplayer-GitLab-master-version/IPTVPlayer/version.py $publicGitDir
-wersja=`cat ./IPTVPlayer/version.py|grep 'IPTV_VERSION='|cut -d '"' -f2`
-sed -i "s/^name=.*$/name=IPTV for Neutrino @j00zek v.$wersja/" $NpluginDir/neutrinoIPTV.cfg
-sed -i "s/^name.polski=.*$/name.polski=IPTV dla Neutrino @j00zek w.$wersja/" $NpluginDir/neutrinoIPTV.cfg
-echo "$wersja">$daemonDir/version
+############################################################
 ############################## logos structure & names ##############################
 rm -f $publicGitDir/icons/*
 mv -f $publicGitDir/icons/logos/*.png $publicGitDir/icons/
@@ -139,17 +206,6 @@ sed -i '/class ConfigMenu(ConfigBaseWidget)/,$d' $myFile
 sed -i 's;from iptvpin import IPTVPinWidget;;g
   
   ' $myFile
-#own settings
-sed -i 's;\(^.*ListaGraficzna.*default[ ]*=[ ]*\)True\(.*$\);\1False\2; 
-  s;\(^.*showcover.*default[ ]*=[ ]*\)True\(.*$\);\1False\2; 
-  s;\(^.*autoCheckForUpdate.*default[ ]*=[ ]*\)True\(.*$\);\1False\2; 
-  s;\(^.*wgetpath.*default = \)"";\1"wget"; 
-  s;\(^.*f4mdumppath.*default = \)"";\1"f4mdump"; 
-  s;\(^.*rtmpdumppath.*default = \)"";\1"rtmpdump"; 
-  s;\(^.*dukpath.*default = \)"";\1"duk"; 
-  s;\(^.*hlsdlpath.*default = \)"";\1"hlsdl"; 
-  ' $myFile
-
 ############################## cleaning unused components #######################################################################################
 echo 'Cleaning not used components from scripts...'
 cd $publicGitDir
@@ -204,15 +260,6 @@ sed -i "s/\(_url.*hostXXX.py\)/\1DISABLED/g" $publicGitDir/hosts/XXX.py
 #wget -q http://iptvplayer.pl/resources/bin/sh4/exteplayer3_ffmpeg3.0 -O $publicGitDir/bin/sh4/exteplayer3
 #wget -q http://iptvplayer.pl/resources/bin/sh4/uchardet -O $publicGitDir/bin/sh4/uchardet
 
-############################## Delete some unwanted hosts ##############################
-cd $publicGitDir
-#step 1 remove all definitevely unwanted
-HostsList='anime chomikuj favourites disabled blocked localmedia wolnelekturypl urllist iptvplayerinfo'
-for myfile in $HostsList
-do
-  rm -rf ./hosts/*$myfile*
-  rm -rf ./icons/*$myfile*
-done
 
 ############################## Delete hosts with captcha ##############################
 cd $publicGitDir/hosts

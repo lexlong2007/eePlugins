@@ -1,0 +1,1033 @@
+diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/IPTVPlayer/components/configbase.py /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/components/configbase.py
+--- /enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/IPTVPlayer/components/configbase.py	2019-03-16 07:17:46.993696001 +0100
++++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/components/configbase.py	2019-03-21 06:53:51.207191000 +0100
+@@ -6,6 +6,8 @@
+ 
+ 
+ ###################################################
++from Plugins.Extensions.IPTVPlayer.j00zekAddons.j00zekToolSet import * 
++###################################################
+ # LOCAL import
+ ###################################################
+ from Plugins.Extensions.IPTVPlayer.tools.iptvtools import printDBG, printExc
+diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/IPTVPlayer/components/iptvconfigmenu.py /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/components/iptvconfigmenu.py
+--- /enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/IPTVPlayer/components/iptvconfigmenu.py	2019-03-16 07:17:46.997696001 +0100
++++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/components/iptvconfigmenu.py	2019-03-21 07:01:29.471191000 +0100
+@@ -51,7 +51,7 @@
+ config.plugins.iptvplayer.uchardetpath    = ConfigText(default = "", fixed_size = False)
+ config.plugins.iptvplayer.set_curr_title  = ConfigYesNo(default = False)
+ config.plugins.iptvplayer.curr_title_file = ConfigText(default = "", fixed_size = False) 
+-config.plugins.iptvplayer.plarform        = ConfigSelection(default = "auto", choices = [("auto", "auto"),("mipsel", _("mipsel")),("sh4", _("sh4")),("i686", _("i686")), ("armv7", _("armv7")), ("armv5t", _("armv5t")), ("unknown", _("unknown"))])
++config.plugins.iptvplayer.plarform        = ConfigSelection(default = "auto", choices = [("auto", "auto"),("mipsel", _("mipsel")),("i686", _("i686")), ("armv7", _("armv7")), ("unknown", _("unknown"))])
+ config.plugins.iptvplayer.plarformfpuabi  = ConfigSelection(default = "", choices = [("", ""),("hard_float", _("Hardware floating point")),("soft_float", _("Software floating point"))])
+ 
+ config.plugins.iptvplayer.showcover          = ConfigYesNo(default = True)
+@@ -59,8 +59,8 @@
+ config.plugins.iptvplayer.allowedcoverformats= ConfigSelection(default = "jpeg,png", choices = [("jpeg,png,gif", _("jpeg,png,gif")),("jpeg,png", _("jpeg,png")),("jpeg", _("jpeg")),("all", _("all"))]) 
+ config.plugins.iptvplayer.showinextensions   = ConfigYesNo(default = True)
+ config.plugins.iptvplayer.showinMainMenu     = ConfigYesNo(default = False)
+-config.plugins.iptvplayer.ListaGraficzna     = ConfigYesNo(default = True)
+-config.plugins.iptvplayer.group_hosts        = ConfigYesNo(default = True)
++config.plugins.iptvplayer.ListaGraficzna     = ConfigYesNo(default = False)
++config.plugins.iptvplayer.group_hosts        = ConfigYesNo(default = False)
+ config.plugins.iptvplayer.NaszaSciezka       = ConfigDirectory(default = "/hdd/movie/") #, fixed_size = False)
+ config.plugins.iptvplayer.bufferingPath      = ConfigDirectory(default = config.plugins.iptvplayer.NaszaSciezka.value) #, fixed_size = False)
+ config.plugins.iptvplayer.buforowanie        = ConfigYesNo(default = False)
+@@ -73,10 +73,10 @@
+ config.plugins.iptvplayer.IPTVDMShowAfterAdd    = ConfigYesNo(default = True)
+ config.plugins.iptvplayer.IPTVDMMaxDownloadItem = ConfigSelection(default = "1", choices = [("1", "1"),("2", "2"),("3", "3"),("4", "4")])
+ 
+-config.plugins.iptvplayer.AktualizacjaWmenu = ConfigYesNo(default = True)
++config.plugins.iptvplayer.AktualizacjaWmenu = ConfigYesNo(default = False)
+ config.plugins.iptvplayer.sortuj = ConfigYesNo(default = True)
+-config.plugins.iptvplayer.remove_diabled_hosts = ConfigYesNo(default = False)
+-config.plugins.iptvplayer.IPTVWebIterface = ConfigYesNo(default = False)
++config.plugins.iptvplayer.remove_diabled_hosts = ConfigYesNo(default = True)
++config.plugins.iptvplayer.IPTVWebIterface = ConfigYesNo(default = True)
+ config.plugins.iptvplayer.plugin_autostart = ConfigYesNo(default = False)
+ config.plugins.iptvplayer.plugin_autostart_method = ConfigSelection(default = "wizard", choices = [("wizard", "wizard"),("infobar", "infobar")])
+ 
+@@ -197,7 +197,7 @@
+ config.plugins.iptvplayer.myjd_jdname = ConfigText(default = "", fixed_size = False)
+ 
+ # Update
+-config.plugins.iptvplayer.autoCheckForUpdate = ConfigYesNo(default = True)
++config.plugins.iptvplayer.autoCheckForUpdate = ConfigYesNo(default = False)
+ config.plugins.iptvplayer.updateLastCheckedVersion = ConfigText(default = "00.00.00.00", fixed_size = False)
+ config.plugins.iptvplayer.fakeUpdate               = ConfigSelection(default = "fake", choices = [("fake", "  ")])
+ config.plugins.iptvplayer.downgradePossible        = ConfigYesNo(default = False)
+@@ -224,6 +224,10 @@
+ 
+ ###################################################
+ 
++###################################################
++j00zekFork=True
++from Plugins.Extensions.IPTVPlayer.j00zekScripts.j00zekToolSet import AlternateOptionsList, ExtendConfigsList, RemoveDuplicatesFromList
++ExtendConfigsList() 
+ ########################################################
+ # Generate list of hosts options for Enabling/Disabling
+ ########################################################
+@@ -303,6 +307,8 @@
+         
+     @staticmethod
+     def fillConfigList(list, hiddenOptions=False):
++        if 'j00zekFork' in globals():
++            AlternateOptionsList(list) 
+         if hiddenOptions:
+             list.append( getConfigListEntry(_("Last checked version"), config.plugins.iptvplayer.updateLastCheckedVersion) )
+             list.append( getConfigListEntry(_("Show all version in the update menu"), config.plugins.iptvplayer.hiddenAllVersionInUpdate) )
+@@ -324,14 +330,14 @@
+             list.append(getConfigListEntry("Auto start method", config.plugins.iptvplayer.plugin_autostart_method))
+             list.append(getConfigListEntry("Prefer hlsld for playlist with alt. media", config.plugins.iptvplayer.prefer_hlsdl_for_pls_with_alt_media))
+ 
+-        list.append( getConfigListEntry(_("Auto check for plugin update"), config.plugins.iptvplayer.autoCheckForUpdate) )
+-        list.append( getConfigListEntry(_("The preferred update server"), config.plugins.iptvplayer.preferredupdateserver) )
+-        if config.plugins.iptvplayer.preferredupdateserver.value == '2':
+-            list.append(getConfigListEntry(_("Add update from GitLab repository"), config.plugins.iptvplayer.gitlab_repo))
+-        if config.plugins.iptvplayer.preferredupdateserver.value == '3':
+-            list.append(getConfigListEntry(_("%s login") % 'E2iPlayer', config.plugins.iptvplayer.iptvplayer_login))
+-            list.append(getConfigListEntry(_("%s password") % 'E2iPlayer', config.plugins.iptvplayer.iptvplayer_password))
+-        list.append( getConfigListEntry(_("Update"), config.plugins.iptvplayer.fakeUpdate) )
++        #list.append( getConfigListEntry(_("Auto check for plugin update"), config.plugins.iptvplayer.autoCheckForUpdate) )
++        #list.append( getConfigListEntry(_("The preferred update server"), config.plugins.iptvplayer.preferredupdateserver) )
++        #if config.plugins.iptvplayer.preferredupdateserver.value == '2':
++        #    list.append(getConfigListEntry(_("Add update from GitLab repository"), config.plugins.iptvplayer.gitlab_repo))
++        #if config.plugins.iptvplayer.preferredupdateserver.value == '3':
++        #    list.append(getConfigListEntry(_("%s login") % 'E2iPlayer', config.plugins.iptvplayer.iptvplayer_login))
++        #    list.append(getConfigListEntry(_("%s password") % 'E2iPlayer', config.plugins.iptvplayer.iptvplayer_password))
++        #list.append( getConfigListEntry(_("Update"), config.plugins.iptvplayer.fakeUpdate) )
+         list.append( getConfigListEntry(_("Virtual Keyboard type"), config.plugins.iptvplayer.osk_type) )
+         if config.plugins.iptvplayer.osk_type.value == 'own':
+             list.append( getConfigListEntry(_("    Background color"), config.plugins.iptvplayer.osk_background_color) )
+@@ -349,13 +355,13 @@
+         if config.plugins.iptvplayer.pluginProtectedByPin.value or config.plugins.iptvplayer.configProtectedByPin.value:
+             list.append( getConfigListEntry(_("Set pin code"), config.plugins.iptvplayer.fakePin) )
+         
+-        list.append(getConfigListEntry(_("Skin"), config.plugins.iptvplayer.skin))
+-        list.append(getConfigListEntry(_("Display thumbnails"), config.plugins.iptvplayer.showcover))
+-        if config.plugins.iptvplayer.showcover.value:
+-            list.append(getConfigListEntry(_("    Allowed formats of thumbnails"), config.plugins.iptvplayer.allowedcoverformats))
+-            list.append(getConfigListEntry(_("    Remove thumbnails"), config.plugins.iptvplayer.deleteIcons))
++        #list.append(getConfigListEntry(_("Skin"), config.plugins.iptvplayer.skin))
++        #list.append(getConfigListEntry(_("Display thumbnails"), config.plugins.iptvplayer.showcover))
++        #if config.plugins.iptvplayer.showcover.value:
++        #    list.append(getConfigListEntry(_("    Allowed formats of thumbnails"), config.plugins.iptvplayer.allowedcoverformats))
++        #    list.append(getConfigListEntry(_("    Remove thumbnails"), config.plugins.iptvplayer.deleteIcons))
+         #list.append(getConfigListEntry("Sortować listy?", config.plugins.iptvplayer.sortuj))            
+-        list.append(getConfigListEntry(_("Graphic services selector"), config.plugins.iptvplayer.ListaGraficzna))
++        #list.append(getConfigListEntry(_("Graphic services selector"), config.plugins.iptvplayer.ListaGraficzna))
+         if config.plugins.iptvplayer.ListaGraficzna.value == True:
+             list.append(getConfigListEntry(_("    Enable hosts groups"), config.plugins.iptvplayer.group_hosts))
+             list.append(getConfigListEntry(_("    Service icon size"), config.plugins.iptvplayer.IconsSize))
+@@ -476,11 +482,14 @@
+         list.append(getConfigListEntry(_("Block wmv files"), config.plugins.iptvplayer.ZablokujWMV))
+         list.append(getConfigListEntry(_("Show IPTVPlayer in extension list"), config.plugins.iptvplayer.showinextensions))
+         list.append(getConfigListEntry(_("Show IPTVPlayer in main menu"), config.plugins.iptvplayer.showinMainMenu))
+-        list.append(getConfigListEntry(_("Show update icon in service selection menu"), config.plugins.iptvplayer.AktualizacjaWmenu))
++        #list.append(getConfigListEntry(_("Show update icon in service selection menu"), config.plugins.iptvplayer.AktualizacjaWmenu))
+         list.append(getConfigListEntry(_("Debug logs"), config.plugins.iptvplayer.debugprint))
+-        list.append(getConfigListEntry(_("Allow downgrade"), config.plugins.iptvplayer.downgradePossible))
+-        list.append(getConfigListEntry(_("Update packet type"), config.plugins.iptvplayer.possibleUpdateType))
++        #list.append(getConfigListEntry(_("Allow downgrade"), config.plugins.iptvplayer.downgradePossible))
++        #list.append(getConfigListEntry(_("Update packet type"), config.plugins.iptvplayer.possibleUpdateType))
+ 
++        if 'j00zekFork' in globals():
++            RemoveDuplicatesFromList(list) 
++            
+     def runSetup(self):
+         self.list = []
+         ConfigMenu.fillConfigList(self.list, self.isHiddenOptionsUnlocked())
+diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/IPTVPlayer/components/iptvplayerwidget.py /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/components/iptvplayerwidget.py
+--- /enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/IPTVPlayer/components/iptvplayerwidget.py	2019-03-16 07:17:47.001696001 +0100
++++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/components/iptvplayerwidget.py	2019-03-21 06:47:03.443191000 +0100
+@@ -13,6 +13,10 @@
+ import traceback
+ 
+ ####################################################
++#                  j00zek E2
++####################################################
++j00zekFork=True
++####################################################
+ #                   E2 components
+ ####################################################
+ from skin import parseColor
+@@ -1292,7 +1296,10 @@
+         return
+ 
+     def displayListOfHosts(self, arg = None):
+-        if config.plugins.iptvplayer.ListaGraficzna.value == False or 0 == GetAvailableIconSize():
++        if 'j00zekFork' in globals():
++            from Plugins.Extensions.IPTVPlayer.j00zekAddons.j00zekHostTreeSelector import j00zekHostTreeSelector
++            self.session.openWithCallback(self.selectHostCallback, j00zekHostTreeSelector, list = self.displayHostsList)
++        elif config.plugins.iptvplayer.ListaGraficzna.value == False or 0 == GetAvailableIconSize():
+             self.newDisplayHostsList = None
+             self.session.openWithCallback(self.selectHostCallback, ChoiceBox, title=_("Select service"), list = self.displayHostsList)
+         else:
+diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/IPTVPlayer/j00zekAddons/j00zekHostTreeSelector.py /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/j00zekAddons/j00zekHostTreeSelector.py
+--- /enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/IPTVPlayer/j00zekAddons/j00zekHostTreeSelector.py	1970-01-01 01:00:00.000000000 +0100
++++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/j00zekAddons/j00zekHostTreeSelector.py	2019-03-21 06:47:03.395191000 +0100
+@@ -0,0 +1,459 @@
++from j00zekToolSet import *
++from Plugins.Extensions.IPTVPlayer.__init__ import _
++from Plugins.Extensions.IPTVPlayer.version import IPTV_VERSION
++
++from Components.ActionMap import ActionMap
++from Components.config import config
++from Components.GUIComponent import GUIComponent
++from Components.Label import Label
++from Components.MenuList import MenuList
++from Components.Pixmap import Pixmap
++from Components.Sources.StaticText import StaticText
++from skin import parseFont, parseColor
++from Tools.LoadPixmap import LoadPixmap
++
++from re import compile as re_compile
++from os import path as os_path, listdir, system as os_system
++from Components.Harddisk import harddiskmanager #do wywalenia!!!!
++
++from Tools.Directories import SCOPE_CURRENT_SKIN, resolveFilename, fileExists
++
++from enigma import RT_HALIGN_LEFT, eListboxPythonMultiContent, gFont, getDesktop
++
++##################################################### main widget #####################################################
++class j00zekHostTreeSelector(Screen):
++
++    def __init__(self, session, list):
++        self.Hostslist = list
++        self.openHost = ''
++        self.LastFolderSelected= None
++        self.rootPath = PluginPath+"/hosts/"
++  
++        self.skin  = LoadSkin("j00zekHostTreeSelector")
++        
++        Screen.__init__(self, session)
++        self["info"] = Label()
++        self["myPath"] = Label('')
++        
++        self["key_red"] = StaticText(_("Exit"))
++        self["Cover"] = Pixmap()
++        
++        self["key_green"] = StaticText("")
++            
++        self["key_yellow"] = StaticText(_("Delete Category"))
++        self["key_blue"] = StaticText(_("New Category"))
++        self["info"].setText(PluginName + ' mod j00zek v.' + IPTV_VERSION) #title
++        self.filelist = FileList(self.rootPath, HostsList = self.Hostslist)
++        self["filelist"] = self.filelist
++        self["actions"] = ActionMap(["j00zekHostTreeSelector"],
++            {
++                "selectHost": self.selectHost,
++                "ExitHostSelector": self.ExitHostSelector,
++                "lineUp": self.lineUp,
++                "lineDown": self.lineDown,
++                "pageUp": self.pageUp,
++                "pageDown": self.pageDown,
++                "newCategory": self.newCategory,
++                "addHostToCategory": self.addHostToCategory,
++                "deleteCategory": self.deleteCategory,
++                "showConfig": self.showConfig,
++                "showLocalMedia":  self.showLocalMedia,
++                "showDownloadManager": self.showDownloadManager,
++            },-2)
++        self.setTitle(PluginName + ' mod j00zek v.' + IPTV_VERSION)
++        self.onShown.append(self.__LayoutFinish)
++
++    def __LayoutFinish(self):
++        if os_path.dirname(config.plugins.iptvplayer.j00zekLastSelectedHost.value) != '':
++            self["filelist"].changeDir(os_path.dirname(config.plugins.iptvplayer.j00zekLastSelectedHost.value)+'/', os_path.basename(config.plugins.iptvplayer.j00zekLastSelectedHost.value))
++            self.LastFolderSelected = self.__getCurrentDir()
++            if not self.LastFolderSelected.endswith('/'): self.LastFolderSelected += '/'
++            self["myPath"].setText(self.LastFolderSelected.replace(self.rootPath,''))
++        self["filelist"].refresh()
++      
++    def showConfig(self):
++        self.close( (("config", "config")) )
++      
++    def showLocalMedia(self):
++        self.close( (("localmedia", "localmedia")) )
++      
++    def showDownloadManager(self):
++        self.close( (("IPTVDM", "IPTVDM")) )
++        
++    def addHostToCategory(self):
++        selection = self["filelist"].getSelection()
++        if selection[1] == False: # host selected
++            myHostName=selection[0]
++            hostPath=self.filelist.getCurrentDirectory()
++            def CB(ret):
++                if ret:
++                    ManageHostsAndCategories(myHostName, ret[1])
++                
++            from Screens.ChoiceBox import ChoiceBox
++            from Plugins.Extensions.IPTVPlayer.j00zekScripts.j00zekToolSet import ManageHostsAndCategories, GetHostsCategories
++            self.session.openWithCallback(CB, ChoiceBox, title=_("Assign to/Remove from Category"), list = GetHostsCategories() )
++
++        self["filelist"].refresh()
++      
++    def newCategory(self):
++        selection = self["filelist"].getSelection()
++        def catCB(callback = None):
++            if callback is not None:
++                printDEBUG('mkdir -p %s/%s' %(self.filelist.getCurrentDirectory(),callback) )
++                os_system('mkdir -p %s/%s' %(self.filelist.getCurrentDirectory(),callback) )
++                self["filelist"].refresh()
++                return
++        from Screens.VirtualKeyBoard import VirtualKeyBoard
++        self.session.openWithCallback(catCB, VirtualKeyBoard, title=_("Enter Category name"), text = _('new Category') )
++            
++        self["filelist"].refresh()
++      
++    def deleteCategory(self):
++        selection = self["filelist"].getSelection()
++        if selection[1] == True: # isDir
++            printDEBUG("Deleting %s" % selection[0])
++            os_system('rm -rf %s' % selection[0])
++        else: #we need disable host
++            #os_system('rm -rf %s/%s' % (self.filelist.getCurrentDirectory(),selection[0]))
++            currhost=None
++            for host in self.Hostslist:
++                if selection[0][4:-4] == host[1]:
++                    currhost = host
++                    break
++            if currhost is not None:
++                try:
++                    exec('config.plugins.iptvplayer.host%s.value=False' % currhost[1])
++                    exec('config.plugins.iptvplayer.host%s.save()' % currhost[1])
++                    self.Hostslist.remove(currhost)
++                    printDEBUG("Disabled %s (%s)" % (currhost[1],selection[0]))
++                except:
++                    printDEBUG("Exception disabling host '%s'" % currhost[1])
++
++        self["filelist"].refresh()
++        self.setInfo()
++      
++    def pageUp(self):
++        if self["filelist"].getSelectedIndex() == 0:
++            self["filelist"].moveToIndex(len(self["filelist"].getFileList())-1)
++        else:
++            self["filelist"].pageUp()
++        self.setInfo()
++
++    def pageDown(self):
++        if self["filelist"].getSelectedIndex() == (len(self["filelist"].getFileList())-1):
++            self["filelist"].moveToIndex(0)
++        else:
++            self["filelist"].pageDown()
++        self.setInfo()
++
++    def lineUp(self):
++        if self["filelist"].getSelectedIndex() == 0:
++            self["filelist"].moveToIndex(len(self["filelist"].getFileList())-1)
++        else:
++            self["filelist"].up()
++        self.setInfo()
++
++    def lineDown(self):
++        if self["filelist"].getSelectedIndex() == (len(self["filelist"].getFileList())-1):
++            self["filelist"].moveToIndex(0)
++        else:
++            self["filelist"].down()
++        self.setInfo()
++
++    def setInfo(self):
++        selection = self["filelist"].getSelection()
++        if selection is None:
++            return
++        elif selection[1] == True: # isDir
++            self["key_green"].setText("")
++            self["key_yellow"].setText(_("Delete Category"))
++            self["Cover"].hide()
++        else:
++            self["key_yellow"].setText(_("Disable Host"))
++            self["key_green"].setText(_("Assign to category"))
++            HostPreview = '%s/icons/previews/%s.jpg' % (PluginPath,self.filelist.getFilename()[:-4])
++            print HostPreview
++            if os_path.exists(HostPreview):
++                self["Cover"].instance.setScale(1)
++                self["Cover"].instance.setPixmap(LoadPixmap(HostPreview))
++                self["Cover"].show()
++            else:
++                self["Cover"].hide()
++        return
++  
++    def __getCurrentDir(self):
++        d = self.filelist.getCurrentDirectory()
++        if d is None:
++            d=""
++        elif not d.endswith('/'):
++            d +='/'
++        return d
++      
++    def selectHost(self):
++        selection = self["filelist"].getSelection()
++        if selection is None:
++            return
++        elif selection[1] == True: # isDir
++            if selection[0] is not None and self.filelist.getCurrentDirectory() is not None and \
++                    len(selection[0]) > len(self.filelist.getCurrentDirectory()) or self.LastFolderSelected == None:
++                self.LastFolderSelected = selection[0]
++                self["filelist"].changeDir(selection[0], "FakeFolderName")
++            else:
++                print "Folder Down"
++                self["filelist"].changeDir(selection[0], self.LastFolderSelected)
++                
++            self["myPath"].setText(self.__getCurrentDir().replace(self.rootPath,''))
++        else:
++            d = self.__getCurrentDir()
++            f = self.filelist.getFilename()
++            #printDEBUG("self.selectedFile>> " + d + f)
++            self.openHost = f[4:].replace('.pyo','').replace('.pyc','')
++            printDEBUG("self.selectedHost>> " + self.openHost)
++            #self.SetDescriptionAndCover(self.openHost)
++            for host in self.Hostslist:
++                if self.openHost == host[1]:
++                    config.plugins.iptvplayer.j00zekLastSelectedHost.value = d + f
++                    self.close(host)
++      
++    def SetDescriptionAndCover(self, HostName):
++        if HostName == '':
++            self["Cover"].hide()
++            return
++        
++        temp = HostName
++        ### COVER ###
++        if os_path.exists(temp + '.jpg'):
++            self["Cover"].instance.setScale(1)
++            self["Cover"].instance.setPixmap(LoadPixmap(os_path=temp + '.jpg'))
++            self["Cover"].show()
++        else:
++            self["Cover"].hide()
++            
++    def ConvertChars(self, text):
++        CharsTable={ '\xC2\xB1': '\xC4\x85','\xC2\xB6': '\xC5\x9b','\xC4\xBD': '\xC5\xba'}
++        for i, j in CharsTable.iteritems():
++            text = text.replace(i, j)
++        return text
++
++    def ExitHostSelector(self):
++        self.close(None)
++##################################################### treeSelector #####################################################
++
++def FileEntryComponent(name, absolute = None, isDir = False, goBack = False, DimFolderText = (40, 7, 1020, 40), DimFolderPIC = (5, 7, 25, 25), DimFileText = (170, 7, 1020, 40), DimFilePIC = (40, 1, 120, 40) ):
++    res = [ (absolute, isDir) ]
++    #res.append((eListboxPythonMultiContent.TYPE_TEXT, 130, 1, 1020, 50, 0, RT_HALIGN_LEFT, name))
++    if isDir:
++        res.append((eListboxPythonMultiContent.TYPE_TEXT, DimFolderText[0], DimFolderText[1], DimFolderText[2], DimFolderText[3], 0, RT_HALIGN_LEFT, name))
++        if goBack == True:
++            png = LoadPixmap(cached=True, path="%s/icons/back.png" % PluginPath)
++        else:
++            png = LoadPixmap(cached=True, path="%s/icons/folder.png" % PluginPath)
++        res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, DimFolderPIC[0], DimFolderPIC[1], DimFolderPIC[2], DimFolderPIC[3], png))
++    else:
++        res.append((eListboxPythonMultiContent.TYPE_TEXT, DimFileText[0], DimFileText[1], DimFileText[2], DimFileText[3], 0, RT_HALIGN_LEFT, name))
++        if os_path.exists("%s/icons/logos/%slogo.png" % (PluginPath,absolute[4:-4])):
++            #print "%s/icons/logos/%slogo.png" % (PluginPath,absolute[4:-4])
++            png = LoadPixmap("%s/icons/logos/%slogo.png" % (PluginPath,absolute[4:-4]))
++        else:
++            png = None
++        if png is not None:
++            res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, DimFilePIC[0], DimFilePIC[1], DimFilePIC[2], DimFilePIC[3], png))
++    return res
++
++class FileList(MenuList):
++    def __init__(self, directory, enableWrapAround = False, HostsList = []):
++        MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
++        self.Hostslist = HostsList
++        self.mountpoints = []
++        self.current_directory = directory
++        self.current_mountpoint = None
++        self.showDirectories = True
++        self.rootDirectory = directory
++        self.showFiles = True
++        # example: matching .nfi and .ts files: "^.*\.(nfi|ts)"
++        self.inhibitDirs = []
++        self.inhibitMounts = []
++
++        #default values:
++        self.Font = gFont("Regular",26)
++        self.itemHeight = 42
++        self.DimFolderText = (40, 7, 1020, 40)
++        self.DimFolderPIC = (5, 7, 25, 25)
++        self.DimFileText = (170, 7, 1020, 40)
++        self.DimFilePIC = (40, 1, 120, 40)
++        
++    def applySkin(self, desktop, parent):
++        def Font(value):
++            self.Font = parseFont(value, ((1,1),(1,1)))
++        def itemHeight(value):
++            self.itemHeight = int(value)
++        def DimFolderText(value):
++            self.DimFolderText = ( int(value.split(',')[0]), int(value.split(',')[1]), int(value.split(',')[2]), int(value.split(',')[3]) )
++        def DimFileText(value):
++            self.DimFileText = ( int(value.split(',')[0]), int(value.split(',')[1]), int(value.split(',')[2]), int(value.split(',')[3]) )
++        def DimFolderPIC(value):
++            self.DimFolderPIC = ( int(value.split(',')[0]), int(value.split(',')[1]), int(value.split(',')[2]), int(value.split(',')[3]) )
++        def DimFilePIC(value):
++            self.DimFilePIC = ( int(value.split(',')[0]), int(value.split(',')[1]), int(value.split(',')[2]), int(value.split(',')[3]) )
++          
++        for (attrib, value) in list(self.skinAttributes):
++            try:
++                locals().get(attrib)(value)
++                self.skinAttributes.remove((attrib, value))
++            except:
++                pass
++              
++        self.l.setFont(0,self.Font)
++        self.l.setItemHeight(self.itemHeight)
++        return GUIComponent.applySkin(self, desktop, parent)
++        
++    def getMountpoint(self, file):
++        file = os_path.join(os_path.realpath(file), "")
++        for m in self.mountpoints:
++            if file.startswith(m):
++                return m
++        return False
++
++    def getMountpointLink(self, file):
++        if os_path.realpath(file) == file:
++            return self.getMountpoint(file)
++        else:
++            if file[-1] == "/":
++                file = file[:-1]
++            mp = self.getMountpoint(file)
++            last = file
++            file = os_path.dirname(file)
++            while last != "/" and mp == self.getMountpoint(file):
++                last = file
++                file = os_path.dirname(file)
++            return os_path.join(last, "")
++
++    def getSelection(self):
++        if self.l.getCurrentSelection() is None:
++            return None
++        return self.l.getCurrentSelection()[0]
++
++    def getCurrentEvent(self):
++        l = self.l.getCurrentSelection()
++        if not l or l[0][1] == True:
++            return None
++        #else:
++        #    return self.serviceHandler.info(l[0][0]).getEvent(l[0][0])
++
++    def getFileList(self):
++        return self.list
++
++    def inParentDirs(self, dir, parents):
++        dir = os_path.realpath(dir)
++        for p in parents:
++            if dir.startswith(p):
++                return True
++        return False
++
++    def changeDir(self, directory, select = None):
++        self.list = []
++
++        # if we are just entering from the list of mount points:
++        if self.current_directory is None:
++            self.current_mountpoint = None
++            
++        self.current_directory = directory
++        directories = []
++        files = []
++
++        if directory is None:
++            files = [ ]
++            directories = [ ]
++        else:
++            if fileExists(directory):
++                try:
++                    files = listdir(directory)
++                except:
++                    files = []
++                files.sort(key=lambda s: s.lower())
++                #files.sort()
++                tmpfiles = files[:]
++                for x in tmpfiles:
++                    if os_path.isdir(directory + x):
++                        directories.append(directory + x + "/")
++                        files.remove(x)
++
++        if directory is not None and self.showDirectories:
++            if (directory != self.rootDirectory) and not (self.inhibitMounts and self.getMountpoint(directory) in self.inhibitMounts):
++                self.list.append(FileEntryComponent(name = _("Parent Category"), absolute = '/'.join(directory.split('/')[:-2]) + '/', isDir = True, goBack = True,
++                                                     DimFolderText = self.DimFolderText, DimFolderPIC = self.DimFolderPIC, DimFileText = self.DimFileText, DimFilePIC = self.DimFilePIC))
++
++        if self.showDirectories:
++            for x in directories:
++                if not (self.inhibitMounts and self.getMountpoint(x) in self.inhibitMounts) and not self.inParentDirs(x, self.inhibitDirs):
++                    name = x.split('/')[-2]
++                    self.list.append(FileEntryComponent(name = name, absolute = x, isDir = True, 
++                                      DimFolderText = self.DimFolderText, DimFolderPIC = self.DimFolderPIC, DimFileText = self.DimFileText, DimFilePIC = self.DimFilePIC))
++
++        if self.showFiles:
++            for x in files:
++                path = directory + x
++                name = x
++
++                if name.startswith('host') and (name.endswith('.pyo') or name.endswith('.pyc')):
++                    name = name[4:-4]
++                    for host in self.Hostslist:
++                        if name == host[1]:
++                            name = host[0]
++                            self.list.append(FileEntryComponent(name = name, absolute = x , isDir = False,
++                                              DimFolderText = self.DimFolderText, DimFolderPIC = self.DimFolderPIC, DimFileText = self.DimFileText, DimFilePIC = self.DimFilePIC))
++                            break
++
++        self.l.setList(self.list)
++
++        if select is not None:
++            i = 0
++            self.moveToIndex(0)
++            for x in self.list:
++                p = x[0][0]
++                if p == select:
++                    self.moveToIndex(i)
++                i += 1
++
++    def getCurrentDirectory(self):
++        return self.current_directory
++
++    def canDescent(self):
++        if self.getSelection() is None:
++            return False
++        return self.getSelection()[1]
++
++    def descent(self):
++        if self.getSelection() is None:
++            return
++        self.changeDir(self.getSelection()[0], select = self.current_directory)
++
++    def getFilename(self):
++        if self.getSelection() is None:
++            return None
++        x = self.getSelection()[0]
++        #if isinstance(x, eServiceReference):
++        #    x = x.getPath()
++        return x
++
++    def getServiceRef(self):
++        if self.getSelection() is None:
++            return None
++        x = self.getSelection()[0]
++        #if isinstance(x, eServiceReference):
++        #    return x
++        return None
++
++    #def execBegin(self):
++    #    harddiskmanager.on_partition_list_change.append(self.partitionListChanged)
++
++    #def execEnd(self):
++    #    harddiskmanager.on_partition_list_change.remove(self.partitionListChanged)
++
++    def refresh(self):
++        self.changeDir(self.current_directory, self.getFilename())
++
++    #def partitionListChanged(self, action, device):
++    #    self.refreshMountpoints()
++    #    if self.current_directory is None:
++    #        self.refresh()
+diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/IPTVPlayer/j00zekAddons/j00zekToolSet.py /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/j00zekAddons/j00zekToolSet.py
+--- /enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/IPTVPlayer/j00zekAddons/j00zekToolSet.py	1970-01-01 01:00:00.000000000 +0100
++++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/j00zekAddons/j00zekToolSet.py	2019-03-21 06:47:03.395191000 +0100
+@@ -0,0 +1,311 @@
++# -*- coding: utf-8 -*-
++#
++#from Plugins.Extensions.IPTVPlayer.j00zekScripts.j00zekToolSet import XXX
++##### permanents
++j00zekFork=True
++PluginName = 'IPTVPlayer'
++PluginGroup = 'Extensions'
++
++##### System Imports
++from os import path as os_path, environ as os_environ, listdir as os_listdir, chmod as os_chmod, remove as os_remove, mkdir as os_mkdir, system as os_system
++
++###### openPLI imports
++from Components.config import *
++from Plugins.Extensions.IPTVPlayer.version import IPTV_VERSION
++from Plugins.Extensions.IPTVPlayer.tools.iptvtools import printDBG as printDEBUG
++from Screens.Screen import Screen
++from Tools.Directories import *
++
++from Plugins.Extensions.IPTVPlayer.__init__ import _
++# Plugin Paths
++PluginFolder = PluginName
++PluginPath = resolveFilename(SCOPE_PLUGINS, '%s/%s' %(PluginGroup,PluginFolder))
++ExtPluginsPath = resolveFilename(SCOPE_PLUGINS, '%s/' %(PluginGroup))
++
++# Update plugin console script
++j00zekRunUpdateList = []
++j00zekRunUpdateList.append( ('cp -a %s/j00zekScripts/UpdatePlugin.sh /tmp/PluginUpdate.sh' % PluginPath) ) #to have clear path of updating this script too ;)
++j00zekRunUpdateList.append( ('chmod 755 /tmp/PluginUpdate.sh') )
++j00zekRunUpdateList.append( ('/tmp/PluginUpdate.sh "%s"' % IPTV_VERSION) )
++j00zekRunUpdateList.append( ('rm -f /tmp/PluginUpdate.sh') )
++##################################################### LOAD SKIN DEFINITION #####################################################
++def AlternateOptionsList(list):
++        #we build our own order :)
++    list.append( getConfigListEntry(_("Auto check for plugin update"), config.plugins.iptvplayer.autoCheckForUpdate) )
++    list.append( getConfigListEntry(_("Update"), config.plugins.iptvplayer.fakeUpdate) )
++    #
++    list.append( getConfigListEntry(_("--- General options ---"), config.plugins.iptvplayer.j00zekSeparator))
++    list.append( getConfigListEntry(_("Detected platform"), config.plugins.iptvplayer.plarform) )
++    list.append( getConfigListEntry(_("Services configuration"), config.plugins.iptvplayer.fakeHostsList) )
++    list.append( getConfigListEntry(_("Show IPTVPlayer in extension list"), config.plugins.iptvplayer.showinextensions))
++    list.append( getConfigListEntry(_("Show IPTVPlayer in main menu"), config.plugins.iptvplayer.showinMainMenu))
++    list.append( getConfigListEntry(_("Show update icon in service selection menu"), config.plugins.iptvplayer.AktualizacjaWmenu))
++    list.append( getConfigListEntry(_("Enable hosts tree selector"), config.plugins.iptvplayer.j00zekTreeHostsSelector))
++    if config.plugins.iptvplayer.j00zekTreeHostsSelector.value == True:
++        list.append( getConfigListEntry(_("Use only hosts tree selector"), config.plugins.iptvplayer.j00zekTreeHostsSelectorOnly))
++    else:
++        list.append( getConfigListEntry(_("Graphic services selector"), config.plugins.iptvplayer.ListaGraficzna))
++        if config.plugins.iptvplayer.ListaGraficzna.value == True:
++            list.append( getConfigListEntry(_("    Service icon size"), config.plugins.iptvplayer.IconsSize))
++            list.append( getConfigListEntry(_("    Number of rows"), config.plugins.iptvplayer.numOfRow))
++            list.append( getConfigListEntry(_("    Number of columns"), config.plugins.iptvplayer.numOfCol))
++    #
++    list.append( getConfigListEntry("", config.plugins.iptvplayer.j00zekSeparator))
++    list.append( getConfigListEntry(_("--- Paths to utilities ---"), config.plugins.iptvplayer.j00zekSeparator))
++    list.append( getConfigListEntry(_("wgetpath"), config.plugins.iptvplayer.wgetpath))
++    list.append( getConfigListEntry(_("rtmpdumppath"), config.plugins.iptvplayer.rtmpdumppath))
++    list.append( getConfigListEntry(_("f4mdumppath"), config.plugins.iptvplayer.f4mdumppath))
++    list.append( getConfigListEntry(_("uchardetpath"), config.plugins.iptvplayer.uchardetpath))
++    list.append( getConfigListEntry(_("exteplayer3path"), config.plugins.iptvplayer.exteplayer3path))
++    list.append( getConfigListEntry(_("gstplayerpath"), config.plugins.iptvplayer.gstplayerpath))
++    #
++    list.append( getConfigListEntry("", config.plugins.iptvplayer.j00zekSeparator))
++    list.append( getConfigListEntry(_("--- Download options ---"), config.plugins.iptvplayer.j00zekSeparator))
++    list.append( getConfigListEntry(_("Start download manager per default"), config.plugins.iptvplayer.IPTVDMRunAtStart))
++    list.append( getConfigListEntry(_("Show download manager after adding new item"), config.plugins.iptvplayer.IPTVDMShowAfterAdd))
++    list.append( getConfigListEntry(_("Number of downloaded files simultaneously"), config.plugins.iptvplayer.IPTVDMMaxDownloadItem))
++    list.append( getConfigListEntry(_("Start IPTVPlayer in recorder mode"), config.plugins.iptvplayer.recorderMode))
++    #
++    list.append( getConfigListEntry("", config.plugins.iptvplayer.j00zekSeparator))
++    list.append( getConfigListEntry(_("--- Debug ---"), config.plugins.iptvplayer.j00zekSeparator))
++    list.append( getConfigListEntry(_("Debug logs"), config.plugins.iptvplayer.debugprint))
++    list.append( getConfigListEntry(_("Disable host protection (error == GS)"), config.plugins.iptvplayer.devHelper))
++    #
++    list.append( getConfigListEntry("", config.plugins.iptvplayer.j00zekSeparator))
++    list.append( getConfigListEntry(_("--- Other IPTVPlayer Config options ---"), config.plugins.iptvplayer.j00zekSeparator))
++
++##################################################### Noew configs definition #####################################################
++def RemoveDuplicatesFromList(list):
++        #make some options hidden
++        myList=[]
++        myList.append(config.plugins.iptvplayer.downgradePossible)
++        myList.append(config.plugins.iptvplayer.possibleUpdateType)
++        myList.append(config.plugins.iptvplayer.skin)
++        
++        for x in range(len(list)-1,0, -1):
++            if list[x][1] in myList:
++                list.pop(x)
++        
++        #remove duplicates
++        myList=[]
++        myIDs=[]
++        for x in range(0, len(list)-1):
++            if list[x][1] not in myList or list[x][1] is config.plugins.iptvplayer.j00zekSeparator:
++                myIDs.append(x)
++                myList.append(list[x][1])
++
++        for x in range(len(list)-1,0, -1):
++            if x not in myIDs:
++                list.pop(x)
++
++##################################################### Noew configs definition #####################################################
++def ExtendConfigsList():
++    config.plugins.iptvplayer.j00zekSeparator = NoSave(ConfigNothing())
++    config.plugins.iptvplayer.j00zekTreeHostsSelector = ConfigYesNo(default = True)
++    config.plugins.iptvplayer.j00zekTreeHostsSelectorOnly = ConfigYesNo(default = False)
++    config.plugins.iptvplayer.recorderMode =  ConfigYesNo(default = False)
++    
++    #setting default values, we do not need from original plugin
++    config.plugins.iptvplayer.downgradePossible.value = False
++    config.plugins.iptvplayer.possibleUpdateType.value = 'sourcecode'
++    config.plugins.iptvplayer.deleteIcons.value = "0"
++    
++    config.plugins.iptvplayer.j00zekLastSelectedHost = NoSave(ConfigText(default = "", fixed_size = False))
++    
++    config.plugins.iptvplayer.devHelper = ConfigYesNo(default = False)
++
++##################################################### LOAD SKIN DEFINITION #####################################################
++def LoadSkin(SkinName):
++    from enigma import getDesktop
++    model=''
++    if os_path.exists("/proc/stb/info/vumodel"):
++        with open("/proc/stb/info/vumodel", "r") as f:
++            model=f.read().strip()
++            f.close()
++            
++    if SkinName.endswith('.xml'):
++        SkinName=SkinName[:-4]
++    skinDef=None
++    
++    if getDesktop(0).size().width() == 1920 and os_path.exists("%s/skins/%s%sFHD.xml" % (PluginPath,SkinName,model)):
++        with open("%s/skins/%s%sFHD.xml" % (PluginPath,SkinName,model),'r') as skinfile:
++            skinDef=skinfile.read()
++            skinfile.close()
++    elif getDesktop(0).size().width() == 1920 and os_path.exists("%s/skins/%sFHD.xml" % (PluginPath,SkinName)):
++        with open("%s/skins/%sFHD.xml" % (PluginPath,SkinName),'r') as skinfile:
++            skinDef=skinfile.read()
++            skinfile.close()
++            
++    elif os_path.exists("%s/skins/%s%s.xml" % (PluginPath,SkinName,model)):
++        with open("%s/skins/%s%s.xml" % (PluginPath,SkinName,model),'r') as skinfile:
++            skinDef=skinfile.read()
++            skinfile.close()
++    elif os_path.exists("%s/skins/%s.xml" % (PluginPath,SkinName)):
++        with open("%s/skins/%s.xml" % (PluginPath,SkinName),'r') as skinfile:
++            skinDef=skinfile.read()
++            skinfile.close()
++    else:
++        printDEBUG("[LoadSkin] %s does not exists" % SkinName )
++    return skinDef
++
++##################################################### CLEAR CACHE - tuners with small amount of memory need it #####################################################
++def ClearMemory(): #avoid GS running os.* (e.g. os.system) on tuners with small amount of RAM
++    with open("/proc/sys/vm/drop_caches", "w") as f: f.write("1\n")
++    
++def isGraterlia():
++    if os_path.exists('/etc/init.d/graterlia_init'):
++        return True
++    else:
++        return False
++##################################################### getPlatform #####################################################
++def getPlatform():
++    fc=''
++    with open('/proc/cpuinfo', 'r') as f:
++        fc=f.read()
++        f.close()
++    if fc.find('sh4') > -1:
++        return 'sh4'
++    elif fc.find('BMIPS') > -1:
++        return 'mipsel'
++    elif fc.find('GenuineIntel') > -1:
++        return 'i686'
++    elif fc.find('ARMv') > -1:
++        return 'arm'
++    else:
++       return 'unknown'
++##################################################### translated Console #####################################################
++class translatedConsole(Screen):
++#TODO move this to skin.xml
++    skin = """
++        <screen position="center,center" size="550,400" title="Updating ..." >
++            <widget name="text" position="0,0" size="550,400" font="Console;14" />
++        </screen>"""
++        
++    def __init__(self, session, title = "j00zekIPTVPlayerConsole", cmdlist = None, finishedCallback = None, closeOnSuccess = False):
++        Screen.__init__(self, session)
++
++        from enigma import eConsoleAppContainer
++        from Components.ScrollLabel import ScrollLabel
++        from Components.ActionMap import ActionMap
++        from Plugins.Extensions.IPTVPlayer.components.iptvplayerinit import TranslateTXT as _
++        
++        self.finishedCallback = finishedCallback
++        self.closeOnSuccess = closeOnSuccess
++        self.errorOcurred = False
++
++        self["text"] = ScrollLabel("")
++        self["actions"] = ActionMap(["WizardActions", "DirectionActions"], 
++        {
++            "ok": self.cancel,
++            "back": self.cancel,
++            "up": self["text"].pageUp,
++            "down": self["text"].pageDown
++        }, -1)
++        
++        self.cmdlist = cmdlist
++        self.newtitle = title
++        
++        self.onShown.append(self.updateTitle)
++        
++        self.container = eConsoleAppContainer()
++        self.run = 0
++        self.container.appClosed.append(self.runFinished)
++        self.container.dataAvail.append(self.dataAvail)
++        self.onLayoutFinish.append(self.startRun) # dont start before gui is finished
++
++    def updateTitle(self):
++        self.setTitle(self.newtitle)
++
++    def startRun(self):
++        self["text"].setText("" + "\n\n")
++        print "TranslatedConsole: executing in run", self.run, " the command:", self.cmdlist[self.run]
++        if self.container.execute(self.cmdlist[self.run]): #start of container application failed...
++            self.runFinished(-1) # so we must call runFinished manual
++
++    def runFinished(self, retval):
++        if retval:
++            self.errorOcurred = True
++        self.run += 1
++        if self.run != len(self.cmdlist):
++            if self.container.execute(self.cmdlist[self.run]): #start of container application failed...
++                self.runFinished(-1) # so we must call runFinished manual
++        else:
++            #lastpage = self["text"].isAtLastPage()
++            #str = self["text"].getText()
++            #str += _("\nUse up/down arrows to scroll text. OK closes window");
++            #self["text"].setText(str)
++            #if lastpage:
++            self["text"].lastPage()
++            if self.finishedCallback is not None:
++                self.finishedCallback()
++            if not self.errorOcurred and self.closeOnSuccess:
++                self.cancel()
++
++    def cancel(self):
++        def rebootQuestionAnswered(ret):
++            if ret:
++                from enigma import quitMainloop
++                quitMainloop(3)
++            try: self.close()
++            except: pass
++            return
++        if self.run == len(self.cmdlist):
++            self.container.appClosed.remove(self.runFinished)
++            self.container.dataAvail.remove(self.dataAvail)
++            if os_path.exists("/tmp/.rebootGUI"):
++                from Screens.MessageBox import MessageBox
++                self.session.openWithCallback(rebootQuestionAnswered, MessageBox,"Restart GUI now?",  type = MessageBox.TYPE_YESNO, timeout = 10, default = False)
++            else:
++                self.close()
++
++    def dataAvail(self, str):
++        #lastpage = self["text"].isAtLastPage()
++        self["text"].setText(self["text"].getText() + self.translate(str))
++        #if lastpage:
++        self["text"].lastPage()
++        
++    def translate(self,txt):
++        def substring_2_translate(text):
++            to_translate = text.split('_(', 2)
++            text = to_translate[1]
++            to_translate = text.split(')', 2)
++            text = to_translate[0]
++            return text
++    
++        if txt.find('_(') == -1:
++            txt = _(txt)
++        else:
++            index = 0
++            while txt.find('_(') != -1:
++                tmptxt = substring_2_translate(txt)
++                translated_tmptxt = _(tmptxt)
++                txt = txt.replace('_(' + tmptxt + ')', translated_tmptxt)
++                index += 1
++                if index == 10:
++                    break
++        return txt
++j00zekIPTVPlayerConsole = translatedConsole
++##################################################### List all categories #####################################################
++def GetHostsCategories(myDir = PluginPath + '/hosts'):
++    HostsCategories = []
++    for CH in os_listdir(myDir):
++        if os_path.isdir(os_path.join(myDir, CH)):
++            HostsCategories.append((CH,CH))
++    HostsCategories.sort()
++    return HostsCategories
++##################################################### assign/remove host from/to category #####################################################
++def ManageHostsAndCategories(HostName, CategoryName = ''):
++    printDEBUG("j00zekToolSet:ManageHostsAndCategories > HostName=%s,CategoryName=%s" %(HostName, CategoryName))
++    ClearMemory()
++    hostsDir='%s/hosts' % PluginPath
++    categoryDir='%s/hosts/%s' % (PluginPath,CategoryName)
++    #first delete, when exists
++    if os_path.exists('%s/%s.py' %(categoryDir,HostName[:-4])) or os_path.exists('%s/%s' %(categoryDir,HostName)):
++        print "Removing %s from category %s" % (HostName,CategoryName)
++        os_system('rm -rf %s/%s*' % (categoryDir,HostName[:-4]) )
++    #assign to category
++    elif os_path.exists('%s/%s' %(hostsDir,HostName)):
++        print "Assigning %s to category %s" % (HostName,CategoryName)
++        os_system('ln -sf %s/%s %s/%s' % ( hostsDir, HostName, categoryDir, HostName) )
++    else:
++        print "unknown " + hostsDir + HostName
+diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/IPTVPlayer/keymap.xml /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/keymap.xml
+--- /enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/IPTVPlayer/keymap.xml	2019-03-16 07:17:47.313696001 +0100
++++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/keymap.xml	2019-03-21 06:47:03.443191000 +0100
+@@ -35,4 +35,23 @@
+         <key id="KEY_OK"    mapto="ok_repeat"    flags="r" />
+         <key id="KEY_RED"   mapto="red_repeat"   flags="r" />
+     </map>
++  <map context="j00zekHostTreeSelector">
++    <key id="KEY_OK"    mapto="selectHost" flags="m" />
++    <key id="KEY_EXIT" mapto="ExitHostSelector" flags="m" />
++    <key id="KEY_HOME" mapto="ExitHostSelector" flags="m" />
++    <key id="KEY_ESC"  mapto="ExitHostSelector" flags="m" />
++    <key id="KEY_RED"  mapto="ExitHostSelector" flags="m" />
++    <key id="KEY_GREEN" mapto="addHostToCategory" flags="m" />
++    <key id="KEY_YELLOW" mapto="deleteCategory" flags="m" />
++    <key id="KEY_BLUE" mapto="newCategory" flags="m" />
++    <key id="KEY_UP" mapto="lineUp" flags="mr" />
++    <key id="KEY_DOWN" mapto="lineDown" flags="mr" />
++    <key id="KEY_LEFT" mapto="pageUp" flags="m" />
++    <key id="KEY_RIGHT" mapto="pageDown" flags="m" />
++    <key id="KEY_PAGEUP" mapto="pageUp" flags="m" />
++    <key id="KEY_PAGEDOWN" mapto="pageDown" flags="m" />
++    <key id="KEY_MENU" mapto="showConfig" flags="m" />
++    <key id="KEY_PLAY" mapto="showLocalMedia" flags="m" />
++    <key id="KEY_RECORD" mapto="showDownloadManager" flags="m" />
++  </map> 
+ </keymap>
+\ Brak znaku nowej linii na końcu pliku
+diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/IPTVPlayer/setup/iptvsetupimpl.py /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/setup/iptvsetupimpl.py
+--- /enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/IPTVPlayer/setup/iptvsetupimpl.py	2019-03-16 07:17:47.369696001 +0100
++++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/setup/iptvsetupimpl.py	2019-03-21 06:47:03.443191000 +0100
+@@ -48,9 +48,9 @@
+         self.wgetVersion = 1902 # 1.15 
+         self.wgetpaths = ["wget", "/usr/bin/wget", "/usr/bin/fullwget", GetBinDir("wget", "")]
+         self._wgetInstallChoiseList = [(_('Install into the "%s".') % ("/usr/bin/fullwget " + _("recommended")), "/usr/bin/fullwget"),
+-                                       (_('Install into the "%s".') % "IPTVPlayer/bin/wget", GetBinDir("wget", "")),
+-                                       (_('Install into the "%s".') % "/usr/bin/wget", "/usr/bin/wget"),
+-                                       (_("Do not install (not recommended)"), "")]
++                                       ] #(_('Install into the "%s".') % "IPTVPlayer/bin/wget", GetBinDir("wget", "")),
++                                       #(_('Install into the "%s".') % "/usr/bin/wget", "/usr/bin/wget"),
++                                       #(_("Do not install (not recommended)"), "")]
+         # rtmpdump members
+         self.rtmpdumpVersion = 20151215 #{'sh4':'2015', 'mipsel':'2015', 'armv5t':'2015', 'armv7':'2015', 'default':"Compiled by samsamsam@o2.pl 2015-01-11"} #'K-S-V patch'
+         self.rtmpdumppaths = ["/usr/bin/rtmpdump", "rtmpdump"]
+@@ -59,33 +59,33 @@
+         self.f4mdumpVersion = 0.80
+         self.f4mdumppaths = ["/usr/bin/f4mdump", GetBinDir("f4mdump", "")]
+         self._f4mdumpInstallChoiseList = [(_('Install into the "%s".') % ("/usr/bin/f4mdump (%s)" % _("recommended")), "/usr/bin/f4mdump"),
+-                                          (_('Install into the "%s".') % "IPTVPlayer/bin/f4mdump", GetBinDir("f4mdump", "")),
+-                                          (_("Do not install (not recommended)"), "")]
++                                          ] #(_('Install into the "%s".') % "IPTVPlayer/bin/f4mdump", GetBinDir("f4mdump", "")),
++                                          # (_("Do not install (not recommended)"), "")]
+         self._f4mdumpInstallChoiseList2 = [(_('Install into the "%s".') % ("/usr/bin/f4mdump static libstdc++ (%s)" % _("recommended")), "/usr/bin/f4mdump"),
+-                                          (_('Install into the "%s".') % "IPTVPlayer/bin/f4mdump _static_libstdc++", GetBinDir("f4mdump", "")),
+-                                          (_("Do not install (not recommended)"), "")]
++                                          ] #(_('Install into the "%s".') % "IPTVPlayer/bin/f4mdump _static_libstdc++", GetBinDir("f4mdump", "")),
++                                          #(_("Do not install (not recommended)"), "")]
+                                           
+         # uchardet member
+         self.uchardetVersion = [0, 0, 6] #UCHARDET_VERSION_MAJOR, UCHARDET_VERSION_MINOR, UCHARDET_VERSION_REVISION
+         self.uchardetpaths = ["/usr/bin/uchardet", GetBinDir("uchardet", "")]
+         self._uchardetInstallChoiseList = [(_('Install into the "%s".') % ("/usr/bin/uchardet (%s)" % _("recommended")), "/usr/bin/uchardet"),
+-                                          (_('Install into the "%s".') % "IPTVPlayer/bin/uchardet", GetBinDir("uchardet", "")),
+-                                          (_("Do not install (not recommended)"), "")]
++                                          ] #(_('Install into the "%s".') % "IPTVPlayer/bin/uchardet", GetBinDir("uchardet", "")),
++                                          #(_("Do not install (not recommended)"), "")]
+         self._uchardetInstallChoiseList2 = [(_('Install into the "%s".') % ("/usr/bin/uchardet static libstdc++ (%s)" % _("recommended")), "/usr/bin/uchardet"),
+-                                          (_('Install into the "%s".') % "IPTVPlayer/bin/uchardet _static_libstdc++", GetBinDir("uchardet", "")),
+-                                          (_("Do not install (not recommended)"), "")]
++                                          ] #(_('Install into the "%s".') % "IPTVPlayer/bin/uchardet _static_libstdc++", GetBinDir("uchardet", "")),
++                                          # (_("Do not install (not recommended)"), "")]
+         # gstplayer
+         self.gstplayerVersion = {'0.10':20, '1.0':10021}
+         self.gstplayerpaths = ["/usr/bin/gstplayer", GetBinDir("gstplayer", "")]
+         self._gstplayerInstallChoiseList = [(_('Install into the "%s".') % ("/usr/bin/gstplayer (%s)" % _("recommended")), "/usr/bin/gstplayer"),
+-                                          (_('Install into the "%s".') % "IPTVPlayer/bin/gstplayer", GetBinDir("gstplayer", "")),
+-                                          (_("Do not install (not recommended)"), "")]
++                                          ] #(_('Install into the "%s".') % "IPTVPlayer/bin/gstplayer", GetBinDir("gstplayer", "")),
++                                          #(_("Do not install (not recommended)"), "")]
+         # exteplayer3
+         self.exteplayer3Version = {'sh4':50, 'mipsel':50, 'armv7':50, 'armv5t':50}
+         self.exteplayer3paths = ["/usr/bin/exteplayer3", GetBinDir("exteplayer3", "")]
+         self._exteplayer3InstallChoiseList = [(_('Install into the "%s".') % ("/usr/bin/exteplayer3 (%s)" % _("recommended")), "/usr/bin/exteplayer3"),
+-                                          (_('Install into the "%s".') % "IPTVPlayer/bin/exteplayer3", GetBinDir("exteplayer3", "")),
+-                                          (_("Do not install (not recommended)"), "")]
++                                          ]#(_('Install into the "%s".') % "IPTVPlayer/bin/exteplayer3", GetBinDir("exteplayer3", "")),
++                                          #(_("Do not install (not recommended)"), "")]
+                                           
+         # flumpegdemux
+         self.flumpegdemuxVersion = "0.10.85"

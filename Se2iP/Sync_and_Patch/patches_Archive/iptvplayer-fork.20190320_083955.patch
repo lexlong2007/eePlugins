@@ -1,0 +1,205 @@
+diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/IPTVPlayer/components/iptvconfigmenu.py /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/components/iptvconfigmenu.py
+--- /enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/IPTVPlayer/components/iptvconfigmenu.py	2019-03-16 07:17:46.997696001 +0100
++++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/components/iptvconfigmenu.py	2019-03-20 08:31:10.954751002 +0100
+@@ -51,7 +51,7 @@
+ config.plugins.iptvplayer.uchardetpath    = ConfigText(default = "", fixed_size = False)
+ config.plugins.iptvplayer.set_curr_title  = ConfigYesNo(default = False)
+ config.plugins.iptvplayer.curr_title_file = ConfigText(default = "", fixed_size = False) 
+-config.plugins.iptvplayer.plarform        = ConfigSelection(default = "auto", choices = [("auto", "auto"),("mipsel", _("mipsel")),("sh4", _("sh4")),("i686", _("i686")), ("armv7", _("armv7")), ("armv5t", _("armv5t")), ("unknown", _("unknown"))])
++config.plugins.iptvplayer.plarform        = ConfigSelection(default = "auto", choices = [("auto", "auto"),("mipsel", _("mipsel")),("i686", _("i686")), ("armv7", _("armv7")), ("unknown", _("unknown"))])
+ config.plugins.iptvplayer.plarformfpuabi  = ConfigSelection(default = "", choices = [("", ""),("hard_float", _("Hardware floating point")),("soft_float", _("Software floating point"))])
+ 
+ config.plugins.iptvplayer.showcover          = ConfigYesNo(default = True)
+@@ -59,8 +59,8 @@
+ config.plugins.iptvplayer.allowedcoverformats= ConfigSelection(default = "jpeg,png", choices = [("jpeg,png,gif", _("jpeg,png,gif")),("jpeg,png", _("jpeg,png")),("jpeg", _("jpeg")),("all", _("all"))]) 
+ config.plugins.iptvplayer.showinextensions   = ConfigYesNo(default = True)
+ config.plugins.iptvplayer.showinMainMenu     = ConfigYesNo(default = False)
+-config.plugins.iptvplayer.ListaGraficzna     = ConfigYesNo(default = True)
+-config.plugins.iptvplayer.group_hosts        = ConfigYesNo(default = True)
++config.plugins.iptvplayer.ListaGraficzna     = ConfigYesNo(default = False)
++config.plugins.iptvplayer.group_hosts        = ConfigYesNo(default = False)
+ config.plugins.iptvplayer.NaszaSciezka       = ConfigDirectory(default = "/hdd/movie/") #, fixed_size = False)
+ config.plugins.iptvplayer.bufferingPath      = ConfigDirectory(default = config.plugins.iptvplayer.NaszaSciezka.value) #, fixed_size = False)
+ config.plugins.iptvplayer.buforowanie        = ConfigYesNo(default = False)
+@@ -197,7 +197,7 @@
+ config.plugins.iptvplayer.myjd_jdname = ConfigText(default = "", fixed_size = False)
+ 
+ # Update
+-config.plugins.iptvplayer.autoCheckForUpdate = ConfigYesNo(default = True)
++config.plugins.iptvplayer.autoCheckForUpdate = ConfigYesNo(default = False)
+ config.plugins.iptvplayer.updateLastCheckedVersion = ConfigText(default = "00.00.00.00", fixed_size = False)
+ config.plugins.iptvplayer.fakeUpdate               = ConfigSelection(default = "fake", choices = [("fake", "  ")])
+ config.plugins.iptvplayer.downgradePossible        = ConfigYesNo(default = False)
+@@ -324,14 +324,14 @@
+             list.append(getConfigListEntry("Auto start method", config.plugins.iptvplayer.plugin_autostart_method))
+             list.append(getConfigListEntry("Prefer hlsld for playlist with alt. media", config.plugins.iptvplayer.prefer_hlsdl_for_pls_with_alt_media))
+ 
+-        list.append( getConfigListEntry(_("Auto check for plugin update"), config.plugins.iptvplayer.autoCheckForUpdate) )
+-        list.append( getConfigListEntry(_("The preferred update server"), config.plugins.iptvplayer.preferredupdateserver) )
+-        if config.plugins.iptvplayer.preferredupdateserver.value == '2':
+-            list.append(getConfigListEntry(_("Add update from GitLab repository"), config.plugins.iptvplayer.gitlab_repo))
+-        if config.plugins.iptvplayer.preferredupdateserver.value == '3':
+-            list.append(getConfigListEntry(_("%s login") % 'E2iPlayer', config.plugins.iptvplayer.iptvplayer_login))
+-            list.append(getConfigListEntry(_("%s password") % 'E2iPlayer', config.plugins.iptvplayer.iptvplayer_password))
+-        list.append( getConfigListEntry(_("Update"), config.plugins.iptvplayer.fakeUpdate) )
++        #list.append( getConfigListEntry(_("Auto check for plugin update"), config.plugins.iptvplayer.autoCheckForUpdate) )
++        #list.append( getConfigListEntry(_("The preferred update server"), config.plugins.iptvplayer.preferredupdateserver) )
++        #if config.plugins.iptvplayer.preferredupdateserver.value == '2':
++        #    list.append(getConfigListEntry(_("Add update from GitLab repository"), config.plugins.iptvplayer.gitlab_repo))
++        #if config.plugins.iptvplayer.preferredupdateserver.value == '3':
++        #    list.append(getConfigListEntry(_("%s login") % 'E2iPlayer', config.plugins.iptvplayer.iptvplayer_login))
++        #    list.append(getConfigListEntry(_("%s password") % 'E2iPlayer', config.plugins.iptvplayer.iptvplayer_password))
++        #list.append( getConfigListEntry(_("Update"), config.plugins.iptvplayer.fakeUpdate) )
+         list.append( getConfigListEntry(_("Virtual Keyboard type"), config.plugins.iptvplayer.osk_type) )
+         if config.plugins.iptvplayer.osk_type.value == 'own':
+             list.append( getConfigListEntry(_("    Background color"), config.plugins.iptvplayer.osk_background_color) )
+@@ -349,13 +349,13 @@
+         if config.plugins.iptvplayer.pluginProtectedByPin.value or config.plugins.iptvplayer.configProtectedByPin.value:
+             list.append( getConfigListEntry(_("Set pin code"), config.plugins.iptvplayer.fakePin) )
+         
+-        list.append(getConfigListEntry(_("Skin"), config.plugins.iptvplayer.skin))
+-        list.append(getConfigListEntry(_("Display thumbnails"), config.plugins.iptvplayer.showcover))
+-        if config.plugins.iptvplayer.showcover.value:
+-            list.append(getConfigListEntry(_("    Allowed formats of thumbnails"), config.plugins.iptvplayer.allowedcoverformats))
+-            list.append(getConfigListEntry(_("    Remove thumbnails"), config.plugins.iptvplayer.deleteIcons))
++        #list.append(getConfigListEntry(_("Skin"), config.plugins.iptvplayer.skin))
++        #list.append(getConfigListEntry(_("Display thumbnails"), config.plugins.iptvplayer.showcover))
++        #if config.plugins.iptvplayer.showcover.value:
++        #    list.append(getConfigListEntry(_("    Allowed formats of thumbnails"), config.plugins.iptvplayer.allowedcoverformats))
++        #    list.append(getConfigListEntry(_("    Remove thumbnails"), config.plugins.iptvplayer.deleteIcons))
+         #list.append(getConfigListEntry("Sortować listy?", config.plugins.iptvplayer.sortuj))            
+-        list.append(getConfigListEntry(_("Graphic services selector"), config.plugins.iptvplayer.ListaGraficzna))
++        #list.append(getConfigListEntry(_("Graphic services selector"), config.plugins.iptvplayer.ListaGraficzna))
+         if config.plugins.iptvplayer.ListaGraficzna.value == True:
+             list.append(getConfigListEntry(_("    Enable hosts groups"), config.plugins.iptvplayer.group_hosts))
+             list.append(getConfigListEntry(_("    Service icon size"), config.plugins.iptvplayer.IconsSize))
+diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/IPTVPlayer/components/iptvplayerwidget.py /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/components/iptvplayerwidget.py
+--- /enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/IPTVPlayer/components/iptvplayerwidget.py	2019-03-16 07:17:47.001696001 +0100
++++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/components/iptvplayerwidget.py	2019-03-20 08:39:31.502751002 +0100
+@@ -13,6 +13,10 @@
+ import traceback
+ 
+ ####################################################
++#                  j00zek E2
++####################################################
++j00zekFork=True
++####################################################
+ #                   E2 components
+ ####################################################
+ from skin import parseColor
+@@ -1292,7 +1296,10 @@
+         return
+ 
+     def displayListOfHosts(self, arg = None):
+-        if config.plugins.iptvplayer.ListaGraficzna.value == False or 0 == GetAvailableIconSize():
++        if 'j00zekFork' in globals():
++            from Plugins.Extensions.IPTVPlayer.j00zekScripts.j00zekHostTreeSelector import j00zekHostTreeSelector
++            self.session.openWithCallback(self.selectHostCallback, j00zekHostTreeSelector, list = self.displayHostsList)
++        elif config.plugins.iptvplayer.ListaGraficzna.value == False or 0 == GetAvailableIconSize():
+             self.newDisplayHostsList = None
+             self.session.openWithCallback(self.selectHostCallback, ChoiceBox, title=_("Select service"), list = self.displayHostsList)
+         else:
+diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/IPTVPlayer/keymap.xml /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/keymap.xml
+--- /enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/IPTVPlayer/keymap.xml	2019-03-16 07:17:47.313696001 +0100
++++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/keymap.xml	2019-03-20 08:31:10.954751002 +0100
+@@ -35,4 +35,23 @@
+         <key id="KEY_OK"    mapto="ok_repeat"    flags="r" />
+         <key id="KEY_RED"   mapto="red_repeat"   flags="r" />
+     </map>
++  <map context="j00zekHostTreeSelector">
++    <key id="KEY_OK"    mapto="selectHost" flags="m" />
++    <key id="KEY_EXIT" mapto="ExitHostSelector" flags="m" />
++    <key id="KEY_HOME" mapto="ExitHostSelector" flags="m" />
++    <key id="KEY_ESC"  mapto="ExitHostSelector" flags="m" />
++    <key id="KEY_RED"  mapto="ExitHostSelector" flags="m" />
++    <key id="KEY_GREEN" mapto="addHostToCategory" flags="m" />
++    <key id="KEY_YELLOW" mapto="deleteCategory" flags="m" />
++    <key id="KEY_BLUE" mapto="newCategory" flags="m" />
++    <key id="KEY_UP" mapto="lineUp" flags="mr" />
++    <key id="KEY_DOWN" mapto="lineDown" flags="mr" />
++    <key id="KEY_LEFT" mapto="pageUp" flags="m" />
++    <key id="KEY_RIGHT" mapto="pageDown" flags="m" />
++    <key id="KEY_PAGEUP" mapto="pageUp" flags="m" />
++    <key id="KEY_PAGEDOWN" mapto="pageDown" flags="m" />
++    <key id="KEY_MENU" mapto="showConfig" flags="m" />
++    <key id="KEY_PLAY" mapto="showLocalMedia" flags="m" />
++    <key id="KEY_RECORD" mapto="showDownloadManager" flags="m" />
++  </map> 
+ </keymap>
+\ Brak znaku nowej linii na końcu pliku
+diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/IPTVPlayer/libs/youtube_dl/extractor/youtube.py /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/libs/youtube_dl/extractor/youtube.py
+--- /enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/IPTVPlayer/libs/youtube_dl/extractor/youtube.py	2019-03-18 08:38:16.390306000 +0100
++++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/libs/youtube_dl/extractor/youtube.py	2019-03-20 08:31:10.938751002 +0100
+@@ -54,9 +54,8 @@
+         tmp = ph.find(data, 'yt.akamaized.net', '}', 0)[1]
+         if tmp:
+             printDBG("DATA: %s" % tmp)
+-            tmp = ph.rfindall(tmp, 'return', '.set(', flags=0)
++            tmp = ph.rfindall(tmp, 'return', '.set(b,encodeURIComponent', flags=0)
+             for name in tmp:
+-                name = name.replace('decodeURIComponent(', '').replace('encodeURIComponent(', '')
+                 printDBG("ITEM: %s" % name)
+                 name = ph.search(name, self.RE_MAIN)[0]
+                 if name: return name
+diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/IPTVPlayer/setup/iptvsetupimpl.py /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/setup/iptvsetupimpl.py
+--- /enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/IPTVPlayer/setup/iptvsetupimpl.py	2019-03-16 07:17:47.369696001 +0100
++++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/setup/iptvsetupimpl.py	2019-03-20 08:31:10.962751002 +0100
+@@ -48,9 +48,9 @@
+         self.wgetVersion = 1902 # 1.15 
+         self.wgetpaths = ["wget", "/usr/bin/wget", "/usr/bin/fullwget", GetBinDir("wget", "")]
+         self._wgetInstallChoiseList = [(_('Install into the "%s".') % ("/usr/bin/fullwget " + _("recommended")), "/usr/bin/fullwget"),
+-                                       (_('Install into the "%s".') % "IPTVPlayer/bin/wget", GetBinDir("wget", "")),
+-                                       (_('Install into the "%s".') % "/usr/bin/wget", "/usr/bin/wget"),
+-                                       (_("Do not install (not recommended)"), "")]
++                                       ] #(_('Install into the "%s".') % "IPTVPlayer/bin/wget", GetBinDir("wget", "")),
++                                       #(_('Install into the "%s".') % "/usr/bin/wget", "/usr/bin/wget"),
++                                       #(_("Do not install (not recommended)"), "")]
+         # rtmpdump members
+         self.rtmpdumpVersion = 20151215 #{'sh4':'2015', 'mipsel':'2015', 'armv5t':'2015', 'armv7':'2015', 'default':"Compiled by samsamsam@o2.pl 2015-01-11"} #'K-S-V patch'
+         self.rtmpdumppaths = ["/usr/bin/rtmpdump", "rtmpdump"]
+@@ -59,33 +59,33 @@
+         self.f4mdumpVersion = 0.80
+         self.f4mdumppaths = ["/usr/bin/f4mdump", GetBinDir("f4mdump", "")]
+         self._f4mdumpInstallChoiseList = [(_('Install into the "%s".') % ("/usr/bin/f4mdump (%s)" % _("recommended")), "/usr/bin/f4mdump"),
+-                                          (_('Install into the "%s".') % "IPTVPlayer/bin/f4mdump", GetBinDir("f4mdump", "")),
+-                                          (_("Do not install (not recommended)"), "")]
++                                          ] #(_('Install into the "%s".') % "IPTVPlayer/bin/f4mdump", GetBinDir("f4mdump", "")),
++                                          # (_("Do not install (not recommended)"), "")]
+         self._f4mdumpInstallChoiseList2 = [(_('Install into the "%s".') % ("/usr/bin/f4mdump static libstdc++ (%s)" % _("recommended")), "/usr/bin/f4mdump"),
+-                                          (_('Install into the "%s".') % "IPTVPlayer/bin/f4mdump _static_libstdc++", GetBinDir("f4mdump", "")),
+-                                          (_("Do not install (not recommended)"), "")]
++                                          ] #(_('Install into the "%s".') % "IPTVPlayer/bin/f4mdump _static_libstdc++", GetBinDir("f4mdump", "")),
++                                          #(_("Do not install (not recommended)"), "")]
+                                           
+         # uchardet member
+         self.uchardetVersion = [0, 0, 6] #UCHARDET_VERSION_MAJOR, UCHARDET_VERSION_MINOR, UCHARDET_VERSION_REVISION
+         self.uchardetpaths = ["/usr/bin/uchardet", GetBinDir("uchardet", "")]
+         self._uchardetInstallChoiseList = [(_('Install into the "%s".') % ("/usr/bin/uchardet (%s)" % _("recommended")), "/usr/bin/uchardet"),
+-                                          (_('Install into the "%s".') % "IPTVPlayer/bin/uchardet", GetBinDir("uchardet", "")),
+-                                          (_("Do not install (not recommended)"), "")]
++                                          ] #(_('Install into the "%s".') % "IPTVPlayer/bin/uchardet", GetBinDir("uchardet", "")),
++                                          #(_("Do not install (not recommended)"), "")]
+         self._uchardetInstallChoiseList2 = [(_('Install into the "%s".') % ("/usr/bin/uchardet static libstdc++ (%s)" % _("recommended")), "/usr/bin/uchardet"),
+-                                          (_('Install into the "%s".') % "IPTVPlayer/bin/uchardet _static_libstdc++", GetBinDir("uchardet", "")),
+-                                          (_("Do not install (not recommended)"), "")]
++                                          ] #(_('Install into the "%s".') % "IPTVPlayer/bin/uchardet _static_libstdc++", GetBinDir("uchardet", "")),
++                                          # (_("Do not install (not recommended)"), "")]
+         # gstplayer
+         self.gstplayerVersion = {'0.10':20, '1.0':10021}
+         self.gstplayerpaths = ["/usr/bin/gstplayer", GetBinDir("gstplayer", "")]
+         self._gstplayerInstallChoiseList = [(_('Install into the "%s".') % ("/usr/bin/gstplayer (%s)" % _("recommended")), "/usr/bin/gstplayer"),
+-                                          (_('Install into the "%s".') % "IPTVPlayer/bin/gstplayer", GetBinDir("gstplayer", "")),
+-                                          (_("Do not install (not recommended)"), "")]
++                                          ] #(_('Install into the "%s".') % "IPTVPlayer/bin/gstplayer", GetBinDir("gstplayer", "")),
++                                          #(_("Do not install (not recommended)"), "")]
+         # exteplayer3
+         self.exteplayer3Version = {'sh4':50, 'mipsel':50, 'armv7':50, 'armv5t':50}
+         self.exteplayer3paths = ["/usr/bin/exteplayer3", GetBinDir("exteplayer3", "")]
+         self._exteplayer3InstallChoiseList = [(_('Install into the "%s".') % ("/usr/bin/exteplayer3 (%s)" % _("recommended")), "/usr/bin/exteplayer3"),
+-                                          (_('Install into the "%s".') % "IPTVPlayer/bin/exteplayer3", GetBinDir("exteplayer3", "")),
+-                                          (_("Do not install (not recommended)"), "")]
++                                          ]#(_('Install into the "%s".') % "IPTVPlayer/bin/exteplayer3", GetBinDir("exteplayer3", "")),
++                                          #(_("Do not install (not recommended)"), "")]
+                                           
+         # flumpegdemux
+         self.flumpegdemuxVersion = "0.10.85"
