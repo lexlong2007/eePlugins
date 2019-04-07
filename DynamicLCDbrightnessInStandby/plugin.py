@@ -200,11 +200,14 @@ def delayedStandbyActions():
     MyTimer.stop()
     if eDBoxLCD.getInstance().detected():
         DBGtext, val, timerWaitingTime = calculateLCDbrightness()
-        DBGtext = 'delayedStandbyActions() >>>\n' + DBGtext
-        try:
-            eDBoxLCD.getInstance().setLCDBrightness(int(val))
-        except Exception as e:
-            DBGtext += "\t\t\t\t Exception: %s\n" % str(e)
+        if config.plugins.dynamicLCD.KODIstate.value == 'isPlaying' and config.plugins.dynamicLCD.KODIsupport.value != 'no':
+            DBGtext = 'delayedStandbyActions() >>>\n KODI is playing, LCD controlled through setKODIbrightness function, next wakeup in %smin' % timerWaitingTime
+        else:
+            DBGtext = 'delayedStandbyActions() >>>\n' + DBGtext
+            try:
+                eDBoxLCD.getInstance().setLCDBrightness(int(val))
+            except Exception as e:
+                DBGtext += "\t\t\t\t Exception: %s\n" % str(e)
         if DBG: printDEBUG(DBGtext.strip())
         MyTimer.start(timerWaitingTime * 60 * 1000, True)
         
