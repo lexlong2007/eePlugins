@@ -139,6 +139,8 @@ class getWeather:
             language = 'en-US'
         elif language == 'no-NO':
             language = 'nn-NO'
+        elif language == 'lt-LT':
+            language = 'en-xl'
         self.city = city
         self.callback = callback
         self.callbackShowIcon = callbackShowIcon
@@ -148,7 +150,7 @@ class getWeather:
             getPage(url).addCallback(self.xmlCallback).addErrback(self.xmlError)
             self.DEBUG('\t url_xml=' ,'%s' % url)
             #url2 = 'http://www.msn.com/weather/we-city?culture=%s&form=PRWLAS&q=%s' % (language, urllib_quote(weatherSearchFullName))
-            self.urlWeb = 'https://www.msn.com/%s/weather?culture=%s&form=PRWLAS&q=%s' % (language, language, urllib_quote(weatherSearchFullName))
+            self.urlWeb = 'https://www.msn.com/%s/weather?culture=%ss&weadegreetype=%s&form=PRWLAS&q=%s' % (language, language, degreetype, urllib_quote(weatherSearchFullName))
             self.DEBUG('\t url_web="%s"' % self.urlWeb)
             #getPage(url2).addCallback(self.webCallback).addErrback(self.webError)
         if thingSpeakChannelID != '':
