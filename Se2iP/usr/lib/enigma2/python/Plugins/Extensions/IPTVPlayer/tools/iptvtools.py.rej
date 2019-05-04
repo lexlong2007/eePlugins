@@ -1,0 +1,11 @@
+--- tools/iptvtools.py	2019-03-31 08:31:36.343623177 +0200
++++ DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/tools/iptvtools.py	2019-03-31 08:19:24.986633928 +0200
+@@ -441,7 +441,7 @@
+     return resolveFilename(SCOPE_PLUGINS, 'Extensions/IPTVPlayer/icons/') + file
+ def GetBinDir(file = '', platform=None):
+     if None == platform: platform = config.plugins.iptvplayer.plarform.value
+-    return resolveFilename(SCOPE_PLUGINS, 'Extensions/IPTVPlayer/bin/') + config.plugins.iptvplayer.plarform.value + '/' + file
++    return resolveFilename(SCOPE_PLUGINS, 'Extensions/IPTVPlayer/bin/') + platform + '/' + file
+ def GetPluginDir(file = ''):
+     return resolveFilename(SCOPE_PLUGINS, 'Extensions/IPTVPlayer/') + file
+ def GetExtensionsDir(file = ''):

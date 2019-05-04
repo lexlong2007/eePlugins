@@ -73,6 +73,8 @@ class AdvancedFreePlayerConfig(Screen, ConfigListScreen):
         self.list.append(getConfigListEntry("", myConfig.separator))
         self.list.append(getConfigListEntry(_("--- Subtitles settings ---"), myConfig.separator))
         self.list.append(getConfigListEntry(_("SRT subtitles displayed by:"), myConfig.SRTplayer))
+        if getPlatform() in ['sh4','ServiceApp']:
+            self.list.append(getConfigListEntry(_("MultiFramework selection:"), myConfig.MultiFramework))
         
         self.list.append(getConfigListEntry("", myConfig.separator))
         self.list.append(getConfigListEntry(_("--- Cover & Descriptions settings ---"), myConfig.separator))
@@ -80,12 +82,6 @@ class AdvancedFreePlayerConfig(Screen, ConfigListScreen):
         self.list.append(getConfigListEntry(_("Download to movie folder:"), myConfig.PermanentCoversDescriptons))
         self.list.append(getConfigListEntry(_("Search TMDB for the language:"), myConfig.coverfind_language))
         self.list.append(getConfigListEntry(_("Cover size:"), myConfig.coverfind_themoviedb_coversize))
-
-        self.list.append(getConfigListEntry("", myConfig.separator))
-        self.list.append(getConfigListEntry(_("--- Advanced settings ---"), myConfig.separator))
-        self.list.append(getConfigListEntry(_("Download:"), myConfig.Version)) #debug|public
-        if getPlatform() in ['sh4','ServiceApp']:
-            self.list.append(getConfigListEntry(_("MultiFramework selection:"), myConfig.MultiFramework))
         
         self["config"].list = self.list        
         self.onLayoutFinish.append(self.layoutFinished)

@@ -246,6 +246,7 @@ class AdvancedFreePlayerStart(Screen):
         else:
             self["filelist"].pageUp()
         self.buttonsNames()
+        printDEBUG("pageUp SelectedIndex()='%s'" % (self["filelist"].getSelectedIndex()))
         self.GetCoverTimer.start(self.ShowDelay,False)
 
 
@@ -256,6 +257,7 @@ class AdvancedFreePlayerStart(Screen):
         else:
             self["filelist"].pageDown()
         self.buttonsNames()
+        printDEBUG("pageDown SelectedIndex()='%s'" % (self["filelist"].getSelectedIndex()))
         self.GetCoverTimer.start(self.ShowDelay,False)
 
     def lineUp(self):
@@ -265,6 +267,7 @@ class AdvancedFreePlayerStart(Screen):
         else:
             self["filelist"].up()
         self.buttonsNames()
+        printDEBUG("lineUp SelectedIndex()='%s'" % (self["filelist"].getSelectedIndex()))
         self.GetCoverTimer.start(self.ShowDelay,False)
 
     def lineDown(self):
@@ -274,6 +277,7 @@ class AdvancedFreePlayerStart(Screen):
         else:
             self["filelist"].down()
         self.buttonsNames()
+        printDEBUG("lineDown SelectedIndex()='%s'" % (self["filelist"].getSelectedIndex()))
         self.GetCoverTimer.start(self.ShowDelay,False)
 
     def playORdelete(self):
@@ -284,16 +288,15 @@ class AdvancedFreePlayerStart(Screen):
             selection = self["filelist"].getSelection()
             printDEBUG("playORdelete>deleteRet ret=%s" % str(ret))
             if ret:
-                self["Cover"].hide()
-                self.session.summary.LCD_hide('LCDpic')
-                self["Description"].setText('')
+                self.setCover('hideCover')
+                self.setDescription('')
                 selection = self["filelist"].getSelection()
+                ClearMemory()
                 if selection[1] == True: # isDir
                     printDEBUG('Deleting folder %s' % selection[0])
                     system('rm -rf "%s"' % selection[0])
                 else:
                     if selection[0][-4:].lower() in ('.srt','.txt','.url'):
-                        ClearMemory()
                         if myConfig.MoveToTrash.value == True:
                             printDEBUG('Moving file "%s/%s" to %s/' % (self.filelist.getCurrentDirectory(),selection[0], myConfig.TrashFolder.value))
                             system('mkdir -p "%s";mv -f "%s/%s" %s/' % (myConfig.TrashFolder.value, self.filelist.getCurrentDirectory(),selection[0], myConfig.TrashFolder.value))
@@ -301,7 +304,6 @@ class AdvancedFreePlayerStart(Screen):
                             printDEBUG('Deleting file "%s/%s"' % (self.filelist.getCurrentDirectory(),selection[0]))
                             system('rm -rf "%s/%s"' % (self.filelist.getCurrentDirectory(),selection[0]))
                     else:
-                        ClearMemory()
                         if myConfig.MoveToTrash.value == True:
                             printDEBUG('Moving files "%s/%s"* to %s/' % (self.filelist.getCurrentDirectory(),selection[0][:-4], myConfig.TrashFolder.value))
                             system('mkdir -p "%s";mv -f "%s/%s"* %s/' % (myConfig.TrashFolder.value, self.filelist.getCurrentDirectory(),selection[0][:-4], myConfig.TrashFolder.value))
@@ -536,25 +538,20 @@ class AdvancedFreePlayerStart(Screen):
         FoundCover = False
         FoundDescr = False
         if MovieNameWithPath == '':
-            self["Description"].setText('')
+            self.setDescription('')
             return FoundCover, FoundDescr
         
         temp = getNameWithoutExtension(MovieNameWithPath)
         WebCoverFile='/tmp/%s.AFP.jpg' % getNameWithoutExtension(self.filelist.getFilename())
         ### COVER ###
         if path.exists(temp + '.jpg'):
-            self["Cover"].updateIcon(temp + '.jpg')
-            self["Cover"].show()
-            self.session.summary.LCD_showPic('LCDpic', temp + '.jpg')
+            self.setCover(temp + '.jpg')
             FoundCover = True
         elif path.exists(WebCoverFile) and myConfig.PermanentCoversDescriptons.value == False:
-            self["Cover"].updateIcon(WebCoverFile)
-            self["Cover"].show()
-            self.session.summary.LCD_showPic('LCDpic', WebCoverFile)
+            self.setCover(WebCoverFile)
             FoundCover = True
         else:
-            self["Cover"].hide()
-            self.session.summary.LCD_hide('LCDpic')
+            self.setCover('hideCover')
         WebDescrFile='/tmp/%s.AFP.txt' % getNameWithoutExtension(self.filelist.getFilename())
         ### DESCRIPTION from EIT ###
         if path.exists(temp + '.eit'):
@@ -615,80 +612,99 @@ class AdvancedFreePlayerStart(Screen):
                             #extended_event_descriptor = extended_event_descriptor.decode("iso-8859-1").encode("utf-8")
                             pass
                 
-                self["Description"].setText(myDescr + ConvertChars(EETtxt) )
+                self.setDescription(myDescr + ConvertChars(EETtxt) )
                 FoundDescr = True
         ### DESCRIPTION from TXT ###
         elif path.exists(temp + '.txt'):
             with open(temp + '.txt','r') as descrTXT:
                 myDescr = descrTXT.read()
                 if len(myDescr) < 4 or myDescr[0] == "{" or myDescr[0] =="[" or myDescr[1] == ":" or myDescr[2] == ":":
-                    self["Description"].setText('')
+                    self.setDescription('')
                 else:
-                    self["Description"].setText(myDescr)
+                    self.setDescription(myDescr)
                     FoundDescr = True
         elif path.exists(WebDescrFile) and myConfig.PermanentCoversDescriptons.value == False:
             with open(WebDescrFile,'r') as descrTXT:
                 myDescr = descrTXT.read()
                 if len(myDescr) < 4 or myDescr[0] == "{" or myDescr[0] =="[" or myDescr[1] == ":" or myDescr[2] == ":":
-                    self["Description"].setText('')
+                    self.setDescription('')
                 else:
-                    self["Description"].setText(myDescr)
+                    self.setDescription(myDescr)
                     FoundDescr = True
         else:
-            self["Description"].setText('')
+            self.setDescription('')
             FoundDescr = False
         #print "Na koniec SetLocalDescriptionAndCover wartosci FoundCover=", FoundCover ,", FoundDescr=", FoundDescr
         return FoundCover, FoundDescr
     
     def ExitPlayer(self):
-        if self.LastPlayedService:
-            self.session.nav.playService(self.LastPlayedService)
-        self.openmovie = None
-        self.opensubtitle = None
-        self.URLlinkName = None
-        self.movietxt = None
-        self.subtitletxt = None
-        self.rootID = None
-        self.LastPlayedService = None
-        self.LastFolderSelected= None
-        self.movieTitle = None
-        self["Description"].setText('')
-        ClearMemory() #just in case for nbox, where we have limited RAM
-        system('(rm -rf /tmp/*.AFP.*;mkdir -p %s) &' % myConfig.TrashFolder.value)
-        myConfig.PlayerOn.value = False
-        configfile.save()
+        try:
+            if self.LastPlayedService:
+                self.session.nav.playService(self.LastPlayedService)
+            self.openmovie = None
+            self.opensubtitle = None
+            self.URLlinkName = None
+            self.movietxt = None
+            self.subtitletxt = None
+            self.rootID = None
+            self.LastPlayedService = None
+            self.LastFolderSelected= None
+            self.movieTitle = None
+            ClearMemory() #just in case for nbox, where we have limited RAM
+            system('(rm -rf /tmp/*.AFP.*;mkdir -p %s) &' % myConfig.TrashFolder.value)
+            myConfig.PlayerOn.value = False
+            configfile.save()
+        except Exception:
+            pass
         self.close()
         
-    def GetCoverTimerCB(self, AlternateMovieName = ''):
-        self.GetCoverTimer.stop()
-        #first we check if file selected, if no, cleaning everything
-        if self["filelist"].getSelection()[1] == True: # isDir
+    def setDescription(self, Text):
+        self["info"].setText( ">>> " + self.movieTitle + " <<< ")
+        self["Description"].setText(Text)
+        
+    def setCover(self, FileName):
+        if FileName in ('','hideCover') or not os.path.exists(FileName):
+            printDEBUG("setCover hide cover for '%s'" % FileName)
+            #self["Cover"].updateIcon('dummyCover')
             self["Cover"].hide()
             self.session.summary.LCD_hide('LCDpic')
-            self["Description"].setText('')
+        else:
+            self["Cover"].updateIcon(FileName)
+            self.session.summary.LCD_showPic('LCDpic', FileName)
+            self["Cover"].show()
+    
+    def GetCoverTimerCB(self, AlternateMovieName = ''):
+        self.GetCoverTimer.stop()
+        if self.gettingDataFromWEB == True:
+            printDEBUG("AFP is processing webdata, waiting %s ms." % self.ShowDelay)
+            self.GetCoverTimer.start(self.ShowDelay,False)
+            return
+        #first we check if file selected, if no, cleaning everything
+        if self["filelist"].getSelection()[1] == True: # isDir
+            self.setCover('hideCover')
+            self.setDescription('')
             return
         extension = self.getExtension(self.filelist.getFilename())[1:]
         if not EXTENSIONS.has_key(extension) or EXTENSIONS[extension] != "movie":
-            self["Cover"].hide()
-            self.session.summary.LCD_hide('LCDpic')
-            self["Description"].setText('')
+            self.setCover('hideCover')
+            self.setDescription('')
             return
             
         ClearMemory() #just in case for nbox, where we have limited RAM
            
         ### LOCAL Descriptions and Covers###
-        if AlternateMovieName == '':
-            FoundCover, FoundDescr = self.SetLocalDescriptionAndCover(self.filelist.getCurrentDirectory() + self.filelist.getFilename())
+        if myConfig.AutoDownloadCoversDescriptions.value == False:
+            return
+        elif AlternateMovieName == '':
             myMovie, movieYear =cleanFile(self.filelist.getFilename())
             self.movieTitle = myMovie
-            if (FoundCover and FoundDescr) or myConfig.AutoDownloadCoversDescriptions.value == False: #no need to download data if both found locally ;)
+            FoundCover, FoundDescr = self.SetLocalDescriptionAndCover(self.filelist.getCurrentDirectory() + self.filelist.getFilename())
+            if (FoundCover and FoundDescr): #no need to download data if both found locally ;)
                 return
         else:
             myMovie, movieYear =cleanFile(myMovie=AlternateMovieName)
             self.movieTitle = myMovie
         
-        if myConfig.AutoDownloadCoversDescriptions.value == False:
-            return
         #print "Status covera i opisu:" , FoundCover,FoundDescr
         try:
             from twisted.web.client import getPage
@@ -698,19 +714,17 @@ class AdvancedFreePlayerStart(Screen):
             #from urllib import urlencode
         except:
             printDEBUG("Error importing twisted. Something wrong with the image?")
-            self["Description"].setText(_("Error importing twisted package. Seems something wrong with the image. :("))
+            self.setDescription(_("Error importing twisted package. Seems something wrong with the image. :("))
             return
         # checking if network connection is working
         if not isINETworking():
-            self["Description"].setText(_("No internet connection. :("))
+            self.setDescription(_("No internet connection. :("))
             return
             
         def WebCover(ret):
             print "[AdvancedFreePlayer] WebCover >>>"
             self.gettingDataFromWEB = False
-            self["Cover"].updateIcon(WebCoverFile)
-            self["Cover"].show()
-            self.session.summary.LCD_showPic('LCDpic', WebCoverFile)
+            self.setCover(WebCoverFile)
             return
         def dataError(error = ''):
             printDEBUG("Error downloading data %s" % str(error))
@@ -790,7 +804,7 @@ class AdvancedFreePlayerStart(Screen):
                         printDEBUG("FoundDescr == False")
                         with open(WebDescrFile,'r') as descrTXT:
                             myDescr = descrTXT.read()
-                            self["Description"].setText(myDescr)
+                            self.setDescription(myDescr)
                     if FoundCover == False or coverUrl != '': #no need to download cover, if we have it, or if there is no cover url. ;)
                         downloadPage(coverUrl,WebCoverFile).addCallback(WebCover).addErrback(dataError)
                 
@@ -814,8 +828,9 @@ class AdvancedFreePlayerStart(Screen):
                     coverUrl = "http://www.thetvdb.com/banners/_cache/posters/%s-1.jpg" % str(seriesid)
                     if FoundDescr == False:
                         printDEBUG("FoundDescr == False1")
-                        self["Description"].setText(overview + '\n\n' + _('Released: ') + FirstAired + '\n' + _('Original title: ') + SeriesName +'\n' + _('Original language: ') + \
-                                                    original_language +'\n' + _('Network: ') + Network + '\n')
+                        myDescr = (overview + '\n\n' + _('Released: ') + FirstAired + '\n' + _('Original title: ') + SeriesName +'\n' + _('Original language: ') + \
+                                    original_language +'\n' + _('Network: ') + Network + '\n')
+                        self.setDescription(myDescr)
                         with open(WebDescrFile, 'w') as WDF:
                             WDF.write(self["Description"].getText() )
                             WDF.close()
