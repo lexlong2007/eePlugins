@@ -71,7 +71,7 @@ def FileEntryComponent(name, absolute = None, isDir = False, goBack = False, cur
         extension = extension[-1].lower()
         if EXTENSIONS.has_key(extension):
             status=''
-            if currDir is not None and EXTENSIONS[extension] == "movie":
+            if currDir is not None and EXTENSIONS[extension] in ("movie", "movieurl"):
                 if not os_path.exists("%s/%s.cuts" %(currDir,absolute)):
                     status='0'
                 else:
@@ -373,8 +373,11 @@ class FileList(MenuList):
     def refresh(self):
         selectedIndex = self.getSelectedIndex()
         self.changeDir(self.current_directory, self.getFilename())
-        if selectedIndex >0:
-            self.moveToIndex(selectedIndex-1)
+        try:
+            self.moveToIndex(selectedIndex)
+        except Exception:
+            if selectedIndex >0:
+                self.moveToIndex(selectedIndex-1)
 
     def partitionListChanged(self, action, device):
         self.refreshMountpoints()

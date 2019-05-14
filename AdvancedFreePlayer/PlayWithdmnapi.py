@@ -119,10 +119,12 @@ class AdvancedFreePlayer(Screen):
     SHOWNSUBTITLE = 6
     HIDDENSUBTITLE = 7
 
-    def __init__(self, session,openmovie,opensubtitle, rootID, LastPlayedService, URLlinkName = '', movieTitle='', LastPosition = 0):
+    def __init__(self, session,openmovie,opensubtitle, rootID, LastPlayedService, URLlinkName = '', movieTitle='', LastPosition = 0, movieDescription='', movieCover=''):
         self.session = session
         self.statusScreen = self.session.instantiateDialog(StatusScreen)
         
+        self.movieDescription = movieDescription
+        self.movieCover = movieCover
         self.URLlinkName = URLlinkName
         self.frameon = 1 / 24
         self.seeksubtitle = 0
@@ -976,9 +978,9 @@ class AdvancedFreePlayer(Screen):
         DeleteFile('/tmp/afpsubs.srt')
         DeleteFile('/tmp/afpsubs.txt')
         if self.URLlinkName == '' and not access(self.openmovie, W_OK):
-            printDEBUG("No access to delete %s" % self.openmovie)
+            printDEBUG("No access to delete local file '%s'" % self.openmovie)
         elif self.URLlinkName != '' and not access(self.URLlinkName, W_OK):
-            printDEBUG("No access to delete %s" % self.URLlinkName)
+            printDEBUG("No access to delete URLink '%s'" % self.URLlinkName)
         elif myConfig.DeleteFileQuestion.value == True or (PercentagePlayed >= int(myConfig.DeleteWhenPercentagePlayed.value) and \
             int(myConfig.DeleteWhenPercentagePlayed.value) >0) and self.openmovie.find('iptv_buffering') != -1:
             printDEBUG(self.openmovie)
@@ -1023,10 +1025,16 @@ class AdvancedFreePlayer(Screen):
                             printDEBUG("Deleting %s" % self.URLlinkName)
                             DeleteFile(self.URLlinkName)
                 else:
-                    setCut(self.openmovie + ".cuts", LastPosition, Movielength)
+                    if self.URLlinkName == '':
+                        setCut(self.openmovie + ".cuts", LastPosition, Movielength)
+                    else:
+                        setCut(self.URLlinkName + ".cuts", LastPosition, Movielength)
             self.session.openWithCallback(ExitRet, MessageBox, _("Delete this movie?"), timeout=10, default=False)
         else:
-            setCut(self.openmovie + ".cuts", LastPosition, Movielength)
+            if self.URLlinkName == '':
+                setCut(self.openmovie + ".cuts", LastPosition, Movielength)
+            else:
+                setCut(self.URLlinkName + ".cuts", LastPosition, Movielength)
         self.close()
 
 ##################################################################### RELOADING SUBTITLES >>>>>>>>>>

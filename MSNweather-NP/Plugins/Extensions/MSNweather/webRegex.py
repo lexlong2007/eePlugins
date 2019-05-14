@@ -34,6 +34,7 @@ iconsMap={
     'bezchmurnie'           :   '31.png',
     'slonecznie'            :   '32.png',
     'przewaznieslonecznie'  :   '34.png',
+    'burze'                 :   '37.png',
     }
 
 def plTOansi(text):

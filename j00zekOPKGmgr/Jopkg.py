@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# @j00zek 2015/2016 dla Graterlia v. 08-01-2016
+# @j00zek 2015/2019 v. 06-05-2019
 # based on some VTI concepts
 #
 from Components.ActionMap import ActionMap
@@ -337,7 +337,7 @@ class Jopkg(Screen):
         return
 
     def keyYellow(self):
-        printDEBUG( "keyYellow" , "non Graterlia MenuOPKGsettings TBD" )
+        printDEBUG( "keyYellow" , "MenuOPKGsettings TBD" )
 
     def keyYellowEnd(self, ret = 0):
         return
@@ -525,7 +525,7 @@ class Jopkg(Screen):
         self.upgradeablepackages = self.getOPKGlist( SameNazwy = True, lista = result )
         self.packages2upgrade = len(self.upgradeablepackages)
         if self.packages2upgrade > 0 and self.pushUpgrade == True:
-            printDEBUG( "build_UpgradeMenu" , "list of non-Graterlia packages" )
+            printDEBUG( "build_UpgradeMenu" , "list of packages" )
             tmptxt=''
             for x in result.splitlines():
                 if not x.startswith('Not selecting'):

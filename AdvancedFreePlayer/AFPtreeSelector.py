@@ -343,14 +343,17 @@ class AdvancedFreePlayerStart(Screen):
             if myConfig.StoreLastFolder.value == True:
                 myConfig.FileListLastFolder.value =  self["myPath"].getText()
                 myConfig.FileListLastFolder.save()
-            self.lastPosition, Length = getCut(self.openmovie + '.cuts') #returns in mins
+            if self.URLlinkName == '':
+                self.lastPosition, Length = getCut(self.openmovie + '.cuts') #returns in mins
+            else:
+                self.lastPosition, Length = getCut(self.URLlinkName + '.cuts') #returns in mins
             if self.lastPosition < 1:
                 self.SelectFramework()
             else:
                 self.session.openWithCallback(self.ClearCuts, MessageBox, _("Do you want to resume this playback?"), timeout=10, default=True)
 
     def ClearCuts(self, ret):
-        printDEBUG("ClearCuts ret='%s'" % str(ret))
+        printDEBUG("AFPtreeSelector:ClearCuts resume this playback to position %s ? '%s'" % (self.lastPosition, str(ret)))
         if not ret:
             clearLastPosition(self.openmovie + '.cuts')
             self.lastPosition = 0
@@ -663,7 +666,7 @@ class AdvancedFreePlayerStart(Screen):
         self["Description"].setText(Text)
         
     def setCover(self, FileName):
-        if FileName in ('','hideCover') or not os.path.exists(FileName):
+        if FileName in ('','hideCover') or not path.exists(FileName):
             printDEBUG("setCover hide cover for '%s'" % FileName)
             #self["Cover"].updateIcon('dummyCover')
             self["Cover"].hide()

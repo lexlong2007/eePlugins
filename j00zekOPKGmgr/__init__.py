@@ -12,7 +12,6 @@ PluginFolder = PluginName
 PluginPath = resolveFilename(SCOPE_PLUGINS, '%s/%s/' %(PluginGroup,PluginFolder))
 SkinPath = resolveFilename(SCOPE_CURRENT_SKIN, '')
 
-isGraterlia = False
 PluginLanguageDomain = "plugin-" + PluginName
 PluginLanguagePath = resolveFilename(SCOPE_PLUGINS, '%s/%s/locale' % (PluginGroup,PluginFolder))
 from Components.Language import language
