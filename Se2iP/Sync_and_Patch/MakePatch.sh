@@ -12,8 +12,10 @@ destE2iplayerPath=$mySe2iPpath/usr/lib/enigma2/python/Plugins/Extensions/IPTVPla
 
 e2iplayerGTIs=/enigma2-pc/e2iplayerGITsSources
 
+e2iplayerPodstawa=$e2iplayerGTIs/glowny-e2iplayer-Mario
+
 curtime=`date +"%Y%m%d_%H%M%S"`
 
-diff -Naur $e2iplayerGTIs/SSS/e2iplayer/IPTVPlayer/ $destE2iplayerPath/ -X $mySe2iPpath/Sync_and_Patch/exclude.pats >$mySe2iPpath/Sync_and_Patch/iptvplayer-fork.patch
+diff -Naur $e2iplayerPodstawa/IPTVPlayer/ $destE2iplayerPath/ -X $mySe2iPpath/Sync_and_Patch/exclude.pats >$mySe2iPpath/Sync_and_Patch/iptvplayer-fork.patch
 cp -f $mySe2iPpath/Sync_and_Patch/iptvplayer-fork.patch $mySe2iPpath/Sync_and_Patch/patches_Archive/iptvplayer-fork.$curtime.patch
 

@@ -6,6 +6,8 @@
 
 
 ###################################################
+from Plugins.Extensions.IPTVPlayer.j00zekAddons.j00zekToolSet import * 
+###################################################
 # LOCAL import
 ###################################################
 from Plugins.Extensions.IPTVPlayer.tools.iptvtools import printDBG, printExc

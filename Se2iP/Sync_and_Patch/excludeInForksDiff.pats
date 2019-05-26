@@ -3,6 +3,7 @@ Makefile*
 rcsim.h
 version.h
 *.orig
+*org*
 *.pyo
 *.pyc
 *.mo

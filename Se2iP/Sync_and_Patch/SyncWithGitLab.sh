@@ -13,16 +13,21 @@ destE2iplayerPath=$mySe2iPpath/usr/lib/enigma2/python/Plugins/Extensions/IPTVPla
 
 e2iplayerGTIs=/enigma2-pc/e2iplayerGITsSources
 
+e2iplayerPodstawa=$e2iplayerGTIs/glowny-e2iplayer-Mario
+
 curDate=`date +"%Y%m%d"`
 if [ -e $mySe2iPpath/Sync_and_Patch/GITs_sync_time.log ];then
  . $mySe2iPpath/Sync_and_Patch/GITs_sync_time.log #get sync date
 else
   syncDate=0
 fi
+#syncDate=0
 
-cd $e2iplayerGTIs
 ############################## Syncing GITLAB ##############################
 if [ $curDate -gt $syncDate ];then
+  cd $e2iplayerGTIs/glowny-e2iplayer-Mario
+  git pull
+  cd $e2iplayerGTIs
   for mydir in `find -type d`
   do
     if [ -e $mydir/.git ] ; then
@@ -43,30 +48,31 @@ done
   do
     if [ -d $mydir ];then
       echo $mydir
-      diff -qr $e2iplayerGTIs/SSS/e2iplayer/IPTVPlayer/ $e2iplayerGTIs/forks/$mydir/IPTVPlayer/ -X $mySe2iPpath/Sync_and_Patch/excludeInForksDiff.pats | cut -d ' ' -f2 >$mydir.diffList
-      diff -Naur $e2iplayerGTIs/SSS/e2iplayer/IPTVPlayer/ $e2iplayerGTIs/forks/$mydir/IPTVPlayer/ -X $mySe2iPpath/Sync_and_Patch/excludeInForksDiff.pats >$mydir.diff_full
-      diff -Naur $e2iplayerGTIs/SSS/e2iplayer/IPTVPlayer/ $e2iplayerGTIs/forks/$mydir/IPTVPlayer/  >$mydir.diff_complete
+      diff -qr $e2iplayerPodstawa/IPTVPlayer/ $e2iplayerGTIs/forks/$mydir/IPTVPlayer/ -X $mySe2iPpath/Sync_and_Patch/excludeInForksDiff.pats | cut -d ' ' -f2 >$mydir.diffList
+      diff -Naur $e2iplayerPodstawa/IPTVPlayer/ $e2iplayerGTIs/forks/$mydir/IPTVPlayer/ -X $mySe2iPpath/Sync_and_Patch/excludeInForksDiff.pats >$mydir.diff_full
+      diff -Naur $e2iplayerPodstawa/IPTVPlayer/ $e2iplayerGTIs/forks/$mydir/IPTVPlayer/  >$mydir.diff_complete
       [ -s $mydir.diffList ] || rm -f $mydir.diffList
       [ -s $mydir.diff_full ] || rm -f $mydir.diff_full
       [ -s $mydir.diff_complete ] || rm -f $mydir.diff_complete
       
-      [ -e $mydir.diff_full ] && sed -i "s;/enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/;;g" $mydir.diff_full
+      [ -e $mydir.diff_full ] && sed -i "s;$e2iplayerPodstawa/;;g" $mydir.diff_full
     fi
   done
 fi
 ############################## Copying master git ##############################
 rm -rf $mySe2iPpath/usr/*
 mkdir -p $destE2iplayerPath
-cp -rf $e2iplayerGTIs/SSS/e2iplayer/IPTVPlayer/* $destE2iplayerPath/
+echo "Kopiuje podstawe"
+cp -rf $e2iplayerPodstawa/IPTVPlayer/* $destE2iplayerPath/
 ############################## Copying & patching pycurl install script ##############################
-cp -rf $e2iplayerGTIs/SSS/www.iptvplayer.gitlab.io/pycurlinstall.py $mySe2iPpath/iptvplayer_rootfs/
+#cp -rf $e2iplayerGTIs/SSS/www.iptvplayer.gitlab.io/pycurlinstall.py $mySe2iPpath/iptvplayer_rootfs/
 
 ############################## Copying additional hosts ##############################
 cd $e2iplayerGTIs/hosts
 
 for mydir in `ls`
 do
-  echo "Copying host $mydir"
+  echo "Kopiuje host $mydir"
   [ -e $mydir/hosts/ ] && cp -f $mydir/hosts/* $destE2iplayerPath/hosts/
   [ -e $mydir/IPTVPlayer/hosts/ ] && cp -f $mydir/IPTVPlayer/hosts/* $destE2iplayerPath/hosts/
   [ -e $mydir/icons/ ] && cp -f $mydir/hosts/* $destE2iplayerPath/icons/
@@ -87,7 +93,7 @@ done
 ############################## Applying own patch ##############################
 cd $destE2iplayerPath
 echo ">>> applying own patch"
-sed "s;/enigma2-pc/e2iplayerGITsSources/SSS/e2iplayer/;;g" < $mySe2iPpath/Sync_and_Patch/iptvplayer-fork.patch > /tmp/tmp.patch
+sed "s;/enigma2-pc/e2iplayerGITsSources/glowny-e2iplayer-Mario/;;g" < $mySe2iPpath/Sync_and_Patch/iptvplayer-fork.patch > /tmp/tmp.patch
 patch -p1 < /tmp/tmp.patch
 rm -f /tmp/tmp.patch
 
@@ -102,7 +108,7 @@ rm -rf $destE2iplayerPath/bin/sh4
 ############################## Delete some unwanted hosts ##############################
 cd $destE2iplayerPath
 #step 1 remove all definitevely unwanted
-HostsList='chomikuj favourites disabled blocked localmedia wolnelekturypl iptvplayerinfo'
+HostsList='chomikuj favourites disabled blocked localmedia wolnelekturypl iptvplayerinfo hostwatchwrestling hostwatchwrestlinguno'
 for myfile in $HostsList
 do
   rm -rf ./hosts/*$myfile*
@@ -111,8 +117,25 @@ done
 
 ############################## building hosts tree ##############################
 
+for myFile in `ls /usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/hosts/host*.py*`
+do
+  #PL
+  if `grep -q 'return .*http:.*\.pl' < $myFile`;then
+    file=$(basename "$myFile")
+    echo "> linking $file to PL"
+    ln -sf $myFile "$destE2iplayerPath/hosts/2 - Polskie/$file"
+  fi
+  #DE
+  if `grep -q 'return .*http:.*\.de' < $myFile`;then
+    file=$(basename "$myFile")
+    echo "> linking $file to PL"
+    ln -sf $myFile "$destE2iplayerPath/hosts/6 - Niemieckie/$file"
+  fi
+done
+
+############################## Manual ##############################
 HostsCategory='1 - Ulubione'
-HostsList='hostyoutube'
+HostsList='hostyoutube hostzalukajcom'
 for host in $HostsList
 do
   ln -sf /usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/hosts/$host.py "$destE2iplayerPath/hosts/$HostsCategory/$host.py"
@@ -120,14 +143,14 @@ done
 
 
 HostsCategory='2 - Polskie'
-HostsList='hostwptv hostmeczykipl'
+HostsList='hostwptv hostmeczykipl hostzalukajcom hostkabarety'
 for host in $HostsList
 do
   ln -sf /usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/hosts/$host.py "$destE2iplayerPath/hosts/$HostsCategory/$host.py"
 done
 
 HostsCategory='3 - Bajki'
-HostsList='hostbajeczkiorg'
+HostsList='hostbajeczkiorg hostwatchcartoononline'
 for host in $HostsList
 do
   ln -sf /usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/hosts/$host.py "$destE2iplayerPath/hosts/$HostsCategory/$host.py"

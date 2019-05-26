@@ -11,7 +11,7 @@ from Plugins.Extensions.IPTVPlayer.libs.urlparser import urlparser
 from Plugins.Extensions.IPTVPlayer.iptvdm.iptvdh import DMHelper
 from Plugins.Extensions.IPTVPlayer.libs.urlparserhelper import decorateUrl, getDirectM3U8Playlist, unpackJSPlayerParams, TEAMCASTPL_decryptPlayerParams
 from Plugins.Extensions.IPTVPlayer.libs.youtube_dl.utils import clean_html 
-from Plugins.Extensions.IPTVPlayer.components.iptvplayerinit import TranslateTXT as _, SetIPTVPlayerLastHostError, GetIPTVNotify
+from Plugins.Extensions.IPTVPlayer.components.iptvplayerinit import TranslateTXT as _, SetIPTVPlayerLastHostError, GetIPTVNotify, GetIPTVSleep
 ###################################################
 # FOREIGN import
 ###################################################
@@ -131,7 +131,7 @@ class IPTVHost(IHost):
     ###################################################
 
 class Host:
-    infoversion = "2019.05.03"
+    infoversion = "2019.05.17a"
     inforemote  = "0.0.0"
     currList = []
     SEARCH_proc = ''
@@ -2978,22 +2978,32 @@ class Host:
         valTab = []
 
         if 'filmbit' in url:
-           for x in range(1, 100): 
+           for x in range(1, 200): 
               COOKIEFILE = os_path.join(GetCookieDir(), 'filmbit.cookie')
               self.defaultParams = {'use_cookie': True, 'load_cookie': True, 'save_cookie': True, 'cookiefile': COOKIEFILE}
               sts, data = self.getPage(url, 'filmbit.cookie', 'filmbit.ws', self.defaultParams)
-              if not sts: return ''
-              #printDBG( 'Host listsItems data: '+str(data) )
+              if not sts: 
+                 if 'chwilowy problem z naszymi serwerami' in data: 
+                    SetIPTVPlayerLastHostError(_(' Ups, wystąpił chwilowy problem z naszymi serwerami.'))
+                    return []
+                 return ''
+              printDBG( 'Host listsItems data: '+str(data) )
               m3u8 =  self.cm.ph.getSearchGroups(data, '''<source src=['"]([^"^']+?)['"]''', 1, True)[0]
+              if m3u8=='': m3u8 =  self.cm.ph.getSearchGroups(data, '''"file":\s*?['"]([^"^']+?)['"]''', 1, True)[0]
               if m3u8: break
+              GetIPTVSleep().Sleep(2)
            if m3u8.startswith('//'): m3u8 = 'http:' + m3u8
-           videoUrl = urlparser.decorateUrl(m3u8, {'Referer': url})  
+           videoUrl = urlparser.decorateUrl(m3u8, {'Referer': url, 'iptv_proto':'m3u8', 'iptv_livestream':True})  
            if self.cm.isValidUrl(videoUrl): 
                #printDBG( 'Host meta: '  + data.meta['url'])
                tmp = getDirectM3U8Playlist(videoUrl)
                for item in tmp:
                    printDBG( 'Host listsItems valtab: '  +str(item))
                    return item['url']
+           if 'Odczekaj momencik na wolne miejsce' in data: 
+               SetIPTVPlayerLastHostError(_(' Odczekaj momencik na wolne miejsce'))
+               return []
+           return ''
 
         if 'miamitvhd' in url:
            COOKIEFILE = os_path.join(GetCookieDir(), 'miami.cookie')

@@ -97,23 +97,23 @@ class IPTVSetupImpl:
         
         # subparser
         self.subparserVersion = 0.5
-        self.subparserPaths = [resolveFilename(SCOPE_PLUGINS, 'Extensions/IPTVPlayer/libs/iptvsubparser%s/_subparser.so' % config.plugins.iptvplayer.plarform.value)]
+        self.subparserPaths = [resolveFilename(SCOPE_PLUGINS, 'Extensions/IPTVPlayer/libs/iptvsubparser/_subparser.so')]
 
         # e2icjson
         self.e2icjsonVersion = 10202 #'1.2.2' int(z[0]) * 10000 + int(z[1]) * 100 + int(z[2])
-        self.e2icjsonPaths = [resolveFilename(SCOPE_PLUGINS, 'Extensions/IPTVPlayer/libs/e2icjson%s/e2icjson.so' % config.plugins.iptvplayer.plarform.value)]
+        self.e2icjsonPaths = [resolveFilename(SCOPE_PLUGINS, 'Extensions/IPTVPlayer/libs/e2icjson/e2icjson.so')]
 
         # hlsdl
         self.hlsdlVersion = 0.21
-        self.hlsdlPaths = [resolveFilename(SCOPE_PLUGINS, 'Extensions/IPTVPlayer/bin/%s/hlsdl' % config.plugins.iptvplayer.plarform.value), "/usr/bin/hlsdl"]
+        self.hlsdlPaths = [resolveFilename(SCOPE_PLUGINS, 'Extensions/IPTVPlayer/bin/hlsdl'), "/usr/bin/hlsdl"]
         
         # cmdwrap
         self.cmdwrapVersion = 2
-        self.cmdwrapPaths = [resolveFilename(SCOPE_PLUGINS, 'Extensions/IPTVPlayer/bin/%s/cmdwrap' % config.plugins.iptvplayer.plarform.value), "/usr/bin/cmdwrap"]
+        self.cmdwrapPaths = [resolveFilename(SCOPE_PLUGINS, 'Extensions/IPTVPlayer/bin/cmdwrap'), "/usr/bin/cmdwrap"]
         
         # duk
         self.dukVersion = 5 # "2.1.99 [experimental]" # real version
-        self.dukPaths = [resolveFilename(SCOPE_PLUGINS, 'Extensions/IPTVPlayer/bin/%s/duk' % config.plugins.iptvplayer.plarform.value), "/usr/bin/duk"]
+        self.dukPaths = [resolveFilename(SCOPE_PLUGINS, 'Extensions/IPTVPlayer/bin/duk'), "/usr/bin/duk"]
         
         self.binaryInstalledSuccessfully = False
         self.tries = 0
@@ -698,7 +698,6 @@ class IPTVSetupImpl:
     # STEP: subparser
     ###################################################
     def subparserStep(self, ret=None):
-        #if config.plugins.iptvplayer.j00zekDontDownloadBins.value: self.e2icjsonStep()
         printDBG("IPTVSetupImpl.subparserStep")
 
         def _detectCmdBuilder(path):
@@ -759,7 +758,6 @@ class IPTVSetupImpl:
     # STEP: e2icjson
     ###################################################
     def e2icjsonStep(self, ret=None):
-        #if config.plugins.iptvplayer.j00zekDontDownloadBins.value: self.hlsdlStep()
         printDBG("IPTVSetupImpl.e2icjsonStep")
         
         def _detectCmdBuilder(path):

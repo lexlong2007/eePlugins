@@ -1195,6 +1195,8 @@
     </widget>
     <widget name="text" position="73,135" size="850,32" font="HD_Thin; 27" foregroundColor="light_yellow" backgroundColor="background"/>
     <widget name="list" position="73,185" size="850,525" itemHeight="40" font="Roboto_HD; 27" backgroundColor="background" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_850_40.png" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" transparent="1"/>
+    <ePixmap position="73,760" size="60,30" pixmap="BlackHarmony/buttons/key_ok.png" alphatest="blend"/>
+    <ePixmap position="173,760" size="60,30" pixmap="BlackHarmony/buttons/key_exit.png" alphatest="blend"/>
   </screen>
   <screen name="CiSelection" position="462,128" size="1000,820" title="Common Interface" flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1000,820" pixmap="BlackHarmony/bg_design/small.png"/>
@@ -1905,7 +1907,8 @@
     <widget source="global.CurrentTime" render="Label" position="160,55" size="660,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Timer Edit List" position="1017,55" size="820,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <!--eLabel text="Timer Edit List" position="1017,55" size="820,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/-->
+    <widget source="Title" render="Label" position="1017,55" size="820,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget name="timerlist" position="95,175" size="1025,750" itemHeight="125" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_1025_125.png" backgroundColor="black" transparent="1"/>
     <widget source="ServiceEvent" render="j00zekPicons" picontype="picon" position="1270,170" size="220,132" zPosition="2" transparent="1" alphatest="blend">
       <convert type="BlackHarmonyServiceName2">Reference</convert>

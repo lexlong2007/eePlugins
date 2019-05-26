@@ -13,6 +13,10 @@ from random import shuffle as random_shuffle
 import traceback
 
 ####################################################
+#                  j00zek E2
+####################################################
+j00zekFork=True
+####################################################
 #                   E2 components
 ####################################################
 from skin import parseColor
@@ -1266,7 +1270,7 @@ class E2iPlayerWidget(Screen):
 
                 # The 'http...' in host titles is annoying on regular choiceBox and impacts sorting.
                 # To simplify choiceBox usage and clearly show service is a webpage, list is build using the "<service name> (<service URL>)" schema.
-                if (config.plugins.iptvplayer.ListaGraficzna.value == False or 0 == GetAvailableIconSize()) and title[:4] == 'http':
+                if 1 = 0 and (config.plugins.iptvplayer.ListaGraficzna.value == False or 0 == GetAvailableIconSize()) and title[:4] == 'http':
                     try: title = ('%s   (%s)') % ('.'.join(title.replace('://','.').replace('www.','').split('.')[1:-1]) , title)
                     except Exception: pass
                 self.displayHostsList.append((title, hostName))
@@ -1292,7 +1296,11 @@ class E2iPlayerWidget(Screen):
         return
 
     def displayListOfHosts(self, arg = None):
-        if config.plugins.iptvplayer.ListaGraficzna.value == False or 0 == GetAvailableIconSize():
+        if 'j00zekFork' in globals():
+            self.newDisplayHostsList = None
+            from Plugins.Extensions.IPTVPlayer.j00zekAddons.j00zekHostTreeSelector import j00zekHostTreeSelector
+            self.session.openWithCallback(self.selectHostCallback, j00zekHostTreeSelector, list = self.displayHostsList)
+        elif config.plugins.iptvplayer.ListaGraficzna.value == False or 0 == GetAvailableIconSize():
             self.newDisplayHostsList = None
             self.session.openWithCallback(self.selectHostCallback, ChoiceBox, title=_("Select service"), list = self.displayHostsList)
         else:

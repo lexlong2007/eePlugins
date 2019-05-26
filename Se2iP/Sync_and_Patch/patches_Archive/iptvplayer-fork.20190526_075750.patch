@@ -1,6 +1,6 @@
 diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /enigma2-pc/e2iplayerGITsSources/glowny-e2iplayer-Mario/IPTVPlayer/components/configbase.py /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/components/configbase.py
 --- /enigma2-pc/e2iplayerGITsSources/glowny-e2iplayer-Mario/IPTVPlayer/components/configbase.py	2019-03-16 07:22:31.793696001 +0100
-+++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/components/configbase.py	2019-05-26 09:01:58.254074999 +0200
++++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/components/configbase.py	2019-05-26 07:33:31.962074999 +0200
 @@ -6,6 +6,8 @@
  
  
@@ -12,7 +12,7 @@ diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /e
  from Plugins.Extensions.IPTVPlayer.tools.iptvtools import printDBG, printExc
 diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /enigma2-pc/e2iplayerGITsSources/glowny-e2iplayer-Mario/IPTVPlayer/components/iptvconfigmenu.py /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/components/iptvconfigmenu.py
 --- /enigma2-pc/e2iplayerGITsSources/glowny-e2iplayer-Mario/IPTVPlayer/components/iptvconfigmenu.py	2019-03-16 07:22:31.801696001 +0100
-+++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/components/iptvconfigmenu.py	2019-05-26 09:01:58.254074999 +0200
++++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/components/iptvconfigmenu.py	2019-05-26 07:33:31.966074999 +0200
 @@ -51,7 +51,7 @@
  config.plugins.iptvplayer.uchardetpath    = ConfigText(default = "", fixed_size = False)
  config.plugins.iptvplayer.set_curr_title  = ConfigYesNo(default = False)
@@ -139,7 +139,7 @@ diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /e
          ConfigMenu.fillConfigList(self.list, self.isHiddenOptionsUnlocked())
 diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /enigma2-pc/e2iplayerGITsSources/glowny-e2iplayer-Mario/IPTVPlayer/components/iptvplayerwidget.py /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/components/iptvplayerwidget.py
 --- /enigma2-pc/e2iplayerGITsSources/glowny-e2iplayer-Mario/IPTVPlayer/components/iptvplayerwidget.py	2019-03-16 07:22:31.809696001 +0100
-+++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/components/iptvplayerwidget.py	2019-05-26 09:01:58.262074999 +0200
++++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/components/iptvplayerwidget.py	2019-05-26 07:53:35.050074999 +0200
 @@ -13,6 +13,10 @@
  import traceback
  
@@ -175,7 +175,7 @@ diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /e
          else:
 diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /enigma2-pc/e2iplayerGITsSources/glowny-e2iplayer-Mario/IPTVPlayer/keymap.xml /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/keymap.xml
 --- /enigma2-pc/e2iplayerGITsSources/glowny-e2iplayer-Mario/IPTVPlayer/keymap.xml	2019-03-16 07:22:32.097696001 +0100
-+++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/keymap.xml	2019-05-26 09:01:58.262074999 +0200
++++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/keymap.xml	2019-05-26 07:33:31.970074999 +0200
 @@ -35,4 +35,23 @@
          <key id="KEY_OK"    mapto="ok_repeat"    flags="r" />
          <key id="KEY_RED"   mapto="red_repeat"   flags="r" />
@@ -201,9 +201,56 @@ diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /e
 +  </map> 
  </keymap>
 \ Brak znaku nowej linii na końcu pliku
+diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /enigma2-pc/e2iplayerGITsSources/glowny-e2iplayer-Mario/IPTVPlayer/libs/pCommon.py /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/libs/pCommon.py
+--- /enigma2-pc/e2iplayerGITsSources/glowny-e2iplayer-Mario/IPTVPlayer/libs/pCommon.py	2019-03-25 06:58:13.593779645 +0100
++++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/libs/pCommon.py	2019-05-26 07:33:31.930074999 +0200
+@@ -1,4 +1,4 @@
+-# -*- coding: utf-8 -*-
++﻿# -*- coding: utf-8 -*-
+ 
+ ###################################################
+ # LOCAL import
+@@ -1006,7 +1006,7 @@
+                         verUrl += '?'
+                         for key in get_data:
+                             verUrl += '%s=%s&' % (key, get_data[key])
+-                        verUrl = _getFullUrl( ph.getattr(verData, 'action'), domain) + '?s=%s&jschl_vc=%s&pass=%s&jschl_answer=%s' % (get_data['s'], get_data['jschl_vc'], get_data['pass'], get_data['jschl_answer'])
++                        verUrl = _getFullUrl( ph.getattr(verData, 'action'), domain) + '?jschl_vc=%s&pass=%s&jschl_answer=%s' % (get_data['jschl_vc'], get_data['pass'], get_data['jschl_answer'])
+                         verUrl = _getFullUrl2( verUrl, domain)
+                         params2 = dict(params)
+                         params2['load_cookie'] = True
+diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /enigma2-pc/e2iplayerGITsSources/glowny-e2iplayer-Mario/IPTVPlayer/libs/sport365live.py /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/libs/sport365live.py
+--- /enigma2-pc/e2iplayerGITsSources/glowny-e2iplayer-Mario/IPTVPlayer/libs/sport365live.py	2019-05-19 05:25:46.265493570 +0200
++++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/libs/sport365live.py	2019-05-26 07:33:31.930074999 +0200
+@@ -20,7 +20,6 @@
+ import re
+ import urllib
+ import random
+-import uuid
+ import base64
+ from time import time
+ from Plugins.Extensions.IPTVPlayer.libs.crypto.cipher.aes_cbc import AES_CBC
+@@ -376,15 +375,9 @@
+                     continue
+                 sts, data = self.getPage(playerUrl, self.http_params)
+                 if not sts: return []
+-                playerUrl = self.cm.ph.getSearchGroups(data, '''location\.replace\(\s*?['"]([^'^"]+?)['"]''', 1, True)[0]
+-
+-                if playerUrl:
+-                    sts, data = self.getPage(playerUrl + str(uuid.uuid1()).replace('-', ''), self.http_params)
+-                    if not sts: return []
+-                data = self.cm.ph.getDataBeetwenNodes(data, 'document.write(', '(')[1] + data
+-
++                data = self.cm.ph.getDataBeetwenMarkers(data, 'document.write(', '(')[1]
+                 playerUrl = self.cleanHtmlStr( self.cm.ph.getSearchGroups(data, '''<iframe[^>]+?src=['"](http[^"^']+?)['"]''', 1, True)[0] )
+-
++                
+                 urlsTab = self.up.getVideoLinkExt(strwithmeta(playerUrl, {'aes_key':aes}))
+                 if len(urlsTab):
+                     break
 diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /enigma2-pc/e2iplayerGITsSources/glowny-e2iplayer-Mario/IPTVPlayer/libs/urlparser.py /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/libs/urlparser.py
 --- /enigma2-pc/e2iplayerGITsSources/glowny-e2iplayer-Mario/IPTVPlayer/libs/urlparser.py	2019-05-25 06:42:51.436284040 +0200
-+++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/libs/urlparser.py	2019-05-26 09:01:58.214074999 +0200
++++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/libs/urlparser.py	2019-05-26 07:33:31.938074999 +0200
 @@ -400,7 +400,6 @@
                         'tusfiles.com':         self.pp.parserUSERSCLOUDCOM ,
                         'hdgo.cc':              self.pp.parserHDGOCC        ,
