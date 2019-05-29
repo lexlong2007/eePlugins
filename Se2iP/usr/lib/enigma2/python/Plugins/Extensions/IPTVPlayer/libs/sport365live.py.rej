@@ -1,0 +1,28 @@
+--- libs/sport365live.py	2019-05-19 05:25:46.265493570 +0200
++++ DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/libs/sport365live.py	2019-05-26 13:06:15.483993002 +0200
+@@ -20,7 +20,6 @@
+ import re
+ import urllib
+ import random
+-import uuid
+ import base64
+ from time import time
+ from Plugins.Extensions.IPTVPlayer.libs.crypto.cipher.aes_cbc import AES_CBC
+@@ -376,15 +375,9 @@
+                     continue
+                 sts, data = self.getPage(playerUrl, self.http_params)
+                 if not sts: return []
+-                playerUrl = self.cm.ph.getSearchGroups(data, '''location\.replace\(\s*?['"]([^'^"]+?)['"]''', 1, True)[0]
+-
+-                if playerUrl:
+-                    sts, data = self.getPage(playerUrl + str(uuid.uuid1()).replace('-', ''), self.http_params)
+-                    if not sts: return []
+-                data = self.cm.ph.getDataBeetwenNodes(data, 'document.write(', '(')[1] + data
+-
++                data = self.cm.ph.getDataBeetwenMarkers(data, 'document.write(', '(')[1]
+                 playerUrl = self.cleanHtmlStr( self.cm.ph.getSearchGroups(data, '''<iframe[^>]+?src=['"](http[^"^']+?)['"]''', 1, True)[0] )
+-
++                
+                 urlsTab = self.up.getVideoLinkExt(strwithmeta(playerUrl, {'aes_key':aes}))
+                 if len(urlsTab):
+                     break

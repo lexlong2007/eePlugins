@@ -1270,8 +1270,8 @@ class E2iPlayerWidget(Screen):
 
                 # The 'http...' in host titles is annoying on regular choiceBox and impacts sorting.
                 # To simplify choiceBox usage and clearly show service is a webpage, list is build using the "<service name> (<service URL>)" schema.
-                if 1 = 0 and (config.plugins.iptvplayer.ListaGraficzna.value == False or 0 == GetAvailableIconSize()) and title[:4] == 'http':
-                    try: title = ('%s   (%s)') % ('.'.join(title.replace('://','.').replace('www.','').split('.')[1:-1]) , title)
+                if title[:4] == 'http':
+                    try: title = ('%s') % (title.replace('://','.').replace('www.','').split('.')[1:-1])
                     except Exception: pass
                 self.displayHostsList.append((title, hostName))
         # if there is no order hosts list use old behavior

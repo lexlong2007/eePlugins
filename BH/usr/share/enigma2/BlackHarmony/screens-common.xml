@@ -1907,8 +1907,10 @@
     <widget source="global.CurrentTime" render="Label" position="160,55" size="660,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <!--eLabel text="Timer Edit List" position="1017,55" size="820,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/-->
-    <widget source="Title" render="Label" position="1017,55" size="820,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="Title" render="Label" position="1017,55" size="820,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1">
+      <!-- zamiast elabel - widget source="Title" render="Label"-->
+      <convert type="j00zekAlternateTitle">Timer Edit List</convert>
+    </widget>  
     <widget name="timerlist" position="95,175" size="1025,750" itemHeight="125" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_1025_125.png" backgroundColor="black" transparent="1"/>
     <widget source="ServiceEvent" render="j00zekPicons" picontype="picon" position="1270,170" size="220,132" zPosition="2" transparent="1" alphatest="blend">
       <convert type="BlackHarmonyServiceName2">Reference</convert>
@@ -4916,7 +4918,7 @@
     <widget source="MasterService" render="Label" position="110,850" size="640,100" font="Regular;30" backgroundColor="background" transparent="1" foregroundColor="white" halign="center">
       <convert type="EventName"/>
     </widget>
-    <widget source="MasterService" render="j00zekPicons" picontype="picon" position="280,30" zPosition="1" size="400,160" transparent="1" alphatest="blend">
+    <widget source="MasterService" render="j00zekPicons" picontype="zzpicon" position="280,30" zPosition="1" size="400,170" transparent="1" alphatest="blend">
       <convert type="ServiceName">Reference</convert>
     </widget>
     <widget name="video2" position="960,270" size="960,540" backgroundColor="transparent"/>
@@ -4926,7 +4928,7 @@
     <widget source="SlaveService" render="Label" position="1070,850" size="640,100" font="Regular;30" backgroundColor="background" transparent="1" foregroundColor="white" halign="center">
       <convert type="EventName"/>
     </widget>
-    <widget source="SlaveService" render="j00zekPicons" picontype="picon" position="1240,30" zPosition="1" size="400,160" transparent="1" alphatest="blend">
+    <widget source="SlaveService" render="j00zekPicons" picontype="zzpicon" position="1240,30" zPosition="1" size="400,170" transparent="1" alphatest="blend">
       <convert type="ServiceName">Reference</convert>
     </widget>
   </screen>

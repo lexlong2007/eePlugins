@@ -1,6 +1,6 @@
 diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /enigma2-pc/e2iplayerGITsSources/glowny-e2iplayer-Mario/IPTVPlayer/components/configbase.py /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/components/configbase.py
 --- /enigma2-pc/e2iplayerGITsSources/glowny-e2iplayer-Mario/IPTVPlayer/components/configbase.py	2019-03-16 07:22:31.793696001 +0100
-+++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/components/configbase.py	2019-05-26 13:06:15.515993002 +0200
++++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/components/configbase.py	2019-05-26 09:22:06.754074999 +0200
 @@ -6,6 +6,8 @@
  
  
@@ -12,7 +12,7 @@ diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /e
  from Plugins.Extensions.IPTVPlayer.tools.iptvtools import printDBG, printExc
 diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /enigma2-pc/e2iplayerGITsSources/glowny-e2iplayer-Mario/IPTVPlayer/components/iptvconfigmenu.py /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/components/iptvconfigmenu.py
 --- /enigma2-pc/e2iplayerGITsSources/glowny-e2iplayer-Mario/IPTVPlayer/components/iptvconfigmenu.py	2019-03-16 07:22:31.801696001 +0100
-+++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/components/iptvconfigmenu.py	2019-05-26 13:06:15.515993002 +0200
++++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/components/iptvconfigmenu.py	2019-05-26 09:22:06.754074999 +0200
 @@ -51,7 +51,7 @@
  config.plugins.iptvplayer.uchardetpath    = ConfigText(default = "", fixed_size = False)
  config.plugins.iptvplayer.set_curr_title  = ConfigYesNo(default = False)
@@ -139,7 +139,7 @@ diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /e
          ConfigMenu.fillConfigList(self.list, self.isHiddenOptionsUnlocked())
 diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /enigma2-pc/e2iplayerGITsSources/glowny-e2iplayer-Mario/IPTVPlayer/components/iptvplayerwidget.py /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/components/iptvplayerwidget.py
 --- /enigma2-pc/e2iplayerGITsSources/glowny-e2iplayer-Mario/IPTVPlayer/components/iptvplayerwidget.py	2019-03-16 07:22:31.809696001 +0100
-+++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/components/iptvplayerwidget.py	2019-05-26 18:38:15.551993002 +0200
++++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/components/iptvplayerwidget.py	2019-05-26 13:05:50.191993002 +0200
 @@ -13,6 +13,10 @@
  import traceback
  
@@ -151,17 +151,15 @@ diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /e
  #                   E2 components
  ####################################################
  from skin import parseColor
-@@ -1266,8 +1270,8 @@
+@@ -1266,7 +1270,7 @@
  
                  # The 'http...' in host titles is annoying on regular choiceBox and impacts sorting.
                  # To simplify choiceBox usage and clearly show service is a webpage, list is build using the "<service name> (<service URL>)" schema.
 -                if (config.plugins.iptvplayer.ListaGraficzna.value == False or 0 == GetAvailableIconSize()) and title[:4] == 'http':
--                    try: title = ('%s   (%s)') % ('.'.join(title.replace('://','.').replace('www.','').split('.')[1:-1]) , title)
-+                if title[:4] == 'http':
-+                    try: title = ('%s') % (title.replace('://','.').replace('www.','').split('.')[1:-1])
++                if 1 == 0 and (config.plugins.iptvplayer.ListaGraficzna.value == False or 0 == GetAvailableIconSize()) and title[:4] == 'http':
+                     try: title = ('%s   (%s)') % ('.'.join(title.replace('://','.').replace('www.','').split('.')[1:-1]) , title)
                      except Exception: pass
                  self.displayHostsList.append((title, hostName))
-         # if there is no order hosts list use old behavior
 @@ -1292,7 +1296,11 @@
          return
  
@@ -177,7 +175,7 @@ diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /e
          else:
 diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /enigma2-pc/e2iplayerGITsSources/glowny-e2iplayer-Mario/IPTVPlayer/keymap.xml /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/keymap.xml
 --- /enigma2-pc/e2iplayerGITsSources/glowny-e2iplayer-Mario/IPTVPlayer/keymap.xml	2019-03-16 07:22:32.097696001 +0100
-+++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/keymap.xml	2019-05-26 13:06:15.523993002 +0200
++++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/keymap.xml	2019-05-26 09:22:06.778074999 +0200
 @@ -35,4 +35,23 @@
          <key id="KEY_OK"    mapto="ok_repeat"    flags="r" />
          <key id="KEY_RED"   mapto="red_repeat"   flags="r" />
@@ -205,7 +203,7 @@ diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /e
 \ Brak znaku nowej linii na końcu pliku
 diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /enigma2-pc/e2iplayerGITsSources/glowny-e2iplayer-Mario/IPTVPlayer/libs/pCommon.py /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/libs/pCommon.py
 --- /enigma2-pc/e2iplayerGITsSources/glowny-e2iplayer-Mario/IPTVPlayer/libs/pCommon.py	2019-03-25 06:58:13.593779645 +0100
-+++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/libs/pCommon.py	2019-05-26 13:06:15.483993002 +0200
++++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/libs/pCommon.py	2019-05-26 09:22:06.670074999 +0200
 @@ -1,4 +1,4 @@
 -# -*- coding: utf-8 -*-
 +﻿# -*- coding: utf-8 -*-
@@ -223,7 +221,7 @@ diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /e
                          params2['load_cookie'] = True
 diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /enigma2-pc/e2iplayerGITsSources/glowny-e2iplayer-Mario/IPTVPlayer/libs/sport365live.py /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/libs/sport365live.py
 --- /enigma2-pc/e2iplayerGITsSources/glowny-e2iplayer-Mario/IPTVPlayer/libs/sport365live.py	2019-05-19 05:25:46.265493570 +0200
-+++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/libs/sport365live.py	2019-05-26 13:06:15.483993002 +0200
++++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/libs/sport365live.py	2019-05-26 09:22:06.682074999 +0200
 @@ -20,7 +20,6 @@
  import re
  import urllib
@@ -252,7 +250,7 @@ diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /e
                      break
 diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /enigma2-pc/e2iplayerGITsSources/glowny-e2iplayer-Mario/IPTVPlayer/libs/urlparser.py /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/libs/urlparser.py
 --- /enigma2-pc/e2iplayerGITsSources/glowny-e2iplayer-Mario/IPTVPlayer/libs/urlparser.py	2019-05-25 06:42:51.436284040 +0200
-+++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/libs/urlparser.py	2019-05-26 13:06:15.491993002 +0200
++++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/libs/urlparser.py	2019-05-26 09:22:06.706074999 +0200
 @@ -400,7 +400,6 @@
                         'tusfiles.com':         self.pp.parserUSERSCLOUDCOM ,
                         'hdgo.cc':              self.pp.parserHDGOCC        ,
