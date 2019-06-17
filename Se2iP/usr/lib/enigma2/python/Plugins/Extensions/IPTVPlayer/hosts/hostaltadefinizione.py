@@ -4,7 +4,7 @@
 ###################################################
 from Plugins.Extensions.IPTVPlayer.components.iptvplayerinit import TranslateTXT as _
 from Plugins.Extensions.IPTVPlayer.components.ihost import CHostBase, CBaseHostClass
-from Plugins.Extensions.IPTVPlayer.tools.iptvtools import printDBG, printExc, byteify
+from Plugins.Extensions.IPTVPlayer.tools.iptvtools import printDBG, printExc, byteify, MergeDicts
 from Plugins.Extensions.IPTVPlayer.tools.iptvtypes import strwithmeta
 from Plugins.Extensions.IPTVPlayer.tools.e2ijs import js_execute
 ###################################################
@@ -19,7 +19,7 @@ except Exception: import simplejson as json
 ###################################################
 
 def gettytul():
-    return 'https://altadefinizione.fm/'
+    return 'https://altadefinizione.to/'
 
 class Altadefinizione(CBaseHostClass):
  
@@ -29,8 +29,9 @@ class Altadefinizione(CBaseHostClass):
         self.HEADER = {'User-Agent': self.USER_AGENT, 'DNT':'1', 'Accept': 'text/html'}
         self.AJAX_HEADER = dict(self.HEADER)
         self.AJAX_HEADER.update( {'X-Requested-With': 'XMLHttpRequest'} )
-        self.MAIN_URL = 'https://altadefinizione.fm/'
-        self.DEFAULT_ICON_URL = self.getFullIconUrl('/wp-content/themes/alta/img/logo.png')
+        self.MAIN_URL = 'https://altadefinizione.to/'
+        self.AZ_URL = self.MAIN_URL + 'catalog/%l/page/{0}'
+        self.DEFAULT_ICON_URL = 'https://altadefinizione.to/templates/Dark/img/logo.png'
         
         self.cacheCategories = []
         
@@ -55,50 +56,60 @@ class Altadefinizione(CBaseHostClass):
         
     def listMainMenu(self, cItem):
         self.cacheCategories = []
+
+        MAIN_CAT_TAB = [{'category':'search',          'title': _('Search'), 'search_item':True, },
+                        {'category':'search_history',  'title': _('Search history')},
+                        {'category':'list_categories', 'title': 'Categorie'},
+                        {'category':'az_main', 'title': _('A-Z List')}]
+        self.listsTab(MAIN_CAT_TAB, cItem)
         
         sts, data = self.getPage(self.getMainUrl())
         if sts:
             self.setMainUrl(data.meta['url'])
             tabTitles = {}
-            tmp = self.cm.ph.getDataBeetwenNodes(data, ('<ul', '>', 'nav-tabs'), ('</ul', '>'))[1]
+            # navigations tabs
+            tmp = self.cm.ph.getDataBeetwenNodes(data, '<ul class="nav nav-tabs">', ('</ul', '>'))[1]
             tmp = self.cm.ph.getAllItemsBeetwenNodes(tmp, ('<a', '>', 'tab'), ('</a', '>'))
             for item in tmp:
                 tabId = self.cm.ph.getSearchGroups(item, '''href=['"]#([^'^"]+?)['"]''')[0]
-                tabTitles[tabId] = self.cleanHtmlStr(item)
+                title = self.cleanHtmlStr(item)
+                if title == 'Qualitá' :
+                    title = 'Qualita'
+                tabTitles[tabId] = title
+
+                #printDBG("------>" + tabId + "---->" + title)
+                tmp = self.cm.ph.getAllItemsBeetwenNodes(data, '<ul class="listSubCat" id="%tabId%"'.replace('%tabId%', title), '</ul>')
+                #print(str(tmp))
+                for tabData in tmp:
+                    #printDBG(tabData)
+                    tabTitle = tabTitles.get(tabId, '')
+                    if tabTitle == '': continue
+                    subItems = []
+                    tabData = self.cm.ph.getAllItemsBeetwenMarkers(tabData, '<a', '</a>')
+                    printDBG(str(tabData))
+                    for item in tabData:
+                        title = self.cleanHtmlStr(item)
+                        url = self.getFullUrl(self.cm.ph.getSearchGroups(item, '''href=['"]([^'^"]+?)['"]''')[0])
+                        params = dict(cItem)
+                        params.update({'category':'list_items', 'title':title, 'url':url})
+                        printDBG(str(params))
+                        subItems.append(params)
+                    
+                    if len(subItems):
+                        params = dict(cItem)
+                        params.update({'category':'sub_items', 'title':tabTitle, 'sub_items':subItems})
+                        self.cacheCategories.append(params)
             
-            tmp = self.cm.ph.getAllItemsBeetwenNodes(data, ('<div', '>', 'tab-pane'), ('</ul', '>'))
-            for tabData in tmp:
-                tabId = self.cm.ph.getSearchGroups(tabData, '''<div[^>]+?id=['"]([^'^"]+?)['"]''')[0]
-                tabTitle = tabTitles.get(tabId, '')
-                if tabTitle == '': continue
-                subItems = []
-                tabData = self.cm.ph.getAllItemsBeetwenMarkers(tabData, '<a', '</a>')
-                for item in tabData:
-                    title = self.cleanHtmlStr(item)
-                    url = self.getFullUrl(self.cm.ph.getSearchGroups(item, '''href=['"]([^'^"]+?)['"]''')[0])
-                    params = dict(cItem)
-                    params.update({'category':'list_items', 'title':title, 'url':url})
-                    subItems.append(params)
-                
-                if len(subItems):
-                    params = dict(cItem)
-                    params.update({'category':'sub_items', 'title':tabTitle, 'sub_items':subItems})
-                    self.cacheCategories.append(params)
-            
-            tmp = self.cm.ph.getDataBeetwenNodes(data, ('<div', '>', 'menu-menu'), ('</ul', '>'))[1]
+            tmp = self.cm.ph.getDataBeetwenNodes(data, ('<ul id="menu-menu-1" class="menu">'), ('</ul', '>'))[1]
             tmp = self.cm.ph.getAllItemsBeetwenMarkers(tmp, '<a', '</a>')
             for item in tmp:
-                url = self.getFullUrl(self.cm.ph.getSearchGroups(item, '''href=['"]([^'^"]+?)['"]''')[0])
-                if url.endswith('richieste/'): break
                 title = self.cleanHtmlStr(item)
+                if title.lower() in ['richieste', 'aggiornamenti 2019', 'guida', 'cineblog01', 'lista film a-z'] : 
+                    break
+                url = self.getFullUrl(self.cm.ph.getSearchGroups(item, '''href=['"]([^'^"]+?)['"]''')[0])
                 params = dict(cItem)
                 params.update({'good_for_fav':True, 'category':'list_items', 'title':title, 'url':url})
                 self.addDir(params)
-                
-        MAIN_CAT_TAB = [{'category':'list_categories', 'title': 'Categorie'},
-                        {'category':'search',          'title': _('Search'), 'search_item':True, },
-                        {'category':'search_history',  'title': _('Search history'),             }]
-        self.listsTab(MAIN_CAT_TAB, cItem)
     
     def listSubItems(self, cItem):
         printDBG("Altadefinizione.listSubItems")
@@ -112,11 +123,10 @@ class Altadefinizione(CBaseHostClass):
             sts, data = self.getPage(cItem['url'])
             if not sts: return
         
-        nextPage = self.cm.ph.getDataBeetwenNodes(data, ('<ul', '>', 'pagination'), ('</ul', '>'), False)[1]
+        nextPage = self.cm.ph.getDataBeetwenNodes(data, '<div class="paginationC">', ('</ul', '>'), False)[1]
         nextPage = self.getFullUrl( self.cm.ph.getSearchGroups(nextPage, '''<a[^>]+?href=['"]([^"^']+?)['"][^>]*?>%s<''' % (page + 1))[0] )
         
-        data = self.cm.ph.getDataBeetwenNodes(data, ('<section', '>', 'lastUpdate'), ('<div', '>', 'ismobile'), False)[1]
-        data = self.cm.ph.getAllItemsBeetwenMarkers(data, '<div', '</div>')
+        data = self.cm.ph.getAllItemsBeetwenMarkers(data, '<div class="box">', '</div>')
         for item in data:
             url = self.getFullUrl( self.cm.ph.getSearchGroups(item, '''href=['"]([^"^']+?)['"]''')[0] )
             if url == '': continue
@@ -138,7 +148,7 @@ class Altadefinizione(CBaseHostClass):
         if nextPage and len(self.currList) > 0:
             params = dict(cItem)
             params.update({'good_for_fav': False, 'title':_("Next page"), 'url':nextPage, 'page':page+1})
-            self.addDir(params)
+            self.addMore(params)
     
     def exploreItem(self, cItem):
         printDBG("Altadefinizione.exploreItem")
@@ -156,41 +166,74 @@ class Altadefinizione(CBaseHostClass):
         desc = ' | '.join(desc) + '[/br]' + descObj['text'] 
         
         # trailer
-        trailerUrl = self.cm.ph.getDataBeetwenNodes(data, ('<div', '>', 'showTrailer'), ('</div', '>'), False)[1]
+        trailerUrl = self.cm.ph.getDataBeetwenNodes(data, '<div class="collapse" id="showtrailer">', '</div>', False)[1]
         trailerUrl = self.getFullUrl(self.cm.ph.getSearchGroups(trailerUrl, '''<iframe[^>]+?src=['"]([^"^']+?)['"]''', 1, ignoreCase=True)[0])
+        printDBG(trailerUrl)
         if trailerUrl != '':
             trailerUrl = strwithmeta(trailerUrl, {'Referer':cItem['url']})
             params = dict(cItem)
             params.update({'good_for_fav': False, 'title':'%s - %s' % (cItem['title'], _('trailer')), 'url':trailerUrl, 'desc':desc, 'prev_url':cItem['url']})
             self.addVideo(params)
-        
-        data = self.cm.ph.getDataBeetwenNodes(data, ('<div', '>', 'player'), ('</div', '>'), False)[1]
-        playerUrl = self.getFullUrl(self.cm.ph.getSearchGroups(data, '''<iframe[^>]+?src=['"]([^"^']+?)['"]''', 1, ignoreCase=True)[0])
-        if playerUrl == '': return
-        
-        urlParams = dict(self.defaultParams)
-        urlParams['header'] = dict(urlParams)
-        urlParams['header']['Referer'] = cUrl
-        sts, data = self.getPage(playerUrl, urlParams)
-        if not sts: return
-        
-        data = self.cm.ph.getDataBeetwenNodes(data, ('<div', '>', 'listRes'), ('</div', '>'), False)[1]
-        data = self.cm.ph.getAllItemsBeetwenMarkers(data, '<a', '</a>')
-        for item in data:
-            url = self.getFullUrl( self.cm.ph.getSearchGroups(item, '''href=['"]([^"^']+?)['"]''')[0] )
-            if url == '': continue
+ 
+        url_container = self.cm.ph.getDataBeetwenNodes(data, '<ul id="mirrors"', '</ul>', False)[1]
+        urls = self.cm.ph.getAllItemsBeetwenMarkers(url_container, '<li>', '</li>')
+        for item in urls:
+            printDBG("----->" + item)
             title = self.cleanHtmlStr(item)
-            params = dict(cItem)
-            params.update({'good_for_fav': False, 'title':'%s - %s' % (cItem['title'], title), 'url':url, 'desc':desc, 'prev_url':cItem['url']})
-            self.addVideo(params)
+            url = self.getFullUrl( self.cm.ph.getSearchGroups(item, '''data-target=['"]([^"^']+?)['"]''')[0] )
+            if url !='' : 
+                url = strwithmeta(url, {'Referer':cItem['url']})
+                params = dict(cItem)
+                params.update({'good_for_fav': False, 'title':'%s - %s' % (cItem['title'], title), 'url':url, 'desc':desc, 'prev_url':cItem['url']})
+                self.addVideo(params)
     
     def listSearchResult(self, cItem, searchPattern, searchType):
         printDBG("Altadefinizione.listSearchResult cItem[%s], searchPattern[%s] searchType[%s]" % (cItem, searchPattern, searchType))
         cItem = dict(cItem)
-        cItem['url'] = self.getFullUrl('/?s=') + urllib.quote_plus(searchPattern)
-        cItem['category'] = 'list_items'
+        cItem['url'] = self.getFullUrl('/index.php?do=search&subaction=search&story=') + urllib.quote_plus(searchPattern)
+        cItem['category'] = 'search_items'
         self.listItems(cItem, 'explore_item')
     
+    def listAZMain(self, cItem):
+        printDBG("Altadefinizione.listAZMain")
+        # 0-9
+        self.addDir(MergeDicts(cItem, {'category':'az_item', 'title': "0-9", 'letter' : '9' } ))              
+        #a-z
+        for i in range(26):
+            self.addDir(MergeDicts(cItem, {'category':'az_item', 'title': chr(ord('A')+i), 'letter': chr(ord('A')+i)} ))       
+    
+    def listAZItem(self, cItem):
+        letter = cItem['letter'].upper()
+        page = cItem.get ('page', 1)  
+        list_url = self.AZ_URL.replace('%l',letter).format(page) 
+        printDBG("Altadefinizione.listAZItem for letter %s" % letter )
+        sts, data = self.getPage(list_url)
+        if not sts: return
+
+        data = self.cm.ph.getDataBeetwenNodes(data, '<table>', '</table>', False)[1]
+        #printDBG(data)
+
+        items= self.cm.ph.getAllItemsBeetwenMarkers(data, '<tr class="mlnew">', '</tr>')
+        for item in items:
+            title_and_url = self.cm.ph.getDataBeetwenNodes(item, '<td class="mlnh-2"><h2>', '</h2>', False)[1]
+            url = self.cm.ph.getSearchGroups(title_and_url, '''href=['"]([^'^"]+?)['"]''')[0]
+            title = self.cleanHtmlStr(title_and_url)
+    
+            year = self.cleanHtmlStr(self.cm.ph.getDataBeetwenNodes(item, '<td class="mlnh-3">', '</td>', False)[1])
+            quality = self.cleanHtmlStr(self.cm.ph.getDataBeetwenNodes(item, '<td class="mlnh-4">', '</td>', False)[1])
+            cat = self.cleanHtmlStr(self.cm.ph.getDataBeetwenNodes(item, '<td class="mlnh-5">', '</td>', False)[1])
+            icon_text = self.cm.ph.getDataBeetwenNodes(item, '<td class="mlnh-thumb">', '</td>', False)[1]
+            icon = self.cm.getFullUrl(self.cm.ph.getSearchGroups(icon_text, '''src=['"]([^'^"]+?)['"]''')[0], self.MAIN_URL)
+            desc = quality + " - " + _('Year') + ": " + year + " - " + cat
+            
+            self.addDir(MergeDicts(cItem, {'category': 'explore_item', 'good_for_fav': True, 'title' : title, 'icon' : icon, 'url' : url, 'desc' : desc  }))
+ 
+        # check if more pages
+        pag = self.cm.ph.getDataBeetwenNodes(data, '<div class="paginationC">', '</div>', False)[1]
+        label = ">{0}</a>".format(page+1)
+        if label in pag:
+            self.addMore(MergeDicts(cItem, {'category': 'az_item', 'title' : _('Next page'), 'page': page + 1 }))
+        
     def getLinksForVideo(self, cItem):
         printDBG("Altadefinizione.getLinksForVideo [%s]" % cItem)
         urlTab = []
@@ -374,16 +417,20 @@ class Altadefinizione(CBaseHostClass):
             self.listSubItems(self.currItem)
         elif category == 'list_categories':
             self.currList = self.cacheCategories
-        elif category == 'list_items':
+        elif category in ['list_items','search_items'] :
             self.listItems(self.currItem, 'explore_item')
         elif category == 'explore_item':
             self.exploreItem(self.currItem)
-    #SEARCH
+        elif category == 'az_main':
+            self.listAZMain(self.currItem)
+        elif category == 'az_item':
+            self.listAZItem(self.currItem)
+        #SEARCH
         elif category in ["search", "search_next_page"]:
             cItem = dict(self.currItem)
             cItem.update({'search_item':False, 'name':'category'}) 
             self.listSearchResult(cItem, searchPattern, searchType)
-    #HISTORIA SEARCH
+        #HISTORIA SEARCH
         elif category == "search_history":
             self.listsHistory({'name':'history', 'category': 'search'}, 'desc', _("Type: "))
         else:
@@ -400,4 +447,5 @@ class IPTVHost(CHostBase):
         if cItem.get('type', 'video') != 'video' and cItem.get('category', 'unk') != 'explore_item':
             return False
         return True
+
     

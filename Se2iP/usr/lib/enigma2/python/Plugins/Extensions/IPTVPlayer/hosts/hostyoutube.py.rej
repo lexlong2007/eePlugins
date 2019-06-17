@@ -1,0 +1,11 @@
+--- hosts/hostyoutube.py	2019-06-06 06:20:34.218304591 +0200
++++ enigma2-pc/e2iplayerGITsSources/forks/e2iplayer-Mosz_Nowy/IPTVPlayer/hosts/hostyoutube.py	2019-03-16 08:09:08.041696001 +0100
+@@ -36,8 +36,6 @@
+     # checking should be moved to setup
+     if IsExecutable('ffmpeg'): 
+         optionList.append(getConfigListEntry(_("Allow dash format:"), config.plugins.iptvplayer.ytShowDash))
+-        if config.plugins.iptvplayer.ytShowDash.value != 'false':
+-            optionList.append(getConfigListEntry(_("Allow VP9 codec:"), config.plugins.iptvplayer.ytVP9))
+     return optionList
+ ###################################################
+ ###################################################

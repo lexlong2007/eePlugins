@@ -1271,7 +1271,7 @@ class E2iPlayerWidget(Screen):
                 # The 'http...' in host titles is annoying on regular choiceBox and impacts sorting.
                 # To simplify choiceBox usage and clearly show service is a webpage, list is build using the "<service name> (<service URL>)" schema.
                 if title[:4] == 'http':
-                    try: title = ('%s') % (title.replace('://','.').replace('www.','').split('.')[1:-1])
+                    try: title = ('%s') % ('.'.join(title.replace('://','.').replace('www.','').split('.')[1:-1]))
                     except Exception: pass
                 self.displayHostsList.append((title, hostName))
         # if there is no order hosts list use old behavior

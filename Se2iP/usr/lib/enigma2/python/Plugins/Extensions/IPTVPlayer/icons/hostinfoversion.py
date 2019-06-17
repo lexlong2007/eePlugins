@@ -131,7 +131,7 @@ class IPTVHost(IHost):
     ###################################################
 
 class Host:
-    infoversion = "2019.05.17a"
+    infoversion = "2019.06.01"
     inforemote  = "0.0.0"
     currList = []
     SEARCH_proc = ''
@@ -277,11 +277,12 @@ class Host:
            valTab.append(CDisplayListItem('Kamery Bieszczady', 'Kamery Bieszczady', CDisplayListItem.TYPE_CATEGORY, ['https://www.bieszczady.live/kamery'], 'Bieszczady', 'https://img4.dmty.pl//uploads/201410/1414266711_6cw4do_600.jpg', None)) 
            valTab.append(CDisplayListItem('MIAMI TV',     'https://miamitvhd.com', CDisplayListItem.TYPE_CATEGORY, ['https://miamitvhd.com/?channel=miamitv'],'MIAMI', 'https://miamitvhd.com/assets/miamitv-8fcf2efe186508c88b6ebd5441452254a32c410d1d18ea7f82ffbb0d26b35271.png', None)) 
            valTab.append(CDisplayListItem('Filmbit',     'https://filmbit.ws/telewizja-online', CDisplayListItem.TYPE_CATEGORY, ['https://filmbit.ws/telewizja-online'],'filmbit-clips', 'http://filmbit.ws/public/dist/images/logo_new.png', None)) 
+           valTab.append(CDisplayListItem('Repozytorium Kinematografii Polskiej',     'http://filmypolskie999.blogspot.com', CDisplayListItem.TYPE_CATEGORY, ['http://filmypolskie999.blogspot.com'],'filmypolskie999', '', None)) 
 
            valTab.sort(key=lambda poz: poz.name)
            valTab.insert(0,CDisplayListItem('Info o E2iPlayer - fork mosz_nowy', 'Wersja hostinfoversion: '+self.infoversion, CDisplayListItem.TYPE_CATEGORY, ['https://gitlab.com/mosz_nowy/e2iplayer/commits/master.atom'], 'info', 'http://www.cam-sats.com/images/forumicons/ip.png', None)) 
            valTab.insert(0,CDisplayListItem('Info o E2iPlayer - fork -=Mario=-', 'Wersja hostinfoversion: '+self.infoversion, CDisplayListItem.TYPE_CATEGORY, ['https://gitlab.com/zadmario/e2iplayer/commits/master.atom'], 'info', 'http://www.cam-sats.com/images/forumicons/ip.png', None)) 
-           valTab.insert(0,CDisplayListItem('Info o E2iPlayer', 'Wersja hostinfoversion: '+self.infoversion, CDisplayListItem.TYPE_CATEGORY, ['https://gitlab.com/e2i/e2iplayer/commits/master.atom'], 'info', 'http://www.cam-sats.com/images/forumicons/ip.png', None)) 
+           valTab.insert(0,CDisplayListItem('Info o E2iPlayer - projekt zamknięty 19 maja 2019r', 'Wersja hostinfoversion: '+self.infoversion, CDisplayListItem.TYPE_CATEGORY, ['https://gitlab.com/e2i/e2iplayer/commits/master.atom'], 'info', 'http://www.cam-sats.com/images/forumicons/ip.png', None)) 
            if self.infoversion <> self.inforemote and self.inforemote <> "0.0.0":
               valTab.insert(0,CDisplayListItem('---UPDATE---','UPDATE MENU',        CDisplayListItem.TYPE_CATEGORY,           [''], 'UPDATE',  '', None)) 
            if config.plugins.iptvplayer.religia.value:
@@ -1715,6 +1716,86 @@ class Host:
                if phUrl.startswith('/'): phUrl = 'http://filmbit.ws' + phUrl 
                valTab.append(CDisplayListItem(phTitle,phTitle,CDisplayListItem.TYPE_VIDEO, [CUrlItem('', phUrl, 1)], 0, phImage, None)) 
             return valTab
+
+        if 'filmypolskie999' == name:
+            printDBG( 'Host listsItems begin name='+name )
+            #valTab.insert(0,CDisplayListItem("--- INNE ---","INNE",     CDisplayListItem.TYPE_CATEGORY,['http://filmypolskie999.blogspot.com/p/inne.html'],'filmypolskie999-seriale',    '',None))
+            valTab.insert(0,CDisplayListItem("--- DOKUMENTY ---","DOKUMENTY",     CDisplayListItem.TYPE_CATEGORY,['http://filmypolskie999.blogspot.com/p/dokument.html'],'filmypolskie999-clips',    '',None))
+            valTab.insert(0,CDisplayListItem("--- TEATR TV ---","TEATR TV",     CDisplayListItem.TYPE_CATEGORY,['http://filmypolskie999.blogspot.com/p/teatr-tv.html'],'filmypolskie999-seriale',    '',None))
+            valTab.insert(0,CDisplayListItem("--- SERIALE ---","SERIALE",     CDisplayListItem.TYPE_CATEGORY,['http://filmypolskie999.blogspot.com/p/tv.html'],'filmypolskie999-seriale',    '',None))
+            valTab.insert(0,CDisplayListItem("--- FILMY ---","FILMY",     CDisplayListItem.TYPE_CATEGORY,['http://filmypolskie999.blogspot.com/p/film.html'],'filmypolskie999-clips',    '',None))
+            return valTab
+        if 'filmypolskie999-clips' == name:
+            printDBG( 'Host listsItems begin name='+name )
+            COOKIEFILE = os_path.join(GetCookieDir(), 'filmypolskie999.cookie')
+            self.HTTP_HEADER = self.cm.getDefaultHeader(browser='chrome')
+            self.defaultParams = {'header':self.HTTP_HEADER, 'use_cookie': True, 'load_cookie': True, 'save_cookie': True, 'cookiefile': COOKIEFILE}
+            sts, data = self.get_Page(url)
+            if not sts: return valTab
+            printDBG( 'Host listsItems data: '+data )
+            data2 = self.cm.ph.getDataBeetwenMarkers(data, "DODAJ FILM", "footer", False)[1]
+            if not data2: data2 = self.cm.ph.getDataBeetwenMarkers(data, ">CAŁY SERIAL", "</ol>", False)[1]
+            if not data2: data2 = self.cm.ph.getDataBeetwenMarkers(data, '<div class="separator"', "</ol>", False)[1]
+
+            data = self.cm.ph.getAllItemsBeetwenMarkers(data2, '<a', '</a>')
+            for item in data:
+               phUrl = self.cm.ph.getSearchGroups(item, '''href=['"]([^"^']+?)['"]''', 1, True)[0] 
+               phTitle = self._cleanHtmlStr(item)
+               if phUrl.startswith('//'): phUrl = 'http:' + phUrl
+               if phUrl:
+                  valTab.append(CDisplayListItem(phTitle,phTitle,CDisplayListItem.TYPE_CATEGORY, [phUrl],'filmypolskie999-serwer', '', phTitle)) 
+            return valTab
+        if 'filmypolskie999-serwer' == name:
+            printDBG( 'Host listsItems begin name='+name )
+            catUrl = self.currList[Index].possibleTypesOfSearch
+            COOKIEFILE = os_path.join(GetCookieDir(), 'filmypolskie999.cookie')
+            self.HTTP_HEADER = self.cm.getDefaultHeader(browser='chrome')
+            self.defaultParams = {'header':self.HTTP_HEADER, 'use_cookie': True, 'load_cookie': True, 'save_cookie': True, 'cookiefile': COOKIEFILE}
+            sts, data = self.get_Page(url)
+            if not sts: return valTab
+            printDBG( 'Host listsItems data: '+data )
+            phImage = self.cm.ph.getSearchGroups(data, '''<link href=['"]([^"^']+?\.jpg)['"]''', 1, True)[0] 
+            desc = self.cm.ph.getDataBeetwenMarkers(data, "'metaDescription': '", "'", False)[1]
+            data2 = self.cm.ph.getAllItemsBeetwenMarkers(data, '<iframe', '</iframe>')
+            for item in data2:
+               phUrl = self.cm.ph.getSearchGroups(item, '''src=['"]([^"^']+?)['"]''', 1, True)[0].replace('\n','') 
+               if phUrl.startswith('//'): phUrl = 'http:' + phUrl
+               if phUrl:
+                  if not 'amazon' in phUrl:
+                     valTab.append(CDisplayListItem(catUrl,decodeHtml(desc),CDisplayListItem.TYPE_VIDEO, [CUrlItem('', phUrl, 1)], 0, phImage, None)) 
+               else:
+                  phUrl = self.cm.ph.getSearchGroups(data, '''file: ['"]([^"^']+?)['"]''', 1, True)[0].replace('\n','')
+                  if phUrl:
+                     if phUrl.startswith('//'): phUrl = 'http:' + phUrl
+                     valTab.append(CDisplayListItem(catUrl,decodeHtml(desc),CDisplayListItem.TYPE_VIDEO, [CUrlItem('', phUrl, 1)], 0, phImage, None)) 
+            return valTab
+        if 'filmypolskie999-seriale' == name:
+            printDBG( 'Host listsItems begin name='+name )
+            COOKIEFILE = os_path.join(GetCookieDir(), 'filmypolskie999.cookie')
+            self.HTTP_HEADER = self.cm.getDefaultHeader(browser='chrome')
+            self.defaultParams = {'header':self.HTTP_HEADER, 'use_cookie': True, 'load_cookie': True, 'save_cookie': True, 'cookiefile': COOKIEFILE}
+            sts, data = self.get_Page(url)
+            if not sts: return valTab
+            printDBG( 'Host listsItems data: '+data )
+            data2 = self.cm.ph.getDataBeetwenMarkers(data, "Seriale zagraniczne", "footer", False)[1]
+            if not data2: data2 = self.cm.ph.getDataBeetwenMarkers(data, ">DODAJ SPEKTAKL", "footer", False)[1]
+            data = self.cm.ph.getAllItemsBeetwenMarkers(data2, '<a', '</a>')
+            for item in data:
+               phUrl = self.cm.ph.getSearchGroups(item, '''href=['"]([^"^']+?)['"]''', 1, True)[0] 
+               phTitle = self._cleanHtmlStr(item)
+               if phUrl.startswith('//'): phUrl = 'http:' + phUrl
+               if phUrl:
+                  valTab.append(CDisplayListItem(phTitle,phTitle,CDisplayListItem.TYPE_CATEGORY, [phUrl],'filmypolskie999-clips', '', phTitle)) 
+            return valTab
+
+#            videoUrls = self.getLinksForVideo(Url)
+#            if videoUrls:
+#                for item in videoUrls:
+#                    Url = item['url']
+#                    Name = item['name']
+#                    printDBG( 'Host name:  '+Name )
+#                    valTab.append(CDisplayListItem('ERT    '+Name, 'ERT    '+Name,  CDisplayListItem.TYPE_VIDEO, [CUrlItem('', Url, 0)], 0, 'http://cdn1.bbend.net/media/com_news/story/2016/10/18/737807/main/sd-2sdf.jpg', None))
+#            return valTab 
 #############################################
         if len(url)>8:
            COOKIEFILE = os_path.join(GetCookieDir(), 'info.cookie')
@@ -2977,8 +3058,16 @@ class Host:
         videoUrl = ''
         valTab = []
 
+        if 'jwplatform' in url:
+           COOKIEFILE = os_path.join(GetCookieDir(), 'jwplatform.cookie')
+           self.defaultParams = {'use_cookie': True, 'load_cookie': True, 'save_cookie': True, 'cookiefile': COOKIEFILE}
+           sts, data = self.getPage(url, 'jwplatform.cookie', 'jwplatform.com', self.defaultParams)
+           if not sts: return valTab
+           printDBG( 'Host listsItems data: '+str(data) )
+           return  self.cm.ph.getSearchGroups(data, '''stream" content=['"]([^"^']+?)['"]''', 1, True)[0]
+
         if 'filmbit' in url:
-           for x in range(1, 200): 
+           for x in range(1, 100): 
               COOKIEFILE = os_path.join(GetCookieDir(), 'filmbit.cookie')
               self.defaultParams = {'use_cookie': True, 'load_cookie': True, 'save_cookie': True, 'cookiefile': COOKIEFILE}
               sts, data = self.getPage(url, 'filmbit.cookie', 'filmbit.ws', self.defaultParams)
@@ -3605,6 +3694,9 @@ class Host:
             if Url.startswith('//'): Url = 'http:' + Url
             return Url
 
+        if url.endswith('.mp4'):
+            return url
+
         videoUrls = self.getLinksForVideo(url)
         if videoUrls:
            for item in videoUrls:
@@ -3623,6 +3715,7 @@ class Host:
                 return ''
             #printDBG( 'Host listsItems data: '+data )
             return self.cm.ph.getSearchGroups(data, '''url:['"]([^"^']+?)['"]''', 1, True)[0]
+
 
 #######################################################################################################################
         query_data = {'url': url, 'use_host': False, 'use_cookie': False, 'use_post': False, 'return_data': True}
@@ -3828,6 +3921,10 @@ def decodeHtml(text):
 	text = text.replace('</b>', '')
 	text = text.replace('Na żywo: ', '')
 	text = text.replace('&quot;', '"')
+	text = text.replace('\\x22', '"')
+	text = text.replace('&#8221;', '"')
+	text = text.replace('&#8222;', '"')
+	text = text.replace('&#8211;', '-')
 
 	return text	
 def decodeNat1(text):

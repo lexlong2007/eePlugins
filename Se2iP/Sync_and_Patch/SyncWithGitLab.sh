@@ -115,6 +115,10 @@ do
   rm -rf ./icons/*$myfile*
 done
 
+############################## modifying some hosts #############################
+myFile=$destE2iplayerPath/hosts/hostinfoversion.py
+sed -i 's/\(valTab\.insert.*Info o E2iPl\)/#\1/g' $myFile
+sed -i 's/self.inforemote <> "0.0.0"/1=0/g' $myFile
 ############################## building hosts tree ##############################
 
 for myFile in `ls /usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/hosts/host*.py*`
@@ -178,7 +182,7 @@ do
 done
 
 HostsCategory='9 - Dla dorosłych'
-HostsList=''
+HostsList='hostXXX'
 for host in $HostsList
 do
   ln -sf /usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/hosts/$host.py "$destE2iplayerPath/hosts/$HostsCategory/$host.py"

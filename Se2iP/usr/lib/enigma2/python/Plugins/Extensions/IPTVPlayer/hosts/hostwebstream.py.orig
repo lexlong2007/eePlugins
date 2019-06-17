@@ -128,9 +128,9 @@ def GetConfigList():
     try:    optionList.extend( MLBStreamTV_GetConfigList() )
     except Exception: printExc()
     
-    #optionList.append(getConfigListEntry("----------------firstonetv.net------------------", config.plugins.iptvplayer.fake_separator))
-    #try:    optionList.extend( FirstOneTv_GetConfigList() )
-    #except Exception: printExc()
+    optionList.append(getConfigListEntry("----------------firstonetv.net------------------", config.plugins.iptvplayer.fake_separator))
+    try:    optionList.extend( FirstOneTv_GetConfigList() )
+    except Exception: printExc()
     
 
     return optionList

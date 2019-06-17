@@ -68,7 +68,26 @@ else
 fi
 echo '</skin>' >> /usr/share/enigma2/BlackHarmony/skin.xml
 sync
-#prepare some links
+#modyfikacja klawiszy dla systemow wspierajacych atrybut objectTypes
+if [ 1 -eq `grep -c objectTypes < /usr/lib/enigma2/python/skin.pyo` ];then
+  sed -i 's/\(^.*<widget\)[ ]*\(name="key_red"\)[ ]*\(.*$\)/\1 objectTypes="key_red,Label,Button" \2 \3\n\1 objectTypes="key_red,StaticText" source="key_red" render="Label" \3/g' /usr/share/enigma2/BlackHarmony/skin.xml
+  sed -i 's/\(^.*<widget\)[ ]*\(name="key_green"\)[ ]*\(.*$\)/\1 objectTypes="key_green,Label,Button" \2 \3\n\1 objectTypes="key_green,StaticText" source="key_green" render="Label" \3/g' /usr/share/enigma2/BlackHarmony/skin.xml
+  sed -i 's/\(^.*<widget\)[ ]*\(name="key_yellow"\)[ ]*\(.*$\)/\1 objectTypes="key_yellow,Label,Button" \2 \3\n\1 objectTypes="key_yellow,StaticText" source="key_yellow" render="Label" \3/g' /usr/share/enigma2/BlackHarmony/skin.xml
+  sed -i 's/\(^.*<widget\)[ ]*\(name="key_blue"\)[ ]*\(.*$\)/\1 objectTypes="key_blue,Label,Button" \2 \3\n\1 objectTypes="key_blue,StaticText" source="key_blue" render="Label" \3/g' /usr/share/enigma2/BlackHarmony/skin.xml
+  #czyszczenie ewentualnych duplikatow
+  sed -i 's/\(^.*\)\(source="key_red"\)\(.*\)\(source="key_red"\)/\1\2\3/g' /usr/share/enigma2/BlackHarmony/skin.xml
+  sed -i 's/\(^.*\)\(source="key_green"\)\(.*\)\(source="key_green"\)/\1\2\3/g' /usr/share/enigma2/BlackHarmony/skin.xml
+  sed -i 's/\(^.*\)\(source="key_yellow"\)\(.*\)\(source="key_yellow"\)/\1\2\3/g' /usr/share/enigma2/BlackHarmony/skin.xml
+  sed -i 's/\(^.*\)\(source="key_blue"\)\(.*\)\(source="key_blue"\)/\1\2\3/g' /usr/share/enigma2/BlackHarmony/skin.xml
+  
+  sed -i 's/\(^.*\)\(render="Label"\)\(.*\)\(render="Label"\)/\1\2\3/g' /usr/share/enigma2/BlackHarmony/skin.xml
+  #ustawienie zPosition o 1 wieksze jak zaleca openpli
+  sed -i 's/\(^.*objectTypes="key_red,StaticText".*\)\( zPosition="1"\)/\1 zPosition="2"/g' /usr/share/enigma2/BlackHarmony/skin.xml
+  sed -i 's/\(^.*objectTypes="key_green,StaticText".*\)\( zPosition="1"\)/\1 zPosition="2"/g' /usr/share/enigma2/BlackHarmony/skin.xml
+  sed -i 's/\(^.*objectTypes="key_yellow,StaticText".*\)\( zPosition="1"\)/\1 zPosition="2"/g' /usr/share/enigma2/BlackHarmony/skin.xml
+  sed -i 's/\(^.*objectTypes="key_blue,StaticText".*\)\( zPosition="1"\)/\1 zPosition="2"/g' /usr/share/enigma2/BlackHarmony/skin.xml
+fi
+#tworzenie linkow w strukturze drzewa
 find /usr/share/enigma2/BlackHarmony/allScreens -iname skin_channelselection_*.xml|while read f; do
   #echo "$f"
   if [ `echo "$f"|grep -c '/ChannelSelections/'` -eq 0 ]; then

@@ -37,7 +37,6 @@ class LivespottingTvApi:
         list = []
         sts, data = self.cm.getPage('http://livespotting.tv/api/api.json')
         if not sts: return list
-        printDBG("data: %s" % data)
         try:
             data = json_loads(data)
             for item in data['streams']:

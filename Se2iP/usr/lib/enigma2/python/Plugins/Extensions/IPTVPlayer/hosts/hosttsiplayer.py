@@ -75,11 +75,11 @@ def gettytul():
 
 class TSIPlayer(CBaseHostClass):
 
-	tsiplayerversion = "2019.05.24.0" 
+	tsiplayerversion = "2019.06.06.0" 
 	tsiplayerremote  = "0.0.0.0"
 	
 	def __init__(self):
-		CBaseHostClass.__init__(self, {'history':'TSIPlayer', 'cookie':'TSIPlayer.cookie1'})
+		CBaseHostClass.__init__(self, {'cookie':'TSIPlayer.cookie1'})
 		self.USER_AGENT = self.cm.getDefaultHeader()['User-Agent']	
 		self.HEADER = {'User-Agent': self.USER_AGENT, 'Accept': 'text/html', 'Accept-Encoding':'gzip, deflate', 'Referer':'', 'Origin':''}
 		self.defaultParams = {'header':self.HEADER, 'use_cookie': True, 'load_cookie': True, 'save_cookie': True, 'cookiefile': self.COOKIE_FILE}
@@ -92,14 +92,15 @@ class TSIPlayer(CBaseHostClass):
 # MAIN CATEGORY
 ###################################################	
 	def MainCat(self):
-		self.addDir({'category' : 'FilmsSeries','title':'Films, Series & Animes','desc':'شاهد الافلام و الانمي والمسلسلات العربيه والاجنبيه المترجمه و المدبلجه','icon':'https://i.ibb.co/Fgk8Yq4/tsiplayer-films.png'} )	
-		self.addDir({'category' : 'Sports','title':'Live Tv & Replay','desc':'Live Tv & Replay','icon':'https://1.bp.blogspot.com/-PHYAba3vvI0/WDroJDScJdI/AAAAAAAABuY/SfwAZRpThoIF-IFAaijBZNWThAn0KXU9QCLcB/s320/Ligtvkafe%2B%25C4%25B0le%2BKumanda%2BSende.jpg'} )
-		self.addDir({'category' : 'Ramadan','title':'Ramadan 2019','desc':'Ramadan','icon':'https://freedesignfile.com/upload/2018/07/Ramadan-kareem-purple-background-vector-01.jpg'} )
-		self.addDir({'category' : 'Kids','title':'Kids','desc':'Kids','icon':'https://store-images.s-microsoft.com/image/apps.29938.9007199266637533.0c6bdecb-3600-484c-8f25-f2bfff75f499.5a2f599e-d619-41d4-a9b9-493f591bd3e0'} )
+		self.addDir({'name':'cat','category' : 'FilmsSeriesAr','title':'Arabic section','desc':'Arabic section','icon':'https://i.ibb.co/Fgk8Yq4/tsiplayer-films.png'} )	
+		self.addDir({'name':'cat','category' : 'FilmsSeriesFr','title':'French section','desc':'Films, Series et Animes en Vf et Vostfr','icon':'https://i.ibb.co/Fgk8Yq4/tsiplayer-films.png'} )	
+		self.addDir({'name':'cat','category' : 'Live','title':'Live Tv & Replay','desc':'Live Tv & Replay','icon':'https://1.bp.blogspot.com/-PHYAba3vvI0/WDroJDScJdI/AAAAAAAABuY/SfwAZRpThoIF-IFAaijBZNWThAn0KXU9QCLcB/s320/Ligtvkafe%2B%25C4%25B0le%2BKumanda%2BSende.jpg'} )
+#		self.addDir({'category' : 'Ramadan','title':'Ramadan 2019','desc':'Ramadan','icon':'https://freedesignfile.com/upload/2018/07/Ramadan-kareem-purple-background-vector-01.jpg'} )
+#		self.addDir({'category' : 'Kids','title':'Kids','desc':'Kids','icon':'https://store-images.s-microsoft.com/image/apps.29938.9007199266637533.0c6bdecb-3600-484c-8f25-f2bfff75f499.5a2f599e-d619-41d4-a9b9-493f591bd3e0'} )
 		if os.path.exists('/usr/lib/enigma2/python/Plugins/Extensions/TSmedia/addons'):# #folder=
-			self.addDir({'category' : 'tsmedia','title':'TSMedia','desc':'TSMedia','icon':'https://i.imgur.com/ddCxCbQ.png','gnr':'start'} )
+			self.addDir({'name':'cat','category' : 'tsmedia','title':'TSMedia','desc':'TSMedia','icon':'https://i.imgur.com/ddCxCbQ.png','gnr':'start'} )
 		if config.plugins.iptvplayer.dev_mod.value:
-			self.addDir({'category' : 'Devmod','title':'Development','desc':'','icon':'http://www.mezganisaid.com/z-include/images/code-dev.png'} )
+			self.addDir({'name':'cat','category' : 'Devmod','title':'Development','desc':'','icon':'http://www.mezganisaid.com/z-include/images/code-dev.png'} )
 		self.GetVersions()
 		if (self.tsiplayerversion == self.tsiplayerremote):
 			color='\c00??????'
@@ -109,30 +110,50 @@ class TSIPlayer(CBaseHostClass):
 			color='\c0000????'
 			titre_=' ---> UPDATE <--- '
 			img_='https://i.ibb.co/fVR0HL6/tsiplayer-update.png'
-		params = {'category' : 'update','title':color+titre_,'desc':'تحديث البرنامج','icon':img_} 
+		params = {'name':'cat','category' : 'update','title':color+titre_,'desc':'تحديث البرنامج','icon':img_} 
 		self.addDir(params)	
 
-
-	def FilmCat(self):	
-		self.addDir({'category' :'search','title': _('Search'),'search_item':True,'page':1,'hst':'ALL','icon':''})
-		self.tsiplayer_host({'cat_id':'6'})	
-		self.addMarker({'category' :'marker','title':'\c00????00 ----> Arabic <----','desc':'افلام مسلسلات و انمي مترجم و مدبلج عربي'})
-		self.tsiplayer_host({'cat_id':'1'})
-		self.addMarker({'category' :'marker','title':'\c00????00 ----> French <----','desc':'Films, Series & Animes en VF et VOSTFR'})
-		self.tsiplayer_host({'cat_id':'5'})
-
-			
-	def IptvCat(self):
-		self.tsiplayer_host({'cat_id':'2'})
+#1:Ar,2:Live,3:Kids,4:Ramadan,6:Ar+In,10:dev,101:EN,102:FR,
+#Live: 100
+#All:  101  
+#Dev:  102
+#Dev Touls :103
+#not work: 104
+#Arabic: 201:Films 202:Anim 203:kids 204:Islamic
+#French: 301,302,303
+#
+	def FilmCatFr(self):
+		self.addMarker({'category' :'marker','title':'\c00????00 -----●★| Films & Series |★●-----','desc':'Films, Series & Animes en VF et VOSTFR'})	
+		self.tsiplayer_host({'cat_id':'101'})	
+		self.tsiplayer_host({'cat_id':'301'})
+		self.addDir({'name':'search','category' :'search','title': _('Search'),'search_item':True,'page':1,'hst':'ALLFR','icon':''})
+		self.addMarker({'category' :'marker','title':'\c00????00 -----●★| Animes & Dessins animés |★●-----','desc':'Dessins animés & Animes en VF et VOSTFR'})
+		self.tsiplayer_host({'cat_id':'302'})
+		self.tsiplayer_host({'cat_id':'303'})
+				
+	def FilmCatAr(self):
+		self.addMarker({'category' :'marker','title':'\c00????00 -----●★| Films & Series |★●-----','desc':'Films, Series & Animes en VF et VOSTFR'})			
+		self.tsiplayer_host({'cat_id':'101'})	
+		self.tsiplayer_host({'cat_id':'201'})	
+		self.addDir({'name':'search','category' :'search','title': _('Search'),'search_item':True,'page':1,'hst':'ALLAR','icon':''})	
+		self.addMarker({'category' :'marker','title':'\c00????00 -----●★| Animes & Dessins animés |★●-----','desc':'Dessins animés & Animes en VF et VOSTFR'})
+		self.tsiplayer_host({'cat_id':'202'})
+		self.tsiplayer_host({'cat_id':'203'})
+		self.addMarker({'category' :'marker','title':'\c00????00 -----●★| Islamic |★●-----','desc':'Dessins animés & Animes en VF et VOSTFR'})
+		self.tsiplayer_host({'cat_id':'204'})
 		
-	def KidsCat(self):
-		self.tsiplayer_host({'cat_id':'3'})
-				
-	def RamadanCat(self):
-		self.tsiplayer_host({'cat_id':'4'})
-				
+		
+					
+	def IptvCat(self):
+		self.tsiplayer_host({'cat_id':'100'})
+						
 	def DevCat(self):
-		self.tsiplayer_host({'cat_id':'10'})	
+		self.addMarker({'category' :'marker','title':'\c00????00 -----●★| Tools |★●-----','desc':'Dessins animés & Animes en VF et VOSTFR'})
+		self.tsiplayer_host({'cat_id':'103'})	
+		self.addMarker({'category' :'marker','title':'\c00????00 -----●★| Hosts en développement |★●-----','desc':'Dessins animés & Animes en VF et VOSTFR'})
+		self.tsiplayer_host({'cat_id':'102'})	
+		self.addMarker({'category' :'marker','title':'\c00????00 -----●★| Hosts Out |★●-----','desc':'Dessins animés & Animes en VF et VOSTFR'})
+		self.tsiplayer_host({'cat_id':'104'})	
 
 
 ###################################################
@@ -268,8 +289,13 @@ class TSIPlayer(CBaseHostClass):
 
 ###################################################
 # HOST tsiplayer
-###################################################			
-	def tsiplayer_host(self,cItem):
+###################################################	
+
+
+
+
+
+	def tsiplayer_get_remote(self,cItem):
 		cat_id=cItem.get('cat_id','')
 		devmod=cItem.get('devmod','')
 		folder='/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/tsiplayer'
@@ -301,13 +327,52 @@ class TSIPlayer(CBaseHostClass):
 						if info.get('update', '')!='':
 							desc=desc+'\c00????00 Last Update: \c00??????'+info.get('update', '')+'\\n'
 						self.addDir({'category' : 'host2','title':info['name'],'desc':desc,'icon':info['icon'],'mode':'00','import':import_str})
-							
+		
+	def tsiplayer_get_local(self,cItem):
+		cat_id=cItem.get('cat_id','')
+		devmod=cItem.get('devmod','')
+		folder='/usr/lib/enigma2/python/Plugins/tsiplayer'
+		import_ = 'from Plugins.tsiplayer.'
+		lst=[]
+		if os.path.exists(folder):
+			lst=os.listdir(folder)
+			lst.sort()
+			for (file_) in lst:
+				if (file_.endswith('.py'))and(file_.startswith('host_')):
+					path_=folder+'/'+file_
+					import_str=import_+file_.replace('.py',' import ')
+					exec (import_str+'getinfo')
+					info=getinfo()
+					desc=''
+					param_ = 'oui'
+					if (info.get('filtre', '')!=''):
+						cmd_='param_ = config.plugins.iptvplayer.'+info.get('filtre', '')+'.value'
+						try:
+							exec(cmd_)
+						except:
+							param_ = ''
+					if param_!='': 
+						if cat_id==info['cat_id']:
+							if cat_id=='10':
+								desc=desc+'\c00????00 -----> !!!!!!!!! Not Working (Dev Mod) !!!!!!!!! <-----\\n'
+							if info.get('warning', '')!='':
+								desc=desc+'\c00????00 '+info.get('warning', '')+'\\n'
+							desc=desc+'\c00????00 Info: \c00??????'+info['desc']+'\\n \c00????00Version: \c00??????'+info['version']+'\\n \c00????00Developpeur: \c00??????'+info['dev']+'\\n'
+							if info.get('update', '')!='':
+								desc=desc+'\c00????00 Last Update: \c00??????'+info.get('update', '')+'\\n'
+							self.addDir({'category' : 'host2','title':'\c0000????'+info['name'],'desc':desc,'icon':info['icon'],'mode':'00','import':import_str})
+				
+		
+	def tsiplayer_host(self,cItem):
+		self.tsiplayer_get_local(cItem)			
+		self.tsiplayer_get_remote(cItem)
+						
 	def host2_host(self,cItem):
 		mode_=cItem['mode']
 		import_str = cItem.get('import',self.import_str)
-		printDBG('hhhhhhhhhhhhhooooooooooooooooooooooo'+str(cItem))
 		if self.import_str!=import_str:
 			file_=import_str.replace('from Plugins.Extensions.IPTVPlayer.tsiplayer.','').replace(' import ','')
+			file_=import_str.replace('from etc.tsiplayer.','').replace(' import ','')
 			_url='http://86.105.212.206/tsiplayer/stat.php?host='+file_+'&cat=Main'
 			self.cm.getPage(_url)
 			exec (import_str+'TSIPHost')
@@ -385,6 +450,7 @@ class TSIPlayer(CBaseHostClass):
 		desc = 'For all requests (new hosts, correction & improvement)'
 		self.addMarker({'title':'\c0000??00 eMail: \c00?????? rgysoft@mail.ru','desc':desc})	
 		self.addMarker({'title':'\c0000??00 Tunisia Sat: \c00?????? https://www.tunisia-sat.com/forums/threads/3951696/','desc':desc})	
+		self.addMarker({'title':'\c0000??00 Facebook: \c00?????? https://www.facebook.com/E2TSIPlayer/','desc':desc})	
 
 	def thx(self):
 		self.addMarker({'title':'Special thank to \c0000??00 samsamsam \c00?????? the Main developer & all Developer Team','desc':''})	
@@ -547,14 +613,12 @@ class TSIPlayer(CBaseHostClass):
 		elif category == 'contact':
 			self.contact()		
 		#CATEGORIES
-		elif category == 'FilmsSeries':
-			self.FilmCat()
-		elif category == 'Sports':
+		elif category == 'FilmsSeriesAr':
+			self.FilmCatAr()
+		elif category == 'FilmsSeriesFr':
+			self.FilmCatFr()
+		elif category == 'Live':
 			self.IptvCat()
-		elif category == 'Kids':
-			self.KidsCat()
-		elif category == 'Ramadan':
-			self.RamadanCat()
 		elif category == 'Devmod':
 			self.DevCat()
 		#Search
@@ -571,7 +635,7 @@ class TSIPlayer(CBaseHostClass):
 	def listSearchResult(self, cItem, searchPattern, searchType):		
 		hst=cItem['hst']
 		cat=cItem['category']
-		page=cItem['page']
+		page=cItem.get('page',1)
 		if cat=='_next_page':
 			str_ch = cItem['searchPattern']
 		else:
@@ -590,7 +654,7 @@ class TSIPlayer(CBaseHostClass):
 			if page>0:
 				self.addDir({'import':cItem['import'],'category':'_next_page','title': '\c0000??00'+'Page Suivante','icon':img, 'search_item':False,'page':page+1,'searchPattern':str_ch,'hst':hst})	
 		
-		elif hst=='ALL':
+		elif hst.startswith('ALL'):
 			folder='/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/tsiplayer'
 			import_ = 'from Plugins.Extensions.IPTVPlayer.tsiplayer.'
 			lst=[]
@@ -611,7 +675,7 @@ class TSIPlayer(CBaseHostClass):
 						except:
 							param_ = ''
 					if param_!='': 
-						if info.get('recherche_all', '0')=='1':
+						if (info.get('recherche_all', '0')=='1') and (((info.get('cat_id', '0')=='201') and hst=='ALLAR') or  ((info.get('cat_id', '0')=='301') and hst=='ALLFR') or  (info.get('cat_id', '0')=='101')):
 							self.addMarker({'title':'\c00????00 ----> '+info['name']+' <----','desc':info['desc']})
 							try:
 								exec (import_str+'TSIPHost')
@@ -662,7 +726,9 @@ class TSIPlayer(CBaseHostClass):
 				elif type_=='3':	
 					urlTab = getDirectM3U8Playlist(url_, False, checkContent=True, sortWithMaxBitrate=999999999)
 				elif type_=='0':
-					urlTab.append({'name':'Direct', 'url':url_})					
+					urlTab.append({'name':'Direct', 'url':url_})
+				elif type_=='4':
+					urlTab.append({'name':url_.split('|')[0], 'url':url_.split('|')[1]})					
 				else:
 					urlTab.append({'name':'Direct', 'url':url_})
 		else:
@@ -745,7 +811,7 @@ class TSIPlayer(CBaseHostClass):
 class IPTVHost(CHostBase): 
 
 	def __init__(self):    
-		CHostBase.__init__(self, TSIPlayer(), True, []) 
+		CHostBase.__init__(self, TSIPlayer(), False, []) 
 		
 	def withArticleContent(self, cItem):
 		if cItem.get('EPG', False):

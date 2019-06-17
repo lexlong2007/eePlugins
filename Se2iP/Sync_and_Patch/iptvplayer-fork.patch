@@ -158,7 +158,7 @@ diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /e
 -                if (config.plugins.iptvplayer.ListaGraficzna.value == False or 0 == GetAvailableIconSize()) and title[:4] == 'http':
 -                    try: title = ('%s   (%s)') % ('.'.join(title.replace('://','.').replace('www.','').split('.')[1:-1]) , title)
 +                if title[:4] == 'http':
-+                    try: title = ('%s') % (title.replace('://','.').replace('www.','').split('.')[1:-1])
++                    try: title = ('%s') % ('.'.join(title.replace('://','.').replace('www.','').split('.')[1:-1]))
                      except Exception: pass
                  self.displayHostsList.append((title, hostName))
          # if there is no order hosts list use old behavior
