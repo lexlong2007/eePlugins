@@ -1,14 +1,5 @@
 --- libs/pCommon.py	2019-06-02 06:28:41.752256000 +0200
 +++ enigma2-pc/e2iplayerGITsSources/forks/e2iplayer-Mosz_Nowy/IPTVPlayer/libs/pCommon.py	2019-06-01 05:17:25.514249999 +0200
-@@ -9,7 +9,7 @@
- from Plugins.Extensions.IPTVPlayer.components.asynccall import IsMainThread, IsThreadTerminated, SetThreadKillable
- from Plugins.Extensions.IPTVPlayer.tools.e2ijs import js_execute_ext
- from Plugins.Extensions.IPTVPlayer.libs import ph
--from Plugins.Extensions.IPTVPlayer.libs.e2ijson import loads as json_loads, dumps as json_dumps
-+from Plugins.Extensions.IPTVPlayer.libs.e2ijson import loads as json_loads
- ###################################################
- # FOREIGN import
- ###################################################
 @@ -991,15 +991,8 @@
                                  dat = item
                                  break

@@ -8,6 +8,7 @@ from Plugins.Extensions.IPTVPlayer.tools.iptvtools import printDBG, printExc, Ge
 from Plugins.Extensions.IPTVPlayer.tools.iptvtypes import strwithmeta
 from Plugins.Extensions.IPTVPlayer.tsiplayer.tstools import *
 from Plugins.Extensions.IPTVPlayer.tsiplayer.pars_openload import get_video_url as pars_openload
+from Plugins.Extensions.IPTVPlayer.libs.urlparserhelper import getDirectM3U8Playlist
 
 ###################################################
 # FOREIGN import
@@ -75,7 +76,7 @@ def gettytul():
 
 class TSIPlayer(CBaseHostClass):
 
-	tsiplayerversion = "2019.06.06.0" 
+	tsiplayerversion = "2019.06.20.2"  
 	tsiplayerremote  = "0.0.0.0"
 	
 	def __init__(self):
@@ -94,7 +95,10 @@ class TSIPlayer(CBaseHostClass):
 	def MainCat(self):
 		self.addDir({'name':'cat','category' : 'FilmsSeriesAr','title':'Arabic section','desc':'Arabic section','icon':'https://i.ibb.co/Fgk8Yq4/tsiplayer-films.png'} )	
 		self.addDir({'name':'cat','category' : 'FilmsSeriesFr','title':'French section','desc':'Films, Series et Animes en Vf et Vostfr','icon':'https://i.ibb.co/Fgk8Yq4/tsiplayer-films.png'} )	
+		self.addDir({'name':'cat','category' : 'FilmsSeriesEn','title':'English section','desc':'Films, Series & Animes (Eng)','icon':'https://i.ibb.co/Fgk8Yq4/tsiplayer-films.png'} )	
+
 		self.addDir({'name':'cat','category' : 'Live','title':'Live Tv & Replay','desc':'Live Tv & Replay','icon':'https://1.bp.blogspot.com/-PHYAba3vvI0/WDroJDScJdI/AAAAAAAABuY/SfwAZRpThoIF-IFAaijBZNWThAn0KXU9QCLcB/s320/Ligtvkafe%2B%25C4%25B0le%2BKumanda%2BSende.jpg'} )
+
 #		self.addDir({'category' : 'Ramadan','title':'Ramadan 2019','desc':'Ramadan','icon':'https://freedesignfile.com/upload/2018/07/Ramadan-kareem-purple-background-vector-01.jpg'} )
 #		self.addDir({'category' : 'Kids','title':'Kids','desc':'Kids','icon':'https://store-images.s-microsoft.com/image/apps.29938.9007199266637533.0c6bdecb-3600-484c-8f25-f2bfff75f499.5a2f599e-d619-41d4-a9b9-493f591bd3e0'} )
 		if os.path.exists('/usr/lib/enigma2/python/Plugins/Extensions/TSmedia/addons'):# #folder=
@@ -121,6 +125,7 @@ class TSIPlayer(CBaseHostClass):
 #not work: 104
 #Arabic: 201:Films 202:Anim 203:kids 204:Islamic
 #French: 301,302,303
+#Eng:    401,402,403
 #
 	def FilmCatFr(self):
 		self.addMarker({'category' :'marker','title':'\c00????00 -----●★| Films & Series |★●-----','desc':'Films, Series & Animes en VF et VOSTFR'})	
@@ -130,6 +135,14 @@ class TSIPlayer(CBaseHostClass):
 		self.addMarker({'category' :'marker','title':'\c00????00 -----●★| Animes & Dessins animés |★●-----','desc':'Dessins animés & Animes en VF et VOSTFR'})
 		self.tsiplayer_host({'cat_id':'302'})
 		self.tsiplayer_host({'cat_id':'303'})
+
+	def FilmCatEn(self):
+		self.addMarker({'category' :'marker','title':'\c00????00 -----●★| Films & Series |★●-----','desc':'Films, Series & Animes'})	
+		self.tsiplayer_host({'cat_id':'101'})	
+		self.tsiplayer_host({'cat_id':'401'})
+#		self.addDir({'name':'search','category' :'search','title': _('Search'),'search_item':True,'page':1,'hst':'ALLFR','icon':''})
+
+
 				
 	def FilmCatAr(self):
 		self.addMarker({'category' :'marker','title':'\c00????00 -----●★| Films & Series |★●-----','desc':'Films, Series & Animes en VF et VOSTFR'})			
@@ -307,8 +320,23 @@ class TSIPlayer(CBaseHostClass):
 			if (file_.endswith('.py'))and(file_.startswith('host_')):
 				path_=folder+'/'+file_
 				import_str=import_+file_.replace('.py',' import ')
-				exec (import_str+'getinfo')
-				info=getinfo()
+
+				try:
+					exec (import_str+'getinfo')
+					info=getinfo()
+				except Exception, e:
+					info={}
+					info['warning']=' >>>>>>> Problem in this host <<<<<<<'
+					info['desc']=str(e)
+					info['name']=file_
+					info['icon']=''
+					info['version']=''
+					info['cat_id']='104'
+					info['dev']=''
+				
+				
+				
+				
 				desc=''
 				param_ = 'oui'
 				if (info.get('filtre', '')!=''):
@@ -341,8 +369,19 @@ class TSIPlayer(CBaseHostClass):
 				if (file_.endswith('.py'))and(file_.startswith('host_')):
 					path_=folder+'/'+file_
 					import_str=import_+file_.replace('.py',' import ')
-					exec (import_str+'getinfo')
-					info=getinfo()
+					try:
+						exec (import_str+'getinfo')
+						info=getinfo()
+					except Exception, e:
+						info={}
+						info['warning']=' >>>>>>> Problem in this host <<<<<<<'
+						info['desc']=str(e)
+						info['name']=file_
+						info['icon']=''
+						info['version']=''
+						info['cat_id']='104'
+						info['dev']=''
+						
 					desc=''
 					param_ = 'oui'
 					if (info.get('filtre', '')!=''):
@@ -372,9 +411,9 @@ class TSIPlayer(CBaseHostClass):
 		import_str = cItem.get('import',self.import_str)
 		if self.import_str!=import_str:
 			file_=import_str.replace('from Plugins.Extensions.IPTVPlayer.tsiplayer.','').replace(' import ','')
-			file_=import_str.replace('from etc.tsiplayer.','').replace(' import ','')
-			_url='http://86.105.212.206/tsiplayer/stat.php?host='+file_+'&cat=Main'
-			self.cm.getPage(_url)
+			#file_=import_str.replace('from etc.tsiplayer.','').replace(' import ','')
+			#_url='http://86.105.212.206/tsiplayer/stat.php?host='+file_+'&cat=Main'
+			#self.cm.getPage(_url)
 			exec (import_str+'TSIPHost')
 			self.import_str=import_str
 			self.host_ = TSIPHost()	
@@ -617,6 +656,9 @@ class TSIPlayer(CBaseHostClass):
 			self.FilmCatAr()
 		elif category == 'FilmsSeriesFr':
 			self.FilmCatFr()
+		elif category == 'FilmsSeriesEn':
+			self.FilmCatEn()
+
 		elif category == 'Live':
 			self.IptvCat()
 		elif category == 'Devmod':

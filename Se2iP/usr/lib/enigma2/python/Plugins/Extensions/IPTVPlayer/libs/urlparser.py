@@ -344,6 +344,7 @@ class urlparser:
                        'posiedze.pl':          self.pp.parserPOSIEDZEPL    ,
                        'powvideo.cc':          self.pp.parserPOWVIDEONET    ,
                        'powvideo.net':         self.pp.parserPOWVIDEONET    ,
+					   'primevideos.net':      self.pp.parserPRIMEVIDEOS,	
                        'privatestream.tv':     self.pp.parserPRIVATESTREAM ,
                        'promptfile.com':       self.pp.parserPROMPTFILE    ,
                        'publicvideohost.org':  self.pp.parsePUBLICVIDEOHOST,
@@ -8004,18 +8005,49 @@ class pageParser(CaptchaHelper):
         if videoUrl.startswith('//'): videoUrl = 'http:' + videoUrl
         return videoUrl
 
+    def parserGLORIATV(self, baseUrl):
+        printDBG("parserGLORIATV baseUrl[%r]" % baseUrl)
+        baseUrl = strwithmeta(baseUrl)
+        HTTP_HEADER = self.cm.getDefaultHeader(browser='firefox')
+        referer = baseUrl.meta.get('Referer')
+        if referer: HTTP_HEADER['Referer'] = referer
+        urlParams = {'header': HTTP_HEADER}
+        sts, data = self.cm.getPage(baseUrl, urlParams)
+        if not sts: return False
+        cUrl = self.cm.meta['url']
+        retTab = []
+        data = ph.find(data, ('<video', '>'), '</video>', flags=0)[1]
+        data = ph.findall(data, '<source', '>', flags=0)
+        for item in data:
+            url = self.cm.getFullUrl(ph.getattr(item, 'src').replace('&amp;', '&'), cUrl)
+            type = ph.clean_html(ph.getattr(item, 'type').lower())
+            if 'video' not in type and 'x-mpeg' not in type: continue
+            url = strwithmeta(url, {'Referer': cUrl, 'User-Agent': HTTP_HEADER['User-Agent']})
+            if 'video' in type:
+                width = ph.getattr(item, 'width')
+                height = ph.getattr(item, 'height')
+                bitrate = ph.getattr(item, 'bitrate')
+                retTab.append({'name': '[%s] %sx%s %s' % (type, width, height, bitrate), 'url': url})
+            elif 'x-mpeg' in type:
+                retTab.extend(getDirectM3U8Playlist(url, checkContent=True, sortWithMaxBitrate=999999999))
+        return retTab
+
     def parserOPENLOADIO(self, baseUrl):
         printDBG('parserOPENLOADIO baseUrl[%r]' % baseUrl)
-        HTTP_HEADER = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 
-           'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3', 
-           'Accept-Encoding': 'none', 
-           'Accept-Language': 'en-US,en;q=0.8'}
-        referer = strwithmeta(baseUrl).meta.get('Referer', '')
-        if referer:
-            HTTP_HEADER['Referer'] = referer
+        HTTP_HEADER = {
+            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36',
+            'Accept': 'text/html', 
+            #'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3', 
+            'Accept-Encoding': 'gzip', 
+            'Accept-Language': 'en-US,en;q=0.8'
+        }
+        #referer = strwithmeta(baseUrl).meta.get('Referer', '')
+        #if referer:
+        #    HTTP_HEADER['Referer'] = referer
         sts, data = self.cm.getPage(baseUrl, {'header': HTTP_HEADER})
         if not sts:
             return False
+
         orgData = data
         msg = clean_html(ph.find(data, ('<div', '>', 'blocked'), '</div>', flags=0)[1])
         if msg or 'content-blocked' in data:
@@ -8040,25 +8072,21 @@ class pageParser(CaptchaHelper):
                 subTracks.append({'title': subLabel + '_' + subLang, 'url': subUrl, 'lang': subLang, 'format': 'srt'})
 
         videoUrl = ''
-        #printDBG(data)
-        tmp = ph.findall(data, ('<div', '>', 'display:none'), '</div>')
-        printDBG('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
-        printDBG(str(tmp))
+        tmp = ph.findall(data, '<div class=""' ,'</div>')
         for item in tmp:
+            printDBG(item)
             encTab = re.compile('<[^>]+?id="[^"]*?"[^>]*?>([^<]+?)<').findall(data)
             for e in encTab:
                 if len(e) > 40:
                     encTab.insert(0, e)
+                    printDBG("e ---->>>>" + e )
                     break
 
-        printDBG('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
-        printDBG(str(encTab))
-                    
         def __decode_k(enc, jscode):
             decoded = ''
             try:
                 js_params = [{'code': 'var id = "%s";' % enc}]
-                js_params.append({'path': GetJSScriptFile('openload3.byte')})
+                js_params.append({'path': GetJSScriptFile('openload.byte')})
                 js_params.append({'name': 'openload', 'code': '%s; print(decoded);' % jscode})
                 ret = js_execute_ext(js_params)
                 if ret['sts'] and 0 == ret['code']:
@@ -10232,13 +10260,16 @@ class pageParser(CaptchaHelper):
         
         sts, data = self.cm.getPage('https://nadaje.com/api/1.0/services/video/%s/' % videoId, {'header': HEADER})
         if not sts: return False
-        
+
         linksTab = []
         data = json_loads(data)['transmission-info']['data']['streams'][0]['urls']
         for key in ['hls', 'rtmp', 'hds']:
             if key not in data: continue
             url = data[key]
-            url = urlparser.decorateUrl(url, {'iptv_livestream':True, 'Referer':referer, 'User-Agent':USER_AGENT, 'Origin':origin})
+            try:
+                url = urlparser.decorateUrl(url, {'iptv_livestream':True, 'Referer':referer, 'User-Agent':USER_AGENT, 'Origin':origin})
+            except Exception:
+                printExc()
             if key == 'hls': linksTab.extend( getDirectM3U8Playlist(url, checkExt=False, checkContent=True) )
             #elif key == 'hds': linksTab.extend( getF4MLinksWithMeta(url) )
             #elif key == 'rtmp': linksTab.append( {'name':key, 'url':url} )
@@ -11334,3 +11365,24 @@ class pageParser(CaptchaHelper):
                 vidTab.append({'name':title, 'url':u})
 
         return vidTab
+
+    def parserPRIMEVIDEOS(self, baseUrl):
+        printDBG("parserPRIMEVIDEOS baseUrl[%s]" % baseUrl)
+        #example  http://vdl.primevideos.net/files/rrlMJoCJMTDeCel.html
+
+        code = re.findall('/(\w*?).html',baseUrl)
+
+        vidTab = []
+        if len(code)>0:
+            code = code[0]
+            url = "http://server3.primevideos.net/x264/{code}/{code}.m3u8".replace("{code}",code)
+            url = strwithmeta(url, { 'Referer' : 'http://server3.primevideos.net/', 'Accept':'*/*', 'Accept-Encoding':'gzip' })
+
+            vidTab.extend(getDirectM3U8Playlist(url, checkExt=True, variantCheck=True, checkContent=True, sortWithMaxBitrate=99999999))
+
+        return vidTab
+
+
+
+
+

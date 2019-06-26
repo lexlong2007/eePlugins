@@ -1,0 +1,11 @@
+--- hosts/hostekinotv.py	2019-06-25 07:35:12.086380000 +0200
++++ enigma2-pc/e2iplayerGITsSources/forks/e2iplayer-Mosz_Nowy/IPTVPlayer/hosts/hostekinotv.py	2019-06-25 07:35:23.414380000 +0200
+@@ -4,7 +4,7 @@
+ # LOCAL import
+ ###################################################
+ from Plugins.Extensions.IPTVPlayer.components.iptvplayerinit import TranslateTXT as _, SetIPTVPlayerLastHostError
+-from Plugins.Extensions.IPTVPlayer.components.ihost import CHostBase, CBaseHostClass
++from Plugins.Extensions.IPTVPlayer.components.ihost import CHostBase, CBaseHostClass
+ from Plugins.Extensions.IPTVPlayer.tools.iptvtools import  printDBG, printExc, GetDefaultLang, rm, byteify
+ from Plugins.Extensions.IPTVPlayer.tools.iptvtypes import strwithmeta
+ from Plugins.Extensions.IPTVPlayer.libs.recaptcha_v2 import UnCaptchaReCaptcha

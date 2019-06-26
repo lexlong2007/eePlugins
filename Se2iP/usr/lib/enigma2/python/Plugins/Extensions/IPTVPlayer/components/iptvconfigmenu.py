@@ -145,7 +145,7 @@ config.plugins.iptvplayer.SciezkaCache = ConfigDirectory(default = "/hdd/IPTVCac
 config.plugins.iptvplayer.NaszaTMP = ConfigDirectory(default = "/tmp/") #, fixed_size = False)
 config.plugins.iptvplayer.ZablokujWMV = ConfigYesNo(default = True)
 
-config.plugins.iptvplayer.gitlab_repo = ConfigSelection(default = "", choices = [("1", "mosz_nowy"),("2", "zadmario")])
+config.plugins.iptvplayer.gitlab_repo = ConfigSelection(default = "zadmario", choices = [("mosz_nowy", "mosz_nowy"),("zadmario", "zadmario"),("maxbambi", "maxbambi")])
 
 config.plugins.iptvplayer.vkcom_login    = ConfigText(default="", fixed_size = False)
 config.plugins.iptvplayer.vkcom_password = ConfigText(default="", fixed_size = False)
@@ -201,7 +201,7 @@ config.plugins.iptvplayer.autoCheckForUpdate = ConfigYesNo(default = False)
 config.plugins.iptvplayer.updateLastCheckedVersion = ConfigText(default = "00.00.00.00", fixed_size = False)
 config.plugins.iptvplayer.fakeUpdate               = ConfigSelection(default = "fake", choices = [("fake", "  ")])
 config.plugins.iptvplayer.downgradePossible        = ConfigYesNo(default = False)
-config.plugins.iptvplayer.possibleUpdateType       = ConfigSelection(default = "precompiled", choices = [("sourcecode", _("with source code")),("precompiled", _("precompiled")), ("all", _("all types"))]) 
+config.plugins.iptvplayer.possibleUpdateType       = ConfigSelection(default = "all", choices = [("sourcecode", _("with source code")),("precompiled", _("precompiled")), ("all", _("all types"))]) 
 
 # Hosts lists
 config.plugins.iptvplayer.fakeHostsList = ConfigSelection(default = "fake", choices = [("fake", "  ")])

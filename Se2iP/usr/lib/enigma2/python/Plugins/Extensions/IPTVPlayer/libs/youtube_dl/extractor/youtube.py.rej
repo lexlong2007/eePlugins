@@ -1,5 +1,5 @@
---- libs/youtube_dl/extractor/youtube.py	2019-06-06 06:20:34.242316591 +0200
-+++ enigma2-pc/e2iplayerGITsSources/forks/e2iplayer-Mosz_Nowy/IPTVPlayer/libs/youtube_dl/extractor/youtube.py	2019-05-04 06:55:20.993337046 +0200
+--- libs/youtube_dl/extractor/youtube.py	2019-06-25 07:35:12.086380000 +0200
++++ enigma2-pc/e2iplayerGITsSources/forks/e2iplayer-Mosz_Nowy/IPTVPlayer/libs/youtube_dl/extractor/youtube.py	2019-06-25 07:35:23.430380000 +0200
 @@ -54,9 +54,8 @@
          tmp = ph.find(data, 'yt.akamaized.net', '}', 0)[1]
          if tmp:
@@ -11,7 +11,7 @@
                  printDBG("ITEM: %s" % name)
                  name = ph.search(name, self.RE_MAIN)[0]
                  if name: return name
-@@ -201,7 +200,6 @@
+@@ -206,7 +205,6 @@
                            # Dash video
                            '138', '137', '248', '136', '247', '135', '246',
                            '245', '244', '134', '243', '133', '242', '160','298','299',
@@ -19,7 +19,7 @@
                            # Dash audio
                            '141', '172', '140', '171', '139',
                            ]
-@@ -287,8 +285,6 @@
+@@ -292,8 +290,6 @@
          '246': 'webm',
          '247': 'webm',
          '248': 'webm',
@@ -28,7 +28,7 @@
  
          'mpd': 'mpd'
      }
-@@ -343,8 +339,6 @@
+@@ -348,8 +344,6 @@
          '248': '1080p',
          '298': '720p60',
          '299': '1080p60',
@@ -37,7 +37,7 @@
      }
  
      _special_itags = {
-@@ -376,8 +370,6 @@
+@@ -381,8 +375,6 @@
          '248': 'DASH Video',
          '298': 'DASH Video',
          '299': 'DASH Video',
@@ -46,7 +46,7 @@
      }
      IE_NAME = u'youtube'
  
-@@ -501,7 +493,7 @@
+@@ -506,7 +498,7 @@
          printDBG(sub_tracks)
          return sub_tracks
  
@@ -55,7 +55,7 @@
          # Extract original video URL from URL with redirection, like age verification, using next_url parameter
          mobj = re.search(self._NEXT_URL_RE, url)
          if mobj:
-@@ -549,6 +541,7 @@
+@@ -554,6 +546,7 @@
                  video_info_url = videoInfoBase + ('%s&ps=default&eurl=&gl=US&hl=en'% ( el_type))
                  sts, video_info = self.cm.getPage(video_info_url, videoInfoparams)
                  if not sts: continue
@@ -63,7 +63,7 @@
                  if '&token=' in video_info or '&account_playback_token=' in video_info:
                      break
          if '&token=' not in video_info and '&account_playback_token=' not in video_info:
-@@ -605,9 +598,7 @@
+@@ -610,9 +603,7 @@
          url_map = {}
          if len(video_info.get('url_encoded_fmt_stream_map', [])) >= 1 or len(video_info.get('adaptive_fmts', [])) >= 1:
              encoded_url_map = video_info.get('url_encoded_fmt_stream_map', [''])[0] + ',' + video_info.get('adaptive_fmts',[''])[0]
@@ -74,7 +74,7 @@
              for url_data_str in encoded_url_map.split(','):
                  if 'index=' in url_data_str and 'index=0-0&' in url_data_str: continue
                  if 'itag=' in url_data_str and 'url=' in url_data_str:
-@@ -639,13 +630,13 @@
+@@ -647,13 +638,13 @@
                      if not 'ratebypass' in url_item['url']:
                          url_item['url'] += '&ratebypass=yes'
                      url_map[url_data['itag']] = url_item
@@ -90,7 +90,7 @@
  
          if video_info.get('player_response') and not video_url_list:
              is_m3u8 = 'yes'
-@@ -653,7 +644,7 @@
+@@ -661,7 +652,7 @@
              manifest = re.search('"hlsManifestUrl":"(.*?)"', manifest_url)
              if manifest: manifest_url = manifest.group(1)
              url_map = self._extract_from_m3u8(manifest_url, video_id)
@@ -99,7 +99,7 @@
  
          if not video_url_list:
              return []
-@@ -759,10 +750,8 @@
+@@ -767,10 +758,8 @@
              printDBG('unable to extract %s; please report this issue on http://yt-dl.org/bug' % name)
              return None
              

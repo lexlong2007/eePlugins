@@ -45,8 +45,8 @@ config.plugins.AltSoftcam = ConfigSubsection()
 config.plugins.AltSoftcam.enabled = ConfigYesNo(default = False)
 config.plugins.AltSoftcam.OsCamonly = ConfigYesNo(default = True)
 config.plugins.AltSoftcam.actcam = ConfigText(default = "none")
-config.plugins.AltSoftcam.camdir = ConfigDirectory(default = "/usr/bin")
-config.plugins.AltSoftcam.camconfig = ConfigDirectory(default = "/usr/keys")
+config.plugins.AltSoftcam.camdir = ConfigDirectory(default = "/usr/lib/enigma2/python/Plugins/Extensions/AlternativeSoftCamManager/CAMbin")
+config.plugins.AltSoftcam.camconfig = ConfigDirectory(default = "/usr/lib/enigma2/python/Plugins/Extensions/AlternativeSoftCamManager/CAMconfig")
 AltSoftcamConfigError = False
 if not os_path.isdir(config.plugins.AltSoftcam.camconfig.value):
     config.plugins.AltSoftcam.camconfig.value = _("none")
