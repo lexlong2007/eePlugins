@@ -574,6 +574,12 @@ class AdvancedFreePlayerStart(Screen):
 
             import struct
 
+            ChannelName = ''
+            if path.exists(MovieNameWithPath + '.meta'):
+                with open(MovieNameWithPath + '.meta','r') as descrTXT:
+                    ChannelName = _('From: %s\n') % descrTXT.readline().split('::')[1].strip()
+                    descrTXT.close()
+                
             with open(temp + '.eit','r') as descrTXT:
                 data = descrTXT.read() #[19:].replace('\00','\n')
                 ### Below is based on EMC handlers, thanks to author!!!
@@ -581,6 +587,7 @@ class AdvancedFreePlayerStart(Screen):
                 TZhour = unBCD(e[2]) + self.TZoffset
                 if TZhour >= 24: TZhour -= 24
                 myDescr = _('Recorded: %s %02d:%02d:%02d\n') % (parseMJD(e[1]), TZhour, unBCD(e[3]), unBCD(e[4]) )
+                myDescr += ChannelName
                 myDescr += _('Lenght: %02d:%02d:%02d\n\n') % (unBCD(e[5]), unBCD(e[6]), unBCD(e[7]) )
                 extended_event_descriptor = []
                 EETtxt = ''

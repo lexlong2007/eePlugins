@@ -377,3 +377,6 @@ msgstr "Przenieść link do filmu '%s' do śmietnika?"
 
 msgid "Move movie '%s' to trash?"
 msgstr "Przenieść film '%s' do śmietnika?"
+
+msgid "From: %s\n"
+msgstr "Z: %s\n"
