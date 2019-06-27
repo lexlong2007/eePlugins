@@ -277,3 +277,9 @@ msgstr "Wyjątek %s"
 
 msgid "Error sychronizing webMaps data"
 msgstr "Błąd synchronizacji danych o mapach"
+
+msgid "Storms"
+msgstr "Burze"
+
+msgid "Loading storms maps..."
+msgstr "Ładuję mapy występowania burz..."

@@ -670,10 +670,16 @@ class AdvancedFreePlayerStart(Screen):
             printDEBUG("setCover hide cover for '%s'" % FileName)
             #self["Cover"].updateIcon('dummyCover')
             self["Cover"].hide()
-            self.session.summary.LCD_hide('LCDpic')
+            try:
+                self.session.summary.LCD_hide('LCDpic')
+            except Exception:
+                pass
         else:
             self["Cover"].updateIcon(FileName)
-            self.session.summary.LCD_showPic('LCDpic', FileName)
+            try:
+              self.session.summary.LCD_showPic('LCDpic', FileName)
+            except Exception:
+                pass
             self["Cover"].show()
     
     def GetCoverTimerCB(self, AlternateMovieName = ''):

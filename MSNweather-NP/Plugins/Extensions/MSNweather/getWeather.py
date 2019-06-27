@@ -9,6 +9,7 @@ from twisted.internet import defer
 from twisted.web.client import getPage, downloadPage
 from urllib import quote as urllib_quote
 from xml.etree.cElementTree import fromstring as cet_fromstring
+from maps import motionBurze
 
 import time
 import webRegex
@@ -241,7 +242,8 @@ class getWeather:
                     else:
                         self.showIcon(-1, filename)
                     self.weatherItems[str(-1)] = currentWeather
-
+        #pobierz obecne dane o burzach
+        motionBurze()
         if len(IconDownloadList) != 0:
             ds = defer.DeferredSemaphore(tokens=len(IconDownloadList))
             downloads = [ ds.run(download, item).addErrback(self.errorIconDownload, item).addCallback(self.finishedIconDownload, item) for item in IconDownloadList ]
