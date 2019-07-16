@@ -283,3 +283,6 @@ msgstr "Burze"
 
 msgid "Loading storms maps..."
 msgstr "Ładuję mapy występowania burz..."
+
+msgid "Storms observations"
+msgstr "Zaobserwowane burze"
