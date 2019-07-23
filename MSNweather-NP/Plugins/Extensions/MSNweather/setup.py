@@ -415,6 +415,8 @@ class MSNWeatherConfiguration(Screen, ConfigListScreen):
         ConfigList.append(getConfigListEntry(_("Icons type:"), config.plugins.WeatherPlugin.IconsType))
         ConfigList.append(getConfigListEntry(_("Icons scaling engine:"), config.plugins.WeatherPlugin.ScalePicType))
         ConfigList.append(getConfigListEntry(_("Build histograms:"), config.plugins.WeatherPlugin.BuildHistograms))
+        if config.plugins.WeatherPlugin.BuildHistograms.value:
+            ConfigList.append(getConfigListEntry(_("Period:"), config.plugins.WeatherPlugin.HistoryPeriod))
         ConfigList.append(getConfigListEntry(_("Debug (require restart):"), config.plugins.WeatherPlugin.DebugEnabled))
         if config.plugins.WeatherPlugin.DebugEnabled.value:
             ConfigList.append(getConfigListEntry(_("Debug log file size:"), config.plugins.WeatherPlugin.DebugSize))

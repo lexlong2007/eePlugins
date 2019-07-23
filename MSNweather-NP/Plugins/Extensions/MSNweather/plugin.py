@@ -77,6 +77,8 @@ config.plugins.WeatherPlugin.DebugGetWeatherFULL = ConfigEnableDisable(default =
 config.plugins.WeatherPlugin.DebugMSNweatherHistograms = ConfigEnableDisable(default = False)
 config.plugins.WeatherPlugin.DebugMSNweatherMaps = ConfigEnableDisable(default = True)
 
+config.plugins.WeatherPlugin.HistoryPeriod = ConfigSelection(choices = [ ("86400", _("Last 24h")), ("43200", _("Last 12h")), ("21600", _("Last 6h")), ("10800", _("Last 3h")), ("3600", _("Last hour")), ], default = "43200")
+
 printDEBUG('INIT', ' MSNweather NP plugin %s' % Version)
 printDEBUG('config.plugins.WeatherPlugin.IconsType = "%s"' % config.plugins.WeatherPlugin.IconsType.value)
 

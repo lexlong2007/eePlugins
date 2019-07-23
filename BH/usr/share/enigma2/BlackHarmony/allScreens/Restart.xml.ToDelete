@@ -1,0 +1,4 @@
+  <screen name="TryQuitMainloop" position="center,3" size="1920,1080" backgroundColor="background" flags="wfNoBorder">
+    <eLabel text="Shutdown Wait..." position="1,895" size="1920,65" zPosition="3" halign="center" font="HD_Thin; 45" transparent="1" backgroundColor="background"/>
+    <ePixmap position="507,228" zPosition="0" size="895,503" pixmap="BlackHarmony/gfx/www.png" alphatest="blend" transparent="1"/>
+  </screen>

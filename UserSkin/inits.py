@@ -17,6 +17,8 @@ SkinPath = resolveFilename(SCOPE_CURRENT_SKIN, '')
 if not SkinPath.endswith('/'):
     SkinPath = SkinPath + '/'
 CurrentSkinName=config.skin.primary_skin.value.replace('skin.xml', '').replace('/', '')
+if SkinPath.endswith('enigma2/'):
+    SkinPath = SkinPath + CurrentSkinName + '/'
 
 #translation
 PluginLanguageDomain = "plugin-" + PluginName

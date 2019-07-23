@@ -286,3 +286,21 @@ msgstr "Ładuję mapy występowania burz..."
 
 msgid "Storms observations"
 msgstr "Zaobserwowane burze"
+
+msgid "Period:"
+msgstr "Okres:"
+
+msgid "Last 24h"
+msgstr "Ostatnie 24 godziny"
+
+msgid "Last 12h"
+msgstr "Ostatnie 12 godzin"
+
+msgid "Last 6h"
+msgstr "Ostatnie 6 godzin"
+
+msgid "Last 3h"
+msgstr "Ostatnie 3 godziny"
+
+msgid "Last hour"
+msgstr "Ostatnia godzina"

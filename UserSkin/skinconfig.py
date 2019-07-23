@@ -865,7 +865,7 @@ class TreeUserSkinScreens(Screen):
         
         self["key_red"] = StaticText(_("Exit"))
         self["key_green"] = StaticText("")
-        self["key_yellow"] = StaticText("")
+        self["key_yellow"] = StaticText(_("Refresh"))
         self["key_blue"] = StaticText("")
         
         self["PreviewPicture"] = Pixmap()
@@ -1016,6 +1016,14 @@ class TreeUserSkinScreens(Screen):
 
         if self.DeleteScreen == True:
             self.session.openWithCallback(keyYellowRet, MessageBox, _("Are you sure you want delete the screen?"), MessageBox.TYPE_YESNO, default = False)
+        elif self.EditScreen == False:
+            try:
+                self.__refreshList()
+                self["filelist"].moveToIndex(0)
+                printDEBUG("Files list refreshed for: %s" % self["filelist"].getCurrentDirectory() )
+            except Exception as e:
+                printDEBUG("Exception refreshing files list: %s " % str(e))
+            
         else:
             print "Nothing to Delete ;)"
             
@@ -1066,7 +1074,7 @@ class TreeUserSkinScreens(Screen):
         elif selection[1] == True: # isDir
             self["key_green"].setText("")
             self.EditScreen = False
-            self["key_yellow"].setText("")
+            self["key_yellow"].setText(_("Refresh"))
             self.DeleteScreen = False
             self["PreviewPicture"].hide()
             self["key_blue"].setText("")
