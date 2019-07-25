@@ -577,7 +577,9 @@ class AdvancedFreePlayerStart(Screen):
             ChannelName = ''
             if path.exists(MovieNameWithPath + '.meta'):
                 with open(MovieNameWithPath + '.meta','r') as descrTXT:
-                    ChannelName = _('From: %s\n') % descrTXT.readline().split('::')[1].strip()
+                    tmpTXT = descrTXT.readline()
+                    if tmpTXT.find('::') > -1:
+                        ChannelName = _('From: %s\n') % tmpTXT.split('::')[1].strip()
                     descrTXT.close()
                 
             with open(temp + '.eit','r') as descrTXT:

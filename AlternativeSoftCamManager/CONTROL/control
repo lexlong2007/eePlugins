@@ -5,6 +5,6 @@ Depends:
 Description: manages softcams
 Maintainer: j00zek
 Source: http://github.com/j00zek/eePlugins
-Version: 19.07.15.1602
+Version: 19.07.25.1128
 Architecture: all
 DestinationPath: /usr/lib/enigma2/python/Plugins/Extensions/AlternativeSoftCamManager

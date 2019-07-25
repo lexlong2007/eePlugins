@@ -1,0 +1,68 @@
+ </skin>
+  <screen name="VerticalEPGView_FHD" position="center,center" size="1920,1080" title="" flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap position="0,1" zPosition="-7" size="1920,1080" pixmap="BlackHarmony/bg_design/cool.png" />
+	
+	<widget source="global.CurrentTime" render="Label" position="75,55" size="80,35" font="Roboto_HD;27" backgroundColor="black" transparent="1">
+    <convert type="ClockToText">Default</convert>
+ </widget>
+    <widget source="global.CurrentTime" render="Label" position="160,55" size="660,35" font="Roboto_HD;27" foregroundColor="lemon" backgroundColor="black" transparent="1">
+     <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+ </widget>
+    <eLabel text="Pionowy EPG" position="1460,55" size="400,35" font="Roboto_HD; 27" halign="right"  foregroundColor="white" backgroundColor="black" transparent="1" />
+    <ePixmap position="500,95" size="60,30" pixmap="BlackHarmony/buttons/left.png" alphatest="blend" />
+	<ePixmap position="1340,95" size="60,30" pixmap="BlackHarmony/buttons/right.png" alphatest="blend" />
+     <widget source="Title" render="Label" position="500,90" size="900,40" noWrap="1" halign="center" valign="center" font="Regular;32" foregroundColor="yellow" backgroundColor="black" transparent="1" />
+	 
+	 <widget position="75,145" size="100,60" source="Service1" render="Picon" alphatest="blend" zPosition="1">
+	<convert type="ServiceName">Reference</convert>
+</widget>
+	<widget position="430,145" size="100,60" source="Service2" render="Picon" alphatest="blend" zPosition="1">
+	<convert type="ServiceName">Reference</convert>
+</widget>
+	<widget position="785,145" size="100,60" source="Service3" render="Picon" alphatest="blend" zPosition="1">
+	<convert type="ServiceName">Reference</convert>
+</widget>
+	<widget position="1140,145" size="100,60" source="Service4" render="Picon" alphatest="blend" zPosition="1">
+	<convert type="ServiceName">Reference</convert>
+</widget>
+	<widget position="1495,145" size="100,60" source="Service5" render="Picon" alphatest="blend" zPosition="1">
+	<convert type="ServiceName">Reference</convert>
+</widget>
+    <eLabel position="429,145" size="1,65" backgroundColor="#000090e6" zPosition="4" />
+    <eLabel position="784,145" size="1,65" backgroundColor="#000090e6" zPosition="4" />
+	<eLabel position="1139,145" size="1,65" backgroundColor="#000090e6" zPosition="4" />
+	<eLabel position="1494,145" size="1,65" backgroundColor="#000090e6" zPosition="4" />
+	<eLabel position="75,210" size="1774,2" backgroundColor="#000090e6" zPosition="4" />
+	
+	<widget font="Roboto_HD;28" halign="center" valign="center" name="currCh1" position="180,145" size="250,60" transparent="1" zPosition="2" backgroundColor="black" />
+	<widget font="Roboto_HD;28" halign="center" valign="center" name="currCh2" position="535,145" size="250,60" transparent="1" zPosition="2" backgroundColor="black" />
+	<widget font="Roboto_HD;28" halign="center" valign="center" name="currCh3" position="890,145" size="250,60" transparent="1" zPosition="2" backgroundColor="black" />
+	<widget font="Roboto_HD;28" halign="center" valign="center" name="currCh4" position="1245,145" size="250,60" transparent="1" zPosition="2" backgroundColor="black"/>
+	<widget font="Roboto_HD;28" halign="center" valign="center" name="currCh5" position="1600,145" size="250,60" transparent="1" zPosition="2" backgroundColor="black" />
+	
+	<widget itemHeight="80" name="epg_list1" position="75,212"  size="355,560" TimeStringColor="#00FFFFCC" TimeColor="#00FF9900"  transparent="1" zPosition="4" scrollbarMode="showAlways" scrollbarWidth="6" selectionPixmap="BlackHarmony/menu/sel_675_80.png"  />
+    <widget itemHeight="80" name="epg_list2" position="430,212" size="355,560" TimeStringColor="#00FFFFCC" TimeColor="#00FF9900" transparent="1" zPosition="4" scrollbarMode="showAlways" scrollbarWidth="6" selectionPixmap="BlackHarmony/menu/sel_675_80.png"  />
+    <widget itemHeight="80" name="epg_list3" position="785,212" size="355,560" TimeStringColor="#00FFFFCC" TimeColor="#00FF9900" transparent="1" zPosition="4" scrollbarMode="showAlways" scrollbarWidth="6" selectionPixmap="BlackHarmony/menu/sel_675_80.png"  />
+    <widget itemHeight="80" name="epg_list4" position="1140,212" size="355,560" TimeStringColor="#00FFFFCC" TimeColor="#00FF9900" transparent="1" zPosition="4" scrollbarMode="showAlways" scrollbarWidth="6" selectionPixmap="BlackHarmony/menu/sel_675_80.png"  />
+    <widget itemHeight="80" name="epg_list5" position="1495,212" size="355,560" TimeStringColor="#00FFFFCC" TimeColor="#00FF9900" transparent="1" zPosition="4" scrollbarMode="showAlways" scrollbarWidth="6" selectionPixmap="BlackHarmony/menu/sel_675_80.png"  /> 
+	
+	
+	
+	<eLabel position="75,780" size="1774,2" backgroundColor="yellow" />
+	<widget render="BlackHarmonyRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=scroll,startdelay=6000,oneshot=5000,wrap" halign="left" font="Roboto_HD; 30" position="75,790" size="1780,174" foregroundColor="white" backgroundColor="black" transparent="1" >
+    <convert type="EventName">ExtendedDescription</convert>
+ </widget>
+	<ePixmap pixmap="BlackHarmony/buttons/red.png" position="95,1001" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="430,1001" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="760,1001" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="1090,1001" size="35,27" alphatest="blend" />
+    <widget name="key_red" position="150,1000" size="240,27" zPosition="1" font="Roboto_HD;24" halign="left" backgroundColor="dark_grey" transparent="1" valign="bottom" />
+    <widget name="key_green" position="480,1000" size="240,27" zPosition="1" font="Roboto_HD;24" halign="left" backgroundColor="dark_grey" transparent="1" />
+    <widget name="key_yellow" position="810,983" size="240,55" zPosition="1" font="Roboto_HD;24" halign="left" backgroundColor="dark_grey" transparent="1" />
+    <widget name="key_blue" position="1140,983" size="480,55" zPosition="1" font="Roboto_HD;24" halign="left" backgroundColor="dark_grey" transparent="1" />
+    <ePixmap position="1650,999" size="60,30" pixmap="BlackHarmony/buttons/key_ok.png" alphatest="blend" />
+    <ePixmap position="1720,999" size="60,30" pixmap="BlackHarmony/buttons/key_infoo.png" alphatest="blend" />
+	<ePixmap position="1789,999" size="60,30" pixmap="BlackHarmony/buttons/key_menu.png" alphatest="blend" />
+	
+	</screen>
+	</skin>
