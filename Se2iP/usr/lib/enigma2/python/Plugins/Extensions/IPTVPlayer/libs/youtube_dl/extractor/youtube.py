@@ -65,6 +65,11 @@ class CYTSignAlgoExtractor:
             name = name.split(',', 1)[-1].split('(', 1)[0].strip()
             if name and not any((c in name) for c in ''', '";()'''):
                 return name
+
+        name = ph.search(data, r'(?P<sig>[a-zA-Z0-9$]+)\s*=\s*function\(\s*a\s*\)\s*{\s*a\s*=\s*a\.split\(\s*""\s*\)')[0]
+        if name and not any((c in name) for c in ''', '"'''):
+            return name.strip()
+
         return ''
 
     def _findFunctionByMarker(self, marker):
@@ -519,8 +524,7 @@ class YoutubeIE(object):
         if not sts: raise ExtractorError('Unable to download video webpage')
 
         # Get video info
-        if re.search(r'player-age-gate-content">', video_webpage) is not None:
-            self.report_age_confirmation()
+        if re.search(r'"LOGIN_REQUIRED"', video_webpage) is not None:
             age_gate = True
             # We simulate the access to the video from www.youtube.com/v/{video_id}
             # this can be viewed without login into Youtube
@@ -625,8 +629,11 @@ class YoutubeIE(object):
                         signature = url_data['sig']
                         url_item['url'] += '&signature=' + signature
                     elif 's' in url_data:
-                        url_item['esign'] = url_data['s']
-                        url_item['url'] += '&signature={0}'
+                        url_item['esign'] = _unquote(url_data['s'])
+                        if 'sp' in url_data: 
+                            url_item['url'] += '&%s={0}' % url_data['sp']
+                        else:
+                            url_item['url'] += '&signature={0}'
                     if not 'ratebypass' in url_item['url']:
                         url_item['url'] += '&ratebypass=yes'
                     url_map[url_data['itag']] = url_item
@@ -677,8 +684,13 @@ class YoutubeIE(object):
             if playerUrl:
                 decSignatures = CYTSignAlgoExtractor(self.cm).decryptSignatures(signatures, playerUrl)
                 if len(signatures) == len(signItems):
-                    for idx in range(len(signItems)):
-                        signItems[idx]['url'] = signItems[idx]['url'].format(decSignatures[idx])
+                    try:
+                        for idx in range(len(signItems)):
+                            signItems[idx]['url'] = signItems[idx]['url'].format(decSignatures[idx])
+                    except Exception:
+                        printExc()
+                        SetIPTVPlayerLastHostError(_('Decrypt Signatures Error'))
+                        return []
                 else:
                     return []
 
@@ -756,5 +768,4 @@ class YoutubeIE(object):
         
         return [(f, url_map[f]) for f in existing_formats] # All formats
 
-   
         

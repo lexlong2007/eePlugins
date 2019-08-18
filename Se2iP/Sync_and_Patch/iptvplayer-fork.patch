@@ -158,7 +158,7 @@ diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /e
 -                if (config.plugins.iptvplayer.ListaGraficzna.value == False or 0 == GetAvailableIconSize()) and title[:4] == 'http':
 -                    try: title = ('%s   (%s)') % ('.'.join(title.replace('://','.').replace('www.','').split('.')[1:-1]) , title)
 +                if title[:4] == 'http':
-+                    try: title = ('%s') % ('.'.join(title.replace('://','.').replace('www.','').split('.')[1:-1]))
++                    try: title = ('%s') % (title.replace('://','.').replace('www.','').split('.')[1:-1])
                      except Exception: pass
                  self.displayHostsList.append((title, hostName))
          # if there is no order hosts list use old behavior
@@ -318,3 +318,16 @@ diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /e
          HTTP_HEADER= { 'User-Agent':"Mozilla/5.0", 'Referer':baseUrl}
          
          HTTP_HEADER = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
+diff -Naur -X /DuckboxDisk/github/eePlugins/Se2iP/Sync_and_Patch/exclude.pats /enigma2-pc/e2iplayerGITsSources/glowny-e2iplayer-Mario/IPTVPlayer/setup/iptvsetupimpl.py /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/setup/iptvsetupimpl.py
+--- /enigma2-pc/e2iplayerGITsSources/glowny-e2iplayer-Mario/IPTVPlayer/setup/iptvsetupimpl.py   2019-06-02 06:28:41.760256000 +0200
++++ /DuckboxDisk/github/eePlugins/Se2iP/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/setup/iptvsetupimpl.py     2019-08-18 08:00:45.936344000 +0200
+@@ -474,7 +474,8 @@
+                 if '.' == self.ffmpegVersion[-1]: self.ffmpegVersion = self.ffmpegVersion[:-1]
+             except Exception: self.ffmpegVersion = ""
+         else: self.ffmpegVersion = ""
+-        self.wgetStep()
++        #self.wgetStep()
++        self.finish()
+             
+     ###################################################
+     # STEP: WGET

@@ -8,7 +8,6 @@ from Plugins.Extensions.IPTVPlayer.components.recaptcha_v2helper import CaptchaH
 from Plugins.Extensions.IPTVPlayer.tools.iptvtools import printDBG, printExc, byteify, rm, GetPluginDir, GetCacheSubDir, ReadTextFile, WriteTextFile
 from Plugins.Extensions.IPTVPlayer.tools.iptvtypes import strwithmeta
 from Plugins.Extensions.IPTVPlayer.libs.crypto.cipher.aes_cbc import AES_CBC
-from Plugins.Extensions.IPTVPlayer.libs import ph
 ###################################################
 
 ###################################################
@@ -77,8 +76,8 @@ class BSTO(CBaseHostClass, CaptchaHelper):
         
     def selectDomain(self):                
         self.MAIN_URL = 'https://bs.to/'
-        self.MAIN_CAT_TAB = [{'category':'list_genres',     'title': _('Genres'),   'url':self.getFullUrl('/serie-genre')},
-                             {'category':'list_genres',     'title': _('Alphabet'), 'url':self.getFullUrl('/serie-alphabet')},
+        self.MAIN_CAT_TAB = [{'category':'list_genres',     'title': 'Genres',   'url':self.getFullUrl('/serie-genre')},
+                             {'category':'list_genres',     'title': 'Alphabet', 'url':self.getFullUrl('/serie-alphabet')},
                              {'category':'search',          'title': _('Search'), 'search_item':True, },
                              {'category':'search_history',  'title': _('Search history'),             } 
                             ]
@@ -117,24 +116,19 @@ class BSTO(CBaseHostClass, CaptchaHelper):
         printDBG("BSTO.listSeasons")
         sts, data = self.getPage(cItem['url'])
         if not sts: return
-
+        
         descData = self.cm.ph.getDataBeetwenMarkers(data, '<div id="sp_left">', '<script', False)[1]
-        desc = self.cleanHtmlStr(self.cm.ph.getDataBeetwenMarkers(descData, '<p', '</p>')[1])
-
+        desc = self.cleanHtmlStr(self.cm.ph.getDataBeetwenMarkers(descData, '<p ', '</p>')[1])
         icon = self.getFullIconUrl(self.cm.ph.getSearchGroups(descData, '''src=['"]([^'^"]+?)['"]''')[0])
-        data = self.cm.ph.getDataBeetwenMarkers(data, '<div class="seasons">', '</ul>')[1]
-
+        
+        data = self.cm.ph.getDataBeetwenMarkers(data, '<div class="seasons full">', '</ul>')[1]
         seasonLabel = self.cleanHtmlStr(self.cm.ph.getDataBeetwenMarkers(data, '<strong>', '</strong>', False)[1])
-        printDBG(seasonLabel)
-
-        items = ph.findall(data , ('<li', '>'), '</li>')
-
-        for item in items:
+        data = self.cm.ph.getAllItemsBeetwenMarkers(data, '<li>', '</li>', False)
+        for item in data:
             url   = self.getFullUrl(self.cm.ph.getSearchGroups(item, '''href=['"]([^'^"]+?)['"]''')[0])
             title = self.cleanHtmlStr(item)
             params = dict(cItem)
             params.update({'good_for_fav':False, 'category':nextCategory, 'title':'%s %s' % (seasonLabel, title), 's_num':title, 'series_title':cItem['title'], 'url':url, 'icon':icon, 'desc':desc})
-            printDBG(str(params))
             self.addDir(params)
         
     def listEpisodes(self, cItem):
@@ -146,10 +140,9 @@ class BSTO(CBaseHostClass, CaptchaHelper):
         if not sts: return
         
         data = self.cm.ph.getDataBeetwenMarkers(data, '<table class="episodes">', '</table>')[1]
-        items = ph.findall(data , ('<tr', '>'), '</tr>')
-        
-        for item in items:
-            item = ph.findall(item , ('<td', '>'), '</td>')
+        data = self.cm.ph.getAllItemsBeetwenMarkers(data, '<tr>', '</tr>', False)
+        for item in data:
+            item = self.cm.ph.getAllItemsBeetwenMarkers(item, '<td', '</td>')
             if len(item) < 3: continue
             url  = self.getFullUrl(self.cm.ph.getSearchGroups(item[0], '''href=['"]([^'^"]+?)['"]''')[0])
             eNum = self.cleanHtmlStr(item[0])
@@ -171,7 +164,6 @@ class BSTO(CBaseHostClass, CaptchaHelper):
             if len(self.cacheLinks[key]):
                 params = dict(cItem)
                 params.update({'good_for_fav':False, 'title':title, 'url':url, 'links_key':key})
-                printDBG( "--->" + str(params))
                 self.addVideo(params)
         
     def listSearchResult(self, cItem, searchPattern, searchType):

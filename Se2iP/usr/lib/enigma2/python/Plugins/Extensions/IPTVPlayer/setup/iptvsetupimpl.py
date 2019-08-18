@@ -112,7 +112,7 @@ class IPTVSetupImpl:
         self.cmdwrapPaths = [resolveFilename(SCOPE_PLUGINS, 'Extensions/IPTVPlayer/bin/cmdwrap'), "/usr/bin/cmdwrap"]
         
         # duk
-        self.dukVersion = 6 # "2.3.0" # real version
+        self.dukVersion = 6 # "2.1.99 [experimental]" # real version
         self.dukPaths = [resolveFilename(SCOPE_PLUGINS, 'Extensions/IPTVPlayer/bin/duk'), "/usr/bin/duk"]
         
         self.binaryInstalledSuccessfully = False
@@ -474,7 +474,8 @@ class IPTVSetupImpl:
                 if '.' == self.ffmpegVersion[-1]: self.ffmpegVersion = self.ffmpegVersion[:-1]
             except Exception: self.ffmpegVersion = ""
         else: self.ffmpegVersion = ""
-        self.wgetStep()
+        #self.wgetStep()
+        self.finish()
             
     ###################################################
     # STEP: WGET

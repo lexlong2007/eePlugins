@@ -441,3 +441,14 @@ class MSNWeatherConfiguration(Screen, ConfigListScreen):
             self["config"].setList(ConfigList)
         except Exception:
             pass
+
+    def keySave(self):
+        for x in self["config"].list:
+            x[1].save()
+        configfile.save()
+        self.close()
+
+    def keyCancel(self):
+        for x in self["config"].list:
+            x[1].cancel()
+        self.close()  

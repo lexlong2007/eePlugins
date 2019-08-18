@@ -13,39 +13,44 @@
 	<ePixmap position="1340,95" size="60,30" pixmap="BlackHarmony/buttons/right.png" alphatest="blend" />
      <widget source="Title" render="Label" position="500,90" size="900,40" noWrap="1" halign="center" valign="center" font="Regular;32" foregroundColor="yellow" backgroundColor="black" transparent="1" />
 	 
-	 <widget position="75,145" size="100,60" source="Service1" render="Picon" alphatest="blend" zPosition="1">
+	 <widget position="74,145" size="100,60" source="Service1" render="Picon" alphatest="blend" zPosition="1">
 	<convert type="ServiceName">Reference</convert>
 </widget>
-	<widget position="430,145" size="100,60" source="Service2" render="Picon" alphatest="blend" zPosition="1">
+	<widget position="370,145" size="100,60" source="Service2" render="Picon" alphatest="blend" zPosition="1">
 	<convert type="ServiceName">Reference</convert>
 </widget>
-	<widget position="785,145" size="100,60" source="Service3" render="Picon" alphatest="blend" zPosition="1">
+	<widget position="666,145" size="100,60" source="Service3" render="Picon" alphatest="blend" zPosition="1">
 	<convert type="ServiceName">Reference</convert>
 </widget>
-	<widget position="1140,145" size="100,60" source="Service4" render="Picon" alphatest="blend" zPosition="1">
+	<widget position="962,145" size="100,60" source="Service4" render="Picon" alphatest="blend" zPosition="1">
 	<convert type="ServiceName">Reference</convert>
 </widget>
-	<widget position="1495,145" size="100,60" source="Service5" render="Picon" alphatest="blend" zPosition="1">
+	<widget position="1258,145" size="100,60" source="Service5" render="Picon" alphatest="blend" zPosition="1">
 	<convert type="ServiceName">Reference</convert>
 </widget>
-    <eLabel position="429,145" size="1,65" backgroundColor="#000090e6" zPosition="4" />
-    <eLabel position="784,145" size="1,65" backgroundColor="#000090e6" zPosition="4" />
-	<eLabel position="1139,145" size="1,65" backgroundColor="#000090e6" zPosition="4" />
-	<eLabel position="1494,145" size="1,65" backgroundColor="#000090e6" zPosition="4" />
+    <widget position="1554,145" size="100,60" source="Service6" render="Picon" alphatest="blend" zPosition="1">
+	<convert type="ServiceName">Reference</convert>
+</widget>
+    <eLabel position="369,145" size="1,65" backgroundColor="#000090e6" zPosition="4" />
+    <eLabel position="665,145" size="1,65" backgroundColor="#000090e6" zPosition="4" />
+	<eLabel position="961,145" size="1,65" backgroundColor="#000090e6" zPosition="4" />
+	<eLabel position="1257,145" size="1,65" backgroundColor="#000090e6" zPosition="4" />
+	<eLabel position="1553,145" size="1,65" backgroundColor="#000090e6" zPosition="4" />
 	<eLabel position="75,210" size="1774,2" backgroundColor="#000090e6" zPosition="4" />
 	
-	<widget font="Roboto_HD;28" halign="center" valign="center" name="currCh1" position="180,145" size="250,60" transparent="1" zPosition="2" backgroundColor="black" />
-	<widget font="Roboto_HD;28" halign="center" valign="center" name="currCh2" position="535,145" size="250,60" transparent="1" zPosition="2" backgroundColor="black" />
-	<widget font="Roboto_HD;28" halign="center" valign="center" name="currCh3" position="890,145" size="250,60" transparent="1" zPosition="2" backgroundColor="black" />
-	<widget font="Roboto_HD;28" halign="center" valign="center" name="currCh4" position="1245,145" size="250,60" transparent="1" zPosition="2" backgroundColor="black"/>
-	<widget font="Roboto_HD;28" halign="center" valign="center" name="currCh5" position="1600,145" size="250,60" transparent="1" zPosition="2" backgroundColor="black" />
+	<widget font="Roboto_HD;25" halign="center" valign="center" name="currCh1" position="179,145" size="191,60" transparent="1" zPosition="2" backgroundColor="black" />
+	<widget font="Roboto_HD;25" halign="center" valign="center" name="currCh2" position="475,145" size="191,60" transparent="1" zPosition="2" backgroundColor="black" />
+	<widget font="Roboto_HD;25" halign="center" valign="center" name="currCh3" position="771,145" size="191,60" transparent="1" zPosition="2" backgroundColor="black" />
+	<widget font="Roboto_HD;25" halign="center" valign="center" name="currCh4" position="1067,145" size="191,60" transparent="1" zPosition="2" backgroundColor="black"/>
+	<widget font="Roboto_HD;25" halign="center" valign="center" name="currCh5" position="1363,145" size="191,60" transparent="1" zPosition="2" backgroundColor="black" />
+	<widget font="Roboto_HD;25" halign="center" valign="center" name="currCh6" position="1659,145" size="191,60" transparent="1" zPosition="2" backgroundColor="black" />
 	
-	<widget itemHeight="80" name="epg_list1" position="75,212"  size="355,560" TimeStringColor="#00FFFFCC" TimeColor="#00FF9900"  transparent="1" zPosition="4" scrollbarMode="showAlways" scrollbarWidth="6" selectionPixmap="BlackHarmony/menu/sel_675_80.png"  />
-    <widget itemHeight="80" name="epg_list2" position="430,212" size="355,560" TimeStringColor="#00FFFFCC" TimeColor="#00FF9900" transparent="1" zPosition="4" scrollbarMode="showAlways" scrollbarWidth="6" selectionPixmap="BlackHarmony/menu/sel_675_80.png"  />
-    <widget itemHeight="80" name="epg_list3" position="785,212" size="355,560" TimeStringColor="#00FFFFCC" TimeColor="#00FF9900" transparent="1" zPosition="4" scrollbarMode="showAlways" scrollbarWidth="6" selectionPixmap="BlackHarmony/menu/sel_675_80.png"  />
-    <widget itemHeight="80" name="epg_list4" position="1140,212" size="355,560" TimeStringColor="#00FFFFCC" TimeColor="#00FF9900" transparent="1" zPosition="4" scrollbarMode="showAlways" scrollbarWidth="6" selectionPixmap="BlackHarmony/menu/sel_675_80.png"  />
-    <widget itemHeight="80" name="epg_list5" position="1495,212" size="355,560" TimeStringColor="#00FFFFCC" TimeColor="#00FF9900" transparent="1" zPosition="4" scrollbarMode="showAlways" scrollbarWidth="6" selectionPixmap="BlackHarmony/menu/sel_675_80.png"  /> 
-	
+	<widget itemHeight="80" name="epg_list1" position="74,212"  size="296,560" TimeStringColor="#00FFFFCC" TimeColor="#00FF9900"  transparent="1" zPosition="4" scrollbarMode="showAlways" scrollbarWidth="6" selectionPixmap="BlackHarmony/menu/sel_675_80.png"  />
+    <widget itemHeight="80" name="epg_list2" position="370,212" size="296,560" TimeStringColor="#00FFFFCC" TimeColor="#00FF9900" transparent="1" zPosition="4" scrollbarMode="showAlways" scrollbarWidth="6" selectionPixmap="BlackHarmony/menu/sel_675_80.png"  />
+    <widget itemHeight="80" name="epg_list3" position="666,212" size="296,560" TimeStringColor="#00FFFFCC" TimeColor="#00FF9900" transparent="1" zPosition="4" scrollbarMode="showAlways" scrollbarWidth="6" selectionPixmap="BlackHarmony/menu/sel_675_80.png"  />
+    <widget itemHeight="80" name="epg_list4" position="962,212" size="296,560" TimeStringColor="#00FFFFCC" TimeColor="#00FF9900" transparent="1" zPosition="4" scrollbarMode="showAlways" scrollbarWidth="6" selectionPixmap="BlackHarmony/menu/sel_675_80.png"  />
+    <widget itemHeight="80" name="epg_list5" position="1258,212" size="296,560" TimeStringColor="#00FFFFCC" TimeColor="#00FF9900" transparent="1" zPosition="4" scrollbarMode="showAlways" scrollbarWidth="6" selectionPixmap="BlackHarmony/menu/sel_675_80.png"  /> 
+	<widget itemHeight="80" name="epg_list6" position="1554,212" size="296,560" TimeStringColor="#00FFFFCC" TimeColor="#00FF9900" transparent="1" zPosition="4" scrollbarMode="showAlways" scrollbarWidth="6" selectionPixmap="BlackHarmony/menu/sel_675_80.png"  /> 
 	
 	
 	<eLabel position="75,780" size="1774,2" backgroundColor="yellow" />

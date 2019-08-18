@@ -1,0 +1,10 @@
+Package: enigma2-plugin-extensions--j00zeks-fanfilm
+Priority: optional
+Section: utils
+Depends: enigma2-plugin-skins--j00zeks-blackharmonyfhd
+Description: NIE SKOŃCZONA wersja tylko dla skórki BlackHarmony!!!
+Maintainer: j00zek
+Source: http://github.com/j00zek/eePlugins
+Version: 19.07.30.0743
+Architecture: all
+DestinationPath: /usr/lib/enigma2/python/Plugins/Extensions/FanFilmE2

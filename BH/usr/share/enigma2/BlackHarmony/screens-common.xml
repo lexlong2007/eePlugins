@@ -9111,3 +9111,19 @@
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="70,750" size="35,27" alphatest="blend" />
     <widget source="key_red" render="Label" position="120,750" size="200,30" zPosition="1" font="Regular;26" halign="left" backgroundColor="black" transparent="1" />
   </screen>
+<!--AudioZap by endriu-->
+  <screen name="AudioZap" backgroundColor="transparent" flags="wfNoBorder"  position="0,0" size="1920,1080" zPosition="-1">
+    <widget backgroundColor="transparent" font="Regular;60" halign="center" name="zap_focus" position="0,0" size="1920,1080" valign="center" zPosition="10" />
+    <eLabel backgroundColor="transparent" font="Regular;30" foregroundColor="foreground" halign="left" position="65,10" size="100,32" text="Audio:" transparent="1" zPosition="10" />
+    <widget backgroundColor="transparent" font="Regular;30" foregroundColor="foreground" halign="left" position="165,10" render="Label" size="795,32" source="MasterService" transparent="1" zPosition="10">
+      <convert type="ServiceName" />
+    </widget>
+    <eLabel backgroundColor="transparent" font="Regular;30" foregroundColor="foreground" halign="right" position="1755,10" size="100,32" text=": Video" transparent="1" zPosition="10" />
+    <widget backgroundColor="transparent" font="Regular;30" foregroundColor="foreground" halign="right" position="960,10" render="Label" size="795,32" source="SlaveService" transparent="1" zPosition="10">
+      <convert type="ServiceName" />
+    </widget>
+    <widget backgroundColor="transparent" name="video1" position="864,486" size="192,108" />
+    <widget backgroundColor="transparent" name="video2" position="0,0" size="1920,1080" />
+  </screen>
+  
+  

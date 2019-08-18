@@ -1,9 +1,17 @@
 #!/bin/sh
+if `grep -q 'osd.language=pl_PL' </etc/enigma2/settings`; then
+  Tekst='BLAD: niewspierana wersja skorki'
+else
+  Tekst='ERROR: incompatible environment found'
+fi
 if [ -e /usr/share/enigma2/Pingu-NavyBlue ] ; then
-  echo "ERROR: incompatible environment found!"
+  echo "$Tekst !"
   exit 1
 elif [ `ls /usr/share/enigma2/|grep -c Pingu-NavyBlue` -gt 0 ] ; then
-  echo "ERROR: incompatible environment found!!"
+  echo "$Tekst !!"
+  exit 1
+elif [ `ls /usr/lib/enigma2/python/Components/Converter/|grep -c Do_Not_Delete` -gt 0 ] ; then
+  echo "$Tekst !!!"
   exit 1
 else
   exit 0
