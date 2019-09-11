@@ -14,6 +14,18 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.5.5\n"
 
+msgid "My Memories"
+msgstr "Moje wspomnienia"
+
+msgid "off"
+msgstr "wył."
+
+msgid "show Bing pic of the day"
+msgstr "Pokaż codzienny obrazek z Bing-a"
+
+msgid "show my photos from folder"
+msgstr "Pokaż moje zdjęcia"
+
 msgid "black"
 msgstr "czarny"
 
@@ -46,9 +58,6 @@ msgstr "Ustawienia"
 
 msgid "Exif"
 msgstr "Informacja"
-
-msgid "PicturePlayer"
-msgstr "Przeglądarka zdjęć"
 
 msgid "Settings"
 msgstr "Ustawienia"
@@ -100,3 +109,24 @@ msgstr "Zobacz zdjęcia..."
 
 msgid "fileformats (BMP, PNG, JPG, GIF)"
 msgstr "typu BMP, PNG, JPG, GIF"
+
+msgid "Stop playing service"
+msgstr "Zatrzymaj odtwarzany serwis"
+
+msgid "Auto mode:"
+msgstr "Tryb automatycznego wyświetlania"
+
+msgid "Generate boot logo:"
+msgstr "Twórz logo startowe"
+
+msgid "Display photo on wakeup:"
+msgstr "Wyświetl zdjęcie po obudzeniu tunera"
+
+msgid "Display time:"
+msgstr "Czas wyświetlania po obudzeniu tunera"
+
+msgid "Photos directory:"
+msgstr "Katalog ze zdjęciami"
+
+msgid "Debug:"
+msgstr "Loguj do pliku /tmp/MyMemories.log"

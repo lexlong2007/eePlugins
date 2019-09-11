@@ -1,0 +1,10 @@
+Package: enigma2-plugin-extensions--j00zeks-mymemories
+Priority: optional
+Section: utils
+Depends: python-imaging
+Description: wyswietla zdjecia przy uruchamianiu lub budzeniu tunera
+Maintainer: j00zek
+Source: http://github.com/j00zek/eePlugins
+Version: 19.09.11.0948
+Architecture: all
+DestinationPath: /usr/lib/enigma2/python/Plugins/Extensions/MyMemories
