@@ -378,7 +378,7 @@ class AdvancedFreePlayerStart(Screen):
         if ret:
             self.rootID = ret[1]
             printDEBUG("Selected framework: " + ret[1])
-        self.StartPlayer()
+            self.StartPlayer()
       
     def StartPlayer(self):
         printDEBUG('StartPlayer >>>')

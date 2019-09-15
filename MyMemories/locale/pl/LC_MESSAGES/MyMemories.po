@@ -130,3 +130,21 @@ msgstr "Katalog ze zdjęciami"
 
 msgid "Debug:"
 msgstr "Loguj do pliku /tmp/MyMemories.log"
+
+msgid "Photo margins in full view"
+msgstr "Marginesy zdjęcia w trybie pełnoekranowym"
+
+msgid "Background color"
+msgstr "Kolor tła"
+
+msgid "Infoline color"
+msgstr "Kolor tekstu"
+
+msgid "Infoline height"
+msgstr "Wysokość tekstu"
+
+msgid "Infoline horizontal position"
+msgstr "Pozycja X linii informacyjnej"
+
+msgid "Infoline vertial position"
+msgstr "Pozycja Y linii informacyjnej"
