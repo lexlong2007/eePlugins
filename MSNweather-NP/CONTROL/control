@@ -5,6 +5,6 @@ Depends:
 Description: wersja tylko dla skórki BlackHarmony!!!
 Maintainer: j00zek
 Source: 
-Version: 19.07.30.0742
+Version: 19.10.12.1107
 Architecture: all
 DestinationPath: /usr/lib/enigma2/python/
