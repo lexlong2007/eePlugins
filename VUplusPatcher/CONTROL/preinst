@@ -1,7 +1,0 @@
-#!/bin/sh
-if [ "`cat /etc/opkg/all-feed.conf 2> /dev/null|grep -c 'code.vuplus.com'`" -gt 0 ];then
-  exit 0
-else
-  echo "ERROR: incompatible image found!"
-  exit 1
-fi

@@ -68,6 +68,7 @@
     <font filename="/usr/share/enigma2/BlackHarmony/fonts/BebasNeue.ttf" name="BebasNeue" scale="100" />
 </fonts>
   <parameters>
+    <parameter name="ConfigListSlider" value="22,1"/>
     <parameter name="ConfigListSeperator" value="250"/>
     <!--             MovieList                                  -->
     <parameter name="MovieListProgress" value="1200,17,80,13"/>
@@ -92,9 +93,9 @@
     <parameter name="ChoicelistName" value="45,1,800,40"/>
     <parameter name="ChoicelistIcon" value="3,4,35,35"/>
     <parameter name="ChoicelistDash" value="0,36,1000,30"/>
-    <!--             TimerList                         -->
-    <parameter name="EPGlistFont1" value="Roboto_HD; 30"/>
-    <parameter name="EPGlistFont2" value="Roboto_HD; 30"/>
+    <!--             EPGList                         -->
+    <parameter name="EPGlistFont1" value="Roboto_HD; 27"/>
+    <parameter name="EPGlistFont2" value="Roboto_HD; 27"/>
     <parameter name="EPGlistText1" value="20,0,70,40"/>
     <parameter name="EPGlistText2" value="90,0,200,40"/>
     <parameter name="EPGlistRecImage" value="320,5,21,21"/>
@@ -109,8 +110,11 @@
     <parameter name="FileListMultiName" value="55,1,470,36"/>
     <parameter name="FileListMultiIcon" value="30,8,20,20"/>
     <parameter name="FileListMultiLock" value="0,0,20,20"/>
+    <parameter name="FileListMulitiFont" value="Regular; 28" />
+    <parameter name="FileListMultiFontSize" value="37" />
+    <parameter name="FileListMultiItemHeight" value="40" />
     <parameter name="FileListFont" value="Roboto_HD;26"/>
-    <parameter name="FileListFontSize" value="32"/>
+    <parameter name="FileListFontSize" value="28"/>
     <parameter name="FileListItemHeight" value="35"/>
     <parameter name="HelpMenuListHlp" value="10,4,750,40"/>
     <parameter name="HelpMenuListFont0" value="Roboto_HD; 26"/>
@@ -130,6 +134,13 @@
     <parameter name="PluginListName" value="140,4,775,37"/>
     <parameter name="PluginListDescription" value="140,38,775,32"/>
     <parameter name="PluginListIcon" value="10,14,100,40"/>
+    <!--            PluginListDownload                 -->
+    <parameter name="PluginBrowserName" value="180,8,38" />
+    <parameter name="PluginBrowserDescr" value="180,42,25" />
+    <parameter name="PluginBrowserIcon" value="15,8,150,60" />
+    <parameter name="PluginBrowserDownloadName" value="120,8,38" />
+    <parameter name="PluginBrowserDownloadDescr" value="120,42,25" />
+    <parameter name="PluginBrowserDownloadIcon" value="15,0,90,75" />
     <!--             TimerList                        -->
     <parameter name="TimerListNoStyleName" value="0,3,1100,32"/>
     <parameter name="TimerListNoStyleDesc" value="0,46,1100,32"/>
@@ -147,7 +158,7 @@
     <parameter name="TimerListDisabledTimer" value="10,45,30,36"/>
     <parameter name="TimerListRedTimer" value="500,5,45,40"/>
     <parameter name="TimerListInstantRecord" value="10,45,30,36"/>
-    <!--             MultiQuickButtonLis                        -->
+    <!--             MultiQuickButtonList                        -->
     <parameter name="MultiQuickButtonListItemHeight" value="35"/>
     <parameter name="MultiQuickButtonList" value="45,1,780,35"/>
     <parameter name="MultiQuickButtonListFont" value="Roboto_HD;26"/>
@@ -173,6 +184,14 @@
     <!--             MediaplayerPlaylist                      -->
     <parameter name="MediaPlayerPlayListFont" value="Roboto_HD;26"/>
     <parameter name="MediaPlayerPlayList" value="30,2,700,40"/>
+    <parameter name="PlayListMultiName" value="39,3,675,39" />
+    <parameter name="PlayListMultiIcon" value="3,9,30,30" />
+    <parameter name="PlayListMultiLock" value="3,9,30,30" />
+         <!--            VirtualKeyBoard                      -->
+    <parameter name="VirtualKeyBoard" value="45,85"/>
+    <parameter name="VirtualKeyBoardAlignment" value="0,0"/>
+    <parameter name="VirtualKeyBoardPadding" value="4,4"/>
+    <parameter name="VirtualKeyBoardShiftColors" value="16777215, 16777215, 65535, 16711935"/>
   </parameters>
   <subtitles>
     <sub name="Subtitle_TTX" font="Napisy;70" foregroundColor="white" shadowColor="black" shadowOffset="4,4"/>

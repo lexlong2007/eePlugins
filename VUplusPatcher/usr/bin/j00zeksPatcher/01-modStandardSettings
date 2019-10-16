@@ -1,5 +1,0 @@
-#!/bin/sh
-##### USTAWIENIA STANDARDOWE #####
-echo "Zmiana ustawień standardowych"
-[ -e /usr/share/enigma2/defaults/skin_user.xml ] && rm -f /usr/share/enigma2/defaults/skin_user.xml
-

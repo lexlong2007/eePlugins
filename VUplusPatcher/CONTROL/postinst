@@ -1,8 +1,0 @@
-#!/bin/sh
-patcherDir='/usr/bin/j00zeksPatcher/'
-if [ -e $patcherDir ]; then
-  chmod 755 $patcherDir/[0-9][0-9]-*
-  run-parts $patcherDir
-  sleep 3
-fi
-exit 0

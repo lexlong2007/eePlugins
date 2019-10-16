@@ -67,7 +67,7 @@ class BlackHarmonypliLayoutInfo(Poll, Converter):
 
     @cached
     def getText(self):
-        text = 'N/A'
+        text = _('N/A')
         if self.type == self.HDDTEMP:
             text = self.getHddTemp()
         elif self.type == self.LOADAVG:
@@ -85,17 +85,17 @@ class BlackHarmonypliLayoutInfo(Poll, Converter):
             else:
                 list = self.getMemInfo(entry[0])
             if list[0] == 0:
-                text = '%s: Not Available' % entry[1]
+                text = _('%s: Not Available') % entry[1]
             elif self.shortFormat:
-                text = '%s: %s, in use: %s%%' % (entry[1], self.getSizeStr(list[0]), list[3])
+                text = _('%s: %s, in use: %s%%') % (entry[1], self.getSizeStr(list[0]), list[3])
             elif self.fullFormat:
-                text = '%s: %s Free:%s Used:%s (%s%%)' % (entry[1],
+                text = _('%s: %s Free:%s Used:%s (%s%%)') % (entry[1],
                  self.getSizeStr(list[0]),
                  self.getSizeStr(list[2]),
                  self.getSizeStr(list[1]),
                  list[3])
             else:
-                text = '%s: %s Used:%s Free:%s' % (entry[1],
+                text = _('%s: %s Used:%s Free:%s') % (entry[1],
                  self.getSizeStr(list[0]),
                  self.getSizeStr(list[1]),
                  self.getSizeStr(list[2]))
@@ -125,7 +125,7 @@ class BlackHarmonypliLayoutInfo(Poll, Converter):
     range = 100
 
     def getHddTemp(self):
-        textvalue = 'No info'
+        textvalue = _('No info')
         info = '0'
         try:
             out_line = popen('hddtemp -n -q /dev/sda').readline()
@@ -137,7 +137,7 @@ class BlackHarmonypliLayoutInfo(Poll, Converter):
         return textvalue
 
     def getLoadAvg(self):
-        textvalue = 'No info'
+        textvalue = _('No info')
         info = '0'
         try:
             out_line = popen('cat /proc/loadavg').readline()

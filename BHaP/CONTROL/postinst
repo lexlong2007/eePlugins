@@ -1,0 +1,199 @@
+#!/bin/sh
+if [ -e /usr/share/enigma2/BlackHarmony/skin_user_bar ];then
+  cp -f /usr/share/enigma2/BlackHarmony/skin_user_bar/* /usr/share/enigma2/BlackHarmony/menu/ 2>/dev/null
+fi
+
+if [ ! -e /usr/lib/enigma2/python/Plugins/Extensions/MSNweather ]; then
+  if `grep -q 'osd.language=pl_PL' </etc/enigma2/settings`; then
+    echo
+    echo "UWAGA:"
+    echo "Aby działało w skórce wyświetlanie pogody, musisz doinstalować wtyczkę z pogodą MSN (enigma2-plugin-extensions--j00zeks-msnweather-np)"
+  else
+    echo
+    echo "ATTENTION:"
+    echo "You need to install eMSN weather plugin plugin to use weather components in skin"
+  fi
+fi
+
+if [ -e /usr/lib/enigma2/python/skin.py ];then #patching BlackHole/Vuplus skin.py to be less resstrictive, similar rules to openATV
+  sed -i 's/\(^[ \t]*\)raise SkinError\(.*pixmap file %s not found!.*\)/\1print\2/' /usr/lib/enigma2/python/skin.py
+  sed -i 's/\(^[ \t]*\)raise SkinError\(.*need color and name, got %s %s.*\)/\1print\2/' /usr/lib/enigma2/python/skin.py
+  sed -i 's/\(^[ \t]*\)raise SkinError\(.*component with name .* was not found in skin of screen.*\)/\1print\2/' /usr/lib/enigma2/python/skin.py
+  sed -i 's/\(^[ \t]*\)raise SkinError\(.*specified related screen .* was not found in screen.*\)/\1print\2/' /usr/lib/enigma2/python/skin.py
+  sed -i 's/\(^[ \t]*\)raise SkinError\(.*source .* was not found in screen.*\)/\1print\2/' /usr/lib/enigma2/python/skin.py
+  sed -i 's/\(^[ \t]*\)raise SkinError\(.*you must define a renderer with render= for source.*\)/\1print\2/' /usr/lib/enigma2/python/skin.py
+  sed -i 's/\(^[ \t]*\)raise SkinError\(.*applet type .* unknown!.*\)/\1print\2/' /usr/lib/enigma2/python/skin.py
+  if [ "`grep -c 'config.skin.primary_vfdskin[ ]*=[ ]*ConfigText' < /usr/lib/enigma2/python/skin.py`" -eq 0 ];then
+    [ -e /usr/share/enigma2/vfd_skin ] || mkdir -p /usr/share/enigma2/vfd_skin
+    sed -i 's/\(^config.skin.primary_skin[ ]*=[ ]*ConfigText.default[ ]*=[ ]*DEFAULT_SKIN.*$\)/\1\nconfig.skin.primary_vfdskin = ConfigText(default="vfd_skin\/skin_vfd.xml")/' /usr/lib/enigma2/python/skin.py
+  fi
+  if [ "`grep -c 'profile("LoadSkinLCD")' < /usr/lib/enigma2/python/skin.py`" -eq 0 ];then
+    sed -i 's/\(^.*not loading user skin.*$\)/\1\n\nprofile("LoadSkinLCD")\ntry: loadSkin("\/usr\/share\/enigma2\/" + config.skin.primary_vfdskin.value, SCOPE_CONFIG)\nexcept (SkinError, IOError, AssertionError), err: print "not loading LCD skin: ", err/' /usr/lib/enigma2/python/skin.py
+  fi
+  echo
+  echo '/usr/lib/enigma2/python/skin.py patched'
+fi
+
+#build skin.xml
+echo '<skin>' > /usr/share/enigma2/BlackHarmony/skin.xml
+cat /usr/share/enigma2/BlackHarmony/skin-header.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
+cat /usr/share/enigma2/BlackHarmony/screens-common.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
+if [ -e /usr/lib/enigma2/python/Plugins/SystemPlugins/VTIPanel ];then
+  cat /usr/share/enigma2/BlackHarmony/screens-VTI_specific.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
+  echo 'VTI image'
+elif [ -e /usr/lib/enigma2/python/Plugins/Extensions/Infopanel ];then
+  cat /usr/share/enigma2/BlackHarmony/screens-openATV_specific.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
+  echo 'openATV image'
+elif [ -e /usr/lib/enigma2/python/Blackhole ];then
+  cat /usr/share/enigma2/BlackHarmony/screens-BlackHole_specific.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
+  sed -i 's/if compat == "passed"/if compat == compat/g' /usr/lib/enigma2/python/Plugins/SystemPlugins/SkinSelector/plugin.py
+  echo 'VTI BlackHole image'
+elif [ -e /etc/init.d/start_pkt.sh ];then
+  cat /usr/share/enigma2/BlackHarmony/screens-PKT_specific.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
+  echo 'PKT image'
+elif [ "`cat /etc/opkg/all-feed.conf 2> /dev/null|grep -c 'code.vuplus.com'`" -gt 0 ];then
+  cat /usr/share/enigma2/BlackHarmony/screens-VUoriginal_specific.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
+  echo 'Vu+ original image'
+  [ -e /usr/share/enigma2/defaults/skin_user.xml ] && rm -f /usr/share/enigma2/defaults/skin_user.xml
+  if [ "`ls -l /etc/enigma2/skin_user.xml 2> /dev/null|grep -c 'Jan.*1.*.1970'`" -gt 0 ];then
+    rm -f /etc/enigma2/skin_user.xml
+  fi
+elif [ "`cat /etc/opkg/all-feed.conf 2> /dev/null|grep -c 'openpli-7'`" -gt 0 ];then
+  cat /usr/share/enigma2/BlackHarmony/screens-openPLI7.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
+  echo 'openPLI-7'
+  [ -e /usr/share/enigma2/defaults/skin_user.xml ] && rm -f /usr/share/enigma2/defaults/skin_user.xml
+else
+  cat /usr/share/enigma2/BlackHarmony/screens-unknown.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
+  echo 'UNKNOWN image'
+fi
+echo '</skin>' >> /usr/share/enigma2/BlackHarmony/skin.xml
+sync
+#modyfikacja klawiszy dla systemow wspierajacych atrybut objectTypes
+if [ 1 -eq `grep -c objectTypes < /usr/lib/enigma2/python/skin.pyo` ];then
+  sed -i 's/\(^.*<widget\)[ ]*\(name="key_red"\)[ ]*\(.*$\)/\1 objectTypes="key_red,Label,Button" \2 \3\n\1 objectTypes="key_red,StaticText" source="key_red" render="Label" \3/g' /usr/share/enigma2/BlackHarmony/skin.xml
+  sed -i 's/\(^.*<widget\)[ ]*\(name="key_green"\)[ ]*\(.*$\)/\1 objectTypes="key_green,Label,Button" \2 \3\n\1 objectTypes="key_green,StaticText" source="key_green" render="Label" \3/g' /usr/share/enigma2/BlackHarmony/skin.xml
+  sed -i 's/\(^.*<widget\)[ ]*\(name="key_yellow"\)[ ]*\(.*$\)/\1 objectTypes="key_yellow,Label,Button" \2 \3\n\1 objectTypes="key_yellow,StaticText" source="key_yellow" render="Label" \3/g' /usr/share/enigma2/BlackHarmony/skin.xml
+  sed -i 's/\(^.*<widget\)[ ]*\(name="key_blue"\)[ ]*\(.*$\)/\1 objectTypes="key_blue,Label,Button" \2 \3\n\1 objectTypes="key_blue,StaticText" source="key_blue" render="Label" \3/g' /usr/share/enigma2/BlackHarmony/skin.xml
+  #czyszczenie ewentualnych duplikatow
+  sed -i 's/\(^.*\)\(source="key_red"\)\(.*\)\(source="key_red"\)/\1\2\3/g' /usr/share/enigma2/BlackHarmony/skin.xml
+  sed -i 's/\(^.*\)\(source="key_green"\)\(.*\)\(source="key_green"\)/\1\2\3/g' /usr/share/enigma2/BlackHarmony/skin.xml
+  sed -i 's/\(^.*\)\(source="key_yellow"\)\(.*\)\(source="key_yellow"\)/\1\2\3/g' /usr/share/enigma2/BlackHarmony/skin.xml
+  sed -i 's/\(^.*\)\(source="key_blue"\)\(.*\)\(source="key_blue"\)/\1\2\3/g' /usr/share/enigma2/BlackHarmony/skin.xml
+  
+  sed -i 's/\(^.*\)\(render="Label"\)\(.*\)\(render="Label"\)/\1\2\3/g' /usr/share/enigma2/BlackHarmony/skin.xml
+  #ustawienie zPosition o 1 wieksze jak zaleca openpli
+  sed -i 's/\(^.*objectTypes="key_red,StaticText".*\)\( zPosition="1"\)/\1 zPosition="2"/g' /usr/share/enigma2/BlackHarmony/skin.xml
+  sed -i 's/\(^.*objectTypes="key_green,StaticText".*\)\( zPosition="1"\)/\1 zPosition="2"/g' /usr/share/enigma2/BlackHarmony/skin.xml
+  sed -i 's/\(^.*objectTypes="key_yellow,StaticText".*\)\( zPosition="1"\)/\1 zPosition="2"/g' /usr/share/enigma2/BlackHarmony/skin.xml
+  sed -i 's/\(^.*objectTypes="key_blue,StaticText".*\)\( zPosition="1"\)/\1 zPosition="2"/g' /usr/share/enigma2/BlackHarmony/skin.xml
+fi
+#tworzenie linkow w strukturze drzewa
+find /usr/share/enigma2/BlackHarmony/allScreens -iname skin_channelselection_*.xml|while read f; do
+  #echo "$f"
+  if [ `echo "$f"|grep -c '/ChannelSelections/'` -eq 0 ]; then
+    f2="`echo \"$f\"|sed 's;\(^.*/allScreens/\).*\(/skin_*\);\1ChannelSelections\2;'`"
+    #echo "$f2"
+    ln -sf "$f" "$f2"
+  fi
+done
+find /usr/share/enigma2/BlackHarmony/allScreens -iname skin_infobar_*.xml|while read f; do
+  #echo "$f"
+  if [ `echo "$f"|grep -c '/Infobars/'` -eq 0 ]; then
+    f2="`echo \"$f\"|sed 's;\(^.*/allScreens/\).*\(/skin_*\);\1Infobars\2;'`"
+    #echo "$f2"
+    ln -sf "$f" "$f2"
+  fi
+done
+find /usr/share/enigma2/BlackHarmony/allScreens -iname skin_secondinfobar_*.xml|while read f; do
+  #echo "$f"
+  if [ `echo "$f"|grep -c '/Secondinfobars/'` -eq 0 ]; then
+    f2="`echo \"$f\"|sed 's;\(^.*/allScreens/\).*\(/skin_*\);\1Secondinfobars\2;'`"
+    #echo "$f2"
+    ln -sf "$f" "$f2"
+  fi
+done
+sync
+find /usr/share/enigma2/BlackHarmony/allScreens -iname skin_volume_*.xml|while read f; do
+  #echo "$f"
+  if [ `echo "$f"|grep -c '/Volume/'` -eq 0 ]; then
+    f2="`echo \"$f\"|sed 's;\(^.*/allScreens/\).*\(/skin_*\);\1Volume\2;'`"
+    #echo "$f2"
+    ln -sf "$f" "$f2"
+  fi
+done
+sync
+#bing image if not exists
+[ -e /usr/share/enigma2/BlackHarmony/icons/BingPicOfTheDay.jpg ] || /usr/lib/enigma2/python/Components/j00zekBING.py
+#deleting skin_user when his components modified
+if [ -e /usr/share/enigma2/BlackHarmony/mySkin/skin_user_BlackHarmony.xml ];then
+  UserSkinDate=`date -r /usr/share/enigma2/BlackHarmony/mySkin/skin_user_BlackHarmony.xml +"%s"`
+  find /usr/share/enigma2/BlackHarmony/UserSkin_Selections/ -iname skin_*.xml|while read f; do
+    if [ -e $f ]; then 
+      widgetDate=`date -r $f +"%s"`
+      if [[ $UserSkinDate -lt $widgetDate ]]; then
+        [ -e /usr/share/enigma2/BlackHarmony/mySkin/skin_user_BlackHarmony.xml ] && rm -f /usr/share/enigma2/BlackHarmony/mySkin/skin_user_BlackHarmony.xml
+        [ -e /etc/enigma2/skin_user_BlackHarmony.xml ] && rm -f /etc/enigma2/skin_user_BlackHarmony.xml
+        break
+      fi
+    else
+      rm -f $f
+      [ -e /usr/share/enigma2/BlackHarmony/mySkin/skin_user_BlackHarmony.xml ] && rm -f /usr/share/enigma2/BlackHarmony/mySkin/skin_user_BlackHarmony.xml
+      [ -e /etc/enigma2/skin_user_BlackHarmony.xml ] && rm -f /etc/enigma2/skin_user_BlackHarmony.xml
+      break
+    fi
+  done
+fi
+if [ -e /etc/enigma2/skin_user_BlackHarmony.xml ];then
+  UserSkinDate=`date -r /etc/enigma2/skin_user_BlackHarmony.xml +"%s"`
+  find /usr/share/enigma2/BlackHarmony/UserSkin_Selections/ -iname skin_*.xml|while read f; do
+    if [ -e $f ]; then 
+      widgetDate=`date -r $f +"%s"`
+      if [[ $UserSkinDate -lt $widgetDate ]]; then
+        rm -f /etc/enigma2/skin_user_BlackHarmony.xml
+        break
+      fi
+    else
+      rm -f $f
+      rm -f /etc/enigma2/skin_user_BlackHarmony.xml
+      break
+    fi
+  done
+fi
+if [ -e /etc/enigma2/skin_user.xml ];then
+  UserSkinDate=`date -r /etc/enigma2/skin_user.xml +"%s"`
+  find /usr/share/enigma2/BlackHarmony/UserSkin_Selections/ -iname skin_*.xml|while read f; do
+    if [ -e $f ]; then 
+      widgetDate=`date -r $f +"%s"`
+      if [[ $UserSkinDate -lt $widgetDate ]]; then
+        rm -f /etc/enigma2/skin_user.xml
+        break
+      fi
+    fi
+  done
+fi
+#set GS marker
+if `grep -q 'config.plugins.UserSkin.SafeMode=true' </etc/enigma2/settings`; then
+  touch /etc/enigma2/skinModified
+fi
+#final message
+if [ -e /usr/share/enigma2/BlackHarmony/UserSkin_Selections/ ];then
+  if [ -e /usr/share/enigma2/BlackHarmony/mySkin/skin_user_BlackHarmony.xml ];then
+    if `grep -q 'osd.language=pl_PL' </etc/enigma2/settings`; then
+      echo
+      echo "Skórka została zaktualizowana"
+    else
+      echo
+      echo "Skin has been updated"
+    fi
+  else
+    if `grep -q 'osd.language=pl_PL' </etc/enigma2/settings`; then
+      echo
+      echo "Nie zapomnij wejść do wtyczki UserSkin i wygenerować ponownie skórkę użytkownika"
+    else
+      echo
+      echo "Do not forget to enter UserSkin plugin and recreate user skin"
+    fi
+  fi
+fi
+sleep 5
+exit 0
