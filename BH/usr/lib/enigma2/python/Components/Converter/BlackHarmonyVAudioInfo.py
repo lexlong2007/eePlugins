@@ -1,6 +1,8 @@
 #
 #  j00zek: this file has changed name just to avoid errors using opkg (situation when file was installed by different pockage)
+#          All credits go to its author(s)
 #
+
 from enigma import iPlayableService
 from Components.Converter.Converter import Converter
 from Components.Element import cached

@@ -1,4 +1,4 @@
-s<kin>
+<skin>
 <screen backgroundColor="black" flags="wfNoBorder" name="ChannelSelection" position="center,center" size="1920,1080" title="Channel Selection">
   <ePixmap pixmap="BlackHarmony/bg_design/cs_pig.png" position="1,1" size="1920,1080" zPosition="-7" />
   <widget backgroundColor="black" font="Roboto_HD; 27" position="75,55" render="Label" size="80,30" source="global.CurrentTime" transparent="1">
