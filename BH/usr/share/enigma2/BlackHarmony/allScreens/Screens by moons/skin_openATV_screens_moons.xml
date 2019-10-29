@@ -1235,7 +1235,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
     <widget source="Title" render="Label" position="660,25" size="520,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1" />
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="40,850" size="35,27" alphatest="blend" />
     <widget source="key_red" render="Label" position="80,850" zPosition="1" size="140,27" font="Roboto_HD; 24" halign="left" valign="center" transparent="1" />
-    <widget source="menu" render="Listbox" position="70,150" size="530,450" selectionPixmap="BlackHarmony/menu/menusel.png" scrollbarMode="showOnDemand">
+    <widget source="menu" render="Listbox" position="70,150" size="530,450" selectionPixmap="BlackHarmony/menu/sel_565_45.png" scrollbarMode="showOnDemand">
       <convert type="TemplatedMultiContent">
 			{"template": [ 
           MultiContentEntryText(pos = (10, 5), size = (530, 45), flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 1), # index 0 is the MenuText,

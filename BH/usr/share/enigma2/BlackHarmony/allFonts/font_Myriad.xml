@@ -23,5 +23,6 @@
     <alias name="ServiceInfo" font="Roboto_HD" size="27" height="40" />
     <alias name="ChoiceBoxDescription" font="Roboto_HD" size="26" height="40"/>
     <alias name="TextNormal" font="Roboto_HD" size="26" height="40"/>
+    <alias name="SHOUTcastListItem" font="Roboto_HD" size="25" height="110"/>
   </fonts>
 </skin>

@@ -77,6 +77,7 @@ do
   [ -e $mydir/IPTVPlayer/hosts/ ] && cp -f $mydir/IPTVPlayer/hosts/* $destE2iplayerPath/hosts/
   [ -e $mydir/icons/ ] && cp -f $mydir/hosts/* $destE2iplayerPath/icons/
   [ -e $mydir/IPTVPlayer/icons ] && cp -f $mydir/IPTVPlayer/hosts/* $destE2iplayerPath/icons/
+  [ -d $mydir/IPTVPlayer/tsiplayer ] && cp -fr $mydir/IPTVPlayer/tsiplayer $destE2iplayerPath/tsiplayer
 done
 ############################## Copying local scripts ##############################
 cp -rf $mySe2iPpath/Sync_and_Patch/files-2-copy/* $destE2iplayerPath/
@@ -118,7 +119,7 @@ done
 ############################## modifying some hosts #############################
 myFile=$destE2iplayerPath/hosts/hostinfoversion.py
 sed -i 's/\(valTab\.insert.*Info o E2iPl\)/#\1/g' $myFile
-sed -i 's/self.inforemote <> "0.0.0"/1=0/g' $myFile
+sed -i 's/self.inforemote <> "0.0.0"/1==0/g' $myFile
 ############################## building hosts tree ##############################
 
 for myFile in `ls /usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/hosts/host*.py*`

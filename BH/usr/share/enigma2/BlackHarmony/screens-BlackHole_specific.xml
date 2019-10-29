@@ -1563,7 +1563,7 @@
     <widget source="global.CurrentTime" render="Label" position="160,30" size="360,35" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <widget name="config" font="Roboto_HD; 27" position="73,140" size="850,240" itemHeight="35" enableWrapAround="1"  scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/short_sel.png" backgroundColor="transpBlack" transparent="1" />
+    <widget name="config" font="Roboto_HD; 27" position="73,140" size="850,240" itemHeight="35" enableWrapAround="1"  scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_845_35.png" backgroundColor="transpBlack" transparent="1" />
    
   </screen>
   <screen name="HotkeySetup" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
@@ -1592,7 +1592,7 @@
     <widget source="global.CurrentTime" render="Label" position="160,30" size="360,35" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <widget name="config" font="Roboto_HD; 27" position="73,140" size="850,240" itemHeight="35" enableWrapAround="1"  scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/short_sel.png" backgroundColor="transpBlack" transparent="1" />
+    <widget name="config" font="Roboto_HD; 27" position="73,140" size="850,240" itemHeight="35" enableWrapAround="1"  scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_845_35.png" backgroundColor="transpBlack" transparent="1" />
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="47,440" size="35,27" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="273,440" size="35,27" alphatest="blend" />
 <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="499,440" size="35,27" alphatest="blend" />
@@ -1702,7 +1702,7 @@
     <widget source="global.CurrentTime" render="Label" position="160,30" size="360,35" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <widget name="config" font="Roboto_HD; 27" position="73,140" size="850,240" itemHeight="35" enableWrapAround="1"  scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/short_sel.png" backgroundColor="transpBlack" transparent="1" />
+    <widget name="config" font="Roboto_HD; 27" position="73,140" size="850,240" itemHeight="35" enableWrapAround="1"  scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_845_35.png" backgroundColor="transpBlack" transparent="1" />
     <widget source="status" render="Label" position="10,550" zPosition="1" size="800,135" font="Roboto_HD;28" halign="center" foregroundColor="lemon" backgroundColor="black" transparent="1"/>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="47,440" size="35,27" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="273,440" size="35,27" alphatest="blend" />
@@ -1744,7 +1744,7 @@
     <widget source="global.CurrentTime" render="Label" position="160,30" size="360,35" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <widget name="config" font="Roboto_HD; 27" position="73,140" size="850,240" itemHeight="35" enableWrapAround="1"  scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/short_sel.png" backgroundColor="transpBlack" transparent="1" />
+    <widget name="config" font="Roboto_HD; 27" position="73,140" size="850,240" itemHeight="35" enableWrapAround="1"  scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_845_35.png" backgroundColor="transpBlack" transparent="1" />
      <ePixmap pixmap="BlackHarmony/buttons/red.png" position="47,440" size="35,27" alphatest="blend" />
      <widget name="key_red"  position="87,439" size="180,32" zPosition="1" font="Roboto_HD; 24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1" />
 

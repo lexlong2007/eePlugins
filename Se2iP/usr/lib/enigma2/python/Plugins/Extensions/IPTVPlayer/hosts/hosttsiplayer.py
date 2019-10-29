@@ -2,20 +2,20 @@
 ###################################################
 # LOCAL import 
 ###################################################
-from Plugins.Extensions.IPTVPlayer.components.iptvplayerinit import TranslateTXT as _
-from Plugins.Extensions.IPTVPlayer.components.ihost import CHostBase, CBaseHostClass
-from Plugins.Extensions.IPTVPlayer.tools.iptvtools import printDBG, printExc, GetTmpDir
-from Plugins.Extensions.IPTVPlayer.tools.iptvtypes import strwithmeta
-from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.tstools import tunisia_gouv
+from Plugins.Extensions.IPTVPlayer.components.iptvplayerinit   import TranslateTXT as _
+from Plugins.Extensions.IPTVPlayer.components.ihost            import CHostBase, CBaseHostClass
+from Plugins.Extensions.IPTVPlayer.tools.iptvtools             import printDBG, printExc, GetTmpDir
+from Plugins.Extensions.IPTVPlayer.tools.iptvtypes             import strwithmeta
+from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.tstools      import tunisia_gouv
 
-from Plugins.Extensions.IPTVPlayer.libs.urlparserhelper import getDirectM3U8Playlist
-
+from Plugins.Extensions.IPTVPlayer.libs.urlparserhelper        import getDirectM3U8Playlist
+from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.urlparser    import urlparser as ts_urlparser
 
 from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.pars_openload import get_video_url as pars_openload
-from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.pars_samaup import get_video_url as pars_samaup
+from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.pars_samaup   import get_video_url as pars_samaup
 from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.pars_yourupload import get_video_url as pars_yourupload
-from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.pars_thevid import get_video_url as pars_thevid 
-from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.resolver import URLResolver
+from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.pars_thevid   import get_video_url as pars_thevid 
+from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.resolver      import URLResolver
 
 ###################################################
 # FOREIGN import
@@ -49,9 +49,11 @@ config.plugins.iptvplayer.ts_xtream_ua     = ConfigText(default = '', fixed_size
 
 
 config.plugins.iptvplayer.ts_dsn           = ConfigYesNo(default = True)
-config.plugins.iptvplayer.ud_methode = ConfigSelection(default = "tar", choices = [("tar", "TAR"), ("zip", "ZIP")])
+#config.plugins.iptvplayer.ud_methode = ConfigSelection(default = "tar", choices = [("tar", "TAR"), ("zip", "ZIP")])
 #config.plugins.iptvplayer.ol_resolver = ConfigSelection(default = "e2iplayer", choices = [("e2iplayer", "E2IPlayer"), ("tsiplayer", "TSIPlayer")])
 config.plugins.iptvplayer.ts_resolver = ConfigSelection(default = "tsmedia", choices = [("tsmedia", "TSMedia"), ("tsiplayer", "TSIPlayer")])
+config.plugins.iptvplayer.tsi_resolver = ConfigSelection(default = "tsiplayer", choices = [("tsiplayer", "TSIPlayer"),("e2iplayer", "E2Iplayer")])
+
 config.plugins.iptvplayer.dev_mod     = ConfigYesNo(default = False)
 config.plugins.iptvplayer.imsakiya_tn = ConfigSelection(default = '', choices = tunisia_gouv)
 config.plugins.iptvplayer.xtream_active = ConfigSelection(default = "Yes", choices = [("Yes", "Yes"), ("", "No")])
@@ -60,8 +62,9 @@ def GetConfigList():
 	optionList = []
 
 	optionList.append( getConfigListEntry(_("Decrypt Server Name:"), config.plugins.iptvplayer.ts_dsn) )
-	optionList.append( getConfigListEntry(_("Update Archive Type:"), config.plugins.iptvplayer.ud_methode) )
+#	optionList.append( getConfigListEntry(_("Update Archive Type:"), config.plugins.iptvplayer.ud_methode) )
 	optionList.append( getConfigListEntry(_("Developer mode:"), config.plugins.iptvplayer.dev_mod) )
+	optionList.append( getConfigListEntry(_("TSIplayer Resolver:"), config.plugins.iptvplayer.tsi_resolver) )	
 	optionList.append( getConfigListEntry(_("TSMedia group Resolver:"), config.plugins.iptvplayer.ts_resolver) )	
 #	optionList.append( getConfigListEntry(_("Openload Resolver:"), config.plugins.iptvplayer.ol_resolver) )	
 	optionList.append( getConfigListEntry(_("Display Xtream:"), config.plugins.iptvplayer.xtream_active) )
@@ -101,6 +104,14 @@ class TSIPlayer(CBaseHostClass):
 # MAIN CATEGORY
 ###################################################	
 	def MainCat(self):
+		self.GetVersions()
+		if (self.tsiplayerversion != self.tsiplayerremote) and (self.tsiplayerremote!='xxxx.xx.xx.x')and (self.tsiplayerremote!='xxxx.xx.xx.x'):
+			color='\c00????00'
+			titre_='-----●★| NEW UPDATE |★●-----'
+			img_='https://i.ibb.co/fVR0HL6/tsiplayer-update.png'
+			params = {'name':'cat','category' : 'update','title':color+titre_,'desc':'تحديث البرنامج','icon':img_} 
+			self.addDir(params)	
+		
 		self.addDir({'name':'cat','category' : 'FilmsSeriesAr','title':'Arabic section','desc':'Arabic section','icon':'https://i.ibb.co/Fgk8Yq4/tsiplayer-films.png'} )	
 		self.addDir({'name':'cat','category' : 'FilmsSeriesFr','title':'French section','desc':'Films, Series et Animes en Vf et Vostfr','icon':'https://i.ibb.co/Fgk8Yq4/tsiplayer-films.png'} )	
 		self.addDir({'name':'cat','category' : 'FilmsSeriesEn','title':'English section','desc':'Films, Series & Animes (Eng)','icon':'https://i.ibb.co/Fgk8Yq4/tsiplayer-films.png'} )	
@@ -123,25 +134,25 @@ class TSIPlayer(CBaseHostClass):
 			self.addDir({'name':'cat','category' : 'tsmedia','title':'TSMedia','desc':desc,'icon':pic,'gnr':'start'} )
 		if config.plugins.iptvplayer.dev_mod.value:
 			self.addDir({'name':'cat','category' : 'Devmod','title':'Development','desc':'','icon':'http://www.mezganisaid.com/z-include/images/code-dev.png'} )
-		self.GetVersions()
+		
 		if (self.tsiplayerremote=='xxxx.xx.xx.x'):
 			color='\c00??0000'
 			titre_='INFO (Remote version problem !!)'
 			img_='https://i.ibb.co/Q8ZRP0X/yaq9y3ab.png'
+			params = {'name':'cat','category' : 'update','title':color+titre_,'desc':'تحديث البرنامج','icon':img_} 
+			self.addDir(params)	
 		elif (self.tsiplayerversion=='xxxx.xx.xx.x'):			
 			color='\c0000????'
 			titre_=' ---> UPDATE <--- (Local version problem !!)'
-			img_='https://i.ibb.co/fVR0HL6/tsiplayer-update.png'						
+			img_='https://i.ibb.co/fVR0HL6/tsiplayer-update.png'
+			params = {'name':'cat','category' : 'update','title':color+titre_,'desc':'تحديث البرنامج','icon':img_} 
+			self.addDir(params)							
 		elif (self.tsiplayerversion == self.tsiplayerremote):
 			color='\c00??????'
 			titre_='INFO'
 			img_='https://i.ibb.co/Q8ZRP0X/yaq9y3ab.png'
-		else:
-			color='\c0000????'
-			titre_=' ---> UPDATE <--- '
-			img_='https://i.ibb.co/fVR0HL6/tsiplayer-update.png'
-		params = {'name':'cat','category' : 'update','title':color+titre_,'desc':'تحديث البرنامج','icon':img_} 
-		self.addDir(params)	
+			params = {'name':'cat','category' : 'update','title':color+titre_,'desc':'تحديث البرنامج','icon':img_} 
+			self.addDir(params)	
 #		self.addDir({'name':'cat','category' : 'vstream','title':'Vstream','desc':'desc','icon':''} )
 #1:Ar,2:Live,3:Kids,4:Ramadan,6:Ar+In,10:dev,101:EN,102:FR,
 #Live sport: 100,replay Sport: 110
@@ -191,14 +202,11 @@ class TSIPlayer(CBaseHostClass):
 	def DevCat(self):
 		self.addMarker({'category' :'marker','title':'\c00????00 -----●★| Tools |★●-----','desc':'Dessins animés & Animes en VF et VOSTFR'})
 		self.tsiplayer_host({'cat_id':'103'})
-		if config.plugins.iptvplayer.ud_methode.value=='tar':
-			cat_='update_now'
-			tag='tar'
-		else:
-			cat_='update_now2'
-			tag='zip'					
-		params = {'category' : cat_,'title':'\c0000????'+' +++++++ FORCE UPDATE & RESTART ('+tag+') +++++++ ','name':'update_restart'} 
-		self.addDir(params)	
+		params = {'category' : 'update_now','title':'\c0000????'+' +++++++ FORCE UPDATE & RESTART (Tar method) +++++++ ','name':'update_restart'} 
+		self.addDir(params)		
+		params = {'category' : 'update_now2','title':'\c0000????'+' +++++++ FORCE UPDATE & RESTART (Zip method) +++++++ ','name':'update_restart'} 
+		self.addDir(params)			
+				
 		self.addMarker({'category' :'marker','title':'\c00????00 -----●★| Hosts en développement |★●-----','desc':'Dessins animés & Animes en VF et VOSTFR'})
 		self.tsiplayer_host({'cat_id':'102'})	
 		self.addMarker({'category' :'marker','title':'\c00????00 -----●★| Hosts Out |★●-----','desc':'Dessins animés & Animes en VF et VOSTFR'})
@@ -292,11 +300,11 @@ class TSIPlayer(CBaseHostClass):
 			argv2=cItem.get('argv2','{}')
 			if argv2=='{}':
 				file_=section_ + '___' +plugin_id_
-				try:
+				'''try:
 					_url='http://86.105.212.206/tsiplayer/stat.php?host=host_TSMedia&cat='+file_
 					self.cm.getPage(_url)
 				except:
-					printDBG('erreur')	
+					printDBG('erreur')	'''
 			lst=[]	
 			sys.argv = [py_file,'1',argv2,'']
 			import_ = 'from Plugins.Extensions.TSmedia.addons.' + section_ + '.' + plugin_id_ + '.default import start'
@@ -520,11 +528,11 @@ class TSIPlayer(CBaseHostClass):
 		import_str = cItem.get('import',self.import_str)
 		if self.import_str!=import_str:
 			file_=import_str.replace('from Plugins.Extensions.IPTVPlayer.tsiplayer.','').replace(' import ','')
-			try:
+			'''try:
 				_url='http://86.105.212.206/tsiplayer/stat.php?host='+file_+'&cat=Main_'
 				self.cm.getPage(_url)
 			except:
-				printDBG('erreur')
+				printDBG('erreur')'''
 			exec (import_str+'TSIPHost')
 			self.import_str=import_str
 			self.host_ = TSIPHost()	
@@ -581,19 +589,16 @@ class TSIPlayer(CBaseHostClass):
 				printDBG( 'Host listsItems phTitle: '+phTitle )
 				printDBG( 'Host listsItems phUpdated: '+phUpdated )
 				printDBG( 'Host listsItems phName: '+phName )
-				params = {'category' : 'none','title':phUpdated+' '+phName+'  >>  '+phTitle,'desc':phUpdated+' '+phName+'  >>  '+phTitle,'name':'update'} 
+				params = {'category' : 'none','title':phUpdated+'|  '+phTitle,'desc':phUpdated+' '+phName+'  >>  '+phTitle,'name':'update'} 
 				self.addMarker(params)	
 		
 	def Update(self):
 		printDBG( 'Update begin' )
 		params = {'category' : 'none','title':'Local version: '+str(self.tsiplayerversion)+'  |  '+'Remote version: '+str(self.tsiplayerremote),'name':'update'} 
 		self.addMarker(params)	
-
-		params = {'category' : 'log','title':'ChangeLog','name':'update'} 
-		self.addDir(params)	
-		params = {'category' : 'contact','title':'Contact Us','name':'contact'} 
-		self.addDir(params)	
+		
 		if (self.tsiplayerversion != self.tsiplayerremote) and (self.tsiplayerremote!='xxxx.xx.xx.x'):
+			'''
 			if config.plugins.iptvplayer.ud_methode.value=='tar':
 				cat_='update_now'
 				tag='tar'
@@ -604,7 +609,17 @@ class TSIPlayer(CBaseHostClass):
 			params = {'category' : cat_,'title':'\c0000????'+' ++++++++++++ UPDATE NOW ('+tag+') ++++++++++++ ','name':'update'} 
 			self.addDir(params)	
 			params = {'category' : cat_,'title':'\c0000????'+' +++++++ UPDATE NOW & RESTART ('+tag+') +++++++ ','name':'update_restart'} 
+			self.addDir(params)		
+			'''
+			params = {'category' : 'update_now','title':'\c0000????'+' +++++++ UPDATE & RESTART ( \c00????00TAR Method\c0000???? ) +++++++ ','name':'update_restart'} 
+			self.addDir(params)		
+			params = {'category' : 'update_now2','title':'\c0000????'+' +++++++ UPDATE & RESTART ( \c00????00ZIP Method\c0000???? ) +++++++ ','name':'update_restart'} 
 			self.addDir(params)	
+			
+		params = {'category' : 'log','title':"What's New",'name':'update'} 
+		self.addDir(params)	
+		params = {'category' : 'contact','title':'Contact Us','name':'contact'} 
+		self.addDir(params)	
 		params = {'category' : 'thx','title':'Thanks','name':'thx'} 
 		self.addDir(params)				 
 		printDBG( 'Host getInitList end' )
@@ -937,6 +952,7 @@ class TSIPlayer(CBaseHostClass):
 		hst=cItem['hst']
 		
 
+
 		
 		urlTab = []
 		if hst=='direct':	
@@ -949,7 +965,25 @@ class TSIPlayer(CBaseHostClass):
 				exec (import_str+'TSIPHost')
 				self.import_str=import_str
 				self.host_ = TSIPHost()	
-			urlTab=self.host_.get_links(cItem)						
+			urlTab0=self.host_.get_links(cItem)
+			urlTab=[]
+			for elm in urlTab0:
+				name_ = elm.get('name','XXXX')
+				type_ = elm.get('type','XXXX')
+				color =''
+				if type_=='local':
+					color = '\c0060??60'
+				elif ts_urlparser().checkHostSupportbyname(name_):
+					color = '\c0090??20'
+				elif ts_urlparser().checkHostNotSupportbyname(name_):
+					color = '\c00??3030'						
+				if '|' in name_:
+					name_=name_.replace(name_.split('|')[-1],color+name_.split('|')[-1].lower().replace('www.','').title())
+				else:
+					name_=color+name_.lower().replace('www.','').title()					
+				elm ['name']= name_					
+				urlTab.append(elm)	
+				
 		else:
 			exec('urlTab = self.'+hst+'_links(cItem[\'url\'])')		
 		return urlTab
@@ -995,7 +1029,7 @@ class TSIPlayer(CBaseHostClass):
 
 
 		 
-	def TSgetVideoLinkExt(self,videoUrl):
+	def TSgetVideoLinkExt(self,videoUrl): 
 		urlTab=[]
 		try:
 			urlTab = URLResolver(videoUrl).getLinks()

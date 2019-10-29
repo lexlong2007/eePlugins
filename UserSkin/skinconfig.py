@@ -961,6 +961,7 @@ class TreeUserSkinScreens(Screen):
             if path.exists('/tmp/preview.jpg'):
                 remove('/tmp/preview.jpg')
             if self.PreviewsURL is not None:
+                self.PreviewsURL = self.PreviewsURL.replace(' ','%20')
                 downloadPage('%s%s.jpg' % (self.PreviewsURL, pic), file('/tmp/preview.jpg', 'wb')).addCallback(webPreview).addErrback(webError)
             else:
                 printDEBUG("[UserSkin:PreviewTimerCB] '%s.jpg' not found" % pic )

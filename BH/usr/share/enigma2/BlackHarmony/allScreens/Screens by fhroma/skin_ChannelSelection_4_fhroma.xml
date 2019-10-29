@@ -15,7 +15,7 @@
     <widget source="Title" render="Label" position="200,110" size="1025,45" font="Roboto_HD; 27" backgroundColor="black" foregroundColor="yellow" transparent="1" halign="left"  />
 	 
 		<ePixmap position="1058,140" zPosition="2" size="35,680" pixmap="BlackHarmony/gfx/scroll.png" alphatest="blend" transparent="1" />
-    <widget name="list" position="55,155" size="1025,635" serviceItemHeight="45" selectionPixmap="BlackHarmony/menu/channel_sel.png" scrollbarMode="showOnDemand" enableWrapAround="1" colorServiceDescription="#99CC99" colorServiceDescriptionSelected="lemon" colorEventProgressbarBorder="border" colorEventProgressbarBorderSelected="border" picServiceEventProgressbar="BlackHarmony/gfx/progcl.png" foregroundColorServiceNotAvail="#777777" serviceNumberFont="Roboto_HD;28" serviceNameFont="Roboto_HD;28" serviceInfoFont="Roboto_HD;24"  transparent="0" />
+    <widget name="list" position="55,155" size="1025,635" serviceItemHeight="45" selectionPixmap="BlackHarmony/menu/sel_1005_40.png" scrollbarMode="showOnDemand" enableWrapAround="1" colorServiceDescription="#99CC99" colorServiceDescriptionSelected="lemon" colorEventProgressbarBorder="border" colorEventProgressbarBorderSelected="border" picServiceEventProgressbar="BlackHarmony/gfx/progcl.png" foregroundColorServiceNotAvail="#777777" serviceNumberFont="Roboto_HD;28" serviceNameFont="Roboto_HD;28" serviceInfoFont="Roboto_HD;24"  transparent="0" />
     <widget font="Roboto_HD; 26" position="1711,705" render="Label" size="90,30" source="ServiceEvent" transparent="1" zPosition="2" halign="left" backgroundColor="black">
       <convert type="EventTime">Remaining</convert>
       <convert type="RemainingToText">NoSeconds</convert>

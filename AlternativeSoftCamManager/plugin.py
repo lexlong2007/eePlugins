@@ -41,14 +41,9 @@ language.addCallback(localeInit)
 config.plugins.AltSoftcam = ConfigSubsection()
 config.plugins.AltSoftcam.enabled = ConfigYesNo(default = False)
 config.plugins.AltSoftcam.OsCamonly = ConfigYesNo(default = True)
-if open('/proc/cpuinfo', 'r').read().lower().find('armv7') > -1:
-    config.plugins.AltSoftcam.actcam = ConfigText(default = "oscam-svn11534-arm-ssl-libusb")
-elif open('/proc/cpuinfo', 'r').read().lower().find('mips') > -1:
-    config.plugins.AltSoftcam.actcam = ConfigText(default = "oscam-svn11534-mipsel-ssl100")
-else:
-    config.plugins.AltSoftcam.actcam = ConfigText(default = _("none"))
-config.plugins.AltSoftcam.camdir = ConfigDirectory(default = "/usr/lib/enigma2/python/Plugins/Extensions/AlternativeSoftCamManager/CAMbin")
-config.plugins.AltSoftcam.camconfig = ConfigDirectory(default = "/usr/lib/enigma2/python/Plugins/Extensions/AlternativeSoftCamManager/CAMconfig")
+config.plugins.AltSoftcam.actcam = ConfigText(default = _("none"))
+config.plugins.AltSoftcam.camdir = ConfigDirectory(default = "/")
+config.plugins.AltSoftcam.camconfig = ConfigDirectory(default = "/")
 AltSoftcamConfigError = False
 if not os_path.isdir(config.plugins.AltSoftcam.camconfig.value):
     config.plugins.AltSoftcam.camconfig.value = _("none")

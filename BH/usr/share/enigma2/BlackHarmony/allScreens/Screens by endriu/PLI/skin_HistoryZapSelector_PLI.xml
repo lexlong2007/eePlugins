@@ -1,0 +1,568 @@
+<skin>
+<!-- HistoryZapDefaultSkin screen -->
+
+<screen name="HistoryZapDefaultSkinFullHD" position="0,0" size="850,1080" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap position="0,0" zPosition="-10" size="850,1080" pixmap="BlackHarmony/bg_design/zap_history.png" />
+    <widget source="global.CurrentTime" render="Label" position="16,20" size="90,40" font="Roboto_HD; 32" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="470,20" size="360,40" font="Roboto_HD; 32" halign="right" foregroundColor="lemon" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+    </widget>
+	<eLabel text="Historia przełączania" position="16,70" size="810,40" font="Roboto_HD; 32" halign="center" backgroundColor="dark_grey" transparent="1"/>
+
+	<widget source="menu" render="Listbox" position="28,133" size="792,884" selectionPixmap="BlackHarmony/menu/sel_860_60.png" scrollbarMode="showOnDemand" scrollbarWidth="10">
+	<convert type="TemplatedMultiContent">
+	{"template": [
+		MultiContentEntryText(pos = (15, 3), size = (42, 42), color = 0x00ffc000, color_sel = 0x00ffc000, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 1),
+		MultiContentEntryText(pos = (80, 3), size = (703, 45), flags = RT_HALIGN_LEFT, text = 2, color = 0x00ffffff, color_sel = 0x00ffffff)
+		],
+		"fonts": [gFont("Regular", 35)],
+		"itemHeight": 52
+		}
+		</convert>
+		</widget>
+			
+	<ePixmap pixmap="BlackHarmony/buttons/key_menu.png" position="20,1033" size="60,30" alphatest="blend" />
+	<ePixmap pixmap="BlackHarmony/buttons/red.png" position="85,1034" size="35,27" alphatest="on"/>
+	<ePixmap pixmap="BlackHarmony/buttons/green.png" position="285,1034" size="35,27" alphatest="on"/>
+	<ePixmap pixmap="BlackHarmony/buttons/blue.png" position="485,1034" size="35,27" alphatest="on"/>
+    <ePixmap alphatest="blend" pixmap="BlackHarmony/buttons/key_info.png" position="631,1033" size="60,30" />
+	<ePixmap alphatest="blend" pixmap="BlackHarmony/buttons/key_infoo.png" position="698,1033" size="60,30" />
+	<ePixmap alphatest="blend" pixmap="BlackHarmony/buttons/key_exit.png" position="765,1033" size="60,30" />
+	<eLabel text="Usuń wpis" position="120,1034" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Czyść listę" position="320,1034" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Podgląd" position="520,1034" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	
+		</screen>
+
+<!-- HistoryZapEventSkin -->
+		
+	 <screen name="HistoryZapEventSkinFullHD" position="center,center" size="1522,1022" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap position="center,center" zPosition="-10" size="1522,1022" pixmap="BlackHarmony/bg_design/wizard.png" />
+    <widget source="global.CurrentTime" render="Label" position="40,35" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="125,35" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+    </widget>
+    <eLabel text="Historia przełączania" position="1064,35" size="400,35" font="Roboto_HD; 27" halign="right"  foregroundColor="white" backgroundColor="black" transparent="1" />
+		
+		
+	<widget source="menu" render="Listbox" position="64,160" size="1390,750" scrollbarMode="showOnDemand" scrollbarWidth="10" selectionPixmap="BlackHarmony/menu/sel_1390_50.png" >
+	<convert type="TemplatedMultiContent">
+	{"template": [
+		MultiContentEntryText(pos = (15, 3), size = (39, 42), color = 0x00ffc000, color_sel = 0x00ffc000, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 1),
+		MultiContentEntryText(pos = (68, 3), size = (390, 42), flags = RT_HALIGN_LEFT, text = 2, color = 0x00ffffff, color_sel = 0x00ffffff),
+		MultiContentEntryText(pos = (473, 3), size = (905, 42), flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3, color = 0x00ffc000, color_sel = 0x00ffc000)
+		],
+		"fonts": [gFont("Regular", 33)],
+		"itemHeight": 50
+		}
+		</convert>
+		</widget>
+			
+			
+	<ePixmap pixmap="BlackHarmony/buttons/key_menu.png" position="50,950" size="60,30" alphatest="blend" />		
+	<ePixmap pixmap="BlackHarmony/buttons/red.png" position="150,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="460,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="770,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="1080,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_info.png" position="1275,950" size="60,30" alphatest="blend" />
+	<ePixmap pixmap="BlackHarmony/buttons/key_infoo.png" position="1342,950" size="60,30" alphatest="blend" />
+	<ePixmap pixmap="BlackHarmony/buttons/key_exit.png" position="1409,950" size="60,30" alphatest="blend"  />
+	<eLabel text="Usuń wpis" position="185,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Czyść listę" position="495,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Wszystkie" position="805,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Podgląd" position="1115,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	
+		</screen>
+
+<!--  HistoryZapEventPiconSkin -->
+		
+	<screen name="HistoryZapEventPiconSkinFullHD" position="center,center" size="1522,1022" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap position="center,center" zPosition="-10" size="1522,1022" pixmap="BlackHarmony/bg_design/wizard.png" />
+    <widget source="global.CurrentTime" render="Label" position="40,35" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="125,35" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+    </widget>
+    <eLabel text="Historia przełączania" position="1064,35" size="400,35" font="Roboto_HD; 27" halign="right"  foregroundColor="white" backgroundColor="black" transparent="1" />	
+		
+	<widget source="menu" render="Listbox" position="64,160" size="1390,752" scrollbarMode="showOnDemand" scrollbarWidth="10" selectionPixmap="BlackHarmony/menu/sel_1390_100.png" >
+	<convert type="TemplatedMultiContent">
+	{"template": [
+		MultiContentEntryText(pos = (80, 21), size = (39, 42), color = 0x00ffc000, color_sel = 0x00ffc000, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 1),
+		MultiContentEntryText(pos = (128, 3), size = (1220, 42), flags = RT_HALIGN_LEFT, text = 2, color = 0x00ffffff, color_sel = 0x00ffffff),
+		MultiContentEntryText(pos = (128, 45), size = (1220, 42), flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3, color = 0x00ffc000, color_sel = 0x00ffc000),
+		MultiContentEntryPixmapAlphaBlend(pos=(1, 19), size=(75, 45), png=6)
+		],
+		"fonts": [gFont("Regular", 33)],
+		"itemHeight": 94
+		}
+		</convert>
+		</widget>
+			
+	<ePixmap pixmap="BlackHarmony/buttons/key_menu.png" position="50,950" size="60,30" alphatest="blend" />		
+	<ePixmap pixmap="BlackHarmony/buttons/red.png" position="150,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="460,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="770,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="1080,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_info.png" position="1275,950" size="60,30" alphatest="blend" />
+	<ePixmap pixmap="BlackHarmony/buttons/key_infoo.png" position="1342,950" size="60,30" alphatest="blend" />
+	<ePixmap pixmap="BlackHarmony/buttons/key_exit.png" position="1409,950" size="60,30" alphatest="blend"  />
+	<eLabel text="Usuń wpis" position="185,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Czyść listę" position="495,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Wszystkie" position="805,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Podgląd" position="1115,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+			
+		</screen>
+
+<!-- HistoryZapEventDuration -->
+		
+	<screen name="HistoryZapEventDurationSkinFullHD" position="center,center" size="1522,1022" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap position="center,center" zPosition="-10" size="1522,1022" pixmap="BlackHarmony/bg_design/wizard.png" />
+    <widget source="global.CurrentTime" render="Label" position="40,35" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="125,35" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+    </widget>
+    <eLabel text="Historia przełączania" position="1064,35" size="400,35" font="Roboto_HD; 27" halign="right"  foregroundColor="white" backgroundColor="black" transparent="1" />	
+		
+	<widget source="menu" render="Listbox" position="64,160" size="1390,752" scrollbarMode="showOnDemand" scrollbarWidth="10" selectionPixmap="BlackHarmony/menu/sel_1390_100.png" >
+	<convert type="TemplatedMultiContent">
+	{"template": [
+		MultiContentEntryText(pos = (15, 21), size = (39, 42), color = 0x00ffc000, color_sel = 0x00ffc000, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 1),
+		MultiContentEntryText(pos = (70, 3), size = (410, 42), flags = RT_HALIGN_LEFT | RT_VALIGN_TOP, text = 2, color = 0x00ffffff, color_sel = 0x00ffffff),
+		MultiContentEntryText(pos = (480, 3), size = (910, 42), flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3, color = 0x00ffc000, color_sel = 0x00ffc000),
+		MultiContentEntryText(pos = (70, 45), size = (410, 42), flags = RT_HALIGN_LEFT, text = 5, color = 0x00999999, color_sel = 0x00999999)
+		],
+		"fonts": [gFont("Regular", 33), ],
+		"itemHeight": 94
+		}
+		</convert>
+		</widget>
+			
+	<ePixmap pixmap="BlackHarmony/buttons/key_menu.png" position="50,950" size="60,30" alphatest="blend" />		
+	<ePixmap pixmap="BlackHarmony/buttons/red.png" position="150,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="460,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="770,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="1080,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_info.png" position="1275,950" size="60,30" alphatest="blend" />
+	<ePixmap pixmap="BlackHarmony/buttons/key_infoo.png" position="1342,950" size="60,30" alphatest="blend" />
+	<ePixmap pixmap="BlackHarmony/buttons/key_exit.png" position="1409,950" size="60,30" alphatest="blend"  />
+	<eLabel text="Usuń wpis" position="185,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Czyść listę" position="495,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Wszystkie" position="805,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Podgląd" position="1115,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+		</screen>
+ 
+ <!-- HistoryZapEventDurationBar -->
+		
+	<screen name="HistoryZapEventDurationBarSkinFullHD" position="center,center" size="1522,1022" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap position="center,center" zPosition="-10" size="1522,1022" pixmap="BlackHarmony/bg_design/wizard.png" />
+    <widget source="global.CurrentTime" render="Label" position="40,35" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="125,35" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+    </widget>
+    <eLabel text="Historia przełączania" position="1064,35" size="400,35" font="Roboto_HD; 27" halign="right"  foregroundColor="white" backgroundColor="black" transparent="1" />	
+		
+	<widget source="menu" render="Listbox" position="64,160" size="1390,752" scrollbarMode="showOnDemand" scrollbarWidth="10" selectionPixmap="BlackHarmony/menu/sel_1390_100.png" >
+	<convert type="TemplatedMultiContent">
+	{"template": [
+		MultiContentEntryText(pos = (15, 21), size = (39, 42), color = 0x00ffc000, color_sel = 0x00ffc000, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 1),
+		MultiContentEntryText(pos = (68, 3), size = (390, 42), flags = RT_HALIGN_LEFT | RT_VALIGN_TOP, text = 2, color = 0x00ffffff, color_sel = 0x00ffffff),
+		MultiContentEntryText(pos = (473, 3), size = (898, 42),flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3, color = 0x00ffc000, color_sel = 0x00ffc000),
+		MultiContentEntryProgress(pos = (68, 57), size = (278, 18), percent = -5, borderWidth = 1, foreColor = 0x0056c856, foreColorSelected = 0x0058bcff),
+		MultiContentEntryText(pos = (368, 45), size = (68, 42), flags = RT_HALIGN_LEFT, text = 7, color = 0x00999999, color_sel = 0x009999ff)
+		],
+		"fonts": [gFont("Regular", 33)],
+		"itemHeight": 94
+		}
+		</convert>
+		</widget>
+			
+	<ePixmap pixmap="BlackHarmony/buttons/key_menu.png" position="50,950" size="60,30" alphatest="blend" />		
+	<ePixmap pixmap="BlackHarmony/buttons/red.png" position="150,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="460,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="770,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="1080,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_info.png" position="1275,950" size="60,30" alphatest="blend" />
+	<ePixmap pixmap="BlackHarmony/buttons/key_infoo.png" position="1342,950" size="60,30" alphatest="blend" />
+	<ePixmap pixmap="BlackHarmony/buttons/key_exit.png" position="1409,950" size="60,30" alphatest="blend"  />
+	<eLabel text="Usuń wpis" position="185,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Czyść listę" position="495,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Wszystkie" position="805,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Podgląd" position="1115,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+		</screen>
+ 
+ <!-- HistoryZapEventDurationPicon -->
+		
+	
+	<screen name="HistoryZapEventDurationPiconSkinFullHD" position="center,center" size="1522,1022" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap position="center,center" zPosition="-10" size="1522,1022" pixmap="BlackHarmony/bg_design/wizard.png" />
+    <widget source="global.CurrentTime" render="Label" position="40,35" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="125,35" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+    </widget>
+    <eLabel text="Historia przełączania" position="1064,35" size="400,35" font="Roboto_HD; 27" halign="right"  foregroundColor="white" backgroundColor="black" transparent="1" />		
+			
+		<widget source="menu" render="Listbox" position="64,160" size="1390,752" scrollbarMode="showOnDemand" scrollbarWidth="10" selectionPixmap="BlackHarmony/menu/sel_1390_100.png" >
+	<convert type="TemplatedMultiContent">
+		{"template": [
+		MultiContentEntryText(pos = (80, 21), size = (39, 42), color = 0x00ffc000, color_sel = 0x00ffc000, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 1),
+		MultiContentEntryText(pos = (128, 3), size = (390, 42), flags = RT_HALIGN_LEFT | RT_VALIGN_TOP, text = 2, color = 0x00ffffff, color_sel = 0x00ffffff),
+		MultiContentEntryText(pos = (533, 3), size = (838, 42), flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3, color = 0x00ffc000, color_sel = 0x00ffc000),
+		MultiContentEntryText(pos = (128, 51), size = (390, 42), flags = RT_HALIGN_LEFT, text = 5, color = 0x00999999, color_sel = 0x00999999),
+		MultiContentEntryPixmapAlphaBlend(pos=(1, 19), size=(75, 45), png=6)
+		],
+		"fonts": [gFont("Regular", 33)],
+		"itemHeight": 94
+					}
+				</convert>
+			</widget>
+	<ePixmap pixmap="BlackHarmony/buttons/key_menu.png" position="50,950" size="60,30" alphatest="blend" />		
+	<ePixmap pixmap="BlackHarmony/buttons/red.png" position="150,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="460,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="770,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="1080,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_info.png" position="1275,950" size="60,30" alphatest="blend" />
+	<ePixmap pixmap="BlackHarmony/buttons/key_infoo.png" position="1342,950" size="60,30" alphatest="blend" />
+	<ePixmap pixmap="BlackHarmony/buttons/key_exit.png" position="1409,950" size="60,30" alphatest="blend"  />
+	<eLabel text="Usuń wpis" position="185,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Czyść listę" position="495,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Wszystkie" position="805,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Podgląd" position="1115,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+		</screen>
+	
+<!-- HistoryZapEventDurationPiconBar -->
+
+	
+	<screen name="HistoryZapEventDurationPiconBarSkinFullHD" position="center,center" size="1522,1022" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap position="center,center" zPosition="-10" size="1522,1022" pixmap="BlackHarmony/bg_design/wizard.png" />
+    <widget source="global.CurrentTime" render="Label" position="40,35" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="125,35" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+    </widget>
+    <eLabel text="Historia przełączania" position="1064,35" size="400,35" font="Roboto_HD; 27" halign="right"  foregroundColor="white" backgroundColor="black" transparent="1" />			
+		
+	<widget source="menu" render="Listbox" position="64,160" size="1390,752" scrollbarMode="showOnDemand" scrollbarWidth="10" selectionPixmap="BlackHarmony/menu/sel_1390_100.png" >
+	<convert type="TemplatedMultiContent">
+	{"template": [
+		MultiContentEntryText(pos = (80, 21), size = (39, 42), color = 0x00ffc000, color_sel = 0x00ffc000, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 1),
+		MultiContentEntryText(pos = (128, 3), size = (390, 42), flags = RT_HALIGN_LEFT | RT_VALIGN_TOP, text = 2, color = 0x00ffffff, color_sel = 0x00ffffff),
+		MultiContentEntryText(pos = (533, 3), size = (838, 42), flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3, color = 0x00ffc000, color_sel = 0x00ffc000),
+		MultiContentEntryProgress(pos = (128, 57), size = (278, 18), percent = -5, borderWidth = 1, foreColor = 0x0056c856, foreColorSelected = 0x0058bcff),
+		MultiContentEntryText(pos = (435, 39), size = (68, 42), flags = RT_HALIGN_LEFT, text = 7, color = 0x00999999, color_sel = 0x009999ff),
+		MultiContentEntryPixmapAlphaBlend(pos=(1, 19), size=(75, 45), png=6)
+		],
+		"fonts": [gFont("Regular", 33)],
+		"itemHeight": 94
+		}
+				</convert>
+			</widget>
+	<ePixmap pixmap="BlackHarmony/buttons/key_menu.png" position="50,950" size="60,30" alphatest="blend" />		
+	<ePixmap pixmap="BlackHarmony/buttons/red.png" position="150,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="460,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="770,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="1080,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_info.png" position="1275,950" size="60,30" alphatest="blend" />
+	<ePixmap pixmap="BlackHarmony/buttons/key_infoo.png" position="1342,950" size="60,30" alphatest="blend" />
+	<ePixmap pixmap="BlackHarmony/buttons/key_exit.png" position="1409,950" size="60,30" alphatest="blend"  />
+	<eLabel text="Usuń wpis" position="185,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Czyść listę" position="495,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Wszystkie" position="805,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Podgląd" position="1115,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+		</screen>
+	
+<!-- HistoryZapDescription -->
+
+	
+	<screen name="HistoryZapDescriptionSkinFullHD" position="center,center" size="1522,1022" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap position="center,center" zPosition="-10" size="1522,1022" pixmap="BlackHarmony/bg_design/wizard.png" />
+    <widget source="global.CurrentTime" render="Label" position="40,35" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="125,35" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+    </widget>
+    <eLabel text="Historia przełączania" position="1064,35" size="400,35" font="Roboto_HD; 27" halign="right"  foregroundColor="white" backgroundColor="black" transparent="1" />			
+		
+	<widget source="menu" render="Listbox" position="64,160" size="1390,752" scrollbarMode="showOnDemand" scrollbarWidth="10" selectionPixmap="BlackHarmony/menu/sel_1390_100.png" >
+	<convert type="TemplatedMultiContent">
+	{"template": [
+		MultiContentEntryText(pos = (15, 21), size = (39, 42), color = 0x00ffc000, color_sel = 0x00ffc000, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 1),
+		MultiContentEntryText(pos = (68, 3), size = (390, 42), flags = RT_HALIGN_LEFT | RT_VALIGN_TOP, text = 2, color = 0x00ffffff, color_sel = 0x00ffffff),
+		MultiContentEntryText(pos = (473, 3), size = (898, 42), flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3, color = 0x00ffc000, color_sel = 0x00ffc000),
+		MultiContentEntryText(pos = (68, 45), size = (1303, 42), flags = RT_HALIGN_LEFT, text = 4, color = 0x00999999, color_sel = 0x00999999)
+		],
+		"fonts": [gFont("Regular", 33)],
+		"itemHeight": 94
+		}
+				</convert>
+			</widget>
+	<ePixmap pixmap="BlackHarmony/buttons/key_menu.png" position="50,950" size="60,30" alphatest="blend" />		
+	<ePixmap pixmap="BlackHarmony/buttons/red.png" position="150,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="460,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="770,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="1080,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_info.png" position="1275,950" size="60,30" alphatest="blend" />
+	<ePixmap pixmap="BlackHarmony/buttons/key_infoo.png" position="1342,950" size="60,30" alphatest="blend" />
+	<ePixmap pixmap="BlackHarmony/buttons/key_exit.png" position="1409,950" size="60,30" alphatest="blend"  />
+	<eLabel text="Usuń wpis" position="185,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Czyść listę" position="495,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Wszystkie" position="805,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Podgląd" position="1115,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+		</screen>
+		
+<!-- HistoryZapDescriptionDuration -->
+
+	<screen name="HistoryZapDescriptionDurationSkinFullHD" position="center,center" size="1522,1022" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap position="center,center" zPosition="-10" size="1522,1022" pixmap="BlackHarmony/bg_design/wizard.png" />
+    <widget source="global.CurrentTime" render="Label" position="40,35" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="125,35" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+    </widget>
+    <eLabel text="Historia przełączania" position="1064,35" size="400,35" font="Roboto_HD; 27" halign="right"  foregroundColor="white" backgroundColor="black" transparent="1" />			
+		
+	<widget source="menu" render="Listbox" position="64,160" size="1390,752" scrollbarMode="showOnDemand" scrollbarWidth="10" selectionPixmap="BlackHarmony/menu/sel_1390_100.png" >
+	<convert type="TemplatedMultiContent">
+	{"template": [
+		MultiContentEntryText(pos = (15, 21), size = (39, 42), color = 0x00ffc000, color_sel = 0x00ffc000, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 1),
+		MultiContentEntryText(pos = (68, 3), size = (390, 42), flags = RT_HALIGN_LEFT | RT_VALIGN_TOP, text = 2, color = 0x00ffffff, color_sel = 0x00ffffff),
+		MultiContentEntryText(pos = (473, 3), size = (898, 42), flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3, color = 0x00ffc000, color_sel = 0x00ffc000),
+		MultiContentEntryText(pos = (68, 45), size = (390, 42), flags = RT_HALIGN_LEFT, text = 5, color = 0x00999999, color_sel = 0x00999999),
+		MultiContentEntryText(pos = (473, 45), size = (898, 42), flags = RT_HALIGN_LEFT, text = 4, color = 0x00999999, color_sel = 0x00999999)
+		],
+		"fonts": [gFont("Regular", 33)],
+		"itemHeight": 94
+		}
+				</convert>
+			</widget>
+	<ePixmap pixmap="BlackHarmony/buttons/key_menu.png" position="50,950" size="60,30" alphatest="blend" />		
+	<ePixmap pixmap="BlackHarmony/buttons/red.png" position="150,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="460,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="770,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="1080,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_info.png" position="1275,950" size="60,30" alphatest="blend" />
+	<ePixmap pixmap="BlackHarmony/buttons/key_infoo.png" position="1342,950" size="60,30" alphatest="blend" />
+	<ePixmap pixmap="BlackHarmony/buttons/key_exit.png" position="1409,950" size="60,30" alphatest="blend"  />
+	<eLabel text="Usuń wpis" position="185,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Czyść listę" position="495,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Wszystkie" position="805,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Podgląd" position="1115,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+		</screen>
+		
+<!-- HistoryZapDescriptionDurationBar -->
+
+	<screen name="HistoryZapDescriptionDurationBarSkinFullHD" position="center,center" size="1522,1022" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap position="center,center" zPosition="-10" size="1522,1022" pixmap="BlackHarmony/bg_design/wizard.png" />
+    <widget source="global.CurrentTime" render="Label" position="40,35" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="125,35" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+    </widget>
+    <eLabel text="Historia przełączania" position="1064,35" size="400,35" font="Roboto_HD; 27" halign="right"  foregroundColor="white" backgroundColor="black" transparent="1" />			
+		
+	<widget source="menu" render="Listbox" position="64,160" size="1390,752" scrollbarMode="showOnDemand" scrollbarWidth="10" selectionPixmap="BlackHarmony/menu/sel_1390_100.png" >
+	<convert type="TemplatedMultiContent">
+	{"template": [
+		MultiContentEntryText(pos = (15, 21), size = (39, 42), color = 0x00ffc000, color_sel = 0x00ffc000, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 1),
+		MultiContentEntryText(pos = (68, 3), size = (390, 42), flags = RT_HALIGN_LEFT | RT_VALIGN_TOP, text = 2, color = 0x00ffffff, color_sel = 0x00ffffff),
+		MultiContentEntryText(pos = (473, 3), size = (898, 42), flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3, color = 0x00ffc000, color_sel = 0x00ffc000),
+		MultiContentEntryProgress(pos = (68, 57), size = (278, 18), percent = -5, borderWidth = 1, foreColor = 0x0056c856, foreColorSelected = 0x0058bcff),
+		MultiContentEntryText(pos = (368, 45), size = (68, 42), flags = RT_HALIGN_LEFT, text = 7, color = 0x00999999, color_sel = 0x009999ff),
+		MultiContentEntryText(pos = (473, 45), size = (898, 42), flags = RT_HALIGN_LEFT, text = 4, color = 0x00999999, color_sel = 0x00999999)
+		],
+		"fonts": [gFont("Regular", 33)],
+		"itemHeight": 94
+		}
+				</convert>
+			</widget>
+	<ePixmap pixmap="BlackHarmony/buttons/key_menu.png" position="50,950" size="60,30" alphatest="blend" />		
+	<ePixmap pixmap="BlackHarmony/buttons/red.png" position="150,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="460,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="770,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="1080,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_info.png" position="1275,950" size="60,30" alphatest="blend" />
+	<ePixmap pixmap="BlackHarmony/buttons/key_infoo.png" position="1342,950" size="60,30" alphatest="blend" />
+	<ePixmap pixmap="BlackHarmony/buttons/key_exit.png" position="1409,950" size="60,30" alphatest="blend"  />
+	<eLabel text="Usuń wpis" position="185,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Czyść listę" position="495,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Wszystkie" position="805,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Podgląd" position="1115,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+		</screen>
+		
+<!-- HistoryZapDescriptionPicon -->
+
+	
+	<screen name="HistoryZapDescriptionPiconSkinFullHD" position="center,center" size="1522,1022" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap position="center,center" zPosition="-10" size="1522,1022" pixmap="BlackHarmony/bg_design/wizard.png" />
+    <widget source="global.CurrentTime" render="Label" position="40,35" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="125,35" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+    </widget>
+    <eLabel text="Historia przełączania" position="1064,35" size="400,35" font="Roboto_HD; 27" halign="right"  foregroundColor="white" backgroundColor="black" transparent="1" />			
+		
+	<widget source="menu" render="Listbox" position="64,160" size="1390,752" scrollbarMode="showOnDemand" scrollbarWidth="10" selectionPixmap="BlackHarmony/menu/sel_1390_100.png" >
+	<convert type="TemplatedMultiContent">
+	{"template": [
+		MultiContentEntryText(pos = (80, 21), size = (39, 42), color = 0x00ffc000, color_sel = 0x00ffc000, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 1),
+		MultiContentEntryText(pos = (128, 3), size = (390, 42), flags = RT_HALIGN_LEFT | RT_VALIGN_TOP, text = 2, color = 0x00ffffff, color_sel = 0x00ffffff),
+		MultiContentEntryText(pos = (533, 3), size = (838, 42), flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3, color = 0x00ffc000, color_sel = 0x00ffc000),
+		MultiContentEntryText(pos = (128, 45), size = (1243, 42), flags = RT_HALIGN_LEFT, text = 4, color = 0x00999999, color_sel = 0x00999999),
+		MultiContentEntryPixmapAlphaBlend(pos=(1, 19), size=(75, 45), png=6)
+		],
+		"fonts": [gFont("Regular", 33)],
+		"itemHeight": 94
+		}
+				</convert>
+			</widget>
+	<ePixmap pixmap="BlackHarmony/buttons/key_menu.png" position="50,950" size="60,30" alphatest="blend" />		
+	<ePixmap pixmap="BlackHarmony/buttons/red.png" position="150,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="460,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="770,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="1080,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_info.png" position="1275,950" size="60,30" alphatest="blend" />
+	<ePixmap pixmap="BlackHarmony/buttons/key_infoo.png" position="1342,950" size="60,30" alphatest="blend" />
+	<ePixmap pixmap="BlackHarmony/buttons/key_exit.png" position="1409,950" size="60,30" alphatest="blend"  />
+	<eLabel text="Usuń wpis" position="185,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Czyść listę" position="495,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Wszystkie" position="805,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Podgląd" position="1115,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+		</screen>
+		
+<!-- HistoryZapDescriptionDurationPicon -->
+
+	
+	<screen name="HistoryZapDescriptionDurationPiconSkinFullHD" position="center,center" size="1522,1022" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap position="center,center" zPosition="-10" size="1522,1022" pixmap="BlackHarmony/bg_design/wizard.png" />
+    <widget source="global.CurrentTime" render="Label" position="40,35" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="125,35" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+    </widget>
+    <eLabel text="Historia przełączania" position="1064,35" size="400,35" font="Roboto_HD; 27" halign="right"  foregroundColor="white" backgroundColor="black" transparent="1" />			
+		
+	<widget source="menu" render="Listbox" position="64,160" size="1390,752" scrollbarMode="showOnDemand" scrollbarWidth="10" selectionPixmap="BlackHarmony/menu/sel_1390_100.png" >
+	<convert type="TemplatedMultiContent">
+	{"template": [
+		MultiContentEntryText(pos = (80, 21), size = (39, 42), color = 0x00ffc000, color_sel = 0x00ffc000, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 1),
+		MultiContentEntryText(pos = (128, 3), size = (390, 42), flags = RT_HALIGN_LEFT | RT_VALIGN_TOP, text = 2, color = 0x00ffffff, color_sel = 0x00ffffff),
+		MultiContentEntryText(pos = (533, 3), size = (838, 42), flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3, color = 0x00ffc000, color_sel = 0x00ffc000),
+		MultiContentEntryText(pos = (128, 45), size = (395, 42), flags = RT_HALIGN_LEFT, text = 5, color = 0x00999999, color_sel = 0x00999999),
+		MultiContentEntryText(pos = (533, 45), size = (838, 42), flags = RT_HALIGN_LEFT, text = 4, color = 0x00999999, color_sel = 0x00999999),
+		MultiContentEntryPixmapAlphaBlend(pos=(1, 19), size=(75, 45), png=6)
+		],
+		"fonts": [gFont("Regular", 33)],
+		"itemHeight": 94
+		}
+				</convert>
+			</widget>
+	<ePixmap pixmap="BlackHarmony/buttons/key_menu.png" position="50,950" size="60,30" alphatest="blend" />		
+	<ePixmap pixmap="BlackHarmony/buttons/red.png" position="150,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="460,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="770,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="1080,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_info.png" position="1275,950" size="60,30" alphatest="blend" />
+	<ePixmap pixmap="BlackHarmony/buttons/key_infoo.png" position="1342,950" size="60,30" alphatest="blend" />
+	<ePixmap pixmap="BlackHarmony/buttons/key_exit.png" position="1409,950" size="60,30" alphatest="blend"  />
+	<eLabel text="Usuń wpis" position="185,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Czyść listę" position="495,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Wszystkie" position="805,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Podgląd" position="1115,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+		</screen>
+		
+<!-- HistoryZapDescriptionDurationBarPicon -->
+
+	
+	<screen name="HistoryZapDescriptionDurationBarPiconSkinFullHD" position="center,center" size="1522,1022" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap position="center,center" zPosition="-10" size="1522,1022" pixmap="BlackHarmony/bg_design/wizard.png" />
+    <widget source="global.CurrentTime" render="Label" position="40,35" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="125,35" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+    </widget>
+    <eLabel text="Historia przełączania" position="1064,35" size="400,35" font="Roboto_HD; 27" halign="right"  foregroundColor="white" backgroundColor="black" transparent="1" />			
+		
+	<widget source="menu" render="Listbox" position="64,160" size="1390,752" scrollbarMode="showOnDemand" scrollbarWidth="10" selectionPixmap="BlackHarmony/menu/sel_1390_100.png" >
+	<convert type="TemplatedMultiContent">
+	{"template": [
+		MultiContentEntryText(pos = (80, 21), size = (39, 42), color =0x00ffc000, color_sel = 0x00ffc000, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 1),
+		MultiContentEntryText(pos = (128, 3), size = (390, 42), flags = RT_HALIGN_LEFT | RT_VALIGN_TOP, text = 2, color = 0x00ffffff, color_sel = 0x00ffffff),
+		MultiContentEntryText(pos = (533, 3), size = (838, 42), flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3, color = 0x00ffc000, color_sel = 0x00ffc000),
+		MultiContentEntryProgress(pos = (128, 57), size = (278, 18), percent = -5, borderWidth = 1, foreColor = 0x0056c856, foreColorSelected = 0x0058bcff),
+		MultiContentEntryText(pos = (435, 45), size = (68, 42), flags = RT_HALIGN_LEFT, text = 7, color = 0x00999999, color_sel = 0x009999ff),
+		MultiContentEntryText(pos = (533, 45), size = (838, 42), flags = RT_HALIGN_LEFT, text = 4, color = 0x00999999, color_sel = 0x00999999),
+		MultiContentEntryPixmapAlphaBlend(pos=(1, 19), size=(75, 45), png=6)
+		],
+		"fonts": [gFont("Regular", 33)],
+		"itemHeight": 94
+		}
+				</convert>
+			</widget>
+	<ePixmap pixmap="BlackHarmony/buttons/key_menu.png" position="50,950" size="60,30" alphatest="blend" />		
+	<ePixmap pixmap="BlackHarmony/buttons/red.png" position="150,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="460,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="770,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="1080,951" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_info.png" position="1275,950" size="60,30" alphatest="blend" />
+	<ePixmap pixmap="BlackHarmony/buttons/key_infoo.png" position="1342,950" size="60,30" alphatest="blend" />
+	<ePixmap pixmap="BlackHarmony/buttons/key_exit.png" position="1409,950" size="60,30" alphatest="blend"  />
+	<eLabel text="Usuń wpis" position="185,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Czyść listę" position="495,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Wszystkie" position="805,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Podgląd" position="1115,951" size="140,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+		</screen>
+		
+	<screen name="FullEntryNumber" position="center,center" size="1000,820" title=" " flags="wfNoBorder" backgroundColor="transparent" >
+	<ePixmap position="center,center" zPosition="-10" size="1000,820" pixmap="BlackHarmony/bg_design/small.png" />
+	  <widget source="global.CurrentTime" render="Label" position="45,30" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="130,30" size="290,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+    </widget>		
+			
+			<widget name="text" font="Regular;26" position="46,115" size="301,610" zPosition="2" halign="left" backgroundColor="dark_grey" transparent="1" />
+			<widget name="text1" font="Regular;26" position="347,115" size="301,610" zPosition="2" halign="left" backgroundColor="dark_grey" transparent="1" />
+			<widget name="text2" font="Regular;26" position="648,115" size="301,610" zPosition="2" halign="left" backgroundColor="dark_grey" transparent="1" />
+	<ePixmap alphatest="blend" pixmap="BlackHarmony/buttons/key_exit.png" position="889,755" size="60,30" />		
+		</screen>
+
+<screen name="SetupZapSelectorScreen" position="center,center" size="1000,820" flags="wfNoBorder" backgroundColor="transparent"  >
+      <ePixmap position="center,center" zPosition="-10" size="1000,820" pixmap="BlackHarmony/bg_design/small.png" />
+	  <widget source="global.CurrentTime" render="Label" position="45,30" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="130,30" size="290,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+    </widget>
+	<eLabel text="Ustawienia HistoryZap" position="556,30" size="400,35" font="Roboto_HD; 27" halign="right"  foregroundColor="white" backgroundColor="black" transparent="1" />	
+			
+		 <widget name="config" font="Roboto_HD; 27" position="75,140" size="850,560" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" itemHeight="35" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_850_35.png" backgroundColor="transpBlack" transparent="1"/>
+    
+	<ePixmap pixmap="BlackHarmony/buttons/red.png" position="60,755" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="320,755" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="580,755" size="35,27" alphatest="blend" />		
+	<eLabel text="Anuluj" position="95,755" size="160,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Zapisz" position="355,755" size="160,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Opcje" position="615,755" size="160,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+		</screen>	
+		
+<skin>		

@@ -192,6 +192,8 @@
     <parameter name="VirtualKeyBoardAlignment" value="0,0"/>
     <parameter name="VirtualKeyBoardPadding" value="4,4"/>
     <parameter name="VirtualKeyBoardShiftColors" value="16777215, 16777215, 65535, 16711935"/>
+    <!--             SHOUTcastList                      -->
+    <parameter name="SHOUTcastListItem" value="25, 25, 45, 110, 35, 37, 75, 35"/>
   </parameters>
   <subtitles>
     <sub name="Subtitle_TTX" font="Napisy;70" foregroundColor="white" shadowColor="black" shadowOffset="4,4"/>

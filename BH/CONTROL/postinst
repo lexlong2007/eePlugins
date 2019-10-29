@@ -1,4 +1,12 @@
 #!/bin/sh
+
+#linki niezbedne dla VTI
+ln -sf /usr/share/enigma2/BlackHarmony/buttons/ /usr/share/enigma2/BlackHarmony/skin_default/buttons
+ln -sf /usr/share/enigma2/BlackHarmony/icons/ /usr/share/enigma2/BlackHarmony/skin_default/icons
+#linki niezbedne dla openATV
+ln -sf /usr/share/enigma2/BlackHarmony/buttons/ /usr/share/enigma2/BlackHarmony/BlackHarmony/buttons
+ln -sf /usr/share/enigma2/BlackHarmony/icons/ /usr/share/enigma2/BlackHarmony/BlackHarmony/icons
+
 if [ -e /usr/share/enigma2/BlackHarmony/skin_user_bar ];then
   cp -f /usr/share/enigma2/BlackHarmony/skin_user_bar/* /usr/share/enigma2/BlackHarmony/menu/ 2>/dev/null
 fi
@@ -47,7 +55,7 @@ elif [ -e /usr/lib/enigma2/python/Plugins/Extensions/Infopanel ];then
 elif [ -e /usr/lib/enigma2/python/Blackhole ];then
   cat /usr/share/enigma2/BlackHarmony/screens-BlackHole_specific.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
   sed -i 's/if compat == "passed"/if compat == compat/g' /usr/lib/enigma2/python/Plugins/SystemPlugins/SkinSelector/plugin.py
-  echo 'VTI BlackHole image'
+  echo 'BlackHole image'
 elif [ -e /etc/init.d/start_pkt.sh ];then
   cat /usr/share/enigma2/BlackHarmony/screens-PKT_specific.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
   echo 'PKT image'
@@ -60,7 +68,11 @@ elif [ "`cat /etc/opkg/all-feed.conf 2> /dev/null|grep -c 'code.vuplus.com'`" -g
   fi
 elif [ "`cat /etc/opkg/all-feed.conf 2> /dev/null|grep -c 'openpli-7'`" -gt 0 ];then
   cat /usr/share/enigma2/BlackHarmony/screens-openPLI7.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
-  echo 'openPLI-7'
+  echo 'openPLI-7 image'
+  [ -e /usr/share/enigma2/defaults/skin_user.xml ] && rm -f /usr/share/enigma2/defaults/skin_user.xml
+elif [ "`cat /etc/opkg/all-feed.conf 2> /dev/null|grep -c 'openbh'`" -gt 0 ];then
+  cat /usr/share/enigma2/BlackHarmony/screens-openBlackHole.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
+  echo 'open BlackHole image'
   [ -e /usr/share/enigma2/defaults/skin_user.xml ] && rm -f /usr/share/enigma2/defaults/skin_user.xml
 else
   cat /usr/share/enigma2/BlackHarmony/screens-unknown.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
