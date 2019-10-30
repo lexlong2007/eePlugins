@@ -78,7 +78,7 @@
       <convert type="j00zekTranslator">Support for skin:</convert>
     </widget>
     <widget source="session.CurrentService" render="Label" backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="285,770" size="430,32" transparent="1">
-      <convert type="j00zekTranslator">http://forum.dvhk.pl</convert>
+      <convert type="j00zekTranslator">www.sat-4-all.com</convert>
     </widget>
     <ePixmap position="990,620" zPosition="1" size="280,210" pixmap="BlackHarmony/prev.png" alphatest="blend"/>
     <widget source="session.CurrentService" render="Label" position="995,770" size="280,30" font="HD_Thin; 28" backgroundColor="background" transparent="1" zPosition="5" foregroundColor="light_yellow">

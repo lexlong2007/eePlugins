@@ -2038,7 +2038,7 @@ self.instance.resize(eSize(*wsize))
     <eLabel text="About" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1" />
     <widget name="AboutScrollLabel" font="Roboto_HD; 25" itemHeight="40" position="66,122" size="750,625" zPosition="2" halign="left" backgroundColor="black" transparent="1"/>
     <eLabel font="Roboto_HD; 26" position="65,760" size="240,32" text="Support for skin:" foregroundColor="lemon" backgroundColor="black" transparent="1" />
-    <eLabel font="Roboto_HD; 26" position="330,760" size="430,32" text="http://forum.dvhk.pl" foregroundColor="white" backgroundColor="black" transparent="1" />
+    <eLabel font="Roboto_HD; 26" position="330,760" size="430,32" text="www.sat-4-all.com" foregroundColor="white" backgroundColor="black" transparent="1" />
     <ePixmap position="885,584" zPosition="1" size="280,210" pixmap="BlackHarmony/prev.png" alphatest="blend" />
     <widget source="session.CurrentService" render="Label" position="885,750" size="280,30" font="HD_Thin; 28" halign="center" zPosition="5" foregroundColor="light_yellow" backgroundColor="black" transparent="1">
       <convert type="j00zekOPKGversionBHcheck"/>

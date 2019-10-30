@@ -34,7 +34,7 @@
     <convert type="BlackHarmonyMSNWeather">temperature_low,day1</convert>
   </widget>
   <eLabel backgroundColor="black" font="HD_Thin; 32" foregroundColor="light_yellow" position="1137,797" size="493,50" text="Support for skin:" transparent="1" halign="center" />
-  <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="1137,845" size="493,50" text="http://forum.dvhk.pl" transparent="1" halign="center" />
+  <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="1137,845" size="493,50" text="www.sat-4-all.com" transparent="1" halign="center" />
   <ePixmap pixmap="BlackHarmony/gfx/other.png" position="1258,477" size="256,256" />
 </screen>
 <screen name="menu_mainmenu" position="0,0" size="1920,1080" title="Main menu" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
@@ -72,7 +72,7 @@
     <convert type="BlackHarmonyMSNWeather">temperature_low,day1</convert>
   </widget>
   <eLabel backgroundColor="black" font="HD_Thin; 32" foregroundColor="light_yellow" position="1137,797" size="493,50" text="Support for skin:" transparent="1" halign="center" />
-  <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="1137,845" size="493,50" text="http://forum.dvhk.pl" transparent="1" halign="center" />
+  <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="1137,845" size="493,50" text="www.sat-4-all.com" transparent="1" halign="center" />
   <widget source="menu" render="Pixmap" pixmap="BlackHarmony/gfx/timer.png" position="1258,477" size="256,256">
     <convert type="MenuEntryCompare">timer_edit</convert>
     <convert type="ConditionalShowHide" />
@@ -157,7 +157,7 @@
     <convert type="BlackHarmonyMSNWeather">temperature_low,day1</convert>
   </widget>
   <eLabel backgroundColor="black" font="HD_Thin; 32" foregroundColor="light_yellow" position="1137,797" size="493,50" text="Support for skin:" transparent="1" halign="center" />
-  <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="1137,845" size="493,50" text="http://forum.dvhk.pl" transparent="1" halign="center" />
+  <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="1137,845" size="493,50" text="www.sat-4-all.com" transparent="1" halign="center" />
   <ePixmap pixmap="BlackHarmony/gfx/info.png" position="1258,477" size="256,256" />
 </screen>
 <screen name="menu_setup" position="0,0" size="1920,1080" title="Main menu" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
@@ -195,7 +195,7 @@
     <convert type="BlackHarmonyMSNWeather">temperature_low,day1</convert>
   </widget>
   <eLabel backgroundColor="black" font="HD_Thin; 32" foregroundColor="light_yellow" position="1137,797" size="493,50" text="Support for skin:" transparent="1" halign="center" />
-  <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="1138,845" size="493,50" text="http://forum.dvhk.pl" transparent="1" halign="center" />
+  <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="1138,845" size="493,50" text="www.sat-4-all.com" transparent="1" halign="center" />
   <ePixmap pixmap="BlackHarmony/gfx/setup.png" position="1258,477" size="256,256" />
 </screen>
 <screen name="menu_shutdown" position="0,0" size="1920,1080" title="Main menu" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
@@ -233,7 +233,7 @@
     <convert type="BlackHarmonyMSNWeather">temperature_low,day1</convert>
   </widget>
   <eLabel backgroundColor="black" font="HD_Thin; 32" foregroundColor="light_yellow" position="1137,797" size="493,50" text="Support for skin:" transparent="1" halign="center" />
-  <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="1137,845" size="493,50" text="http://forum.dvhk.pl" transparent="1" halign="center" />
+  <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="1137,845" size="493,50" text="www.sat-4-all.com" transparent="1" halign="center" />
   <ePixmap pixmap="BlackHarmony/gfx/power.png" position="1258,477" size="256,256" />
 </screen>
   <screen name="menu_harddisk" position="0,0" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">

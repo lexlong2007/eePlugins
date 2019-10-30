@@ -58,7 +58,7 @@
     </widget>
     <widget name="AboutScrollLabel" font="Roboto_HD; 25" position="66,122" size="750,625" zPosition="2" halign="left" />
     <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="lemon" position="65,760" size="210,32" text="Support for skin:" transparent="1" />
-    <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="285,759" size="430,32" text="http://forum.dvhk.pl" transparent="1" />
+    <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="285,759" size="430,32" text="www.sat-4-all.com" transparent="1" />
     <widget source="session.CurrentService" render="Label" position="885,741" size="280,30" font="HD_Thin; 28" halign="center" backgroundColor="background" transparent="1" zPosition="5" foregroundColor="light_yellow">
       <convert type="j00zekOPKGversionBHcheck"/>
     </widget>
