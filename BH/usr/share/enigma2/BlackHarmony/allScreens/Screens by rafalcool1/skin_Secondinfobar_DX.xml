@@ -50,7 +50,7 @@
   </widget>
   <ePixmap position="946,770" size="38,20" pixmap="BlackHarmony/icons/ico_iptv_off.png" alphatest="blend" zPosition="1" />
   <widget position="946,770" size="38,20" source="session.CurrentService" render="Pixmap" pixmap="BlackHarmony/icons/ico_iptv_on.png" alphatest="blend" zPosition="2">
-    <convert type="ServiceInfo">IsIPStream</convert>
+    <convert type="BlackHarmonyServiceInfoEX">IS_STREAMTV</convert>
     <convert type="ConditionalShowHide" />
   </widget>
   <widget source="session.CurrentService" render="Pixmap" pixmap="BlackHarmony/icons/ico_lan_on.png" position="1319,770" zPosition="2" size="17,20" transparent="1" alphatest="blend">

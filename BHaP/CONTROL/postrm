@@ -1,3 +1,2 @@
 #!/bin/sh
-rm -rf /usr/share/enigma2/BlackHarmony/allPreviews/skin_*.jpg 2 > /dev/null
 exit 0

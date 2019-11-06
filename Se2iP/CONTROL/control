@@ -5,7 +5,7 @@ Depends:
 Description: zawiera zebrane poprawki Mario, mosz_nowy i innych oraz dodane binarki
 Maintainer: j00zek
 Source: http://github.com/j00zek/eePlugins
-Version: 19.10.29.0833
+Version: 19.11.06.1210
 Architecture: all
 DestinationPath: /
 ExcludeFolder: Sync_and_Patch

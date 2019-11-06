@@ -337,17 +337,17 @@ class TSIPlayer(CBaseHostClass):
 				URL=cItem['section']+'|'+cItem['plugin_id']+'|'+cItem['py_file']+'|'+str(elm)
 				self.addDir({'category':'search'  ,'title': _('Search'),'search_item':True,'page':-1,'hst':'tsmedia','url':URL,'icon':img})				
 			elif ('plugin.video.youtube' in url_) and  ('&videoid=' in url_):
-				self.addVideo({'category' : 'video','hst':'none','title':titre,'url':'https://www.youtube.com/watch?v='+url_.split('&videoid=',1)[1],'desc':desc_,'icon':img_})
+				self.addVideo({'good_for_fav':True,'category' : 'video','hst':'none','title':titre,'url':'https://www.youtube.com/watch?v='+url_.split('&videoid=',1)[1],'desc':desc_,'icon':img_})
 			elif mode_==0:
 				if 'youtube' in url_:
-					self.addVideo({'category' : 'video','hst':'none','title':titre,'url':url_,'desc':desc_,'icon':img_})				
+					self.addVideo({'category' : 'video','good_for_fav':True,'hst':'none','title':titre,'url':url_,'desc':desc_,'icon':img_})				
 				else:
-					self.addVideo({'category' : 'video','hst':'direct','title':titre,'url':url_,'desc':desc_,'icon':img_})	
+					self.addVideo({'category' : 'video','good_for_fav':True,'hst':'direct','title':titre,'url':url_,'desc':desc_,'icon':img_})	
 			elif (self.up.checkHostSupport(url_) == 1) and config.plugins.iptvplayer.ts_resolver.value=='tsiplayer':
 				URL=url_
-				self.addVideo({'category' : 'video','hst':'none','title':titre,'url':URL,'desc':desc_+' mode='+url_,'icon':img_,'py_file':cItem['py_file'],'section':cItem['section'],'plugin_id':cItem['plugin_id'],'argv2':str(elm),'gnr':'menu2',})					
+				self.addVideo({'category' : 'video','good_for_fav':True,'hst':'none','title':titre,'url':URL,'desc':desc_+' mode='+url_,'icon':img_,'py_file':cItem['py_file'],'section':cItem['section'],'plugin_id':cItem['plugin_id'],'argv2':str(elm),'gnr':'menu2',})					
 			else:
-				self.addDir({'category' : 'tsmedia','argv2':str(elm),'title':titre,'desc':desc_,'icon':img_,'py_file':cItem['py_file'],'section':cItem['section'],'plugin_id':cItem['plugin_id'],'gnr':'menu2',})		
+				self.addDir({'category' : 'tsmedia','good_for_fav':True,'argv2':str(elm),'title':titre,'desc':desc_,'icon':img_,'py_file':cItem['py_file'],'section':cItem['section'],'plugin_id':cItem['plugin_id'],'gnr':'menu2',})		
 
 	def tsmedia_getlist_sea(self,lst,section_,plugin_id_,py_file,argv2,str_ch):
 		for elm in lst:      #(titre,argv2_,IMG,x4,x5,x6,x7) in lst:
@@ -367,17 +367,17 @@ class TSIPlayer(CBaseHostClass):
 				URL=section_+'|'+plugin_id_+'|'+py_file+'|'+str(elm)
 				self.addDir({'category':'_next_page','title': '\c0000??00'+'Page Suivante', 'search_item':False,'page':-1,'searchPattern':str_ch,'url':URL,'hst':'tsmedia','icon':img_})				
 			elif ('plugin.video.youtube' in url_) and  ('&videoid=' in url_):
-				self.addVideo({'category' : 'video','hst':'none','title':titre,'url':'https://www.youtube.com/watch?v='+url_.split('&videoid=',1)[1],'desc':desc_,'icon':img_})
+				self.addVideo({'category' : 'video','good_for_fav':True,'hst':'none','title':titre,'url':'https://www.youtube.com/watch?v='+url_.split('&videoid=',1)[1],'desc':desc_,'icon':img_})
 			elif mode_==0: 
 				if 'youtube' in url_:
-					self.addVideo({'category' : 'video','hst':'none','title':titre,'url':url_,'desc':desc_,'icon':img_})				
+					self.addVideo({'category' : 'video','good_for_fav':True,'hst':'none','title':titre,'url':url_,'desc':desc_,'icon':img_})				
 				else:
-					self.addVideo({'category' : 'video','hst':'direct','title':titre,'url':url_,'desc':desc_,'icon':img_})	
+					self.addVideo({'category' : 'video','good_for_fav':True,'hst':'direct','title':titre,'url':url_,'desc':desc_,'icon':img_})	
 			elif (self.up.checkHostSupport(url_) == 1) and config.plugins.iptvplayer.ts_resolver.value=='tsiplayer':
 				URL=url_
-				self.addVideo({'category' : 'video','hst':'none','title':titre,'url':URL,'desc':desc_+' mode='+url_,'icon':img_,'py_file':cItem['py_file'],'section':cItem['section'],'plugin_id':cItem['plugin_id'],'argv2':str(elm),'gnr':'menu2',})					
+				self.addVideo({'category' : 'video','good_for_fav':True,'hst':'none','title':titre,'url':URL,'desc':desc_+' mode='+url_,'icon':img_,'py_file':cItem['py_file'],'section':cItem['section'],'plugin_id':cItem['plugin_id'],'argv2':str(elm),'gnr':'menu2',})					
 			else:
-				self.addDir({'category' : 'tsmedia','argv2':str(elm),'title':titre,'desc':desc_,'icon':img_,'py_file':py_file,'section':section_,'plugin_id':plugin_id_,'gnr':'menu2',})		
+				self.addDir({'category' : 'tsmedia','good_for_fav':True,'argv2':str(elm),'title':titre,'desc':desc_,'icon':img_,'py_file':py_file,'section':section_,'plugin_id':plugin_id_,'gnr':'menu2',})		
 
 
 	def tsmedia_search(self,str_ch,page,URL):

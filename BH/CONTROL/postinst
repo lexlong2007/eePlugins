@@ -99,6 +99,11 @@ if [ 1 -eq `grep -c objectTypes < /usr/lib/enigma2/python/skin.pyo` ];then
   sed -i 's/\(^.*objectTypes="key_yellow,StaticText".*\)\( zPosition="1"\)/\1 zPosition="2"/g' /usr/share/enigma2/BlackHarmony/skin.xml
   sed -i 's/\(^.*objectTypes="key_blue,StaticText".*\)\( zPosition="1"\)/\1 zPosition="2"/g' /usr/share/enigma2/BlackHarmony/skin.xml
 fi
+#czyszczenie zlych linkow
+find -L /usr/share/enigma2/BlackHarmony/allScreens/ChannelSelections -name *.xml -type l -exec  rm {} +
+find -L /usr/share/enigma2/BlackHarmony/allScreens/Infobars -name *.xml -type l -exec  rm {} +
+find -L /usr/share/enigma2/BlackHarmony/allScreens/Secondinfobars -name *.xml -type l -exec  rm {} +
+find -L /usr/share/enigma2/BlackHarmony/allScreens/Volume -name *.xml -type l -exec  rm {} +
 #tworzenie linkow w strukturze drzewa
 find /usr/share/enigma2/BlackHarmony/allScreens -iname skin_channelselection_*.xml|while read f; do
   #echo "$f"
