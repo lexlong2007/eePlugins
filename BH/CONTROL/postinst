@@ -1,5 +1,9 @@
 #!/bin/sh
-
+if `grep -q 'osd.language=pl_PL' </etc/enigma2/settings`; then
+ lang='PL'
+else
+ lang='EN'
+fi
 #linki niezbedne dla VTI
 ln -sf /usr/share/enigma2/BlackHarmony/buttons/ /usr/share/enigma2/BlackHarmony/skin_default/buttons
 ln -sf /usr/share/enigma2/BlackHarmony/icons/ /usr/share/enigma2/BlackHarmony/skin_default/icons
@@ -12,7 +16,7 @@ if [ -e /usr/share/enigma2/BlackHarmony/skin_user_bar ];then
 fi
 
 if [ ! -e /usr/lib/enigma2/python/Plugins/Extensions/MSNweather ]; then
-  if `grep -q 'osd.language=pl_PL' </etc/enigma2/settings`; then
+  if [ $lang == 'PL' ]; then
     echo
     echo "UWAGA:"
     echo "Aby działało w skórce wyświetlanie pogody, musisz doinstalować wtyczkę z pogodą MSN (enigma2-plugin-extensions--j00zeks-msnweather-np)"
@@ -42,41 +46,72 @@ if [ -e /usr/lib/enigma2/python/skin.py ];then #patching BlackHole/Vuplus skin.p
   echo '/usr/lib/enigma2/python/skin.py patched'
 fi
 
+#check image type
+if [ -e /usr/lib/enigma2/python/Plugins/SystemPlugins/VTIPanel ];then
+  systemType='VTI'
+elif [ "`cat /etc/opkg/all-feed.conf 2> /dev/null|grep -c 'code.vuplus.com'`" -gt 0 ];then
+  systemType='VUorg'
+elif [ -e /usr/lib/enigma2/python/Blackhole ];then
+  systemType='BlackHole'
+elif [ -e /etc/init.d/start_pkt.sh ];then
+  systemType='PKT'
+elif [ "`cat /etc/opkg/all-feed.conf 2> /dev/null|grep -c 'openbh'`" -gt 0 ];then
+  systemType='openBlackHole'
+elif [ "`cat /etc/opkg/all-feed.conf 2> /dev/null|grep -c 'openpli-7'`" -gt 0 ];then
+  systemType='openPLI-7'
+elif [ -e /usr/lib/enigma2/python/Plugins/Extensions/Infopanel ];then
+  systemType='openATV'
+else
+  systemType='UNKNOWN'
+fi
+
+#info
+echo "$systemType" > /usr/share/enigma2/BlackHarmony/image.info
+if [ $lang == 'PL' ]; then
+  echo
+  echo "Konfiguracja dla $systemType"
+else
+  echo
+  echo "Configuring for $systemType"
+fi
+
 #build skin.xml
 echo '<skin>' > /usr/share/enigma2/BlackHarmony/skin.xml
 cat /usr/share/enigma2/BlackHarmony/skin-header.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
 cat /usr/share/enigma2/BlackHarmony/screens-common.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
-if [ -e /usr/lib/enigma2/python/Plugins/SystemPlugins/VTIPanel ];then
+
+if [ "$systemType" == 'VTI' ];then
   cat /usr/share/enigma2/BlackHarmony/screens-VTI_specific.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
-  echo 'VTI image'
-elif [ -e /usr/lib/enigma2/python/Plugins/Extensions/Infopanel ];then
+
+elif [ "$systemType" == 'openATV' ];then
   cat /usr/share/enigma2/BlackHarmony/screens-openATV_specific.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
-  echo 'openATV image'
-elif [ -e /usr/lib/enigma2/python/Blackhole ];then
+
+elif [ "$systemType" == 'BlackHole' ];then
   cat /usr/share/enigma2/BlackHarmony/screens-BlackHole_specific.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
   sed -i 's/if compat == "passed"/if compat == compat/g' /usr/lib/enigma2/python/Plugins/SystemPlugins/SkinSelector/plugin.py
-  echo 'BlackHole image'
-elif [ -e /etc/init.d/start_pkt.sh ];then
+
+elif [ "$systemType" == 'PKT' ];then
   cat /usr/share/enigma2/BlackHarmony/screens-PKT_specific.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
-  echo 'PKT image'
-elif [ "`cat /etc/opkg/all-feed.conf 2> /dev/null|grep -c 'code.vuplus.com'`" -gt 0 ];then
+
+elif [ "$systemType" == 'VUorg' ];then
   cat /usr/share/enigma2/BlackHarmony/screens-VUoriginal_specific.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
-  echo 'Vu+ original image'
+
   [ -e /usr/share/enigma2/defaults/skin_user.xml ] && rm -f /usr/share/enigma2/defaults/skin_user.xml
   if [ "`ls -l /etc/enigma2/skin_user.xml 2> /dev/null|grep -c 'Jan.*1.*.1970'`" -gt 0 ];then
     rm -f /etc/enigma2/skin_user.xml
   fi
-elif [ "`cat /etc/opkg/all-feed.conf 2> /dev/null|grep -c 'openpli-7'`" -gt 0 ];then
+
+elif [ "$systemType" == 'openPLI-7' ];then
   cat /usr/share/enigma2/BlackHarmony/screens-openPLI7.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
-  echo 'openPLI-7 image'
   [ -e /usr/share/enigma2/defaults/skin_user.xml ] && rm -f /usr/share/enigma2/defaults/skin_user.xml
-elif [ "`cat /etc/opkg/all-feed.conf 2> /dev/null|grep -c 'openbh'`" -gt 0 ];then
+
+elif [ "$systemType" == 'openBlackHole' ];then
   cat /usr/share/enigma2/BlackHarmony/screens-openBlackHole.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
-  echo 'open BlackHole image'
+
   [ -e /usr/share/enigma2/defaults/skin_user.xml ] && rm -f /usr/share/enigma2/defaults/skin_user.xml
 else
   cat /usr/share/enigma2/BlackHarmony/screens-unknown.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
-  echo 'UNKNOWN image'
+
 fi
 echo '</skin>' >> /usr/share/enigma2/BlackHarmony/skin.xml
 sync
@@ -195,7 +230,7 @@ fi
 #final message
 if [ -e /usr/share/enigma2/BlackHarmony/UserSkin_Selections/ ];then
   if [ -e /usr/share/enigma2/BlackHarmony/mySkin/skin_user_BlackHarmony.xml ];then
-    if `grep -q 'osd.language=pl_PL' </etc/enigma2/settings`; then
+   if [ $lang == 'PL' ]; then
       echo
       echo "Skórka została zaktualizowana"
     else
