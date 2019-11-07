@@ -9860,7 +9860,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2,orgpos.y()))
     <widget source="global.CurrentTime" render="Label" position="170,40" size="460,30" font="Roboto_HD; 32" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-        <eLabel text="WybĂłr kopii" position="622,40" size="320,40" font="Roboto_HD; 32" halign="right" backgroundColor="dark_grey" transparent="1"/>
+        <eLabel text="Wybór kopii" position="622,40" size="320,40" font="Roboto_HD; 32" halign="right" backgroundColor="dark_grey" transparent="1"/>
                         
         <widget source="curdir" render="Label" position="61,120" size="877,90" font="Regular; 26" backgroundColor="transpBlack" foregroundColor="#00dddddd" transparent="1" />
         
