@@ -22,7 +22,7 @@ lastPiconsDict = {}
 #piconType = 'picon'
 
 ##### write log in /tmp folder #####
-DBG = True
+DBG = False
 try:
     from Components.j00zekComponents import j00zekDEBUG
 except Exception:

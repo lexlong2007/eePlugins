@@ -108,7 +108,7 @@
 
 <!-- EPGvertical -->
 
-	<screen name="EPGvertical" position="center,center" size="1920,1080" title="" flags="wfNoBorder" backgroundColor="transparent">
+  <screen name="EPGvertical" position="center,center" size="1920,1080" title="" flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,1" zPosition="-7" size="1920,1080" pixmap="BlackHarmony/bg_design/cool.png" />
 	
 	<widget source="global.CurrentTime" render="Label" position="75,55" size="80,35" font="Roboto_HD;27" backgroundColor="black" transparent="1">
@@ -287,7 +287,7 @@
 	
 	</screen>
 		 
-	<screen name="EPGverticalPIG" position="center,center" size="1920,1080" title="Pionowe EPG PIG" flags="wfNoBorder"  backgroundColor="transparent"> 
+  <screen name="EPGverticalPIG" position="center,center" size="1920,1080" title="Pionowe EPG PIG" flags="wfNoBorder"  backgroundColor="transparent"> 
 		<panel name="EPGvertical"/>
     <ePixmap position="0,1" zPosition="-7" size="1920,1080" pixmap="BlackHarmony/bg_design/cool.png" />
 		<!-- DO NOT CHANGE THIS LINE !!!!!!!!!!!!!!! -->
@@ -324,4 +324,4 @@
 			<convert type="EventName">Name</convert>
 		</widget>
 	</screen>
-	</skin>
+  </skin>

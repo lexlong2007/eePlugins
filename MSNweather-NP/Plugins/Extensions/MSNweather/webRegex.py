@@ -42,10 +42,15 @@ def plTOansi(text):
     text = text.replace("ę","e").replace("ć","c").replace("ó","o").strip().replace("ż","z").strip()
     return text.lower()
   
+def decodeHTML(text):
+    text = text.replace('&#176;','°').replace("&lt;", "<").replace("&gt;", ">")
+    text = text.replace('&#228;','ä').replace('&#196;','Ä').replace('&#246;','ö').replace('&#214;','Ö').replace('&#252;','ü').replace('&#220;','Ü').replace('&#223;','ß')
+    return text
+
 import re
 # instantiate the parser and fed it some HTML
 def getWeather(webContent, DBGnow = False, DBGhourly = False, DBGdaily = False):
-    webContent = webContent.replace('&#176;','°')
+    webContent = decodeHTML(webContent)
     def findInContent( WC, reFindString ):
         retTxt = ''
         FC = re.findall(reFindString, WC, re.S)

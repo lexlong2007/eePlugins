@@ -25,7 +25,7 @@ PluginLanguagePath = resolveFilename(SCOPE_PLUGINS, '%s/%s/locale' % (PluginGrou
 
 #DEBUG
 from datetime import datetime
-myDEBUG=True
+myDEBUG=False
 myDEBUGfile = '/tmp/%s.log' % PluginName
 
 append2file=False

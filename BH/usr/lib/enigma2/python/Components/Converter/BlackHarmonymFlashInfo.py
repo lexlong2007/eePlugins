@@ -28,7 +28,7 @@ from Components.Language import language
 from os import statvfs
 from Poll import Poll
 
-def _(text):
+def translate(text):
     if language.getLanguage()[:2] == 'pl':
         tmp = text.replace('Size','Wielkość').replace('Used','zajęte').replace('Available','wolne').replace('free','wolne').replace('in Use','wykorzystano').replace('No infos available','Brak informacji')
     else:
@@ -67,11 +67,11 @@ class BlackHarmonymFlashInfo(Poll, Converter, object):
             else:
                 usedpercent = "n/a"
             if self.long_display == 1:
-                return _("Size: %s, Used: %s (%s), Available: %s") % (self.formatFileSize(size),self.formatFileSize(used),usedpercent,self.formatFileSize(available))
+                return translate("Size: %s, Used: %s (%s), Available: %s") % (self.formatFileSize(size),self.formatFileSize(used),usedpercent,self.formatFileSize(available))
             else:
-                return _("%s free, %s in Use") % (self.formatFileSize(available),usedpercent)
+                return translate("%s free, %s in Use") % (self.formatFileSize(available),usedpercent)
         else:
-            return _("No infos available")
+            return translate("No infos available")
 
     text = property(getText)
 

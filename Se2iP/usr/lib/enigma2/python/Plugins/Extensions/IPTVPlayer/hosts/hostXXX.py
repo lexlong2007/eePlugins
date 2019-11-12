@@ -164,7 +164,7 @@ class IPTVHost(IHost):
     ###################################################
 
 class Host:
-    XXXversion = "2019.11.04.0"
+    XXXversion = "2019.11.07.0"
     XXXremote  = "0.0.0.0"
     currList = []
     MAIN_URL = ''
@@ -1728,10 +1728,11 @@ class Host:
            printDBG( 'Host listsItems begin name='+name )
            COOKIEFILE = os_path.join(GetCookieDir(), 'chaturbate.cookie')
            self.HTTP_HEADER = self.cm.getDefaultHeader(browser='chrome')
-           self.defaultParams = {'header':self.HTTP_HEADER}
+           self.defaultParams = {'header':self.HTTP_HEADER, 'use_cookie': True, 'load_cookie': True, 'save_cookie': True, 'cookiefile': COOKIEFILE}
            sts, data = self.get_Page(url)
            if not sts: return
            printDBG( 'Host listsItems data: '+data )
+           cookieHeader = self.cm.getCookieHeader(COOKIEFILE)
            match = re.search('class="endless_separator".*?<li><a href="(.*?)"', data, re.S)
            data = self.cm.ph.getAllItemsBeetwenMarkers(data, '<li class="room_list_room', 'viewers</li>')
            #printDBG( 'Host2 data: '+str(data) )
@@ -1746,6 +1747,7 @@ class Host:
               Viewers=''
               bitrate = self.cm.ph.getSearchGroups(item, '''thumbnail_label.*?>([^>]+?)<''', 1, True)[0]
               if Url.startswith('/'): Url = self.MAIN_URL + Url 
+              Image = strwithmeta(Image, {'Referer':url, 'Cookie':cookieHeader})
               valTab.append(CDisplayListItem(decodeHtml(Title),decodeHtml(Title)+'   [Age: '+decodeHtml(Age)+']           [Location: '+decodeHtml(Location)+']   [info: '+bitrate+']',CDisplayListItem.TYPE_VIDEO, [CUrlItem('', Url, 1)], 0, Image, None)) 
            if match:
               printDBG( 'Host listsItems Next: '  +match.group(1) )
@@ -8618,29 +8620,32 @@ class Host:
            COOKIEFILE = os_path.join(GetCookieDir(), 'chaturbate.cookie')
            self.HTTP_HEADER = self.cm.getDefaultHeader(browser='chrome')
            self.defaultParams = {'header':self.HTTP_HEADER}
-           sts, data = self.get_Page(url)
-           if not sts: return
-           printDBG( 'Host listsItems data: '+str(data) )
-           host = 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.2.18) Gecko/20110621 Mandriva Linux/1.9.2.18-0.1mdv2010.2 (2010.2) Firefox/3.6.18'
-           videoPage = self.cm.ph.getSearchGroups(data, '''<source src=['"]([^"^']+?)['"]''')[0] 
-           try:
-              item = []
-              videoUrl = urllib2.unquote(videoPage.replace('&amp;','&'))
-              videoUrl = urlparser.decorateUrl(videoUrl, {'Referer': url, 'User-Agent':host}) 
-              if self.cm.isValidUrl(videoUrl): 
-                 tmp = getDirectM3U8Playlist(videoUrl)
-                 try: tmp = sorted(tmp, key=lambda item: int(item.get('bitrate', '0')))
-                 except Exception: pass
-                 for item in tmp:
-                    printDBG( 'Host listsItems valtab1: '  +str(item))
-                 if self.format4k:
-                    return tmp[-1]['url']
-                 else:
-                    if tmp[-1]['height']<=1080 : return tmp[-1]['url']
-                    if tmp[-2]['height']<=1080 : return tmp[-2]['url']
-                    if tmp[-3]['height']<=1080 : return tmp[-3]['url']
-           except Exception:
-              printExc()
+           for x in range(1, 10): 
+              sts, data = self.get_Page(url)
+              if not sts: return
+              printDBG( 'Host listsItems data: '+str(data) )
+              if 'Room is currently offline' in data:
+                 SetIPTVPlayerLastHostError(_(' OFFLINE.'))
+              host = 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.2.18) Gecko/20110621 Mandriva Linux/1.9.2.18-0.1mdv2010.2 (2010.2) Firefox/3.6.18'
+              videoPage = self.cm.ph.getSearchGroups(data, '''<source src=['"]([^"^']+?)['"]''')[0] 
+              try:
+                 item = []
+                 videoUrl = urllib2.unquote(videoPage.replace('&amp;','&'))
+                 videoUrl = urlparser.decorateUrl(videoUrl, {'Referer': url, 'User-Agent':host}) 
+                 if self.cm.isValidUrl(videoUrl): 
+                    tmp = getDirectM3U8Playlist(videoUrl)
+                    try: tmp = sorted(tmp, key=lambda item: int(item.get('bitrate', '0')))
+                    except Exception: pass
+                    for item in tmp:
+                       printDBG( 'Host listsItems valtab1: '  +str(item))
+                    if self.format4k:
+                       return tmp[-1]['url']
+                    else:
+                       if tmp[-1]['height']<=1080 : return tmp[-1]['url']
+                       if tmp[-2]['height']<=1080 : return tmp[-2]['url']
+                       if tmp[-3]['height']<=1080 : return tmp[-3]['url']
+              except Exception:
+                 printExc()
            return ''
   
         if parser == 'https://www.mydirtyhobby.to':
@@ -9087,8 +9092,8 @@ class Host:
            else: return ''
 
         def FindServer(video):
-            crazycloud_list = ['11-1','15-1','15-2','16-1','16-2','16-3','16-4','17-1','17-2','17-3','20-1','20-2','20-3']
-            daxab_list = ['11-1','11-2','11-3','11-4','12-1','15-3','16-5','17-4','20-5','32-1','33-1','43-1','45-1','46-1','47-1','48-1','49-1','49-2','49-3','49-4','49-5','49-6','49-7','50-1','51-1','52-1','53-1','54-1','55-1','56-1','57-1','58-1','59-1','60-1','63-1','64-1','66-1','67-1']
+            crazycloud_list = ['17-1','17-2','17-3','20-1','20-2','20-3']
+            daxab_list = ['12-1','17-4','20-5','32-1','33-1','43-1','45-1','46-1','47-1','48-1','50-1','52-1','53-1','54-1','55-1','56-1','57-1','58-1','59-1','60-1','63-1','64-1','65-1','66-1','67-1','68-1','68-2']
             #crazycloud_list.reverse()
             for srv in crazycloud_list:
                 server = 'https://psv' + srv + '.crazycloud.ru/videos/'
