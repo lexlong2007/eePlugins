@@ -9130,7 +9130,7 @@
     <widget name="text" position="center,c+5" size="720,100" font="Regular;22" halign="center" />
   </screen>
   <screen name="MessageBox" position="center,center" size="790,10" title="Message">
-    <widget name="text" position="110,8" size="680,0" font="Roboto_HD; 25"/>
+    <widget name="text" position="110,8" size="680,0" font="Roboto_HD; 25" transparent="1" />
     <widget name="ErrorPixmap" pixmap="BlackHarmony/icons/error.png" position="5,5" size="100,100" alphatest="blend"/>
     <widget name="QuestionPixmap" pixmap="BlackHarmony/icons/question.png" position="5,5" size="100,100" alphatest="blend"/>
     <widget name="InfoPixmap" pixmap="BlackHarmony/icons/info.png" position="5,5" size="100,100" alphatest="blend"/>
@@ -9140,6 +9140,7 @@
 from enigma import eSize, ePoint
 
 orgwidth = self.instance.size().width()
+orgheight = self.instance.size().height()
 orgpos = self.instance.position()
 textsize = self["text"].getSize()
 
@@ -9150,8 +9151,8 @@ offset = 20
 #        offset = 80
 wsizex = textsize[0] + 120
 wsizey = textsize[1] + offset
-if (600 &gt; wsizex):
-        wsizex = 600
+if (790 &gt; wsizex):
+        wsizex = 790
 
 # resize label
 self["text"].instance.resize(eSize(*textsize))
@@ -9159,16 +9160,17 @@ self["text"].instance.resize(eSize(*textsize))
 # move list
 count = len(self.list)
 listsize = (wsizex - 20, 35 * count)
-self["list"].instance.move(ePoint(10, textsize[1]))
+self["list"].instance.move(ePoint(10, textsize[1] + 10 ))
 self["list"].instance.resize(eSize(*listsize))
 
 # resize window
-wsize = (wsizex, wsizey + listsize[1])
+wsize = (wsizex, wsizey + listsize[1] + 10)
 self.instance.resize(eSize(*wsize))
 
 # center window
 newwidth = wsize[0]
-self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2,orgpos.y()))
+newheight = wsize[1]
+self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2,orgpos.y() + (orgheight - newheight)/2 ))
     </applet>
   </screen> 
 <!-- HistoryZapDefaultSkin screen by endriu-->
@@ -10280,7 +10282,7 @@ self.instance.resize(eSize(*wsize))
     <widget name="QuestionPixmap" pixmap="BlackHarmony/icons/question.png" position="5,5" size="100,100" alphatest="blend"/>
     <widget name="InfoPixmap" pixmap="BlackHarmony/icons/info.png" position="5,5" size="100,100" alphatest="blend"/>
     <widget name="list" font="Roboto_HD; 27" position="15,70" size="750,0" itemHeight="35" selectionPixmap="BlackHarmony/menu/sel_750_35.png" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" backgroundColor="black" transparent="1"/>
-                <applet type="onLayoutFinish">
+    <applet type="onLayoutFinish">
 # this should be factored out into some helper code, but currently demonstrates applets.
 from enigma import eSize, ePoint
 
@@ -10317,16 +10319,16 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2,orgpos.y()))
                 </applet>
   </screen>
   <screen name="FastScanScreen" position="462,128" size="1000,820" title="Fast Scan" flags="wfNoBorder" backgroundColor="transparent">
-     <ePixmap position="0,0" zPosition="-10" size="1000,820" pixmap="BlackHarmony/bg_design/small.png"/>
-         <widget source="Title" render="Label" position="425,35" size="520,35" font="Roboto_HD; 27" halign="right" transparent="1" backgroundColor="dark_grey" />
-     <widget source="global.CurrentTime" render="Label" position="40,35" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
-       <convert type="ClockToText">Default</convert>
-     </widget>
-     <widget source="global.CurrentTime" render="Label" position="130,35" size="300,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
-       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
-     </widget>
-         <widget name="config" position="40,130" size="900,510" itemHeight="40" font="Roboto_HD; 27" scrollbarMode="showOnDemand" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" selectionPixmap="BlackHarmony/menu/sel_860_40.png" backgroundColor="black" transparent="1"/>
-         <widget source="introduction" render="Label" position="290,570" size="415,190" font="Roboto_HD; 27" halign="center" valign="center" foregroundColor="light_yellow" backgroundColor="black" transparent="1"/>
+    <ePixmap position="0,0" zPosition="-10" size="1000,820" pixmap="BlackHarmony/bg_design/small.png"/>
+    <widget source="Title" render="Label" position="425,35" size="520,35" font="Roboto_HD; 27" halign="right" transparent="1" backgroundColor="dark_grey" />
+    <widget source="global.CurrentTime" render="Label" position="40,35" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="130,35" size="300,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+    </widget>
+    <widget name="config" position="40,130" size="900,510" itemHeight="40" font="Roboto_HD; 27" scrollbarMode="showOnDemand" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" selectionPixmap="BlackHarmony/menu/sel_860_40.png" backgroundColor="black" transparent="1"/>
+    <widget source="introduction" render="Label" position="290,570" size="415,190" font="Roboto_HD; 27" halign="center" valign="center" foregroundColor="light_yellow" backgroundColor="black" transparent="1"/>
      <ePixmap pixmap="BlackHarmony/buttons/red.png" position="70,750" size="35,27" alphatest="blend" />
      <ePixmap pixmap="BlackHarmony/buttons/green.png" position="270,750" size="35,27" alphatest="blend" />
      <eLabel text="Cancel" position="120,648" size="170,230" font="Roboto_HD; 24" noWrap="1" zPosition="1" halign="left" valign="center" foregroundColor="white" backgroundColor="black" transparent="1" />
@@ -11275,5 +11277,5 @@ self["list"].instance.resize(eSize(*listsize))
 newwidth = wsize[0]
 newheight = wsize[1]
 self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight)/2))
-      </applet>
+    </applet>
   </screen>
