@@ -18,9 +18,6 @@ elif [ `ls /usr/share/enigma2/|grep -c Pingu-NavyBlue` -gt 0 ] ; then
 elif [ `ls /usr/share/enigma2/|grep -c GoldenNight` -gt 0 ] ; then
   echo "$Tekst !!!"
   exit 1
-elif [ `ls /usr/lib/enigma2/python/Components/Converter/|grep -c Do_Not_Delete` -gt 0 ] ; then
-  echo "$Tekst !!!!"
-  exit 1
 else
   exit 0
 fi
