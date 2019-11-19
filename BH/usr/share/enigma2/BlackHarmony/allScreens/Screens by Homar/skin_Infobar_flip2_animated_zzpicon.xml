@@ -58,16 +58,16 @@
       <convert type="ConditionalShowHide" />
     </widget>
 <ePixmap alphatest="blend" pixmap="BlackHarmony/allScreens/Screens by Homar/clock/flip2/default.png" position="1636,730" size="360,200" zPosition="1" />
-	<widget source="global.CurrentTime" render="FlipClock" position="1638,732" zPosition="2" size="57,107" alphatest="blend" transparent="1">
+	<widget source="global.CurrentTime" render="BlackHarmonyFlipClock" position="1638,732" zPosition="2" size="57,107" alphatest="blend" transparent="1">
 	  <convert type="ClockToText">Format:H1 %H</convert>
 	</widget>
-	<widget source="global.CurrentTime" render="FlipClock" position="1693,732" zPosition="2" size="57,107" alphatest="blend" transparent="1">
+	<widget source="global.CurrentTime" render="BlackHarmonyFlipClock" position="1693,732" zPosition="2" size="57,107" alphatest="blend" transparent="1">
 	  <convert type="ClockToText">Format:H2 %H</convert>
 	</widget>
-	<widget source="global.CurrentTime" render="FlipClock" position="1757,732" zPosition="2" size="57,107" alphatest="blend" transparent="1">
+	<widget source="global.CurrentTime" render="BlackHarmonyFlipClock" position="1757,732" zPosition="2" size="57,107" alphatest="blend" transparent="1">
 	  <convert type="ClockToText">Format:M1 %M</convert>
 	</widget>
-	<widget source="global.CurrentTime" render="FlipClock" position="1812,732" zPosition="2" size="57,107" alphatest="blend" transparent="1">
+	<widget source="global.CurrentTime" render="BlackHarmonyFlipClock" position="1812,732" zPosition="2" size="57,107" alphatest="blend" transparent="1">
 	  <convert type="ClockToText">Format:M2 %M</convert>
 	</widget>
 <widget source="global.CurrentTime" render="Label" position="1598,840" size="323,37" font="RegularLCD;37" transparent="1" zPosition="3" halign="center" valign="top">
