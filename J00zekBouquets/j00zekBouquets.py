@@ -48,7 +48,7 @@ j00zekConfig.BouquetsClearLameDB = ConfigSelection(default = "norefresh", choice
                                                                                       ("norefresh", "Nie")
                                                                                       ])
 j00zekConfig.BouquetsExcludeBouquet = ConfigYesNo(default = False)
-j00zekConfig.BouquetsExcludeBouquet.value = False
+#j00zekConfig.BouquetsExcludeBouquet.value = False
 j00zekConfig.BouquetsAction = ConfigSelection(default = "prov", choices = [("prov", "Tworzenie bukietu z układem dostawcy"), ("1st", "Aktualizacja pierwszego bukietu na liście"), ("all", "Aktualizacja pierwszego i Tworzenie bukietu z układem dostawcy")])
 
 j00zekConfig.Clear1st = ConfigYesNo(default = False)
@@ -153,7 +153,7 @@ class j00zekBouquets(Screen, ConfigListScreen):
                 self.list.append(getConfigListEntry('Akcja:', j00zekConfig.BouquetsAction))
                 if j00zekConfig.BouquetsAction.value == '1st' or j00zekConfig.BouquetsAction.value == 'all':
                     self.list.append(getConfigListEntry("Usuń nieznane pozycje z bukietu:", j00zekConfig.Clear1st))
-                #self.list.append(getConfigListEntry("Pomiń zdefiniowane kanały:", j00zekConfig.BouquetsExcludeBouquet))
+                self.list.append(getConfigListEntry("Pomiń zdefiniowane kanały:", j00zekConfig.BouquetsExcludeBouquet))
                 self.list.append(getConfigListEntry('Puste miejsca na liście kanałów:', j00zekConfig.Znacznik))
                 
                 self.list.append(getConfigListEntry(" ", j00zekConfig.separator))                
