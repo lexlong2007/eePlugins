@@ -66,7 +66,9 @@ class MSNWeatherPixmapNP(Renderer):
             if attrib == "size":
                 x, y = value.split(',')
                 self._scaleSize = eSize(int(x), int(y))
-                break
+            elif attrib == "path":
+                self.pngAnimPath = value
+        self.DEBUG('MSNWeatherPixmap(Renderer).postWidgetCreate self.pngAnimPath=%s' % self.pngAnimPath)
         sc = AVSwitch().getFramebufferScale()
         self._aspectRatio = eSize(sc[0], sc[1])
         self.picload.setPara((self._scaleSize.width(), self._scaleSize.height(), sc[0], sc[1], True, 2, '#ff000000')) 
@@ -129,7 +131,6 @@ class MSNWeatherPixmapNP(Renderer):
                     self.DEBUG('MSNWeatherPixmap(Renderer).updateIcon picsIconsCount=%s' % self.picsIconsCount)
             else:
                 self.instance.setPixmap(LoadPixmap(path=self.lastPic))
-              
 
     def timerEvent(self):
         self.timer.stop()

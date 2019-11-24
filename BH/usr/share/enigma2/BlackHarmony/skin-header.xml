@@ -69,7 +69,7 @@
 </fonts>
   <parameters>
     <parameter name="ConfigListSlider" value="22,1"/>
-    <parameter name="ConfigListSeperator" value="250"/>
+    <parameter name="ConfigListSeperator" value="400"/>
     <!--             MovieList                                  -->
     <parameter name="MovieListProgress" value="1200,17,80,13"/>
     <parameter name="MovieListProgressPercent" value="1250,8,80,37"/>

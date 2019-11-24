@@ -43,7 +43,7 @@ class BlackHarmonyFlipClock(Renderer):
                value = value[4:5]   
             else:
                value = 0
-            self.instance.setPixmapFromFile('/usr/share/enigma2/vfd_skin/Homar/clock/flip/' + str(value) + '.png')
+            self.instance.setPixmapFromFile('/usr/share/enigma2/BlackHarmony/allScreens/Screens by Homar/clock/flip/' + str(value) + '.png')
 
     def pollme(self):
         self.changed(None)

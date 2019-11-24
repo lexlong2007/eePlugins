@@ -14,7 +14,7 @@ from Components.FileList import FileList, EXTENSIONS
 from Components.Label import Label
 from enigma import eDVBDB, eServiceReference, eTimer, eConsoleAppContainer
 from j00zekConsole import j00zekConsole
-from os import system as os_system, remove as os_remove, chmod as os_chmod, symlink as os_symlink #fsync as os_fsync, rename as os_rename, walk as os_walk, listdir, mkdir as os_mkdir
+from os import system as os_system, remove as os_remove, chmod as os_chmod, symlink as os_symlink, path as os_path
 from Screens.InfoBar import InfoBar
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen

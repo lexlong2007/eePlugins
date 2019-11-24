@@ -10,7 +10,7 @@ from Components.Language import language
 #from decimal import Decimal as dec
 import math, datetime
 
-DBG = False
+DBG = True
 if DBG: from Components.j00zekComponents import j00zekDEBUG
 
 #simple and dirty translation
@@ -71,4 +71,12 @@ class j00zekMoon(Converter, object):
             retTXT = "---"
         return str(retTXT)
 
+    @cached
+    def getIconFilename(self):
+        phaseDict = phase(get_julian_datetime(datetime.datetime.now()))
+        retTXT = self.myRound(phaseDict['phase'] * 100, 5)
+        if DBG: j00zekDEBUG("[j00zekMoon:getIconFilename] phaseIcon: %s" % (retTXT))
+        return '%s.png' % str(retTXT)
+
     text = property(getText)
+    iconfilename = property(getIconFilename)

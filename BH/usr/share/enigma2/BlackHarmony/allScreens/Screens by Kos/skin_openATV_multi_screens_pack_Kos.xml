@@ -29,99 +29,99 @@
   </screen>
   <!-- END semi auto button bar -->
   <!-- openATV MENU SCREENS -->
-  <screen name="menu_mainmenu" position="70,75" size="1920,1080" title="Main menu" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
-    <ePixmap position="0,0" zPosition="-10" size="710,950" pixmap="BlackHarmony/bg_design/menubg.png"/>
-    <widget source="global.CurrentTime" render="Label" position="55,50" size="80,30" font="Roboto_HD; 27" foregroundColor="white" backgroundColor="black" transparent="1">
-      <convert type="ClockToText">Default</convert>
-    </widget>
-    <widget source="global.CurrentTime" render="Label" position="142,50" size="360,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
-      <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
-    </widget>
-    <widget source="menu" render="Listbox" position="70,227" size="565,450" selectionPixmap="BlackHarmony/menu/sel_565_45.png" scrollbarMode="showNever" enableWrapAround="1" foregroundColor="white" backgroundColor="black" transparent="1">
-      <convert type="TemplatedMultiContent">
+  <screen name="menu_mainmenu" position="70,30" size="1920,1080" title="Main menu" flags="wfNoBorder" backgroundColor="transparent">
+  <ePixmap position="0,0" zPosition="-10" size="710,1020" pixmap="BlackHarmony/bg_design/menubg_menu.png" />
+  <widget source="global.CurrentTime" render="Label" position="55,50" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
+    <convert type="ClockToText">Default</convert>
+  </widget>
+  <widget source="global.CurrentTime" render="Label" position="142,50" size="360,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
+    <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+  </widget>
+  <widget source="menu" render="Listbox" position="70,227" size="565,450" selectionPixmap="BlackHarmony/menu/sel_565_45.png" scrollbarMode="showNever" enableWrapAround="1" backgroundColor="black" transparent="1">
+    <convert type="TemplatedMultiContent">
 				{"template": [ MultiContentEntryText(pos = (15,5),size = (565,35),flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER,text = 0) ],
 				"fonts": [gFont("Roboto_HD",31)],
 				"itemHeight": 45
 				}
-	  </convert>
-    </widget>
-    <widget source="title" render="Label" position="85,140" size="560,40" font="HD_Thin; 36" halign="left" foregroundColor="light_yellow" backgroundColor="black" transparent="1"/>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="70,723" size="135,135" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
-      <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
-    </widget>
-    <widget noWrap="1" font="HD_Thin; 24" render="Label" position="215,735" size="110,30" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="center" foregroundColor="lemon" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonyMSNWeather">temperature_current</convert>
-    </widget>
-    <widget noWrap="1" font="HD_Thin; 24" render="Label" position="240,801" size="400,32" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="left" foregroundColor="white" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonyMSNWeather">temperature_text,current</convert>
-    </widget>
-    <eLabel name="new eLabel" position="335,735" size="80,30" font="HD_Thin; 24" foregroundColor="white" backgroundColor="black" transparent="1" halign="left" text="maks."/>
-    <widget noWrap="1" font="HD_Thin; 24" render="Label" position="409,735" size="70,30" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="left" foregroundColor="yellow" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonyMSNWeather">temperature_high,day1</convert>
-    </widget>
-    <eLabel name="new eLabel" position="495,735" size="63,30" font="HD_Thin; 24" foregroundColor="white" backgroundColor="black" transparent="1" halign="left" text="min."/>
-    <widget noWrap="1" font="HD_Thin; 24" render="Label" position="553,735" size="70,30" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="left" foregroundColor="blue" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonyMSNWeather">temperature_low,day1</convert>
-    </widget>
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="40,910" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="350,910" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="470,910" size="35,27" alphatest="blend" />
-    <widget name="green" position="80,910" size="260,27" zPosition="3" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
-    <widget name="yellow" position="390,910" size="80,27" zPosition="3" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
-    <widget name="blue" position="510,910" size="180,27" zPosition="3" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
-  </screen>
-  <screen name="MenuSort" position="70,75" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+			</convert>
+  </widget>
+  <widget source="title" render="Label" position="85,140" size="560,40" font="HD_Thin; 36" halign="left" foregroundColor="light_yellow" backgroundColor="black" transparent="1" />
+  <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="70,708" size="135,135" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+    <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
+  </widget>
+  <widget noWrap="1" font="HD_Thin; 24" render="Label" position="215,728" size="110,30" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="center"  foregroundColor="lemon" backgroundColor="black" transparent="1">
+    <convert type="BlackHarmonyMSNWeather">temperature_current</convert>
+  </widget>
+  <widget noWrap="1" font="HD_Thin; 24" render="Label" position="239,796" size="400,32" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="left" foregroundColor="white" backgroundColor="black" transparent="1">
+    <convert type="BlackHarmonyMSNWeather">temperature_text,current</convert>
+  </widget>
+  <eLabel text="maks." name="new eLabel" position="335,728" size="80,30" font="HD_Thin; 24" halign="left" foregroundColor="white" backgroundColor="black" transparent="1"/>
+  <widget noWrap="1" font="HD_Thin; 24" render="Label" position="409,728" size="70,30" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="left" foregroundColor="yellow" backgroundColor="black" transparent="1">
+    <convert type="BlackHarmonyMSNWeather">temperature_high,day1</convert>
+  </widget>
+  <eLabel text="min." name="new eLabel" position="495,728" size="63,30" font="HD_Thin; 24" halign="left" foregroundColor="white" backgroundColor="black" transparent="1"/>
+  <widget noWrap="1" font="HD_Thin; 24" render="Label" position="553,7258" size="70,30" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="left" foregroundColor="blue" backgroundColor="black" transparent="1">
+    <convert type="BlackHarmonyMSNWeather">temperature_low,day1</convert>
+  </widget>
+  <ePixmap pixmap="BlackHarmony/buttons/green.png" position="50,871" size="35,27" alphatest="blend" />
+  <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="350,871" size="35,27" alphatest="blend" />
+  <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="465,871" size="35,27" alphatest="blend" />
+  <widget name="green" position="90,870" size="260,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
+  <widget name="yellow" position="390,870" size="80,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
+  <widget name="blue" position="505,870" size="180,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
+</screen>
+  <screen name="MenuSort" position="70,30" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
 	<panel name="menu_mainmenu" /> 
   </screen>
-  <screen name="menu_harddisk" position="70,75" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+  <screen name="menu_harddisk" position="70,30" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
 	<panel name="menu_mainmenu" />
   </screen>
-  <screen name="menu_timermenu" position="70,75" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+  <screen name="menu_timermenu" position="70,30" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
 	<panel name="menu_mainmenu" />
   </screen>
-  <screen name="menu_information" position="70,75" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+  <screen name="menu_information" position="70,30" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
 	<panel name="menu_mainmenu" /> 
   </screen>
-  <screen name="menu_scan" position="70,75" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+  <screen name="menu_scan" position="70,30" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
 	<panel name="menu_mainmenu" /> 
   </screen>
-  <screen name="menu_setup" position="70,75" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+  <screen name="menu_setup" position="70,30" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
 	<panel name="menu_mainmenu" /> 
   </screen>
-  <screen name="menu_shutdown" position="70,75" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+  <screen name="menu_shutdown" position="70,30" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
 	<panel name="menu_mainmenu" /> 
   </screen>
-  <screen name="menu_system" position="70,75" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+  <screen name="menu_system" position="70,30" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
 	<panel name="menu_mainmenu" /> 
   </screen>
-  <screen name="menu_osd_menu" position="70,75" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+  <screen name="menu_osd_menu" position="70,30" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
 	<panel name="menu_mainmenu" /> 
   </screen>
-  <screen name="menu_extended" position="70,75" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+  <screen name="menu_extended" position="70,30" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
 	<panel name="menu_mainmenu" /> 
   </screen>
-  <screen name="menu_network" position="70,75" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+  <screen name="menu_network" position="70,30" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
 	<panel name="menu_mainmenu" /> 
   </screen>
-  <screen name="password_setup" position="70,75" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+  <screen name="password_setup" position="70,30" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
 	<panel name="menu_mainmenu" /> 
   </screen>
-  <screen name="menu_video_menu" position="70,75" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+  <screen name="menu_video_menu" position="70,30" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
 	<panel name="menu_mainmenu" /> 
   </screen>
-  <screen name="menu_audio_menu" position="70,75" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+  <screen name="menu_audio_menu" position="70,30" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
 	<panel name="menu_mainmenu" /> 
   </screen>
-  <screen name="menu_rec" position="70,75" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+  <screen name="menu_rec" position="70,30" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
 	<panel name="menu_mainmenu" /> 
   </screen>
-  <screen name="menu_epg" position="70,75" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+  <screen name="menu_epg" position="70,30" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
 	<panel name="menu_mainmenu" /> 
   </screen>
-  <screen name="menu_cam" position="70,75" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+  <screen name="menu_cam" position="70,30" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
 	<panel name="menu_mainmenu" /> 
   </screen>
-  <screen name="menu_display" position="70,75" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+  <screen name="menu_display" position="70,30" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
 	<panel name="menu_mainmenu" /> 
   </screen>
   <screen name="InfoBarLite" position="-2,10" size="1920,1080" title="InfoBar" flags="wfNoBorder" backgroundColor="transparent">
@@ -5017,9 +5017,11 @@ self['config'].l.setSeperation(int(300*f))
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="72,779" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="447,779" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="835,779" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="1218,779" size="35,27" alphatest="blend"/>
     <widget source="key_red" render="Label" position="127,778" size="280,27" zPosition="1" font="Roboto_HD; 24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1"/>
     <widget source="key_green" render="Label" position="500,778" size="280,27" zPosition="1" font="Roboto_HD; 24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1"/>
     <widget source="key_yellow" render="Label" position="890,778" size="280,26" zPosition="1" font="Roboto_HD;24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="key_blue" render="Label" position="1273,778" size="180,30" zPosition="1" font="Roboto_HD;24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1"/>
   </screen>
   <screen name="UserSkin_Menu" position="462,128" size="1000,820" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1000,820" pixmap="BlackHarmony/bg_design/small.png"/>
@@ -6444,7 +6446,7 @@ self['config'].l.setSeperation(int(300*f))
    </screen>
    <screen name="FastSearchStart" position="center,center" size="1000,820" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1000,820" pixmap="BlackHarmony/bg_design/small.png" />
-    <eLabel text="Szybkie Wyszukiwanie" position="425,35" size="520,35" font="Roboto_HD; 27" halign="right" transparent="1" backgroundColor="dark_grey" />
+    <widget source="Title" render="Label" position="425,35" size="520,35" font="Roboto_HD; 27" halign="right" transparent="1" backgroundColor="dark_grey" />
     <widget source="global.CurrentTime" render="Label" position="40,35" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Default</convert>
     </widget>
@@ -6464,24 +6466,36 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="yellow" render="Label" position="435,748" size="140,35" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget source="blue" render="Label" position="605,748" size="150,35" zPosition="1" font="Roboto_HD;24" halign="left" backgroundColor="dark_grey" transparent="1" />
   </screen>
-  <screen name="NC" position="center,center" size="1000,820" title=" " flags="wfNoBorder" backgroundColor="transparent">
+  <screen name="FastSearchlist1" position="center,center" size="1000,820" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1000,820" pixmap="BlackHarmony/bg_design/small.png" />
     <widget source="global.CurrentTime" render="Label" position="40,35" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Default</convert>
     </widget>
-    <eLabel text="NC+ - HotBird 13E" position="425,35" size="520,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1" />
+    <widget source="Title" render="Label" position="425,35" size="520,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1" />
     <widget source="global.CurrentTime" render="Label" position="130,35" size="300,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
     <widget name="memo" position="60,115" size="900,700" font="Roboto_HD;27" backgroundColor="black" transparent="1"/>
     <widget name="info" position="230,750" size="540,35" halign="center" font="Roboto_HD;25" backgroundColor="black" transparent="1"/>
   </screen>
-  <screen name="Polsat" position="center,center" size="1000,820" title=" " flags="wfNoBorder" backgroundColor="transparent">
+  <screen name="FastSearchlist2" position="center,center" size="1000,820" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1000,820" pixmap="BlackHarmony/bg_design/small.png" />
     <widget source="global.CurrentTime" render="Label" position="40,35" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Default</convert>
     </widget>
-    <eLabel text="Cyfrowy Polsat - HotBird 13E" position="425,35" size="520,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1" />
+    <widget source="Title" render="Label" position="425,35" size="520,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1" />
+    <widget source="global.CurrentTime" render="Label" position="130,35" size="300,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+    </widget>
+    <widget name="memo" position="60,115" size="900,700" font="Roboto_HD;27" backgroundColor="black" transparent="1"/>
+    <widget name="info" position="230,750" size="540,35" halign="center" font="Roboto_HD;25" backgroundColor="black" transparent="1"/>
+  </screen>
+  <screen name="FastSearchlist3" position="center,center" size="1000,820" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap position="0,0" zPosition="-10" size="1000,820" pixmap="BlackHarmony/bg_design/small.png" />
+    <widget source="global.CurrentTime" render="Label" position="40,35" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="Title" render="Label" position="425,35" size="520,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1" />
     <widget source="global.CurrentTime" render="Label" position="130,35" size="300,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
@@ -6493,7 +6507,19 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="global.CurrentTime" render="Label" position="40,35" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Default</convert>
     </widget>
-    <eLabel text="NC+" position="425,35" size="520,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1" />
+    <widget source="Title" render="Label" position="425,35" size="520,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1" />
+    <widget source="global.CurrentTime" render="Label" position="130,35" size="300,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+    </widget>
+    <widget name="memo" position="60,115" size="900,700" font="Roboto_HD;27" backgroundColor="black" transparent="1"/>
+    <widget name="info" position="230,750" size="540,35" halign="center" font="Roboto_HD;25" backgroundColor="black" transparent="1"/>
+  </screen>
+  <screen name="Polsat" position="center,center" size="1000,820" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap position="0,0" zPosition="-10" size="1000,820" pixmap="BlackHarmony/bg_design/small.png" />
+    <widget source="global.CurrentTime" render="Label" position="40,35" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="Title" render="Label" position="425,35" size="520,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1" />
     <widget source="global.CurrentTime" render="Label" position="130,35" size="300,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
@@ -7566,8 +7592,8 @@ self['config'].l.setSeperation(int(300*f))
     <widget name="feedstatusRED" position="1620,836" size="200,30" zPosition="1" font="Roboto_HD; 27" halign="left" backgroundColor="black" transparent="1" />
     <widget name="feedstatusYELLOW" position="1620,873" size="200,30" zPosition="1" font="Roboto_HD; 27" halign="left" backgroundColor="black" transparent="1" />
     <widget name="feedstatusGREEN" position="1620,908" size="200,30" zPosition="1" font="Roboto_HD; 27" halign="left" backgroundColor="black" transparent="1" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="95,1001" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="430,1001" size="35,27" alphatest="blend" />
+    <widget name="key_red_pic" render="Pixmap" pixmap="BlackHarmony/buttons/red.png" position="95,1001" size="35,27" alphatest="blend" />
+    <widget name="key_green_pic" render="Pixmap" pixmap="BlackHarmony/buttons/green.png" position="430,1001" size="35,27" alphatest="blend" />
     <widget name="key_red" position="141,999" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget name="key_green" position="478,999" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
   </screen>
@@ -9034,85 +9060,85 @@ self['config'].l.setSeperation(int(300*f))
     <widget name="ErrorPixmap" pixmap="BlackHarmony/icons/error.png" position="5,5" size="100,100" alphatest="blend"/>
     <widget name="QuestionPixmap" pixmap="BlackHarmony/icons/question.png" position="5,5" size="100,100" alphatest="blend"/>
     <widget name="InfoPixmap" pixmap="BlackHarmony/icons/info.png" position="5,5" size="100,100" alphatest="blend"/>
-    <widget name="list" font="Roboto_HD; 27" position="15,70" size="750,0" itemHeight="35" selectionPixmap="BlackHarmony/menu/sel_750_35.png" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" backgroundColor="black" transparent="1"/>
+    <widget name="list" font="Roboto_HD; 27" position="15,70" size="750,330" itemHeight="35" selectionPixmap="BlackHarmony/menu/sel_750_35.png" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" backgroundColor="black" transparent="1"/>
     <applet type="onLayoutFinish">
-# this should be factored out into some helper code, but currently demonstrates applets.
-from enigma import eSize, ePoint
-
-orgwidth = self.instance.size().width()
-orgpos = self.instance.position()
+# this should be factored out into some helper code,but currently demonstrates applets.
+from enigma import eSize,ePoint, getDesktop
+#orgwidth = self.instance.size().width()
+#orgheight = self.instance.size().height()
+#---
+offset_listposx = 10
+offset_listposy = 20
+offset_listwidth = 10
+offset_listheight = 35
+offset_textwidth = 35
+offset_textheight = 20
+min_width = 280
+min_height = 93
+#----
+deskwidth = getDesktop(0).size().width()
+deskheight = getDesktop(0).size().height()
 textsize = self["text"].getSize()
+textwidth = textsize[0] + offset_textwidth
+textheight = textsize[1] + offset_textheight
 
-# y size still must be fixed in font stuff...
-textsize = (textsize[0] + 80, textsize[1] + 80)
-offset = 20
-#if self.type == self.TYPE_YESNO:
-#        offset = 80
-wsizex = textsize[0] + 120
-wsizey = textsize[1] + offset
-if (600 &gt; wsizex):
-        wsizex = 600
+listwidth = 0
+listheight = 0
+
+if self.list:
+	try:
+		for i in self.list:
+			if len(i[0]) > listwidth:
+				listwidth = len(i[0])
+		listwidth = listwidth * offset_listwidth
+		listheight = len(self.list) * offset_listheight
+	except:
+		pass
+
+if (min_height &gt;textheight):
+	textheight = min_height
+if (min_width &gt;textwidth):
+	textwidth = min_width
+if (listheight &gt;0):
+	offset = 31
+else:
+	offset = 21
+if (textwidth &gt;listwidth):
+	wsizex = textwidth + offset_listposx * 12
+else:
+	textwidth = listwidth - offset_listposx * 11
+	wsizex = listwidth + offset_listposx
+
+wsizey = textheight + listheight + offset
+
+if (wsizey &gt;deskheight):
+	textheight = deskheight - listheight - offset
+	wsizey = textheight + listheight + offset
+
+if (wsizex &gt;deskwidth):
+	textwidth = deskwidth - offset_listposx * 12
+	listwidth = wsizex = deskwidth
+
+wsize = (wsizex,wsizey)
+
+# resize
+self.instance.resize(eSize(*wsize))
 
 # resize label
+textsize = (textwidth,textheight)
 self["text"].instance.resize(eSize(*textsize))
 
 # move list
-count = len(self.list)
-listsize = (wsizex - 20, 35 * count)
-self["list"].instance.move(ePoint(10, textsize[1]))
+listsize = (wsizex - offset_listposx * 2,listheight)
+self["list"].instance.move(ePoint(offset_listposx,textheight + offset_listposy))
 self["list"].instance.resize(eSize(*listsize))
-
-# resize window
-wsize = (wsizex, wsizey + listsize[1])
-self.instance.resize(eSize(*wsize))
 
 # center window
 newwidth = wsize[0]
-self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2,orgpos.y()))
+newheight = wsize[1]
+self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight)/2))
         </applet>
   </screen> 
-  <screen name="MessageBoxTemplate" zPosition="11" position="center,center" size="1000,822" title="MessageBox Template">
-    <widget name="text" position="110,8" size="680,0" font="Roboto_HD; 25" backgroundColor="black" transparent="1"/>
-    <widget name="ErrorPixmap" pixmap="BlackHarmony/icons/error.png" position="5,5" size="100,100" alphatest="blend"/>
-    <widget name="QuestionPixmap" pixmap="BlackHarmony/icons/question.png" position="5,5" size="100,100" alphatest="blend"/>
-    <widget name="InfoPixmap" pixmap="BlackHarmony/icons/info.png" position="5,5" size="100,100" alphatest="blend"/>
-    <widget name="list" font="Roboto_HD; 27" position="15,70" size="750,0" itemHeight="35" selectionPixmap="BlackHarmony/menu/sel_750_35.png" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" backgroundColor="black" transparent="1"/>
-		<applet type="onLayoutFinish">
-# this should be factored out into some helper code, but currently demonstrates applets.
-from enigma import eSize, ePoint
-
-orgwidth = self.instance.size().width()
-orgpos = self.instance.position()
-textsize = self["text"].getSize()
-
-# y size still must be fixed in font stuff...
-textsize = (textsize[0] + 80, textsize[1] + 80)
-offset = 20
-#if self.type == self.TYPE_YESNO:
-#        offset = 80
-wsizex = textsize[0] + 120
-wsizey = textsize[1] + offset
-if (600 &gt; wsizex):
-        wsizex = 600
-
-# resize label
-self["text"].instance.resize(eSize(*textsize))
-
-# move list
-count = len(self.list)
-listsize = (wsizex - 20, 35 * count)
-self["list"].instance.move(ePoint(10, textsize[1]))
-self["list"].instance.resize(eSize(*listsize))
-
-# resize window
-wsize = (wsizex, wsizey + listsize[1])
-self.instance.resize(eSize(*wsize))
-
-# center window
-newwidth = wsize[0]
-self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2,orgpos.y()))
-		</applet>
-  </screen>
      <!-- EPGvertical -->
   <screen name="EPGvertical" position="center,center" size="1920,1080" title="" flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,1" zPosition="-7" size="1920,1080" pixmap="BlackHarmony/bg_design/cool.png" />

@@ -321,21 +321,6 @@
   <widget source="key_red" render="Label" position="91,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
   <widget source="key_green" render="Label" position="378,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
 </screen>
-<screen name="FlashOnline" position="345,93" size="1232,908" title="Flash Online" flags="wfNoBorder" backgroundColor="transparent">
-  <widget source="Title" render="Label" position="58,36" foregroundColor="foreground" size="525,50" valign="bottom" font="Roboto_HD; 34" backgroundColor="background" transparent="1" />
-  <widget name="info-online" position="130,422" size="980,50" font="Roboto_HD; 25" backgroundColor="background" foregroundColor="foreground" halign="center" transparent="0" zPosition="1" />
-  <widget name="info-local" position="130,616" size="980,50" font="Roboto_HD; 25" backgroundColor="background" foregroundColor="foreground" halign="center" transparent="0" zPosition="1" />
-  <eLabel text="Wybierz opcję wgrywania" position="123,197" size="980,55" font="Roboto_HD; 35" backgroundColor="background" foregroundColor="lemon" halign="center" transparent="0" zPosition="1" />
-  <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png" />
-  <ePixmap pixmap="BlackHarmony/buttons/red.png" position="41,850" size="35,27" alphatest="blend" />
-  <ePixmap pixmap="BlackHarmony/buttons/green.png" position="328,850" size="35,27" alphatest="blend" />
-  <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="615,850" size="35,27" alphatest="blend" />
-  <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="902,850" size="35,27" alphatest="blend" />
-  <widget source="key_red" render="Label" position="91,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
-  <widget source="key_green" render="Label" position="378,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
-  <widget source="key_yellow" render="Label" position="665,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
-  <widget source="key_blue" render="Label" position="952,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
-</screen>
 <screen name="doFlashImage" position="345,93" size="1232,908" title="Flash On the fly (select a image)" flags="wfNoBorder" backgroundColor="transparent">
   <widget source="Title" render="Label" position="58,36" foregroundColor="foreground" size="525,50" valign="bottom" font="Roboto_HD; 34" backgroundColor="background" transparent="1" />
   <widget name="imageList" position="391,151" zPosition="1" size="520,510" backgroundColor="background" foregroundColor="foreground" itemHeight="30" font="Roboto_HD; 25" selectionPixmap="BlackHarmony/menu/sel_520_35.png" scrollbarMode="showOnDemand" transparent="1" halign="center" />

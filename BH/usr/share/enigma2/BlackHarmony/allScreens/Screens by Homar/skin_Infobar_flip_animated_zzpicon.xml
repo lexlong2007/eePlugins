@@ -57,17 +57,17 @@
       <convert type="BlackHarmonyServiceInfoEX">HasHBBTV</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-<ePixmap alphatest="blend" pixmap="BlackHarmony/allScreens/Screens by Homar/clock/flip/default.png" position="1633,727" size="360,200" zPosition="1" />
-	<widget source="global.CurrentTime" render="BlackHarmonyFlipClock" position="1638,738" zPosition="2" size="57,107" alphatest="blend" transparent="1">
+<ePixmap alphatest="blend" pixmap="BlackHarmony/allScreens/Screens by Homar/clock/flip/default.png" position="1633,737" size="360,200" zPosition="1" />
+	<widget source="global.CurrentTime" render="BlackHarmonyFlipClock" position="1648,755" zPosition="2" size="57,107" alphatest="blend" transparent="1">
 	  <convert type="ClockToText">Format:H1 %H</convert>
 	</widget>
-	<widget source="global.CurrentTime" render="BlackHarmonyFlipClock" position="1693,738" zPosition="2" size="57,107" alphatest="blend" transparent="1">
+	<widget source="global.CurrentTime" render="BlackHarmonyFlipClock" position="1693,755" zPosition="2" size="57,107" alphatest="blend" transparent="1">
 	  <convert type="ClockToText">Format:H2 %H</convert>
 	</widget>
-	<widget source="global.CurrentTime" render="BlackHarmonyFlipClock" position="1757,738" zPosition="2" size="57,107" alphatest="blend" transparent="1">
+	<widget source="global.CurrentTime" render="BlackHarmonyFlipClock" position="1762,755" zPosition="2" size="57,107" alphatest="blend" transparent="1">
 	  <convert type="ClockToText">Format:M1 %M</convert>
 	</widget>
-	<widget source="global.CurrentTime" render="BlackHarmonyFlipClock" position="1812,738" zPosition="2" size="57,107" alphatest="blend" transparent="1">
+	<widget source="global.CurrentTime" render="BlackHarmonyFlipClock" position="1807,755" zPosition="2" size="57,107" alphatest="blend" transparent="1">
 	  <convert type="ClockToText">Format:M2 %M</convert>
 	</widget>
         <!-- Pikona -->
