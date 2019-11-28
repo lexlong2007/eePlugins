@@ -73,7 +73,7 @@ class MSNWeatherPixmapNP(Renderer):
             elif attrib == 'path':
                 self.pngAnimPath = value
                 attribs.remove((attrib, value))
-        self.DEBUG("\t %s pngAnimPath set to '%s'" % self.pngAnimPath)
+        self.DEBUG("\t pngAnimPath set to '%s'" % self.pngAnimPath)
 
         try:
             self._scaleSize = eSize(self.width, self.height)
