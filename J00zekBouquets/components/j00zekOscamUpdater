@@ -1,0 +1,79 @@
+#!/bin/sh
+#
+# @2017 @j00zek
+#
+
+##### CONFIG #####
+myPath=`dirname $0`
+
+srvid='False'
+caid='unknown'
+Packet='unknown'
+services='False'
+dvbapi='False'
+keysFolder='NotConfigured'
+j00zekBouquetsAction='prov'
+BouquetsToAnalyze='/tmp/BouquetsToAnalyze'
+
+[ -z $1 ] || srvid=$1
+[ -z $2 ] || caid=$2
+[ -z $3 ] || Packet=$3
+[ -z $4 ] || services=$4
+[ -z $5 ] || dvbapi=$5
+[ -z $6 ] || keysFolder=$6
+[ -z $7 ] || j00zekBouquetsAction=$7
+
+[ -e $keysFolder ] || exit 0 #nothing to do, if no folder with config
+
+buildBouquetsToAnalyze(){
+cat $1| \
+grep '#SERVICE 1:[0-9]:.*::.'| \
+sed 's/^.* 1:[0-9]:[0-9]:/000/;s/:.*::/|/;s/.*\(....|\)/\1/;s/[[:space:]]*$//'| \
+sort -rfu| \
+uniq -w 4 >>$BouquetsToAnalyze
+}
+
+[ -f $BouquetsToAnalyze ] && rm -f $BouquetsToAnalyze
+case $j00zekBouquetsAction in
+  "prov")
+    [ -f /etc/enigma2/userbouquet.ncplus.j00zekAutobouquet.tv ] && buildBouquetsToAnalyze "/etc/enigma2/userbouquet.ncplus.j00zekAutobouquet.tv"
+    [ -f /etc/enigma2/userbouquet.CP.j00zekAutobouquet.tv ] && buildBouquetsToAnalyze "/etc/enigma2/userbouquet.CP.j00zekAutobouquet.tv"
+    ;;      
+  "1st")
+    FirstBouquet=`grep -v 'userbouquet.excludedSIDs.j00zekAutobouquet.tv' /etc/enigma2/bouquets.tv |grep -m 1 "^#SERVICE[:]*"|sed 's/^#.*0:0:0:0://; s/^.*FROM BOUQUET "\(.*\)".*/\1/'`
+    [ -f /etc/enigma2/$FirstBouquet ] && buildBouquetsToAnalyze "/etc/enigma2/$FirstBouquet"
+    ;;
+  "all")
+    FirstBouquet=`grep -v 'userbouquet.excludedSIDs.j00zekAutobouquet.tv' /etc/enigma2/bouquets.tv |grep -m 1 "^#SERVICE[:]*"|sed 's/^#.*0:0:0:0://; s/^.*FROM BOUQUET "\(.*\)".*/\1/'`
+    [ -f /etc/enigma2/$FirstBouquet ] && buildBouquetsToAnalyze "/etc/enigma2/$FirstBouquet"
+    ;;
+esac
+[ -z $BouquetsToAnalyze ] && exit 0
+
+echo "[`date +%Y-%m-%d:%H:%M:%S`] j00zekOscamUpdater $srvid $caid $Packet $services $dvbapi $keysFolder $j00zekBouquetsAction">>/tmp/jB.log
+
+[ -e $keysFolder/oscam.srvid ] ]] touch $keysFolder/oscam.srvid 2>/dev/null
+[ $( grep -c '^'<$keysFolder/oscam.srvid ) -eq 0 ] && echo "##### created by j00zekBouquets #####">$keysFolder/oscam.srvid
+if [ "$srvid" == "True" ]; then
+  echo "  [`date +%H:%M:%S`] Updating oscam.srvid...">>/tmp/jB.log
+  echo "Aktualizuję oscam.srvid..."
+  dataToUpdate=''
+  while IFS='|' read -r SID NAME
+  do           
+    SIDbig=`echo $SID|tr '[:lower:]' '[:upper:]'`
+    #echo "$SIDbig">>/tmp/jB.log
+    if ! [ -z "$NAME" ];then
+      if `egrep -q "$SIDbig|$SID" <$myPath/PLsids.cfg`;then
+        sed -i "/:$SIDbig|/d" $keysFolder/oscam.srvid
+        sed -i "/:$SID|/d" $keysFolder/oscam.srvid
+        sed -i "1i 0000,0100,0500,0B00,0B01,1803,1863:$SIDbig||$NAME" $keysFolder/oscam.srvid
+        # sed -i "1i 0000,FFFE:$SIDbig||$NAME" $keysFolder/oscam.srvid
+      fi
+    fi
+  done <$BouquetsToAnalyze
+  sed -i "/by j00zekBouquets #####/d" $keysFolder/oscam.srvid
+  sed -i "1i ##### updated by j00zekBouquets #####" $keysFolder/oscam.srvid
+fi
+echo "  [`date +%H:%M:%S`] end oscam.srvid synchro">>/tmp/jB.log
+[ "$caid" == 'unknown' ] && exit 0 #if no caid, we cannot do anything more :(
+echo "   [`date +%H:%M:%S`] end">>/tmp/jB.log

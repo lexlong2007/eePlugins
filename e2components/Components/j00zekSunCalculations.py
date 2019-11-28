@@ -1,5 +1,5 @@
 #
-# j00zek 2018 
+# j00zek 2018  
 # based on:
 #    https://stackoverflow.com/questions/19615350/calculate-sunrise-and-sunset-times-for-a-given-gps-coordinate-within-postgresql
 # plus automatically recognizes the coordinates

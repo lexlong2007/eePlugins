@@ -1,6 +1,6 @@
 from Components.Pixmap import Pixmap
 from enigma import ePicLoad
-
+ 
 DBG = False
 try:
     if DBG: from Components.j00zekComponents import j00zekDEBUG

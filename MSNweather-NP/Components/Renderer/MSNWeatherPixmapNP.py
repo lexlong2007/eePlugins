@@ -39,6 +39,8 @@ class MSNWeatherPixmapNP(Renderer):
         self.picsIconsCount = 0
         self.slideIcon = 0
         self.lastPic = ''
+        self.height = 1
+        self.width = 1
         self.timer = eTimer()
         self.timer.callback.append(self.timerEvent)
         self.pngAnimPath='/usr/share/enigma2/animatedWeatherIcons'
@@ -61,18 +63,29 @@ class MSNWeatherPixmapNP(Renderer):
             from Plugins.Extensions.MSNweather.debug import printDEBUG
             printDEBUG( myFUNC , myText )
     
-    def postWidgetCreate(self, instance):
-        for (attrib, value) in self.skinAttributes:
+    def applySkin(self, desktop, parent):
+        self.DEBUG('MSNWeatherPixmap(Renderer).applySkin >>>')
+        attribs = self.skinAttributes[:]
+        for attrib, value in self.skinAttributes:
             if attrib == "size":
-                x, y = value.split(',')
-                self._scaleSize = eSize(int(x), int(y))
-            elif attrib == "path":
+                self.width = int(value.split(',')[0])
+                self.height = int(value.split(',')[1])
+            elif attrib == 'path':
                 self.pngAnimPath = value
-        self.DEBUG('MSNWeatherPixmap(Renderer).postWidgetCreate self.pngAnimPath=%s' % self.pngAnimPath)
-        sc = AVSwitch().getFramebufferScale()
-        self._aspectRatio = eSize(sc[0], sc[1])
-        self.picload.setPara((self._scaleSize.width(), self._scaleSize.height(), sc[0], sc[1], True, 2, '#ff000000')) 
-        
+                attribs.remove((attrib, value))
+        self.DEBUG("\t %s pngAnimPath set to '%s'" % self.pngAnimPath)
+
+        try:
+            self._scaleSize = eSize(self.width, self.height)
+            sc = AVSwitch().getFramebufferScale()
+            self._aspectRatio = eSize(sc[0], sc[1])
+            self.picload.setPara((self._scaleSize.width(), self._scaleSize.height(), sc[0], sc[1], True, 2, '#ff000000')) 
+        except Exception as e:
+            self.DEBUG('MSNWeatherPixmap(Renderer).setSize exception %s' % str(e))
+
+        self.skinAttributes = attribs
+        return Renderer.applySkin(self, desktop, parent) 
+
     def doSuspend(self, suspended):
         if suspended:
             self.timer.stop()
@@ -88,7 +101,7 @@ class MSNWeatherPixmapNP(Renderer):
                 if self.ePicLoadScale == False:
                     self.instance.setScale(1)
                 self.updateIcon(self.source.iconfilename)
-
+                
     def doAnimation(self, pngAnimPath):
         if config.plugins.WeatherPlugin.IconsType.value == 'animIcons' and os.path.exists(pngAnimPath):
             self.DEBUG('MSNWeatherPixmap(Renderer).doAnimation(pngAnimPath=%s) returns True' % pngAnimPath)

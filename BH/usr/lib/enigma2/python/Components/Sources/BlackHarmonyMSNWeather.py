@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# j00zek: this file is just to avoid GS-es, when msn weather plugin not installed
+# j00zek: this file is just to avoid GS-es, when msn weather plugin not installed 
 # 
 
 import time

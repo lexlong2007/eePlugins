@@ -27,7 +27,7 @@
       <convert type="ConditionalShowHide" />
     </widget>
 
-    <widget source="session.CurrentService" render="Label" position="55,732" size="840,68" font="HD_Thin; 58" valign="top" backgroundColor="black" transparent="1" halign="left" noWrap="1" foregroundColor="yellow" zPosition="1">
+    <widget source="session.CurrentService" render="Label" position="55,732" size="780,68" font="HD_Thin; 58" valign="top" backgroundColor="black" transparent="1" halign="left" noWrap="1" foregroundColor="yellow" zPosition="1">
       <convert type="BlackHarmonygExtraTuner">ServiceNumberName</convert>
     </widget>
             <widget source="session.Event_Now" render="Label" position="480,839" size="125,46" font="HD_Thin; 40" halign="left" backgroundColor="black" transparent="1">
@@ -73,13 +73,29 @@
 <widget source="global.CurrentTime" render="Label" position="1598,837" size="323,36" font="RegularLCD;36" transparent="1" zPosition="3" halign="center" valign="top">
   <convert type="ClockToText">Format:%d.%m.%Y</convert>
   </widget>
+<ePixmap alphatest="blend" pixmap="BlackHarmony/allScreens/Screens by Homar/clock/AGC.png" position="610,810" size="360,200" zPosition="1" />	
+<ePixmap alphatest="blend" pixmap="BlackHarmony/gfx/progress_gray.png" position="660,816" size="120,8" zPosition="1" />	
+<widget source="session.FrontendStatus" render="Progress" position="660,816" size="120,8" zPosition="5"  pixmap="BlackHarmony/gfx/bar_snr_130x15.png" transparent="1">
+ <convert type="FrontendInfo">AGC</convert>
+ </widget>
+ <widget source="session.FrontendStatus" render="Label" position="788,808" size="60,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" zPosition="1" foregroundColor="green">
+ <convert type="FrontendInfo">AGC</convert>
+ </widget>
+ <ePixmap alphatest="blend" pixmap="BlackHarmony/allScreens/Screens by Homar/clock/SNR.png" position="855,810" size="360,200" zPosition="1" />
+ <ePixmap alphatest="blend" pixmap="BlackHarmony/gfx/progress_gray.png" position="905,816" size="120,8" zPosition="1" />
+ <widget source="session.FrontendStatus" render="Progress" position="905,816" size="120,8" zPosition="5"  pixmap="BlackHarmony/gfx/bar_snr_130x15.png" transparent="1">
+ <convert type="FrontendInfo">SNR</convert>
+ </widget>
+ <widget source="session.FrontendStatus" render="Label" position="1033,808" size="60,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" zPosition="1" foregroundColor="green">
+ <convert type="FrontendInfo">SNR</convert>
+ </widget>
         <!-- Pikona -->
     <widget alphatest="blend" position="65,815" render="j00zekPicons" picontype="zzpicon" size="400,170" source="session.CurrentService" transparent="1" zPosition="4">
       <convert type="ServiceName">Reference</convert>
     </widget>
     <!-- Animacja -->
     <widget source="session.CurrentService" render="j00zekPiconAnimation" pixmaps="animatedZZPicons" position="65,815" size="400,170" zPosition="5" transparent="1" alphatest="blend" />
-    <widget backgroundColor="black" font="HD_Thin; 25" halign="center" position="1270,745" render="Label" size="353,35" source="global.CurrentTime" transparent="1" valign="center" noWrap="1" foregroundColor="lemon" text=" ">
+    <widget backgroundColor="black" font="HD_Thin; 25" halign="center" position="1280,745" render="Label" size="353,35" source="global.CurrentTime" transparent="1" valign="center" noWrap="1" foregroundColor="lemon" text=" ">
       <convert type="ClockToText">Format:%A %d %B </convert>
     </widget>
             <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1632,873" size="128,128" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
@@ -108,7 +124,7 @@
     <widget source="session.BlackHarmonyMSNWeather" render="Label" position="1615,72" size="140,30" font="Roboto_HD; 20" halign="center" valign="center" transparent="1" zPosition="3">
       <convert type="BlackHarmonyMSNWeather">temperature_heigh_low,day3</convert>
     </widget>
-        <widget source="global.CurrentTime" render="Label" position="608,968" size="348,29" font="Regular; 22" halign="left" transparent="1" backgroundColor="black" foregroundColor="grey" zPosition="3" noWrap="1">
+        <widget source="global.CurrentTime" render="Label" position="608,968" size="448,29" font="Regular; 22" halign="left" transparent="1" backgroundColor="black" foregroundColor="grey" zPosition="3" noWrap="1">
       <convert type="BlackHarmonyimieniny" />
     </widget>
     <widget noWrap="1" backgroundColor="black" font="HD_Thin; 30" render="Label" position="1787,955" size="90,35" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="left" transparent="1" foregroundColor="podsw" valign="top">

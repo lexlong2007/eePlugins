@@ -30,12 +30,10 @@ if [ -f $myPath/platformtester-$platform ]; then
     echo
     ln -sf $myPath/j00zekBouquetsNC-$platform.Atype $rootPath/j00zekBouquetsNC
     ln -sf $myPath/j00zekBouquetsCP-$platform.Atype $rootPath/j00zekBouquetsCP
-    ln -sf $myPath/j00zekOscamUpdater-$platform.Atype $rootPath/j00zekOscamUpdater
   else
     echo 'Wykryto kernel typu B'
     ln -sf $myPath/j00zekBouquetsNC-$platform.Btype $rootPath/j00zekBouquetsNC
     ln -sf $myPath/j00zekBouquetsCP-$platform.Btype $rootPath/j00zekBouquetsCP
-    ln -sf $myPath/j00zekOscamUpdater-$platform.Btype $rootPath/j00zekOscamUpdater
   fi
 else
   echo '$myPath/platformtester-$platform nie istnieje!!!'

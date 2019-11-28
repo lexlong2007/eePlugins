@@ -60,7 +60,7 @@
     <convert type="BlackHarmonyMSNWeather">temperature_high,day1</convert>
   </widget>
   <eLabel text="min." name="new eLabel" position="495,728" size="63,30" font="HD_Thin; 24" halign="left" foregroundColor="white" backgroundColor="black" transparent="1"/>
-  <widget noWrap="1" font="HD_Thin; 24" render="Label" position="553,7258" size="70,30" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="left" foregroundColor="blue" backgroundColor="black" transparent="1">
+  <widget noWrap="1" font="HD_Thin; 24" render="Label" position="553,728" size="70,30" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="left" foregroundColor="blue" backgroundColor="black" transparent="1">
     <convert type="BlackHarmonyMSNWeather">temperature_low,day1</convert>
   </widget>
   <ePixmap pixmap="BlackHarmony/buttons/green.png" position="50,871" size="35,27" alphatest="blend" />
@@ -2096,12 +2096,12 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="list" render="Listbox" position="65,140" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" size="1095,580" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_1095_75.png" backgroundColor="black" transparent="1">
       <convert type="TemplatedMultiContent">
 				{"template": [
-					MultiContentEntryPixmapAlphaTest(pos = (10,10),size = (54,54),png = 3),# index 3 is the interface pixmap
-					MultiContentEntryPixmapAlphaTest(pos = (71,46),size = (15,16),png = 4),# index 4 is the default pixmap
-					MultiContentEntryText(pos = (100,2),size = (1000,35),font=0,flags = RT_HALIGN_LEFT|RT_VALIGN_TOP,text = 1),# index 1 is the interfacename
-					MultiContentEntryText(pos = (100,42),size = (1000,35),font=1,flags = RT_HALIGN_LEFT|RT_VALIGN_BOTTOM,text = 2,color=0xffffff,color_sel=0xffffff),# index 2 is the description
+					MultiContentEntryPixmapAlphaTest(pos = (10,10), size = (54,54), png = 3), # index 3 is the interface pixmap
+					MultiContentEntryPixmapAlphaTest(pos = (71,46), size = (20,20), png = 4), # index 4 is the default pixmap
+					MultiContentEntryText(pos = (100,2), size = (1000,35), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_TOP, text = 1), # index 1 is the interfacename
+					MultiContentEntryText(pos = (100,42), size = (1000,35), font=1, flags = RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, text = 2), # index 2 is the description
 				],
-				"fonts": [gFont("Roboto_HD",26),gFont("Roboto_HD",22)],
+				"fonts": [gFont("Roboto_HD",26),gFont("Roboto_HD",23)],
 				"itemHeight": 75
 				}
 	  </convert>
@@ -2114,7 +2114,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="key_red" render="Label" position="91,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget source="key_green" render="Label" position="378,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget source="key_yellow" render="Label" position="665,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
-    <widget source="key_blue" render="Label" position="952,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="key_blue" render="Label" position="952,849" size="280,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
   </screen>
   <screen name="NetworkAdapterTest" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png"/>
@@ -2168,7 +2168,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="global.CurrentTime" render="Label" position="125,25" size="360,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Choose a Wireless Network" position="760,25" size="420,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="Title" render="Label" position="760,25" size="420,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget source="info" render="Label" position="65,130" size="1095,35" font="Roboto_HD; 27" backgroundColor="black" foregroundColor="light_yellow" transparent="1"/>
     <widget source="list" render="Listbox" position="65,180" size="1095,620" scrollbarMode="showOnDemand" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" selectionPixmap="BlackHarmony/menu/sel_1095_75.png" backgroundColor="black" transparent="1">
       <convert type="TemplatedMultiContent">
@@ -4016,10 +4016,14 @@ self['config'].l.setSeperation(int(300*f))
     </widget>
     <widget source="Title" render="Label" position="1030,50" zPosition="2" size="420,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget name="headertext" position="80,170" zPosition="1" size="740,39" font="Roboto_HD; 30" halign="center" foregroundColor="#00F0A30A" backgroundColor="black" transparent="1" />
-    <widget name="statustext" position="882,734" zPosition="1" size="560,60" font="Roboto_HD; 25" halign="center" valign="center" foregroundColor="light_yellow" backgroundColor="black" transparent="1"/>
     <widget name="list" position="80,222" font="Roboto_HD; 27" size="740,690" enableWrapAround="1" scrollbarMode="showOnDemand" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" selectionPixmap="BlackHarmony/menu/sel_850_110.png" backgroundColor="black" transparent="1"/>
-    <widget name="titel" position="882,586" zPosition="1" size="560,130" font="Roboto_HD; 26" halign="center" foregroundColor="white" backgroundColor="black" transparent="1"/>
     <widget name="station" position="879,526" zPosition="1" size="560,30" font="Roboto_HD; 26" halign="center" foregroundColor="#00F0A30A" backgroundColor="black" transparent="1"/>
+    <widget name="titel" position="882,586" zPosition="1" size="560,130" font="Roboto_HD; 26" halign="center" foregroundColor="white" backgroundColor="black" transparent="1"/>
+    <widget name="statustext" position="882,734" zPosition="1" size="560,60" font="Roboto_HD; 25" halign="center" valign="center" foregroundColor="light_yellow" backgroundColor="black" transparent="1"/>
+    <eLabel text="Connected: " position="882,820" size="140,30" zPosition="1" font="Roboto_HD; 24" halign="left" foregroundColor="white" backgroundColor="black" transparent="1" />
+	<widget source="session.CurrentService" render="Label" position="1030,820" size="130,30" font="Roboto_HD; 25" zPosition="2" foregroundColor="light_yellow" backgroundColor="black" transparent="1">
+	  <convert type="ServicePosition">Remaining</convert>
+	</widget>
     <widget name="console" position="882,865" zPosition="1" size="560,50" font="Roboto_HD; 18" halign="left" backgroundColor="black" transparent="1"/>
     <widget name="cover" zPosition="2" position="1015,191" size="300,300" alphatest="blend" backgroundColor="transparent"/>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="65,955" size="35,27" alphatest="blend"/>
@@ -4040,6 +4044,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="global.CurrentTime" render="Label" position="125,25" size="360,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
+    <widget name="description" position="65,627" size="1095,160" font="Roboto_HD; 27" zPosition="2" halign="center" valign="center" foregroundColor="light_yellow" backgroundColor="black" transparent="1"/>
     <widget source="Title" render="Label" position="860,25" size="320,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget name="config" itemHeight="35" font="Roboto_HD; 26" position="65,140" size="1095,640" scrollbarMode="showOnDemand" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" selectionPixmap="BlackHarmony/menu/sel_1095_35.png" backgroundColor="black" transparent="1"/>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="41,850" size="35,27" alphatest="blend"/>

@@ -1,5 +1,5 @@
 #!/bin/sh
-# 2016 @j00zek
+# 2019 @j00zek
 # Script creates list of transponders being in use by PL providers
 # j00zeBouquets will filter data based on it
 #
@@ -26,8 +26,10 @@ getTransponders(){
     grep '^.....$' < /tmp/PLtrans.tmp > /tmp/PLtrans.temp
     [ $? -gt 0 ] && exit 0
     [ -f /tmp/PLtrans.tmp ] && rm -f /tmp/PLtrans.tmp 2>/dev/null
-    [ -f /tmp/PLtrans.temp ] && sort -u </tmp/PLtrans.temp >$myPath/PLtransponders.cfg
-    rm -f /tmp/PLtrans.temp 2>/dev/null
+	cfgFile="/usr/lib/enigma2/python/Plugins/Extensions/J00zekBouquets/components/PLtransponders.cfg"
+	[ -e  $cfgFile ] && cat $cfgFile >> /tmp/PLtrans.temp
+    [ -f /tmp/PLtrans.temp ] && sort </tmp/PLtrans.temp|uniq >$myPath/PLtransponders.cfg
+    #rm -f /tmp/PLtrans.temp 2>/dev/null
     #echo "_(List of transponders being in use by PL providers has been updated. Found `grep -c '^'<$myPath/transponders.PL`)"
 }
 
@@ -50,8 +52,11 @@ getSids(){
     do
       printf '%04x\n' $SID>>/tmp/PLsids
     done </tmp/PLsids.tmp
-    [ -f /tmp/PLsids ] && sort -u </tmp/PLsids >$myPath/PLsids.cfg
-    rm -f /tmp/*sids* 2>/dev/null
+	cfgFile="/usr/lib/enigma2/python/Plugins/Extensions/J00zekBouquets/components/PLsids.cfg"
+	[ -e  $cfgFile ] && cat $cfgFile >> /tmp/PLsids
+    [ -f /tmp/PLsids ] && sort </tmp/PLsids|uniq >$myPath/PLsids.cfg
+    rm -f /tmp/PLsids.tmp 2>/dev/null
+    rm -f /tmp/PLsids 2>/dev/null
 }
 case $1 in
   "transponders") getTransponders;;
