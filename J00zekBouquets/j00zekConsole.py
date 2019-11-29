@@ -1,24 +1,25 @@
 # -*- coding: utf-8 -*-
-# @j00zek 2014/2015/2016/2017
+# @j00zek 2014/2015/2016/2017/2019
 #
 # changes/improvements:
 # - translation of cmd texts with common structure _(), e.g. echo "_(this is an example)"
 # - safe for tuners with small memory size
 
-from enigma import eConsoleAppContainer
+from enigma import eConsoleAppContainer, eServiceReference
+from Screens.InfoBar import InfoBar
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.MenuList import MenuList
 from Components.ScrollLabel import ScrollLabel
 from inits import *
 #
-from Components.Pixmap import Pixmap
-from enigma import ePicLoad, ePoint, getDesktop, eTimer, ePixmap
-from os import system as os_system, popen as os_popen, path
+#from Components.Pixmap import Pixmap
+#from enigma import eTimer
+#from os import system as os_system, popen as os_popen
 #from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
-from Screens.MessageBox import MessageBox
-from Screens.ChoiceBox import ChoiceBox
+#from Screens.MessageBox import MessageBox
+#from Screens.ChoiceBox import ChoiceBox
 
 class j00zekConsole(Screen):
     skin = """
@@ -92,6 +93,18 @@ class j00zekConsole(Screen):
 
     def dataAvail(self, str):
         #lastpage = self["text"].isAtLastPage()
+        #with open("/tmp/JB", "a") as f: f.write(str)
+        if str.find("zapTo(") > -1:
+            dvbService = str.split('zapTo(', 1)[1]
+            if dvbService.find(")") > -1:
+                dvbService = dvbService.split(')', 1)[0]
+                serviceDVB = eServiceReference(dvbService)
+                InfoBar.instance.servicelist.clearPath()
+                InfoBar.instance.servicelist.enterPath(serviceDVB)
+                InfoBar.instance.servicelist.setCurrentSelection(serviceDVB)
+                InfoBar.instance.servicelist.zap()
+                str = str.replace("zapTo(%s)" % dvbService ,"Przełączanie na kanał nadający dane o numeracji...")
+            #with open("/tmp/JB", "a") as f: f.write("aaaa" + dvbService)
         self["text"].setText(self["text"].getText() + str)
         #if lastpage:
         self["text"].lastPage()

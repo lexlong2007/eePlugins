@@ -301,22 +301,10 @@ class j00zekBouquets(Screen, ConfigListScreen):
         return
     
     def keyYellow(self):
-        try:
-            openWebifState = config.OpenWebif.enabled.value
-            OpenWebifAuth = config.OpenWebif.auth.value
-        except:
-            openWebifState = None
-            OpenWebifAuth = None
         if j00zekConfig.BouquetsEnabled.value == False:
             return
-        elif openWebifState is None:
-            self.session.openWithCallback(self.doNothing ,MessageBox,"nie zainstalowano wtyczki OpenWebif - kończę!!!", MessageBox.TYPE_INFO)
-            return
-        elif openWebifState == False:
-            self.session.openWithCallback(self.doNothing ,MessageBox,"Interfejs OpenWebif jest wyłączony - kończę!!!", MessageBox.TYPE_INFO)
-            return
-        elif OpenWebifAuth == True:
-            self.session.openWithCallback(self.doNothing ,MessageBox,"OpenWebif wymaga zalogowania- kończę!!!", MessageBox.TYPE_INFO)
+        elif not os_path.exists('/usr/bin/dvbsnoop'):
+            self.session.openWithCallback(self.doNothing ,MessageBox,"Brak dvbsnoop Spróbuj zainstalować z repozytorium. - kończę!!!", MessageBox.TYPE_INFO)
             return
         elif j00zekConfig.BouquetsNC.value != 'NA' or j00zekConfig.BouquetsCP.value != 'NA':
             self.SaveSettings()
@@ -335,11 +323,7 @@ class j00zekBouquets(Screen, ConfigListScreen):
             self.ConfigureJB()
             self.ConfigOscamUpdate()
 
-            service = eServiceReference(self.ZapTo)
-            InfoBar.instance.servicelist.clearPath()
-            InfoBar.instance.servicelist.enterPath(service)
-            InfoBar.instance.servicelist.setCurrentSelection(service)
-            InfoBar.instance.servicelist.zap()
+            self.ZapToService(self.ZapTo)
             self.timer.callback.append(self.keyYellowStep2)
             self.timer.start(500,1) # j00zekBouquets waits for e2 to tune.
         return
@@ -377,6 +361,13 @@ class j00zekBouquets(Screen, ConfigListScreen):
         eDVBDB.getInstance().reloadServicelist()
         eDVBDB.getInstance().reloadBouquets()
 
+    def ZapToService(self, ZapTo):
+        service = eServiceReference(ZapTo)
+        InfoBar.instance.servicelist.clearPath()
+        InfoBar.instance.servicelist.enterPath(service)
+        InfoBar.instance.servicelist.setCurrentSelection(service)
+        InfoBar.instance.servicelist.zap()
+    
     def ZapToPrevChannel(self):
         if InfoBar.instance.servicelist.getRoot() != self.prev_root: #already in correct bouquet?
             InfoBar.instance.servicelist.clearPath()

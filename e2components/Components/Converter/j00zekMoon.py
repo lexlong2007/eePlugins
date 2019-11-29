@@ -10,7 +10,7 @@ from Components.Language import language
 #from decimal import Decimal as dec
 import math, datetime
 
-DBG = True
+DBG = False
 if DBG: from Components.j00zekComponents import j00zekDEBUG
 
 #simple and dirty translation
