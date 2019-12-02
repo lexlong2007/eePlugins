@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from Plugins.Extensions.IPTVPlayer.tools.iptvtools import printDBG
 from Plugins.Extensions.IPTVPlayer.libs import ph
-from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.tstools import TSCBaseHostClass,gethostname,cryptoJS_AES_decrypt
+from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.tstools import TSCBaseHostClass,gethostname,cryptoJS_AES_decrypt,tscolor
 from Plugins.Extensions.IPTVPlayer.libs.e2ijson import loads as json_loads
 from Plugins.Extensions.IPTVPlayer.tools.iptvtypes import strwithmeta
 from Plugins.Extensions.IPTVPlayer.libs.urlparserhelper import getDirectM3U8Playlist
@@ -68,7 +68,7 @@ class TSIPHost(TSCBaseHostClass):
 					url=self.MAIN_URL+url
 				self.addDir({'import':cItem['import'],'EPG':True,'category' : 'host2','url': url,'title':titre,'desc':'','icon':image,'hst':'tshost','good_for_fav':True,'mode':'31'})	
 			if i>23:
-				self.addDir({'import':cItem['import'],'title':'\c0000????Next Page','page':page+1,'category' : 'host2','url':cItem['url'],'icon':cItem['icon'],'mode':'30'} )									
+				self.addDir({'import':cItem['import'],'title':tscolor('\c0000????')+'Next Page','page':page+1,'category' : 'host2','url':cItem['url'],'icon':cItem['icon'],'mode':'30'} )									
 
 	
 	
@@ -80,7 +80,7 @@ class TSIPHost(TSCBaseHostClass):
 			data_list = re.findall('class="tab-pane.*?id="(.*?)".*?<ul(.*?)</ul', data, re.S)
 			for (server,data1) in data_list:
 				server=server.replace('server-','Server ')
-				self.addMarker({'title':'\c00????00'+server,'icon':cItem['icon']} )
+				self.addMarker({'title':tscolor('\c00????00')+server,'icon':cItem['icon']} )
 				data_list = re.findall('embedUrl="(.*?)">(.*?)<', data1, re.S)
 				for (Url,titre) in data_list:
 					data_h={'name':titre, 'url':'hst#tshost#'+Url, 'need_resolve':1}
@@ -96,7 +96,7 @@ class TSIPHost(TSCBaseHostClass):
 				url      = elm['data']['href']
 				image    = elm['data']['image']		
 				typ_     = elm['data']['type']
-				titre=titre+' \c0000????('+typ_+')'
+				titre=titre+' '+tscolor('\c0000????')+'('+typ_+')'
 				if not url.startswith('http'):
 					url=self.MAIN_URL+url			
 				self.addDir({'import':extra,'category' : 'host2','url': url,'title':titre,'desc':'','icon':image,'hst':'tshost','EPG':True,'good_for_fav':True,'mode':'31'})	

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from Plugins.Extensions.IPTVPlayer.tools.iptvtools import printDBG
 from Plugins.Extensions.IPTVPlayer.libs import ph
-from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.tstools import TSCBaseHostClass
+from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.tstools import TSCBaseHostClass,tscolor
 from Components.config import config
 
 import re
@@ -97,7 +97,7 @@ class TSIPHost(TSCBaseHostClass):
 								if ('الرئيسية' not in titre11) and ('الطلبات' not in titre11) and ('سلاسل' not in titre11):
 									self.addDir({'import':cItem['import'],'category' :'host2', 'url':url11, 'title':titre11, 'desc':titre11, 'icon':img, 'mode':'30', 'page':1})
 								
-						self.addMarker({'title':'\c0000??00Films by genre','icon':'','desc':''})				
+						self.addMarker({'title':tscolor('\c0000??00')+'Films by genre','icon':'','desc':''})				
 						lst_data2 = re.findall('<h2>نوع العرض</h2>(.*?)</ul',data, re.S)
 						if lst_data2:
 							lst_data3 = re.findall('<li.*?href="(.*?)">(.*?)</li>',lst_data2[0], re.S)
@@ -128,7 +128,7 @@ class TSIPHost(TSCBaseHostClass):
 				desc=self.get_desc(desc0,desc1)
 				self.addDir({'import':cItem['import'],'good_for_fav':True,'category':'host2', 'url':url1, 'title':ph.clean_html(name_eng), 'desc':desc, 'icon':image, 'mode':'31','EPG':True,'hst':'tshost'} )							
 			if page!=0:
-				self.addDir({'import':cItem['import'],'category':'host2', 'url':url0, 'title':'\c0000??00Page Suivante', 'page':page+1, 'desc':'Page Suivante', 'icon':cItem['icon'], 'mode':'30'})	
+				self.addDir({'import':cItem['import'],'category':'host2', 'url':url0, 'title':tscolor('\c0000??00')+'Page Suivante', 'page':page+1, 'desc':'Page Suivante', 'icon':cItem['icon'], 'mode':'30'})	
 
 	def get_desc(self,desc0,desc1):
 		desc = ''
@@ -136,15 +136,15 @@ class TSIPHost(TSCBaseHostClass):
 			
 		elm_list = re.findall('<li.*?<em>(.*?)</em>(.*?)</li>', desc1, re.S)
 		for (href,titre) in elm_list:
-			if 'المشاهدات' in href: desc=desc+'\c00??????Views: \c00????00'+ph.clean_html(titre)+'\n'				
-			if 'سنة' in href: desc=desc+'\c00??????Year: \c00????00'+ph.clean_html(titre)+'\n'				
-			if 'النوع' in href: desc=desc+'\c00??????Genre: \c00????00'+ph.clean_html(titre)+'\n'			
+			if 'المشاهدات' in href: desc=desc+tscolor('\c00??????')+'Views: '+tscolor('\c00????00')+ph.clean_html(titre)+'\n'				
+			if 'سنة' in href: desc=desc+tscolor('\c00??????')+'Year: '+tscolor('\c00????00')+ph.clean_html(titre)+'\n'				
+			if 'النوع' in href: desc=desc+tscolor('\c00??????')+'Genre: '+tscolor('\c00????00')+ph.clean_html(titre)+'\n'			
 
 
 		elm_list = re.findall('href="(.*?)">(.*?)<', desc0, re.S)
 		for (href,titre) in elm_list:
-			if 'category' in href: desc=desc+'\c00??????Category: \c00????00'+ph.clean_html(titre)+'\n'				
-			if 'quality' in href: desc=desc+'\c00??????Quality: \c00????00'+ph.clean_html(titre)+'\n'	
+			if 'category' in href: desc=desc+tscolor('\c00??????')+'Category: '+tscolor('\c00????00')+ph.clean_html(titre)+'\n'				
+			if 'quality' in href: desc=desc+tscolor('\c00??????')+'Quality: '+tscolor('\c00????00')+ph.clean_html(titre)+'\n'	
 			
 
 			
@@ -196,7 +196,7 @@ class TSIPHost(TSCBaseHostClass):
 					data2=cat_data[0]'''
 				params = {'import':cItem['import'],'good_for_fav':True,'category' : 'video','url': url0,'title':titre,'desc':'','icon':cItem['icon'],'desc':cItem['desc'],'hst':'tshost'} 
 				self.addVideo(params)						
-				self.addMarker({'title':'\c0000??00نرشح لكم','icon':'','desc':''})	
+				self.addMarker({'title':tscolor('\c0000??00')+'نرشح لكم','icon':'','desc':''})	
 				cat_data=re.findall('<div class="Block">.*?href="(.*?)".*?src="(.*?)".*?<h2>(.*?)<.*?DescPost">(.*?)</a>', data, re.S)
 				if cat_data:
 					for (url,image,name_eng,desc) in cat_data:
@@ -249,7 +249,7 @@ class TSIPHost(TSCBaseHostClass):
 			lst_dat=re.findall('StoryContentExtend">(.*?)</div>', data, re.S)
 			if lst_dat: 
 				if ph.clean_html(lst_dat[0])!='':
-					desc = '\c00????00Story: \c00??????'+ph.clean_html(lst_dat[0])
+					desc = tscolor('\c00????00')+'Story: '+tscolor('\c00??????')+ph.clean_html(lst_dat[0])
 		icon = cItem.get('icon')
 		title = cItem['title']		
 		return [{'title':title, 'text': desc, 'images':[{'title':'', 'url':icon}], 'other_info':otherInfo1}]

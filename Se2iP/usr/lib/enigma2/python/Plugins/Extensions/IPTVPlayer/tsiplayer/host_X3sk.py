@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from Plugins.Extensions.IPTVPlayer.tools.iptvtools import printDBG
-from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.tstools import TSCBaseHostClass
+from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.tstools import TSCBaseHostClass,tscolor
 from Plugins.Extensions.IPTVPlayer.libs.e2ijson import loads as json_loads
 from Plugins.Extensions.IPTVPlayer.libs import ph
 import re,urllib,base64
@@ -59,7 +59,7 @@ class TSIPHost(TSCBaseHostClass):
 			if sts:
 				lst_data=re.findall('<div class="col-xs-12 catTitle">(.*?)/h2>(.*?)<div class="row">', data, re.S)
 				for (name_cat,data2) in lst_data:		
-					self.addMarker({'title':'\c00????00'+ph.clean_html(name_cat),'icon':cItem['icon']})
+					self.addMarker({'title':tscolor('\c00????00')+ph.clean_html(name_cat),'icon':cItem['icon']})
 					lst_data2=re.findall('"itemIMG">.*?href="(.*?)".*?src="(.*?)".*?<h3>(.*?)</h3>', data2, re.S)
 					for (url1,image,name_eng) in lst_data2:	
 						if not image.startswith('http'): image='https://3sk.co/'+image	
@@ -107,7 +107,7 @@ class TSIPHost(TSCBaseHostClass):
 				if not ".php" in link:
 					continue
 				if mode_=='91':
-					self.addVideo({'import':extra,'category' : 'host2','title':title,'url':link,'hst':'tshost','good_for_fav':True})		
+					self.addVideo({'import':extra,'category' : 'video','title':title,'url':link,'hst':'tshost','good_for_fav':True})		
 				else:
 					self.addDir({'import':extra,'category' : 'host2','title':title,'url':link,'mode':'20','good_for_fav':True})
 		

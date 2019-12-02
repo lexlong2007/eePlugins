@@ -132,7 +132,7 @@ class IPTVHost(IHost):
     ###################################################
 
 class Host:
-    infoversion = "2019.11.05"
+    infoversion = "2019.11.19"
     inforemote  = "0.0.0"
     currList = []
     SEARCH_proc = ''
@@ -1734,7 +1734,7 @@ class Host:
             printDBG( 'Host listsItems begin name='+name )
             #valTab.insert(0,CDisplayListItem("--- INNE ---","INNE",     CDisplayListItem.TYPE_CATEGORY,['http://filmypolskie999.blogspot.com/p/inne.html'],'filmypolskie999-seriale',    '',None))
             #valTab.insert(0,CDisplayListItem("--- DOKUMENTY ---","DOKUMENTY",     CDisplayListItem.TYPE_CATEGORY,['http://filmypolskie999.blogspot.com/p/dokument.html'],'filmypolskie999-clips',    '',None))
-            valTab.insert(0,CDisplayListItem("--- TEATR TV ---","TEATR TV",     CDisplayListItem.TYPE_CATEGORY,['http://filmypolskie999.blogspot.com/p/teatr-tv.html'],'filmypolskie999-seriale',    '',None))
+            valTab.insert(0,CDisplayListItem("--- TEATR TV ---","TEATR TV",     CDisplayListItem.TYPE_CATEGORY,['http://filmypolskie999.blogspot.com/p/teatr-tv.html'],'filmypolskie999-clips',    '',None))
             valTab.insert(0,CDisplayListItem("--- SERIALE ---","SERIALE",     CDisplayListItem.TYPE_CATEGORY,['http://filmypolskie999.blogspot.com/p/tv.html'],'filmypolskie999-seriale',    '',None))
             valTab.insert(0,CDisplayListItem("--- FILMY ---","FILMY",     CDisplayListItem.TYPE_CATEGORY,['http://filmypolskie999.blogspot.com/p/film.html'],'filmypolskie999-clips',    '',None))
             return valTab
@@ -1746,14 +1746,29 @@ class Host:
             sts, data = self.get_Page(url)
             if not sts: return valTab
             printDBG( 'Host listsItems data: '+data )
+
             data2 = self.cm.ph.getDataBeetwenMarkers(data, "DODAJ FILM", "footer", False)[1]
             if not data2: data2 = self.cm.ph.getDataBeetwenMarkers(data, ">CAŁY SERIAL", "</ol>", False)[1]
-            if not data2: data2 = self.cm.ph.getDataBeetwenMarkers(data, '<div class="separator"', "</ol>", False)[1]
+            #if not data2: data2 = self.cm.ph.getDataBeetwenMarkers(data, '>Teatr', "footer", False)[1]
+            if not data2: data2 = self.cm.ph.getDataBeetwenMarkers(data, '>Spektakle', "<div>", False)[1]
+            #if not data2: data2 = self.cm.ph.getDataBeetwenMarkers(data, '<div class="separator"', "</ol>", False)[1]
+            if not data2: data2 = self.cm.ph.getDataBeetwenMarkers(data, 'DODAJ', 'footer', False)[1]
+            if not data2: data2 = self.cm.ph.getDataBeetwenMarkers(data, 'CZAT', 'footer', False)[1]
+
+
+            printDBG( 'Host clips data2:%s' % data2 )
+            if not data2: data2 = data
+
             data = self.cm.ph.getAllItemsBeetwenMarkers(data2, '<a', '</a>')
             for item in data:
                phUrl = self.cm.ph.getSearchGroups(item, '''href=['"]([^"^']+?)['"]''', 1, True)[0] 
                phTitle = self._cleanHtmlStr(item)
                if phUrl.startswith('//'): phUrl = 'http:' + phUrl
+               if phTitle=='': phUrl=''
+               if 'Wikipedia' in phTitle: phUrl=''
+               if 'Wikipedia' in phTitle: phUrl=''
+               if 'Wikipedia' in phTitle: phUrl=''
+
                if phUrl and not 'tiny.cc' in phTitle:
                   valTab.append(CDisplayListItem(phTitle,phTitle,CDisplayListItem.TYPE_CATEGORY, [phUrl],'filmypolskie999-serwer', '', phTitle)) 
             return valTab
@@ -1766,20 +1781,29 @@ class Host:
             sts, data = self.get_Page(url)
             if not sts: return valTab
             printDBG( 'Host listsItems data: '+data )
+            if 'BRAK-WIDEO-DODAJ' in data:
+               msg = _("Last error:\n%s" % 'BRAK WIDEO')
+               GetIPTVNotify().push('%s' % msg, 'info', 10)
+            pusty = ''
             phImage = self.cm.ph.getSearchGroups(data, '''<link href=['"]([^"^']+?\.jpg)['"]''', 1, True)[0] 
-            desc = self.cm.ph.getDataBeetwenMarkers(data, "'metaDescription': '", "'", False)[1]
+            desc = self.cm.ph.getDataBeetwenMarkers(data, "'metaDescription': '", "'", False)[1].replace('\n','')
             data2 = self.cm.ph.getAllItemsBeetwenMarkers(data, '<iframe', '</iframe>')
             for item in data2:
                phUrl = self.cm.ph.getSearchGroups(item, '''src=['"]([^"^']+?)['"]''', 1, True)[0].replace('\n','').replace('&amp;','&') 
                if phUrl.startswith('//'): phUrl = 'http:' + phUrl
+               if 'amazon' in phUrl: phUrl = ''
                if phUrl:
-                  if not 'amazon' in phUrl:
-                     valTab.append(CDisplayListItem(catUrl,decodeHtml(desc),CDisplayListItem.TYPE_VIDEO, [CUrlItem('', phUrl, 1)], 0, phImage, None)) 
+                  pusty = ' '
+                  valTab.append(CDisplayListItem(catUrl,decodeHtml(desc),CDisplayListItem.TYPE_VIDEO, [CUrlItem('', phUrl, 1)], 0, phImage, None)) 
                else:
                   phUrl = self.cm.ph.getSearchGroups(data, '''file: ['"]([^"^']+?)['"]''', 1, True)[0].replace('\n','').replace('&amp;','&')
                   if phUrl:
+                     pusty = ' '
                      if phUrl.startswith('//'): phUrl = 'http:' + phUrl
                      valTab.append(CDisplayListItem(catUrl,decodeHtml(desc),CDisplayListItem.TYPE_VIDEO, [CUrlItem('', phUrl, 1)], 0, phImage, None)) 
+            printDBG( 'Host listsItems phUrl:%s' % phUrl )
+            if pusty == '':
+               valTab.append(CDisplayListItem(catUrl,'',CDisplayListItem.TYPE_CATEGORY, [url],'filmypolskie999-clips', '', None)) 
             return valTab
         if 'filmypolskie999-seriale' == name:
             printDBG( 'Host listsItems begin name='+name )
@@ -2011,7 +2035,7 @@ class Host:
             #valTab.insert(0,CDisplayListItem("--- SwirTeamTk ---","SwirTeamTk",     CDisplayListItem.TYPE_CATEGORY,['http://tv-swirtvteam.tk/'],'SwirTeamTk',    '',None))
             valTab.insert(0,CDisplayListItem("--- SuperSportowo ---","SuperSportowo",     CDisplayListItem.TYPE_CATEGORY,['https://supersportowo.com'],'SuperSportowo',    '',None))
             valTab.insert(0,CDisplayListItem("--- Ustreamix ---","Ustreamix",     CDisplayListItem.TYPE_CATEGORY,['https://ssl.ustreamix.com/search.php?q=poland'],'Ustreamix',    '',None))
-            valTab.insert(0,CDisplayListItem("--- Darmowa-telewizja.online ---","Darmowa-telewizja.online",     CDisplayListItem.TYPE_CATEGORY,['http://darmowa-telewizja.online/'],'darmowaonline',    '',None))
+            #valTab.insert(0,CDisplayListItem("--- Darmowa-telewizja.online ---","Darmowa-telewizja.online",     CDisplayListItem.TYPE_CATEGORY,['http://darmowa-telewizja.online/'],'darmowaonline',    '',None))
             return valTab
         if 'darmowaonline' == name:
             printDBG( 'Host listsItems begin name='+name )

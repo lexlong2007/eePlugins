@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from Plugins.Extensions.IPTVPlayer.tools.iptvtools import printDBG
 from Plugins.Extensions.IPTVPlayer.libs import ph
-from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.tstools import TSCBaseHostClass
+from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.tstools import TSCBaseHostClass,tscolor
 from Plugins.Extensions.IPTVPlayer.libs.e2ijson import loads as json_loads
 
 import re
@@ -56,7 +56,7 @@ class TSIPHost(TSCBaseHostClass):
 						if gnr==2: url = self.MAIN_URL+'/'
 					self.addDir({'import':cItem['import'],'category' : 'host2','title':ph.clean_html(titre),'url':url,'icon':cItem['icon'],'mode':'30'})
 				if gnr <3:
-					self.addDir({'import':cItem['import'],'category' : 'host2','title':'\c00????00'+'By Filter','icon':cItem['icon'],'mode':'21','sub_mode':gnr})
+					self.addDir({'import':cItem['import'],'category' : 'host2','title':tscolor('\c00????00')+'By Filter','icon':cItem['icon'],'mode':'21','sub_mode':gnr})
 
 	def showfilter(self,cItem):
 		count=cItem.get('count',0)
@@ -68,28 +68,28 @@ class TSIPHost(TSCBaseHostClass):
 			if sts:
 				Liste_films_data = re.findall('DropdownFilter">(.*?)</ul', data1, re.S)
 				if Liste_films_data:
-					self.addMarker({'title':'\c0000??00'+'التصنيف','desc':'','icon':cItem['icon']})
+					self.addMarker({'title':tscolor('\c0000??00')+'التصنيف','desc':'','icon':cItem['icon']})
 					data = Liste_films_data
 					elm_list = re.findall('<li>.*?data-term="(.*?)".*?">(.*?)</li>', data[gnr], re.S)
 					for (term,titre) in elm_list:
 						self.addDir({'import':cItem['import'],'count':1,'data':data,'category' : 'host2','url': '','filter_':term,'title':ph.clean_html(titre),'desc':ph.clean_html(titre),'icon':cItem['icon'],'hst':'tshost','mode':'21'})	
 				
 		elif count==1:			
-			self.addMarker({'title':'\c0000??00'+'النوع','desc':'','icon':cItem['icon']})
+			self.addMarker({'title':tscolor('\c0000??00')+'النوع','desc':'','icon':cItem['icon']})
 			self.addDir({'import':cItem['import'],'count':2,'data':data,'category' : 'host2','url': '','filter_':filter_+'|'+'undefined','title':'الكل','desc':cItem['desc']+'|'+'كل الانواع','icon':cItem['icon'],'hst':'tshost','mode':'21'})	
 			elm_list = re.findall('<li>.*?data-term="(.*?)".*?">(.*?)</li>', data[3], re.S)
 			for (term,titre) in elm_list:
 				self.addDir({'import':cItem['import'],'count':2,'data':data,'category' : 'host2','url': '','filter_':filter_+'|'+term,'title':ph.clean_html(titre),'desc':cItem['desc']+'|'+ph.clean_html(titre),'icon':cItem['icon'],'hst':'tshost','mode':'21'})	
 
 		elif count==2:			
-			self.addMarker({'title':'\c0000??00'+'سنة الإصدار','desc':'','icon':cItem['icon']})
+			self.addMarker({'title':tscolor('\c0000??00')+'سنة الإصدار','desc':'','icon':cItem['icon']})
 			self.addDir({'import':cItem['import'],'count':3,'data':data,'category' : 'host2','url': '','filter_':filter_+'|'+'undefined','title':'الكل','desc':cItem['desc']+'|'+'كل السنوات','icon':cItem['icon'],'hst':'tshost','mode':'21'})		
 			elm_list = re.findall('<li>.*?data-term="(.*?)".*?">(.*?)</li>', data[4], re.S)
 			for (term,titre) in elm_list:
 				self.addDir({'import':cItem['import'],'count':3,'data':data,'category' : 'host2','url': '','filter_':filter_+'|'+term,'title':ph.clean_html(titre),'desc':cItem['desc']+'|'+ph.clean_html(titre),'icon':cItem['icon'],'hst':'tshost','mode':'21'})	
 
 		elif count==3:			
-			self.addMarker({'title':'\c0000??00'+'الجودة','desc':'','icon':cItem['icon']})	
+			self.addMarker({'title':tscolor('\c0000??00')+'الجودة','desc':'','icon':cItem['icon']})	
 			self.addDir({'import':cItem['import'],'category' : 'host2','url': '','filter_':filter_+'|'+'undefined','title':'الكل','desc':cItem['desc']+'|'+'كل الجودات','icon':cItem['icon'],'hst':'tshost','mode':'30'})	
 			elm_list = re.findall('<li>.*?data-term="(.*?)".*?">(.*?)</li>', data[5], re.S)
 			for (term,titre) in elm_list:
@@ -121,7 +121,7 @@ class TSIPHost(TSCBaseHostClass):
 				desc = self.get_desc(desc0,desc1,desc2)
 				self.addDir({'import':cItem['import'],'category' : 'host2','title':name_eng,'url':url1,'icon':image,'desc':desc,'mode':'31','good_for_fav':True,'EPG':True,'hst':'tshost'})					
 			if (filter_==''):
-				self.addDir({'import':cItem['import'],'category' : 'host2','title':'\c0000??00Page Suivante','url':urlo,'page':page+1,'mode':'30'})
+				self.addDir({'import':cItem['import'],'category' : 'host2','title':tscolor('\c0000??00')+'Page Suivante','url':urlo,'page':page+1,'mode':'30'})
 
 	def showelms(self,cItem):
 		url=cItem['url']
@@ -184,7 +184,7 @@ class TSIPHost(TSCBaseHostClass):
 			sts, data = self.getPage(cItem['url'])
 			if sts:
 				lst_dat=re.findall('StoryContent">(.*?)</div>', data, re.S)
-				if lst_dat: desc = '\c00????00Story: \c00??????'+ph.clean_html(lst_dat[0])
+				if lst_dat: desc = tscolor('\c00????00')+'Story: '+tscolor('\c00??????')+ph.clean_html(lst_dat[0])
 			icon = cItem.get('icon')
 			title = cItem['title']		
 			return [{'title':title, 'text': desc, 'images':[{'title':'', 'url':icon}], 'other_info':otherInfo1}]
@@ -228,19 +228,19 @@ class TSIPHost(TSCBaseHostClass):
 		elm_list = re.findall('StarsIMDB">(.*?)</div>', desc0, re.S)
 		if elm_list:
 			if 'n/A' not in elm_list[0]:
-				desc=desc+'\c00??????IMDB: \c00????00'+ph.clean_html(elm_list[0])+'\n'				
+				desc=desc+tscolor('\c00??????')+'IMDB: '+tscolor('\c00????00')+ph.clean_html(elm_list[0])+'\n'				
 		
 		elm_list = re.findall('fa-film">(.*?)</li>', desc1, re.S)
 		if elm_list: 
 			if 'n/A' not in elm_list[0]:
-				desc=desc+'\c00??????Genre: \c00????00'+ph.clean_html(elm_list[0].replace('</span>','|'))+'\n'	
+				desc=desc+tscolor('\c00??????')+'Genre: '+tscolor('\c00????00')+ph.clean_html(elm_list[0].replace('</span>','|'))+'\n'	
 		elm_list = re.findall('desktop">(.*?)</li>', desc1, re.S)
-		if elm_list: desc=desc+'\c00??????Quality: \c00????00'+ph.clean_html(elm_list[0])+'\n'
+		if elm_list: desc=desc+tscolor('\c00??????')+'Quality: '+tscolor('\c00????00')+ph.clean_html(elm_list[0])+'\n'
 		elm_list = re.findall('<li>.*?<span>(.*?)</span>(.*?)</li>', desc2, re.S)
 		for (tt,vv) in elm_list:
-			if 'سنة' in tt: desc=desc+'\c00??????Year: \c00????00'+ph.clean_html(vv)+'\n'
-			if 'الإشراف' in tt: desc=desc+'\c00??????Type: \c00????00'+ph.clean_html(vv)+'\n'
-			if 'دولة' in tt: desc=desc+'\c00??????Country: \c00????00'+ph.clean_html(vv)+'\n'
+			if 'سنة' in tt: desc=desc+tscolor('\c00??????')+'Year: '+tscolor('\c00????00')+ph.clean_html(vv)+'\n'
+			if 'الإشراف' in tt: desc=desc+tscolor('\c00??????')+'Type: '+tscolor('\c00????00')+ph.clean_html(vv)+'\n'
+			if 'دولة' in tt: desc=desc+tscolor('\c00??????')+'Country: '+tscolor('\c00????00')+ph.clean_html(vv)+'\n'
 		return desc
 
 			

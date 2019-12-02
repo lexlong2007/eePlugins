@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from Plugins.Extensions.IPTVPlayer.tools.iptvtools import printDBG
 from Plugins.Extensions.IPTVPlayer.libs import ph
-from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.tstools import TSCBaseHostClass,gethostname
+from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.tstools import TSCBaseHostClass,gethostname,tscolor
 from Plugins.Extensions.IPTVPlayer.libs.e2ijson import loads as json_loads
 from Plugins.Extensions.IPTVPlayer.tools.iptvtypes import strwithmeta
 from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.packer import cPacker
@@ -59,7 +59,7 @@ class TSIPHost(TSCBaseHostClass):
 				desc = ph.clean_html(desc1)
 				titre = titre.replace('Watch Online','')
 				self.addVideo({'import':cItem['import'],'good_for_fav':True,'EPG':True,'category' : 'host2','url':url,'title':ph.clean_html(titre),'desc':desc,'icon':image,'hst':'tshost'})	
-			self.addDir({'import':cItem['import'],'title':'\c0000??00'+'Page '+str(page+1),'page':page+1,'category' : 'host2','url':cItem['url'],'icon':cItem['icon'],'mode':'30'} )									
+			self.addDir({'import':cItem['import'],'title':tscolor('\c0000??00')+'Page '+str(page+1),'page':page+1,'category' : 'host2','url':cItem['url'],'icon':cItem['icon'],'mode':'30'} )									
 
 	def SearchResult(self,str_ch,page,extra):
 		url_=self.MAIN_URL+'/page/'+str(page)+'/?s='+str_ch
@@ -69,7 +69,7 @@ class TSIPHost(TSCBaseHostClass):
 			for (desc1,titre,url,image) in films_list:
 				desc = ph.clean_html(desc1)
 				titre = titre.replace('Watch Online','')
-				self.addVideo({'import':extra,'good_for_fav':True,'EPG':True,'category' : 'host2','url':url,'title':ph.clean_html(titre),'desc':desc,'icon':image,'hst':'tshost'})	
+				self.addVideo({'import':extra,'good_for_fav':True,'EPG':True,'category' : 'video','url':url,'title':ph.clean_html(titre),'desc':desc,'icon':image,'hst':'tshost'})	
 
 
 	def get_links(self,cItem):
@@ -112,8 +112,8 @@ class TSIPHost(TSCBaseHostClass):
 		if sts:
 			lst_dat=re.findall('<div class="quads.*?<p><strong>(.*?)<a', data, re.S)
 			if lst_dat:
-				desc=lst_dat[0].replace('<strong>','\\n\c00????00')
-				desc=desc.replace('</strong>','\c00??????')
+				desc=lst_dat[0].replace('<strong>','\\n'+tscolor('\c00????00'))
+				desc=desc.replace('</strong>',tscolor('\c00??????'))
 				desc=ph.clean_html(desc)
 			else:
 				desc= cItem['desc']				

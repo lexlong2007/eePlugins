@@ -65,7 +65,7 @@ class BlackHarmonyRunningText(Renderer):
 		self.txtext   = ""
 		self.scroll_label = self.mTimer = self.mStartPoint = None
 		self.X = self.Y = self.W = self.H = self.mStartDelay = 0
-		self.mAlways = 1		# always move text
+		self.mAlways = 0		# 0=move text only when bigger, 1=always move text
 		self.mStep = 1			# moving step: 1 pixel per 1 time
 		self.mStepTimeout = 50		# step timeout: 1 step per 50 milliseconds ( speed: 20 pixel per second )
 		self.direction = LEFT

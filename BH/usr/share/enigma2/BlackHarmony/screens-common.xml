@@ -10672,7 +10672,66 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2,orgpos.y()))
     <widget render="Label" source="key_green" position="260,435" size="120,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget render="Label" source="yellow_key" position="405,435" size="320,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
   </screen>
-  
+<!-- openATV MENU Horizontal SCREENS -->
+  <screen name="Iconmain" position="30,150" size="1920,1080" title="Menu" backgroundColor="transparent" flags="wfNoBorder">
+        <widget name="title" position="10,650" size="1830,80" zPosition="3" halign="center" font="Roboto_HD;60" foregroundColor="white" backgroundColor="black" transparent="1"/>
+        <eLabel position="0,740" size="1850,5" backgroundColor="#00B7EB" zPosition="-1"/>
+        <widget source="label1" render="Label" position="15,765" size="280,130" font="Regular; 28" halign="center" valign="center" zPosition="2" foregroundColor="white" backgroundColor="black" transparent="1"/>
+        <widget source="label1s" render="Label" position="15,765" size="280,130" font="Regular; 30" borderWidth="1" borderColor="border" halign="center" valign="center" zPosition="2" foregroundColor="lemon" backgroundColor="black" transparent="1"/>
+        <ePixmap pixmap="BlackHarmony/menu/sel_280_135.png" position="15,765" size="280,134" zPosition="1" transparent="1" alphatest="blend"/>
+        <eLabel position="15,765" size="280,134" backgroundColor="black"/>
+        <widget source="label2" render="Label" position="325,765" size="280,130" font="Regular; 28" halign="center" valign="center" zPosition="2" foregroundColor="white" backgroundColor="black" transparent="1"/>
+        <widget source="label2s" render="Label" position="325,765" size="280,130" font="Regular; 30" borderWidth="1" borderColor="border" halign="center" valign="center" zPosition="2" foregroundColor="lemon" backgroundColor="black" transparent="1"/>
+        <ePixmap pixmap="BlackHarmony/menu/sel_280_135.png" position="325,765" size="280,134" zPosition="1" transparent="1" alphatest="blend"/>
+        <eLabel position="325,765" size="280,134" backgroundColor="black"/>
+        <widget source="label3" render="Label" position="635,765" size="280,130" font="Regular; 28" halign="center" valign="center" zPosition="2" foregroundColor="white" backgroundColor="black" transparent="1"/>
+        <widget source="label3s" render="Label" position="635,765" size="280,130" font="Regular; 30" borderWidth="1" borderColor="border" halign="center" valign="center" zPosition="2" foregroundColor="lemon" backgroundColor="black" transparent="1"/>
+        <ePixmap pixmap="BlackHarmony/menu/sel_280_135.png" position="635,765" size="280,134" zPosition="1" transparent="1" alphatest="blend"/>
+        <eLabel position="635,765" size="280,134" backgroundColor="black"/>
+        <widget source="label4" render="Label" position="945,765" size="280,130" font="Regular; 28" halign="center" valign="center" zPosition="2" foregroundColor="white" backgroundColor="black" transparent="1"/>
+        <widget source="label4s" render="Label" position="945,765" size="280,130" font="Regular; 30" borderWidth="1" borderColor="border" halign="center" valign="center" zPosition="2" foregroundColor="lemon" backgroundColor="black" transparent="1"/>
+        <ePixmap pixmap="BlackHarmony/menu/sel_280_135.png" position="945,765" size="280,134" zPosition="1" transparent="1" alphatest="blend"/>
+        <eLabel position="945,765" size="280,134" backgroundColor="black"/>
+        <widget source="label5" render="Label" position="1255,765" size="280,130" font="Regular; 28" halign="center" valign="center" zPosition="2" foregroundColor="white" backgroundColor="black" transparent="1"/>
+        <widget source="label5s" render="Label" position="1255,765" size="280,130" font="Regular; 30" borderWidth="1" borderColor="border" halign="center" valign="center" zPosition="2" foregroundColor="lemon" backgroundColor="black" transparent="1"/>
+        <ePixmap pixmap="BlackHarmony/menu/sel_280_135.png" position="1255,765" size="280,134" zPosition="1" transparent="1" alphatest="blend"/>
+        <eLabel position="1255,765" size="280,134" backgroundColor="black"/>
+        <widget source="label6" render="Label" position="1560,765" size="280,130" font="Regular; 28" halign="center" valign="center" zPosition="2" foregroundColor="white" backgroundColor="black" transparent="1"/>
+        <widget source="label6s" render="Label" position="1560,765" size="280,130" font="Regular; 30" borderWidth="1" borderColor="border" halign="center" valign="center" zPosition="2" foregroundColor="lemon" backgroundColor="black" transparent="1"/>
+        <ePixmap pixmap="BlackHarmony/menu/sel_280_135.png" position="1560,765" size="280,134" zPosition="1" transparent="1" alphatest="blend"/>
+        <eLabel position="1560,765" size="280,134" backgroundColor="black"/>
+  </screen>
+  <screen name="Animmain" position="-2,-20" size="1920,1080" title="Menu" flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap position="35,780" zPosition="-2" size="1850,375" pixmap="BlackHarmony/bg_design/infobar_epg.png" />
+        <widget name="title" position="250,710" size="1550,80" zPosition="3" halign="center" valign="bottom" font="Roboto_HD; 60" foregroundColor="white" backgroundColor="black" transparent="1"/>
+        <ePixmap pixmap="BlackHarmony/gfx/linia_IB.png" position="330,820" size="450,1" alphatest="blend"/>
+        <ePixmap pixmap="BlackHarmony/gfx/linia_IB.png" position="330,1000" size="450,1" alphatest="blend"/>
+        <widget source="label1" render="Label" position="250,845" size="280,130" font="Regular; 28" halign="center" valign="center" zPosition="2" foregroundColor="white" backgroundColor="black" transparent="1"/>
+        <widget source="label2" render="Label" position="556,845" size="280,130" font="Regular; 28" halign="center" valign="center" zPosition="2" foregroundColor="white" backgroundColor="black" transparent="1"/>
+    <eLabel position="910,844" size="284,134" zPosition="1" backgroundColor="blue"/>
+        <widget source="label3" render="Label" position="912,846" size="280,130" font="Bold; 30" borderWidth="1" borderColor="border" halign="center" valign="center" zPosition="3" foregroundColor="lemon" backgroundColor="black" transparent="0"/>
+        <ePixmap pixmap="BlackHarmony/gfx/linia_IB.png" position="1350,820" size="450,1" alphatest="blend"/>
+        <ePixmap pixmap="BlackHarmony/gfx/linia_IB.png" position="1350,1000" size="450,1" alphatest="blend"/>
+        <widget source="label4" render="Label" position="1268,845" size="280,130" font="Regular; 28" halign="center" valign="center" zPosition="2" foregroundColor="white" backgroundColor="black" transparent="1"/>
+        <widget source="label5" render="Label" position="1575,845" size="280,130" font="Regular; 28" halign="center" valign="center" zPosition="2" foregroundColor="white" backgroundColor="black" transparent="1"/>
+        <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="70,840" size="135,135" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+      <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
+    </widget>
+    <widget noWrap="1" font="HD_Thin; 24" render="Label" position="515,1020" size="110,30" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="center"  foregroundColor="lemon" backgroundColor="black" transparent="1">
+    <convert type="BlackHarmonyMSNWeather">temperature_current</convert>
+    </widget>
+    <widget noWrap="1" font="HD_Thin; 24" render="Label" position="239,1020" size="400,32" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="left" foregroundColor="white" backgroundColor="black" transparent="1">
+      <convert type="BlackHarmonyMSNWeather">temperature_text,current</convert>
+    </widget>
+    <eLabel text="maks." name="new eLabel" position="635,1020" size="80,30" font="HD_Thin; 24" halign="left" foregroundColor="white" backgroundColor="black" transparent="1"/>
+    <widget noWrap="1" font="HD_Thin; 24" render="Label" position="709,1020" size="70,30" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="left" foregroundColor="yellow" backgroundColor="black" transparent="1">
+      <convert type="BlackHarmonyMSNWeather">temperature_high,day1</convert>
+    </widget>
+    <eLabel text="min." name="new eLabel" position="795,1020" size="63,30" font="HD_Thin; 24" halign="left" foregroundColor="white" backgroundColor="black" transparent="1"/>
+    <widget noWrap="1" font="HD_Thin; 24" render="Label" position="853,1020" size="70,30" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="left" foregroundColor="blue" backgroundColor="black" transparent="1">
+      <convert type="BlackHarmonyMSNWeather">temperature_low,day1</convert>
+    </widget>
+  </screen>  
 <!-- Foreca plugin screens by fhroma -->
   <screen name="ForecaPreview" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png"/>

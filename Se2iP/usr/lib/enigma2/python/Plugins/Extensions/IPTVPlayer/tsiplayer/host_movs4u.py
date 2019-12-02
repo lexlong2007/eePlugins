@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from Plugins.Extensions.IPTVPlayer.tools.iptvtools import printDBG
 from Plugins.Extensions.IPTVPlayer.libs import ph
-from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.tstools import TSCBaseHostClass
+from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.tstools import TSCBaseHostClass,tscolor
 from Plugins.Extensions.IPTVPlayer.libs.urlparserhelper import unpackJSPlayerParams, SAWLIVETV_decryptPlayerParams
 from Plugins.Extensions.IPTVPlayer.tools.iptvtypes import strwithmeta
 from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.packer import cPacker
@@ -20,13 +20,13 @@ import urllib
 def getinfo():
 	info_={}
 	info_['name']='Movs4u.To'
-	info_['version']='1.7 28/10/2019'
+	info_['version']='1.7.1 04/11/2019'
 	info_['dev']='RGYSoft'
 	info_['cat_id']='201'
 	info_['desc']='أفلام و مسلسلات اجنبية'
 	info_['icon']='https://www.movs4u.tv/wp-content/uploads/2019/01/Logo-header.png'
 	info_['recherche_all']='1'
-	info_['update']='change to www.movs4u.org'	
+	info_['update']='change to www.mvs4u.net'	
 	return info_
 	
 	
@@ -35,14 +35,18 @@ class TSIPHost(TSCBaseHostClass):
 		
 		TSCBaseHostClass.__init__(self,{'cookie':'movs4u.cookie'})
 		self.USER_AGENT = 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0'
-		self.MAIN_URL = 'https://www.movs4u.org'
+		self.MAIN_URL = 'https://www.mvs4u.net'
 		self.HEADER = {'User-Agent': self.USER_AGENT, 'Connection': 'keep-alive', 'Accept-Encoding':'gzip', 'Content-Type':'application/x-www-form-urlencoded','Referer':self.getMainUrl(), 'Origin':self.getMainUrl()}
 		self.defaultParams = {'timeout':9,'header':self.HEADER, 'use_cookie': True, 'load_cookie': True, 'save_cookie': True, 'cookiefile': self.COOKIE_FILE}
 		#self.getPage = self.cm.getPage
 		
+	def getPage(self, baseUrl, addParams = {}, post_data = None):
+		if addParams == {}: addParams = dict(self.defaultParams)
+		addParams['cloudflare_params'] = {'cookie_file':self.COOKIE_FILE, 'User-Agent':self.USER_AGENT}
+		return self.cm.getPageCFProtection(baseUrl, addParams, post_data)
 
 
-	def getPage(self,baseUrl, addParams = {}, post_data = None):
+	def getPage1(self,baseUrl, addParams = {}, post_data = None):
 		if addParams == {}: addParams = dict(self.defaultParams) 
 		sts, data = self.cm.getPage(baseUrl,addParams,post_data)
 		if not data: data=''
@@ -147,16 +151,16 @@ class TSIPHost(TSCBaseHostClass):
 									meta_= mt 
 								else:
 									meta_= meta_ + ' | ' + mt
-							desc = meta_ +'\n\c0000????Genre: \c00??????'+ self.cleanHtmlStr(desc2)+'\n'+ desc
+							desc = meta_ +'\n'+tscolor('\c0000????')+'Genre: '+tscolor('\c00??????')+ self.cleanHtmlStr(desc2)+'\n'+ desc
 							name_eng=self.cleanHtmlStr(name_eng)
-							params = {'import':cItem['import'],'good_for_fav':True,'category' : 'video','url': url,'title':name_eng +'\c0000???? ('+qual+')','desc':desc,'icon':image,'hst':'tshost'} 
+							params = {'import':cItem['import'],'good_for_fav':True,'category' : 'video','url': url,'title':name_eng +tscolor('\c0000????')+' ('+qual+')','desc':desc,'icon':image,'hst':'tshost'} 
 							self.addVideo(params)	
 					else:
 						Liste_films_data = re.findall('<article id=.*?src="(.*?)".*?alt="(.*?)".*?quality">(.*?)<.*?href="(.*?)"', films_data, re.S)	
 						for (image,name_eng,qual,url) in Liste_films_data:
 							image=strwithmeta(image,{'Cookie':cookieHeader, 'User-Agent':self.USER_AGENT})
 							name_eng=self.cleanHtmlStr(name_eng)
-							params = {'import':cItem['import'],'good_for_fav':True,'category' : 'video','url': url,'title':name_eng +'\c0000???? ('+qual+')','desc':'','icon':image,'hst':'tshost'} 
+							params = {'import':cItem['import'],'good_for_fav':True,'category' : 'video','url': url,'title':name_eng +tscolor('\c0000????')+' ('+qual+')','desc':'','icon':image,'hst':'tshost'} 
 							self.addVideo(params)						
 				elif gnr=='Film_qual':
 					Liste_films_data = re.findall('class="item".*?href="(.*?)".*?src="(.*?)".*?alt="(.*?)".*?type">(.*?)<', films_data, re.S)	
@@ -164,7 +168,7 @@ class TSIPHost(TSCBaseHostClass):
 					for (url,image,name_eng,nat) in Liste_films_data:
 						image=strwithmeta(image,{'Cookie':cookieHeader, 'User-Agent':self.USER_AGENT})
 						name_eng=self.cleanHtmlStr(name_eng)
-						params = {'import':cItem['import'],'good_for_fav':True,'category' : 'video','url': url,'title':name_eng +'\c0000???? ('+nat+')','desc':'','icon':image,'hst':'tshost'} 
+						params = {'import':cItem['import'],'good_for_fav':True,'category' : 'video','url': url,'title':name_eng +tscolor('\c0000????')+' ('+nat+')','desc':'','icon':image,'hst':'tshost'} 
 						self.addVideo(params)					
 				elif gnr=='serie':
 					Liste_films_data = re.findall('article id.*?src="(.*?)".*?alt="(.*?)".*?href="(.*?)".*?"texto">(.*?)<', films_data, re.S)	
@@ -185,7 +189,7 @@ class TSIPHost(TSCBaseHostClass):
 					for (url,image,name_eng,qual) in Liste_films_data:
 						image=strwithmeta(image,{'Cookie':cookieHeader, 'User-Agent':self.USER_AGENT})
 						name_eng=self.cleanHtmlStr(name_eng)
-						params = {'import':cItem['import'],'good_for_fav':True,'category' : 'video','url': url,'title':name_eng +'\c0000???? ('+qual+')','desc':'','icon':image,'hst':'tshost'} 
+						params = {'import':cItem['import'],'good_for_fav':True,'category' : 'video','url': url,'title':name_eng +tscolor('\c0000????')+' ('+qual+')','desc':'','icon':image,'hst':'tshost'} 
 						self.addVideo(params)
 				elif gnr=='serie_ep':
 					Liste_films_data1 = re.findall('<h2>Video trailer.*?src="(.*?)"', data, re.S)
@@ -197,16 +201,16 @@ class TSIPHost(TSCBaseHostClass):
 						films_data=Liste_films_data[0]
 						Liste_films_data = re.findall("<span class='title'>(.*?)<(.*?)<\/ul>", films_data, re.S)
 						for (season,data_s) in Liste_films_data:
-							params = {'name':'categories','category' : 'video','title':'\c00????00'+season.replace('الموسم',''),'desc':'','icon':img_} 
+							params = {'name':'categories','category' : 'video','title':tscolor('\c00????00')+season.replace('الموسم',''),'desc':'','icon':img_} 
 							self.addMarker(params)
 							films_data = re.findall("<li.*?src='(.*?)'.*?numerando'>(.*?)<.*?href='(.*?)'>(.*?)<", data_s, re.S)
 							for (image,name_eng,url,name2) in films_data:
 								image=strwithmeta(image,{'Cookie':cookieHeader, 'User-Agent':self.USER_AGENT})
 								name_eng=self.cleanHtmlStr(name_eng)
-								params = {'import':cItem['import'],'good_for_fav':True,'category' : 'video','url': url,'title':name_eng +'\c0000????  # '+name2,'desc':'','icon':image,'hst':'tshost'} 
+								params = {'import':cItem['import'],'good_for_fav':True,'category' : 'video','url': url,'title':name_eng +tscolor('\c0000????')+'  # '+name2,'desc':'','icon':image,'hst':'tshost'} 
 								self.addVideo(params)
 				if gnr!='serie_ep':
-					params = {'import':cItem['import'],'category':'host2','title': '\c0000??00Next Page','Url':cItem['Url'],'sub_mode':gnr,'page':page+1,'icon':img_,'mode':'30'}
+					params = {'import':cItem['import'],'category':'host2','title': tscolor('\c0000??00')+'Next Page','Url':cItem['Url'],'sub_mode':gnr,'page':page+1,'icon':img_,'mode':'30'}
 					self.addDir(params)							
 
 	
@@ -223,6 +227,34 @@ class TSIPHost(TSCBaseHostClass):
 					params = {'import':extra,'good_for_fav':True,'category' : 'host2','Url': url,'title':name_eng,'desc':'','icon':image,'sub_mode':'serie_ep','page':1,'mode':'30'} 
 					self.addDir(params)	
 		
+
+
+	def MediaBoxResult(self,str_ch,year_,extra):
+		urltab=[]
+		str_ch_o = str_ch
+		str_ch = urllib.quote(str_ch_o)
+		url_=self.MAIN_URL+'/page/1/?s='+str_ch
+		sts, data = self.getPage(url_)
+		if sts:
+			Liste_films_data = re.findall('"result-item">.*?href="(.*?)".*?src="(.*?)".*?alt="(.*?)".*?">(.*?)<', data, re.S)
+			for (url,image,name_eng,type_) in Liste_films_data:
+				name_eng=ph.clean_html(name_eng.strip())
+				desc0,titre0 = self.uniform_titre(name_eng,1)
+				if str_ch_o.lower().replace(' ','') == titre0.replace('-',' ').replace(':',' ').lower().replace(' ',''):
+					trouver = True
+				else:
+					trouver = False
+				name_eng='|'+tscolor('\c0060??60')+'Movs4U'+tscolor('\c00??????')+'| '+titre0
+				if type_=='Movie':
+					params = {'titre':titre0,'import':extra,'good_for_fav':True,'category' : 'video','url': url,'title':name_eng,'desc':'','icon':image,'hst':'tshost'} 
+					if trouver: urltab.insert(0,params)
+					else: urltab.append(params)
+				else:
+					params = {'titre':titre0,'import':extra,'good_for_fav':True,'category' : 'host2','Url': url,'title':name_eng,'desc':'','icon':image,'sub_mode':'serie_ep','page':1,'mode':'30'} 
+					if trouver: urltab.insert(0,params)
+					else: urltab.append(params)	
+		return urltab
+
 		
 	def get_links(self,cItem): 	
 		urlTab = []	

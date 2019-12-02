@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from Plugins.Extensions.IPTVPlayer.tools.iptvtools import printDBG
 from Plugins.Extensions.IPTVPlayer.libs import ph
-from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.tstools import TSCBaseHostClass
+from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.tstools import TSCBaseHostClass,tscolor
 try:
 	from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.vstream.requestHandler import cRequestHandler
 	from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.vstream.config import GestionCookie
@@ -133,7 +133,7 @@ class TSIPHost(TSCBaseHostClass):
 				for (url,image,titre,desc) in films_list:
 					titre=titre.replace('مشاهدة فيلم ','')
 					self.addVideo({'import':cItem['import'],'good_for_fav':True,'category' : 'video','url': url,'title':titre,'desc':desc,'icon':image,'hst':'tshost','EPG':True})	
-			self.addDir({'import':cItem['import'],'title':'\c0000??00Page '+str(page+1),'page':page+1,'category' : 'host2','link':url1,'icon':image,'mode':'30'} )									
+			self.addDir({'import':cItem['import'],'title':tscolor('\c0000??00')+'Page '+str(page+1),'page':page+1,'category' : 'host2','link':url1,'icon':image,'mode':'30'} )									
 
 	def showitms_series(self,cItem):
 		url1=cItem['link']
@@ -148,7 +148,7 @@ class TSIPHost(TSCBaseHostClass):
 					titre=titre.replace('مشاهدة برنامج ','')
 					titre=titre.replace('مشاهدة','')
 					self.addDir({'import':cItem['import'],'good_for_fav':True,'category' : 'host2','url': url,'title':titre,'desc':'','icon':image,'mode':'32'} )
-				self.addDir({'import':cItem['import'],'title':'\c0000??00Page '+str(page+1),'page':page+1,'category' : 'host2','link':url1,'icon':cItem['icon'],'mode':'31'})				
+				self.addDir({'import':cItem['import'],'title':tscolor('\c0000??00')+'Page '+str(page+1),'page':page+1,'category' : 'host2','link':url1,'icon':cItem['icon'],'mode':'31'})				
 
 	def showepisodes(self,cItem):
 		URL=cItem['url']  

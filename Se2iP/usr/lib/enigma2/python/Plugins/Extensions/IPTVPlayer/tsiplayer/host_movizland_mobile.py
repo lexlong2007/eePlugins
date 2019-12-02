@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from Plugins.Extensions.IPTVPlayer.tools.iptvtools import printDBG
 from Plugins.Extensions.IPTVPlayer.libs import ph
-from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.tstools import TSCBaseHostClass
+from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.tstools import TSCBaseHostClass,tscolor
 
 import re
 
@@ -48,7 +48,7 @@ class TSIPHost(TSCBaseHostClass):
 			Liste_films_data = re.findall('<li class="grid-item.*?href="(.*?)".*?src="(.*?)".*?Title">(.*?)<', data, re.S)
 			for (url1,image,name_eng) in Liste_films_data:
 				self.addVideo({'import':cItem['import'],'category' : 'host2','title':name_eng.strip(),'url':url1,'icon':image,'desc':'','good_for_fav':True,'hst':'tshost'})					
-			self.addDir({'import':cItem['import'],'category' : 'host2','title':'\c0000??00Page Suivante','url':urlo,'page':page+1,'mode':'30'})
+			self.addDir({'import':cItem['import'],'category' : 'host2','title':tscolor('\c0000??00')+'Page Suivante','url':urlo,'page':page+1,'mode':'30'})
 
 		
 
@@ -58,7 +58,7 @@ class TSIPHost(TSCBaseHostClass):
 		if sts:
 			Liste_films_data = re.findall('<li class="grid-item.*?href="(.*?)".*?src="(.*?)".*?Title">(.*?)<', data, re.S)
 			for (url1,image,name_eng) in Liste_films_data:
-				self.addVideo({'import':extra,'category' : 'host2','title':name_eng.strip(),'url':url1,'icon':image,'desc':'','good_for_fav':True,'hst':'tshost'})					
+				self.addVideo({'import':extra,'category' : 'video','title':name_eng.strip(),'url':url1,'icon':image,'desc':'','good_for_fav':True,'hst':'tshost'})					
 		
 		
 	def get_links(self,cItem): 	

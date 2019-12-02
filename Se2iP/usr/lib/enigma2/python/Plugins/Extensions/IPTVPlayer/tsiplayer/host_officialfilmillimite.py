@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from Plugins.Extensions.IPTVPlayer.tools.iptvtools import printDBG
 from Plugins.Extensions.IPTVPlayer.libs import ph
-from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.tstools import TSCBaseHostClass,gethostname
+from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.tstools import TSCBaseHostClass,gethostname,tscolor
 from Plugins.Extensions.IPTVPlayer.libs.e2ijson import loads as json_loads
 from Plugins.Extensions.IPTVPlayer.tools.iptvtypes import strwithmeta
 from Plugins.Extensions.IPTVPlayer.libs.urlparserhelper import getDirectM3U8Playlist
@@ -111,18 +111,18 @@ class TSIPHost(TSCBaseHostClass):
 				films_list = re.findall('href="(.*?)".*?-src="(.*?)".*?alt="(.*?)".*?class="imdb">(.*?)</span>.*?class="ttx">(.*?)</span>.*?class="year">(.*?)<.*?calidad2">(.*?)<', item, re.S)		
 				if films_list:
 					for (url,image,titre,rate,desc,year_,qual) in films_list:
-						desc1='\c00??????Rating: \c00????00'+ph.clean_html(rate)+'\c00?????? | Date: \c00????00'+year_+'\c00?????? | Qualitée: \c00????00'+qual
-						desc=desc1+'\\n\c00??????Synopsis: \c0000????'+ph.clean_html(desc)			
+						desc1=tscolor('\c00??????')+'Rating: '+tscolor('\c00????00')+ph.clean_html(rate)+tscolor('\c00??????')+' | Date: '+tscolor('\c00????00')+year_+tscolor('\c00??????')+' | Qualitée: '+tscolor('\c00????00')+qual
+						desc=desc1+'\\n'+tscolor('\c00??????')+'Synopsis: '+tscolor('\c0000????')+ph.clean_html(desc)			
 						self.addDir({'import':cItem['import'],'good_for_fav':True,'EPG':True,'category' : 'host2','url': url,'title':self.cleanHtmlStr(titre.replace(' Streaming HD','')),'desc':desc,'icon':image,'hst':'tshost','mode':'31'})	
 				else:
 					films_list = re.findall('href="(.*?)".*?src="(.*?)".*?alt="(.*?)".*?class="imdb">(.*?)</span>.*?class="ttx">(.*?)</span>.*?<.*?calidad2">(.*?)<', item, re.S)		
 					for (url,image,titre,rate,desc,qual) in films_list:
-						desc1='\c00??????Rating: \c00????00'+ph.clean_html(rate)+'\c00?????? | Qualitée: \c00????00'+qual
-						desc=desc1+'\\n\c00??????Synopsis: \c0000????'+ph.clean_html(desc)			
+						desc1=tscolor('\c00??????')+'Rating: '+tscolor('\c00????00')+ph.clean_html(rate)+tscolor('\c00??????')+' | Qualitée: '+tscolor('\c00????00')+qual
+						desc=desc1+'\\n'+tscolor('\c00??????')+'Synopsis: '+tscolor('\c0000????')+ph.clean_html(desc)			
 						self.addDir({'import':cItem['import'],'good_for_fav':True,'EPG':True,'category' : 'host2','url': url,'title':self.cleanHtmlStr(titre.replace(' Streaming HD','')),'desc':desc,'icon':image,'hst':'tshost','mode':'31'})		
 					
 			if i>15:
-				self.addDir({'import':cItem['import'],'title':'\c0000????Page Suivante','page':page+1,'category' : 'host2','url':cItem['url'],'icon':cItem['icon'],'mode':'30'} )									
+				self.addDir({'import':cItem['import'],'title':tscolor('\c0000????')+'Page Suivante','page':page+1,'category' : 'host2','url':cItem['url'],'icon':cItem['icon'],'mode':'30'} )									
 
 	def showelms(self,cItem):
 		urlo=cItem['url']
@@ -168,8 +168,8 @@ class TSIPHost(TSCBaseHostClass):
 		if sts:
 			films_list = re.findall('class="item">.*?href="(.*?)".*?src="(.*?)".*?alt="(.*?)".*?class="imdb">(.*?)</span>.*?class="ttx">(.*?)</span>.*?<.*?calidad2">(.*?)<', data, re.S)		
 			for (url,image,titre,rate,desc,qual) in films_list:
-				desc1='\c00??????Rating: \c00????00'+ph.clean_html(rate)+'\c00?????? | Qualitée: \c00????00'+qual
-				desc=desc1+'\\n\c00??????Synopsis: \c0000????'+ph.clean_html(desc)			
+				desc1=tscolor('\c00??????')+'Rating: '+tscolor('\c00????00')+ph.clean_html(rate)+tscolor('\c00??????')+' | Qualitée: '+tscolor('\c00????00')+qual
+				desc=desc1+'\\n'+tscolor('\c00??????')+'Synopsis: '+tscolor('\c0000????')+ph.clean_html(desc)			
 				self.addDir({'import':extra,'good_for_fav':True,'EPG':True,'category' : 'host2','url': url,'title':self.cleanHtmlStr(titre.replace(' Streaming HD','')),'desc':desc,'icon':image,'hst':'tshost','mode':'31'})		
 
 	def get_links(self,cItem):
