@@ -1,5 +1,5 @@
 <screen name="AdvancedFreePlayerInfobarSummary" position="0,0" size="480,320" id="1">
-  <widget source="session.CurrentService" render="j00zekRunningText" position="0,5" size="480,165" font="Regular;50" halign="center" valign="center" foregroundColor="#FFFF00" options="movetype=none,wrap,useBiggestPossibleFont" minFontSize="32" >
+  <widget source="session.CurrentService" render="j00zekLabel" minFontSize="32" position="0,5" size="480,165" font="Regular;50" halign="center" valign="center" foregroundColor="#FFFF00" >
     <convert type="ServiceName">Name</convert>
   </widget>
   <widget source="session.CurrentService" render="Progress" position="20,215" size="440,10" borderWidth="1" >
