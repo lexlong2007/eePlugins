@@ -31,7 +31,7 @@
     <widget source="session.CurrentService" render="j00zekPicons" picontype="zzpicon" position="40,10" zPosition="4" size="400,170" transparent="1" alphatest="blend">
       <convert type="ServiceName">Reference</convert>
     </widget>
-    <widget source="session.Event_Now" render="RollerCharLCDLong" noWrap="1" position="14,185" size="920,52" font="VFD;52" halign="left" valign="top">
+    <widget source="session.Event_Now" render="j00zekLabel" noWrap="1" position="14,185" size="920,52" font="VFD;52" halign="left" valign="top">
       <convert type="EventName">Name</convert>
     </widget>
     <widget source="session.Event_Now" render="Progress" pixmap="BlackHarmony/gfx/progress_lcd.png" position="15,265" size="280,20" borderWidth="2">
@@ -50,7 +50,7 @@
     </widget>
   </screen>
   <screen name="InfoBarMoviePlayerSummary" position="0,0" size="480,320" id="1">
-  <widget source="session.CurrentService" render="Label" position="15,10" size="450,220" font="VFD;40" halign="center" valign="center">
+  <widget source="session.CurrentService" render="j00zekLabel" position="15,10" size="450,220" font="VFD;40" halign="center" valign="center">
     <convert type="ServiceName">Name</convert>
   </widget>
 
@@ -173,7 +173,7 @@
   <!-- LCD screen AdvancedFreePlayer -->
   
     <screen name="AdvancedFreePlayerInfobarSummary" position="0,0" size="480,320" id="1">
-    <widget source="session.CurrentService" render="Label" position="15,10" size="450,220" font="VFD;40" halign="center" valign="center">
+    <widget source="session.CurrentService" render="j00zekLabel" position="15,10" size="450,220" font="VFD;40" halign="center" valign="center">
       <convert type="ServiceName">Name</convert>
     </widget>
     <widget source="session.CurrentService" render="Progress" pixmap="BlackHarmony/gfx/progress_lcd.png" position="15,265" size="270,20" borderWidth="2">

@@ -131,6 +131,7 @@ def calculateLCDbrightness(DBGtext = ''):
     Minutes = int(currTime[4])
     hourAndMinutes = time.strftime('%H:%M', currTime)
     MinutesSinceMidnight = hour * 60 + Minutes
+    
     if hour == 0:    val = config.plugins.dynamicLCD.NightStandbyBrightness00.value
     elif hour == 1:  val = config.plugins.dynamicLCD.NightStandbyBrightness01.value
     elif hour == 2:  val = config.plugins.dynamicLCD.NightStandbyBrightness02.value
@@ -208,8 +209,16 @@ def delayedStandbyActions():
                 eDBoxLCD.getInstance().setLCDBrightness(int(val))
             except Exception as e:
                 DBGtext += "\t\t\t\t Exception: %s\n" % str(e)
+
+        timestamp = int("%s%s%s" % (datetime.now().year,datetime.now().month,datetime.now().day))
+        if timestamp < 20191204:
+            DBGtext += 'system time seems to be not set yet. Next refresh after 10 seconds'
+            timerWaitingTime = 10 * 1000
+        else:
+            timerWaitingTime = timerWaitingTime * 60 * 1000
+          
         if DBG: printDEBUG(DBGtext.strip())
-        MyTimer.start(timerWaitingTime * 60 * 1000, True)
+        MyTimer.start(timerWaitingTime, True)
         
 
 def setKODIbrightness( stateTXT = '' ):

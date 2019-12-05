@@ -383,7 +383,7 @@
   <widget source="global.CurrentTime" render="Label" position="260,35" size="200,66" font="VFD;66" halign="right" valign="center">
     <convert type="ClockToText">Format:%H:%M</convert>
   </widget>
-  <widget source="session.CurrentService" render="RollerCharLCDLong" position="20,192" size="440,60" font="VFD;55" noWrap="1" halign="left" valign="top" zPosition="5">
+  <widget source="session.CurrentService" render="j00zekLabel" position="20,192" size="440,60" font="VFD;55" noWrap="1" halign="left" valign="top" zPosition="5">
     <convert type="ServiceName">Name</convert>
   </widget>
   <widget source="session.CurrentService" render="Label" position="260,108" size="200,60" font="VFD;55" halign="right" valign="top">
@@ -432,7 +432,7 @@
 		<!-- Cover -->
 		<widget source="session.CurrentService" render="Cover" position="260,0" size="220,300" zPosition="5" alphatest="blend"/>
 		<eLabel position="260,0" size="220,300" backgroundColor="#444444" />
-		<widget source="session.CurrentService" render="Label" position="270,10" size="200,280" zPosition="1" font="VFD;35" backgroundColor="#444444" halign="center" valign="center" >
+		<widget source="session.CurrentService" render="j00zekLabel" position="270,10" size="200,280" zPosition="1" font="VFD;35" backgroundColor="#444444" halign="center" valign="center" >
 			<convert type="ServiceName">Name</convert>
 		</widget>		
 		<!-- Service Info -->
@@ -484,7 +484,7 @@
   <widget source="global.CurrentTime" render="Label" position="260,35" size="200,66" font="VFD;66" halign="right" valign="center">
     <convert type="ClockToText">Format:%H:%M</convert>
   </widget>
-  <widget source="session.CurrentService" render="RollerCharLCDLong" position="20,192" size="440,60" font="VFD;55" noWrap="1" halign="left" valign="top">
+  <widget source="session.CurrentService" render="j00zekLabel" position="20,192" size="440,60" font="VFD;55" noWrap="1" halign="left" valign="top">
     <convert type="ServiceName">Name</convert>
   </widget>
   <widget source="session.CurrentService" render="Label" position="260,108" size="200,60" font="VFD;55" halign="right" valign="top">

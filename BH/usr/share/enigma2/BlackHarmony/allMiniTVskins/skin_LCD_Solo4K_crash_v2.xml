@@ -41,7 +41,7 @@
     </widget>
   </screen>
   <screen name="InfoBarMoviePlayerSummary" position="0,0" size="480,320" id="1">
-  <widget source="session.CurrentService" render="Label" position="24,10" size="440,165" font="HD_Thin; 40" foregroundColor="#e8ffaa" halign="center" valign="center">
+  <widget source="session.CurrentService" render="j00zekLabel" position="24,10" size="440,165" font="HD_Thin; 40" foregroundColor="#e8ffaa" halign="center" valign="center">
     <convert type="ServiceName">Name</convert>
   </widget>
   <widget source="session.RecordState" render="FixedLabel" position="331,187" size="111,30" zPosition="3" text=" ">
@@ -62,7 +62,7 @@
   </widget>
 </screen>
   <screen name="EMCMoviePlayerSummary" position="0,0" size="480,320" id="1">
-  <widget source="session.CurrentService" render="Label" position="24,10" size="440,165" font="HD_Thin; 40" foregroundColor="#e8ffaa" halign="center" valign="center">
+  <widget source="session.CurrentService" render="j00zekLabel" position="24,10" size="440,165" font="HD_Thin; 40" foregroundColor="#e8ffaa" halign="center" valign="center">
     <convert type="ServiceName">Name</convert>
   </widget>
   <widget source="session.RecordState" render="FixedLabel" position="331,187" size="111,30" zPosition="3" text=" ">
@@ -207,7 +207,7 @@
   </screen>
   <!-- LCD AdvancedFreePlayer -->
   <screen name="AdvancedFreePlayerInfobarSummary" position="0,0" size="480,320" id="1">
-  <widget source="session.CurrentService" render="Label" position="24,10" size="440,165" font="HD_Thin; 40" foregroundColor="#e8ffaa" halign="center" valign="center">
+  <widget source="session.CurrentService" render="j00zekLabel" position="24,10" size="440,165" font="HD_Thin; 40" foregroundColor="#e8ffaa" halign="center" valign="center">
     <convert type="ServiceName">Name</convert>
   </widget>
   <widget source="session.RecordState" render="FixedLabel" position="331,187" size="111,30" zPosition="3" text=" ">

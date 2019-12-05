@@ -31,11 +31,11 @@
     <widget render="BlackHarmonyRunningText" source="ServiceEvent" position="980,562" size="835,276" options="movetype=running,startpoint=0,direction=top,steptime=80,repeat=2,startdelay=6000,wrap" halign="left" font="Roboto_HD; 30" backgroundColor="background" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
-	<!--Nastepne audycje-->
-	<widget source="ServiceEvent" render="j00zekNextEvents" position="980,867" size="835,145" zPosition="2" noWrap="1" font="Roboto_HD; 26" backgroundColor="black" transparent="1" foregroundColor="light_yellow" >
-		<convert type="ServiceName">Reference</convert>
-	</widget>
- 	<!--Belka dolna-->
+    <!--Nastepne audycje-->
+    <widget source="ServiceEvent" render="j00zekNextEvents" position="980,867" size="835,145" zPosition="2" noWrap="1" font="Roboto_HD; 26" backgroundColor="black" transparent="1" foregroundColor="light_yellow" >
+      <convert type="ServiceName">Reference</convert>
+    </widget>
+    <!--Belka dolna-->
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="35,991" size="35,27" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="265,991" size="35,27" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="495,991" size="35,27" alphatest="blend" />

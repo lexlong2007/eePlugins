@@ -81,7 +81,7 @@ def sessionstart(reason, session = None):
     if reason == 0 and not inStandby:
         if DBG: printDEBUG('reason == 0 and not inStandby')
         config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
-        MyDelayTimer.start(1000,True)
+        MyDelayTimer.start(2000,True)
 
 def Plugins(path, **kwargs):
     return [PluginDescriptor(name=_("Startup To Standby"), where = PluginDescriptor.WHERE_PLUGINMENU, fnc = main, needsRestart = False),

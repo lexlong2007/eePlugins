@@ -28,7 +28,7 @@ from Components.Language import language
 currLang = language.getLanguage()[:2] #used for descriptions keep GUI language in 'pl|en' format
 
 #DEBUG
-myDEBUG=False
+myDEBUG=True
 myDEBUGfile = '/tmp/%s.log' % PluginName
 
 def getSkinName():

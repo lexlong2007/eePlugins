@@ -13,7 +13,7 @@
 #it without source code (this version and your modifications).
 #This means you also have to distribute
 #source code of your modifications.
-DBG = False
+DBG = True
 
 from debug import printDEBUG
 from inits import *
@@ -26,7 +26,7 @@ from Components.Label import Label
 from Components.Pixmap import Pixmap
 from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
-from enigma import ePicLoad, eTimer
+from enigma import eEnv, ePicLoad, eTimer
 from Plugins.Plugin import PluginDescriptor
 from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
@@ -36,7 +36,7 @@ from Tools.Directories import *
 from Tools.LoadPixmap import LoadPixmap
 from Tools import Notifications
 #system imports
-from os import listdir, remove, rename, system, path, symlink, chdir, rmdir, mkdir
+from os import listdir, remove, rename, system, path, symlink, chdir, rmdir, mkdir, walk
 import shutil
 import re
 from twisted.web.client import downloadPage
@@ -112,6 +112,71 @@ def isImageType(imgName = ''):
         return False
 isImageType() #inicjacja
 
+def getTunerName():
+    myName = 'unknown'
+    if path.exists('/proc/stb/info/vumodel'):
+        with open('/proc/stb/info/vumodel', 'r') as file:
+            myName = file.readline().strip()
+            file.close()
+    return myName.lower()
+
+def vtiLCDskins( skinlist = [] ):
+    def find(arg, dirname, names):
+        for x in names:
+            if x.startswith('skin_vfd') and x.endswith('.xml'):
+                if dirname != myRoot:
+                    subdir = dirname[len(myRoot):]
+                    skinname = x
+                    skinname = subdir + '/' + skinname
+                    #skinlist.append(skinname)
+                    skinlist.append(( skinname, "VTI-%s" % _(skinname[len('skin_vfd'):-4].replace("_", " ")) ))
+                else:
+                    skinname = x
+                    #skinlist.append(skinname)
+                    skinlist.append(( skinname, "VTI-%s" % _(skinname[len('skin_vfd'):-4].replace("_", " ")) ))
+    myRoot = '/usr/share/enigma2/vfd_skin'
+    if path.exists(myRoot):
+        path.walk(myRoot, find, '')
+
+    try: skinlist.sort(key=lambda t : tuple(str(t[0]).lower()))
+    except Exception: skinlist.sort()
+    
+    return skinlist
+    
+def atvLCDskins( skinlist = [] ):
+    myRoot = '/usr/share/enigma2/display/'
+    try:
+        if path.exists(myRoot):
+            for root, dirs, files in walk(myRoot, followlinks=False):
+                for subdir in dirs:
+                    dir = path.join(root,subdir)
+                    if path.exists(path.join(dir,'skin_display.xml')):
+                        #skinlist.append(subdir)
+                        skinlist.append(( subdir, "ATV-%s" % _(subdir.replace("_", " ")) ))
+    except Exception as e:
+        if DBG == True: printDEBUG(str(e))
+
+    try: skinlist.sort(key=lambda t : tuple(str(t[0]).lower()))
+    except Exception: skinlist.sort()
+    
+    return skinlist
+
+def homarLCDskins( skinlist = [] , tunerName = getTunerName() ):
+    if tunerName in ('duo4k','solo4k','ultimo4k','uno4k'):
+        myRoot = '/usr/share/enigma2/HomarLCDskins/model.%s' % tunerName
+        if path.exists(myRoot):
+            for f in sorted(listdir(myRoot), key=str.lower):
+                if DBG == True: printDEBUG(f)
+                if f.startswith('skin_LCD') and f.endswith('.xml'):
+                    skinlist.append(( f, _(f[len('skin_LCD'):-4].replace("_", " ")) ))
+        else:
+            skinlist.append(( _('Homar LCD skins from opkg'), _('Homar LCD skins from opkg') ))
+
+        try: skinlist.sort(key=lambda t : tuple(str(t[0]).lower()))
+        except Exception: skinlist.sort()
+    
+    return skinlist
+
 class UserSkin_Config(Screen, ConfigListScreen):
     skin = """
   <screen name="UserSkin_Config" position="82,124" size="1101,376" title="UserSkin Setup" backgroundColor="transparent" flags="wfNoBorder">
@@ -158,15 +223,30 @@ class UserSkin_Config(Screen, ConfigListScreen):
             for folder in ("allBars", "allColors", "allFonts", "allInfos", "allPreviews", "allScreens", "UserSkin_Selections", 'allMiniTVskins'):
                 if not path.exists(SkinPath + folder):
                     mkdir(SkinPath + folder)
+            
             #### initializing VFDskins ###
-            mylist = [("system", "system")]
+            self.LCDscreensList = [("system", "system")]
             if  path.exists('/usr/lib/enigma2/python/Plugins/Extensions/LCDlinux'):
-                mylist.append(("LCDLinux", "LCDLinux"))
+                self.LCDscreensList.append(("LCDLinux", "LCDLinux"))
+            self.LCDscreensList.extend( atvLCDskins() )
+            self.LCDscreensList.extend( vtiLCDskins() )
+            self.LCDscreensList.extend( homarLCDskins() )
+            
+            filterVFDskins4model = False
+            tunerName = getTunerName()
+            if tunerName != 'unknown':
+                for f in sorted(listdir(SkinPath + "allMiniTVskins/"), key=str.lower):
+                    if f.startswith('skin_') and f.endswith('.xml') and f.lower().find(tunerName) > -1:
+                        filterVFDskins4model = True
+                        break
+
             for f in sorted(listdir(SkinPath + "allMiniTVskins/"), key=str.lower):
                 if DBG == True: printDEBUG(f)
                 if f.startswith('skin_') and f.endswith('.xml'):
-                    mylist.append(( f, _(f[5:-4].replace("_", " ")) ))
-            config.plugins.UserSkin.LCDmode = ConfigSelection(default="system", choices = mylist)
+                    if not filterVFDskins4model or f.lower().find(tunerName) > -1:
+                        self.LCDscreensList.append(( f, _(f[5:-4].replace("_", " ")) ))
+                    
+            config.plugins.UserSkin.LCDmode = ConfigSelection(default="system", choices = self.LCDscreensList)
             #### initializing FONTS ###
             if not path.exists(SkinPath + "allFonts/font_default.xml"):
                 with open(SkinPath + 'allFonts/font_default.xml', "w") as f:
@@ -242,7 +322,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
         self["key_blue"] = Label()
         self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
             {
-                "green": self.keyOk,
+                "green": self.keyOkbutton,
                 "red": self.cancel,
                 "yellow": self.keyYellow,
                 "blue": self.keyBlue,
@@ -341,6 +421,11 @@ class UserSkin_Config(Screen, ConfigListScreen):
             self.setPicture(self.myUserSkin_bar.value)
         else:
             self["Picture"].hide()
+            
+        if self["config"].getCurrent()[1] == config.plugins.UserSkin.LCDmode:
+            self["key_green"].setText(_("Set LCD screen"))
+        else:
+            self["key_green"].setText(_("OK"))
 
     def cancel(self):
         if self["config"].isChanged():
@@ -391,7 +476,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
             
     def keyYellow(self):
         if self.myUserSkin_active.value:
-            self.session.openWithCallback(self.UserSkinScreesnCB, TreeUserSkinScreens)
+            self.session.openWithCallback(self.UserSkinScreensCB, TreeUserSkinScreens)
         else:
             self["config"].setCurrentIndex(0)
 
@@ -400,9 +485,23 @@ class UserSkin_Config(Screen, ConfigListScreen):
         if ret:
             config.plugins.j00zekPiconAnimation.UserPath.value = ret
         
+    def LCDskinCB(self,ret):
+        def installHomarLCDscreens(ret = False):
+            if DBG == True: printDEBUG("installHomarLCDscreens>>>")
+            if ret == True:
+                os.system('opkg update;opkg install enigma2-plugin-skins--j00zeks-homar;sync')
+                self.keyOk()
+        if ret:
+            if DBG == True: printDEBUG(ret)
+            if ret[0] == _('Homar LCD skins from opkg'):
+                self.session.openWithCallback(installHomarLCDscreens,MessageBox, _("Installation of LCD screens prepared by Homar from opkg will take a minute. Do you want to proceed?"), MessageBox.TYPE_YESNO, default = False)
+                #config.plugins.UserSkin.LCDmode.value = ret[0]
+        
     def keyOkbutton(self):
         try:
-            if config.plugins.j00zekPiconAnimation.UserPath is not None and self["config"].getCurrent()[1] == config.plugins.j00zekPiconAnimation.UserPath:
+            if self["config"].getCurrent()[1] == config.plugins.UserSkin.LCDmode:
+                self.session.openWithCallback(self.LCDskinCB, ChoiceBox, title = _("Choose LCD skin:"), list = self.LCDscreensList)
+            elif config.plugins.j00zekPiconAnimation.UserPath is not None and self["config"].getCurrent()[1] == config.plugins.j00zekPiconAnimation.UserPath:
                 from Screens.LocationBox import LocationBox
                 self.session.openWithCallback(self.LocationBoxCB, LocationBox)
             else:
@@ -478,7 +577,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
         else:
             self.close()
 
-    def UserSkinScreesnCB(self):
+    def UserSkinScreensCB(self):
         self.changed_screens = True
         self["config"].setCurrentIndex(0)
 

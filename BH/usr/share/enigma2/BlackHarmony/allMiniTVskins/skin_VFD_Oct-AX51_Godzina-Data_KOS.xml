@@ -210,7 +210,7 @@
         </screen>
 <!-- AudioSelection -->
         <screen name="AudioSelection_summary" position="0,0" size="132,64">
-                <widget source="parent.summary_description" render="BlackHarmonyRollerCharVFD" position="fill" size="120,20" font="Regular;18" />
+                <widget source="parent.summarydescription" render="BlackHarmonyRollerCharVFD" position="fill" size="120,20" font="Regular;18" />
         </screen>
 <!-- Console -->
         <screen name="Console_summary" position="0,0" size="132,64">
@@ -220,6 +220,12 @@
         <screen name="TimerLog_summary" position="0,0" size="132,64">
                 <widget source="parent.summary_description" render="BlackHarmonyRollerCharVFD" position="fill" size="120,20" font="Regular;18" />
         </screen>
+<!-- ServiceScan -->
+	<screen name="ServiceScanSummary" size="132,64">
+	    <widget source="Title" render="BlackHarmonyRollerCharVFD" position="6,4" size="120,42" font="Regular;16" transparent="1" />
+	    <widget name="scan_progress" position="6,50" zPosition="1" borderWidth="1" size="56,12" backgroundColor="dark" />
+	    <widget name="Service" position="6,22" size="120,26" font="Regular;12" transparent="1" />
+	</screen>
 <!-- Wizard -->
         <screen name="WizardSummary" position="0,0" size="132,64">
                 <widget source="entry" render="BlackHarmonyRollerCharVFD" position="fill" size="120,20" font="Regular;18" />

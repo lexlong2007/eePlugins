@@ -95,6 +95,7 @@ class j00zekLabel(Renderer):
                     self.txtFlags |= { "left": RT_HALIGN_LEFT, "center": RT_HALIGN_CENTER, "right": RT_HALIGN_RIGHT, "block": RT_HALIGN_BLOCK }[value]
                 elif attrib == "noWrap":
                     setWrapFlag(attrib, value)
+                    if DBG: j00zekDEBUG("[j00zekLabel:applySkin] noWrap='%s'" % value)
                 else:
                     attribs.append((attrib,value))
                     if attrib == "backgroundColor":
@@ -106,9 +107,8 @@ class j00zekLabel(Renderer):
         ret = Renderer.applySkin(self, desktop, screen)
         
         self.txLabel.setFont(self.txFont)
-        #if not (self.txtFlags & RT_WRAP):
-        #    self.txLabel.setNoWrap(1)
-        self.txLabel.setNoWrap(0)
+        if not (self.txtFlags & RT_WRAP):
+            self.txLabel.setNoWrap(1)
         self.txLabel.setVAlign(valign)
         self.txLabel.setHAlign(self.halign)
         self.txLabel.move( ePoint(0,0) )
@@ -148,6 +148,12 @@ class j00zekLabel(Renderer):
             currSize -= 1
             self.txLabel.setFont(parseFont("%s;%s" % (self.txFontName, currSize), ((1,1),(1,1))))
             text_size = self.txLabel.calculateSize()
-            if DBG: j00zekDEBUG("[j00zekLabel:setFontSize] Size of text for font %s is %s/%s" % (currSize, text_size.height(), self.H))
-            if text_size.height() <= self.H:
-                break
+            if (self.txtFlags & RT_WRAP):
+                if DBG: j00zekDEBUG("[j00zekLabel:setFontSize] Size of wrapped text for font %s is %s/%s" % (currSize, text_size.height(), self.H))
+                if text_size.height() <= self.H:
+                    break
+            else:
+                if DBG: j00zekDEBUG("[j00zekLabel:setFontSize] Size of not wrapped text for font %s is %s/%s" % (currSize, text_size.width(), self.W))
+                if text_size.width() <= self.W:
+                    break
+
