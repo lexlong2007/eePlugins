@@ -5,12 +5,11 @@ except Exception:
     myDEBUG=True
     myDEBUGfile = '/tmp/%s.log' % PluginName
 
-import inspect
+from datetime import datetime
 
 append2file=False
 def printDEBUG( myText  , myFUNC = '' ):
 	global append2file
-	myFUNC = inspect.stack()[1][3]
 	if myDEBUG:
 		print ("[%s%s] %s" % (PluginName,myFUNC,myText))
 		try:
@@ -19,12 +18,10 @@ def printDEBUG( myText  , myFUNC = '' ):
 				f = open(myDEBUGfile, 'w')
 			else:
 				f = open(myDEBUGfile, 'a')
-			if myText[0:1] == '[':
-				f.write('%s\n' %(myText))
-			else:
-				f.write('[%s] %s\n' %(myFUNC,myText))
+				f.write('%s\t%s\n' % (str(datetime.now()), myText))
 			f.close
 		except:
 			pass
 
 printDBG=printDEBUG
+str(datetime.now())

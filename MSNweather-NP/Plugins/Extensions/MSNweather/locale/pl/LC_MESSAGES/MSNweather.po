@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeatherPlugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-03 08:33+0100\n"
-"PO-Revision-Date: 2015-01-04 18:17+0100\n"
+"PO-Revision-Date: 2019-12-07 21:00+0100\n"
 "Last-Translator: Mariusz1970 <Mariusz1970@onet.eu>\n"
 "Language-Team: Björn Freise <Mariusz1970@onet.eu>\n"
 "Language: pl\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 1.7.1\n"
+"X-Generator: Poedit 1.7.6\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SearchPath-0: ../src\n"
@@ -20,23 +20,95 @@ msgstr ""
 msgid "Add"
 msgstr "Dodaj"
 
+msgid "animated Icons"
+msgstr "Animowane ikony"
+
+msgid "Animated plugin icons"
+msgstr "Animacja ikon we wtyczce"
+
+msgid "Animated infobar icons"
+msgstr "Animacja ikon na infobarze"
+
 msgid "Back"
 msgstr "Powrót "
+
+msgid "Build histograms:"
+msgstr "Twórz histogramy"
 
 msgid "Cancel"
 msgstr "Anuluj"
 
+msgid "Close"
+msgstr "Zamknij"
+
 msgid "City"
 msgstr "Miasto"
+
+msgid "Cloud"
+msgstr "Zachmurzenie"
+
+msgid "clouds_forecast"
+msgstr "Prognoza zachmurzenia"
 
 msgid "Delete"
 msgstr "Usuń"
 
+msgid "Debug (require restart):"
+msgstr "Logowanie (wymagany restart):"
+
+msgid "Debug log file size:"
+msgstr "Wielkość pliku loga"
+
+msgid "Downloading today's temperature maps..."
+msgstr "Pobieranie map z dzisiejszą temperaturą..."
+
+msgid "Downloading precipitation forecast maps..."
+msgstr "Pobieranie map z prognozą opadów..."
+
+msgid "Downloading satellite observation maps..."
+msgstr "Pobieranie map satelitarnych..."
+
+msgid "Downloading clouds forecast maps..."
+msgstr "Pobieranie map z prognozą zachmurzenia..."
+
 msgid "Edit"
 msgstr "Edytuj"
 
+msgid "Exit"
+msgstr "Wyjdź"
+
+msgid "ePicLoad (E.g. Vu+ org)"
+msgstr "ePicLoad (np. Vu+ org)"
+
+msgid "Error wrong input data"
+msgstr "Błąd, podano złe dane"
+
+msgid "Error sychronizing web data"
+msgstr "Błąd synchonizacji danych"
+
+msgid "Error analyzing web data"
+msgstr "Błąd analizy danych"
+
+msgid "Exception %s"
+msgstr "Wyjątek %s"
+
+msgid "Error sychronizing webMaps data"
+msgstr "Błąd synchronizacji danych o mapach"
+
+msgid "Feature not available in this system!!!"
+msgstr "Funkcja niedostępna na tym systemie!!!"
+
 msgid "Feels like %s"
 msgstr "Temp. odczuwalna %s"
+
+msgid "General Error"
+msgstr "Nieznany błąd"
+
+msgid "Geo Latitude"
+msgstr "Szerokość geograficzna"
+
+msgid "Geo Longitude"
+msgstr "Długość geograficzna"
 
 msgid "Getting weather information..."
 msgstr "Pobieranie informacji o pogodzie ..."
@@ -44,11 +116,56 @@ msgstr "Pobieranie informacji o pogodzie ..."
 msgid "Humidity: %s %%"
 msgstr "Wilgotność: %s %%"
 
+msgid "imperial system"
+msgstr "Stopnie Fahrenheita "
+
+msgid "internal E2"
+msgstr "wewnętrzny E2"
+
+msgid "Icons scaling engine:"
+msgstr "Silnik skalowanie ikon:"
+
+msgid "Icons type:"
+msgstr "Typ ikon:"
+
 msgid "Location code"
 msgstr "Kod lokalizacji"
 
+msgid "Location Full name"
+msgstr "Pełna nazwa lokalizacji"
+
+msgid "Last 24h"
+msgstr "Ostatnie 24 godziny"
+
+msgid "Last 12h"
+msgstr "Ostatnie 12 godzin"
+
+msgid "Last 6h"
+msgstr "Ostatnie 6 godzin"
+
+msgid "Last 3h"
+msgstr "Ostatnie 3 godziny"
+
+msgid "Last hour"
+msgstr "Ostatnia godzina"
+
+msgid "Loading storms maps..."
+msgstr "Ładuję mapy występowania burz..."
+
 msgid "MSN location search result"
 msgstr "Wynik szukania lokalizacji w MSN"
+
+msgid "MSN weather NP"
+msgstr "Pogoda MSN v.NP"
+
+msgid "MSN weather configuration"
+msgstr "MSN weather konfiguracja"
+
+msgid "MSN service icons"
+msgstr "Ikony serwisu MSN"
+
+msgid "metric system"
+msgstr "Stopnie Celsjusza"
 
 msgid ""
 "No locations defined...\n"
@@ -58,7 +175,7 @@ msgstr ""
 "Naciśnij przycisk \"Menu\", aby to zrobić."
 
 msgid "OK"
-msgstr "OK"
+msgstr "Zapisz"
 
 msgid "Observation point: %s"
 msgstr "Punkt obserwacji: %s"
@@ -66,23 +183,71 @@ msgstr "Punkt obserwacji: %s"
 msgid "Observation time: %s"
 msgstr "Czas obserwacji: %s"
 
+msgid "Pressure"
+msgstr "Ciśnienie"
+
+msgid "Precipation"
+msgstr "Opady"
+
+msgid "precipitation_forecast"
+msgstr "Prognoza opadów"
+
 msgid "Please enter a valid city name."
 msgstr "Wprowadź prawidłową nazwę miasta."
 
 msgid "Please enter a valid location code for the city."
 msgstr "Wpisz poprawny kod dla lokalizacji miasta"
 
+msgid "Pressure %s"
+msgstr "Ciśnienie %s"
+
+msgid "Period:"
+msgstr "Okres:"
+
 msgid "Really delete this WeatherPlugin Entry?"
 msgstr "Naprawdę usunąć ten wpis?"
 
+msgid "Satellite"
+msgstr "Satelita"
+
+msgid "satellite_observation"
+msgstr "Mapa satelitarna"
+
 msgid "Search Code"
 msgstr "Szukaj  Kodu"
+
+msgid "Show Maps"
+msgstr "Pokaż mapy"
+
+msgid "Show Histograms"
+msgstr "Pokaż histogramy"
 
 msgid "Show Weather Forecast"
 msgstr "Pokazuje prognozę pogody"
 
 msgid "System"
-msgstr "System"
+msgstr "Skala: (ºC - ºF)"
+
+msgid "skin Icons"
+msgstr "Ikony skórki"
+
+msgid "Storms"
+msgstr "Burze"
+
+msgid "Storms observations"
+msgstr "Zaobserwowane burze"
+
+msgid "Temperature"
+msgstr "Temperatura"
+
+msgid "Temperature | Feelng temperature"
+msgstr "Temperatura | Temp. odczuwalna"
+
+msgid "temperature_today"
+msgstr "Dzisiejsza temperatura"
+
+msgid "thingSpeak meteo channel ID"
+msgstr "Numer kanału meteo w serwisie thingSpeak"
 
 msgid "Weather Plugin"
 msgstr "Prognoza pogody"
@@ -98,17 +263,11 @@ msgid ""
 "code."
 msgstr "Musisz wprowadzić poprawną nazwę miasta, aby znaleźć kod lokalizacji."
 
-msgid "imperial system"
-msgstr "Stopnie Fahrenheita "
+msgid "What happened in weather during last %s hours?"
+msgstr "Jak zmieniała się pogoda podczas ostatnich %s godzin?"
 
-msgid "metric system"
-msgstr "Stopnie Celsjusza"
-
-msgid "Animated plugin icons"
-msgstr "Animacja ikon we wtyczce"
-
-msgid "Animated infobar icons"
-msgstr "Animacja ikon na infobarze"
+msgid "Weather maps"
+msgstr "Mapy pogody"
 
 msgid "Jan"
 msgstr "sty"
@@ -146,15 +305,6 @@ msgstr "lis"
 msgid "Dec"
 msgstr "gru"
 
-msgid "Location Full name"
-msgstr "Pełna nazwa lokalizacji"
-
-msgid "thingSpeak meteo channel ID"
-msgstr "Numer kanału meteo w serwisie thingSpeak"
-
-msgid "Pressure %s"
-msgstr "Ciśnienie %s"
-
 msgid "pon."
 msgstr "pn."
 
@@ -174,133 +324,4 @@ msgid "sob."
 msgstr "so."
 
 msgid "niedz."
-msgstr "n."
-
-msgid "MSN weather NP"
-msgstr "Pogoda MSN v.NP"
-
-msgid "Icons type:"
-msgstr "Typ ikon:"
-
-msgid "Debug (require restart):"
-msgstr "Logowanie (wymagany restart):"
-
-msgid "MSN service icons"
-msgstr "Ikony serwisu MSN"
-
-msgid "skin Icons"
-msgstr "Ikony skórki"
-
-msgid "animated Icons"
-msgstr "Animowane ikony"
-
-msgid "Debug log file size:"
-msgstr "Wielkość pliku loga"
-
-msgid "Build histograms:"
-msgstr "Twórz histogramy"
-
-msgid "What happened in weather during last %s hours?"
-msgstr "Jak zmieniała się pogoda podczas ostatnich %s godzin?"
-
-msgid "Pressure"
-msgstr "Ciśnienie"
-
-msgid "Temperature | Feelng temperature"
-msgstr "Temperatura | Temp. odczuwalna"
-
-msgid "Icons scaling engine:"
-msgstr "Silnik skalowanie ikon:"
-
-msgid "internal E2"
-msgstr "wewnętrzny E2"
-
-msgid "ePicLoad (E.g. Vu+ org)"
-msgstr "ePicLoad (np. Vu+ org)"
-
-msgid "Weather maps"
-msgstr "Mapy pogody"
-
-msgid "Temperature"
-msgstr "Temperatura"
-
-msgid "Precipation"
-msgstr "Opady"
-
-msgid "Satellite"
-msgstr "Satelita"
-
-msgid "Cloud"
-msgstr "Zachmurzenie"
-
-msgid "temperature_today"
-msgstr "Dzisiejsza temperatura"
-
-msgid "precipitation_forecast"
-msgstr "Prognoza opadów"
-
-msgid "satellite_observation"
-msgstr "Mapa satelitarna"
-
-msgid "clouds_forecast"
-msgstr "Prognoza zachmurzenia"
-
-msgid "Feature not available in this system!!!"
-msgstr "Funkcja niedostępna na tym systemie!!!"
-
-msgid "Downloading today's temperature maps..."
-msgstr "Pobieranie map z dzisiejszą temperaturą..."
-
-msgid "Downloading precipitation forecast maps..."
-msgstr "Pobieranie map z prognozą opadów..."
-
-msgid "Downloading satellite observation maps..."
-msgstr "Pobieranie map satelitarnych..."
-
-msgid "Downloading clouds forecast maps..."
-msgstr "Pobieranie map z prognozą zachmurzenia..."
-
-msgid "General Error"
-msgstr "Nieznany błąd"
-
-msgid "Error wrong input data"
-msgstr "Błąd, podano złe dane"
-
-msgid "Error sychronizing web data"
-msgstr "Błąd synchonizacji danych"
-
-msgid "Error analyzing web data"
-msgstr "Błąd analizy danych"
-
-msgid "Exception %s"
-msgstr "Wyjątek %s"
-
-msgid "Error sychronizing webMaps data"
-msgstr "Błąd synchronizacji danych o mapach"
-
-msgid "Storms"
-msgstr "Burze"
-
-msgid "Loading storms maps..."
-msgstr "Ładuję mapy występowania burz..."
-
-msgid "Storms observations"
-msgstr "Zaobserwowane burze"
-
-msgid "Period:"
-msgstr "Okres:"
-
-msgid "Last 24h"
-msgstr "Ostatnie 24 godziny"
-
-msgid "Last 12h"
-msgstr "Ostatnie 12 godzin"
-
-msgid "Last 6h"
-msgstr "Ostatnie 6 godzin"
-
-msgid "Last 3h"
-msgstr "Ostatnie 3 godziny"
-
-msgid "Last hour"
-msgstr "Ostatnia godzina"
+msgstr "nd."

@@ -65,7 +65,7 @@ class j00zekLabel(Renderer):
         self.halign = valign = eLabel.alignLeft
         if self.skinAttributes:
             attribs = [ ]
-            setWrapFlag("noWrap", "1") #wrap by default
+            setWrapFlag("noWrap", "0") #wrap by default
             for (attrib, value) in self.skinAttributes:
                 if attrib == "font":
                     self.txFont = parseFont(value, ((1,1),(1,1)))

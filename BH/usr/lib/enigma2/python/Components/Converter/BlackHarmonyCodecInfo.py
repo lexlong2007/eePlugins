@@ -1,4 +1,7 @@
 # -*- coding: UTF-8 -*-
+#
+# j00zek: this file has changed name just to avoid errors using opkg (situation when file was installed by different pockage)
+#
 from Poll import Poll
 from Components.Converter.Converter import Converter
 from enigma import iServiceInformation, iPlayableService
@@ -218,21 +221,43 @@ class BlackHarmonyCodecInfo(Poll, Converter, object):
 	text = property(getText)                            	
 
         def createAudioCodec(self):
-            service = self.source.service
-            audio = service.audioTracks()
-            if audio:
-                try:
-                    ct = audio.getCurrentTrack()
-                    i = audio.getTrackInfo(ct)
-                    languages = i.getLanguage()
-                    if _("rus") in languages or _("Russian") in languages or _("ru") in languages:
-                        languages = _("rus")
-                    elif _("org") in languages:
-                        languages = _("Original")
-                    description = i.getDescription()                 
-                    return description + "  " + languages
-                except:
-                    return _("unknown")
+		service = self.source.service
+		audio = service.audioTracks()
+		if audio:
+			try:
+				ct = audio.getCurrentTrack()
+				i = audio.getTrackInfo(ct)
+				languages = i.getLanguage()
+				if "pol" in languages or "polish" in languages or "pl" in languages:
+					languages = _("Polish")
+				if "eng" in languages or "Englisch" in languages or "en" in languages:
+					languages = _("English")
+				if "de" in languages or "Deutsch" in languages or "deu" in languages or "ger" in languages:
+					languages = _("German")
+				if "fra" in languages or "french" in languages or "fre" in languages or "fr" in languages:
+					languages = _("French")
+				elif "spa" in languages:
+					languages = _("Spanish")
+				elif "swe" in languages:
+					languages = _("Swedish")
+				elif "ita" in languages:
+					languages = _("Italian")
+				elif "ukr" in languages:
+					languages = _("Ukrainian")
+				elif "rus" in languages:
+					languages = _("Russian")
+				elif "org" in languages:
+					languages = _("Original")
+				elif "mis" in languages:
+					languages = _("Miscellaneous languages")
+				elif "qaa" in languages:
+					languages = _("Reserved")
+				elif "und" in languages:
+					languages = _("Undetermined")
+				description = i.getDescription();
+				return description +'\c00??;?00' " " + languages
+			except:
+				return _("unknown")
 					
 
         def getEcmpid(self):

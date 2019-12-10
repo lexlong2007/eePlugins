@@ -82,8 +82,8 @@
   <widget source="global.CurrentTime" render="Label" position="164,71" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
     <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
   </widget>
-  <eLabel name="new eLabel" position="928,180" size="2,650" backgroundColor="f0f0f0" zPosition="5" />
-  <eLabel name="new eLabel" position="98,830" size="1710,2" backgroundColor="f0f0f0" zPosition="5" />
+  <eLabel name="new eLabel" position="928,180" size="2,650" backgroundColor="#f0f0f0" zPosition="5" />
+  <eLabel name="new eLabel" position="98,830" size="1710,2" backgroundColor="#f0f0f0" zPosition="5" />
   <eLabel text="OpenATV" position="722,43" size="420,88" font="Replacement; 65" halign="center" backgroundColor="dark_grey" transparent="1" foregroundColor="lemon" />
 </screen>
 <screen name="SoftwarePanel" position="center,center" size="1980,1080" backgroundColor="transparent" flags="wfNoBorder">

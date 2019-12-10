@@ -277,9 +277,9 @@ class j00zekRunningText(Renderer):
             self.scroll_label.setFont(self.txfont) #revert to standard in case alternate font used
             self.scroll_label.setText(self.txtext)
             text_size = self.scroll_label.calculateSize()
-            if text_size.height() > self.H:
+            if (self.txtflags & RT_WRAP) and text_size.height() > self.H:
                 if self.useBiggestPossibleFont == True:
-                    if DBG: j00zekDEBUG("[j00zekRunningText:calcMoving] looking for best font sizefor current text '%s > %s'" % (text_size.height(), self.H))
+                    if DBG: j00zekDEBUG("[j00zekRunningText:calcMoving] looking for best font size for current wrapped text '%s > %s'" % (text_size.height(), self.H))
                     currSize = self.maxFontSize
                     while currSize > self.minFontSize:
                         currSize -= 1
@@ -289,11 +289,27 @@ class j00zekRunningText(Renderer):
                         if text_size.height() <= self.H:
                             break
                 else:
-                    if DBG: j00zekDEBUG("[j00zekRunningText:calcMoving] switching to alternateFont because text > height '%s > %s'" % (text_size.height(), self.H))
+                    if DBG: j00zekDEBUG("[j00zekRunningText:calcMoving] switching to alternateFont because wrapped text > height '%s > %s'" % (text_size.height(), self.H))
                     self.scroll_label.setFont(self.alternateFont)
                     text_size = self.scroll_label.calculateSize()
+            elif text_size.width() > self.W:
+                if self.useBiggestPossibleFont == True:
+                    if DBG: j00zekDEBUG("[j00zekRunningText:calcMoving] looking for best font size for current not wrapped text '%s > %s'" % (text_size.width(), self.W))
+                    currSize = self.maxFontSize
+                    while currSize > self.minFontSize:
+                        currSize -= 1
+                        self.scroll_label.setFont(parseFont("%s;%s" % (self.txfontName, currSize), ((1,1),(1,1))))
+                        text_size = self.scroll_label.calculateSize()
+                        if DBG: j00zekDEBUG("[j00zekRunningText:calcMoving] Size of text for font %s is %s/%s" % (currSize, text_size.width(), self.W))
+                        if text_size.width() <= self.W:
+                            break
+                else:
+                    if DBG: j00zekDEBUG("[j00zekRunningText:calcMoving] switching to alternateFont because not wrapped text > width '%s > %s'" % (text_size.width(), self.W))
+                    self.scroll_label.setFont(self.alternateFont)
+                    text_size = self.scroll_label.calculateSize()
+              
             else:
-                if DBG: j00zekDEBUG("[j00zekRunningText:calcMoving] reverting to mainFont because text < height '%s < %s'" % (text_size.height(), self.H))
+                if DBG: j00zekDEBUG("[j00zekRunningText:calcMoving] reverting to mainFont because text < width '%s < %s'" % (text_size.width(), self.H))
         
         text_width = text_size.width()
         text_height = text_size.height()

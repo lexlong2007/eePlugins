@@ -1,6 +1,19 @@
 # -*- coding: utf-8 -*-
+from os import path
+
+repo='u'
+for opkgPath in ('/etc/opkg/opkg-j00zka.conf','/etc/opkg/user-feed.conf',):
+  if path.exists(opkgPath):
+    with open(opkgPath, 'r') as f:
+      fc=f.read()
+      f.close()
+      if 'http://j00zek.one.pl/opkg-j00zka ' in fc:
+        repo='p'
+      elif 'prywatne_repo_developerskie_j00zka_korzystajac_ZGADZASZ_sie_ze_cos_moze_niedzialac_i_NIE_bedziesz_miec_pretensji' in fc:
+        repo='d'
+  
 from version import Version
-UserSkinInfo='@j00zek %s' % Version
+UserSkinInfo='@j00zek %s (%s)' % (Version, repo)
 
 #stale
 PluginName = 'UserSkin'
@@ -44,7 +57,6 @@ def getPluginPath():
     return PluginPath
 
 def getPixmapPath(Pixmap=None):
-    from os import path
     if Pixmap is not None:
         #print "!!!!!!!!!!!!!!!!!!!!!!!!!",resolveFilename(SCOPE_SKIN, 'icons/%s' % Pixmap)
         if path.exists("%sUserSkinpics/%s" % (SkinPath,Pixmap)):

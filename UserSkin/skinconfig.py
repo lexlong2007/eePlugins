@@ -14,6 +14,7 @@
 #This means you also have to distribute
 #source code of your modifications.
 DBG = True
+FullDBG = False
 
 from debug import printDEBUG
 from inits import *
@@ -26,7 +27,7 @@ from Components.Label import Label
 from Components.Pixmap import Pixmap
 from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
-from enigma import eEnv, ePicLoad, eTimer
+from enigma import ePicLoad, eTimer, getDesktop
 from Plugins.Plugin import PluginDescriptor
 from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
@@ -43,17 +44,13 @@ from twisted.web.client import downloadPage
 
 from translate import _
 
-#UserSkin permanent configs, we use AtileHD for compatibility reasons
-config.plugins.AtileHD = ConfigSubsection()
-config.plugins.AtileHD.refreshInterval = ConfigNumber(default=30) #in minutes
-config.plugins.AtileHD.woeid = ConfigNumber(default=523920) #Location Warsaw (visit weather.yahoo.com)
-config.plugins.AtileHD.tempUnit = ConfigSelection(default="Celsius", choices = [
-                ("Celsius", _("Celsius")),
-                ("Fahrenheit", _("Fahrenheit"))
-                ])
+#UserSkin permanent configs
 config.plugins.UserSkin = ConfigSubsection()
 config.plugins.UserSkin.refreshInterval = ConfigNumber(default=30) #in minutes
-       
+
+def clearCache():
+    with open("/proc/sys/vm/drop_caches", "w") as f: f.write("1\n")
+
 def isSlowCPU():
     fc=''
     ret=False
@@ -123,17 +120,13 @@ def getTunerName():
 def vtiLCDskins( skinlist = [] ):
     def find(arg, dirname, names):
         for x in names:
-            if x.startswith('skin_vfd') and x.endswith('.xml'):
+            if x.startswith('skin_vfd') and x.endswith('.xml') and not x.startswith('skin_vfd_HMR_'):
                 if dirname != myRoot:
                     subdir = dirname[len(myRoot):]
-                    skinname = x
-                    skinname = subdir + '/' + skinname
-                    #skinlist.append(skinname)
-                    skinlist.append(( skinname, "VTI-%s" % _(skinname[len('skin_vfd'):-4].replace("_", " ")) ))
+                    skinname = subdir + 'vfd_skin/' + x
                 else:
-                    skinname = x
-                    #skinlist.append(skinname)
-                    skinlist.append(( skinname, "VTI-%s" % _(skinname[len('skin_vfd'):-4].replace("_", " ")) ))
+                    skinname = 'vfd_skin/' + x
+                skinlist.append(( skinname, "VTI-%s" % _(skinname[len('skin_vfd'):-4].replace("_", " ")) ))
     myRoot = '/usr/share/enigma2/vfd_skin'
     if path.exists(myRoot):
         path.walk(myRoot, find, '')
@@ -159,21 +152,41 @@ def atvLCDskins( skinlist = [] ):
     try: skinlist.sort(key=lambda t : tuple(str(t[0]).lower()))
     except Exception: skinlist.sort()
     
-    return skinlist
+    return [] #skinlist
 
 def homarLCDskins( skinlist = [] , tunerName = getTunerName() ):
-    if tunerName in ('duo4k','solo4k','ultimo4k','uno4k'):
-        myRoot = '/usr/share/enigma2/HomarLCDskins/model.%s' % tunerName
-        if path.exists(myRoot):
-            for f in sorted(listdir(myRoot), key=str.lower):
-                if DBG == True: printDEBUG(f)
-                if f.startswith('skin_LCD') and f.endswith('.xml'):
-                    skinlist.append(( f, _(f[len('skin_LCD'):-4].replace("_", " ")) ))
-        else:
-            skinlist.append(( _('Homar LCD skins from opkg'), _('Homar LCD skins from opkg') ))
+    def find(arg, dirname, names):
+        for x in names:
+            if x.startswith('skin_LCD_HMR') and x.endswith('.xml'):
+                if FullDBG == True: printDEBUG("\t dirname ='%s', skinname='%s'" % (dirname, x))
+                if dirname != myRoot:
+                    subdir = dirname[len(myRoot):]
+                    skinname = path.join(subRoot,subdir,x)
+                else:
+                    skinname = path.join(subRoot,x)
+                if FullDBG == True: printDEBUG("homarLCDskins skinname'%s'" % (skinname))
+                skinlist.append(( skinname, _(x[len('skin_LCD_'):-4].replace("_", " ")) ))
+    
+    if path.exists('/usr/share/enigma2/HomarLCDskins/konfiguracja'):
+        with open('/usr/share/enigma2/HomarLCDskins/konfiguracja', 'r') as file:
+            if file.read().find('trybDevelopera=On') > -1:
+                tunerName = 'all'
+            file.close()
 
-        try: skinlist.sort(key=lambda t : tuple(str(t[0]).lower()))
-        except Exception: skinlist.sort()
+    if tunerName == 'all':
+        subRoot='HomarLCDskins/'
+    else:
+        subRoot='HomarLCDskins/model.%s/' % tunerName
+    myRoot = '/usr/share/enigma2/%s' % subRoot
+    
+    if DBG == True: printDEBUG("homarLCDskins selected tuner='%s', myRoot='%s'" % (tunerName, myRoot))
+    if path.exists(myRoot):
+        path.walk(myRoot, find, '')
+    else:
+        skinlist.append(( _('Homar LCD skins from opkg'), _('Homar LCD skins from opkg') ))
+
+    try: skinlist.sort(key=lambda t : tuple(str(t[0]).lower()))
+    except Exception: skinlist.sort()
     
     return skinlist
 
@@ -201,6 +214,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
     changed_screens = False
         
     def __init__(self, session, args = 0):
+        if DBG == True: printDEBUG('__init__ >>>')
         self.session = session
         Screen.__init__(self, session)
         self.UserSkinToolSet = UserSkinToolSet()
@@ -219,18 +233,17 @@ class UserSkin_Config(Screen, ConfigListScreen):
                 self.currentSkin = '_' + self.currentSkin # default_skin = '', others '_skinname', used later
                 
         if path.exists(SkinPath):
+            if DBG == True: printDEBUG('#### initializing SUBDIRS ###')
             #### initializing SUBDIRS ###
             for folder in ("allBars", "allColors", "allFonts", "allInfos", "allPreviews", "allScreens", "UserSkin_Selections", 'allMiniTVskins'):
                 if not path.exists(SkinPath + folder):
                     mkdir(SkinPath + folder)
             
-            #### initializing VFDskins ###
+### initializing VFDskins ###
+            if DBG == True: printDEBUG('#### initializing VFDskins ###')
             self.LCDscreensList = [("system", "system")]
             if  path.exists('/usr/lib/enigma2/python/Plugins/Extensions/LCDlinux'):
                 self.LCDscreensList.append(("LCDLinux", "LCDLinux"))
-            self.LCDscreensList.extend( atvLCDskins() )
-            self.LCDscreensList.extend( vtiLCDskins() )
-            self.LCDscreensList.extend( homarLCDskins() )
             
             filterVFDskins4model = False
             tunerName = getTunerName()
@@ -241,12 +254,17 @@ class UserSkin_Config(Screen, ConfigListScreen):
                         break
 
             for f in sorted(listdir(SkinPath + "allMiniTVskins/"), key=str.lower):
-                if DBG == True: printDEBUG(f)
                 if f.startswith('skin_') and f.endswith('.xml'):
                     if not filterVFDskins4model or f.lower().find(tunerName) > -1:
-                        self.LCDscreensList.append(( f, _(f[5:-4].replace("_", " ")) ))
+                        if FullDBG == True: printDEBUG( path.join('BlackHarmony/allMiniTVskins/',f) )
+                        self.LCDscreensList.append(( path.join('BlackHarmony/allMiniTVskins/',f), _(f[5:-4].replace("_", " ")) ))
                     
+            self.LCDscreensList.extend( atvLCDskins() )
+            self.LCDscreensList.extend( vtiLCDskins() )
+            self.LCDscreensList.extend( homarLCDskins() )
+
             config.plugins.UserSkin.LCDmode = ConfigSelection(default="system", choices = self.LCDscreensList)
+            if DBG == True: printDEBUG('#### initializing FONTS ###')
             #### initializing FONTS ###
             if not path.exists(SkinPath + "allFonts/font_default.xml"):
                 with open(SkinPath + 'allFonts/font_default.xml', "w") as f:
@@ -263,7 +281,8 @@ class UserSkin_Config(Screen, ConfigListScreen):
             else:
                 self.myUserSkin_font = NoSave(ConfigSelection(default = 'font_default.xml', choices = mylist))
             
-            #### initializing COLORS ###
+            if DBG == True: printDEBUG('#### initializing COLORS ###')
+#### initializing COLORS ###
             if not path.exists(SkinPath + "allColors/colors_default.xml") or path.getsize(SkinPath + "allColors/colors_default.xml") > 8192:
                 printDEBUG("generating colors_default.xml")
                 with open(SkinPath + "allColors/colors_default.xml" , "w") as f:
@@ -282,7 +301,8 @@ class UserSkin_Config(Screen, ConfigListScreen):
                                           choices = mylist))
             else:
                 self.myUserSkin_style = NoSave(ConfigSelection(default = 'colors_default.xml', choices = mylist))
-            #### initializing USER BARS ###
+            if DBG == True: printDEBUG('#### initializing USER BARS ###')
+#### initializing USER BARS ###
             mylist = []
             for f in sorted(listdir(SkinPath + "allBars/"), key=str.lower):
                 if path.isdir(path.join(SkinPath + "allBars/", f)) and f.startswith('bar_') and f.find('.') > 1:
@@ -300,7 +320,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
                 else:
                     mylist.append(("default", _("default") ))
                     self.myUserSkin_bar = NoSave(ConfigSelection(default = "default", choices = mylist))
-        ##########################################################################################################3
+##########################################################################################################3
         if path.exists(SkinPath + "mySkin"):
             self.myUserSkin_active = NoSave(ConfigYesNo(default= True))
         else:
@@ -308,21 +328,18 @@ class UserSkin_Config(Screen, ConfigListScreen):
         self.myUserSkin_fake_entry = NoSave(ConfigNothing())
         self.LackOfFile = ''
         
-        #if path.exists('/usr/bin/enigma2_pre_start.sh'):
-        #    config.plugins.UserSkin.SafeMode.value = True
-        #else:
-        #    config.plugins.UserSkin.SafeMode.value = False
-        
+        if DBG == True: printDEBUG('#### initializing ConfigListScreen ###')
         self.list = []
         ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
 
+        if DBG == True: printDEBUG('#### initializing BUTTONS ###')
         self["key_red"] = Label(_("Cancel"))
         self["key_green"] = Label(_("OK"))
         self["key_yellow"] = Label()
         self["key_blue"] = Label()
         self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
             {
-                "green": self.keyOkbutton,
+                "green": self.keyOk,
                 "red": self.cancel,
                 "yellow": self.keyYellow,
                 "blue": self.keyBlue,
@@ -334,29 +351,38 @@ class UserSkin_Config(Screen, ConfigListScreen):
         
         if not self.selectionChanged in self["config"].onSelectionChanged:
             self["config"].onSelectionChanged.append(self.selectionChanged)
-        
+#### initializing LCDconfigKey ###        
+        if DBG == True: printDEBUG('#### initializing LCDconfigKey ###')
+        self.LCDconfigKey = 'none'
         try:
-            self.LCDconfigKey = config.skin.display_skin.value
-            self.LCDconfigKey = 'display_skin'
+            LCDconfigKey = config.skin.primary_vfdskin.value
+            self.LCDconfigKey = 'primary_vfdskin'
         except Exception:
             try:
-                LCDconfigKey = config.skin.primary_vfdskin.value
-                self.LCDconfigKey = 'primary_vfdskin'
+                self.LCDconfigKey = config.skin.display_skin.value
+                self.LCDconfigKey = 'display_skin'
             except Exception:
-                self.LCDconfigKey = 'none'
-                if os.path.exists('/usr/lib/enigma2/python/skin.pyo') and (os.path.islink('/usr/share/enigma2/skin_box.xml') or not os.path.isfile('/usr/share/enigma2/skin_box.xml')):
+                clearCache()
+                if os.path.exists('/usr/lib/enigma2/python/skin.pyo') and (os.path.exists('/usr/share/enigma2/skin_display.xml') or os.path.exists('/usr/share/enigma2/skin_display.xml.org')):
                     with open('/usr/lib/enigma2/python/skin.pyo', 'rb') as f:
-                        fc = f.read()
+                        if 'skin_display.xml' in f.read():
+                            self.LCDconfigKey = 'skin_display.xml'
                         f.close()
-                    if fc.find('skin_box.xml') > -1:
-                        self.LCDconfigKey = 'skin_box.xml'
-                        
+                elif os.path.exists('/usr/lib/enigma2/python/skin.pyo') and (os.path.islink('/usr/share/enigma2/skin_box.xml') or not os.path.isfile('/usr/share/enigma2/skin_box.xml')):
+                    with open('/usr/lib/enigma2/python/skin.pyo', 'rb') as f:
+                        if 'skin_box.xml' in f.read():
+                            self.LCDconfigKey = 'skin_box.xml'
+                        f.close()
+                
+        if DBG == True: printDEBUG('\t LCDconfigKey="%s"' % self.LCDconfigKey )                
         
         self.createConfigList()
         self.updateEntries = False
         self.LCD_widgets_selected = False
+        if DBG == True: printDEBUG('__init__  <<< ENDS')
 
     def createConfigList(self):
+        if DBG == True: printDEBUG('self.createConfigList() >>>')
         self.set_bar = getConfigListEntry(_("Selector bar style:"), self.myUserSkin_bar)
         self.set_color = getConfigListEntry(_("Colors:"), self.myUserSkin_style)
         self.set_font = getConfigListEntry(_("Font:"), self.myUserSkin_font)
@@ -370,7 +396,14 @@ class UserSkin_Config(Screen, ConfigListScreen):
         if isSlowCPU() == True:
             self.list.append(getConfigListEntry(_("No JPG previews:"), config.plugins.UserSkin.jpgPreview))
         if self.LCDconfigKey != 'none':
-            self.list.append(getConfigListEntry(_("Display skin:"), config.plugins.UserSkin.LCDmode))
+            try:
+                if getDesktop(1).size().width() >= 320:
+                    optionText = _("LCD skin (OK):")
+                else:
+                    optionText = _("VFD skin (OK):")
+            except Exception:
+                optionText = _("Display skin (OK):")
+            self.list.append(getConfigListEntry( optionText, config.plugins.UserSkin.LCDmode) )
         try:
             if (path.exists(resolveFilename(SCOPE_PLUGINS, '../Components/Renderer/j00zekPiconAnimation.py')) or \
                     path.exists(resolveFilename(SCOPE_PLUGINS, '../Components/Renderer/j00zekPiconAnimation.pyo')) or \
@@ -422,11 +455,6 @@ class UserSkin_Config(Screen, ConfigListScreen):
         else:
             self["Picture"].hide()
             
-        if self["config"].getCurrent()[1] == config.plugins.UserSkin.LCDmode:
-            self["key_green"].setText(_("Set LCD screen"))
-        else:
-            self["key_green"].setText(_("OK"))
-
     def cancel(self):
         if self["config"].isChanged():
             self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Do you really want to cancel?"), MessageBox.TYPE_YESNO, default = False)
@@ -486,8 +514,9 @@ class UserSkin_Config(Screen, ConfigListScreen):
             config.plugins.j00zekPiconAnimation.UserPath.value = ret
         
     def LCDskinCB(self,ret):
+        if DBG == True: printDEBUG("LCDskinCB >>>")
         def installHomarLCDscreens(ret = False):
-            if DBG == True: printDEBUG("installHomarLCDscreens>>>")
+            if DBG == True: printDEBUG("installHomarLCDscreens >>>")
             if ret == True:
                 os.system('opkg update;opkg install enigma2-plugin-skins--j00zeks-homar;sync')
                 self.keyOk()
@@ -495,18 +524,25 @@ class UserSkin_Config(Screen, ConfigListScreen):
             if DBG == True: printDEBUG(ret)
             if ret[0] == _('Homar LCD skins from opkg'):
                 self.session.openWithCallback(installHomarLCDscreens,MessageBox, _("Installation of LCD screens prepared by Homar from opkg will take a minute. Do you want to proceed?"), MessageBox.TYPE_YESNO, default = False)
-                #config.plugins.UserSkin.LCDmode.value = ret[0]
+            else:
+                config.plugins.UserSkin.LCDmode.value = ret[1]
+                if DBG == True: printDEBUG("config.plugins.UserSkin.LCDmode.value=%s" % config.plugins.UserSkin.LCDmode.value )
         
     def keyOkbutton(self):
+        if DBG == True: printDEBUG("keyOkbutton >>>")
         try:
             if self["config"].getCurrent()[1] == config.plugins.UserSkin.LCDmode:
-                self.session.openWithCallback(self.LCDskinCB, ChoiceBox, title = _("Choose LCD skin:"), list = self.LCDscreensList)
+                mySkin = []
+                for item in self.LCDscreensList:
+                    mySkin.append((item[1] , item[0]))
+                self.session.openWithCallback(self.LCDskinCB, ChoiceBox, title = _("Choose LCD skin:"), list = mySkin)
             elif config.plugins.j00zekPiconAnimation.UserPath is not None and self["config"].getCurrent()[1] == config.plugins.j00zekPiconAnimation.UserPath:
                 from Screens.LocationBox import LocationBox
                 self.session.openWithCallback(self.LocationBoxCB, LocationBox)
             else:
                 self.keyOk()
-        except Exception:
+        except Exception as e:
+            if DBG == True: printDEBUG("keyOkbutton() Exception %s" % str(e))
             self.keyOk()
     
     def keyOk(self):
@@ -515,12 +551,11 @@ class UserSkin_Config(Screen, ConfigListScreen):
         else:
             self.session.openWithCallback(self.keyOkret,MessageBox, _("Do you want to update your skin modification?"), MessageBox.TYPE_YESNO, default = False)
     def keyOkret(self, ret = False):
-        if DBG == True: printDEBUG(">>>")
+        if DBG == True: printDEBUG("keyOkret() >>>")
         if ret == True:
             printDEBUG('self["config"].isChanged()')
             printDEBUG("self.myUserSkin_style.value=" + self.myUserSkin_style.value)
             printDEBUG("self.myUserSkin_bar.value=" + self.myUserSkin_bar.value)
-            config.plugins.UserSkin.refreshInterval.value = config.plugins.AtileHD.refreshInterval.value
             for x in self["config"].list:
                 x[1].save()
             configfile.save()
@@ -611,51 +646,10 @@ class UserSkin_Config(Screen, ConfigListScreen):
         restartbox.setTitle(_("Message"))
 
     def keyBlue(self):
-        def doNothing(ret=None):
-            return
-          
-        if 1:
-            from about import UserSkin_About
-            self.session.openWithCallback(doNothing,UserSkin_About)
-            return
-
-        import xml.etree.cElementTree as ET
-        from Screens.VirtualKeyBoard import VirtualKeyBoard
+        from about import UserSkin_About
+        self.session.openWithCallback(doNothing,UserSkin_About)
+        return
         
-        def SaveScreen(ScreenFileName = None):
-            if ScreenFileName is not None:
-                if not ScreenFileName.endswith('.xml'):
-                    ScreenFileName += '.xml'
-                if not ScreenFileName.startswith('skin_'):
-                    ScreenFileName = 'skin_' + ScreenFileName
-                printDEBUG("Writing %s%s/%s" % (SkinPath, 'allScreens',ScreenFileName))
-                
-                for skinScreen in root.findall('screen'):
-                    if 'name' in skinScreen.attrib:
-                        if skinScreen.attrib['name'] == self.ScreenSelectedToExport:
-                            SkinContent = ET.tostring(skinScreen)
-                            break
-                with open("%s%s/%s" % (SkinPath, 'allScreens', ScreenFileName), "w") as f:
-                    f.write('<skin>\n')
-                    f.write(SkinContent)
-                    f.write('</skin>\n')
-
-        def ScreenSelected(ret):
-            if ret:
-                self.ScreenSelectedToExport = ret[0]
-                printDEBUG('Selected: %s' % self.ScreenSelectedToExport)
-                self.session.openWithCallback(SaveScreen, VirtualKeyBoard, title=(_("Enter filename")), text = self.ScreenSelectedToExport + '_new')
-        
-        ScreensList= []
-        root = ET.parse(SkinPath + 'skin.xml').getroot()
-        for skinScreen in root.findall('screen'):
-            if 'name' in skinScreen.attrib:
-                printDEBUG('Found in skin.xml: %s' % skinScreen.attrib['name'])
-                ScreensList.append((skinScreen.attrib['name'],skinScreen.attrib['name']))
-        if len(ScreensList) > 0:
-            ScreensList.sort()
-            self.session.openWithCallback(ScreenSelected, ChoiceBox, title = _("Select skin to export:"), list = ScreensList)
-                
     def update_user_skin(self):
         def getScreenNames(XMLfilename):
             myPath=path.realpath(XMLfilename)
@@ -741,10 +735,10 @@ class UserSkin_Config(Screen, ConfigListScreen):
             remove(user_skin_file)
             
         if self.myUserSkin_active.value:
-            printDEBUG("update_user_skin.self.myUserSkin_active.value=True")
+            if DBG: printDEBUG("update_user_skin.self.myUserSkin_active.value=True")
             user_skin = ""
             user_parameters = ""
-            printDEBUG("############################################# Initial skin:\n" + user_skin + "\n#############################################\n")        
+            if FullDBG: printDEBUG("############################################# Initial skin:\n" + user_skin + "\n#############################################\n")        
             if isImageType('vti') == False or isImageType('openatv') == False:
                 if path.exists(SkinPath + 'skin_user_header.xml'):
                     printDEBUG("- appending skin_user_header.xml")
@@ -752,7 +746,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
                 if path.exists(SkinPath + 'skin_user_colors.xml'):
                     printDEBUG("- appending skin_user_colors.xml")
                     user_skin = user_skin + self.readXMLfile(SkinPath + 'skin_user_colors.xml' , 'ALLSECTIONS')
-            printDEBUG("############################################# Skin after loading header & colors:\n" + user_skin + "\n#############################################\n")        
+            if FullDBG: printDEBUG("############################################# Skin after loading header & colors:\n" + user_skin + "\n#############################################\n")        
             if path.exists(SkinPath + 'UserSkin_Selections'):
                 if self.widgets_selected:
                     printDEBUG("mergeScreens mode !!!")
@@ -806,33 +800,68 @@ class UserSkin_Config(Screen, ConfigListScreen):
                         #system('ln -sf %s %s' % (user_skin_file, resolveFilename(SCOPE_CONFIG, 'skin_user' + self.currentSkin + '.xml')))
                         system('mv -f %s %s' % (user_skin_file, resolveFilename(SCOPE_CONFIG, 'skin_user' + self.currentSkin + '.xml')))
               
+            clearCache()
+            if os.path.islink('/usr/share/enigma2/skin_box.xml'):
+                os.system('rm -f /usr/share/enigma2/skin_box.xml' )
             if config.plugins.UserSkin.LCDmode.value not in ('LCDLinux',"system"):
-                #if path.exists(resolveFilename(SCOPE_SKIN, 'display')):
-                #    system('ln -sf %s %s/%s' % (SkinPath + "allMiniTVskins/" + config.plugins.UserSkin.LCDmode.value,
-                #                    resolveFilename(SCOPE_SKIN, 'display'),
-                #                    config.plugins.UserSkin.LCDmode.value)
-                if self.LCDconfigKey == 'display_skin':
-                    config.skin.display_skin.value = '../BlackHarmony/allMiniTVskins/' + config.plugins.UserSkin.LCDmode.value #openXYZ
-                    config.skin.display_skin.save()
-                    configfile.save()
-                    printDEBUG('Set config.skin.display_skin.value=' + config.plugins.UserSkin.LCDmode.value)
-                elif self.LCDconfigKey == 'primary_vfdskin':
-                    config.skin.primary_vfdskin.value = 'BlackHarmony/allMiniTVskins/' + config.plugins.UserSkin.LCDmode.value
+            ##### VTI style #####
+                if self.LCDconfigKey == 'primary_vfdskin':
+                    config.skin.primary_vfdskin.value = config.plugins.UserSkin.LCDmode.value
                     config.skin.primary_vfdskin.save()
                     configfile.save()
-                    printDEBUG('Set config.skin.display_skin.value=')
-                elif self.LCDconfigKey == 'skin_box.xml':
-                    os.system('ln -sf /usr/share/enigma2/BlackHarmony/allMiniTVskins/%s /usr/share/enigma2/skin_box.xml' % (config.plugins.UserSkin.LCDmode.value) )
-            elif self.LCDconfigKey == 'skin_box.xml' and os.path.exists('/usr/share/enigma2/skin_box.xml'):
-                os.system('rm -f /usr/share/enigma2/skin_box.xml' )
+                    printDEBUG("Set config.skin.primary_vfdskin.value='%s'" % config.skin.primary_vfdskin.value)
+            ##### openATV style #####
+                elif self.LCDconfigKey == 'display_skin':
+                    config.skin.display_skin.value = "skin_LCD_UserSkin.xml"
+                    config.skin.display_skin.save()
+                    configfile.save()
+                    printDEBUG("Set config.skin.display_skin.value='%s'" % config.skin.display_skin.value)
+                    self.generateLCDskin('/usr/share/enigma2/%s' % config.plugins.UserSkin.LCDmode.value , '/usr/share/enigma2/display/%s' % config.skin.display_skin.value)
+            ##### PLi style using skin_display.xml #####
+                elif self.LCDconfigKey == 'skin_display.xml': #openPLi style
+                    if not os.path.isfile('/usr/share/enigma2/skin_display.xml.org') and os.path.isfile('/usr/share/enigma2/skin_display.xml'):
+                        os.system('cp -f /usr/share/enigma2/skin_display.xml /usr/share/enigma2/skin_display.xml.org')
+                    if os.path.islink('/usr/share/enigma2/skin_display.xml'):
+                        os.system('rm -f /usr/share/enigma2/skin_display.xml' )
+                    self.generateLCDskin('/usr/share/enigma2/%s' % config.plugins.UserSkin.LCDmode.value , '/usr/share/enigma2/skin_display.xml')
+                    printDEBUG('linking /usr/share/enigma2/%s to /usr/share/enigma2/skin_display.xml' % (config.plugins.UserSkin.LCDmode.value))
+            ##### PLi style using skin_display.xml #####
+                elif self.LCDconfigKey == 'skin_box.xml': #openPLi 2nd style
+                    self.generateLCDskin('/usr/share/enigma2/%s' % config.plugins.UserSkin.LCDmode.value , '/usr/share/enigma2/skin_LCD_UserSkin.xml')
+                    os.system('ln -sf /usr/share/enigma2/skin_LCD_UserSkin.xml /usr/share/enigma2/skin_box.xml' )
+                    printDEBUG('linking /usr/share/enigma2/%s to /usr/share/enigma2/skin_box.xml' % (config.plugins.UserSkin.LCDmode.value))
+            ##### ALL disabled #####
+            else:
+                if os.path.islink('/usr/share/enigma2/skin_box.xml'):
+                    os.system('rm -f /usr/share/enigma2/skin_box.xml' )
+                if os.path.isfile('/usr/share/enigma2/skin_display.xml.org'):
+                    os.system('cp -f /usr/share/enigma2/skin_display.xml.org /usr/share/enigma2/skin_display.xml')
+                if os.path.isfile('/usr/share/enigma2/skin_LCD_UserSkin.xml'):
+                    os.system('rm -f /usr/share/enigma2/skin_LCD_UserSkin.xml' )
                 
             #checking if all scripts are in the system
-            if DBG == True: printDEBUG("########################### Final User Skin\n%s\n##############################################\n" % user_skin)
+            if FullDBG == True: printDEBUG("########################### Final User Skin\n%s\n##############################################\n" % user_skin)
             self.checkComponent(user_skin, 'render' , resolveFilename(SCOPE_PLUGINS, '../Components/Renderer/') )
             self.checkComponent(user_skin, 'convert type' , resolveFilename(SCOPE_PLUGINS, '../Components/Converter/') )
             self.checkComponent(user_skin, 'pixmap' , resolveFilename(SCOPE_SKIN, '') )
             self.checkFontColor(user_skin)
 
+    def generateLCDskin(self, inFile, outFile): #ATV/PLi does not work when id="1" in display skin.
+        with open(inFile, 'r') as fr:
+            fw = open(outFile , 'w')
+            fw.write("<!-- Transformed by UserSkin from file='%s' -->\n" % config.plugins.UserSkin.LCDmode.value )
+            while True:
+                fline = fr.readline()
+                if not fline:
+                    break
+                if 'screen name=' in fline:
+                    fline = fline.replace('id="1"','')
+                    if 'name="vti' in fline.lower(): #ATV has some strange workarrounds for VTI
+                        fline = fline.replace('name="','name="fake')
+                fw.write(fline)
+            fr.close()
+            fw.close()
+    
     def checkFontColor(self, myContent):
         def updateLackOfColor(name, mySeparator =', '):
             printDEBUG("Missing color definitions found:%s\n" % name)
@@ -876,9 +905,9 @@ class UserSkin_Config(Screen, ConfigListScreen):
         printDEBUG("Found %d definitions of %s:\n" % (len(r),look4Component))
         if r:
             for myComponent in set(r):
-                if DBG == True: printDEBUG(" [UserSkin] checks if %s exists" % myComponent)
+                if FullDBG == True: printDEBUG(" [UserSkin] checks if %s exists" % myComponent)
                 if look4Component == 'pixmap':
-                    if DBG == True: printDEBUG("%s\n%s\n" % (myComponent,myPath + myComponent))
+                    if FullDBG == True: printDEBUG("%s\n%s\n" % (myComponent,myPath + myComponent))
                     if myComponent.startswith('/'):
                         if not path.exists(myComponent):
                             updateLackOfFile(myComponent, '\n')

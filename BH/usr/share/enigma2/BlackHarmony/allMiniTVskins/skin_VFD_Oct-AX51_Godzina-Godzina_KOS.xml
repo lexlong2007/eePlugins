@@ -173,9 +173,7 @@
 
 <!-- mediaplayer -->
 	<screen name="MediaPlayerLCDScreen" position="0,0" size="132,64">
-		<widget source="session.CurrentService" render="BlackHarmonyRollerCharVFD" position="0,0" size="120,25" halign="left" noWrap="1" >
-			<convert type="ServicePosition">VFDPosition</convert>
-		</widget>
+		<widget name="text3" position="0,0" size="120,20" font="Regular;18" halign="left" noWrap="1"/>
 	</screen>
 <!-- ATV -->
 <!-- Quickmenü -->
@@ -209,8 +207,8 @@
 		<widget source="parent.summarylangsel" render="BlackHarmonyRollerCharVFD" position="fill" size="120,20" font="Regular;18" />
 	</screen>
 <!-- AudioSelection -->
-	<screen name="AudioSelection_summary" position="0,0" size="132,64">
-		<widget source="parent.summarydescription" render="BlackHarmonyRollerCharVFD" position="fill" size="120,20" font="Regular;18" />
+	<screen name="AudioSelectionsummary" position="0,0" size="132,64">
+		<widget source="parent.summary_description" render="BlackHarmonyRollerCharVFD" position="fill" size="120,20" font="Regular;18" />
 	</screen>
 <!-- Console -->
 	<screen name="Console_summary" position="0,0" size="132,64">

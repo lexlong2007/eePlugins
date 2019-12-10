@@ -4362,8 +4362,10 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="session.CurrentService" render="Label" position="999,902" size="180,30" font="Regular;25" halign="right" valign="center" foregroundColor="white" backgroundColor="black" transparent="1">
       <convert type="ServicePosition">Remaining</convert>
     </widget>
-    <ePixmap pixmap="BlackHarmony/buttons/movie/menu.png" position="1076,1010" size="75,40" alphatest="blend"/>
-    <ePixmap pixmap="BlackHarmony/gfx/mp_buttons.png" position="752,1004" size="280,50" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/movie/menu.png" position="1076,990" size="75,40" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/gfx/mp_buttons.png" position="752,984" size="280,50" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="752,1050" size="35,27" alphatest="blend"/>
+    <eLabel text="Clear playlist" position="792,1049" size="320,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
   </screen>
   <screen name="tmdbConfigScreen" position="462,128" size="1000,820" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1000,820" pixmap="BlackHarmony/bg_design/small.png"/>
@@ -5206,7 +5208,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="global.CurrentTime" render="Label" position="130,50" size="360,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <widget source="Title" render="Label" position="633,50" size="820,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="Title" render="Label" position="633,50" size="820,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget name="filelist" itemHeight="75" font0="Roboto_HD;27" font1="Roboto_HD;25" DimText0="70,2,700,35" DimText1="70,41,700,30" DimPIC="5,15,54,54" position="83,185" size="735,525" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_735_75.png" backgroundColor="black" transparent="1"/>
     <widget name="PreviewPicture" position="889,285" size="550,290" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="72,779" size="35,27" alphatest="blend"/>
@@ -5247,7 +5249,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="global.CurrentTime" render="Label" position="130,50" size="360,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <widget source="Title" render="Label" position="633,50" size="820,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="Title" render="Label" position="633,50" size="820,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget name="list" font="Roboto_HD; 27" position="83,190" size="735,525" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" itemHeight="35" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_850_35.png" backgroundColor="black" transparent="1"/>
     <widget name="cover" zPosition="4" position="890,312" size="550,290" transparent="1" alphatest="blend"/>
   </screen>
@@ -5259,7 +5261,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="global.CurrentTime" render="Label" position="130,50" size="360,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <widget source="Title" render="Label" position="633,50" size="820,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="Title" render="Label" position="633,50" size="820,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget name="config" position="83,190" size="735,480" itemHeight="35" font="Roboto_HD; 27" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_735_35.png" backgroundColor="black" transparent="1"/>
     <widget name="Picture" position="889,285" size="550,290" alphatest="on"/>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="72,779" size="35,27" alphatest="blend"/>
@@ -5279,7 +5281,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="global.CurrentTime" render="Label" position="130,50" size="360,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <widget source="Title" render="Label" position="633,50" size="820,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="Title" render="Label" position="633,50" size="820,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget source="menu" render="Listbox" position="83,187" size="735,530" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_735_75.png" backgroundColor="black" transparent="1">
       <convert type="TemplatedMultiContent">
                                 {"template":
@@ -5315,7 +5317,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="global.CurrentTime" render="Label" position="195,80" size="360,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <widget source="Title" render="Label" position="992,80" size="820,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="Title" render="Label" position="992,80" size="820,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget source="menu" render="Listbox" position="130,185" size="910,530" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_910_75.png" backgroundColor="black" transparent="1">
       <convert type="TemplatedMultiContent">
                                 {"template":
@@ -5361,7 +5363,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="global.CurrentTime" render="Label" position="125,25" size="360,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="J00zekMenuChannels" position="865,25" size="320,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <eLabel text="J00zekMenuChannels" position="865,25" size="320,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget name="config" font="Roboto_HD; 27" position="65,145" size="1095,630" itemHeight="35" selectionPixmap="BlackHarmony/menu/sel_1095_35.png" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" scrollbarMode="showOnDemand" backgroundColor="black" transparent="1"/>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="41,850" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="328,850" size="35,27" alphatest="blend"/>
@@ -7583,11 +7585,11 @@ self['config'].l.setSeperation(int(300*f))
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="80,960" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="360,960" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="600,960" size="35,27" alphatest="blend"/>
-    <!--ePixmap pixmap="BlackHarmony/buttons/blue.png" position="980,960" size="35,27" alphatest="blend"/-->
-    <eLabel text="Close" position="120,959" size="150,35" font="Roboto_HD; 26" foregroundColor="white" backgroundColor="black" transparent="1"/>
-    <eLabel text="Mapy" position="400,959" size="150,35" font="Roboto_HD; 26" foregroundColor="white" backgroundColor="black" transparent="1"/>
-    <eLabel text="Zmiany w pogodzie" position="640,959" size="380,35" font="Roboto_HD; 26" foregroundColor="white" backgroundColor="black" transparent="1"/>
-    <!--eLabel text="Close" position="1020,959" size="150,35" font="Roboto_HD; 26" foregroundColor="white" backgroundColor="black" transparent="1"/-->
+    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="980,960" size="35,27" alphatest="blend"/>
+    <widget source="key_red" render="Label" position="120,959" size="150,35" font="Roboto_HD; 24" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="key_green" render="Label" position="400,959" size="150,35" font="Roboto_HD; 24" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="key_yellow" render="Label" position="640,959" size="380,35" font="Roboto_HD; 24" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="key_blue" render="Label" position="1020,959" size="150,35" font="Roboto_HD; 24" foregroundColor="white" backgroundColor="black" transparent="1"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_left.png" position="1210,960" size="40,30" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_right.png" position="1300,960" size="40,30" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_menu.png" position="1380,960" size="60,30" alphatest="blend"/>
@@ -9657,7 +9659,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2,orgpos.y()))
   </screen>
   <!-- Buffer Indicator -->
   <screen name="BufferIndicator" title="" position="center,168" size="600,48" zPosition="100" backgroundColor="transparent" flags="wfNoBorder">
-    <widget name="status" position="0,0" size="600,48" font="Regular;39" halign="center" valign="center" foregroundColor="una6ff" backgroundColor="transpBlack" borderColor="black" borderWidth="2" transparent="1"/>
+    <widget name="status" position="0,0" size="600,48" font="Regular;39" halign="center" valign="center" foregroundColor="white" backgroundColor="transpBlack" borderColor="black" borderWidth="2" transparent="1"/>
   </screen>
   <screen name="SecParameterSetup" position="345,93" size="1920,1080" title="Satellite equipment setup" flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1920,1080" pixmap="BlackHarmony/bg_design/mainbg.png"/>
