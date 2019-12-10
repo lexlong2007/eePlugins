@@ -5,6 +5,6 @@ Depends: enigma2---j00zeks-components enigma2-plugin-skins--j00zeks-blackharmony
 Description: skórki LCD dla tuneróœ Utimo4K,Solo4K,Duo4K,Uno4KSE pod różne systemy kolegi homar80
 Maintainer: j00zek
 Source: NA
-Version: 19.12.05.2022
+Version: 19.12.10.1004
 Architecture: all
-DestinationPath: /usr/share/enigma2/HomarLCDskins
+DestinationPath: /usr

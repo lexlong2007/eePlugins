@@ -821,9 +821,8 @@ class UserSkin_Config(Screen, ConfigListScreen):
                 elif self.LCDconfigKey == 'skin_display.xml': #openPLi style
                     if not os.path.isfile('/usr/share/enigma2/skin_display.xml.org') and os.path.isfile('/usr/share/enigma2/skin_display.xml'):
                         os.system('cp -f /usr/share/enigma2/skin_display.xml /usr/share/enigma2/skin_display.xml.org')
-                    if os.path.islink('/usr/share/enigma2/skin_display.xml'):
-                        os.system('rm -f /usr/share/enigma2/skin_display.xml' )
-                    self.generateLCDskin('/usr/share/enigma2/%s' % config.plugins.UserSkin.LCDmode.value , '/usr/share/enigma2/skin_display.xml')
+                    self.generateLCDskin('/usr/share/enigma2/%s' % config.plugins.UserSkin.LCDmode.value , '/usr/share/enigma2/skin_LCD_UserSkin.xml')
+                    os.system('ln -sf /usr/share/enigma2/skin_LCD_UserSkin.xml /usr/share/enigma2/skin_display.xml' )
                     printDEBUG('linking /usr/share/enigma2/%s to /usr/share/enigma2/skin_display.xml' % (config.plugins.UserSkin.LCDmode.value))
             ##### PLi style using skin_display.xml #####
                 elif self.LCDconfigKey == 'skin_box.xml': #openPLi 2nd style
