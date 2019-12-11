@@ -219,7 +219,7 @@
       <convert type="ServiceInfo">IsCrypted</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="session.CurrentService" render="Label" position="65,797" size="800,48" font="HD_Thin; 42" valign="top" noWrap="1" halign="left" backgroundColor="black" transparent="1">
+    <widget source="session.CurrentService" render="j00zekLabel" position="65,797" size="800,48" font="HD_Thin; 42" valign="top" noWrap="1" halign="left" backgroundColor="black" transparent="1">
       <convert type="ServiceName">Name</convert>
     </widget>
     <widget source="session.Event_Now" render="Progress" position="339,940" size="1302,6" pixmap="BlackHarmony/gfx/progress_weather.png" zPosition="1" transparent="1">
@@ -230,10 +230,10 @@
       <convert type="ClockToText">Default</convert>
     </widget>
     <eLabel text="-" position="437,874" size="20,38" font="HD_Thin; 33" halign="left" foregroundColor="light_grey" backgroundColor="black" transparent="1"/>
-    <widget source="session.Event_Now" render="Label" position="461,874" size="980,38" font="HD_Thin; 33" halign="left" backgroundColor="black" transparent="1">
+    <widget source="session.Event_Now" render="j00zekLabel" position="461,874" size="980,38" font="HD_Thin; 33" halign="left" backgroundColor="black" transparent="1">
       <convert type="EventName">Name</convert>
     </widget>
-    <widget source="session.Event_Now" render="Label" position="1450,874" size="200,38" font="HD_Thin; 33" halign="right" backgroundColor="black" transparent="1">
+    <widget source="session.Event_Now" render="j00zekLabel" position="1450,874" size="200,38" font="HD_Thin; 33" halign="right" backgroundColor="black" transparent="1">
       <convert type="EventTime">Remaining</convert>
       <convert type="RemainingToText">InMinutes</convert>
     </widget>
@@ -242,10 +242,10 @@
       <convert type="ClockToText">Default</convert>
     </widget>
     <eLabel text="-" position="437,970" size="20,38" font="HD_Thin; 33" halign="left" foregroundColor="light_grey" backgroundColor="black" transparent="1"/>
-    <widget source="session.Event_Next" render="Label" position="461,970" size="980,38" font="HD_Thin; 33" halign="left" foregroundColor="light_grey" backgroundColor="black" transparent="1">
+    <widget source="session.Event_Next" render="j00zekLabel" position="461,970" size="980,38" font="HD_Thin; 33" halign="left" foregroundColor="light_grey" backgroundColor="black" transparent="1">
       <convert type="EventName">Name</convert>
     </widget>
-    <widget source="session.Event_Next" render="Label" position="1450,970" size="200,38" font="HD_Thin; 33" halign="right" foregroundColor="light_grey" backgroundColor="black" transparent="1">
+    <widget source="session.Event_Next" render="j00zekLabel" position="1450,970" size="200,38" font="HD_Thin; 33" halign="right" foregroundColor="light_grey" backgroundColor="black" transparent="1">
       <convert type="EventTime">Duration</convert>
       <convert type="ClockToText">InMinutes</convert>
     </widget>
@@ -260,7 +260,7 @@
     <widget source="session.CurrentService" render="Picon" position="73,875" size="220,132" zPosition="4" alphatest="blend" transparent="1">
       <convert type="ServiceName">Reference</convert>
     </widget>
-    <widget source="global.CurrentTime" render="Label" position="1522,803" size="200,45" font="HD_Thin; 30" halign="left" valign="center" noWrap="1" foregroundColor="light_yellow" backgroundColor="black" transparent="1">
+    <widget source="global.CurrentTime" render="j00zekLabel" position="1522,803" size="200,45" font="HD_Thin; 30" halign="left" valign="center" noWrap="1" foregroundColor="light_yellow" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%d %b. %Y </convert>
     </widget>
     <eLabel text="A" position="1701,984" zPosition="1" size="20,25" font="Roboto_HD; 22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1"/>
@@ -1967,7 +1967,7 @@ self.instance.resize(eSize(*wsize))
     <widget source="global.CurrentTime" render="Label" position="130,30" size="360,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <widget name="infolist" position="70,125" size="850,580" font="Roboto_HD; 27" selectionPixmap="BlackHarmony/menu/sel_850_35.png" itemHeight="35" scrollbarMode="showOnDemand" enableWrapAround="1" scrollbarSliderBorderWidth="1" scrollbarWidth="10" backgroundColor="black" transparent="1" />
+    <widget name="infolist" position="70,125" size="850,580" font="Roboto_HD; 27" selectionPixmap="BlackHarmony/menu/sel_850_35.png" itemHeight="35" scrollbarMode="showOnDemand" selectionDisabled="1" enableWrapAround="1" scrollbarSliderBorderWidth="1" scrollbarWidth="10" backgroundColor="black" transparent="1" />
     <ePixmap pixmap="BlackHarmony/buttons/key_exit.png" position="70,750" size="60,30" alphatest="blend" />
   </screen>
   <screen name="VideoEnhancementPreview" position="462,128" size="1000,820" title=" " flags="wfNoBorder" backgroundColor="transparent">

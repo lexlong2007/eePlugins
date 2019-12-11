@@ -36,7 +36,7 @@ import time
 class AdvancedFreePlayerStarter(Screen):
 
     def __init__(self, session, openmovie, movieTitle):
-        #printDEBUG("AdvancedFreePlayerStarter >>>")
+        printDEBUG("AdvancedFreePlayerStarter >>>")
         self.sortDate = False
         self.openmovie = openmovie
         self.movieTitle = movieTitle
@@ -869,6 +869,10 @@ class AdvancedFreePlayerStart(Screen):
             
         if re.search('[Ss][0-9]+[Ee][0-9]+', myMovie):
             seriesName=re.sub('[Ss][0-9]+[Ee][0-9]+.*','', myMovie, flags=re.I)
+            url = "http://thetvdb.com/api/GetSeries.php?seriesname=%s&language=%s" % (seriesName.replace('.','%20').replace(' ','%20'),myConfig.coverfind_language.value)
+            isMovie = False
+        elif re.search('odc_', myMovie):
+            seriesName=re.sub('.odc_.*','', myMovie, flags=re.I)
             url = "http://thetvdb.com/api/GetSeries.php?seriesname=%s&language=%s" % (seriesName.replace('.','%20').replace(' ','%20'),myConfig.coverfind_language.value)
             isMovie = False
         else:

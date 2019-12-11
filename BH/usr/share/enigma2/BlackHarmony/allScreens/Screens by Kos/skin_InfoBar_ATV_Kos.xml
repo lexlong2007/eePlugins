@@ -75,7 +75,7 @@
       <convert type="BlackHarmonyServiceInfoEX">IsIPStream</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="session.CurrentService" render="Label" position="65,757" size="700,48" font="HD_Thin; 42" valign="top" noWrap="1" backgroundColor="black" transparent="1" halign="left">
+    <widget source="session.CurrentService" render="j00zekLabel" position="65,757" size="700,48" font="HD_Thin; 42" valign="top" noWrap="1" backgroundColor="black" transparent="1" halign="left">
       <convert type="ServiceName">Name</convert>
     </widget>
     <eLabel text="SNR:" position="1746,850" size="55,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1"/>
@@ -101,10 +101,10 @@
     </widget>
     <ePixmap position="412,838" zPosition="2" size="20,20" halign="center" pixmap="BlackHarmony/buttons/event-right.png" alphatest="blend"/>
     <!--eLabel text="-" position="412,827" size="20,36" font="HD_Thin; 30" halign="left" backgroundColor="black" transparent="1" foregroundColor="light_grey"/-->
-    <widget source="session.Event_Now" render="Label" position="436,827" size="710,36" font="HD_Thin; 32" halign="left" backgroundColor="black" transparent="1">
+    <widget source="session.Event_Now" render="j00zekLabel" position="436,827" size="710,36" font="HD_Thin; 32" halign="left" backgroundColor="black" transparent="1">
       <convert type="EventName">Name</convert>
     </widget>
-    <widget source="session.Event_Now" render="Label" position="1155,827" size="190,36" font="Roboto_HD; 32" halign="right" backgroundColor="black" transparent="1">
+    <widget source="session.Event_Now" render="j00zekLabel" position="1155,827" size="190,36" font="Roboto_HD; 32" halign="right" backgroundColor="black" transparent="1">
       <convert type="EventTime">Remaining</convert>
       <convert type="RemainingToText">InMinutes</convert>
     </widget>
@@ -114,10 +114,10 @@
     </widget>
     <ePixmap position="412,913" zPosition="2" size="20,20" halign="center" pixmap="BlackHarmony/buttons/event-right.png" alphatest="blend"/>
     <!--eLabel text="-" position="412,901" size="20,36" font="HD_Thin; 30" halign="left" foregroundColor="light_grey" backgroundColor="black" transparent="1"/-->
-    <widget source="session.Event_Next" render="Label" position="436,901" size="710,36" font="HD_Thin; 32" halign="left" foregroundColor="light_grey" backgroundColor="black" transparent="1">
+    <widget source="session.Event_Next" render="j00zekLabel" position="436,901" size="710,36" font="HD_Thin; 32" halign="left" foregroundColor="light_grey" backgroundColor="black" transparent="1">
       <convert type="EventName">Name</convert>
     </widget>
-    <widget source="session.Event_Next" render="Label" position="1155,901" size="190,36" font="Roboto_HD; 32" halign="right" foregroundColor="light_grey" backgroundColor="black" transparent="1">
+    <widget source="session.Event_Next" render="j00zekLabel" position="1155,901" size="190,36" font="Roboto_HD; 32" halign="right" foregroundColor="light_grey" backgroundColor="black" transparent="1">
       <convert type="EventTime">Duration</convert>
       <convert type="ClockToText">InMinutes</convert>
     </widget>
@@ -127,7 +127,7 @@
     <widget source="session.CurrentService" render="Picon" position="65,835" size="220,132" zPosition="4" alphatest="blend" transparent="1">
       <convert type="ServiceName">Reference</convert>
     </widget>
-    <widget backgroundColor="black" font="HD_Thin; 24" halign="left" position="1560,777" render="Label" size="165,26" source="global.CurrentTime" transparent="1" valign="center" noWrap="1" foregroundColor="light_yellow">
+    <widget backgroundColor="black" font="HD_Thin; 24" halign="left" position="1560,777" render="j00zekLabel" size="165,26" source="global.CurrentTime" transparent="1" valign="center" noWrap="1" foregroundColor="light_yellow">
       <convert type="ClockToText">Format:%d %b. %Y </convert>
     </widget>
     <eLabel name="new eLabel" position="310,955" size="45,25" font="Roboto_HD; 22" foregroundColor="#FFFF00" backgroundColor="black" text="CA:" transparent="1"/>
