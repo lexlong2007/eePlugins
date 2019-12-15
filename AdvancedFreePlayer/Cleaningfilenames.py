@@ -2,12 +2,19 @@
 import re
 from os import path
 
-def cleanFile(text, ReturnMovieYear = True):
+def cleanFile(text, ReturnMovieYear = True, metaFileName = ''):
     if text.endswith('.ts'):
+        if metaFileName != '' and path.exists(metaFileName):
+            with open(metaFileName,'r') as descrTXT:
+                tmpTXT = descrTXT.readline()
+                descrTXT.close()
+                if tmpTXT.find('::') > -1:
+                    ChannelName = tmpTXT.split('::')[1].strip()
+                    text = re.sub(ChannelName,'', text, flags=re.I)
         movieYear=''
         #removing exact character combinations
-        ExactCutList = ['.ts', '^[12][09][0-9]* [0-9][0-9]* - ', '.*[kK]omediowa sobota', '.*[Dd]obre kino', 
-                    '.*[Hh]it na sobotę', '.*[Kk]omediowy czwartek', '.*[Ss]iatkówka mężczyzn', '.*HD - ', '.*TV - ']
+        ExactCutList = ['.ts', '^[12][09][0-9]* [0-9][0-9]* -', '.*[kK]omediowa sobota', '.*[Dd]obre kino', 
+                    '.*[Hh]it na sobotę', '.*[Kk]omediowy czwartek', '.*[Ss]iatkówka mężczyzn', '.*HD -', '.*TV -', '^[ ]*[-][ ]*']
         for word in ExactCutList:
             text = re.sub(word,'', text, flags=re.I) 
         text = re.sub('(\_|\.|\+)',' ', text, flags=re.I) #cleaning

@@ -60,8 +60,10 @@ def FileEntryComponent(name, absolute = None, isDir = False, goBack = False, cur
         return info
         
     res = [ (absolute, isDir) ]
-    if config.plugins.AdvancedFreePlayer.NamesNOfiles.value and isDir == False:
-        res.append((eListboxPythonMultiContent.TYPE_TEXT, DimText0[0], DimText0[1], DimText0[2], DimText0[3], 0, RT_HALIGN_LEFT, cleanFile(name,ReturnMovieYear = False) ))
+    if config.plugins.AdvancedFreePlayer.NamesNOfiles.value and isDir == False and currDir is not None and absolute is not None:
+        res.append((eListboxPythonMultiContent.TYPE_TEXT, DimText0[0], DimText0[1], DimText0[2], DimText0[3], 0, RT_HALIGN_LEFT, cleanFile(name, ReturnMovieYear = False, metaFileName = "%s/%s.meta" %(currDir,absolute) ) ))
+    elif config.plugins.AdvancedFreePlayer.NamesNOfiles.value and isDir == False and not currDir:
+        res.append((eListboxPythonMultiContent.TYPE_TEXT, DimText0[0], DimText0[1], DimText0[2], DimText0[3], 0, RT_HALIGN_LEFT, cleanFile(name, ReturnMovieYear = False) ))
     else:
         res.append((eListboxPythonMultiContent.TYPE_TEXT, DimText0[0], DimText0[1], DimText0[2], DimText0[3], 0, RT_HALIGN_LEFT, name))
     if isDir:
