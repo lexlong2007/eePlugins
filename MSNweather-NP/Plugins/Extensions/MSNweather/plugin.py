@@ -119,24 +119,29 @@ class MSNweather(Screen):
             <widget render="Label" source="condition" position="270,95" zPosition="1" size="300,20" font="Regular;18" transparent="1"/>
             <widget render="Label" source="wind_condition" position="270,115" zPosition="1" size="300,20" font="Regular;18" transparent="1"/>
             <widget render="Label" source="humidity" position="270,135" zPosition="1" size="300,20" font="Regular;18" valign="bottom" transparent="1"/>
-			<ePixmap pixmap="skin_default/buttons/red.png" position="0,300" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="160,300" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/yellow.png" position="330,300" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/blue.png" position="560,300" size="140,40" alphatest="on" />
-			<widget source="key_red" render="Label" position="10,295" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
-			<widget source="key_green" render="Label" position="190,295" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
-			<widget source="key_yellow" render="Label" position="370,295" zPosition="1" size="180,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
-			<widget source="key_blue" render="Label" position="580,295" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" transparent="1" />
+            <ePixmap pixmap="skin_default/buttons/red.png" position="0,300" size="140,40" alphatest="on" />
+            <ePixmap pixmap="skin_default/buttons/green.png" position="160,300" size="140,40" alphatest="on" />
+            <ePixmap pixmap="skin_default/buttons/yellow.png" position="330,300" size="140,40" alphatest="on" />
+            <widget source="session.CurrentService" render="Label" position="10,295" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" >
+              <convert type="j00zekTranslator">Close</convert>
+            </widget>
+            <widget source="session.CurrentService" render="Label" position="190,295" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" >
+              <convert type="j00zekTranslator">Show Maps</convert>
+            </widget>
+            <widget source="session.CurrentService" render="Label" position="370,295" zPosition="1" size="180,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" >
+              <convert type="j00zekTranslator">Show Histograms</convert>
+            </widget>
+<!--            <ePixmap pixmap="skin_default/buttons/blue.png" position="560,300" size="140,40" alphatest="on" />
+            <widget source="session.CurrentService" render="Label" position="580,295" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" transparent="1" >
+              <convert type="j00zekTranslator"> </convert>
+            </widget>
+-->
         </screen>"""
     
     def __init__(self, session):
         Screen.__init__(self, session)
         self.title = _("MSN weather NP @j00zek %s" % Version)
         self.setTitle(_("MSN weather NP @j00zek %s") % Version) 
-        self['key_red'] = Label(_('Close'))
-        self['key_green'] = Label(_('Show Maps'))
-        self['key_yellow'] = Label(_('Show Histograms'))
-        self['key_blue'] = Label(_(' '))
         self["actions"] = ActionMap(["SetupActions", "DirectionActions", "MenuActions", "ColorActions"],
 
         {
