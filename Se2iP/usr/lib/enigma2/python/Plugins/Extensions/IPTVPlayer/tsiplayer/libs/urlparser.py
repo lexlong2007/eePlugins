@@ -46,17 +46,19 @@ def Cdecode(sHtmlContent,encodedC):
 		for aEntry in aResult[1]:
 			z.append(JJDecoder(aEntry[1]).decode())
 		#VSlog(z)
+		printDBG('z='+str(z))
 		for x in z:
 			r1 = re.search("atob\(\'([^']+)\'\)", x, re.DOTALL | re.UNICODE)
 			if r1:
 				y.append(base64.b64decode(r1.group(1)))
-				
+		printDBG('y='+str(y))		
 		for w in y:
-
 			r2 = re.search(encodedC + "='([^']+)'", w)
 			if r2:
 				return r2.group(1)
-
+			else:
+				if '|' in w:
+					return w.split('|')[1]			
 def decode(urlcoded,a,b,c):
 	TableauTest = {}
 	key = ''
@@ -1218,11 +1220,13 @@ class pageParser(CaptchaHelper):
 				vidTab[idx]['url'] = urlparser.decorateUrl(vidTab[idx]['url'], {'external_sub_tracks':sub_tracks})
 			
 		return vidTab[::-1]
-		
+
 	def parseTUNEPK(self, baseUrl):
-		printDBG("parseTUNEPK url[%s]\n" % baseUrl)
-		# example video: http://tune.pk/video/4203444/top-10-infamous-mass-shootings-in-the-u
-		HTTP_HEADER = {'User-Agent': "Mozilla/5.0"}
+		import hashlib
+		vidTab=[]
+		printDBG("parseTUNEPK0 url[%s]\n" % baseUrl)
+		ua = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36'
+		HTTP_HEADER = {'User-Agent': ua}
 		COOKIE_FILE = GetCookieDir('tunepk.cookie')
 		rm(COOKIE_FILE)
 		params = {'header':HTTP_HEADER, 'cookiefile':COOKIE_FILE, 'use_cookie': True, 'save_cookie':True, 'load_cookie':True}
@@ -1230,36 +1234,65 @@ class pageParser(CaptchaHelper):
 			vid = self.cm.ph.getSearchGroups(baseUrl+'&', item+'([0-9]+)[^0-9]')[0]
 			if '' != vid: break
 		if '' == vid: return []
-		url = 'https://tune.pk/video/%s' % vid
-		referer = url
-		sts, data = self.cm.getPage(url, params)
-		if not sts: return []
-		printDBG(data)
-		videoTab = []
-		hlsTab=[]
-		mp4Tab=[]
-		urls=[]
-		lst_data = re.findall('new\s+TunePlayer\(({.+?})\)\s*;\s*\n', data, re.S)
-		if lst_data:
-			items = json.loads(lst_data[0])['details']['player']['sources']
-			for item in items:
-				url = item['file']
-				label = item.get('label', 'MP4')
-				if url.startswith('//'): url = 'http:' + url
-				if not self.cm.isValidUrl(url): continue
-				if url not in urls:
-					urls.append(url)
-					url = strwithmeta(url, {'Referer':referer})
-					if 'm3u8' in url:
-						hlsTab.extend(getDirectM3U8Playlist(url, checkExt=False, checkContent=True, sortWithMaxBitrate=999999999))
-					else:
-						if str(label) in ('720','480'):
-							label = str(label)+'p'
-						mp4Tab.append({'name':'[MP4] '+str(label), 'url':url})
-						
-		videoTab.extend(mp4Tab)
-		videoTab.extend(hlsTab)		
-		return videoTab
+		media_id = vid
+		#referer = url
+		apiurl = 'https://api.tune.pk/v3/videos/{}'.format(media_id)
+		referer = 'https://tune.pk/video/%s' % media_id
+		printDBG("apiurl="+apiurl)
+		currentTime = time.time()
+		x_req_time = time.strftime('%a, %d %b %Y %H:%M:%S GMT',time.gmtime(currentTime))
+		tunestring = 'videos/{} . {} . KH42JVbO'.format(media_id, int(currentTime))
+		token = hashlib.sha1(tunestring).hexdigest()
+		headers = {'Content-Type': 'application/json; charset=utf-8',
+				   'User-Agent': ua,
+				   'X-KEY': '777750fea4d3bd585bf47dc1873619fc',
+				   #'X-REQ-APP': 'web' #not needed, returning bullshit hash anyways
+				   'X-REQ-TIME': x_req_time,
+				   'X-REQ-TOKEN': token}
+		params['header'] = headers
+		sts, response = self.cm.getPage(apiurl, params)
+		printDBG("response="+str(response))
+		jdata = json.loads(response)
+		if jdata['message'] == 'OK':
+			vids = jdata['data']['videos']['files']
+			sources = []
+			urls=[]
+			for key in vids.keys():
+				if vids[key]['file']  not in urls:
+					sources.append((vids[key]['label'], vids[key]['file']))
+					urls.append(vids[key]['file'])
+			
+			sources.reverse() 
+			
+			serverTime = long(jdata['timestamp']) + (int(time.time()) - int(currentTime))
+			hashLifeDuration = long(jdata['data']['duration']) * 5
+			if hashLifeDuration < 3600:
+				hashLifeDuration = 3600
+			expiryTime = serverTime + hashLifeDuration
+			for elm in sources:
+				video_url = elm[1]
+				titre = elm[0]
+				try:
+					startOfPathUrl = video_url.index('/files/videos/')
+					pathUrl = video_url[startOfPathUrl:None]
+				except ValueError:
+					try:
+						startOfPathUrl = video_url.index('/files/streams/')
+						pathUrl = video_url[startOfPathUrl:None]
+					except ValueError:
+							raise ResolverError('This video cannot be played.')
+
+				htoken = hashlib.md5(str(expiryTime) + pathUrl + ' ' + 'c@ntr@lw3biutun3cb').digest()
+				htoken = base64.urlsafe_b64encode(htoken).replace('=', '').replace('\n', '')
+				headers = {'Referer': referer, 'User-Agent': ua}
+
+				urll=video_url + '?h=' + htoken + '&ttl=' + str(expiryTime)
+				urll = strwithmeta(urll,headers)
+				if 'm3u8' in urll:
+					vidTab.extend(getDirectM3U8Playlist(urll, checkExt=False, checkContent=True, sortWithMaxBitrate=999999999))
+				else:
+					vidTab.append({'name':titre, 'url':urll})
+		return vidTab
 
 	def getYTParser(self):
 		if self.ytParser == None:
