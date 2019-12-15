@@ -647,7 +647,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
 
     def keyBlue(self):
         from about import UserSkin_About
-        self.session.openWithCallback(doNothing,UserSkin_About)
+        self.session.openWithCallback(self.doNothing,UserSkin_About)
         return
         
     def update_user_skin(self):
