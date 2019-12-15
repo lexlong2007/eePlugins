@@ -9058,10 +9058,20 @@
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="360,960" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="600,960" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="980,960" size="35,27" alphatest="blend"/>
-    <widget source="key_red" render="Label" position="120,959" size="150,35" font="Roboto_HD; 24" backgroundColor="dark_grey" transparent="1"/>
-    <widget source="key_green" render="Label" position="400,959" size="150,35" font="Roboto_HD; 24" backgroundColor="dark_grey" transparent="1"/>
-    <widget source="key_yellow" render="Label" position="640,959" size="380,35" font="Roboto_HD; 24" backgroundColor="dark_grey" transparent="1"/>
-    <widget source="key_blue" render="Label" position="1020,959" size="150,35" font="Roboto_HD; 24" foregroundColor="white" backgroundColor="black" transparent="1"/>
+    <widget source="session.CurrentService" render="Label" position="120,959" size="150,35" font="Roboto_HD; 24" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekTranslator">Close</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="400,959" size="150,35" font="Roboto_HD; 24" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekTranslator">Show Maps</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="640,959" size="380,35" font="Roboto_HD; 24" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekTranslator">Show Histograms</convert>
+    </widget>
+<!--
+    <widget source="session.CurrentService" render="Label" position="1020,959" size="150,35" font="Roboto_HD; 24" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekTranslator"> </convert>
+    </widget>
+-->
     <ePixmap pixmap="BlackHarmony/buttons/key_left.png" position="1210,960" size="40,30" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_right.png" position="1300,960" size="40,30" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_menu.png" position="1380,960" size="60,30" alphatest="blend"/>

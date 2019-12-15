@@ -97,7 +97,7 @@
   </widget>
   <widget alphatest="blend" pixmaps="animatedZZPicons" position="65,805" render="j00zekPiconAnimation" size="400,170" source="session.CurrentService" transparent="1" zPosition="5" /> 
 #--animacja zdjecia--# 
-  <ePixmap alphatest="blend" pixmap="BlackHarmony/gfx/mariusz.png" position="1650,805" size="220,132" zPosition="1" />
+  <ePixmap alphatest="blend" pixmap="BlackHarmony/gfx/wlasneZdjecie.png" position="1650,805" size="220,132" zPosition="1" />
   <widget alphatest="blend" pixmaps="animatedPicons" position="1650,805" render="j00zekPiconAnimation" size="220,132" source="session.CurrentService" transparent="1" zPosition="5" /> 
  <widget backgroundColor="black" font="HD_Thin; 24" foregroundColor="yellow" halign="center" noWrap="1" position="1400,751" render="Label" size="320,26" source="global.CurrentTime" transparent="1" valign="center">
     <convert type="ClockToText">Format:%A %d %B </convert>

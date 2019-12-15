@@ -5,9 +5,9 @@
 [ -d /usr/share/enigma2/BlackHarmony/BlackHarmony/icons ] && rm -rf /usr/share/enigma2/BlackHarmony/BlackHarmony/icons 
 
 if `grep -q 'osd.language=pl_PL' </etc/enigma2/settings`; then
-  Tekst='BLAD: niewspierana wersja skorki'
+  Tekst='BLAD: twoja enigma jest zaśmiecona, skórka NIE będzie działać'
 else
-  Tekst='ERROR: incompatible environment found'
+  Tekst="ERROR: incompatible environment found, skin won't work"
 fi
 if [ -e /usr/share/enigma2/Pingu-NavyBlue ] ; then
   echo "$Tekst !"
@@ -17,6 +17,9 @@ elif [ `ls /usr/share/enigma2/|grep -c Pingu-NavyBlue` -gt 0 ] ; then
   exit 1
 elif [ `ls /usr/share/enigma2/|grep -c GoldenNight` -gt 0 ] ; then
   echo "$Tekst !!!"
+  exit 1
+elif [ `ls /usr/share/enigma2/|grep -c NexGenGradient` -gt 0 ] ; then
+  echo "$Tekst !!!!"
   exit 1
 else
   exit 0

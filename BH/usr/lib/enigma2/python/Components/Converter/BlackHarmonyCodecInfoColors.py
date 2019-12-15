@@ -213,6 +213,8 @@ class BlackHarmonyCodecInfoColors(Poll, Converter, object):
                         #c00289496 - blue
                         #c00!!;!00 - light green
                         #c00??;?00 - light yellow
+                        #c00ww;w00 - lemon
+                        #c00?25=01 - orange
 		elif self.type == self.AudioCodec:
                         return self.createAudioCodec()
 		elif self.type == self.VideoCodec:
