@@ -1,3 +1,4 @@
+# Embedded file name: /usr/lib/enigma2/python/Plugins/Extensions/SHOUTcast/plugin.py
 from Plugins.Plugin import PluginDescriptor
 from urlparse import urlparse
 from Screens.Screen import Screen
@@ -35,12 +36,12 @@ config.plugins.shoutcast.showcover = ConfigYesNo(default=True)
 config.plugins.shoutcast.where = ConfigSelection(default='0', choices=[('0', _('Bing')), ('1', _('Google'))])
 config.plugins.shoutcast.showinextensions = ConfigYesNo(default=False)
 config.plugins.shoutcast.streamingrate = ConfigSelection(default='0', choices=[('0', _('All speeds')),
- ('64', _('>= 64 kbps')),
- ('96', _('>= 96 kbps')),
- ('128', _('>= 128 kbps')),
- ('192', _('>= 192 kbps')),
- ('256', _('>= 256 kbps')),
- ('320', _('>= 320 kbps'))])
+ ('64', ('>= 64 kbps')),
+ ('96', ('>= 96 kbps')),
+ ('128', ('>= 128 kbps')),
+ ('192', ('>= 192 kbps')),
+ ('256', ('>= 256 kbps')),
+ ('320', ('>= 320 kbps'))])
 config.plugins.shoutcast.reloadstationlist = ConfigSelection(default='0', choices=[('0', _('Off')),
  ('1', _('every minute')),
  ('3', _('every three minutes')),
@@ -236,7 +237,7 @@ class SHOUTcastWidget(Screen):
         if containerStreamripper.running():
             self['key_red'].setText(_('Stop record'))
             self.currentStreamingStation = _('Recording stream station')
-            self.playServiceStream('http://localhost:9191')
+            self.playServiceStream('http://localhost:9191')            
         if InfoBar.instance is not None:
             self.servicelist = InfoBar.instance.servicelist
         else:
@@ -410,11 +411,13 @@ class SHOUTcastWidget(Screen):
     def streamripperClosed(self, retval):
         if retval == 0:
             self['console'].setText('')
+            self['statustext'].setText('')
         self['key_red'].setText(_('Record'))
 
     def streamripperDataAvail(self, data):
         sData = data.replace('\n', '')
         self['console'].setText(sData)
+        self['statustext'].setText ('\c00289496' + (_('Recording station:  ') + ('\c00??;?00%s') % self.currentStreamingStation))
 
     def stopReloadStationListTimer(self):
         if self.reloadStationListTimer.isActive():
@@ -546,9 +549,9 @@ class SHOUTcastWidget(Screen):
             self['list'].moveToIndex(favoriteListIndex)
         self['list'].show()
 
-    def getGenreList(self, genre = 'all', id = 0):
+    def getGenreList(self, genre = _('all'), id = 0):
         self['headertext'].setText('')
-        self['statustext'].setText(_('Getting SHOUTcast genre list for %s...' % genre))
+        self['statustext'].setText(_('Getting SHOUTcast genre list for %s') % genre)
         self['list'].hide()
         if len(devid) > 8:
             url = self.SC + '/genre/secondary?parentid=%s&k=%s&f=xml' % (id, devid)
@@ -1076,7 +1079,7 @@ class SHOUTcastWidget(Screen):
                         sendUrlCommand(url, None, 10).addCallback(self.GoogleImageCallback).addErrback(self.Error)
                 if len(sTitle) == 0:
                     sTitle = _('n/a')
-                title = '\\c00289496' + _('Title: ') + '\\c00?25=01%s' % sTitle
+                title = ('\c00289496'+_('Title: ') + ('\c00?25=01''%s') % sTitle)
                 print '[SHOUTcast] Title: %s ' % title
                 self['titel'].setText(title)
                 self.summaries.setText(title)
@@ -1394,12 +1397,12 @@ class SHOUTcastSetup(Screen, ConfigListScreen):
          getConfigListEntry(_('Cover Position V:'), config.plugins.shoutcast.pos_cover_height),
          getConfigListEntry(_('Cover Size H:'), config.plugins.shoutcast.size_cover_width),
          getConfigListEntry(_('Cover Size V:'), config.plugins.shoutcast.size_cover_height),
-         getConfigListEntry(_('Show in extension menu:'), config.plugins.shoutcast.showinextensions),
          getConfigListEntry(_('Streaming rate:'), config.plugins.shoutcast.streamingrate),
          getConfigListEntry(_('Reload station list:'), config.plugins.shoutcast.reloadstationlist),
          getConfigListEntry(_('Rip to single file, name is timestamped:'), config.plugins.shoutcast.riptosinglefile),
          getConfigListEntry(_('Create a directory for each stream:'), config.plugins.shoutcast.createdirforeachstream),
          getConfigListEntry(_('Add sequence number to output file:'), config.plugins.shoutcast.addsequenceoutputfile),
+         getConfigListEntry(_('Show in extension menu:'), config.plugins.shoutcast.showinextensions),
          getConfigListEntry(_('Station List number:'), config.plugins.shoutcast.lista)]
         self.dirname = getConfigListEntry(_('Recording location:'), config.plugins.shoutcast.dirname)
         self.list.append(self.dirname)
