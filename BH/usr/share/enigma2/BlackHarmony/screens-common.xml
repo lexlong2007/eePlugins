@@ -10145,6 +10145,32 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2 , orgpos.y() + (o
     <widget source="key_blue" render="Label" position="605,750" size="150,26" zPosition="1" font="Roboto_HD;24" halign="left" backgroundColor="dark_grey" transparent="1" />
   </screen>
   <!-- screens by Kos -->
+  <screen name="SlimChannelSelection" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png"/>
+    <widget source="global.CurrentTime" render="Label" position="40,25" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="125,25" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+    </widget>
+    <!-- zamiast elabel - widget source="Title" render="Label"-->
+    <widget source="Title" render="Label" position="860,25" size="320,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekAlternateTitle">Channel Selection</convert>
+    </widget>  
+    <widget name="list" position="65,140" size="1095,640" itemsDistances="20" serviceItemHeight="50" selectionPixmap="BlackHarmony/menu/sel_1095_50.png" scrollbarMode="showOnDemand" enableWrapAround="1" colorServiceDescription="#00f7fc83" colorServiceDescriptionSelected="#e0e0e0" colorEventProgressbarBorder="#00f7fc83" colorEventProgressbarBorderSelected="#00f7fc83" picServiceEventProgressbar="BlackHarmony/gfx/progcl.png" foregroundColorServiceNotAvail="#777777" serviceNumberFont="Roboto_HD;32" serviceNameFont="Roboto_HD;32" serviceInfoFont="Roboto_HD;30" scrollbarWidth="10" progressBarWidth="80" progressPercentWidth="80" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" backgroundColor="black" transparent="1"/>
+    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="41,850" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="328,850" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="615,850" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="902,850" size="35,27" alphatest="blend"/>
+    <widget objectTypes="key_red,Label,Button" name="key_red" position="91,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <widget objectTypes="key_red,StaticText" source="key_red" render="Label" position="91,849" size="200,27" zPosition="2" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <widget objectTypes="key_green,Label,Button" name="key_green" position="378,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <widget objectTypes="key_green,StaticText" source="key_green" render="Label" position="378,849" size="200,27" zPosition="2" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <widget objectTypes="key_yellow,Label,Button" name="key_yellow" position="665,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <widget objectTypes="key_yellow,StaticText" source="key_yellow" render="Label" position="665,849" size="200,27" zPosition="2" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <widget objectTypes="key_blue,Label,Button" name="key_blue" position="952,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <widget objectTypes="key_blue,StaticText" source="key_blue" render="Label" position="952,849" size="200,27" zPosition="2" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+  </screen>
   <screen name="SelectSatsEntryScreen" position="462,128" size="1000,820" title="Select Sats Entry" flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1000,820" pixmap="BlackHarmony/bg_design/small.png"/>
     <widget source="global.CurrentTime" render="Label" position="45,30" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">

@@ -23,7 +23,7 @@
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="389,955" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="734,955" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="1074,955" size="35,27" alphatest="blend"/>
-    <widget source="key_red" render="Label" position="116,954" size="200,30" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="key_red" render="Label" position="116,954" size="240,30" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget source="key_green" render="Label" position="443,954" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget source="key_yellow" render="Label" position="789,954" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget source="key_blue" render="Label" position="1129,954" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
