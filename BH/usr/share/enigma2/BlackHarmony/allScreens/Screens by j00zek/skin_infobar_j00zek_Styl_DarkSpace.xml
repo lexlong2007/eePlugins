@@ -1,0 +1,101 @@
+<screen backgroundColor="transparent" flags="wfNoBorder" name="InfoBar" position="60,850" size="1800,171" title="InfoBar">
+	<ePixmap pixmap="BlackHarmony/bg_design/infobarDarekSpace1844x171x230.png" position="0,0" size="1800,171" zPosition="-10" />
+	<!-- Pikona -->
+	<widget alphatest="blend" position="54,16" render="j00zekPicons" picontype="picon" size="220,132" source="session.CurrentService" transparent="1" zPosition="4">
+		<convert type="ServiceName">Reference</convert>
+	</widget>
+	<!-- czas -->
+	<widget source="global.CurrentTime" render="Label" position="1578,19" size="203,60" valign="center" halign="right" font="HD_Thin;55" foregroundColor="light_yellow" backgroundColor="black" transparent="1">
+		<convert type="ClockToText">Default</convert>
+	</widget>
+	<!-- Obecny program -->
+	<widget source="session.Event_Now" render="Label" position="360,0" size="115,85" font="HD_Thin; 32" valign="center" halign="left" backgroundColor="black" transparent="0">
+		<convert type="EventTime">StartTime</convert>
+		<convert type="ClockToText">Default</convert>
+	</widget>
+	<eLabel text="-" position="360,0" size="115,85" font="HD_Thin; 30" valign="center" halign="right" backgroundColor="black" transparent="1" foregroundColor="light_grey" />
+	<widget source="session.Event_Now" render="j00zekLabel" position="490,0" size="800,85" font="HD_Thin; 42" valign="center" halign="left" backgroundColor="black" transparent="1" noWrap="1">
+		<convert type="EventName">Name</convert>
+	</widget>
+	<widget source="session.Event_Now" render="Label" position="1300,0" size="180,85" font="HD_Thin; 32" valign="center" halign="right" backgroundColor="black" transparent="1">
+		<convert type="EventTime">Remaining</convert>
+		<convert type="RemainingToText">InMinutes</convert>
+	</widget>
+	<!-- pasek postepu -->
+	<ePixmap pixmap="BlackHarmony/gfx/progress_gray.png" position="360,center" size="1120,6" zPosition="-5" alphatest="blend" />
+	<widget source="session.Event_Now" render="Progress" position="360,center" size="1120,6" zPosition="1" pixmap="BlackHarmony/gfx/progress_ib.png" transparent="1">
+		<convert type="EventTime">Progress</convert>
+	</widget>
+	<!-- Nastepny program -->
+	<widget source="session.Event_Next" render="Label" position="360,85" size="115,85" font="HD_Thin; 32" valign="center" halign="left" foregroundColor="light_grey" backgroundColor="black" transparent="1">
+		<convert type="EventTime">StartTime</convert>
+		<convert type="ClockToText">Default</convert>
+	</widget>
+	<eLabel text="-" position="360,85" size="115,85" font="HD_Thin; 30" valign="center" halign="right" foregroundColor="light_grey" backgroundColor="black" transparent="1" />
+	<widget source="session.Event_Next" render="j00zekLabel" position="490,85" size="800,96" font="HD_Thin; 42" valign="center" halign="left" backgroundColor="black" transparent="1" foregroundColor="light_grey" noWrap="1">
+		<convert type="EventName">Name</convert>
+	</widget>
+	<widget source="session.Event_Next" render="Label" position="1300,85" size="180,85" font="HD_Thin; 32" valign="center" halign="right" foregroundColor="light_grey" backgroundColor="black" transparent="1">
+		<convert type="EventTime">Duration</convert>
+		<convert type="ClockToText">InMinutes</convert>
+	</widget>
+	<!-- stan nagrywania -->
+	<widget source="session.RecordState" render="Pixmap" position="1520,120" size="38,38" zPosition="2" pixmap="BlackHarmony/icons/recsign.png" alphatest="blend" transparent="1">
+		<convert type="ConditionalShowHide">Blink</convert>
+	</widget>
+	<!-- status tunera -->
+	<eLabel text="SNR:" position="1650,100" size="115,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" />
+	<widget source="session.FrontendStatus" render="Label" position="1655,100" size="115,25" font="Roboto_HD; 22" halign="right" backgroundColor="black" transparent="1" zPosition="1" foregroundColor="green">
+		<convert type="FrontendInfo">SNR</convert>
+	</widget>
+	<eLabel text="BER:" position="1650,130" size="115,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" />
+	<widget source="session.FrontendStatus" render="Label" position="1655,130" size="115,25" font="Roboto_HD; 22" halign="right" backgroundColor="black" transparent="1" zPosition="1" foregroundColor="green">
+		<convert type="FrontendInfo">BER</convert>
+	</widget>
+	<!-- wykorzystanie glowic -->
+	<eLabel text="A" position="1580,100" zPosition="1" size="35,25" font="Roboto_HD; 22" halign="left" foregroundColor="#00dcdcdc" backgroundColor="black" transparent="1" />
+	<eLabel text="B" position="1580,100" zPosition="1" size="35,25" font="Roboto_HD; 22" halign="right" foregroundColor="#00dcdcdc" backgroundColor="black" transparent="1" />
+	<eLabel text="C" position="1580,130" zPosition="1" size="35,25" font="Roboto_HD; 22" halign="left" foregroundColor="#00dcdcdc" backgroundColor="black" transparent="1" />
+	<eLabel text="D" position="1580,130" zPosition="1" size="35,25" font="Roboto_HD; 22" halign="right" foregroundColor="#00dcdcdc" backgroundColor="black" transparent="1" />
+  <widget source="session.TunerInfo" render="FixedLabel" text="A" position="1580,100" zPosition="2" size="35,25" font="Roboto_HD; 22" halign="left" foregroundColor="yellow" backgroundColor="black" transparent="1">
+    <convert type="TunerInfo">TunerUseMask</convert>
+    <convert type="ValueBitTest">1</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" render="FixedLabel" text="A" position="1580,100" zPosition="3" size="35,25" font="Roboto_HD; 22" halign="left" foregroundColor="blue" backgroundColor="dark_blue" transparent="1">
+    <convert type="FrontendInfo">NUMBER</convert>
+    <convert type="ValueRange">0,0</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.TunerInfo" render="FixedLabel" text="B" position="1580,100" zPosition="2" size="35,25" font="Roboto_HD; 22" halign="right" foregroundColor="yellow" backgroundColor="black" transparent="1">
+    <convert type="TunerInfo">TunerUseMask</convert>
+    <convert type="ValueBitTest">2</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" render="FixedLabel" text="B" position="1580,100" zPosition="3" size="35,25" font="Roboto_HD; 22" halign="right" foregroundColor="blue" backgroundColor="dark_blue" transparent="1">
+    <convert type="FrontendInfo">NUMBER</convert>
+    <convert type="ValueRange">1,1</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.TunerInfo" render="FixedLabel" text="C" position="1580,130" zPosition="2" size="35,25" font="Roboto_HD; 22" halign="left" foregroundColor="yellow" backgroundColor="black" transparent="1">
+    <convert type="TunerInfo">TunerUseMask</convert>
+    <convert type="ValueBitTest">4</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" render="FixedLabel" text="C" position="1580,130" zPosition="3" size="35,25" font="Roboto_HD; 22" halign="left" foregroundColor="blue" backgroundColor="dark_blue" transparent="1">
+    <convert type="FrontendInfo">NUMBER</convert>
+    <convert type="ValueRange">2,2</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.TunerInfo" render="FixedLabel" text="D" position="1580,130" zPosition="2" size="35,25" font="Roboto_HD; 22" halign="right" foregroundColor="yellow" backgroundColor="black" transparent="1">
+    <convert type="TunerInfo">TunerUseMask</convert>
+    <convert type="ValueBitTest">8</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" render="FixedLabel" text="D" position="1580,130" zPosition="3" size="35,25" font="Roboto_HD; 22" halign="right" foregroundColor="blue" backgroundColor="dark_blue" transparent="1">
+    <convert type="FrontendInfo">NUMBER</convert>
+    <convert type="ValueRange">3,3</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <!--widget source="session.CurrentService" render="j00zekFEicon" position="1530,130" size="44,20" zPosition="3" alphatest="blend"/--> 
+</screen>
