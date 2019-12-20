@@ -1,4 +1,4 @@
-<screen backgroundColor="transparent" flags="wfNoBorder" name="InfoBar" position="60,850" size="1800,171" title="InfoBar">
+<screen backgroundColor="transparent" flags="wfNoBorder" name="InfoBar" position="60,870" size="1800,171" title="InfoBar">
 	<ePixmap pixmap="BlackHarmony/bg_design/infobarDarekSpace1844x171x230.png" position="0,0" size="1800,171" zPosition="-10" />
 	<!-- Pikona -->
 	<widget alphatest="blend" position="54,16" render="j00zekPicons" picontype="picon" size="220,132" source="session.CurrentService" transparent="1" zPosition="4">
@@ -9,7 +9,7 @@
 		<convert type="ClockToText">Default</convert>
 	</widget>
 	<!-- Obecny program -->
-	<widget source="session.Event_Now" render="Label" position="360,0" size="115,85" font="HD_Thin; 32" valign="center" halign="left" backgroundColor="black" transparent="0">
+	<widget source="session.Event_Now" render="Label" position="360,0" size="115,85" font="HD_Thin; 32" valign="center" halign="left" backgroundColor="black" transparent="1">
 		<convert type="EventTime">StartTime</convert>
 		<convert type="ClockToText">Default</convert>
 	</widget>
