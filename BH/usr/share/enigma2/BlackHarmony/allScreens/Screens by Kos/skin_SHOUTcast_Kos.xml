@@ -8,11 +8,11 @@
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
     <widget source="Title" render="Label" position="1030,50" zPosition="2" size="420,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
-    <widget name="headertext" position="80,170" zPosition="1" size="740,39" font="Roboto_HD; 30" halign="center" foregroundColor="#00F0A30A" backgroundColor="black" transparent="1" />
+    <widget source="headertext" render="j00zekLabel" position="80,170" zPosition="1" size="740,39" font="Roboto_HD; 30" halign="center" foregroundColor="#00F0A30A" backgroundColor="black" transparent="1" />
     <widget name="list" position="80,222" font="Roboto_HD; 27" size="740,690" enableWrapAround="1" scrollbarMode="showOnDemand" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" selectionPixmap="BlackHarmony/menu/sel_850_110.png" backgroundColor="black" transparent="1"/>
-    <widget name="station" position="879,526" zPosition="1" size="560,30" font="Roboto_HD; 26" halign="center" foregroundColor="#00F0A30A" backgroundColor="black" transparent="1"/>
-    <widget name="titel" position="882,586" zPosition="1" size="560,130" font="Roboto_HD; 26" halign="center" foregroundColor="white" backgroundColor="black" transparent="1"/>
-    <widget name="statustext" position="882,734" zPosition="1" size="560,60" font="Roboto_HD; 25" halign="center" valign="center" foregroundColor="light_yellow" backgroundColor="black" transparent="1"/>
+    <widget source="station" render="j00zekRunningText" options="movetype=running" position="879,526" zPosition="1" size="560,30" font="Roboto_HD; 26" halign="center" foregroundColor="#00F0A30A" backgroundColor="black" transparent="1"/>
+    <widget source="titel" render="j00zekLabel" position="882,586" zPosition="1" size="560,130" font="Roboto_HD; 26" halign="center" foregroundColor="white" backgroundColor="black" transparent="1"/>
+    <widget source="statustext" render="j00zekLabel" position="882,734" zPosition="1" size="560,60" font="Roboto_HD; 25" halign="center" valign="center" foregroundColor="light_yellow" backgroundColor="black" transparent="1"/>
     <eLabel text="Connected: " position="882,820" size="140,30" zPosition="1" font="Roboto_HD; 24" halign="left" foregroundColor="white" backgroundColor="black" transparent="1" />
 	<widget source="session.CurrentService" render="Label" position="1030,820" size="130,30" font="Roboto_HD; 25" zPosition="2" foregroundColor="light_yellow" backgroundColor="black" transparent="1">
 	  <convert type="ServicePosition">Remaining</convert>

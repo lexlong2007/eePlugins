@@ -73,7 +73,7 @@
 </widget>
     <eLabel text="Menu" position="661,30" size="280,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
 		
-		<widget name="menu" position="75,122" size="845,595" itemHeight="35" foregroundColor="white" backgroundColor="transparent" transparent="1" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/small_sel.png" />
+		<widget name="menu" position="75,122" size="845,595" itemHeight="35" foregroundColor="white" backgroundColor="transparent" transparent="1" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_845_35.png" />
 		
 		
 		

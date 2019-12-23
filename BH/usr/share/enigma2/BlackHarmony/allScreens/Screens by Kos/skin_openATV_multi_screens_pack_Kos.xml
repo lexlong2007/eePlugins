@@ -4231,9 +4231,13 @@ self['config'].l.setSeperation(int(300*f))
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
     <widget source="Title" render="Label" position="1030,50" zPosition="2" size="420,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="headertext" render="j00zekLabel" position="80,170" zPosition="1" size="740,39" font="Roboto_HD; 30" halign="center" foregroundColor="#00F0A30A" backgroundColor="black" transparent="1" />
     <widget name="headertext" position="80,170" zPosition="1" size="740,39" font="Roboto_HD; 30" halign="center" foregroundColor="#00F0A30A" backgroundColor="black" transparent="1" />
     <widget name="list" position="80,222" font="Roboto_HD; 27" size="740,690" enableWrapAround="1" scrollbarMode="showOnDemand" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" selectionPixmap="BlackHarmony/menu/sel_850_110.png" backgroundColor="black" transparent="1"/>
-    <widget name="station" position="879,526" zPosition="1" size="560,30" font="Roboto_HD; 26" halign="center" foregroundColor="#00F0A30A" backgroundColor="black" transparent="1"/>
+    <widget source="station" render="j00zekRunningText" options="movetype=running" position="879,526" zPosition="1" size="560,30" font="Roboto_HD; 26" halign="center" foregroundColor="#00F0A30A" backgroundColor="black" transparent="1"/>
+    <widget source="titel" render="j00zekLabel" position="882,586" zPosition="1" size="560,130" font="Roboto_HD; 26" halign="center" foregroundColor="white" backgroundColor="black" transparent="1"/>
+    <widget source="statustext" render="j00zekLabel" position="882,734" zPosition="1" size="560,60" font="Roboto_HD; 25" halign="center" valign="center" foregroundColor="light_yellow" backgroundColor="black" transparent="1"/>
+    <widget name="station" options="movetype=running" position="879,526" zPosition="1" size="560,30" font="Roboto_HD; 26" halign="center" foregroundColor="#00F0A30A" backgroundColor="black" transparent="1"/>
     <widget name="titel" position="882,586" zPosition="1" size="560,130" font="Roboto_HD; 26" halign="center" foregroundColor="white" backgroundColor="black" transparent="1"/>
     <widget name="statustext" position="882,734" zPosition="1" size="560,60" font="Roboto_HD; 25" halign="center" valign="center" foregroundColor="light_yellow" backgroundColor="black" transparent="1"/>
     <eLabel text="Connected: " position="882,820" size="140,30" zPosition="1" font="Roboto_HD; 24" halign="left" foregroundColor="white" backgroundColor="black" transparent="1" />
@@ -4246,7 +4250,7 @@ self['config'].l.setSeperation(int(300*f))
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="389,955" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="734,955" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="1074,955" size="35,27" alphatest="blend"/>
-    <widget source="key_red" render="Label" position="116,954" size="200,30" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="key_red" render="Label" position="116,954" size="240,30" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget source="key_green" render="Label" position="443,954" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget source="key_yellow" render="Label" position="789,954" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget source="key_blue" render="Label" position="1129,954" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
