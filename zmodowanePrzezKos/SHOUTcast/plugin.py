@@ -2,6 +2,7 @@
 # mod by Kos, j00zek
 
 # List of changes:
+# 24.12.2019 - improved display of tags in the station list, improved 'def ok_pressed'
 # 23.12.2019 - improve VFD/LCD handling + code clean ups
 # 22.12.2019 - improve skins flexibility bu using defined renderers in skins instead of hard coded label
 
@@ -498,6 +499,18 @@ class SHOUTcastWidget(Screen):
         tag = self.stationListURL.replace('http://www.radio-browser.info/webservice/xml/stations', '')
         if tag == '':
             tag = _('ALL STATIONS')
+        elif tag == '/bycountry/Poland':
+            tag = _('Poland')
+        elif tag == '/bytag/disco%20polo':
+            tag = _('Disco Polo')
+        elif tag == '/bytag/Dance':
+            tag = _('Dance')
+        elif tag == '/bytag/Techno':
+            tag = _('Techno')
+        elif tag == '/byname/Italo':
+            tag = _('Italo')
+        elif tag == '/bytag/90s':
+            tag = _('90s')
         if self.visible:
             if self.mode != self.STATIONLIST:
                 if self.visible:
@@ -510,6 +523,7 @@ class SHOUTcastWidget(Screen):
                     self['list'].setList([ (x,) for x in self.stationList ])
                     self['list'].moveToIndex(self.stationListIndex)
                     self.reloadStationListTimer.start(10000 * self.reloadStationListTimerVar)
+                    
         else:
             self.showWindow()
 
@@ -644,6 +658,7 @@ class SHOUTcastWidget(Screen):
                     self.currentStreamingStation = sel.name
                     sendUrlCommand(url, None, 10).addCallback(self.callbackPLS).addErrback(self.callbackStationListError)
                 elif sel.ct.startswith('http'):
+                    self['headertext'].setText(self.headerTextString)
                     self.currentStreamingStation = sel.name
                     self.playServiceStream(sel.ct)
                     self['statustext'].setText ('\c00289496' + (_('Stations selected:  ') + ('\c00??;?00%s') % self.currentStreamingStation))
@@ -1374,21 +1389,21 @@ class SHOUTcastLCDScreen(Screen):
         skin = """
     <screen position="0,0" size="800,480" title=" ">
         <widget name="text1" position="10,0"  size="800,110" font="Regular;50" halign="center" valign="center" backgroundColor="#20000000" foregroundColor="#0174DF" transparent="1"/>
-        <widget name="text2" position="10,110" size="800,90" font="Regular;40" halign="center" valign="center" backgroundColor="#20000000" foregroundColor="#FFBF00" transparent="1"/>
+        <widget source="text2" render="Label" position="10,110" size="800,90" font="Regular;40" halign="center" valign="center" backgroundColor="#20000000" foregroundColor="#FFBF00" transparent="1"/>
         <widget name="songPic" position="0,0" zPosition="4" size="800,480" alphatest="blend" />
     </screen>"""
     elif ssw >= 480 and ssh >= 320:
         skin = """
     <screen position="0,0" size="480,320" title=" ">
         <widget name="text1" position="10,10" zPosition="2" size="460,90" font="Regular;40" halign="center" valign="top" foregroundColor="#0174DF" transparent="1"/>
-        <widget name="text2" position="10,230" zPosition="2" size="460,80" font="Regular;35" halign="center" valign="bottom" foregroundColor="#FFBF00" transparent="1"/>
+        <widget source="text2" render="Label" position="10,230" zPosition="2" size="460,80" font="Regular;35" halign="center" valign="bottom" foregroundColor="#FFBF00" transparent="1"/>
         <widget name="songPic" position="0,0" zPosition="1" size="480,320" alphatest="blend" />
     </screen>"""
     elif ssw >= 220 and ssh >= 176:
         skin = """
     <screen position="0,0" size="220,176" title=" ">
         <widget name="text1" position="5,0" size="210,50" font="Regular;24" halign="center" valign="center" backgroundColor="#20000000" foregroundColor="#0174DF" transparent="1"/>
-        <widget name="text2" position="5,80" size="210,50" font="Regular;22" halign="center" valign="center" backgroundColor="#20000000" foregroundColor="#FFBF00" transparent="1"/>
+        <widget source="text2" render="Label" position="5,80" size="210,50" font="Regular;22" halign="center" valign="center" backgroundColor="#20000000" foregroundColor="#FFBF00" transparent="1"/>
         <widget name="songPic" position="0,0" size="220,176" zPosition="4" alphatest="blend" />
     </screen>"""
     else:
