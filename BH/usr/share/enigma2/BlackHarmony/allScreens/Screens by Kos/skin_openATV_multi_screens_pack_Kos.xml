@@ -6880,7 +6880,7 @@ self['config'].l.setSeperation(int(300*f))
     <ePixmap pixmap="BlackHarmony/buttons/key_ok.png" position="880,435" size="60,30" zPosition="1" transparent="1" alphatest="blend"/>
     <widget render="Label" source="key_red" position="80,435" size="120,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget render="Label" source="key_green" position="260,435" size="120,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
-    <widget render="Label" source="yellow_key" position="405,435" size="320,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
+    <!--widget render="Label" source="yellow_key" position="405,435" size="320,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" /-->
   </screen>
   <screen name="AltCamManager" position="460,130" size="1000,820" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1000,820" pixmap="BlackHarmony/bg_design/small.png"/>
