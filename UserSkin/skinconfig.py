@@ -617,7 +617,6 @@ class UserSkin_Config(Screen, ConfigListScreen):
         self["config"].setCurrentIndex(0)
 
     def restartGUI(self):
-      
         def restartGUIcb(answer):
             if answer is True:
                 self.session.open(TryQuitMainloop, 3)
@@ -645,6 +644,9 @@ class UserSkin_Config(Screen, ConfigListScreen):
             restartbox = self.session.openWithCallback(restartGUIcb,MessageBox, myMessage, MessageBox.TYPE_YESNO, default = False)
         restartbox.setTitle(_("Message"))
 
+    def doNothing(self, ret = None):
+        return
+      
     def keyBlue(self):
         from about import UserSkin_About
         self.session.openWithCallback(self.doNothing,UserSkin_About)
@@ -848,16 +850,24 @@ class UserSkin_Config(Screen, ConfigListScreen):
     def generateLCDskin(self, inFile, outFile): #ATV/PLi does not work when id="1" in display skin.
         with open(inFile, 'r') as fr:
             fw = open(outFile , 'w')
-            fw.write("<!-- Transformed by UserSkin from file='%s' -->\n" % config.plugins.UserSkin.LCDmode.value )
-            while True:
-                fline = fr.readline()
-                if not fline:
-                    break
-                if 'screen name=' in fline:
-                    fline = fline.replace('id="1"','')
+            #first line can contain something which has to be first ;)
+            fline = fr.readline()
+            if fline:
+                if '<?xml' in fline:
+                    fw.write(fline)
+                    fw.write("<!-- Transformed by UserSkin from file='%s' -->\n" % config.plugins.UserSkin.LCDmode.value )
+                else:
+                    fw.write("<!-- Transformed by UserSkin from file='%s' -->\n" % config.plugins.UserSkin.LCDmode.value )
+                    fw.write(fline)
+                while True:
+                    fline = fr.readline()
+                    if not fline:
+                        break
+                    if 'screen name=' in fline:
+                        fline = fline.replace('id="1"','')
                     if 'name="vti' in fline.lower(): #ATV has some strange workarrounds for VTI
                         fline = fline.replace('name="','name="fake')
-                fw.write(fline)
+                    fw.write(fline)
             fr.close()
             fw.close()
     
