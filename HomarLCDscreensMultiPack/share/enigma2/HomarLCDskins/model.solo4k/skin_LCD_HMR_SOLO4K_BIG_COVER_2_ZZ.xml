@@ -306,15 +306,15 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
   <screen name="SHOUTcastLCDScreen" position="0,0" size="480,320" id="1">
 <widget source="session.CurrentService" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated_1" position="0,0" size="480,320" zPosition="5" transparent="1" alphatest="blend" />
   <ePixmap pixmap="HomarLCDskins/Homar_480x320/music.png" position="0,0" size="480,320" zPosition="-1" alphatest="blend" />
-  <ePixmap pixmap="HomarLCDskins/Homar_480x320/shoutcast.png" position="60,235" size="354,100" zPosition="-1" alphatest="blend" />
-  <widget source="global.CurrentTime" render="Label" position="20,15" size="440,60" font="VFD;48" transparent="1" halign="left" valign="center" foregroundColor="#ffff00" >
+    <widget source="global.CurrentTime" render="Label" position="20,15" size="440,60" font="VFD;48" transparent="1" halign="left" valign="center" foregroundColor="#ffff00" >
     <convert type="ClockToText">Format:%a, %d.%m.%Y</convert>
   </widget>
   <widget source="global.CurrentTime" render="Label" position="190,55" size="200,55" font="VFD;48" transparent="1" halign="right" valign="center">
   <convert type="ClockToText">Format:%H:%M:%S</convert>
   </widget>
-  <widget name="text1" position="20,80" size="440,48" font="VFD;44" transparent="1" halign="center" foregroundColor="#04FC0C" valign="center"/>
-  <widget name="text2" position="10,120" size="440,120" font="VFD;44" transparent="1" halign="center" foregroundColor="#ffff00" valign="center"/>
+  <widget name="text1" position="26,110" size="300,130" font="VFD;39" transparent="1" halign="left" foregroundColor="#04FC0C" valign="center"/>
+  <widget source="text2" render="BlackHarmonyRunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,startdelay=200,always=0,oneshot=0" noWrap="1" position="16,260" size="460,58" font="VFD;48" transparent="1" halign="left" foregroundColor="#ffff00"/>
+<widget name="songPic" position="0,0" zPosition="4" size="480,260" alphatest="off" />
 </screen>
 
 <!-- Abspielen von ISO -->
