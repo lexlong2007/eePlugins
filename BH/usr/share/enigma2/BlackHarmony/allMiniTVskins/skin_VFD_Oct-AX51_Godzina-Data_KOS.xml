@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!--  Skin: LCD from Magic by MiLo, XmlUnboundNsPrefix -->
 <!--suppress XmlUnboundNsPrefix, XmlUnboundNsPrefix -->
 <skin>
@@ -241,8 +240,8 @@
                 <widget source="SetupEntry" render="BlackHarmonyRollerCharVFD" position="0,0" size="120,20" font="Regular;18" halign="left" noWrap="1"  />
         </screen>
 <!-- Shoutcast -->
-        <screen name="SHOUTcastLCDScreen" size="132,64">
-		<widget source="text2" render="BlackHarmonyRollerCharVFD" position="0,0" size="120,20" font="Regular;18" halign="left" noWrap="1"  />
-		<widget name="text2" position="0,0" size="120,20" font="Regular;18" halign="left" noWrap="1"  />
+    <screen name="SHOUTcastLCDScreen" size="132,64">
+		<widget objectTypes="text2,Label" name="text2" position="0,0" size="120,20" font="Regular;18" halign="left" noWrap="1"/>
+        <widget objectTypes="text2,StaticText" source="text2" render="BlackHarmonyRollerCharVFD" position="0,0" size="120,20" font="Regular;18" halign="left" noWrap="1"/>
 	</screen>
 </skin>
