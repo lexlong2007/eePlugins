@@ -122,9 +122,12 @@ def getPiconName(serviceName, selfPiconType):
         name = ServiceReference(serviceName).getServiceName()
         name = unicodedata.normalize('NFKD', unicode(name, 'utf_8', errors='ignore')).encode('ASCII', 'ignore')
         name = re.sub('[^a-z0-9]', '', name.replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
+        name = name.replace('fhd', 'hd').replace('uhd', 'hd') #iptv streams names correction
         if len(name) > 0:
             pngname = findPicon(name, selfPiconType)
             if not pngname and len(name) > 2 and name.endswith('hd'):
+                pngname = findPicon(name[:-2], selfPiconType)
+            elif not pngname and len(name) > 2 and name.endswith('pl'):
                 pngname = findPicon(name[:-2], selfPiconType)
     if DBG:
         j00zekDEBUG('[j00zekPicons:getPiconName] serviceName=%s, picon=%s, %s, piconFile=%s, selfPiconType=%s' %(str(serviceName),

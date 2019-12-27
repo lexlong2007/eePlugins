@@ -1,8 +1,12 @@
 ################################################################################
 #
-# j00zekLabel with dynamic change of font size
-#      by default mint font size is 3/4 of font size or 
+# j00zekLabel z dynamiczna zmiana wielkosci czcionki
+#      by default min. font size is 3/4 of font size or 
 #                       can be defined by minFontSize="32" parameter
+#
+# Prosze NIE dystrybuowac tego skryptu w formie archwum zip, czy tar.gz
+# Zgadzam sie jedynie na dystrybucje z repozytorium opkg
+#
 ################################################################################
 
 from enigma import eWidget, eLabel, ePoint, eSize, gFont, \
