@@ -11,8 +11,8 @@ from Components.Language import language
 if language.getLanguage() == 'pl_PL':
     translationsDict = {'Support for skin:': 'Wsparcie:', 'Flash Free:': 'Wolne:',
                         'Load Avg:': 'Obciążenie CPU:', 'Uptime:': 'Czas pracy:', 'Memory:': 'Pamięć RAM:', 'Box Type:': 'Typ tunera:', 'Flash:': 'Pamięć Flash:',
-                        'Flash Free:': 'Wolne:', 'Show Maps': 'Mapy',
-                        'Show Histograms': 'Histogramy'}
+                        'Flash Free:': 'Wolne:', 'Show Maps': 'Mapy','Show Histograms': 'Histogramy',
+                        'Playing since:': 'Gramy od:'}
 else:
     translationsDict = {} 
     
