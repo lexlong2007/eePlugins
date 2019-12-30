@@ -17,7 +17,7 @@
 	<widget source="station" render="j00zekRunningText" options="movetype=running" position="1100,700" zPosition="1" size="705,40" font="Roboto_HD; 30" transparent="1" backgroundColor="black" foregroundColor="#66CC99" halign="center" />
         <widget source="titel" render="j00zekLabel" position="1100,740" zPosition="1" size="705,100" font="Roboto_HD; 30" transparent="1" backgroundColor="black" halign="center" foregroundColor="green" />
 	<!--eLabel text="Gramy od:" position="1100,850" size="130,30" zPosition="1" font="Roboto_HD; 25" halign="left" foregroundColor="#58ccff" backgroundColor="black" transparent="1" /-->
-        <widget source="session.CurrentService" render="Label" position="1100,850" size="130,30" zPosition="1" font="Roboto_HD; 25" halign="left" foregroundColor="#58ccff" backgroundColor="black" transparent="1" />
+        <widget source="session.CurrentService" render="Label" position="1100,850" size="130,30" zPosition="1" font="Roboto_HD; 25" halign="left" foregroundColor="#66CC99" backgroundColor="black" transparent="1" >
           <convert type="j00zekTranslator">Playing since:</convert>
         </widget>
         <widget source="session.CurrentService" render="Label" position="1250,850" size="100,30" font="Roboto_HD; 25" zPosition="2" foregroundColor="light_yellow" backgroundColor="black" transparent="1">
@@ -68,4 +68,4 @@
     <widget source="key_red" render="Label" position="91,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget source="key_green" render="Label" position="378,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
   </screen>
-  </skin>
+</skin>

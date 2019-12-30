@@ -28,7 +28,7 @@ import ssl
 from os import path, listdir
 import re
 from OscamStatusSetup import oscamServer, readCFG, OscamServerEntriesListConfigScreen, globalsConfigScreen, LASTSERVER, XOFFSET, EXTMENU, USEECM, dlg_xh, USEPICONS
-VERSION = '1.3.1'
+VERSION = '1.3.2'
 TIMERTICK = 10000
 FULLHD = False
 if getDesktop(0).size().width() >= 1920:
@@ -309,6 +309,9 @@ class ReaderServiceDataScreen(Screen):
         x, h = dlg_xh(self.instance.size().width())
         self.instance.move(ePoint(x, 0))
 
+    def createSummary(self):
+        return OscamLCDScreen
+
 
 class ClientDataScreen(Screen):
     if FULLHD:
@@ -441,6 +444,9 @@ class ClientDataScreen(Screen):
     def Close(self):
         self.close(0)
 
+    def createSummary(self):
+        return OscamLCDScreen
+
 
 class DownloadXMLScreen(Screen):
 
@@ -548,6 +554,9 @@ class DownloadXMLScreen(Screen):
     def setTitle(self, txt):
         self['title'].setText(txt)
 
+    def createSummary(self):
+        return OscamLCDScreen
+
 
 class OscamDataScreen(DownloadXMLScreen):
     if FULLHD:
@@ -598,6 +607,9 @@ class OscamDataScreen(DownloadXMLScreen):
         self['starttime'].setText(d.starttime)
         self['uptime'].setText(elapsedTime(d.uptime, _('%d days %d hours %d minutes %d seconds'), True))
         self['readonly'].setText(d.readonly)
+
+    def createSummary(self):
+        return OscamLCDScreen
 
 
 class OscamRestartScreen(DownloadXMLScreen):
@@ -687,6 +699,9 @@ class OscamRestartScreen(DownloadXMLScreen):
                 self.sendNewPart('shutdown&action=restart')
             elif self.mode == 'shutdown':
                 self.sendNewPart('shutdown&action=shutdown')
+
+    def createSummary(self):
+        return OscamLCDScreen
 
 
 class ReaderDataScreen(DownloadXMLScreen):
@@ -848,6 +863,9 @@ class ReaderDataScreen(DownloadXMLScreen):
 
     def yellowPressed(self):
         self.session.open(ReaderServiceDataScreen, self.r)
+
+    def createSummary(self):
+        return OscamLCDScreen
 
 
 class LogDataList(MenuList):
@@ -1078,6 +1096,9 @@ class ReaderlistScreen(DownloadXMLScreen):
 
     def rightPressed(self):
         pass
+
+    def createSummary(self):
+        return OscamLCDScreen
 
 
 class ReaderstatsScreen(DownloadXMLScreen):
@@ -1378,6 +1399,9 @@ class UserstatsScreen(DownloadXMLScreen):
     def rightPressed(self):
         pass
 
+    def createSummary(self):
+        return OscamLCDScreen
+
 
 class StatusDataScreen(DownloadXMLScreen):
     if FULLHD:
@@ -1639,6 +1663,9 @@ class StatusDataScreen(DownloadXMLScreen):
     def backCB(self, retval):
         self.timer.start(TIMERTICK)
 
+    def createSummary(self):
+        return OscamLCDScreen
+
 
 class OscamStatus(Screen):
     if FULLHD:
@@ -1710,7 +1737,7 @@ class OscamStatus(Screen):
     def SetupCB(self, entry):
         if entry:
             self.oServer = entry
-            self['title'].setText(_('Oscam Status ') + VERSION + ' @' + self.oServer.serverName)
+            self['title'].setText(_('Oscam Status ') + VERSION + ' @ ' + self.oServer.serverName)
 
     def globalsDlg(self):
         self.session.openWithCallback(self.globalsCB, globalsConfigScreen)
@@ -1718,6 +1745,9 @@ class OscamStatus(Screen):
     def globalsCB(self):
         x, h = dlg_xh(self.instance.size().width())
         self.instance.move(ePoint(x, 0))
+
+    def createSummary(self):
+        return OscamLCDScreen
 
     def findPicon(self, service = None):
         if service is not None:
@@ -1742,3 +1772,11 @@ def Plugins(**kwargs):
     if EXTMENU.value:
         l.append(PluginDescriptor(name=_('Oscam Status'), description=_('whats going on?'), where=PluginDescriptor.WHERE_EXTENSIONSMENU, icon='OscamStatus.png', fnc=main))
     return l
+
+
+class OscamLCDScreen(Screen):
+    skin = '\n\t<screen position="0,0" size="132,64" title="Oscam Status">\n\t\t<widget name="headline" position="4,0" size="128,22" font="Regular;20"/>\n\t</screen>'
+
+    def __init__(self, session, parent):
+        Screen.__init__(self, session, parent)
+        self['headline'] = Label(_('Oscam Status'))

@@ -28,6 +28,10 @@
 	<panel name="MenuBlueAutoPanel" conditional="key_blue"/>
   </screen>
   <!-- END semi auto button bar -->
+  <switchpixmap>
+	<pixmap name="menu_on" filename="skin_default/icons/menu_on.png"/>
+	<pixmap name="menu_off" filename="skin_default/icons/menu_off.png"/>
+  </switchpixmap>
   <!-- openATV MENU SCREENS -->
   <screen name="menu_mainmenu" position="70,30" size="1920,1080" title="Main menu" flags="wfNoBorder" backgroundColor="transparent">
   <ePixmap position="0,0" zPosition="-10" size="710,1020" pixmap="BlackHarmony/bg_design/menubg_menu.png" />
@@ -4437,16 +4441,16 @@ self['config'].l.setSeperation(int(300*f))
     <widget name="key_green" position="500,778" size="180,27" zPosition="1" font="Roboto_HD; 24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1"/>
     <widget name="key_blue" position="1273,778" size="180,26" zPosition="1" font="Roboto_HD;24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1"/>
   </screen>
-  <screen name="OscamStatus" position="462,128" size="1000,820" title=" " flags="wfNoBorder" backgroundColor="transparent">
-    <ePixmap position="0,0" zPosition="-10" size="1000,820" pixmap="BlackHarmony/bg_design/small.png"/>
-    <widget source="global.CurrentTime" render="Label" position="45,30" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
+  <screen name="OscamStatus" position="center,center" size="1920,1080" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap position="462,128" zPosition="-10" size="1000,820" pixmap="BlackHarmony/bg_design/small.png"/>
+    <widget source="global.CurrentTime" render="Label" position="507,158" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Default</convert>
     </widget>
-    <widget source="global.CurrentTime" render="Label" position="130,30" size="360,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
+    <widget source="global.CurrentTime" render="Label" position="592,158" size="360,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Oscam Info - Main Menu" position="460,30" size="480,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
-    <widget source="menu" render="Listbox" position="68,140" size="860,560" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" selectionPixmap="BlackHarmony/menu/sel_860_45.png" scrollbarMode="showOnDemand" backgroundColor="black" transparent="1">
+    <widget source="title" render="Label" position="910,158" size="480,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="menu" render="Listbox" position="529,270" size="860,560" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" selectionPixmap="BlackHarmony/menu/sel_860_45.png" scrollbarMode="showOnDemand" backgroundColor="black" transparent="1">
       <convert type="TemplatedMultiContent">
 					{"template": [
 						MultiContentEntryPixmapAlphaTest(pos = (5, 6), size = (40, 40), png = 0),
@@ -4457,7 +4461,7 @@ self['config'].l.setSeperation(int(300*f))
 					}
 	  </convert>
     </widget>
-    <ePixmap pixmap="BlackHarmony/buttons/key_menu.png" position="870,750" size="60,40" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_menu.png" position="529,890" size="60,40" alphatest="blend" />
   </screen>
   <screen name="OscamRestartScreen" position="center,center" size="1920,1080" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="462,128" zPosition="-10" size="1000,820" pixmap="BlackHarmony/bg_design/small.png"/>
@@ -4467,8 +4471,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="global.CurrentTime" render="Label" position="592,158" size="360,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Oscam Restart" position="910,158" size="480,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
-    <widget render="Label" source="title" position="517,890" size="400,26" valign="center" zPosition="5" transparent="1" foregroundColor="white" font="Roboto_HD; 24" backgroundColor="dark_grey"/>
+    <widget render="Label" source="title" position="910,158" size="480,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget render="Label" source="lversion" position="560,299" size="140,30" font="Roboto_HD;25" transparent="1" foregroundColor="green" backgroundColor="black"/>
     <widget render="Label" source="version" position="700,354" size="600,30" font="Roboto_HD;25" transparent="1" backgroundColor="black"/>
     <widget render="Label" source="lrevision" position="560,354" size="140,30" font="Roboto_HD;25" transparent="1" foregroundColor="light_yellow" backgroundColor="black"/>
@@ -4492,8 +4495,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="global.CurrentTime" render="Label" position="592,158" size="360,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Information" position="910,158" size="480,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
-    <widget render="Label" source="title" position="517,890" size="400,26" valign="center" zPosition="5" transparent="1" foregroundColor="white" font="Roboto_HD; 24" backgroundColor="dark_grey"/>
+    <widget render="Label" source="title" position="910,158" size="480,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget render="Label" source="lversion" position="560,299" size="140,30" font="Roboto_HD;25" transparent="1" foregroundColor="green" backgroundColor="black"/>
     <widget render="Label" source="version" position="700,354" size="600,30" font="Roboto_HD;25" transparent="1" backgroundColor="black"/>
     <widget render="Label" source="lrevision" position="560,354" size="140,30" font="Roboto_HD;25" transparent="1" foregroundColor="light_yellow" backgroundColor="black"/>
@@ -4514,11 +4516,11 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="global.CurrentTime" render="Label" position="345,85" size="360,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Clients" position="1225,85" size="420,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
-    <widget render="Label" source="title" position="285,985" size="500,26" valign="center" zPosition="5" transparent="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey"/>
+    <widget render="Label" source="title" position="1225,85" size="420,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget render="Label" source="label2" position="270,210" size="50,30" valign="top" zPosition="6" transparent="0" foregroundColor="yellow" font="Roboto_HD; 26"/>
     <widget render="Label" source="label0" position="330,210" size="200,30" valign="top" zPosition="5" transparent="0" foregroundColor="green" font="Roboto_HD; 26"/>
     <widget render="Label" source="label1" position="545,210" size="150,30" valign="top" zPosition="5" transparent="0" foregroundColor="light_yellow" font="Roboto_HD; 26"/>
-    <widget render="Label" source="label3" position="770,210" size="160,30" valign="top" zPosition="5" transparent="0" foregroundColor="blue" font="Roboto_HD; 26"/>
+    <widget render="Label" source="label3" position="800,210" size="160,30" valign="top" zPosition="5" transparent="0" foregroundColor="blue" font="Roboto_HD; 26"/>
     <widget render="Label" source="label4" position="1040,210" size="200,30" valign="top" zPosition="5" transparent="0" foregroundColor="yellow" font="Roboto_HD; 26"/>
     <widget source="data" render="Listbox" position="285,275" size="1345,640" scrollbarMode="showOnDemand" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" selectionPixmap="BlackHarmony/menu/sel_1345_40.png" backgroundColor="black" transparent="1">
       <convert type="TemplatedMultiContent">
@@ -4553,8 +4555,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="global.CurrentTime" render="Label" position="345,85" size="360,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Clients" position="1225,85" size="420,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
-    <widget render="Label" source="title" position="1130,985" size="500,26" valign="center" zPosition="5" transparent="1" font="Roboto_HD; 24" halign="right" backgroundColor="dark_grey"/>
+    <widget render="Label" source="title" position="1225,85" size="420,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget render="Label" source="label0" position="330,210" size="200,30" valign="top" zPosition="5" transparent="0" foregroundColor="green" font="Roboto_HD; 26"/>
     <widget render="Label" source="label1" position="540,210" size="250,30" valign="top" zPosition="5" transparent="0" foregroundColor="light_yellow" font="Roboto_HD; 26"/>
     <widget render="Label" source="label2" position="800,210" size="250,30" valign="top" zPosition="5" transparent="0" foregroundColor="blue" font="Roboto_HD; 26"/>
@@ -4586,7 +4587,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="global.CurrentTime" render="Label" position="592,158" size="360,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Oscam Info - Configuration" position="910,158" size="480,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="title" render="Label" position="910,158" size="480,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget name="config" font="Roboto_HD; 26" position="529,270" size="860,560" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" itemHeight="35" selectionPixmap="BlackHarmony/menu/sel_860_35.png" scrollbarMode="showOnDemand" backgroundColor="black" transparent="1"/>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="529,890" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="790,890" size="35,27" alphatest="blend"/>
@@ -4601,7 +4602,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="global.CurrentTime" render="Label" position="592,158" size="360,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Oscam Info - Configuration" position="910,158" size="480,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="title" render="Label" position="910,158" size="480,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget name="list" font="Roboto_HD; 26" position="529,270" size="860,560" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" itemHeight="35" selectionPixmap="BlackHarmony/menu/sel_860_35.png" scrollbarMode="showOnDemand" backgroundColor="black" transparent="1"/>
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="690,890" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="930,890" size="35,27" alphatest="blend"/>
@@ -4618,7 +4619,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="global.CurrentTime" render="Label" position="592,158" size="360,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Oscam Info - Configuration" position="910,158" size="480,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="title" render="Label" position="910,158" size="480,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget name="config" font="Roboto_HD; 26" position="529,270" size="860,560" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" itemHeight="35" selectionPixmap="BlackHarmony/menu/sel_860_35.png" scrollbarMode="showOnDemand" backgroundColor="black" transparent="1"/>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="529,890" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="790,890" size="35,27" alphatest="blend"/>
@@ -4633,7 +4634,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="global.CurrentTime" render="Label" position="345,85" size="360,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Reader Data" position="1225,85" size="420,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="title" render="Label" position="1225,85" size="420,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget source="data" render="Listbox" position="290,230" size="1345,680" scrollbarMode="showOnDemand" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" selectionPixmap="BlackHarmony/menu/sel_1345_40.png" backgroundColor="black" transparent="1">
       <convert type="TemplatedMultiContent">
 					{"template": [
@@ -4657,8 +4658,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="global.CurrentTime" render="Label" position="345,85" size="360,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Checking Logs..." position="1225,85" size="420,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
-    <widget render="Label" source="title" position="285,985" size="500,26" valign="center" zPosition="5" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="title" render="Label" position="1225,85" size="420,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget name="data" font="Roboto_HD; 25" itemHeight="40" position="285,220" size="1345,700" scrollbarMode="showOnDemand" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" selectionPixmap="BlackHarmony/menu/sel_1345_40.png" backgroundColor="black" transparent="1"/>
   </screen>
   <screen name="ReaderlistScreen" position="center,center" size="1920,1080" title=" " flags="wfNoBorder" backgroundColor="transparent">
@@ -4669,8 +4669,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="global.CurrentTime" render="Label" position="592,158" size="360,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="( All readers)" position="910,158" size="480,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
-    <widget render="Label" source="title" position="1020,888" size="400,27" valign="center" zPosition="5" halign="center" font="Roboto_HD; 24" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="title" render="Label" position="910,158" size="480,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget render="Label" source="label0" position="570,266" size="230,30" valign="top" font="Roboto_HD; 26" zPosition="5" foregroundColor="green" backgroundColor="black" transparent="1"/>
     <widget render="Label" source="label1" position="830,265" size="170,30" valign="center" zPosition="5" font="Roboto_HD; 26" foregroundColor="light_yellow" backgroundColor="black"  transparent="1"/>
     <widget render="Label" source="label2" position="1090,267" size="100,30" valign="center" zPosition="5" font="Roboto_HD; 26" foregroundColor="blue" backgroundColor="black"  transparent="1"/>
@@ -4700,8 +4699,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="global.CurrentTime" render="Label" position="345,85" size="360,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Client Data" position="1225,85" size="420,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
-    <widget render="Label" source="title" position="285,985" size="500,26" valign="center" zPosition="5" transparent="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey"/>
+    <widget source="title" render="Label" position="1225,85" size="420,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget render="Label" source="lprotocol" position="284,220" size="160,30" font="Roboto_HD;25" transparent="1" backgroundColor="black" foregroundColor="green"/>
     <widget render="Label" source="protocol" position="445,220" size="500,30" font="Roboto_HD;25" transparent="1" backgroundColor="black"/>
     <widget render="Label" source="lprotocolext" position="284,260" size="160,30" font="Roboto_HD;25" transparent="1" backgroundColor="black"/>
@@ -4764,8 +4762,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="global.CurrentTime" render="Label" position="345,85" size="360,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Reader stats" position="1225,85" size="420,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
-    <widget render="Label" source="title" position="285,985" size="500,26" valign="center" zPosition="5" transparent="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey"/>
+    <widget source="title" render="Label" position="1225,85" size="420,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget render="Label" source="lEMMerror" position="335,200" size="200,55" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="white" font="Roboto_HD;25" backgroundColor="black"/>
     <widget render="Label" source="lEMMwritten" position="670,200" size="200,55" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="white" font="Roboto_HD;25" backgroundColor="black"/>
     <widget render="Label" source="lEMMskipped" position="1040,200" size="200,55" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="white" font="Roboto_HD;25" backgroundColor="black"/>

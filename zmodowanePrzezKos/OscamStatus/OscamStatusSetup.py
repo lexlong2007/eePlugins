@@ -6,6 +6,7 @@ from Components.Button import Button
 from Components.MenuList import MenuList
 from Components.ConfigList import ConfigListScreen
 from Components.Sources.List import List
+from Components.Label import Label
 from Components.Sources.StaticText import StaticText
 from Components.config import config
 from Components.config import NoSave
@@ -131,13 +132,16 @@ class globalsConfigScreen(Screen, ConfigListScreen):
 
         self.close()
 
+    def createSummary(self):
+        return OscamLCDScreen
+
 
 class oscamServer:
-    serverName = 'NewServer'
+    serverName = _('NewServer')
     serverIP = '127.0.0.1'
     serverPort = '8081'
-    username = 'username'
-    password = 'password'
+    username = _('username')
+    password = _('password')
     useSSL = False
 
 
@@ -265,15 +269,15 @@ class OscamServerEntryList(MenuList):
             if w >= 1920:
                 res.append((eListboxPythonMultiContent.TYPE_TEXT,
                  40,
-                 3,
-                 285,
-                 36,
+                 1,
+                 270,
+                 28,
                  1,
                  RT_HALIGN_LEFT | RT_VALIGN_CENTER,
                  i.serverName))
                 res.append((eListboxPythonMultiContent.TYPE_TEXT,
                  330,
-                 3,
+                 1,
                  210,
                  36,
                  1,
@@ -408,6 +412,9 @@ class OscamServerEntriesListConfigScreen(Screen):
     def keyClose(self):
         self.close(False)
 
+    def createSummary(self):
+        return OscamLCDScreen
+
 
 class OscamServerEntryConfigScreen(Screen, ConfigListScreen):
     w = getDesktop(0).size().width()
@@ -498,3 +505,14 @@ class OscamServerEntryConfigScreen(Screen, ConfigListScreen):
             oscamServers[self.index] = entry
         writeCFG(oscamServers)
         self.close()
+
+    def createSummary(self):
+        return OscamLCDScreen
+
+
+class OscamLCDScreen(Screen):
+    skin = '\n\t<screen position="0,0" size="132,64" title="Oscam Status configuration">\n\t\t<widget name="headline" position="4,0" size="128,22" font="Regular;20"/>\n\t</screen>'
+
+    def __init__(self, session, parent):
+        Screen.__init__(self, session, parent)
+        self['headline'] = Label(_('Oscam Status configuration'))
