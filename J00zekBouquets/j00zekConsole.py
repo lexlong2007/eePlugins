@@ -5,7 +5,7 @@
 # - translation of cmd texts with common structure _(), e.g. echo "_(this is an example)"
 # - safe for tuners with small memory size
 
-from enigma import eConsoleAppContainer, eServiceReference
+from enigma import eConsoleAppContainer, eServiceReference, getDesktop
 from Screens.InfoBar import InfoBar
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
@@ -22,10 +22,16 @@ from Screens.Screen import Screen
 #from Screens.ChoiceBox import ChoiceBox
 
 class j00zekConsole(Screen):
-    skin = """
-        <screen position="40,300" size="550,400" title="Command execution..." >
+    if getDesktop(0).size().width() >= 1920:
+        skin = """
+          <screen name="j00zekConsole" position="60,560" size="600,400" title="Command execution...">
+            <widget name="text" position="0,0" size="600,400" font="Console;18" backgroundColor="background" transparent="1"/>
+          </screen>"""
+    else:
+        skin = """
+          <screen position="40,300" size="550,400" title="Command execution..." >
             <widget name="text" position="0,0" size="550,400" font="Console;14" />
-        </screen>"""
+          </screen>"""
         
     def __init__(self, session, title = "j00zekBouquetsConsole", cmdlist = None, finishedCallback = None, closeOnSuccess = False, endText = "\nUżyj strzałek góra/dół do przewinięcia tekstu. OK zamyka okno"):
         Screen.__init__(self, session)

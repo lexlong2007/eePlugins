@@ -12,7 +12,7 @@ from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.Console import Console
 from Components.FileList import FileList, EXTENSIONS
 from Components.Label import Label
-from enigma import eDVBDB, eServiceReference, eTimer, eConsoleAppContainer
+from enigma import eDVBDB, eServiceReference, eTimer, eConsoleAppContainer, getDesktop
 from j00zekConsole import j00zekConsole
 from os import system as os_system, remove as os_remove, chmod as os_chmod, symlink as os_symlink, path as os_path
 from Screens.InfoBar import InfoBar
@@ -83,15 +83,24 @@ j00zekConfig.Znacznik = ConfigSelection(default = "#SERVICE 1:832:D:0:0:0:0:0:0:
 ##############################################################
 
 class j00zekBouquets(Screen, ConfigListScreen):
-
-    skin = """
-    <screen name="j00zekBouquets" position="60,260" size="600,400" title="j00zekBouquets @j00zek" >
+    if getDesktop(0).size().width() >= 1920:
+        skin = """
+          <screen name="j00zekBouquets" position="345,93" size="1232,908" title="j00zekBouquets @j00zek" >
+            <widget name="config" position="10,10" size="1095,645" zPosition="1" font="Regular;27" itemHeight="35" transparent="0" scrollbarMode="showOnDemand" />
+            <widget name="key_red" position="91,849" size="200,27" zPosition="1" valign="center" halign="center" font="Regular;24" transparent="1" foregroundColor="red" />
+            <widget name="key_green" position="378,849" size="200,27" zPosition="1" valign="center" halign="center" font="Regular;24" transparent="1" foregroundColor="green" />
+            <widget name="key_yellow" position="665,849" size="200,27" zPosition="1" valign="center" halign="center" font="Regular;24" transparent="1" foregroundColor="yellow" />
+            <widget name="key_blue" position="952,849" size="200,27" zPosition="1" valign="center" halign="center" font="Regular;24" transparent="1" foregroundColor="blue" />
+          </screen>"""
+    else:
+        skin = """
+          <screen name="j00zekBouquets" position="60,260" size="600,400" title="j00zekBouquets @j00zek" >
             <widget name="config" position="10,10" size="580,330" zPosition="1" transparent="0" scrollbarMode="showOnDemand" />
             <widget name="key_red" position="0,340" zPosition="2" size="300,30" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="red" />
             <widget name="key_green" position="300,340" zPosition="2" size="300,30" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="green" />
             <widget name="key_yellow" position="0,370" zPosition="2" size="300,30" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="yellow" />
             <widget name="key_blue" position="300,370" zPosition="2" size="300,30" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="blue" />
-    </screen>"""
+          </screen>"""
 
     onChangedEntry = [ ]
     LastIndex=0
@@ -492,15 +501,26 @@ class j00zekBouquets(Screen, ConfigListScreen):
             self.runSetup()
 #### ####################################################################################################################################################
 class DirectorySelectorWidget(Screen):
-    skin = """
-    <screen name="DirectorySelectorWidget" position="center,center" size="620,440" title="">
+    if getDesktop(0).size().width() >= 1920:
+        skin = """
+          <screen name="DirectorySelectorWidget" position="center,center" size="1220,440" title="">
+            <widget name="key_red"      position="10,10"  zPosition="2"  size="1200,35" valign="center"  halign="left"   font="Regular;24" transparent="1" foregroundColor="red" />
+            <widget name="key_blue"     position="10,10"  zPosition="2"  size="1200,35" valign="center"  halign="center" font="Regular;24" transparent="1" foregroundColor="blue" />
+            <widget name="key_green"    position="10,10"  zPosition="2"  size="1200,35" valign="center"  halign="right"  font="Regular;24" transparent="1" foregroundColor="green" />
+            <widget name="key_yellow"   position="10,10"  zPosition="2"  size="1200,35" valign="center"  halign="center"  font="Regular;24" transparent="1" foregroundColor="yellow" />
+            <widget name="curr_dir"     position="10,50"  zPosition="2"  size="1200,35" valign="center"  halign="left"   font="Regular;22" transparent="1" foregroundColor="white" />
+            <widget name="filelist"     position="10,85"  zPosition="1"  size="1200,335" transparent="1" scrollbarMode="showOnDemand" />
+          </screen>"""
+    else:
+        skin = """
+          <screen name="DirectorySelectorWidget" position="center,center" size="620,440" title="">
             <widget name="key_red"      position="10,10"  zPosition="2"  size="600,35" valign="center"  halign="left"   font="Regular;22" transparent="1" foregroundColor="red" />
             <widget name="key_blue"     position="10,10"  zPosition="2"  size="600,35" valign="center"  halign="center" font="Regular;22" transparent="1" foregroundColor="blue" />
             <widget name="key_green"    position="10,10"  zPosition="2"  size="600,35" valign="center"  halign="right"  font="Regular;22" transparent="1" foregroundColor="green" />
             <widget name="key_yellow"   position="10,10"  zPosition="2"  size="600,35" valign="center"  halign="center"  font="Regular;22" transparent="1" foregroundColor="yellow" />
             <widget name="curr_dir"     position="10,50"  zPosition="2"  size="600,35" valign="center"  halign="left"   font="Regular;18" transparent="1" foregroundColor="white" />
             <widget name="filelist"     position="10,85"  zPosition="1"  size="580,335" transparent="1" scrollbarMode="showOnDemand" />
-    </screen>"""
+          </screen>"""
     def __init__(self, session, currDir, title="Select directory", FileMode=False, searchpattern=""):
         print("DirectorySelectorWidget.__init__ -------------------------------")
         Screen.__init__(self, session)

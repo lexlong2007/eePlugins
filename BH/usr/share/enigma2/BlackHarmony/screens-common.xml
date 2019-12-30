@@ -18,8 +18,9 @@
     <widget source="global.CurrentTime" render="Label" position="160,55" size="660,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <widget source="Title" render="Label" position="95,160" size="1025,35" font="Roboto_HD; 30" backgroundColor="black" transparent="1" halign="left" foregroundColor="light_yellow"/>
-    <!--eLabel name="new eLabel" position="1460,80" size="365,30" font="Roboto_HD; 27" foregroundColor="white" backgroundColor="dark_grey" transparent="1" halign="right" text="Channel Selection" /-->
+    <widget source="Title" render="Label" position="95,160" size="1025,35" font="Roboto_HD; 30" backgroundColor="black" transparent="1" halign="left" foregroundColor="light_yellow">
+      <convert type="j00zekAlternateTitle">Channel Selection</convert>
+    </widget>  
     <widget name="list" position="95,225" size="1025,720" serviceItemHeight="45" selectionPixmap="BlackHarmony/menu/sel_1005_40.png" scrollbarMode="showOnDemand" enableWrapAround="1" colorServiceDescription="pastel" colorServiceDescriptionSelected="lemon" colorEventProgressbarBorder="border" colorEventProgressbarBorderSelected="border" picServiceEventProgressbar="BlackHarmony/gfx/progcl.png" foregroundColorServiceNotAvail="#777777" serviceNumberFont="Roboto_HD;32" serviceNameFont="Roboto_HD;32" serviceInfoFont="Roboto_HD;29" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" transparent="0"/>
     <widget font="Roboto_HD; 26" position="1751,756" render="Label" size="120,30" source="ServiceEvent" transparent="1" zPosition="2" halign="left" backgroundColor="black">
       <convert type="EventTime">Remaining</convert>
@@ -785,14 +786,15 @@
   </screen>
   <screen name="EMCSelection" position="center,center" size="1920,1080" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="1,1" zPosition="-5" size="1920,1080" pixmap="BlackHarmony/bg_design/info.png"/>
-    <eLabel text="EMC Selection" position="992,88" size="820,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget source="global.CurrentTime" render="Label" position="110,80" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Default</convert>
     </widget>
     <widget source="global.CurrentTime" render="Label" position="195,80" size="660,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <widget source="Title" render="Label" position="1518,355" size="254,30" font="Roboto_HD; 26" backgroundColor="black" transparent="1" halign="right"/>
+    <widget source="Title" render="Label" position="1518,355" size="254,30" font="Roboto_HD; 26" backgroundColor="black" transparent="1" halign="right">
+      <convert type="j00zekAlternateTitle">EMC Selection</convert>
+    </widget>  
     <eLabel position="1113,410" size="675,1" backgroundColor="linie" foregroundColor="linie"/>
     <widget source="Service" render="Label" position="1544,195" size="150,30" font="Roboto_HD; 26" backgroundColor="background" halign="right" transparent="1" zPosition="1" foregroundColor="green">
       <convert type="ServiceTime">StartTime</convert>
@@ -892,7 +894,9 @@
     <widget source="global.CurrentTime" render="Label" position="125,25" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <widget source="Title" render="Label" position="665,25" size="520,30" font="Roboto_HD; 27" halign="right" foregroundColor="white" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="Title" render="Label" position="665,25" size="520,30" font="Roboto_HD; 27" halign="right" foregroundColor="white" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekAlternateTitle">EMC Menu</convert>
+    </widget>
     <widget name="config" font="Roboto_HD; 27" position="65,140" size="1095,455" itemHeight="35" selectionPixmap="BlackHarmony/menu/sel_1095_35.png" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" scrollbarMode="showOnDemand" backgroundColor="background"/>
     <eLabel position="65,610" size="1095,1" backgroundColor="linie" zPosition="4" foregroundColor="linie"/>
     <widget source="help" render="Label" position="65,627" size="1095,160" font="Roboto_HD;26" backgroundColor="black" transparent="1" foregroundColor="light_yellow"/>
@@ -950,7 +954,9 @@
     <widget source="global.CurrentTime" render="Label" position="129,26" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <widget source="Title" render="Label" position="663,26" size="520,30" font="Roboto_HD; 27" halign="right" foregroundColor="white" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="Title" render="Label" position="663,26" size="520,30" font="Roboto_HD; 27" halign="right" foregroundColor="white" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekAlternateTitle">Movie Menu</convert>
+    </widget>
     <widget source="menu" render="Listbox" font="Roboto_HD; 27" position="65,145" size="1095,630" itemHeight="35" selectionPixmap="BlackHarmony/menu/sel_1095_35.png" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" scrollbarMode="showOnDemand" backgroundColor="background">
       <convert type="StringList"/>
     </widget>
@@ -1029,8 +1035,9 @@
     <widget source="global.CurrentTime" render="Label" position="125,25" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Radio" position="965,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
-    <widget source="Title" render="Label" position="65,130" size="1095,34" font="Roboto_HD; 30" backgroundColor="background" transparent="1" foregroundColor="light_yellow"/>
+    <widget source="Title" render="Label" position="65,130" size="1095,34" font="Roboto_HD; 30" backgroundColor="background" transparent="1" foregroundColor="light_yellow">
+      <convert type="j00zekAlternateTitle">Radio</convert>
+    </widget>
     <widget name="list" position="65,188" size="1095,600" scrollbarMode="showOnDemand" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" selectionPixmap="BlackHarmony/menu/sel_1095_35.png" colorServiceDescription="grey" colorServiceDescriptionSelected="grey" colorEventProgressbar="blue" colorEventProgressbarSelected="blue" colorEventProgressbarBorder="grey" colorEventProgressbarBorderSelected="grey" foregroundColorServiceNotAvail="#777777" serviceItemHeight="35" serviceNumberFont="Roboto_HD;28" serviceNameFont="Roboto_HD;28" serviceInfoFont="Roboto_HD;28" transparent="1"/>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="41,850" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="328,850" size="35,27" alphatest="blend"/>
@@ -1138,7 +1145,9 @@
     <widget source="global.CurrentTime" render="Label" position="130,30" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <widget source="Title" render="Label" position="661,30" size="280,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="Title" render="Label" position="661,30" size="280,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekAlternateTitle">Software Update...</convert>
+    </widget>
     <widget name="activityslider" position="75,334" size="850,20" foregroundColor="white" transparent="1"/>
     <widget source="package" render="Label" position="75,214" size="850,90" font="Roboto_HD; 27" foregroundColor="light_yellow" backgroundColor="background" transparent="1" valign="center" halign="center"/>
     <widget name="slider" position="69,595" size="850,20" transparent="1"/>
@@ -1355,7 +1364,9 @@
     <widget source="global.CurrentTime" render="Label" position="125,25" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <widget source="Title" render="Label" position="660,25" size="520,30" font="Roboto_HD; 27" halign="right" foregroundColor="white" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="Title" render="Label" position="660,25" size="520,30" font="Roboto_HD; 27" halign="right" foregroundColor="white" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekAlternateTitle">CleanupWizard settings</convert>
+    </widget>
     <widget name="config" position="65,135" size="1095,570" scrollbarMode="showOnDemand" itemHeight="35" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" selectionPixmap="BlackHarmony/menu/sel_1095_35.png" backgroundColor="transpBlack" transparent="1"/>
     <widget source="status" render="Label" position="64,735" size="1095,60" font="Roboto_HD; 26" halign="center" backgroundColor="black" transparent="1" foregroundColor="light_yellow"/>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="41,850" size="35,27" alphatest="blend"/>
@@ -7639,7 +7650,7 @@
     <ePixmap position="-5,center" zPosition="-7" size="1922,1080" pixmap="BlackHarmony/bg_design/cool.png" />
     <!-- zamiast elabel - widget source="Title" render="Label"-->
     <widget source="Title" render="Label" position="1114,68" size="747,43" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1">
-      <convert type="j00zekAlternateTitle">Aktualizacja Online OpenATV</convert>
+      <convert type="j00zekAlternateTitle">Online update OpenATV</convert>
     </widget>  
     <eLabel text="OpenATV" position="326,825" size="420,88" font="Replacement; 65" halign="center" backgroundColor="dark_grey" transparent="1" foregroundColor="lemon" />
     <widget source="session.VideoPicture" render="Pig" position="104,258" size="891,518" backgroundColor="transparent" zPosition="1" />

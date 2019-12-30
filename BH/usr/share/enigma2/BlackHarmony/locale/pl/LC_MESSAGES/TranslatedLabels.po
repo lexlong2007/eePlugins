@@ -1,0 +1,135 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: tuxbox-enigma 0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-01 13:01+0000\n"
+"PO-Revision-Date: 2019-10-08 14:30+0100\n"
+"Last-Translator: \n"
+"Language-Team: j00zek\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: polish\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 1.5.5\n"
+
+msgid "Support for skin:"
+msgstr "Wsparcie:"
+
+msgid "Flash Free:"
+msgstr "Wolne:"
+
+msgid "Load Avg:"
+msgstr "Obciążenie CPU:"
+
+msgid "Uptime:"
+msgstr "Czas pracy:"
+
+msgid "Memory:"
+msgstr "Pamięć RAM:"
+
+msgid "Box Type:"
+msgstr "Typ tunera:"
+
+msgid "Flash:"
+msgstr "Pamięć Flash:"
+
+msgid "Show Maps"
+msgstr "Mapy"
+
+msgid "Show Histograms"
+msgstr "Histogramy"
+
+msgid "Playing since:"
+msgstr "Gramy od:"
+
+msgid "Timer Edit List"
+msgstr "Lista timerów"
+
+msgid "Channel Selection"
+msgstr "Lista kanałów"
+
+msgid "EMC Selection"
+msgstr "Wybór EMC"
+
+msgid "EMC Menu"
+msgstr "Lista EMC"
+
+msgid "Movie Menu"
+msgstr "Lista filmów"
+
+msgid "Radio"
+msgstr "Radio"
+
+msgid "Softwaremanager..."
+msgstr "Manadżer oprogramowania..."
+
+msgid "Softwaremanager Setup"
+msgstr "Ustawienia manadżera oprogramowania"
+
+msgid "Software Update..."
+msgstr "Aktualizacja oprogramowania..."
+
+msgid "CleanupWizard settings"
+msgstr "Ustawienia pomocnika czyszczenia"
+
+msgid "Video Enhancement Preview"
+msgstr "Podgląd rozszerzeń video"
+
+msgid "Input"
+msgstr "Wejście"
+
+msgid "Video Enhancement Setup"
+msgstr "Ustawienia rozszerzeń video"
+
+msgid "Network Setup"
+msgstr "Ustawienia sieci"
+
+msgid "Network Configuration..."
+msgstr "Konfiguracja sieci..."
+
+msgid "Nameserver Setup"
+msgstr "Ustawienia serwera nazw"
+
+msgid "Network Adapter Selection"
+msgstr "Wybór adaptera sieciowego"
+
+msgid "Network Adapter Test"
+msgstr "Test aaptera sieciowego"
+
+msgid "Mount Edit"
+msgstr "Edycja montowania"
+
+msgid "Auto Mount Manager"
+msgstr "Manadżer automatycznego montowania"
+
+msgid "Mount View"
+msgstr "Pokaż montowania"
+
+msgid "User Manager"
+msgstr "Manadżer użytkowników"
+
+msgid "Select files/folders to backup..."
+msgstr "Wybierz pliki/katalogi dla kopii bezpieczeństwa..."
+
+msgid "Installing Software..."
+msgstr "Instalacja oprogramowania..."
+
+msgid "IPKG Menu"
+msgstr "Menu IPKG"
+
+msgid "Packet Manager"
+msgstr "Manadżer pakietów"
+
+msgid "Plugin Manager"
+msgstr "Manadżer wtyczek"
+
+msgid "OpenWebiF Configuration"
+msgstr "Konfiguracja interfejsu Web"
+
+msgid "File Browser"
+msgstr "Przeglądarka plików"
+
+msgid "Online update OpenATV"
+msgstr "Aktualizacja Online OpenATV"
