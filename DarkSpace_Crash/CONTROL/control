@@ -1,0 +1,11 @@
+Package: enigma2-plugin-skins-darkspace-by-crash
+Priority: optional
+Section: utils
+Depends: 
+Description: Prosta skórka kolegi Crash
+Maintainer: j00zek
+Source: http://github.com/j00zek/eePlugins
+Version: 20.01.03.1256
+Architecture: all
+DestinationPath: /
+ExcludeFolder: Sync_and_Patch
