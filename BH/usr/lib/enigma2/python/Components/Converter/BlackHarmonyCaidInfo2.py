@@ -9,6 +9,7 @@
 
 from Components.Converter.Converter import Converter
 from enigma import iServiceInformation, iPlayableService
+from Components.j00zekSkinTranslatedLabels import translate as _
 from Tools.Directories import fileExists
 from Components.Element import cached
 from Poll import Poll

@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-
 #
-#  BlackHarmonyBoxInfo - Converter
+#  BlackHarmonypliLayoutInfo - Converter
 #
-# j00zek: this file has changed name just to avoid errors using opkg (situation when file was installed by different package)
+# j00zek: this file has changed name to avoid errors using opkg (situation when file was installed by different package)
+#          and uses skin own translations
 #
 
 from Components.Converter.Converter import Converter
 from Components.Element import cached
+from Components.j00zekSkinTranslatedLabels import translate as _
 from Poll import Poll
 from os import popen, statvfs
+
 SIZE_UNITS = ['B',
  'KB',
  'MB',

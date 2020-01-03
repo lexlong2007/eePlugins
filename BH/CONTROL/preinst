@@ -5,7 +5,7 @@
 [ -d /usr/share/enigma2/BlackHarmony/BlackHarmony/icons ] && rm -rf /usr/share/enigma2/BlackHarmony/BlackHarmony/icons 
 
 if `grep -q 'osd.language=pl_PL' </etc/enigma2/settings`; then
-  Tekst='BLAD: Wykryto instalację pakietów tar.gz, które mogą zamazywać oryginalne komponenty systemu i w konsekwencji doprowadzić do jego niestabilności. Skórka NIE będzie działać'
+  Tekst='BLAD: Wykryto instalację pakietów tar.gz, które zamazują oryginalne komponenty systemu co w konsekwencji prowadzi do jego niestabilności. Skórka NIE będzie działać'
 else
   Tekst="ERROR: incompatible environment found, skin won't work"
 fi

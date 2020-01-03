@@ -3,52 +3,28 @@ msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-11-01 13:01+0000\n"
-"PO-Revision-Date: 2019-10-08 14:30+0100\n"
+"PO-Revision-Date: 2020-01-02 10:29+0100\n"
 "Last-Translator: \n"
 "Language-Team: j00zek\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: polish\n"
+"Language: pl\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 1.5.5\n"
+"X-Generator: Poedit 1.7.6\n"
 
-msgid "Support for skin:"
-msgstr "Wsparcie:"
-
-msgid "Flash Free:"
-msgstr "Wolne:"
-
-msgid "Load Avg:"
-msgstr "Obciążenie CPU:"
-
-msgid "Uptime:"
-msgstr "Czas pracy:"
-
-msgid "Memory:"
-msgstr "Pamięć RAM:"
+msgid "Auto Mount Manager"
+msgstr "Manadżer automatycznego montowania"
 
 msgid "Box Type:"
 msgstr "Typ tunera:"
 
-msgid "Flash:"
-msgstr "Pamięć Flash:"
-
-msgid "Show Maps"
-msgstr "Mapy"
-
-msgid "Show Histograms"
-msgstr "Histogramy"
-
-msgid "Playing since:"
-msgstr "Gramy od:"
-
-msgid "Timer Edit List"
-msgstr "Lista timerów"
-
 msgid "Channel Selection"
 msgstr "Lista kanałów"
+
+msgid "CleanupWizard settings"
+msgstr "Ustawienia pomocnika czyszczenia"
 
 msgid "EMC Selection"
 msgstr "Wybór EMC"
@@ -56,32 +32,50 @@ msgstr "Wybór EMC"
 msgid "EMC Menu"
 msgstr "Lista EMC"
 
-msgid "Movie Menu"
-msgstr "Lista filmów"
+msgid "Free-to-air"
+msgstr "Niekodowane TV (FTA)"
 
-msgid "Radio"
-msgstr "Radio"
+msgid "Flash Free:"
+msgstr "Wolne:"
 
-msgid "Softwaremanager..."
-msgstr "Manadżer oprogramowania..."
+msgid "Flash:"
+msgstr "Pamięć Flash:"
 
-msgid "Softwaremanager Setup"
-msgstr "Ustawienia manadżera oprogramowania"
+msgid "File Browser"
+msgstr "Przeglądarka plików"
 
-msgid "Software Update..."
-msgstr "Aktualizacja oprogramowania..."
+msgid "Installing Software..."
+msgstr "Instalacja oprogramowania..."
 
-msgid "CleanupWizard settings"
-msgstr "Ustawienia pomocnika czyszczenia"
-
-msgid "Video Enhancement Preview"
-msgstr "Podgląd rozszerzeń video"
+msgid "IPKG Menu"
+msgstr "Menu IPKG"
 
 msgid "Input"
 msgstr "Wejście"
 
-msgid "Video Enhancement Setup"
-msgstr "Ustawienia rozszerzeń video"
+msgid "Load Avg:"
+msgstr "Obciążenie CPU:"
+
+msgid "Memory:"
+msgstr "Pamięć RAM:"
+
+msgid "Mount Edit"
+msgstr "Edycja montowania"
+
+msgid "Mount View"
+msgstr "Pokaż montowania"
+
+msgid "No info"
+msgstr "Brak informacji"
+
+msgid "N/A"
+msgstr "Niedostępne"
+
+msgid "n/A"
+msgstr "Niedostępne"
+
+msgid "no data from the emulator"
+msgstr "brak danych z emulatora"
 
 msgid "Network Setup"
 msgstr "Ustawienia sieci"
@@ -98,26 +92,11 @@ msgstr "Wybór adaptera sieciowego"
 msgid "Network Adapter Test"
 msgstr "Test aaptera sieciowego"
 
-msgid "Mount Edit"
-msgstr "Edycja montowania"
+msgid "OpenWebiF Configuration"
+msgstr "Konfiguracja interfejsu Web"
 
-msgid "Auto Mount Manager"
-msgstr "Manadżer automatycznego montowania"
-
-msgid "Mount View"
-msgstr "Pokaż montowania"
-
-msgid "User Manager"
-msgstr "Manadżer użytkowników"
-
-msgid "Select files/folders to backup..."
-msgstr "Wybierz pliki/katalogi dla kopii bezpieczeństwa..."
-
-msgid "Installing Software..."
-msgstr "Instalacja oprogramowania..."
-
-msgid "IPKG Menu"
-msgstr "Menu IPKG"
+msgid "Online update OpenATV"
+msgstr "Aktualizacja Online OpenATV"
 
 msgid "Packet Manager"
 msgstr "Manadżer pakietów"
@@ -125,11 +104,242 @@ msgstr "Manadżer pakietów"
 msgid "Plugin Manager"
 msgstr "Manadżer wtyczek"
 
-msgid "OpenWebiF Configuration"
-msgstr "Konfiguracja interfejsu Web"
+msgid "Playing since:"
+msgstr "Gramy od:"
 
-msgid "File Browser"
-msgstr "Przeglądarka plików"
+msgid "Radio"
+msgstr "Radio"
 
-msgid "Online update OpenATV"
-msgstr "Aktualizacja Online OpenATV"
+msgid "Support for skin:"
+msgstr "Wsparcie:"
+
+msgid "Support for skin - "
+msgstr "Wsparcie dla skóry -"
+
+msgid "Show Maps"
+msgstr "Pokaż mapy"
+
+msgid "Show Histograms"
+msgstr "Pokaż histogramy"
+
+msgid "Softwaremanager..."
+msgstr "Manadżer oprogramowania..."
+
+msgid "Softwaremanager Setup"
+msgstr "Ustawienia manadżera oprogramowania"
+
+msgid "Software Update..."
+msgstr "Aktualizacja oprogramowania..."
+
+msgid "Select files/folders to backup..."
+msgstr "Wybierz pliki/katalogi dla kopii bezpieczeństwa..."
+
+msgid "Timer Edit List"
+msgstr "Lista edycji timera"
+
+msgid "Uptime:"
+msgstr "Czas pracy:"
+
+msgid "User Manager"
+msgstr "Menedżer użytkownika"
+
+msgid "Video Enhancement Preview"
+msgstr "Podgląd rozszerzeń video"
+
+msgid "Video Enhancement Setup"
+msgstr "Ustawienia rozszerzeń video"
+
+msgid "%s: Not Available"
+msgstr "%s: Niedostępne"
+
+msgid "%s: %s, in use: %s%%"
+msgstr "%s: %s, w użyciu: %s%%"
+
+msgid "%s: %s Free: %s Used: %s (%s%%)"
+msgstr "%s: %s Wolne: %s Użyte: %s (%s%%)"
+
+msgid "%s: %s Used: %s Free: %s"
+msgstr "%s: %s Użyte: %s Wolne: %s"
+
+msgid "Audio PID"
+msgstr "PID dźwięku"
+
+msgid "Audio PID, codec & lang"
+msgstr "Audio PID, kodek i język"
+
+msgid "Audio PID%s, codec & lang"
+msgstr "Audio PID%s, kodek i język"
+
+msgid "Basic PID info"
+msgstr "Podstawowe inf. PID"
+
+msgid "Bandwidth"
+msgstr "Przepustowość(szer.pasma)"
+
+msgid "Channel"
+msgstr "Kanał"
+
+msgid "Constellation"
+msgstr "Konstelacja"
+
+msgid "Code rate LP"
+msgstr "Wskaźnik kodowania LP"
+
+msgid "Code rate HP"
+msgstr "Wskaźnik kodowania HP"
+
+msgid "DVB Subtitles PID & lang"
+msgstr "Napisy DVB PID i język"
+
+msgid "ECM Info"
+msgstr "Informacje ECM"
+
+msgid "English"
+msgstr "Angielski"
+
+msgid "Extended PID info"
+msgstr "Rozszerzone inf. PID"
+
+msgid "Embedded"
+msgstr "Wbudowany"
+
+msgid "Exit"
+msgstr "Wyjdź"
+
+msgid "filename"
+msgstr "nazwa pliku"
+
+msgid "FEC"
+msgstr "FEC"
+
+msgid "Frequency"
+msgstr "Częstotliwość"
+
+msgid "French"
+msgstr "Francuski"
+
+msgid "German"
+msgstr "Niemiecki"
+
+msgid "Guard interval"
+msgstr "Przedział ochrony"
+
+msgid "Hierarchy info"
+msgstr "Info hierarchii"
+
+msgid "Input Stream ID"
+msgstr "ID Strumienia Wejściowego"
+
+msgid "Inversion"
+msgstr "Odwracanie"
+
+msgid "Namespace & Orbital pos."
+msgstr "Nazwa miejsca i pozycja orb."
+
+msgid "Miscellaneous languages"
+msgstr "Różne języki"
+
+msgid "NIM"
+msgstr "Tuner"
+
+msgid "Modulation"
+msgstr "Modulacja"
+
+msgid "Orbital position"
+msgstr "Pozycja orbitalna"
+
+msgid "Original"
+msgstr "Oryginalny"
+
+msgid "Other Subtitles & lang"
+msgstr "Inne napisy i język"
+
+msgid "Polish"
+msgstr "Polski"
+
+msgid "Polarization"
+msgstr "Polaryzacja"
+
+msgid "Provider"
+msgstr "Prowider"
+
+msgid "Pilot"
+msgstr "Pilot"
+
+msgid "PMT PID"
+msgstr "PMT PID"
+
+msgid "PLS Mode"
+msgstr "Tryb PLS"
+
+msgid "PLS Code"
+msgstr "Kod PLS"
+
+msgid "Roll-off"
+msgstr "Pasmo przepustowe i zaporowe"
+
+msgid "Reserved"
+msgstr "Zarezerwowany"
+
+msgid "System"
+msgstr "System"
+
+msgid "Symbol rate"
+msgstr "Wartość SR"
+
+msgid "Service info"
+msgstr "Info. o kanale"
+
+msgid "Service Name"
+msgstr "Nazwa Kanału"
+
+msgid "Service reference"
+msgstr "Referencje Kanału"
+
+msgid "Service & PIDs"
+msgstr "Serwis i PID"
+
+msgid "Service info - ECM Info"
+msgstr "Informacje serwisowe - Informacje ECM"
+
+msgid "Service info - Tuner status"
+msgstr "Informacje serwisowe - Status tunera"
+
+msgid "Service info - Transponder"
+msgstr "Informacje serwisowe - transponder"
+
+msgid "Service info - service & PIDs"
+msgstr "Informacje serwisowe - usługa i PID"
+
+msgid "Service info - service & Basic PID Info"
+msgstr "Informacje serwisowe - serwis i podstawowe inf. o PID"
+
+msgid "Service info - service & Extended PID Info"
+msgstr "Informacje serwisowe - serwis i rozszerzone inf. o PID"
+
+msgid "Transmission mode"
+msgstr "Tryb transmisji"
+
+msgid "Type"
+msgstr "Typ"
+
+msgid "TXT PID"
+msgstr "TXT PID"
+
+msgid "TXT Subtitles page & lang"
+msgstr "Strona napisów TXT i język"
+
+msgid "Unencrypted"
+msgstr "Nieszyfrowane"
+
+msgid "Undetermined"
+msgstr "Nieokreślony"
+
+msgid "unavailable"
+msgstr "niedostępny"
+
+msgid "Unknown"
+msgstr "Nieznany"
+
+msgid "Videocodec, size & format"
+msgstr "Wideokodek, rozmiar i format"

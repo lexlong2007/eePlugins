@@ -2,7 +2,7 @@
 #
 # j00zek 2019/2020
 # some images doesn't present title, some doesn't translate
-# this converter is to manage over this situations
+# this converter is to manage over both situations
 #
 
 from Components.Converter.Converter import Converter

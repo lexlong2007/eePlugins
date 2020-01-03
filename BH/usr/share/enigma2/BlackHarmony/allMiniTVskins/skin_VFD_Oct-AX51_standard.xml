@@ -21,6 +21,13 @@
 		<font filename="nmsbd.ttf" name="FdLcD" scale="100"/>
 	</fonts>
 
+<!-- EPG Panel -->    
+    <screen name="MyEPGPanel" position="0,0" size="132,64">
+	  <widget source="parent.Event" render="Label" position="0,0" size="132,64" >
+		 <convert type="EventName">Name</convert>
+      </widget>
+	</screen>
+
 <!-- main-->
 	<screen name="InfoBarSummary" position="0,0" size="132,64">
 		<widget source="session.CurrentService" render="BlackHarmonyRollerCharVFD" options="repeat=0" position="0,0" size="120,25" halign="left" noWrap="1" >
