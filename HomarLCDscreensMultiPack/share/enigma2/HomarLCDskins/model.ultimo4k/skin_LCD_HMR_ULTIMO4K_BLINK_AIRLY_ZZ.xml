@@ -1038,8 +1038,8 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
 <!-- EPG -->
 <screen name="EPGSelection_summary" position="0,0" size="800,480" id="1">
 <ePixmap pixmap="HomarLCDskins/Homar/Homar_1.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
-<widget source="parent.Service" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated" position="110,10" size="560,230" zPosition="5" transparent="1" alphatest="blend" />
-<widget source="parent.Service" render="j00zekPicons" picontype="zzpicon" position="110,10" size="560,230" zPosition="4" transparent="1" alphatest="blend">
+<widget source="parent.Service" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated" position="100,10" size="580,246" zPosition="5" transparent="1" alphatest="blend" />
+<widget source="parent.Service" render="j00zekPicons" picontype="zzpicon" position="100,10" size="580,246" zPosition="4" transparent="1" alphatest="blend">
 <convert type="BlackHarmonyServiceName2">Reference</convert>
 </widget>
 <widget source="parent.Service" render="BlackHarmonyRunningText" 

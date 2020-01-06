@@ -93,8 +93,8 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
   </widget>
 <ePixmap pixmap="HomarLCDskins/Homar/kamera.png" position="160,50" size="800,480" zPosition="-1" alphatest="blend" />
   <widget source="session.CurrentService" render="BlackHarmonyCover" position="0,0" size="526,320" zPosition="5" transparent="0" alphatest="off" />
-  <widget source="session.CurrentService" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated_1" position="0,0" size="526,320" zPosition="5" transparent="1" alphatest="blend" />
-  <widget source="session.CurrentService" render="Picon" position="10,0" size="516,320" zPosition="4" transparent="5" alphatest="off">
+  <widget source="session.CurrentService" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated_1" position="0,0" size="526,310" zPosition="5" transparent="1" alphatest="blend" />
+  <widget source="session.CurrentService" render="Picon" position="10,0" size="516,310" zPosition="4" transparent="5" alphatest="off">
   <convert type="MovieBarInfo">Reference</convert>
   </widget>
   </screen>
@@ -102,8 +102,8 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
 <!-- InfoBar -->
 <screen name="InfoBarSummary" position="0,0" size="800,480" id="1">
   <ePixmap pixmap="HomarLCDskins/Homar/Homar_4.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
-  <widget source="session.CurrentService" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated" position="100,0" size="480,330" zPosition="5" transparent="1" alphatest="blend" />
-  <widget alphatest="blend" render="Picon" position="100,0" size="480,330" source="session.CurrentService" zPosition="4" transparent="1">
+  <widget source="session.CurrentService" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated" position="100,15" size="480,288" zPosition="5" transparent="1" alphatest="blend" />
+  <widget alphatest="blend" render="Picon" position="100,15" size="480,288" source="session.CurrentService" zPosition="4" transparent="1">
     <convert type="BlackHarmonyServiceName2">Reference</convert>
   </widget>
   <widget source="session.Event_Now" render="BlackHarmonyRunningText" 
@@ -143,8 +143,8 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
 <!-- ChannelSelection -->
 <screen name="ChannelSelection_summary" position="0,0" size="800,480" id="1">
   <ePixmap pixmap="HomarLCDskins/Homar/Homar_4.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
-<widget source="parent.ServiceEvent" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated" position="15,95" size="285,180" zPosition="5" transparent="1" alphatest="blend" />
-  <widget source="parent.ServiceEvent" render="j00zekPicons" picontype="picon" position="15,95" size="285,180" zPosition="4" transparent="1" alphatest="blend">
+<widget source="parent.ServiceEvent" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated" position="15,95" size="280,168" zPosition="5" transparent="1" alphatest="blend" />
+  <widget source="parent.ServiceEvent" render="j00zekPicons" picontype="picon" position="15,95" size="280,168" zPosition="4" transparent="1" alphatest="blend">
   <convert type="BlackHarmonyServiceName2">Reference</convert>
   </widget>
 <widget source="parent.ServiceEvent" render="BlackHarmonyRunningText" 
@@ -387,8 +387,8 @@ options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,start
 <!-- NumberZapWithName -->
 <screen name="NumberZapWithName_summary" position="0,0" size="800,480" id="1">
 <ePixmap pixmap="HomarLCDskins/Homar/Homar_1.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
-<widget source="parent.Service" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated" position="200,40" size="400,220" zPosition="5" transparent="1" alphatest="blend" />
-<widget source="parent.Service" render="j00zekPicons" picontype="picon" position="200,40" size="400,220" zPosition="4" transparent="1" alphatest="blend">
+<widget source="parent.Service" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated" position="200,40" size="400,240" zPosition="5" transparent="1" alphatest="blend" />
+<widget source="parent.Service" render="j00zekPicons" picontype="picon" position="200,40" size="400,240" zPosition="4" transparent="1" alphatest="blend">
 <convert type="BlackHarmonyServiceName2">Reference</convert>
 </widget>
 <widget source="parent.Service" render="BlackHarmonyRunningText" 
@@ -405,8 +405,8 @@ position="16,280" size="760,90" font="VFD;88" transparent="1" halign="center" va
 <!-- ZapHistory -->   
 <screen name="InfoBarZapHistory_summary" position="0,0" size="800,480" id="1">
 <ePixmap pixmap="HomarLCDskins/Homar/Homar_1.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
-<widget source="parent.ServiceEvent" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated" position="160,20" size="460,280" zPosition="5" transparent="1" alphatest="blend" />
-<widget source="parent.ServiceEvent" render="j00zekPicons" picontype="picon" position="160,20" size="460,280" zPosition="4" transparent="1" alphatest="blend">
+<widget source="parent.ServiceEvent" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated" position="160,20" size="460,277" zPosition="5" transparent="1" alphatest="blend" />
+<widget source="parent.ServiceEvent" render="j00zekPicons" picontype="picon" position="160,20" size="460,277" zPosition="4" transparent="1" alphatest="blend">
   <convert type="BlackHarmonyServiceName2">Reference</convert>
   </widget>
 <widget source="session.RecordState" render="Pixmap" pixmap="HomarLCDskins/Homar/Homar_2.png" position="680,20" size="120,30" zPosition="3" alphatest="blend">
@@ -958,8 +958,8 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
 <!-- EPG -->
 <screen name="EPGSelection_summary" position="0,0" size="800,480" id="1">
 <ePixmap pixmap="HomarLCDskins/Homar/Homar_1.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
-<widget source="parent.Service" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated" position="200,20" size="400,220" zPosition="5" transparent="1" alphatest="blend" />
-<widget source="parent.Service" render="j00zekPicons" picontype="picon" position="200,20" size="400,220" zPosition="4" transparent="1" alphatest="blend">
+<widget source="parent.Service" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated" position="200,20" size="400,240" zPosition="5" transparent="1" alphatest="blend" />
+<widget source="parent.Service" render="j00zekPicons" picontype="picon" position="200,20" size="400,240" zPosition="4" transparent="1" alphatest="blend">
 <convert type="BlackHarmonyServiceName2">Reference</convert>
 </widget>
 <widget source="parent.Service" render="BlackHarmonyRunningText" 

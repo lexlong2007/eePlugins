@@ -92,9 +92,9 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
     <convert type="ClockToText">Format:%H:%M</convert>
   </widget>
 <ePixmap pixmap="HomarLCDskins/Homar/kamera.png" position="160,50" size="800,480" zPosition="-1" alphatest="blend" />
-  <widget source="session.CurrentService" render="BlackHarmonyCover" position="0,0" size="526,320" zPosition="5" transparent="0" alphatest="off" />
+  <widget source="session.CurrentService" render="BlackHarmonyCover" position="0,0" size="536,320" zPosition="5" transparent="0" alphatest="off" />
   <widget source="session.CurrentService" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated_1" position="0,0" size="526,320" zPosition="5" transparent="1" alphatest="blend" />
-  <widget source="session.CurrentService" render="Picon" position="10,0" size="516,320" zPosition="4" transparent="5" alphatest="off">
+  <widget source="session.CurrentService" render="j00zekPicons" picontype="zzpicon" position="10,0" size="516,310" zPosition="4" transparent="5" alphatest="off">
   <convert type="MovieBarInfo">Reference</convert>
   </widget>
   </screen>
