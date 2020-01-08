@@ -1,0 +1,50 @@
+<skin>
+  <screen name="VirtualKeyBoard" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png"/>
+    <widget source="global.CurrentTime" render="Label" position="40,25" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="125,25" size="360,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+    </widget>
+	<eLabel text="Virtual KeyBoard" position="860,25" size="320,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget name="header" position="85,125" size="1055,40" font="Roboto_HD;28" halign="center" noWrap="1" foregroundColor="light_yellow" backgroundColor="black" transparent="1"/>
+    <eLabel position="82,178" size="1061,62" zPosition="1" backgroundColor="white"/>
+    <eLabel position="85,182" size="1055,56" zPosition="2" backgroundColor="black"/>
+    <widget name="text" position="85,182" size="1055,56" zPosition="3" font="Roboto_HD;40" noWrap="1" halign="right" backgroundColor="black" transparent="1"/>
+    <widget source="country" render="Label" position="80,240" size="200,30" font="Roboto_HD; 27" halign="left" backgroundColor="black" transparent="1"/>
+    <widget name="list" position="center,265" size="600,325" selectionDisabled="1" backgroundColor="black" transparent="1"/>
+	<ePixmap pixmap="BlackHarmony/buttons/red.png" position="41,850" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="288,850" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="535,850" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_info.png" position="770,850" size="60,30" alphatest="blend"/>
+	<eLabel text="Delete" position="80,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="New Search" position="330,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <eLabel text="Language" position="575,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+	<eLabel text="Toggle SHIFT mode" position="835,849" size="350,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+  </screen>
+	
+  <screen name="NumericalTextInputHelpDialogVKB" position="center,710" zPosition="2" size="816,190" backgroundColor="black" flags="wfNoBorder">
+	<eLabel backgroundColor="#00ffffd8" size="816,2" position="0,0" />
+	<eLabel backgroundColor="#00ffffd8" size="2,190" position="0,0" />
+	<eLabel backgroundColor="#00ffffd8" size="2,190" position="814,0" />
+	<eLabel backgroundColor="#00ffffd8" size="816,2" position="0,188" />
+	<widget name="key1" position="3,3" size="270,45" font="Roboto_HD;24" halign="center" valign="center" transparent="1" />
+	<widget name="key2" position="273,3" size="270,45" font="Roboto_HD;24" halign="center" valign="center" transparent="1" />
+	<widget name="key3" position="543,3" size="270,45" font="Roboto_HD;24" halign="center" valign="center" transparent="1" />
+	<widget name="key4" position="3,48" size="270,45" font="Roboto_HD;24" halign="center" valign="center" transparent="1" />
+	<widget name="key5" position="273,48" size="270,45" font="Roboto_HD;24" halign="center" valign="center" transparent="1" />
+	<widget name="key6" position="543,48" size="270,45" font="Roboto_HD;24" halign="center" valign="center" transparent="1" />
+	<widget name="key7" position="3,93" size="270,45" font="Roboto_HD;24" halign="center" valign="center" transparent="1" />
+	<widget name="key8" position="273,93" size="270,45" font="Roboto_HD;24" halign="center" valign="center" transparent="1" />
+	<widget name="key9" position="543,93" size="270,45" font="Roboto_HD;24" halign="center" valign="center" transparent="1" />
+	<widget name="help1" position="3,138" size="150,45" font="Roboto_HD;24" halign="center" valign="center" transparent="1" />
+	<widget name="key0" position="153,138" size="510,45" font="Roboto_HD;24" halign="center" valign="center" transparent="1" />
+	<widget name="help2" position="663,138" size="150,45" font="Roboto_HD;24" halign="center" valign="center" transparent="1" />
+	<eLabel backgroundColor="#00ffffd8" size="576,1" position="120,48" />
+	<eLabel backgroundColor="#00ffffd8" size="576,1" position="120,93" />
+	<eLabel backgroundColor="#00ffffd8" size="576,1" position="120,138" />
+	<eLabel backgroundColor="#00ffffd8" size="1,140" position="275,25" />
+	<eLabel backgroundColor="#00ffffd8" size="1,140" position="544,25" />
+  </screen>
+</skin>
