@@ -744,8 +744,8 @@ class AdvancedFreePlayerStart(Screen):
             self.gettingDataFromWEB = False
             self.setCover(WebCoverFile)
             return
-        def dataError(error = ''):
-            printDEBUG("Error downloading data %s" % str(error))
+        def dataError(error = '', errorType='downloading'):
+            printDEBUG("Error %s data %s" % ( str(errorType),str(error)))
             self.gettingDataFromWEB = False
             return
             
@@ -829,37 +829,34 @@ class AdvancedFreePlayerStart(Screen):
                 else:
                     self.gettingDataFromWEB = False
                     return
-            else:
-                list = re.findall('<seriesid>(.*?)</seriesid>.*?<language>(.*?)</language>.*?<SeriesName>(.*?)</SeriesName>.*?<Overview>(.*?)</Overview>.*?<FirstAired>(.*?)</FirstAired>.*?<Network>(.*?)</Network>', data, re.S)
+            else: #dane seriali sa w xml-u!!!!
+                list = re.findall('<seriesid>(.*?)</seriesid>.*?<language>(.*?)</language>.*?<SeriesName>(.*?)</SeriesName>.*?<banner>(.*?)</banner>.*?<Overview>(.*?)</Overview>.*?<FirstAired>(.*?)</FirstAired>', data, re.S)
+                printDEBUG("len(list) = %s" % len(list)) #DEBUG
                 if list is not None and len(list)>0:
                     #print">>>>>>>>>>>>>>>>>>>>>>>>>",list
                     idx = 0
-                    if movieYear != '':
-                        printDEBUG("filtering series list by release year %s" % movieYear)
-                        for coverPath,overview,release_date,id,otitle,original_language,title,popularity,vote_average in list:
-                            if movieYear in release_date:
-                                break
-                            else:
-                                idx += 1
-                                
-                    seriesid, original_language, SeriesName, overview, FirstAired, Network = list[idx]
-                    coverUrl = "http://www.thetvdb.com/banners/_cache/posters/%s-1.jpg" % str(seriesid)
+                    seriesid, original_language, SeriesName, banner, overview, FirstAired = list[idx]
+                    coverUrl = "http://www.thetvdb.com%s" % banner
+                    printDEBUG("coverUrl = %s" % coverUrl)
                     if FoundDescr == False:
-                        printDEBUG("FoundDescr == False1")
+                        printDEBUG("Series FoundDescr == False")
                         myDescr = (overview + '\n\n' + _('Released: ') + FirstAired + '\n' + _('Original title: ') + SeriesName +'\n' + _('Original language: ') + \
-                                    original_language +'\n' + _('Network: ') + Network + '\n')
+                                    original_language +'\n')
                         self.setDescription(myDescr)
                         with open(WebDescrFile, 'w') as WDF:
                             WDF.write(self["Description"].getText() )
                             WDF.close()
                     if FoundCover == False: #no need to download cover, if we have it. ;)
-                        downloadPage(coverUrl,WebCoverFile).addCallback(WebCover).addErrback(dataError)
+                        downloadPage(coverUrl,WebCoverFile).addCallback(WebCover).addErrback(dataError,errorType='downloading cover')
                 else:
                     self.gettingDataFromWEB = False
                     return
         
+        def HTML(txt):
+            return txt.replace(' ','%20').replace('&', '%26')
+            
         #start >>>
-        myMovie=DecodeNationalLetters(myMovie).replace(' ','%20').replace('&', '%26')
+        myMovie=DecodeNationalLetters(myMovie)
         if myConfig.PermanentCoversDescriptons.value == True:
             WebCoverFile='%s/%s.jpg' % (self.filelist.getCurrentDirectory(), getNameWithoutExtension(self.filelist.getFilename()) )
             WebDescrFile='%s/%s.txt' % (self.filelist.getCurrentDirectory(), getNameWithoutExtension(self.filelist.getFilename()) )
@@ -867,23 +864,32 @@ class AdvancedFreePlayerStart(Screen):
             WebCoverFile='/tmp/%s.AFP.jpg' % getNameWithoutExtension(self.filelist.getFilename())
             WebDescrFile='/tmp/%s.AFP.txt' % getNameWithoutExtension(self.filelist.getFilename())
             
+        printDEBUG("mySeries = %s" % self.filelist.getFilename())
+        printDEBUG("Description = %s" % self["Description"].getText())
         if re.search('[Ss][0-9]+[Ee][0-9]+', myMovie):
+            printDEBUG("re.search('[Ss][0-9]+[Ee][0-9]+'")
             seriesName=re.sub('[Ss][0-9]+[Ee][0-9]+.*','', myMovie, flags=re.I)
-            url = "http://thetvdb.com/api/GetSeries.php?seriesname=%s&language=%s" % (seriesName.replace('.','%20').replace(' ','%20'),myConfig.coverfind_language.value)
+            url = "http://thetvdb.com/api/GetSeries.php?seriesname=%s&language=%s" % (HTML(seriesName),myConfig.coverfind_language.value)
             isMovie = False
-        elif re.search('odc_', myMovie):
-            seriesName=re.sub('.odc_.*','', myMovie, flags=re.I)
-            url = "http://thetvdb.com/api/GetSeries.php?seriesname=%s&language=%s" % (seriesName.replace('.','%20').replace(' ','%20'),myConfig.coverfind_language.value)
+        elif re.search('odc[_ ]*[0-9]+', self.filelist.getFilename()): #odc w nazwie pliku
+            printDEBUG("SERIAL >>> odc w nazwie pliku")
+            seriesName=re.sub('odc.*','', myMovie, flags=re.I).replace('(','').replace(')','')
+            url = "http://thetvdb.com/api/GetSeries.php?seriesname=%s&language=%s" % (HTML(seriesName),myConfig.coverfind_language.value)
+            isMovie = False
+        elif re.search('odc[\. ]+[0-9]+', self["Description"].getText()): #odc w opisie
+            printDEBUG("re.search('odc.*[0-9]+'")
+            seriesName= myMovie #re.sub('.odc_.*','', myMovie, flags=re.I)
+            url = "http://thetvdb.com/api/GetSeries.php?seriesname=%s&language=%s" % (HTML(seriesName),myConfig.coverfind_language.value)
             isMovie = False
         else:
-            url = "http://api.themoviedb.org/3/search/movie?api_key=8789cfd3fbab7dccf1269c3d7d867aff&query=%s&language=%s" % (myMovie,myConfig.coverfind_language.value)
+            url = "http://api.themoviedb.org/3/search/movie?api_key=8789cfd3fbab7dccf1269c3d7d867aff&query=%s&language=%s" % (HTML(myMovie),myConfig.coverfind_language.value)
             isMovie = True
         if self.gettingDataFromWEB == True:
             printDEBUG("[GetFromTMDBbyName] getPage running, skip '%s'this time" % url) #DEBUG
         else:
             printDEBUG("[GetFromTMDBbyName] url: " + url) #DEBUG
             self.gettingDataFromWEB = True
-            getPage(url, headers={'Content-Type':'application/x-www-form-urlencoded'}).addCallback(readTmBD,movieYear,isMovie,myMovie).addErrback(dataError)
+            getPage(url, headers={'Content-Type':'application/x-www-form-urlencoded'}).addCallback(readTmBD,movieYear,isMovie,myMovie).addErrback(dataError,errorType='getting data')
         
 ##################################################################### SUBTITLES >>>>>>>>>>
     def runDMnapi(self):

@@ -128,6 +128,9 @@
   <screen name="menu_display" position="70,30" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
 	<panel name="menu_mainmenu" /> 
   </screen>
+  <screen name="menu_epgloadsave_menu" position="70,30" size="1920,1080" title="YYY" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+	<panel name="menu_mainmenu" /> 
+  </screen>
   <!-- openATV MENU Horizontal SCREENS -->
   <screen name="Iconmain" position="30,150" size="1920,1080" title="Menu" backgroundColor="transparent" flags="wfNoBorder">
 	<widget name="title" position="10,650" size="1830,80" zPosition="3" halign="center" font="Roboto_HD;60" foregroundColor="white" backgroundColor="black" transparent="1"/>

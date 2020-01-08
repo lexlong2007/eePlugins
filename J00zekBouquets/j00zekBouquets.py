@@ -1,7 +1,7 @@
 ﻿# -*- coding: utf-8 -*-
 #######################################################################
 #
-#   Coded by j00zek (c)2014/2015/2016/2017
+#   Coded by j00zek (c)2014-2020
 #
 #######################################################################
 
@@ -16,6 +16,7 @@ from enigma import eDVBDB, eServiceReference, eTimer, eConsoleAppContainer, getD
 from j00zekConsole import j00zekConsole
 from os import system as os_system, remove as os_remove, chmod as os_chmod, symlink as os_symlink, path as os_path
 from Screens.InfoBar import InfoBar
+from Screens.ChoiceBox import ChoiceBox 
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Tools.BoundFunction import boundFunction
@@ -52,6 +53,7 @@ j00zekConfig.BouquetsExcludeBouquet = ConfigYesNo(default = False)
 j00zekConfig.BouquetsAction = ConfigSelection(default = "prov", choices = [("prov", "Tworzenie bukietu z układem dostawcy"), ("1st", "Aktualizacja pierwszego bukietu na liście"), ("all", "Aktualizacja pierwszego i Tworzenie bukietu z układem dostawcy")])
 
 j00zekConfig.Clear1st = ConfigYesNo(default = False)
+j00zekConfig.ClearBouquets = ConfigYesNo(default = False)
 
 #oscam synchro
 j00zekConfig.BouquetsOscam = ConfigYesNo(default = True)
@@ -67,6 +69,7 @@ if j00zekConfig.BouquetsOscamConfig.value == 'NIEZNANY':
                 break
 
 j00zekConfig.Bouquets_srvid = ConfigYesNo(default = False) #PID > Name assigments "0100,0B01:428A|nc+|Filmbox Arthouse"
+
 #local card config helpers
 j00zekConfig.Bouquets_caid = ConfigSelection(default = "unknown", choices = [("unknown", 'Nie ustawiono'), ("0100", "NC+ Seca (0100)"), ("0B01", "NC+ Conax (0B01)"), ("0B01", "NC+ Mix"), ("1803", "Polsat (1803)")])
 j00zekConfig.Bouquets_Packet = ConfigSelection(default = "unknown", choices = [("unknown", 'Nie ustawiono'), ("scan", "Skanowanie automatyczne")]) #, ("ncstart", "NC-Start+"), ("nccomfort", "NC-Comfort+"), ("ncextra", "NC-Extra+")])
@@ -80,6 +83,24 @@ j00zekConfig.Znacznik = ConfigSelection(default = "#SERVICE 1:832:D:0:0:0:0:0:0:
                                                    ("#SERVICE 1:0:1:144B:5DC:13E:820000:0:0:0::---", "Wyświetlaj '---'"),
                                                    ("#SERVICE 1:0:1:144B:5DC:13E:820000:0:0:0::<puste>", "Wyświetlaj '<puste>'")
                                                   ])
+
+#Convert from m3u files
+j00zekConfig.m3uEnabled = ConfigYesNo(default = False)
+j00zekConfig.m3uMode = ConfigSelection(default = "NA", choices = [("NA", "Nie aktualizuj"),
+                                                                  ("m3u", "lokalnego pliku m3u"),
+                                                                  ("url", "Plik pobierany ze strony")
+                                                                 ])
+j00zekConfig.m3ufile = ConfigDirectory(default = "/") #ConfigSelection(choices = get_Files('m3u'))
+j00zekConfig.m3uURL = ConfigDirectory(default = "/")  #ConfigSelection(choices = get_Files('url'))
+j00zekConfig.m3uURLkeep = ConfigYesNo(default = False) # split languages or not
+j00zekConfig.FrameworkType = ConfigSelection(default = "4097", choices = getMultiFramework())
+j00zekConfig.m3uSplitMode = ConfigYesNo(default = False) # split languages or not
+j00zekConfig.m3uFilter = ConfigYesNo(default = False)
+j00zekConfig.m3uProxy = ConfigSelection(default = "NA", choices = [("NA", "bezpośrednie"),
+                                                                  ("http://127.0.0.1:53422/play/?url=", "poprzez LiveProxy na porcie 53422"),
+                                                                  ("http://127.0.0.1:8088/", "poprzez Streamlink na porcie 8088")
+                                                                 ])
+
 ##############################################################
 
 class j00zekBouquets(Screen, ConfigListScreen):
@@ -140,6 +161,7 @@ class j00zekBouquets(Screen, ConfigListScreen):
     def runSetup(self):
         self.list = [ ]
         self.list.append(getConfigListEntry('Czyszczenie lamedb:', j00zekConfig.BouquetsClearLameDB))
+        self.list.append(getConfigListEntry('Czyszczenie listy bukietów:', j00zekConfig.ClearBouquets))
         self.list.append(getConfigListEntry(' ', j00zekConfig.separator))
         self.list.append(getConfigListEntry('--- Synchronizacja z tunera ---', j00zekConfig.chlistEnabled))
         if j00zekConfig.chlistEnabled.value == True:
@@ -168,7 +190,7 @@ class j00zekBouquets(Screen, ConfigListScreen):
                 self.list.append(getConfigListEntry(" ", j00zekConfig.separator))                
                 self.list.append(getConfigListEntry("--- Synchronizacja nazw kanałów w oscamie ---", j00zekConfig.BouquetsOscam))
                 if j00zekConfig.BouquetsOscam.value is True:
-                    self.list.append(getConfigListEntry('Katalog konfiguracyjny oscam-a:', j00zekConfig.BouquetsOscamConfig))
+                    self.list.append(getConfigListEntry('Katalog konfiguracyjny oscam-a (OK):', j00zekConfig.BouquetsOscamConfig))
                     if fileExists("%s/oscam.srvid" % j00zekConfig.BouquetsOscamConfig.value):
                         self.list.append(getConfigListEntry('Aktualizacja nazw serwisów:', j00zekConfig.Bouquets_srvid))
                     else:
@@ -177,6 +199,24 @@ class j00zekBouquets(Screen, ConfigListScreen):
         else:
             self["key_yellow"].setText('')
 
+        self.list.append(getConfigListEntry(' ', j00zekConfig.separator))
+        self.list.append(getConfigListEntry('--- Synchronizacja z m3u ---', j00zekConfig.m3uEnabled))
+        if j00zekConfig.m3uEnabled.value == True:
+            #self["key_blue"].setText('Pobierz z m3u')
+            self.list.append(getConfigListEntry('Aktualizuj listę z:', j00zekConfig.m3uMode))
+            if j00zekConfig.m3uMode.value == 'm3u':
+                self.list.append(getConfigListEntry("Wybrany plik m3u (OK):", j00zekConfig.m3ufile))
+            elif j00zekConfig.m3uMode.value == 'url':
+                self.list.append(getConfigListEntry('Wybrany plik url (OK):', j00zekConfig.m3uURL))
+                self.list.append(getConfigListEntry('Zapisz pobrany plik do %s:' % j00zekConfig.m3uURL.value.replace('.url','.m3u'), j00zekConfig.m3uURLkeep))
+                
+            self.list.append(getConfigListEntry('Tylko sekcje z pliku /etc/enigma2/JB_m3u_sections.cfg', j00zekConfig.m3uFilter))
+            self.list.append(getConfigListEntry('Oddzielny bukiet dla każdej sekcji:', j00zekConfig.m3uSplitMode))
+            self.list.append(getConfigListEntry('Wersja MultiFramework:', j00zekConfig.FrameworkType))
+            self.list.append(getConfigListEntry('Połączenie:', j00zekConfig.m3uProxy))
+        else:
+            pass #self["key_blue"].setText('')
+            
         self["config"].list = self.list
         self["config"].setList(self.list)
     
@@ -467,13 +507,70 @@ class j00zekBouquets(Screen, ConfigListScreen):
         if isinstance(currItem, ConfigDirectory):
             def SetDirPathCallBack(curIndex, newPath):
                 if None != newPath:
-                    self["config"].list[curIndex][1].value = newPath
+                    self["config"].list[curIndex][1].value = newPath.replace('//','/')
                     self.runSetup()
-            if os_path.isdir(j00zekConfig.BouquetsOscamConfig.value):
-                self.session.openWithCallback(boundFunction(SetDirPathCallBack, curIndex), DirectorySelectorWidget, currDir=j00zekConfig.BouquetsOscamConfig.value, title='Wybierz katalog z konfiguracją OsCam-a')
+            if self["config"].getCurrent()[1] == j00zekConfig.BouquetsOscamConfig:
+                if os_path.isdir(j00zekConfig.BouquetsOscamConfig.value):
+                    myCurrDir=j00zekConfig.BouquetsOscamConfig.value
+                else:
+                    myCurrDir='/'
+                self.session.openWithCallback(boundFunction(SetDirPathCallBack, curIndex), DirectorySelectorWidget, currDir=myCurrDir, title='Wybierz katalog z konfiguracją OsCam-a')
+            elif self["config"].getCurrent()[1] == j00zekConfig.m3ufile:
+                if os_path.isdir(os_path.dirname(j00zekConfig.m3ufile.value)):
+                    myCurrDir=os_path.dirname(j00zekConfig.m3ufile.value)
+                else:
+                    myCurrDir='/'
+                self.session.openWithCallback(boundFunction(SetDirPathCallBack, curIndex), DirectorySelectorWidget, currDir=myCurrDir, title='Wybierz plik m3u', FileMode=True, searchpattern="m3u")
+            elif self["config"].getCurrent()[1] == j00zekConfig.m3uURL:
+                if os_path.isdir(os_path.dirname(j00zekConfig.m3uURL.value)):
+                    myCurrDir=os_path.dirname(j00zekConfig.m3uURL.value)
+                else:
+                    myCurrDir='/'
+                self.session.openWithCallback(boundFunction(SetDirPathCallBack, curIndex), DirectorySelectorWidget, currDir=myCurrDir, title='Wybierz plik url', FileMode=True, searchpattern="url")
+        else:
+            def choiceRet(ret):
+                if ret:
+                    if ret[1] == 'keyYellow': self.keyYellow()
+                    if ret[1] == 'loadm3u': self.loadm3u()
+                    if ret[1] == 'loadurl': self.loadm3u(fromURL=True)
+                    if ret[1] == 'reloadurl': self.loadm3u(reload=True)
+                    if ret[1] == 'keyBlue': self.keyBlue()
+                    if ret[1] == 'keyRed': self.keyRed()
+                    if ret[1] == 'keyGreen': self.keyGreen()
+            self.SaveSettings()
+            myChoiceList=[]
+            if j00zekConfig.BouquetsEnabled.value : myChoiceList.append(('Pobierz z satelity', 'keyYellow'))
+            if j00zekConfig.m3uEnabled.value and j00zekConfig.m3uMode.value == 'm3u': myChoiceList.append(("Aktualizuj z pliku .../%s" % os.path.basename(j00zekConfig.m3ufile.value), 'loadm3u'))
+            if j00zekConfig.m3uEnabled.value and j00zekConfig.m3uMode.value == 'url':
+                myChoiceList.append(("Pobierz z adresu http://.../%s" % os.path.basename(j00zekConfig.m3uURL.value), 'loadurl'))
+                if os.path.exists(j00zekConfig.m3uURL.value.replace('.url','.m3u')): myChoiceList.append(("Aktualizuj z pobranego pliku .../%s" % os.path.basename(j00zekConfig.m3uURL.value.replace('.url','.m3u')), 'reloadurl'))
+            if j00zekConfig.chlistEnabled.value : myChoiceList.append(('Pobierz z tunera', 'keyBlue'))
+            myChoiceList.append(('Ładuj z archiwum listy', 'keyRed'))
+            myChoiceList.append(('Utwórz archiwum listy', 'keyGreen'))
+            self.session.openWithCallback(choiceRet, ChoiceBox, title = "Co chcesz zrobić?", list = myChoiceList) 
+    
+    def loadm3u(self, fromURL=False, reload=False):
+        self.runlist = []
+        if fromURL:
+            if j00zekConfig.m3uURLkeep.value:
+                tmpFileName = j00zekConfig.m3uURL.value.replace('.url','.m3u').replace('//','/')
             else:
-                self.session.openWithCallback(boundFunction(SetDirPathCallBack, curIndex), DirectorySelectorWidget, currDir='/', title='Wybierz katalog z konfiguracją OsCam-a')
+                tmpFileName = '/tmp/%s' % os.path.basename(j00zekConfig.m3uURL.value.replace('.url','.m3u'))
+            self.runlist.append("%s/components/pyCurl %s %s" % (PluginPath, j00zekConfig.m3uURL.value, tmpFileName))
+        elif reload:
+            tmpFileName = j00zekConfig.m3uURL.value.replace('.url','.m3u').replace('//','/')
+        else:
+            tmpFileName = j00zekConfig.m3ufile.value            
+        self.runlist.append("%s/components/loadm3u %s %s %s %s" % (PluginPath,
+                                                      tmpFileName,
+                                                         j00zekConfig.FrameworkType.value,
+                                                            j00zekConfig.m3uSplitMode.value,
+                                                               j00zekConfig.m3uFilter.value))
+        self.session.openWithCallback(self.loadm3uEndRun ,j00zekConsole, title = "Aktualizacja z m3u/URL", cmdlist = self.runlist)
 
+    def loadm3uEndRun(self, ret = 0):
+        self.reloadLAMEDB()
+        
     def keyCancel(self):
         for x in self["config"].list:
             x[1].cancel()
@@ -496,7 +593,9 @@ class j00zekBouquets(Screen, ConfigListScreen):
               self["config"].getCurrent()[1] == j00zekConfig.BouquetsCP or
               self["config"].getCurrent()[1] == j00zekConfig.BouquetsClearLameDB or
               self["config"].getCurrent()[1] == j00zekConfig.BouquetsAction or
-              self["config"].getCurrent()[1] == j00zekConfig.BouquetsOscam
+              self["config"].getCurrent()[1] == j00zekConfig.BouquetsOscam or
+              self["config"].getCurrent()[1] == j00zekConfig.m3uEnabled or
+              self["config"].getCurrent()[1] == j00zekConfig.m3uMode
               ):
             self.runSetup()
 #### ####################################################################################################################################################

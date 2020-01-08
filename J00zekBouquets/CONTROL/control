@@ -5,6 +5,6 @@ Depends:
 Description: synchronizuje listy kanalow NC i CP
 Maintainer: j00zek
 Source: http://github.com/j00zek/eePlugins
-Version: 19.12.30.0637
+Version: 20.01.08.0909
 Architecture: all
 DestinationPath: /usr/lib/enigma2/python/Plugins/Extensions/J00zekBouquets

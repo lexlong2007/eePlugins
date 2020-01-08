@@ -1,4 +1,20 @@
   <!-- >>>>>>>>>> VTI SPECIFIC SCREENS <<<<<<<<<< -->
+  <!-- old VirtualKeyBoard z VTI -->
+  <screen name="VirtualKeyBoard" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png"/>
+    <widget source="global.CurrentTime" render="Label" position="40,25" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="125,25" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+    </widget>
+    <eLabel text="Virtual KeyBoard" position="860,25" size="320,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget name="header" position="85,155" size="1055,40" font="Roboto_HD;28" halign="center" transparent="1" noWrap="1" foregroundColor="light_yellow" backgroundColor="black"/>
+    <eLabel position="82,238" size="1061,62" zPosition="1" backgroundColor="white"/>
+    <eLabel position="85,242" size="1055,56" zPosition="2" backgroundColor="black"/>
+    <widget name="text" position="85,242" size="1055,56" zPosition="3" font="Roboto_HD;40" noWrap="1" halign="right" backgroundColor="black"/>
+    <widget name="list" position="310,440" size="696,250" selectionDisabled="1" transparent="1"/>
+  </screen>
 <!-- About -->  
   <screen name="About" position="345,93" size="1232,908" title="About" flags="wfNoBorder" backgroundColor="transparent">
     <eLabel text="About" position="960,26" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>

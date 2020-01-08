@@ -1,0 +1,147 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+#
+# @j00zek 2020
+#
+###########################################################################################################
+
+import urllib2, os, sys, re
+
+def importFilesFrom(sourceDir):
+    for m3uFile in os.listdir(sourceDir):
+        if not m3uFile.endswith('.m3u'): continue
+        BFNAME = 'userbouquet.%s.j00zekAutobouquetIPTV.tv' % m3uFile[:-4]
+        BFNAMEandPath = '/etc/enigma2/%s' % BFNAME
+        m3uFileWithPath = os.path.join(sourceDir, m3uFile)
+        desk_tmp = ''
+        print "Import streamów z %s ..." % m3uFile[:-4]
+        if os.path.isfile(BFNAMEandPath):
+            os.remove(BFNAMEandPath)
+        with open('/etc/enigma2/%s' % BFNAME, 'w') as outFile:
+            infile = open(m3uFileWithPath, 'r')
+            line = infile.readline().strip()
+            if not '#EXTM3U' in line:
+                print "Plik '%s' ma niepoprawny format, pomijam" % m3uFile
+                break
+            outFile.write('#NAME %s\n' % m3uFile[:-4])
+            line = infile.readline().strip()
+            descr = ''
+            url = ''
+            while line:
+                if line.startswith('#EXTINF') and line.find(','):
+                    descr = line.split(',', 1)[1].strip()
+                elif line.startswith('http://'):
+                    url = line.strip().replace(':', '%3a')
+                #jak mamy wszystko, to zapisujemy
+                if descr != '' and url != '':
+                    outFile.write('#SERVICE %s:0:1:1:0:0:0:0:0:0:%s:%s\n' %( str(Framework), url, descr))
+                    descr = ''
+                    url = ''
+                line = infile.readline().strip()
+            infile.close()
+            outFile.close()
+        if os.path.isfile('/etc/enigma2/bouquets.tv'):
+            update_bouquets_tv = True
+            for line in open('/etc/enigma2/bouquets.tv'):
+                if BFNAME in line:
+                    update_bouquets_tv = False
+                    break
+            if update_bouquets_tv:
+                print "Dodaję w pliku bouquets.tv definicję bukietu"
+                with open('/etc/enigma2/bouquets.tv', 'a') as outfile:
+                    outfile.write('#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "%s" ORDER BY bouquet\n' % BFNAME)
+                    outfile.close()
+        
+
+if __name__ == '__main__': 
+    m3uFileName = '/'
+    Framework   = 4097
+    m3uDoSplit  = False
+    m3uDoFilter = False
+    m3uMode     = 'NA'
+    m3uURL      = '/'
+    m3uURLkeep  = False
+    Clearbouquets = False
+    FiltersFile = '/etc/enigma2/JB_m3u_sections.cfg'
+    
+    if len(sys.argv) - 1 >= 4:
+        m3uFileName = sys.argv[1]
+        Framework   = int(sys.argv[2])
+        if sys.argv[3].lower() == 'true': m3uDoSplit = True
+        if sys.argv[4].lower() == 'true': m3uDoFilter = True
+    elif os.path.exists('/etc/enigma2/settings'):
+        with open('/etc/enigma2/settings', 'r') as f:
+            for line in f:
+                line = line.strip()
+                if line.startswith('config.plugins.j00zek.m3uMode='):
+                    m3uMode = line.split('=')[1]
+                elif line.startswith('config.plugins.j00zek.m3uURL='):
+                    m3uURL = line.split('=')[1]
+                elif line.startswith('config.plugins.j00zek.m3uURLkeep=true'):
+                    m3uURLkeep = True
+                elif line.startswith('config.plugins.j00zek.m3ufile='):
+                    m3uFileName = line.split('=')[1]
+                elif line.startswith('config.plugins.j00zek.FrameworkType='):
+                    Framework = line.split('=')[1]
+                elif line.startswith('config.plugins.j00zek.m3uSplitMode=true'):
+                    m3uDoSplit  = True
+                elif line.startswith('config.plugins.j00zek.m3uFilter=true'):
+                    m3uDoFilter = True
+            f.close()
+            if m3uURLkeep and m3uMode == 'url' and os.path.exists(m3uURL.replace('.url','.m3u').replace('//','/')):
+                m3uFileName = m3uURL.replace('.url','.m3u').replace('//','/')
+    else:
+        print "BŁĄD: za mało parametrów"
+        quit()
+
+    if not os.path.exists(m3uFileName):
+        print "Brak pliku źródłowego '%s'" % m3uFileName
+        quit()
+    else:
+        with open(m3uFileName, 'r') as file:
+            line = file.readline().strip()
+            print line
+            file.close()
+            if not '#EXTM3U' in line:
+                print "Plik '%s' ma niepoprawny format !!!" % m3uFileName
+                quit()
+            
+    print "Dane wejściowe:"
+    print "Nazwa pliku: %s" % m3uFileName
+    print "Framework: %s" % Framework
+    print "Oddzielne bukiety dla sekcji: %s" % m3uDoSplit
+    print "Filtrowanie sekcji: %s" % m3uDoFilter
+    #
+    aktywneSekcje = []
+    markerySekcji = []
+    if m3uDoSplit or m3uDoFilter:
+        if os.path.exists(FiltersFile):
+            with open(FiltersFile, 'r') as f:
+                for line in f:
+                    line = line.strip()
+                    if line.startswith('#'): continue
+                    elif line == '': continue
+                    elif line.find('['):
+                        aktywneSekcje.append(line)
+                        markerySekcji.append(line.split('[')[0])
+                f.close()
+            print "załadowane markery sekcji:", markerySekcji
+        if len(markerySekcji) == 0 and m3uDoSplit:
+            print "Nie znaleziono markerów sekcji, podział pliku jest niemożliwy"
+            quit()
+        elif len(markerySekcji) == 0 and m3uDoFilter:
+            print "Nie znaleziono markerów sekcji, filtrowanie jest niemożliwe"
+            quit()
+    
+    os.system('mkdir -p /tmp/JB/')
+    if m3uDoFilter:
+        pass
+    elif m3uDoSplit:
+        pass
+    else:
+        with open( '/tmp/JB/%s' % os.path.basename(m3uFileName), 'w') as outfile:
+            with open(m3uFileName, 'r') as infile:
+                for line in infile:
+                    outfile.write(line)
+    importFilesFrom('/tmp/JB/')
+    os.system('rm -rf /tmp/JB/')
