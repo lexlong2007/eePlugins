@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-11-01 13:01+0000\n"
-"PO-Revision-Date: 2020-01-02 10:29+0100\n"
+"PO-Revision-Date: 2020-01-09 08:09+0100\n"
 "Last-Translator: \n"
 "Language-Team: j00zek\n"
 "MIME-Version: 1.0\n"
@@ -25,6 +25,9 @@ msgstr "Lista kanałów"
 
 msgid "CleanupWizard settings"
 msgstr "Ustawienia pomocnika czyszczenia"
+
+msgid "day after tomorrow"
+msgstr "Pojutrze"
 
 msgid "EMC Selection"
 msgstr "Wybór EMC"
@@ -98,6 +101,15 @@ msgstr "Konfiguracja interfejsu Web"
 msgid "Online update OpenATV"
 msgstr "Aktualizacja Online OpenATV"
 
+msgid "pressure"
+msgstr "ciśnienie"
+
+msgid "Pressure:"
+msgstr "Ciśnienie:"
+
+msgid "Weather now"
+msgstr "Pogoda teraz"
+
 msgid "Packet Manager"
 msgstr "Manadżer pakietów"
 
@@ -109,6 +121,9 @@ msgstr "Gramy od:"
 
 msgid "Radio"
 msgstr "Radio"
+
+msgid "Sensed temperature"
+msgstr "Temperatura odczuwalna"
 
 msgid "Support for skin:"
 msgstr "Wsparcie:"
@@ -136,6 +151,9 @@ msgstr "Wybierz pliki/katalogi dla kopii bezpieczeństwa..."
 
 msgid "Timer Edit List"
 msgstr "Lista edycji timera"
+
+msgid "Tomorrow"
+msgstr "Jutro"
 
 msgid "Uptime:"
 msgstr "Czas pracy:"

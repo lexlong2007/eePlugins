@@ -750,7 +750,7 @@ class AdvancedFreePlayerStart(Screen):
             return
             
         def readTmBD(data, movieYear, isMovie,myMovie):
-            #print 'readTmBD'
+            printDEBUG("[readTmBD] >>>") #DEBUG
             f = open('/tmp/TmBD.AFP.webdata', 'w')
             f.write(data)
             f.close

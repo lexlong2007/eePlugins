@@ -1,3 +1,4 @@
+<skin>
   <screen name="SubtitleDisplay" position="0,0" size="1920,1080" zPosition="-1" backgroundColor="transparent" flags="wfNoBorder"/>
   <screen name="Subtitles" position="462,128" size="1000,820" title="Subtitles" flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1000,820" pixmap="BlackHarmony/bg_design/small.png"/>
@@ -11383,3 +11384,27 @@ newheight = wsize[1]
 self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight)/2))
     </applet>
   </screen>
+  <screen name="NumericalTextInputHelpDialogVKB" position="center,710" zPosition="2" size="816,190" backgroundColor="black" flags="wfNoBorder">
+    <eLabel backgroundColor="#00ffffd8" size="816,2" position="0,0" />
+    <eLabel backgroundColor="#00ffffd8" size="2,190" position="0,0" />
+    <eLabel backgroundColor="#00ffffd8" size="2,190" position="814,0" />
+    <eLabel backgroundColor="#00ffffd8" size="816,2" position="0,188" />
+    <widget name="key1" position="3,3" size="270,45" font="Roboto_HD;24" halign="center" valign="center" transparent="1" />
+    <widget name="key2" position="273,3" size="270,45" font="Roboto_HD;24" halign="center" valign="center" transparent="1" />
+    <widget name="key3" position="543,3" size="270,45" font="Roboto_HD;24" halign="center" valign="center" transparent="1" />
+    <widget name="key4" position="3,48" size="270,45" font="Roboto_HD;24" halign="center" valign="center" transparent="1" />
+    <widget name="key5" position="273,48" size="270,45" font="Roboto_HD;24" halign="center" valign="center" transparent="1" />
+    <widget name="key6" position="543,48" size="270,45" font="Roboto_HD;24" halign="center" valign="center" transparent="1" />
+    <widget name="key7" position="3,93" size="270,45" font="Roboto_HD;24" halign="center" valign="center" transparent="1" />
+    <widget name="key8" position="273,93" size="270,45" font="Roboto_HD;24" halign="center" valign="center" transparent="1" />
+    <widget name="key9" position="543,93" size="270,45" font="Roboto_HD;24" halign="center" valign="center" transparent="1" />
+    <widget name="help1" position="3,138" size="150,45" font="Roboto_HD;24" halign="center" valign="center" transparent="1" />
+    <widget name="key0" position="153,138" size="510,45" font="Roboto_HD;24" halign="center" valign="center" transparent="1" />
+    <widget name="help2" position="663,138" size="150,45" font="Roboto_HD;24" halign="center" valign="center" transparent="1" />
+    <eLabel backgroundColor="#00ffffd8" size="576,1" position="120,48" />
+    <eLabel backgroundColor="#00ffffd8" size="576,1" position="120,93" />
+    <eLabel backgroundColor="#00ffffd8" size="576,1" position="120,138" />
+    <eLabel backgroundColor="#00ffffd8" size="1,140" position="275,25" />
+    <eLabel backgroundColor="#00ffffd8" size="1,140" position="544,25" />
+  </screen>
+</skin>
