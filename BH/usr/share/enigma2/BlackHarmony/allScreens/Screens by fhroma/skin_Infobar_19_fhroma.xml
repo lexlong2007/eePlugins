@@ -315,12 +315,9 @@
       <convert type="BlackHarmonyCaidInfo2">Emu</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="session.CurrentService" render="Label" position="1340,952" zPosition="2" size="360,30" font="Roboto_HD; 22" valign="top" halign="left" transparent="1" foregroundColor="blue" backgroundColor="black">
-      <convert type="CryptoInfo">VerboseInfo</convert>
-    </widget>
-    <!--widget source="session.CurrentService" render="Label" position="1310,955" zPosition="2" size="360,25" font="Roboto_HD; 22" valign="top" halign="left" transparent="1" backgroundColor="black" foregroundColor="blue">
+    <widget source="session.CurrentService" render="Label" position="1310,955" zPosition="2" size="360,25" font="Roboto_HD; 22" valign="top" halign="left" transparent="1" backgroundColor="black" foregroundColor="blue">
       <convert type="BlackHarmonygExtraInfo">Source</convert>
-    </widget-->
+    </widget>
     <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1470,27" size="85,85" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="3">
       <convert type="BlackHarmonyMSNWeather">weathericon,day2</convert>
     </widget>

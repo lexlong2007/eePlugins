@@ -58,7 +58,7 @@ elif [ -e /usr/lib/enigma2/python/Blackhole ];then
   systemType='BlackHole'
 elif [ -e /etc/init.d/start_pkt.sh ];then
   systemType='PKT'
-  SkinInclude=1
+  SkinInclude=0
 elif [ "`cat /etc/opkg/all-feed.conf 2> /dev/null|grep -c 'openbh'`" -gt 0 ];then
   systemType='openBlackHole'
 elif [ "`cat /etc/opkg/all-feed.conf 2> /dev/null|grep -c 'openpli-7'`" -gt 0 ];then
@@ -66,7 +66,7 @@ elif [ "`cat /etc/opkg/all-feed.conf 2> /dev/null|grep -c 'openpli-7'`" -gt 0 ];
   SkinInclude=1
 elif [ -e /usr/lib/enigma2/python/Plugins/Extensions/Infopanel ];then
   systemType='openATV'
-  SkinInclude=1
+  SkinInclude=0
 else
   systemType='UNKNOWN'
 fi
@@ -84,14 +84,8 @@ fi
 #build skin.xml
 echo '<skin>' > $BHfolder/skin.xml
 cat $BHfolder/skin-head.xml >> $BHfolder/skin.xml
-if [ $SkinInclude -eq 1 ];then
-  echo '  <include filename="skin_user_header.xml"/>' >> $BHfolder/skin.xml
-  echo '  <include filename="skin_user_colors.xml"/>' >> $BHfolder/skin.xml
-  [ -e $BHfolder/screens-$systemType.xml ] && echo "  <include filename=\"screens-$systemType.xml\"/>" >> $BHfolder/skin.xml
-else
-  cat $BHfolder/skin_user_header.xml|grep -v 'skin>' >> $BHfolder/skin.xml
-  cat $BHfolder/skin_user_colors.xml|grep -v 'skin>' >> $BHfolder/skin.xml
-fi
+cat $BHfolder/allFonts/font_default.xml|grep -v 'skin>' >> $BHfolder/skin.xml
+cat $BHfolder/allColors/colors_default.xml|grep -v 'skin>' >> $BHfolder/skin.xml
 cat /usr/share/enigma2/BlackHarmony/screens-common.xml|grep -v 'skin>' >> /usr/share/enigma2/BlackHarmony/skin.xml
 
 if [ "$systemType" == 'VTI' ];then
@@ -108,7 +102,7 @@ elif [ "$systemType" == 'PKT' ];then
   cat /usr/share/enigma2/BlackHarmony/screens-PKT_specific.xml >> /usr/share/enigma2/BlackHarmony/skin.xml
 
 elif [ "$systemType" == 'openPLI-7' ];then
-  #cat /usr/share/enigma2/BlackHarmony/screens-openPLI7.xml|grep -v 'skin>' >> /usr/share/enigma2/BlackHarmony/skin.xml
+  cat /usr/share/enigma2/BlackHarmony/screens-openPLI-7.xml|grep -v 'skin>' >> /usr/share/enigma2/BlackHarmony/skin.xml
   [ -e /usr/share/enigma2/defaults/skin_user.xml ] && rm -f /usr/share/enigma2/defaults/skin_user.xml
 
 elif [ "$systemType" == 'openBlackHole' ];then
