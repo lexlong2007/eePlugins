@@ -5,7 +5,7 @@ import os
 from Poll import Poll
 from Tools.HardwareInfoVu import HardwareInfoVu
 
-class DarkSpaceBoxInfo(Poll, Converter, object):
+class BoxInfo(Poll, Converter, object):
     BOXTYPE = 0
     LOAD = 1
     MEMINFO = 2

@@ -16,6 +16,7 @@ echo "krok 1, wywalamy wszystkie modyfikacje wtyczek i inne śmieci"
 rm -rf $myAbsPath/usr/lib/enigma2/python/Components/Renderer/*MSN* 2 > /dev/null
 rm -rf $myAbsPath/usr/lib/enigma2/python/Components/Converter/*MSN* 2 > /dev/null
 cp -rf $myAbsPath/Sync_and_Patch/python-Components/* $myAbsPath/usr/lib/enigma2/python/Components/
+cp -rf $myAbsPath/Sync_and_Patch/skin-Components/* $myAbsPath/usr/share/enigma2/DarkSpace/
 #
 echo "krok 2, przenosimy fonty"
 [ -d $myAbsPath/usr/share/fonts ] && mv -f $myAbsPath/usr/share/fonts/* $myAbsPath/usr/share/enigma2/DarkSpace/fonts/
@@ -38,8 +39,16 @@ do
   fi
   #echo " -$className = $newclassName"
   sed -i "s;class $className;class $newclassName;g" $newFile #modify className in new file
-  sed -i "s;<convert type=\"$className\"[ ]*>;<convert type=\"$newclassName\">;g" $myAbsPath/usr/share/enigma2/DarkSpace/skin.xml #modify skin.xml
-  sed -i "s;<convert type=\"$className\"[ ]*/>;<convert type=\"$newclassName\" />;g" $myAbsPath/usr/share/enigma2/DarkSpace/skin.xml #modify skin.xml
+  #sed -i "s;<convert type=\"$className\"[ ]*>;<convert type=\"$newclassName\">;g" $myAbsPath/usr/share/enigma2/DarkSpace/skin.xml #modify skin.xml
+  #sed -i "s;<convert type=\"$className\"[ ]*/>;<convert type=\"$newclassName\" />;g" $myAbsPath/usr/share/enigma2/DarkSpace/skin.xml #modify skin.xml
+  echo;echo "Zmiana $className na $newclassName w ..."
+  for xmlfile in `find $myAbsPath/usr/share/enigma2/DarkSpace/ -type f -name '*.xml'`
+  do
+    fileName=`echo "$xmlfile"|sed "s;$myAbsPath/usr/share/enigma2/DarkSpace/;;"`
+    echo " - $fileName"
+    sed -i "s;<convert type=\"$className\"[ ]*>;<convert type=\"$newclassName\">;g" $xmlfile
+    sed -i "s;<convert type=\"$className\"[ ]*/>;<convert type=\"$newclassName\" />;g" $xmlfile
+  done
 done
 #
 echo "krok 5, zmieniamy nazwy rendererów"
@@ -59,7 +68,14 @@ do
   fi
   #echo " -$className = $newclassName"
   sed -i "s;class $className;class $newclassName;g" $newFile #modify className in new file
-  sed -i "s;render=\"$className\";render=\"$newclassName\";g" $myAbsPath/usr/share/enigma2/DarkSpace/skin.xml #modify skin.xml
+  #sed -i "s;render=\"$className\";render=\"$newclassName\";g" $myAbsPath/usr/share/enigma2/DarkSpace/skin.xml #modify skin.xml
+  echo;echo "Zmiana $className na $newclassName w ..."
+  for xmlfile in `find $myAbsPath/usr/share/enigma2/DarkSpace/ -type f -name '*.xml'`
+  do
+    fileName=`echo "$xmlfile"|sed "s;$myAbsPath/usr/share/enigma2/DarkSpace/;;"`
+    echo " - $fileName"
+    sed -i "s;render=\"$className\";render=\"$newclassName\";g" $xmlfile
+  done
 done
 exit 0
 ../Se2iP
