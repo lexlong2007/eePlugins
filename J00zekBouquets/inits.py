@@ -15,9 +15,9 @@ SkinPath = resolveFilename(SCOPE_CURRENT_SKIN, '')
 
 def getMultiFramework():
     if fileExists("/usr/lib/enigma2/python/Plugins/SystemPlugins/ServiceApp/serviceapp.so"):
-        return [("4097", "standardowy gstreamer (root 4097)"),("5001", "ServiceApp gstreamer (root 5001)"), ("5002", "ServiceApp ffmpeg (root 5002)")]
+        return [("4097", "standardowy gstreamer (root 4097)"),("5001", "ServiceApp gstreamer (root 5001)"), ("5002", "ServiceApp ffmpeg (root 5002)"),("1", "sprzętowy, jak SAT (root 1)")]
     else:
-        return [("4097", "standardowy gstreamer (root 4097)")]
+        return [("4097", "standardowy gstreamer (root 4097)"),("1", "sprzętowy, jak SAT (root 1)")]
 
 #Pobieranie plikow
 ##################

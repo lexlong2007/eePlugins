@@ -90,16 +90,22 @@ j00zekConfig.m3uMode = ConfigSelection(default = "NA", choices = [("NA", "Nie ak
                                                                   ("m3u", "lokalnego pliku m3u"),
                                                                   ("url", "Plik pobierany ze strony")
                                                                  ])
-j00zekConfig.m3ufile = ConfigDirectory(default = "/") #ConfigSelection(choices = get_Files('m3u'))
-j00zekConfig.m3uURL = ConfigDirectory(default = "/")  #ConfigSelection(choices = get_Files('url'))
-j00zekConfig.m3uURLkeep = ConfigYesNo(default = False) # split languages or not
+
+j00zekConfig.m3ufile = ConfigDirectory(default = "/")
+j00zekConfig.m3uURL = ConfigDirectory(default = "/")
+j00zekConfig.m3uURLkeep = ConfigYesNo(default = False)
 j00zekConfig.FrameworkType = ConfigSelection(default = "4097", choices = getMultiFramework())
 j00zekConfig.m3uSplitMode = ConfigYesNo(default = False) # split languages or not
 j00zekConfig.m3uFilter = ConfigYesNo(default = False)
-j00zekConfig.m3uProxy = ConfigSelection(default = "NA", choices = [("NA", "bezpośrednie"),
+j00zekConfig.m3uProxy = ConfigSelection(default = "proxyOFF", choices = [("proxyOFF", "bezpośrednie"),
                                                                   ("http://127.0.0.1:53422/play/?url=", "poprzez LiveProxy na porcie 53422"),
                                                                   ("http://127.0.0.1:8088/", "poprzez Streamlink na porcie 8088")
                                                                  ])
+j00zekConfig.m3uAddIPTVmarker = ConfigSelection(default = "markerOFF", choices = [("markerOFF", "nie zmieniaj"),
+                                                                  ("i", "dodaj i na początku nazwy"),
+                                                                  ("IPTV", "dodaj IPTV na końcu nazwy")
+                                                                 ])
+j00zekConfig.m3uEPGmode = ConfigYesNo(default = False) #jak True to próbujemy znaleźć referencję kanału z Satki
 
 ##############################################################
 
@@ -161,7 +167,7 @@ class j00zekBouquets(Screen, ConfigListScreen):
     def runSetup(self):
         self.list = [ ]
         self.list.append(getConfigListEntry('Czyszczenie lamedb:', j00zekConfig.BouquetsClearLameDB))
-        self.list.append(getConfigListEntry('Czyszczenie listy bukietów:', j00zekConfig.ClearBouquets))
+        self.list.append(getConfigListEntry('Czyszczenie listy z nieużywanych bukietów:', j00zekConfig.ClearBouquets))
         self.list.append(getConfigListEntry(' ', j00zekConfig.separator))
         self.list.append(getConfigListEntry('--- Synchronizacja z tunera ---', j00zekConfig.chlistEnabled))
         if j00zekConfig.chlistEnabled.value == True:
@@ -214,6 +220,8 @@ class j00zekBouquets(Screen, ConfigListScreen):
             self.list.append(getConfigListEntry('Oddzielny bukiet dla każdej sekcji:', j00zekConfig.m3uSplitMode))
             self.list.append(getConfigListEntry('Wersja MultiFramework:', j00zekConfig.FrameworkType))
             self.list.append(getConfigListEntry('Połączenie:', j00zekConfig.m3uProxy))
+            self.list.append(getConfigListEntry('Zmień nazwę kanału:', j00zekConfig.m3uAddIPTVmarker))
+            self.list.append(getConfigListEntry('Korzystaj z referencji SAT dla EPG:', j00zekConfig.m3uEPGmode))
         else:
             pass #self["key_blue"].setText('')
             
@@ -335,6 +343,8 @@ class j00zekBouquets(Screen, ConfigListScreen):
                 self.ZapTo = self.ZapCP
         if j00zekConfig.BouquetsAction.value in ("1st","all") and  j00zekConfig.Clear1st.value == True:
             self.runlist.append(('%s/components/clear1st.sh' % PluginPath))
+        if j00zekConfig.ClearBouquets.value:
+            self.runlist.append("%s/components/ClearBouquets" % PluginPath)
         return
 
     def ConfigOscamUpdate(self):
@@ -561,11 +571,17 @@ class j00zekBouquets(Screen, ConfigListScreen):
             tmpFileName = j00zekConfig.m3uURL.value.replace('.url','.m3u').replace('//','/')
         else:
             tmpFileName = j00zekConfig.m3ufile.value            
-        self.runlist.append("%s/components/loadm3u %s %s %s %s" % (PluginPath,
-                                                      tmpFileName,
-                                                         j00zekConfig.FrameworkType.value,
-                                                            j00zekConfig.m3uSplitMode.value,
-                                                               j00zekConfig.m3uFilter.value))
+        self.runlist.append("%s/components/loadm3u %s %s %s %s %s %s %s" % (PluginPath,
+                                                   tmpFileName,
+                                                      j00zekConfig.FrameworkType.value,
+                                                         j00zekConfig.m3uSplitMode.value,
+                                                            j00zekConfig.m3uFilter.value,
+                                                               j00zekConfig.m3uProxy.value,
+                                                                  j00zekConfig.m3uAddIPTVmarker.value,
+                                                                     j00zekConfig.m3uEPGmode.value ))
+        if j00zekConfig.ClearBouquets.value:
+            self.runlist.append("%s/components/ClearBouquets" % PluginPath)
+        
         self.session.openWithCallback(self.loadm3uEndRun ,j00zekConsole, title = "Aktualizacja z m3u/URL", cmdlist = self.runlist)
 
     def loadm3uEndRun(self, ret = 0):

@@ -5,12 +5,22 @@
 #
 ###########################################################################################################
 
-import urllib2, os, sys, re
+import os, sys
+
+def pobierzReferencjeSAT():
+    myRef = []
+    if m3uEPGmode:
+        pass
+    return myRef
+    
+def znajdzReferencje(descr):
+    myRef='0:1:1:0:0:0:0:0:0'
+    return myRef
 
 def importFilesFrom(sourceDir):
     for m3uFile in os.listdir(sourceDir):
         if not m3uFile.endswith('.m3u'): continue
-        BFNAME = 'userbouquet.%s.j00zekAutobouquetIPTV.tv' % m3uFile[:-4]
+        BFNAME = 'userbouquet.%s%s.j00zekAutobouquet.IPTV' % (m3uFile[:-4], str(FrameworkType))
         BFNAMEandPath = '/etc/enigma2/%s' % BFNAME
         m3uFileWithPath = os.path.join(sourceDir, m3uFile)
         desk_tmp = ''
@@ -23,20 +33,27 @@ def importFilesFrom(sourceDir):
             if not '#EXTM3U' in line:
                 print "Plik '%s' ma niepoprawny format, pomijam" % m3uFile
                 break
-            outFile.write('#NAME %s\n' % m3uFile[:-4])
+            outFile.write('#NAME %s (%s)\n' % ( m3uFile[:-4], str(FrameworkType)))
             line = infile.readline().strip()
             descr = ''
             url = ''
             while line:
                 if line.startswith('#EXTINF') and line.find(','):
                     descr = line.split(',', 1)[1].strip()
+                    if m3uAddIPTVmarker == 'i':
+                        ChanName = m3uAddIPTVmarker + descr
+                    elif m3uAddIPTVmarker == 'IPTV':
+                        ChanName = descr + ' ' + m3uAddIPTVmarker
+                    else:
+                        ChanName = descr
                 elif line.startswith('http://'):
                     url = line.strip().replace(':', '%3a')
                 #jak mamy wszystko, to zapisujemy
                 if descr != '' and url != '':
-                    outFile.write('#SERVICE %s:0:1:1:0:0:0:0:0:0:%s:%s\n' %( str(Framework), url, descr))
+                    outFile.write('#SERVICE %s:%s:%s:%s\n' %( str(FrameworkType), znajdzReferencje(descr), url, ChanName))
                     descr = ''
                     url = ''
+                    ChanName = ''
                 line = infile.readline().strip()
             infile.close()
             outFile.close()
@@ -54,21 +71,31 @@ def importFilesFrom(sourceDir):
         
 
 if __name__ == '__main__': 
-    m3uFileName = '/'
-    Framework   = 4097
-    m3uDoSplit  = False
-    m3uDoFilter = False
-    m3uMode     = 'NA'
-    m3uURL      = '/'
-    m3uURLkeep  = False
-    Clearbouquets = False
     FiltersFile = '/etc/enigma2/JB_m3u_sections.cfg'
+    #zdefiniowane we wtyczce (w kolejnośc definicji
+    m3uMode          = 'NA'
+    m3uFile          = '/'
+    m3uURL           = '/'
+    m3uURLkeep       = False
+    FrameworkType    = 4097
+    m3uSplitMode     = False
+    m3uFilter        = False
+    m3uProxy         = "proxyOFF"
+    m3uAddIPTVmarker = "markerOFF"
+    m3uEPGmode       = False
+    
+    
+    
+
     
     if len(sys.argv) - 1 >= 4:
-        m3uFileName = sys.argv[1]
-        Framework   = int(sys.argv[2])
-        if sys.argv[3].lower() == 'true': m3uDoSplit = True
-        if sys.argv[4].lower() == 'true': m3uDoFilter = True
+        m3uFile = sys.argv[1]
+        FrameworkType   = int(sys.argv[2])
+        if sys.argv[3].lower() == 'true': m3uSplitMode = True
+        if sys.argv[4].lower() == 'true': m3uFilter = True
+        m3uProxy = sys.argv[5]
+        m3uAddIPTVmarker = sys.argv[6]
+        if sys.argv[7].lower() == 'true': m3uEPGmode = True
     elif os.path.exists('/etc/enigma2/settings'):
         with open('/etc/enigma2/settings', 'r') as f:
             for line in f:
@@ -80,41 +107,51 @@ if __name__ == '__main__':
                 elif line.startswith('config.plugins.j00zek.m3uURLkeep=true'):
                     m3uURLkeep = True
                 elif line.startswith('config.plugins.j00zek.m3ufile='):
-                    m3uFileName = line.split('=')[1]
+                    m3uFile = line.split('=')[1]
                 elif line.startswith('config.plugins.j00zek.FrameworkType='):
-                    Framework = line.split('=')[1]
+                    FrameworkType = line.split('=')[1]
                 elif line.startswith('config.plugins.j00zek.m3uSplitMode=true'):
-                    m3uDoSplit  = True
+                    m3uSplitMode  = True
                 elif line.startswith('config.plugins.j00zek.m3uFilter=true'):
-                    m3uDoFilter = True
+                    m3uFilter = True
+                elif line.startswith('config.plugins.j00zek.m3uProxy='):
+                    m3uProxy = line.split('=')[1]
+                elif line.startswith('config.plugins.j00zek.m3uAddIPTVmarker='):
+                    m3uAddIPTVmarker = line.split('=')[1]
+                elif line.startswith('config.plugins.j00zek.m3uEPGmode=true'):
+                    m3uEPGmode = True
             f.close()
             if m3uURLkeep and m3uMode == 'url' and os.path.exists(m3uURL.replace('.url','.m3u').replace('//','/')):
-                m3uFileName = m3uURL.replace('.url','.m3u').replace('//','/')
+                m3uFile = m3uURL.replace('.url','.m3u').replace('//','/')
     else:
         print "BŁĄD: za mało parametrów"
         quit()
 
-    if not os.path.exists(m3uFileName):
-        print "Brak pliku źródłowego '%s'" % m3uFileName
+    if not os.path.exists(m3uFile):
+        print "Brak pliku źródłowego '%s'" % m3uFile
         quit()
     else:
-        with open(m3uFileName, 'r') as file:
+        with open(m3uFile, 'r') as file:
             line = file.readline().strip()
             print line
             file.close()
             if not '#EXTM3U' in line:
-                print "Plik '%s' ma niepoprawny format !!!" % m3uFileName
+                print "Plik '%s' ma niepoprawny format !!!" % m3uFile
                 quit()
             
     print "Dane wejściowe:"
-    print "Nazwa pliku: %s" % m3uFileName
-    print "Framework: %s" % Framework
-    print "Oddzielne bukiety dla sekcji: %s" % m3uDoSplit
-    print "Filtrowanie sekcji: %s" % m3uDoFilter
+    print "Nazwa pliku: %s" % m3uFile
+    print "FrameworkType: %s" % FrameworkType
+    print "Oddzielne bukiety dla sekcji: %s" % str(m3uSplitMode).replace('False','Nie').replace('True','Tek')
+    print "Filtrowanie sekcji: %s" % str(m3uFilter).replace('False','Nie').replace('True','Tek')
+    print "Ustawienia Proxy: %s" % m3uProxy.replace('proxyOFF','Nie')
+    print "Marker w nazwie: %s" % m3uAddIPTVmarker.replace('markerOFF','Nie')
+    print "Ustawienia EPG: %s" % str(m3uEPGmode).replace('True','Korzystaj z referencji SAT').replace('False','Standardowe dla IPTV')
     #
+    ReferencjeSAT = pobierzReferencjeSAT()
     aktywneSekcje = []
     markerySekcji = []
-    if m3uDoSplit or m3uDoFilter:
+    if m3uSplitMode or m3uFilter:
         if os.path.exists(FiltersFile):
             with open(FiltersFile, 'r') as f:
                 for line in f:
@@ -126,21 +163,21 @@ if __name__ == '__main__':
                         markerySekcji.append(line.split('[')[0])
                 f.close()
             print "załadowane markery sekcji:", markerySekcji
-        if len(markerySekcji) == 0 and m3uDoSplit:
+        if len(markerySekcji) == 0 and m3uSplitMode:
             print "Nie znaleziono markerów sekcji, podział pliku jest niemożliwy"
             quit()
-        elif len(markerySekcji) == 0 and m3uDoFilter:
+        elif len(markerySekcji) == 0 and m3uFilter:
             print "Nie znaleziono markerów sekcji, filtrowanie jest niemożliwe"
             quit()
     
     os.system('mkdir -p /tmp/JB/')
-    if m3uDoFilter:
+    if m3uFilter:
         pass
-    elif m3uDoSplit:
+    elif m3uSplitMode:
         pass
     else:
-        with open( '/tmp/JB/%s' % os.path.basename(m3uFileName), 'w') as outfile:
-            with open(m3uFileName, 'r') as infile:
+        with open( '/tmp/JB/%s' % os.path.basename(m3uFile), 'w') as outfile:
+            with open(m3uFile, 'r') as infile:
                 for line in infile:
                     outfile.write(line)
     importFilesFrom('/tmp/JB/')
