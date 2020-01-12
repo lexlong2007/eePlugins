@@ -1,0 +1,10 @@
+Package: enigma2-plugin-extensions--j00zeks-iptvplayersmanager
+Priority: optional
+Section: utils
+Depends: 
+Description: zarządzanie modami IPTVplayera i dodatkowymi hostami
+Maintainer: j00zek
+Source: http://github.com/j00zek/eePlugins
+Version: 20.01.12.1213
+Architecture: all
+DestinationPath: /usr/lib/enigma2/python/Plugins/Extensions/IPTVplayersManager

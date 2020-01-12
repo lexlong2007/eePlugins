@@ -1,0 +1,102 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: tuxbox-enigma 0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-01 13:01+0000\n"
+"PO-Revision-Date: 2015-10-08 14:30+0100\n"
+"Last-Translator: \n"
+"Language-Team: j00zek\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: polish\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 1.5.5\n"
+
+msgid "IPTVplayersManager"
+msgstr "Menadżer dystrybucji IPTVplayer-a"
+
+msgid "Restart GUI now?"
+msgstr "Zrestartować teraz?"
+
+msgid "Install path: %s"
+msgstr "Ścieżka instalacyjna:\n%s"
+
+msgid "Execute %s?"
+msgstr "Wykonać %s?"
+
+msgid "%s executed!"
+msgstr "Wykonano %s"
+
+msgid "has been installed properly :)"
+msgstr "poprawnie zainstalowany :)"
+
+msgid "has been updated properly :)"
+msgstr "poprawnie zaktualizowany :)"
+
+msgid "Install or update"
+msgstr "Instalacja/Aktualizacja"
+
+msgid "ERROR: curl not installed"
+msgstr "BŁĄD: brak curl"
+
+msgid "Downloading archive from"
+msgstr "Pobieram archiwum z"
+
+msgid "Unpacking archive..."
+msgstr "Rozpakowuję archiwum..."
+
+msgid "ERROR: unpacking archive"
+msgstr "BŁĄD: rozpakowywania archiwum"
+
+msgid "Modifying"
+msgstr "Modyfikuję"
+
+msgid "Deleting Web module..."
+msgstr "Usuwam moduł Web..."
+
+msgid "Blocking original update mechanism and scripts..."
+msgstr "Blokuję otyginalny mechanizm aktualizacji i skrypty..."
+
+msgid "Updating"
+msgstr "Aktualizuję"
+
+msgid "ERROR: updating"
+msgstr "BŁĄD: aktualizacji"
+
+msgid "Installing in"
+msgstr "Onstaluję w"
+
+msgid "ERROR: installing"
+msgstr "BŁĄD: installacji"
+
+msgid "Press OK to close the window"
+msgstr "Naciśnij OK, aby zamknąć okno"
+
+msgid "ERROR: unknown fork"
+msgstr "BŁĄD: nieznany fork"
+
+msgid "Renaming"
+msgstr "Zmieniam nazwę"
+
+msgid "maybe will be later"
+msgstr "może zrobię później"
+
+msgid "Searching for iptvFork* directories"
+msgstr "Szukam katalogów iptvFork*"
+
+msgid "Deleting"
+msgstr "Kasuję"
+
+msgid "All forks have been deleted."
+msgstr "Wszystkie forki zostały skasowane."
+
+msgid "Delete all forks"
+msgstr "Skasuj wszystki forki"
+
+msgid "(Re)Install"
+msgstr "(Prze)Instaluj"
+
+msgid "Change path"
+msgstr "Zmień ścieżkę"
