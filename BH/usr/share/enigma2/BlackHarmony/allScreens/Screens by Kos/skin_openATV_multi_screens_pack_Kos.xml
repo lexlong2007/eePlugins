@@ -1861,7 +1861,9 @@ self.instance.resize(eSize(*wsize))
     </widget>
     <eLabel text="About" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1" />
     <widget name="AboutScrollLabel" font="Roboto_HD; 25" itemHeight="40" position="66,122" size="770,625" zPosition="2" halign="left" backgroundColor="black" transparent="1"/>
-    <eLabel font="Roboto_HD; 26" position="65,760" size="240,32" text="Support for skin:" foregroundColor="lemon" backgroundColor="black" transparent="1" />
+    <widget source="session.CurrentService" render="Label" position="65,760" size="240,32" font="Roboto_HD; 26" foregroundColor="lemon" backgroundColor="black" transparent="1" >
+      <convert type="j00zekTranslator">Support for Skin:</convert>
+    </widget>
     <eLabel font="Roboto_HD; 26" position="330,760" size="430,32" text="www.sat-4-all.com" foregroundColor="white" backgroundColor="black" transparent="1" />
     <ePixmap position="885,584" zPosition="1" size="280,210" pixmap="BlackHarmony/prev.png" alphatest="blend" />
     <widget source="session.CurrentService" render="Label" position="885,750" size="280,30" font="HD_Thin; 28" halign="center" zPosition="5" foregroundColor="light_yellow" backgroundColor="black" transparent="1">
@@ -4247,7 +4249,9 @@ self['config'].l.setSeperation(int(300*f))
     <widget objectTypes="titel,StaticText" source="titel" render="j00zekLabel" position="882,586" size="560,130" zPosition="2" font="Roboto_HD; 27" halign="center" foregroundColor="white" backgroundColor="black" transparent="1"/>
     <widget objectTypes="statustext,Label" name="statustext" position="882,734" size="560,60" zPosition="1" font="Roboto_HD; 26" halign="center" foregroundColor="light_yellow" backgroundColor="black" transparent="1"/>
     <widget objectTypes="statustext,StaticText" source="statustext" render="j00zekLabel" position="882,734" size="560,60" zPosition="2" font="Roboto_HD; 27" halign="center" foregroundColor="light_yellow" backgroundColor="black" transparent="1"/>
-    <eLabel text="Connected: " position="882,820" size="140,30" zPosition="1" font="Roboto_HD; 24" halign="left" foregroundColor="white" backgroundColor="black" transparent="1" />
+    <widget source="session.CurrentService" render="Label" position="882,820" size="140,30" zPosition="1" font="Roboto_HD; 24" halign="left" foregroundColor="white" backgroundColor="black" transparent="1" >
+      <convert type="j00zekTranslator">Connected:</convert>
+    </widget>
 	<widget source="session.CurrentService" render="Label" position="1030,820" size="130,30" font="Roboto_HD; 25" zPosition="2" foregroundColor="light_yellow" backgroundColor="black" transparent="1">
 	  <convert type="ServicePosition">Remaining</convert>
 	</widget>
