@@ -19,6 +19,7 @@ from os import system as os_system, popen as os_popen, path as os_path
 
 config.plugins.IPTVplayersManager = ConfigSubsection()
 config.plugins.IPTVplayersManager.InstallPath = ConfigText(default = PluginsExtensionsPath, fixed_size = False)
+config.plugins.IPTVplayersManager.installAsFork = ConfigYesNo(default = True)
 
 def substring_2_translate(text):
     to_translate = text.split('_(', 2)
@@ -148,8 +149,9 @@ class j00zekIPTVmgr(Screen,):
         if getDesktop(0).size().width() == 1920: 
             skin  = """
     <screen name="j00zekIPTVmgr" position="center,center" size="820,540" title="j00zekIPTVmgr" >
-        <widget source="InstallPath" render="Label" position=" 10,0" size="800,60" font="Regular;24" foregroundColor="#6DABBF" valign="center" halign="center" noWrap="0" />
-        <widget name="list" position="10,80" font="Regular;22" size="800,430" scrollbarMode="showOnDemand" />
+        <widget source="InstallPath"     render="Label" position="10,0"   size="800,60" font="Regular;24" foregroundColor="#6DABBF" valign="center" halign="center" noWrap="0" />
+        <widget source="installAsFork"   render="Label" position="10,80"  size="800,30" font="Regular;24" foregroundColor="#6DABBF" valign="center" halign="center" noWrap="0" />
+        <widget name="list" position="10,130" font="Regular;22" size="800,400" scrollbarMode="showOnDemand" />
         <widget source="key_red"    render="Label" position="10,500" foregroundColor="red"    size="800,30" zPosition="1" font="Regular;24" valign="center" halign="left" transparent="1" />
         <widget source="key_green"  render="Label" position="10,500" foregroundColor="green"  size="800,30" zPosition="1" font="Regular;24" valign="center" halign="center" transparent="1" />
         <widget source="key_yellow" render="Label" position="10,500" foregroundColor="yellow" size="800,30" zPosition="1" font="Regular;24" valign="center" halign="right" transparent="1" />
@@ -157,8 +159,9 @@ class j00zekIPTVmgr(Screen,):
         else:
             skin  = """
     <screen name="j00zekIPTVmgr" position="center,center" size="620,540" title="j00zekIPTVmgr" >
-        <widget source="InstallPath" render="Label" position=" 10,0" size="600,40" font="Regular;18" foregroundColor="#6DABBF" valign="center" halign="center" noWrap="0" />
-        <widget name="list" position="5,60" font="Regular;20" size="600,430" scrollbarMode="showOnDemand" />
+        <widget source="InstallPath"     render="Label" position="10,0"  size="600,40" font="Regular;18" foregroundColor="#6DABBF" valign="center" halign="center" noWrap="0" />
+        <widget source="installAsFork"   render="Label" position="10,60" size="600,20" font="Regular;18" foregroundColor="#6DABBF" valign="center" halign="center" noWrap="0" />
+        <widget name="list" position="5,100" font="Regular;20" size="600,430" scrollbarMode="showOnDemand" />
         <widget source="key_red"    render="Label" position="10,500" foregroundColor="red"    size="600,30" zPosition="1" font="Regular;20" valign="center" halign="left" transparent="1" />
         <widget source="key_green"  render="Label" position="10,500" foregroundColor="green"  size="600,30" zPosition="1" font="Regular;20" valign="center" halign="center" transparent="1" />
         <widget source="key_yellow" render="Label" position="10,500" foregroundColor="yellow" size="600,30" zPosition="1" font="Regular;20" valign="center" halign="right" transparent="1" />
@@ -179,14 +182,14 @@ class j00zekIPTVmgr(Screen,):
             }, -1)
 
         self.visible = True
-        self["key_red"] = StaticText(_("Cancel"))
+        self["key_red"] = StaticText(_("Installation type"))
         self["key_green"] = StaticText(_("(Re)Install"))
         self["key_yellow"] = StaticText(_("Change path"))
         self["InstallPath"] = StaticText("")
+        self["installAsFork"] = StaticText("")
         self.onLayoutFinish.append(self.updateData) # dont start before gui is finished
         
     def updateData(self):
-        self["InstallPath"].setText( _("Install path: %s") % config.plugins.IPTVplayersManager.InstallPath.value)
         self.setTitle(self.MenuTitle)
         self.endrun() #reloadsList
     
@@ -194,7 +197,9 @@ class j00zekIPTVmgr(Screen,):
         self.selectFolder()
       
     def redButton(self):
-        self.close()
+        config.plugins.IPTVplayersManager.installAsFork.value = not config.plugins.IPTVplayersManager.installAsFork.value
+        config.plugins.IPTVplayersManager.installAsFork.save()
+        self.endrun() #reloadsList
         
     def greenButton(self):
         self.run()
@@ -212,6 +217,7 @@ class j00zekIPTVmgr(Screen,):
                     ClearMemory()
                     self.OptionScript = opcja[2]
                     self.OptionScript = self.OptionScript.replace('[InstallPath]', config.plugins.IPTVplayersManager.InstallPath.value)
+                    self.OptionScript = self.OptionScript.replace('[installAsFork]', str(config.plugins.IPTVplayersManager.installAsFork.value))
                     
                     if opcja[1] == "CONSOLE":
                         self.session.openWithCallback(self.endrun ,translatedConsole, title = "%s" % selecteditem, cmdlist = [ ('chmod 775 %s 2>/dev/null' %  self.OptionScript),('%s' %  self.OptionScript) ])
@@ -244,6 +250,10 @@ class j00zekIPTVmgr(Screen,):
                             
     def endrun(self, ret =0):
         self["InstallPath"].setText( _("Install path: %s") % config.plugins.IPTVplayersManager.InstallPath.value)
+        if config.plugins.IPTVplayersManager.installAsFork.value:
+            self["installAsFork"].setText( _("Each fork will be installed in own directory"))
+        else:
+            self["installAsFork"].setText( _("Each fork will be installed in IPTVplayer directory"))
         self.clearLIST()
         self.reloadLIST()
 

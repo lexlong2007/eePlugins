@@ -4,7 +4,10 @@
 #$2 = sciezka do katalogu wtyczki
 #$3 = URL
 #$4 = instalacja w katalogu oryginalnym IPTVplayer-a
-
+if [ ! -f /usr/lib/enigma2/python/boxbranding.so ];then
+  echo "_(This fork requires boxbranding.so to run, which does NOT exists in this software!!!)"
+  exit 1
+fi
 forkName=$1
 installPath=$2
 archiveURL=$3
@@ -103,6 +106,22 @@ else
         echo "[doReboot]"
 fi
 CleanFiles
+#workarround dla braku boxbranding.so
+if [ ! -f /usr/lib/enigma2/python/boxbranding.so ];then
+  echo "_(Simulating missing) boxbranding.so"
+  if [ `cat /proc/cpuinfo|tr '[:upper:]' '[:lower:]'|grep -c 'arm'` -gt 0 ];then cpuType='arm'
+  elif [ `cat /proc/cpuinfo|tr '[:upper:]' '[:lower:]'|grep -c 'mips'` -gt 0 ];then cpuType='mips'
+  elif [ `cat /proc/cpuinfo|tr '[:upper:]' '[:lower:]'|grep -c 'sh4'` -gt 0 ];then cpuType='sh4'
+  else cpuType='N/A'
+  fi
+  echo -e "# -*- coding: utf-8 -*-
+def getImageArch():
+  return '$cpuType'
+" > $installPath/$addonName/boxbranding.py
+  cp -f $installPath/$addonName/boxbranding.py $installPath/$addonName/tools/boxbranding.py
+  cp -f $installPath/$addonName/boxbranding.py $installPath/$addonName/components/boxbranding.py
+fi
+
 echo;echo "_(Press OK to close the window)"
 
 exit 0

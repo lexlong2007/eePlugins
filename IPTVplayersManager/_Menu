@@ -1,8 +1,8 @@
 MENU|Install or update
-ITEM|IPTVplayer fork Mario|CONSOLE|getFork.sh Mario [InstallPath] https://gitlab.com/zadmario/e2iplayer/-/archive/master/e2iplayer-master.tar.gz
-ITEM|IPTVplayer fork Mosz_Nowy|CONSOLE|getFork.sh MoszNowy [InstallPath] https://gitlab.com/mosz_nowy/e2iplayer/-/archive/master/e2iplayer-master.tar.gz
-ITEM|IPTVplayer fork PersianPros|CONSOLE|getFork.sh PersianPros [InstallPath] https://github.com/persianpros/e2iplayer/archive/master.tar.gz
-ITEM|Host infoversion|CONSOLE|getInfo.sh
+ITEM|IPTVplayer fork Mario|CONSOLE|getFork.sh Mario [InstallPath] https://gitlab.com/zadmario/e2iplayer/-/archive/master/e2iplayer-master.tar.gz [installAsFork]
+ITEM|IPTVplayer fork Mosz_Nowy|CONSOLE|getFork.sh MoszNowy [InstallPath] https://gitlab.com/mosz_nowy/e2iplayer/-/archive/master/e2iplayer-master.tar.gz [installAsFork]
+ITEM|IPTVplayer fork PersianPros|CONSOLE|getForkBoxBrand.sh PersianPros [InstallPath] https://github.com/persianpros/e2iplayer/archive/master.tar.gz [installAsFork]
+ITEM|Host infoversion|CONSOLE|getInfo.sh 
 ITEM|Host XXX|CONSOLE|getXXX.sh
 ITEM|Host TSIPLAYER|CONSOLE|getTSI.sh
 ITEM|Delete all forks|CONSOLE|deleteForks.sh

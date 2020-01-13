@@ -29,11 +29,11 @@ msgstr "Wykonać %s?"
 msgid "%s executed!"
 msgstr "Wykonano %s"
 
-msgid "has been installed properly :)"
-msgstr "poprawnie zainstalowany :)"
+msgid "has been installed properly"
+msgstr "poprawnie zainstalowany"
 
-msgid "has been updated properly :)"
-msgstr "poprawnie zaktualizowany :)"
+msgid "has been updated properly"
+msgstr "poprawnie zaktualizowany"
 
 msgid "Install or update"
 msgstr "Instalacja/Aktualizacja"
@@ -66,7 +66,7 @@ msgid "ERROR: updating"
 msgstr "BŁĄD: aktualizacji"
 
 msgid "Installing in"
-msgstr "Onstaluję w"
+msgstr "Instaluję w"
 
 msgid "ERROR: installing"
 msgstr "BŁĄD: installacji"
@@ -100,3 +100,39 @@ msgstr "(Prze)Instaluj"
 
 msgid "Change path"
 msgstr "Zmień ścieżkę"
+
+msgid "ERROR: unknown archive type"
+msgstr "BŁĄD: nieznany typ archiwum"
+
+msgid "ERROR: unzip not installed"
+msgstr "BŁĄD: unzip nie zainstalowany"
+
+msgid "Installation type"
+msgstr "Typ instalacji"
+
+msgid "Config mode"
+msgstr "Tryb konfiguracji"
+
+msgid "Each fork will be installed in own directory"
+msgstr "Każdy fork zostanie zainstalowany we własnym katalogu"
+
+msgid "Each fork will be installed in IPTVplayer directory"
+msgstr "Każdy fork zostanie zainstalowany w katalogu IPTVplayer-a"
+
+msgid "Each fork will use own configuration"
+msgstr "Każdy fork będzie korzystać z własnych ustawień"
+
+msgid "Each fork will use common IPTVplayer configuration"
+msgstr "Każdy fork będzie używał wspólnych ustawień"
+
+msgid "Linking"
+msgstr "Mapowanie"
+
+msgid "in E2 as"
+msgstr "w E2 jako"
+
+msgid "Simulating missing"
+msgstr "Symuluję brakujący"
+
+msgid "This fork requires boxbranding.so to run, which does NOT exists in this software!!!"
+msgstr "Ten fork wymaga pliku boxbranding.so, którego brak w tej dystrybucji!!!"
