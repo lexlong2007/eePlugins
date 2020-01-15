@@ -337,14 +337,15 @@ class UserSkin_Config(Screen, ConfigListScreen):
         self["key_green"] = Label(_("OK"))
         self["key_yellow"] = Label()
         self["key_blue"] = Label()
-        self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
+        self["setupActions"] = ActionMap(["SetupActions", "ColorActions","MenuActions"],
             {
-                "green": self.keyOk,
                 "red": self.cancel,
+                "green": self.keyOk,
                 "yellow": self.keyYellow,
                 "blue": self.keyBlue,
                 "cancel": self.cancel,
                 "ok": self.keyOkbutton,
+                "menu": self.keyMenu,
             }, -2)
             
         self["Picture"] = Pixmap()
@@ -404,18 +405,6 @@ class UserSkin_Config(Screen, ConfigListScreen):
             except Exception:
                 optionText = _("Display skin (OK):")
             self.list.append(getConfigListEntry( optionText, config.plugins.UserSkin.LCDmode) )
-        try:
-            if (path.exists(resolveFilename(SCOPE_PLUGINS, '../Components/Renderer/j00zekPiconAnimation.py')) or \
-                    path.exists(resolveFilename(SCOPE_PLUGINS, '../Components/Renderer/j00zekPiconAnimation.pyo')) or \
-                    path.exists(resolveFilename(SCOPE_PLUGINS, '../Components/Renderer/j00zekPiconAnimation.pyc'))) and \
-                    not config.plugins.j00zekPiconAnimation.UserPath is None and \
-                    not config.plugins.j00zekPiconAnimation.UserPathEnabled is None:
-                self.list.append(getConfigListEntry(_("---Picons animations optional settings---"), self.myUserSkin_fake_entry))
-                self.list.append(getConfigListEntry(_("Force using custom path:"), config.plugins.j00zekPiconAnimation.UserPathEnabled))
-                if config.plugins.j00zekPiconAnimation.UserPathEnabled.value == True:
-                    self.list.append(getConfigListEntry(_("Custom path:"), config.plugins.j00zekPiconAnimation.UserPath))
-        except Exception, e:
-            printDEBUG("[UserSkin:createConfigList] Exception %s" % str(e))
         self["config"].list = self.list
         self["config"].l.setList(self.list)
         if self.myUserSkin_active.value:
@@ -646,6 +635,14 @@ class UserSkin_Config(Screen, ConfigListScreen):
 
     def doNothing(self, ret = None):
         return
+      
+    def keyMenu(self):
+        if path.exists(resolveFilename(SCOPE_PLUGINS, 'SystemPlugins/e2componentsInitiator/plugin.pyo')):
+            from Plugins.SystemPlugins.e2componentsInitiator.plugin import e2ComponentsConfig
+            try:
+                self.session.openWithCallback(self.doNothing, e2ComponentsConfig)
+            except Exception as e:
+                self.session.openWithCallback(self.doNothing,MessageBox, "EXCEPTION: %s" % str(e), MessageBox.TYPE_INFO, timeout=10) 
       
     def keyBlue(self):
         from about import UserSkin_About
@@ -1242,7 +1239,7 @@ class TreeUserSkinScreens(Screen):
           
     def doNothing(self, ret = None):
         return
-      
+
     def keyBlue(self):
         selection = self["filelist"].getSelection()
         if selection is None or selection[1] == True: # isDir
