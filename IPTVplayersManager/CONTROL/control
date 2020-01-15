@@ -5,6 +5,6 @@ Depends:
 Description: zarządzanie modami IPTVplayera i dodatkowymi hostami
 Maintainer: j00zek
 Source: http://github.com/j00zek/eePlugins
-Version: 20.01.13.1328
+Version: 20.01.13.1408
 Architecture: all
 DestinationPath: /usr/lib/enigma2/python/Plugins/Extensions/IPTVplayersManager
