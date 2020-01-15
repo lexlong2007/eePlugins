@@ -37,6 +37,7 @@
     <widget source="ServiceEvent" render="j00zekLabel" position="1185,420" size="655,35" font="HD_Thin; 30" halign="left" noWrap="1" foregroundColor="light_yellow" backgroundColor="black" transparent="1">
       <convert type="EventName">Name</convert>
     </widget>
+    <eLabel position="1313,163" size="404,174" zPosition="1" backgroundColor="#866423" transparent="0"/>
     <widget source="ServiceEvent" render="j00zekPicons" picontype="zzpicon" position="1315,165" size="400,170" zPosition="2" alphatest="blend" transparent="1">
       <convert type="ServiceName">Reference</convert>
     </widget>

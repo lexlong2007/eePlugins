@@ -74,15 +74,15 @@
       <convert type="ClockToText">Default</convert>
     </widget>
     <eLabel text="-" position="595,824" size="20,36" font="Roboto_HD; 30" halign="left" backgroundColor="black" transparent="1" foregroundColor="white" />
-    <widget source="session.Event_Now" render="Label" position="625,824" size="845,36" font="Roboto_HD; 30" halign="left" backgroundColor="black" transparent="1" foregroundColor="#00cc99">
+    <widget source="session.Event_Now" render="Label" position="625,824" size="835,36" font="Roboto_HD; 30" halign="left" backgroundColor="black" transparent="1" foregroundColor="#00cc99">
       <convert type="EventName">Name</convert>
     </widget>
-    <widget source="session.Event_Now" render="Label" position="1470,824" size="160,36" font="Roboto_HD; 28" halign="right" backgroundColor="black" transparent="1">
+    <widget source="session.Event_Now" render="Label" position="1460,824" size="170,36" font="Roboto_HD; 28" halign="right" backgroundColor="black" transparent="1">
       <convert type="EventTime">Remaining</convert>
       <convert type="RemainingToText">InMinutes</convert>
     </widget>
     <eLabel backgroundColor="green" position="504,878" size="1123,5" transparent="0" zPosition="2" foregroundColor="black" />
-    <widget pixmap="BlackHarmony/gfx/progress_rec.png" position="504,877" render="Progress" size="1123,15" source="session.Event_Now" transparent="1" zPosition="3">
+    <widget pixmap="BlackHarmony/gfx/progress_rec.png" position="504,878" render="Progress" size="1123,5" source="session.Event_Now" transparent="1" zPosition="3">
       <convert type="EventTime">Progress</convert>
     </widget>
     <widget source="session.Event_Now" position="504,872" size="1123,15" render="BlackHarmonyPositionGauge" pointer="BlackHarmony/gfx/seekbutton.png:1,1" transparent="1" zPosition="3">
