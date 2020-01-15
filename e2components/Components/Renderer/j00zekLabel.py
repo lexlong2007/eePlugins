@@ -4,6 +4,8 @@
 #      by default min. font size is 3/4 of font size or 
 #                       can be defined by minFontSize="32" parameter
 #
+# Nie zgadzam sie na wykorzystywanie tego skryptu w projektach platnych jak np. Graterlia!!!
+#
 # Prosze NIE dystrybuowac tego skryptu w formie archwum zip, czy tar.gz
 # Zgadzam sie jedynie na dystrybucje z repozytorium opkg
 #

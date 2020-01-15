@@ -2,6 +2,15 @@
 # purpose:
 #       -smaller and more ellegant xml
 #       -should work quicker as no multiple checks necessary
+#
+#    Uszanuj moja prace i nie kasuj/zmieniaj informacji kto jest autorem renderera
+#    Please respect my work and don't delete/change name of the renderer author
+#
+#    Nie zgadzam sie na wykorzystywanie tego renderera w projektach platnych jak np. Graterlia!!!
+#
+# Prosze NIE dystrybuowac tego skryptu w formie archwum zip, czy tar.gz
+# Zgadzam sie jedynie na dystrybucje z repozytorium opkg
+#    
 
 from Renderer import Renderer
 
