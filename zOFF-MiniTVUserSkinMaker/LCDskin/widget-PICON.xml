@@ -1,0 +1,11 @@
+<definition>
+  <widgetInit script="self[''] = Pixmap()" />
+  <previewXML>
+    <widget name="" pixmap="Picon.png" picontype="picon" position="130,85" zPosition="4" size="100,60" transparent="1" alphatest="blend" />
+  </previewXML>
+  <widgetXML>
+    <widget source="session.CurrentService" render="j00zekPicons" picontype="picon" position="130,85" zPosition="4" size="100,60" transparent="1" alphatest="blend" >
+      <convert type="ServiceName">Reference</convert>
+    </widget>
+  </widgetXML>
+</definition>

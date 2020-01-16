@@ -1,0 +1,11 @@
+<definition>
+  <widgetInit script="from time import gmtime, strftime;self['TIME'] = Label(strftime('%H:%M', gmtime()))" />
+  <previewXML>
+    <widget name="TIME" position="320,45" size="150,35" foregroundColor="white" backgroundColor="#000000" zPosition="2" transparent="0" halign="right" font="Regular;32" />
+  </previewXML>
+  <widgetXML>
+      <widget source="global.CurrentTime" render="Label" position="320,45" size="150,35" foregroundColor="white" backgroundColor="#000000" zPosition="2" transparent="0" halign="right" font="Regular;32">
+        <convert type="ClockToText">Format:%H:%M</convert>
+      </widget>
+  </widgetXML>
+</definition>

@@ -1,0 +1,11 @@
+<definition>
+  <widgetInit script="self[''] = Pixmap()" />
+  <previewXML>
+    <widget name="" pixmap="BlackHarmony/icons/ico_rec_on.png" position="20,15" size="55,42" alphatest="blend" />
+  </previewXML>
+  <widgetXML>
+    <widget render="Pixmap" pixmap="BlackHarmony/icons/ico_rec_on.png" position="20,15" size="55,42" alphatest="blend" source="session.RecordState" >
+      <convert type="ConditionalShowHide" />
+    </widget>
+  </widgetXML>
+</definition>

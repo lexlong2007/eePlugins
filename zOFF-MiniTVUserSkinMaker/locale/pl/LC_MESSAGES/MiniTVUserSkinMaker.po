@@ -1,0 +1,181 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MiniTVUserSkinMaker v0.1\n"
+"POT-Creation-Date: 2017-10-11 18:44+0100\n"
+"PO-Revision-Date: 2017-10-22 10:03+0100\n"
+"Last-Translator: j00zek\n"
+"Language-Team: j00zek\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.5\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+msgid "miniTV skin creator"
+msgstr "Tworzenie skórek dla ekranu miniTV (LCD tunera)"
+
+msgid "pixmap path is incorrect"
+msgstr "niepoprawna ścieżka do pixmap-y"
+
+msgid "Select Widget:"
+msgstr "Wybierz widżet"
+
+msgid "Load saved design"
+msgstr "Załaduj zapisany wzór"
+
+msgid "Save design"
+msgstr "Zapisz wzór"
+
+msgid "Save as LCD skin"
+msgstr "Zapisz jako skórkę LCD"
+
+msgid "Save as UserSkin skin"
+msgstr "Zapisz jako skórkę użytkownika"
+
+msgid "action NOT ready yet"
+msgstr "akcja jeszcze nie gotowa"
+
+msgid "No saved designs found"
+msgstr "Nie znaleziono zapisanych wzorów"
+
+msgid "Select saved design to load:"
+msgstr "Wybierz wzór do załadowania:"
+
+msgid "I want to enter own name"
+msgstr "Chcę podać własną nazwę"
+
+msgid "Save as:"
+msgstr "Zapisz jako:"
+
+msgid "RECORDicon"
+msgstr "Ikona zapisu"
+
+msgid "16x9icon"
+msgstr "Ikona 16x9"
+
+msgid "CRYPTicon"
+msgstr "Ikona kodowania"
+
+msgid "DOLBYicon"
+msgstr "Ikona Dolby"
+
+msgid "PICONicon"
+msgstr "Pikona"
+
+msgid "WEATHERicon"
+msgstr "Ikona pogody"
+
+msgid "WEATHERtemp"
+msgstr "Temperatura"
+
+msgid "File %s.design\n ...has been written"
+msgstr "Zapisano plik...\n%s"
+
+msgid "Error occured: %s"
+msgstr "Wystąpił błąd: %s"
+
+msgid "Design %s\n ...has been loaded"
+msgstr "Wzór %s\n ... został załadowany"
+
+msgid "PICON"
+msgstr "Pikona"
+
+msgid "Widget attributes:"
+msgstr "Atrybuty widżeta:"
+
+msgid "Press OK to enable widget"
+msgstr "Naciśnij klawisz OK, aby aktywować widżet"
+
+msgid "Filename not selected, skin won't be saved!"
+msgstr "Nie podano nazwy pliku, skórka nie zostanie zapisana!"
+
+msgid "GUI needs a restart to apply a new skin\nDo you want to Restart the GUI now?"
+msgstr "Skórka została zapisana.\nZrestartować system, aby ją aktywować?"
+
+msgid "Skin has been written in .../LCD folder\nActivate it in UserSkin:\n'Skin personalization/UserSkin additional screens'"
+msgstr "Skórka została zapisana w katalogu .../LCD.\nAktywuj ją poprzez UserSkin:\n'Personalizacja skórki/Skórki użytkownika'"
+
+msgid "CHANNELNAME"
+msgstr "Nazwa kanału"
+
+msgid "CHANNELNUMBER"
+msgstr "Numer kanału"
+
+msgid "EVENTNAME"
+msgstr "Nazwa programu"
+
+msgid "EVENTNAMEscroll"
+msgstr "Nazwa programu (przewijana)"
+
+msgid "REMAININGtext"
+msgstr "Info ile minut do końca"
+
+msgid "Move/resize step"
+msgstr "Krok zmiany pozycji/wielkości"
+
+msgid "position"
+msgstr "pozycja"
+
+msgid "size"
+msgstr "wielkość"
+
+msgid "pixmap"
+msgstr "ikona"
+
+msgid "foregroundColor"
+msgstr "kolor tekstu"
+
+msgid "backgroundColor"
+msgstr "kolor tła"
+
+msgid "transparent"
+msgstr "przezroczystość"
+
+msgid "miniTV skin creator %s system: %s, display %d (%dx%d)"
+msgstr "Kreator skórek miniTV %s system: %s, wyświetlacz %d (%dx%d)"
+
+msgid "DATE"
+msgstr "Aktualna data"
+
+msgid "TIME"
+msgstr "Aktualny czas"
+
+msgid "REMAINING"
+msgstr "Czas do końca audycji (info)"
+
+msgid "EVENTTIMEprogress"
+msgstr "Czas do końca audycji (pasek)"
+
+msgid "UHDicon"
+msgstr "Ikona UHD"
+
+msgid "HD1080icon"
+msgstr "ikona 1080HD"
+
+msgid "HD720icon"
+msgstr "ikona 720HD"
+
+msgid "Very long event name to scroll"
+msgstr "Bardzo aleo to bardzo długa, przewijana nazwa audycji"
+
+msgid "No active widgets to save"
+msgstr "Brak aktywnych widżetów do zapisania"
+
+msgid "Preview skin"
+msgstr "Podgląd skórki"
+
+msgid "j00zekRunningText"
+msgstr "Nazwa programu (przewijana)"
+
+msgid "picontype"
+msgstr "typ pikony"
+
+msgid "VRicon"
+msgstr "Ikona rozdz. wideo"
+
+msgid "aqq"
+msgstr ""

@@ -1,0 +1,11 @@
+<definition>
+  <widgetInit script="self[''] = Label('Paramount HD')" />
+  <previewXML>
+    <widget name="" position="350,350" size="300,44" foregroundColor="white" backgroundColor="#000000" zPosition="3" transparent="0" halign="center" valign="center" font="Regular;40" />
+  </previewXML>
+  <widgetXML>
+      <widget source="session.CurrentService" render="Label" position="350,350" size="300,44" foregroundColor="white" backgroundColor="#000000" zPosition="3" transparent="0" halign="center" valign="center" font="Regular;40" >
+        <convert type="j00zekExtraTuner">ServiceName</convert>
+      </widget>
+  </widgetXML>
+</definition>
