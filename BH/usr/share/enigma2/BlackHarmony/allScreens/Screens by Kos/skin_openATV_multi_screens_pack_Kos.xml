@@ -354,8 +354,8 @@
     </widget>
     <widget source="session.FrontendStatus" render="Label" position="1766,944" size="100,25" font="Roboto_HD; 22" halign="left" zPosition="1" backgroundColor="black" transparent="1">
       <convert type="FrontendInfo">AGC</convert>
-    </widget> 
-    <widget source="session.CurrentService" render="j00zekVideoResolutionIcon" position="1135,805" size="37,20" zPosition="4" alphatest="blend"/>  
+    </widget>
+  </screen>  
   <screen name="SecondInfoBarECM" position="center,center" size="1000,820" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1000,820" pixmap="BlackHarmony/bg_design/small.png" />
     <eLabel text="2nd Infobar ECM" position="425,35" size="520,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>

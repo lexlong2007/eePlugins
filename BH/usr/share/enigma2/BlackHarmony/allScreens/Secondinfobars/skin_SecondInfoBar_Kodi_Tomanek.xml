@@ -108,7 +108,7 @@
        <convert type="j00zekMoon">oswietlenie</convert>
     </widget>    
  
- <widget alphatest="on" path="/usr/share/enigma2/BlackHarmony/icons" picontype="MoonPhase" position="1650,570" render="j00zekPicons" showdefaultpic="no" size="85,85" source="global.CurrentTime" zPosition="8">
+ <widget alphatest="on" path="BlackHarmony/icons" picontype="MoonPhase" position="1650,570" render="j00zekPicons" showdefaultpic="no" size="85,85" source="global.CurrentTime" zPosition="8">
     <convert type="j00zekMoon">obraz</convert>
   </widget>  
   
@@ -235,7 +235,7 @@
   
   
   <!-- STATEICON KODI -->
-  	<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ShareLCDwithKODI/kodi_logo.jpg" position="1700,865" zPosition="1" size="140,45" alphatest="blend" />
+  	<ePixmap pixmap="BlackHarmony/gfx/kodi_logo.jpg" position="1700,865" zPosition="1" size="140,45" alphatest="blend" />
 
         <widget position="1740,915" size="64,64" source="session.CurrentService" render="j00zekPicons" path="/usr/lib/enigma2/python/Plugins/Extensions/ShareLCDwithKODI"  picontype="icons" showdefaultpic="no" zPosition="5" alphatest="blend"> 
             <convert type="j00zekLCD4KODI">stateicon</convert>
