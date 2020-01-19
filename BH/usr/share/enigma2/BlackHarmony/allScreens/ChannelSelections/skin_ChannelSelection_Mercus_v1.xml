@@ -25,7 +25,7 @@
     <!--widget source="ServiceEvent" render="Label" position="105,515" size="635,300" font="Roboto_HD; 26" backgroundColor="background" transparent="1">
     <convert type="EventName">ExtendedDescription</convert>
   </widget-->
-    <widget render="BlackHarmonyRunningText" source="ServiceEvent" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=6000,wrap" halign="center" font="Roboto_HD; 28" backgroundColor="background" position="1195,420" size="655,311" transparent="1">
+    <widget render="j00zekModRunningText" source="ServiceEvent" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=6000,wrap" halign="center" font="Roboto_HD; 28" backgroundColor="background" position="1195,420" size="655,311" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
     <widget source="ServiceEvent" render="Progress" position="1357,774" size="376,6" pixmap="BlackHarmony/gfx/progress_cs.png" transparent="1">
