@@ -9,6 +9,7 @@
     <font filename="/usr/share/enigma2/BlackHarmony/fonts/BloggerSans-Light.ttf" name="Regular" scale="110" />
     <font filename="/usr/share/enigma2/BlackHarmony/fonts/BloggerSans-Light.ttf" name="Roboto_HD" scale="100" />
     <font filename="/usr/share/enigma2/BlackHarmony/fonts/hd_thin.ttf" name="HD_Thin" scale="100" />
+    <font filename="/usr/share/enigma2/BlackHarmony/fonts/Roboto-Light.ttf" name="RegularLight" scale="100" />
     
     <alias name="ChoiceBoxDescription" font="Roboto_HD" size="26" height="40"/>
     <alias name="ChoiceList" font="Roboto_HD" size="27" height="40"/>

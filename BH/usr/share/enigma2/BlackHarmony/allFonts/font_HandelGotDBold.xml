@@ -9,6 +9,7 @@
     <font filename="/usr/share/enigma2/BlackHarmony/fonts/HandelGotDBol.ttf" name="Regular" scale="110" />
     <font filename="/usr/share/enigma2/BlackHarmony/fonts/HandelGotDBol.ttf" name="Roboto_HD" scale="100" />
     <font filename="/usr/share/enigma2/BlackHarmony/fonts/hd_thin.ttf" name="HD_Thin" scale="100" />
+    <font filename="/usr/share/enigma2/BlackHarmony/fonts/Roboto-Light.ttf" name="RegularLight" scale="100" />
     
     <alias name="PluginBrowser0" font="Regular" size="25" height="70" />
     <alias name="PluginBrowser1" font="Regular" size="20" />
