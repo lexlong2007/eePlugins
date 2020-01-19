@@ -430,8 +430,6 @@ class UserSkin_Config(Screen, ConfigListScreen):
                     self["key_yellow"].setText(_("User skins"))
                 else:
                     self["key_yellow"].setText("")
-            elif self["config"].getCurrent()[1] == config.plugins.j00zekPiconAnimation.UserPath:
-                self.createConfigList()
         except Exception: pass
 
     def selectionChanged(self):
@@ -497,11 +495,6 @@ class UserSkin_Config(Screen, ConfigListScreen):
         else:
             self["config"].setCurrentIndex(0)
 
-    def LocationBoxCB(self,ret):
-        if DBG == True: printDEBUG(ret)
-        if ret:
-            config.plugins.j00zekPiconAnimation.UserPath.value = ret
-        
     def LCDskinCB(self,ret):
         if DBG == True: printDEBUG("LCDskinCB >>>")
         def installHomarLCDscreens(ret = False):
@@ -525,9 +518,6 @@ class UserSkin_Config(Screen, ConfigListScreen):
                 for item in self.LCDscreensList:
                     mySkin.append((item[1] , item[0]))
                 self.session.openWithCallback(self.LCDskinCB, ChoiceBox, title = _("Choose LCD skin:"), list = mySkin)
-            elif config.plugins.j00zekPiconAnimation.UserPath is not None and self["config"].getCurrent()[1] == config.plugins.j00zekPiconAnimation.UserPath:
-                from Screens.LocationBox import LocationBox
-                self.session.openWithCallback(self.LocationBoxCB, LocationBox)
             else:
                 self.keyOk()
         except Exception as e:
@@ -1223,11 +1213,12 @@ class TreeUserSkinScreens(Screen):
                 self["key_yellow"].setText(_("Delete"))
                 self.DeleteScreen = True
 
-            self.PreviewTimer.start(100,False)
             if self.filelist.getFilename().lower().find('infobar') != -1:
                 self["key_blue"].setText(_("Preview"))
             else:
                 self["key_blue"].setText("")
+
+            self.PreviewTimer.start(100,False)
             
     def __getCurrentDir(self):
         d = self.filelist.getCurrentDirectory()
@@ -1244,7 +1235,7 @@ class TreeUserSkinScreens(Screen):
         selection = self["filelist"].getSelection()
         if selection is None or selection[1] == True: # isDir
             return
-        if path.exists(self.filelist.getCurrentDirectory() + '/' + self.filelist.getFilename()):
+        if self.filelist.getFilename().lower().find('infobar') != -1 and path.exists(self.filelist.getCurrentDirectory() + '/' + self.filelist.getFilename()):
             import xml.etree.cElementTree as ET
             root = ET.parse(self.filelist.getCurrentDirectory() + '/' + self.filelist.getFilename()).getroot()
             NumberOfScreens = len(root.findall('screen'))
@@ -1270,7 +1261,10 @@ class TreeUserSkinScreens(Screen):
     def keyBlueRet(self, ret = ('fake',0) ):
         if DBG == True: printDEBUG(ret)
         if ret and ret[1] > 0:
-            self.session.openWithCallback(self.doNothing, UserSkinPreviewSkin, self.filelist.getCurrentDirectory() + '/' + self.filelist.getFilename(), ret[1])
+            try:
+                self.session.openWithCallback(self.doNothing, UserSkinPreviewSkin, self.filelist.getCurrentDirectory() + '/' + self.filelist.getFilename(), ret[1])
+            except Exception as e:
+                pass
 
 ################################################################################################################################################################
 import xml.etree.cElementTree as ET
