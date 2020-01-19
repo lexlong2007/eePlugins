@@ -71,7 +71,7 @@
     </widget>
     <ePixmap position="1260,770" size="44,20" zPosition="1" pixmap="BlackHarmony/icons/ico_hbbtv_on.png" alphatest="blend"/>
     <widget source="session.CurrentService" render="Pixmap" position="1260,770" size="44,20" zPosition="2" pixmap="BlackHarmony/icons/ico_hbbtv_off.png" alphatest="blend">
-      <convert type="BlackHarmonyServiceInfoEX">HasHBBTV</convert>
+      <convert type="j00zekModServiceInfoEX">HasHBBTV</convert>
       <convert type="ConditionalShowHide"/>
     </widget>
     <ePixmap position="1219,770" size="26,20" zPosition="1" pixmap="BlackHarmony/icons/ico_crypt_off.png" alphatest="blend"/>
@@ -112,7 +112,7 @@
     </widget>
     <widget source="session.CurrentService" render="j00zekFrontEndIcon" position="848,770" size="46,20" zPosition="1" alphatest="blend"/>
     <widget source="session.CurrentService" render="Pixmap" pixmap="BlackHarmony/icons/ico_iptv_on.png" position="848,770" size="46,20" zPosition="5" alphatest="blend">
-      <convert type="BlackHarmonyServiceInfoEX">IsIPStream</convert>
+      <convert type="j00zekModServiceInfoEX">IsIPStream</convert>
       <convert type="ConditionalShowHide" />
     </widget>
     <widget source="session.CurrentService" render="j00zekLabel" position="65,757" size="700,48" font="HD_Thin; 42" valign="top" noWrap="1" backgroundColor="black" transparent="1" halign="left">
@@ -349,7 +349,7 @@
       <convert type="ConditionalShowHide"/>
     </widget>
     <widget source="session.CurrentService" render="FixedLabel" text="FTA" font="Roboto_HD; 22" position="537,955" size="220,25" halign="center" backgroundColor="black" foregroundColor="yellow" zPosition="1" valign="center" transparent="1">
-      <convert type="BlackHarmonyServiceInfoEX">IsFta</convert>
+      <convert type="j00zekModServiceInfoEX">IsFta</convert>
       <convert type="ConditionalShowHide"/>
     </widget>
     <widget source="session.CurrentService" render="FixedLabel" text="NET" font="Roboto_HD; 22" position="537,955" size="60,25" halign="center" backgroundColor="black" foregroundColor="#00FF00" zPosition="2" valign="center" transparent="1">
@@ -366,23 +366,27 @@
     </widget>
     <!-- Tuner type -->
     <widget source="session.CurrentService" render="FixedLabel" text="DVB-S" position="1523,850" size="85,25" font="Roboto_HD; 22" halign="center" zPosition="1" foregroundColor="green" backgroundColor="black" transparent="1" >
-      <convert type="BlackHarmonyServiceInfoEX">IsSatelliteS</convert>
+      <convert type="j00zekModServiceInfoEX">IsSatelliteS</convert>
       <convert type="ConditionalShowHide" />
     </widget>
     <widget source="session.CurrentService" render="FixedLabel" text="DVB-S2" position="1523,850" size="85,25" font="Roboto_HD; 22" halign="left" zPosition="2" foregroundColor="green" backgroundColor="black" transparent="1" >
-      <convert type="BlackHarmonyServiceInfoEX">IsSatelliteS2</convert>
+      <convert type="j00zekModServiceInfoEX">IsSatelliteS2</convert>
       <convert type="ConditionalShowHide" />
     </widget>	
-    <widget source="session.CurrentService" render="FixedLabel" text="DVB-T" position="1523,850" size="85,25" font="Roboto_HD; 22" halign="center" zPosition="3" foregroundColor="light_yellow" backgroundColor="black" transparent="1" >
-      <convert type="BlackHarmonyServiceInfoEX">IsCable</convert>
+    <widget source="session.CurrentService" render="FixedLabel" text="DVB-c" position="1523,850" size="85,25" font="Roboto_HD; 22" halign="center" zPosition="3" foregroundColor="light_yellow" backgroundColor="black" transparent="1" >
+      <convert type="j00zekModServiceInfoEX">IsCable</convert>
       <convert type="ConditionalShowHide" />
     </widget>	
-    <widget source="session.CurrentService" render="FixedLabel" text="DVB-C" position="1523,850" size="85,25" font="Roboto_HD; 22"  halign="center" zPosition="4" foregroundColor="yellow" backgroundColor="black" transparent="1" >
-      <convert type="BlackHarmonyServiceInfoEX">IsTerrestrial</convert>
+    <widget source="session.CurrentService" render="FixedLabel" text="DVB-T" position="1523,850" size="85,25" font="Roboto_HD; 22"  halign="center" zPosition="4" foregroundColor="yellow" backgroundColor="black" transparent="1" >
+      <convert type="j00zekModServiceInfoEX">IsTerrestrial</convert>
       <convert type="ConditionalShowHide" />
-    </widget>	
+    </widget>
+    <widget source="session.CurrentService" render="FixedLabel" text="DVB-T2" position="1523,850" size="85,25" font="Roboto_HD; 22"  halign="center" zPosition="4" foregroundColor="yellow" backgroundColor="black" transparent="1" >
+      <convert type="j00zekModServiceInfoEX">IsTerrestrialT2</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
     <widget source="session.CurrentService" render="FixedLabel" text="Stream" position="1523,850" size="85,25" font="Roboto_HD; 21" halign="left" zPosition="5" foregroundColor="#93F600" backgroundColor="black" transparent="1" >
-      <convert type="BlackHarmonyServiceInfoEX">IsStreamTV</convert>
+      <convert type="j00zekModServiceInfoEX">IsStreamTV</convert>
       <convert type="ConditionalShowHide" />
     </widget> 
   </screen>

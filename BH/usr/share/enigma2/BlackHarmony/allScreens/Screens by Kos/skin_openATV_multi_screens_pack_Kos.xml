@@ -284,7 +284,7 @@
     </widget>
     <ePixmap position="1316,805" size="44,20" zPosition="1" pixmap="BlackHarmony/icons/ico_hbbtv_on.png" alphatest="blend"/>
     <widget source="session.CurrentService" render="Pixmap" position="1316,805" size="44,20" zPosition="2" pixmap="BlackHarmony/icons/ico_hbbtv_off.png" alphatest="blend">
-      <convert type="BlackHarmonyServiceInfoEX">HasHBBTV</convert>
+      <convert type="j00zekModServiceInfoEX">HasHBBTV</convert>
       <convert type="ConditionalShowHide" />
     </widget>
     <widget source="global.CurrentTime" render="Label" position="1718,797" size="140,48" font="HD_Thin; 42" halign="right" valign="center" backgroundColor="black" transparent="1" >
@@ -371,7 +371,7 @@
     </widget>
     <eLabel text="Decoded from :" position="60,160" size="200,35" font="Roboto_HD; 27" foregroundColor="white" backgroundColor="black" transparent="1" />
     <widget source="session.CurrentService" render="FixedLabel" text="FTA" font="Roboto_HD; 27" position="250,160" size="880,35" zPosition="1" foregroundColor="#FFFF00" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonyServiceInfoEX">IsFta</convert>
+      <convert type="j00zekModServiceInfoEX">IsFta</convert>
       <convert type="ConditionalShowHide" />
     </widget>
     <widget source="session.CurrentService" render="FixedLabel" text="Internet" font="Roboto_HD; 27" position="250,160" size="880,35" zPosition="2" foregroundColor="#00FF00" backgroundColor="black" transparent="1">
@@ -526,7 +526,7 @@
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
     <widget alphatest="blend" position="1110,183" render="j00zekPicons" picontype="picon" size="220,132" source="Service">
-      <convert type="BlackHarmonyServiceName2">Reference</convert>
+      <convert type="j00zekModServiceName2">Reference</convert>
     </widget>
     <widget  source="Event" render="Label" font="Roboto_HD; 26" position="1340,275" size="80,30" halign="right" foregroundColor="white" backgroundColor="black" transparent="1">
       <convert type="EventTime">StartTime</convert>
@@ -587,7 +587,7 @@
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
     <widget alphatest="blend" position="1110,183" render="j00zekPicons" picontype="picon" size="220,132" source="Service">
-      <convert type="BlackHarmonyServiceName2">Reference</convert>
+      <convert type="j00zekModServiceName2">Reference</convert>
     </widget>
     <widget  source="Event" render="Label" font="Roboto_HD; 26" position="1340,275" size="80,30" halign="right" foregroundColor="white" backgroundColor="black" transparent="1">
       <convert type="EventTime">StartTime</convert>
@@ -1684,7 +1684,7 @@ self.instance.resize(eSize(*wsize))
     <widget source="Title" render="Label" position="1017,55" size="820,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget name="timerlist" position="95,175" size="1025,750" itemHeight="125" iconMargin="50" rowSplit="40" setEventNameFont="Roboto_HD; 28" setServiceNameFont="Roboto_HD; 26" setFont="Roboto_HD; 25" satPosLeft="500" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_1025_125.png" backgroundColor="black" transparent="1"/>
     <widget source="ServiceEvent" render="j00zekPicons" picontype="picon" position="1270,170" size="220,132" zPosition="2" transparent="1" alphatest="blend">
-      <convert type="BlackHarmonyServiceName2">Reference</convert>
+      <convert type="j00zekModServiceName2">Reference</convert>
     </widget>
     <widget source="Event" render="Label" position="1190,337" size="650,70" font="Roboto_HD; 32" backgroundColor="black" transparent="1" foregroundColor="green" halign="left" valign="bottom">
       <convert type="EventName">Name</convert>
@@ -5277,10 +5277,30 @@ self['config'].l.setSeperation(int(300*f))
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="447,779" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="735,779" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="1118,779" size="35,27" alphatest="blend"/>
+    <ePixmap position="1410,779" size="60,30" pixmap="BlackHarmony/buttons/key_menu.png" alphatest="blend" />
     <widget name="key_red" position="127,778" size="280,27" zPosition="1" font="Roboto_HD; 24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1"/>
     <widget name="key_yellow" position="790,778" size="280,26" zPosition="1" font="Roboto_HD;24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1"/>
     <widget name="key_green" position="500,778" size="180,27" zPosition="1" font="Roboto_HD; 24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1"/>
     <widget name="key_blue" position="1173,778" size="280,26" zPosition="1" font="Roboto_HD;24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1"/>
+  </screen>
+  <screen name="e2ComponentsConfig" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png"/>
+    <widget source="global.CurrentTime" render="Label" position="40,25" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="125,25" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+    </widget>
+    <widget source="Title" render="Label" position="660,25" size="520,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget name="config" position="65,140" size="1095,640" font="Roboto_HD; 27" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" itemHeight="35" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_1095_35.png" backgroundColor="black" transparent="1"/>
+    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="41,850" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="328,850" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="615,850" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="902,850" size="35,27" alphatest="blend"/>
+    <widget name="key_red" position="91,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <widget name="key_green" position="378,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <widget name="key_yellow" position="665,849" size="230,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <widget name="key_blue" position="952,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
   </screen>
   <screen name="UserSkinScreens" position="204,135" size="1522,850" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1522,850" pixmap="BlackHarmony/bg_design/skin_conf.png"/>
@@ -5742,7 +5762,7 @@ self['config'].l.setSeperation(int(300*f))
       <convert type="EventName">Name</convert>
     </widget>
     <widget alphatest="blend" position="1390,163" size="400,170" render="j00zekPicons" picontype="zzpicon" source="Service" transparent="1">
-      <convert type="BlackHarmonyServiceName2">Reference</convert>
+      <convert type="j00zekModServiceName2">Reference</convert>
     </widget>
     <widget source="Event" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" position="1350,525" size="480,425" font="Roboto_HD;28" halign="left" foregroundColor="white" backgroundColor="black" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
@@ -5792,7 +5812,7 @@ self['config'].l.setSeperation(int(300*f))
       <convert type="EventName">Name</convert>
     </widget>
     <widget alphatest="blend" position="1390,163" size="400,170" render="j00zekPicons" picontype="zzpicon" source="Service" transparent="1">
-      <convert type="BlackHarmonyServiceName2">Reference</convert>
+      <convert type="j00zekModServiceName2">Reference</convert>
     </widget>
     <widget source="Event" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" position="1350,525" size="480,425" font="Roboto_HD;28" halign="left" foregroundColor="white" backgroundColor="black" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
@@ -5840,7 +5860,7 @@ self['config'].l.setSeperation(int(300*f))
       <convert type="EventName">Name</convert>
     </widget>
     <widget alphatest="blend" position="1345,163" size="400,170" render="j00zekPicons" picontype="zzpicon" source="Service" transparent="1">
-      <convert type="BlackHarmonyServiceName2">Reference</convert>
+      <convert type="j00zekModServiceName2">Reference</convert>
     </widget>
     <widget source="Event" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" position="1251,525" size="580,425" font="Roboto_HD;28" halign="left" foregroundColor="white" backgroundColor="black" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
@@ -5888,7 +5908,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="Service" render="CoolNextEvent" position="90,285" size="1130,290" font="Roboto_HD;30" halign="left" foregroundColor="white" backgroundColor="black" transparent="1">
     </widget>
     <widget alphatest="blend" position="1335,226" size="400,170" render="j00zekPicons" picontype="zzpicon" source="Service" transparent="1">
-      <convert type="BlackHarmonyServiceName2">Reference</convert>
+      <convert type="j00zekModServiceName2">Reference</convert>
     </widget>
     <widget source="Event" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" position="90,581" size="1740,335" font="Roboto_HD;28" halign="left" foregroundColor="white" backgroundColor="black" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
@@ -5935,7 +5955,7 @@ self['config'].l.setSeperation(int(300*f))
       <convert type="EventName">Name</convert>
     </widget>
     <widget alphatest="blend" position="1345,163" size="400,170" render="j00zekPicons" picontype="zzpicon" source="Service" transparent="1">
-      <convert type="BlackHarmonyServiceName2">Reference</convert>
+      <convert type="j00zekModServiceName2">Reference</convert>
     </widget>
     <widget source="Event" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" position="1251,525" size="580,425" font="Roboto_HD;28" halign="left" foregroundColor="white" backgroundColor="black" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
@@ -5962,7 +5982,7 @@ self['config'].l.setSeperation(int(300*f))
     </widget>
     <widget source="Title" render="Label" position="817,55" size="1025,35" font="Roboto_HD; 30" backgroundColor="black" transparent="1" halign="right"/>
     <widget alphatest="blend" position="110,181" render="j00zekPicons" picontype="zzpicon" size="400,170" source="Service">
-      <convert type="BlackHarmonyServiceName2">Reference</convert>
+      <convert type="j00zekModServiceName2">Reference</convert>
     </widget>
     <widget font="HD_Thin; 35" foregroundColor="light_yellow" position="555,197" render="Label" size="735,45" source="Service" backgroundColor="black" transparent="1">
       <convert type="ServiceName">Name</convert>
@@ -6521,7 +6541,7 @@ self['config'].l.setSeperation(int(300*f))
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
     <widget alphatest="blend" position="1110,183" render="j00zekPicons" picontype="picon" size="220,132" source="Service">
-      <convert type="BlackHarmonyServiceName2">Reference</convert>
+      <convert type="j00zekModServiceName2">Reference</convert>
     </widget>
     <widget  source="Event" render="Label" font="Roboto_HD; 26" position="1340,275" size="80,30" halign="right" foregroundColor="white" backgroundColor="black" transparent="1">
       <convert type="EventTime">StartTime</convert>
@@ -6923,9 +6943,11 @@ self['config'].l.setSeperation(int(300*f))
     <widget name="filelist" itemHeight="35" font="Roboto_HD; 26" position="73,188" size="850,500" scrollbarMode="showOnDemand" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" selectionPixmap="BlackHarmony/menu/sel_850_35.png" backgroundColor="black" transparent="1"/>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="47,760" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="273,760" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="499,760" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="723,760" size="35,27" alphatest="blend"/>
     <widget name="key_red" position="87,759" size="180,27" zPosition="1" font="Roboto_HD; 24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1"/>
     <widget name="key_green" position="313,759" size="180,27" zPosition="1" font="Roboto_HD; 24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1"/>
+    <widget name="key_yellow" position="538,759" size="180,27" zPosition="1" font="Roboto_HD;24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1"/>
     <widget name="key_blue" position="763,759" size="180,30" zPosition="1" font="Roboto_HD;24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1"/>
   </screen>
   <screen name="picshow" position="204,34" size="1522,1022" title=" " flags="wfNoBorder" backgroundColor="transparent">
@@ -7858,7 +7880,7 @@ self['config'].l.setSeperation(int(300*f))
   <screen name="QuickEPG" position="345,93" size="1232,908" title="Eventview" flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png" />
     <widget alphatest="blend" position="940,135" render="j00zekPicons" picontype="picon" size="220,132" source="Service">
-      <convert type="BlackHarmonyServiceName2">Reference</convert>
+      <convert type="j00zekModServiceName2">Reference</convert>
     </widget>
     <widget source="global.CurrentTime" render="Label" position="40,25" size="80,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Default</convert>

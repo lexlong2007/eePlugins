@@ -23,10 +23,10 @@
       <convert type="ClockToText">Format:- %H:%M</convert>
     </widget>
     <widget source="ServiceEvent" render="Label" position="1205,55" size="635,30" font="Roboto_HD; 25" halign="right" noWrap="1" valign="center" text="19.2E  DVB-S2  10627 27500 3/4 8PSK" zPosition="3" foregroundColor="white" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonyServiceName2">%O  %s  %F %p %Y %f %M %b</convert>
+      <convert type="j00zekModServiceName2">%O  %s  %F %p %Y %f %M %b</convert>
     </widget>
     <widget source="ServiceEvent" render="Label" position="750,55" size="400,35" font="Roboto_HD; 25" halign="center" foregroundColor="#00F0A30A" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonyServiceName2">Provider</convert>
+      <convert type="j00zekModServiceName2">Provider</convert>
     </widget>
     <widget render="j00zekModRunningText" source="ServiceEvent" position="1185,465" size="655,265" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=scroll,startdelay=6000,oneshot=5000,wrap" halign="left" font="Roboto_HD; 28" backgroundColor="black" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
