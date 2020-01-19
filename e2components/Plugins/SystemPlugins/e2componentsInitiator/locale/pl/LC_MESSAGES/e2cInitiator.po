@@ -2,67 +2,129 @@ msgid ""
 msgstr ""
 "Project-Id-Version: j00zekOPKGmanager\n"
 "POT-Creation-Date: 2016-01-07 12:00+0100\n"
-"PO-Revision-Date: 2016-04-13 14:21+0200\n"
+"PO-Revision-Date: 2020-01-19 12:43+0100\n"
 "Last-Translator: j00zek\n"
 "Language-Team: j00zek\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.6\n"
+"X-Generator: Poedit 1.7.6\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#init.py
-msgid "not set"
-msgstr "nie zdefiniowana"
+# init.py
+msgid "AUTO"
+msgstr "Automatycznie"
 
 msgid "Defined in skin"
 msgstr "Zdefinowane w skórce"
 
+msgid "none"
+msgstr "Brak"
+
+msgid "NONE"
+msgstr "Brak"
+
+msgid "not set"
+msgstr "nie zdefiniowana"
+
 msgid "same as defined font"
-msgstr "100%% zdefiniowanej czcionki"
+msgstr "100% zdefiniowanej czcionki"
 
 msgid "75%% of defined font"
-msgstr "75%% zdefiniowanej czcionki"
+msgstr "75% zdefiniowanej czcionki"
 
 msgid "67%% of defined font"
-msgstr "67%% zdefiniowanej czcionki"
+msgstr "67% zdefiniowanej czcionki"
 
 msgid "50%% of defined font"
-msgstr "50%% zdefiniowanej czcionki"
+msgstr "50% zdefiniowanej czcionki"
 
-#buildList
-msgid "---User paths---"
-msgstr "---Ścieżki użytkownika---"
+msgid "RUNNING"
+msgstr "W ruchu"
 
-msgid "Picons animations user path:"
-msgstr "do animacji pikon:"
+msgid "same as max font"
+msgstr "taka sama jak maksymalna czcionka"
 
-msgid "VRicons user path:"
-msgstr "do ikon rozdzielczości video:"
+msgid "SWIMMING"
+msgstr "Pływanie"
 
-msgid "FEicons user path:"
-msgstr "do pikon rodzaju źródła:"
+msgid "SHORT_DESCRIPTION"
+msgstr "Krótki opis"
+
+msgid "FULL_DESCRIPTION"
+msgstr "Pełny opis"
+
+# buildList
+msgid "Alternate user icons path:"
+msgstr "Ścieżka użytkownika ikon alternatywnych:"
+
+msgid "Ammend Font size"
+msgstr "Zmień rozmiar czcionki"
 
 msgid "---Dynamic Font Size---"
-msgstr "---Dynamiczna zmiana czcionki---"
+msgstr "--- Dynamiczna zmiana czcionki ---"
 
-msgid "Service Name minimum font size"
-msgstr "Minimalna wielkość nazwy kanału"
+msgid "FEicons user path:"
+msgstr "Ścieżka użytkownika FEicons:"
 
 msgid "Event Name minimum font size"
 msgstr "Minimalna wielkość tytułu audycji"
 
-#other def
+msgid "---Event description (EventName)---"
+msgstr "--- Opis zdarzenia (EventName) ---"
+
+msgid "Initial delay"
+msgstr "Początkowe opóźnienie"
+
+msgid "Information presented"
+msgstr "Informacje przedstawione"
+
+msgid "Picons animations user path:"
+msgstr "Ścieżka użytkownika animacji Picons:"
+
+msgid "Speed"
+msgstr "Prędkość"
+
+msgid "---Scrolling text---"
+msgstr "--- Przewijanie tekstu ---"
+
+msgid "Service Name minimum font size"
+msgstr "Minimalna wielkość nazwy kanału"
+
+msgid "Type on multiline"
+msgstr "Pisz na multilinii"
+
+msgid "---User paths---"
+msgstr "--- Ścieżki użytkownika ---"
+
+msgid "VRicons user path:"
+msgstr "do ikon rozdzielczości video:"
+
+# other def
 msgid "Are you sure you want to save this configuration?"
 msgstr "Na pewno zapisać Tę konfigurację?"
+
+msgid "Cancel"
+msgstr "Anuluj"
+
+msgid "Exit"
+msgstr "Wyjście"
 
 msgid "j00zek e2components configuration"
 msgstr "Konfiguracja komponentów enigmy j00zka"
 
+msgid "Refresh"
+msgstr "Odśwież"
+
 msgid "Set Default value"
 msgstr "Zresetuj ustawienie"
 
+msgid "Select"
+msgstr "Wybierz"
+
+msgid "Save"
+msgstr "Zapisz"
