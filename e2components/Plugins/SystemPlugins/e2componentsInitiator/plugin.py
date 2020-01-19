@@ -11,74 +11,51 @@
 #  Zgadzam sie jedynie na dystrybucje z repozytorium opkg
 #
 ################################################################################
+from . import mygettext as _
 from Components.config import *
 from Plugins.Plugin import PluginDescriptor
-from Screens.Screen import Screen 
+from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
-from Components.ActionMap import ActionMap 
+from Components.ActionMap import ActionMap
 from os import path as os_path
 ######################################################################################
 def sessionstart(session, **kwargs):
     try:
-        if reason == 0:
-            #from Components.Sources.mySource import mySource
-            #session.screen['mySource'] = mySource()
-            print "e2components config initiated"
+        #from Components.Sources.mySource import mySource
+        #session.screen['mySource'] = mySource()
+        print "e2components config initiated"
     except Exception, e:
         print "Exception: %s" % str(e)
 
 def Plugins(**kwargs):
     return [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart)]
 ######################################################################################
-MinFontChoices = [ ("OFF", _("Defined in skin")) , ("0.75", _("3/4 of defined font")) , ("0,67", _("2/3 of defined font")) , ("0,5", _("1/2 of defined font")) ]
-######################################################################################
-
-config.plugins.j00zekCC = ConfigSubsection()
 config.plugins.j00zekCC.FakeEntry = NoSave(ConfigNothing()) 
-
-config.plugins.j00zekCC.PiconAnimation_UserPath = ConfigDirectory(default = _('default'))  
-config.plugins.j00zekCC.j00zekFEicon_UserPath = ConfigDirectory(default = _('default'))
-config.plugins.j00zekCC.j00zekVRicon_UserPath = ConfigDirectory(default = _('default'))
-#j00zekLabel
-config.plugins.j00zekCC.MinFontSize = ConfigSelection(default = "OFF", choices = MinFontChoices )
-config.plugins.j00zekCC.InfoBarMinFontSize = ConfigSelection(default = "OFF", choices = MinFontChoices )
-config.plugins.j00zekCC.CHListMinFontSize = ConfigSelection(default = "OFF", choices = MinFontChoices )
-config.plugins.j00zekCC.LcdMinFontSize = ConfigSelection(default = "OFF", choices = MinFontChoices )
-#runningText
-config.plugins.j00zekCC.rtType = ConfigSelection(default = "OFF", choices =  [ ("OFF", _("Defined in skin")), ("0", _("NONE")), ("1", _("RUNNING")), ("2", _("SWIMMING")), ("3", _("AUTO"))])
-config.plugins.j00zekCC.rtDirection = ConfigSelection(default = "OFF", choices =   [ ("OFF", _("Defined in skin")), ("0", _("LEFT")), ("1", _("RIGHT")), ("2", _("TOP")), ("3", _("BOTTOM")) ])
-config.plugins.j00zekCC.rtInitialDelay = ConfigSelection(default = "OFF", choices =   [ ("OFF", _("Defined in skin")), ("1", _("1")), ("2", _("2")), ("3", _("3")) ])
-config.plugins.j00zekCC.rtSpeed = ConfigSelection(default = "OFF", choices =   [ ("OFF", _("Defined in skin")), ("1", _("1")), ("2", _("2")), ("3", _("3")) ])
-#EventName
-config.plugins.j00zekCC.enDescrType = ConfigSelection(default = "OFF", choices =   [ ("OFF", _("Defined in skin")), ("1", _("SHORT_DESCRIPTION")), ("2", _("EXTENDED_DESCRIPTION")), ("3", _("FULL_DESCRIPTION")) ])
-#ConfigYesNo(default = False) #ConfigText(default = _("none")) #("", _(""))
 ######################################################################################
 class e2ComponentsConfig(Screen, ConfigListScreen):
     def buildList(self):
         self.list = []
         #
+        self.list.append(getConfigListEntry(_(" "), config.plugins.j00zekCC.FakeEntry))
+        self.list.append(getConfigListEntry(_("---Dynamic Font Size---"), config.plugins.j00zekCC.FakeEntry))
+        self.list.append(getConfigListEntry(_("Service Name minimum font size"), config.plugins.j00zekCC.j00zekLabelSN ))
+        self.list.append(getConfigListEntry(_("Event Name minimum font size"), config.plugins.j00zekCC.j00zekLabelEN ))
+        #
+        self.list.append(getConfigListEntry(_(" "), config.plugins.j00zekCC.FakeEntry))
         self.list.append(getConfigListEntry(_("---User paths---"), config.plugins.j00zekCC.FakeEntry))
-        self.list.append(getConfigListEntry(_("\tPicons animations user path:"), config.plugins.j00zekCC.PiconAnimation_UserPath ))
-        self.list.append(getConfigListEntry(_("FEicons user path:"), config.plugins.j00zekCC.j00zekFEicon_UserPath))
-        self.list.append(getConfigListEntry(_("VRicons user path:"), config.plugins.j00zekCC.j00zekVRicon_UserPath ))
+        self.list.append(getConfigListEntry(_("Picons animations user path:"), config.plugins.j00zekCC.PiconAnimation_UserPath ))
+        self.list.append(getConfigListEntry(_("Alternate user icons path:"), config.plugins.j00zekCC.AlternateUserIconsPath))
         #
         self.list.append(getConfigListEntry(_(" "), config.plugins.j00zekCC.FakeEntry))
-        self.list.append(getConfigListEntry(_("---Dynamic Font Size (j00zekLabel)---"), config.plugins.j00zekCC.FakeEntry))
-        self.list.append(getConfigListEntry(_("Standard minimum font size"), config.plugins.j00zekCC.MinFontSize ))
-        self.list.append(getConfigListEntry(_("Minimum font size on Infobar"), config.plugins.j00zekCC.InfoBarMinFontSize ))
-        self.list.append(getConfigListEntry(_("Minimum font size on Channels list"), config.plugins.j00zekCC.CHListMinFontSize ))
-        self.list.append(getConfigListEntry(_("Minimum font size on LCD"), config.plugins.j00zekCC.LcdMinFontSize ))
-        #
-        self.list.append(getConfigListEntry(_(" "), config.plugins.j00zekCC.FakeEntry))
-        self.list.append(getConfigListEntry(_("---Scrolling text (RunningText)---"), config.plugins.j00zekCC.FakeEntry))
-        self.list.append(getConfigListEntry(_("Type"), config.plugins.j00zekCC.rtType))
-        self.list.append(getConfigListEntry(_("Direction"), config.plugins.j00zekCC.rtDirection))
-        self.list.append(getConfigListEntry(_("Initial delay"), config.plugins.j00zekCC.rtInitialDelay))
-        self.list.append(getConfigListEntry(_("Speed"), config.plugins.j00zekCC.rtSpeed))
+        self.list.append(getConfigListEntry(_("---Scrolling text---"), config.plugins.j00zekCC.FakeEntry))
+        #self.list.append(getConfigListEntry(_("Ammend Font size"), config.plugins.j00zekCC.rtFontSize))
+        #self.list.append(getConfigListEntry(_("Type on multiline"), config.plugins.j00zekCC.rtType))
+        #self.list.append(getConfigListEntry(_("Initial delay"), config.plugins.j00zekCC.rtInitialDelay))
+        #self.list.append(getConfigListEntry(_("Speed"), config.plugins.j00zekCC.rtSpeed))
         #
         self.list.append(getConfigListEntry(_(" "), config.plugins.j00zekCC.FakeEntry))
         self.list.append(getConfigListEntry(_("---Event description (EventName)---"), config.plugins.j00zekCC.FakeEntry))
-        self.list.append(getConfigListEntry(_("Information presented"),  config.plugins.j00zekCC.enDescrType ))
+        #self.list.append(getConfigListEntry(_("Information presented"),  config.plugins.j00zekCC.enDescrType ))
         
         #self.list.append(getConfigListEntry(_("XXXX"), XXXX ))
         self["config"].list = self.list
@@ -86,17 +63,17 @@ class e2ComponentsConfig(Screen, ConfigListScreen):
     def __init__(self, session):
         from enigma import getDesktop
         if getDesktop(0).size().width() == 1920:
-            self.skin = """<screen name="ConfigEdit" position="center,center" size="900,400" title="e2components configuration">
+            self.skin = """<screen name="e2ComponentsConfig" position="center,center" size="900,400" title="e2components configuration">
                             <eLabel position="5,0" size="690,2" backgroundColor="#aaaaaa" />
-                            <widget name="config" position="20,20" size="860,345" zPosition="1" scrollbarMode="showOnDemand" />
-                            <widget name="key_red"    position="20,350" zPosition="2" size="860,30" foregroundColor="red"   valign="center" halign="left" font="Regular;22" transparent="1" />
-                            <widget name="key_green"  position="20,350" zPosition="2" size="860,30" foregroundColor="green"  valign="center" halign="center" font="Regular;22" transparent="1" />
-                            <widget name="key_yellow" position="20,350" zPosition="2" size="860,30" foregroundColor="yellow" valign="center" halign="right" font="Regular;22" transparent="1" />
+                            <widget name="config" position="20,20" size="860,330" zPosition="1" scrollbarMode="showOnDemand" />
+                            <widget name="key_red"    position="20,360" zPosition="2" size="860,30" foregroundColor="red"   valign="center" halign="left" font="Regular;22" transparent="1" />
+                            <widget name="key_green"  position="20,360" zPosition="2" size="860,30" foregroundColor="green"  valign="center" halign="center" font="Regular;22" transparent="1" />
+                            <widget name="key_yellow" position="20,360" zPosition="2" size="860,30" foregroundColor="yellow" valign="center" halign="right" font="Regular;22" transparent="1" />
                           </screen>"""
         else:
-            self.skin = """<screen name="ConfigEdit" position="center,center" size="700,200" title="e2components configuration">
+            self.skin = """<screen name="e2ComponentsConfig" position="center,center" size="700,200" title="e2components configuration">
                             <eLabel position="5,0" size="690,2" backgroundColor="#aaaaaa" />
-                            <widget name="config" position="20,20" size="660,145" zPosition="1" scrollbarMode="showOnDemand" />
+                            <widget name="config" position="20,20" size="640,145" zPosition="1" scrollbarMode="showOnDemand" />
                             <widget name="key_red"    position="20,150" zPosition="2" size="660,30" foregroundColor="red" valign="center" halign="left" font="Regular;22" transparent="1" />
                             <widget name="key_green"  position="20,150" zPosition="2" size="660,30" foregroundColor="green" valign="center" halign="center" font="Regular;22" transparent="1" />
                             <widget name="key_yellow" position="20,150" zPosition="2" size="660,30" foregroundColor="yellow" valign="center" halign="right" font="Regular;22" transparent="1" />
@@ -114,7 +91,7 @@ class e2ComponentsConfig(Screen, ConfigListScreen):
                 "yellow": self.yellowButton,
             }, -2)
         ConfigListScreen.__init__(self, [], session)
-        self.title = _("e2components configuration")
+        self.title = _("j00zek e2components configuration")
         self.buildList()
 
     def selectFolder(self):
@@ -135,10 +112,13 @@ class e2ComponentsConfig(Screen, ConfigListScreen):
     def yellowButton(self):
         curIndex = self["config"].getCurrentIndex()
         if isinstance(self["config"].list[curIndex][1], ConfigDirectory):
-            self["config"].list[curIndex][1].value = _('default')
+            self["config"].list[curIndex][1].value = _('not set')
+        else:
+            self["config"].list[curIndex][1].value = '0'
         self.buildList()
 
     def ok(self):
+        from Screens.MessageBox import MessageBox
         self.session.openWithCallback(self.updateConfig, MessageBox, _("Are you sure you want to save this configuration?"))
 
     def updateConfig(self, ret = False):
@@ -149,7 +129,6 @@ class e2ComponentsConfig(Screen, ConfigListScreen):
             self.close()
 
 ######################################################################################
-from Components.FileList import FileList
 from Components.Label import Label 
 from Components.Sources.StaticText import StaticText
 from Screens.VirtualKeyBoard import VirtualKeyBoard
@@ -167,6 +146,8 @@ class DirectorySelectorWidget(Screen):
     </screen>"""
     def __init__(self, session, currDir, title="Select directory"):
         print("DirectorySelectorWidget.__init__ -------------------------------")
+        from Components.FileList import FileList
+        
         Screen.__init__(self, session)
         # for the skin: first try MediaPlayerDirectoryBrowser, then FileBrowser, this allows individual skinning
         #self.skinName = ["MediaPlayerDirectoryBrowser", "FileBrowser" ]

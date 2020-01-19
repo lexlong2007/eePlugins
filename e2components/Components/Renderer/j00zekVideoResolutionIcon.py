@@ -14,15 +14,17 @@
 
 from Renderer import Renderer
 
+from Components.config import config
 from enigma import ePixmap, ePicLoad, eSize, iServiceInformation
 from Tools.Directories import pathExists, SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, resolveFilename
+import os
 
 DBG = False
 try:
     if DBG: from Components.j00zekComponents import j00zekDEBUG
 except Exception: DBG = False
     
-class j00zekVRicon(Renderer):
+class j00zekVideoResolutionIcon(Renderer):
    
     def __init__(self):
         Renderer.__init__(self)
@@ -46,6 +48,7 @@ class j00zekVRicon(Renderer):
                 attribs.remove((attrib, value))
 
         self.skinAttributes = attribs
+            
         return Renderer.applySkin(self, desktop, parent)
 
     GUI_WIDGET = ePixmap
@@ -64,23 +67,31 @@ class j00zekVRicon(Renderer):
                         x = info.getInfo(iServiceInformation.sVideoWidth)
                         y = info.getInfo(iServiceInformation.sVideoHeight)
                         if x > 1920 and y > 1080:
-                            tmpIcon = '%s/%s' % (self.iconPath, self.iconUHD) #UHD - 3840x2160
+                            tmpIcon = self.iconUHD      #UHD - 3840x2160
                         elif x > 1280 and y > 720:
-                            tmpIcon = '%s/%s' % (self.iconPath, self.iconHD) #HD - 1920x1080
+                            tmpIcon = self.iconHD       #HD  - 1920x1080
                         elif x == 960 and y == 540: 
-                            tmpIcon = '%s/%s' % (self.iconPath, self.icon960) # 960x540
+                            tmpIcon = self.icon960      #        960x540
                         elif x > 720 and y > 576:
-                            tmpIcon = '%s/%s' % (self.iconPath, self.iconHDready) #HDready - 1280x720
+                            tmpIcon = self.iconHDready #HDready - 1280x720
                         elif x > 0 and y > 0:
-                            tmpIcon = '%s/%s' % (self.iconPath, self.iconSD) #SD - 720 x 576 / 768 x 576 / 720 x 480
+                            tmpIcon = self.iconSD       #SD - 720 x 576 / 768 x 576 / 720 x 480
+
+                        if tmpIcon != '':
+                            tmpPathIcon = os.path.join(config.plugins.j00zekCC.AlternateUserIconsPath.value, tmpIcon)
+                            if not pathExists(tmpPathIcon):
+                                if DBG: j00zekDEBUG("[j00zekVRicon:changed] AlternateUserIconsPath='%s' does not exist" % tmpPathIcon)
+                                tmpPathIcon = os.path.join(self.iconPath, tmpIcon)
+
+                            if not pathExists(tmpPathIcon):
+                                self.instance.hide()
+                                if DBG: j00zekDEBUG("[j00zekVRicon:changed] Icon '%s' not found" % tmpPathIcon)
+                            elif tmpIcon != self.currIcon:
+                                if DBG: j00zekDEBUG("[j00zekVRicon:changed] displaying icon '%s'" % tmpPathIcon)
+                                self.currIcon = tmpPathIcon
+                                self.instance.setScale(1)
+                                self.instance.setPixmapFromFile(self.currIcon)
+                                self.instance.show()
                         else:
-                            return #no video size = nothing played = nothing to do
-                        if not pathExists(tmpIcon):
-                            self.instance.hide()
-                            if DBG: j00zekDEBUG("[j00zekVRicon:changed] Icon '%s' not found" % tmpIcon)
-                        elif tmpIcon != self.currIcon:
-                            if DBG: j00zekDEBUG("[j00zekVRicon:changed] displaying icon '%s'" % tmpIcon)
-                            self.currIcon = tmpIcon
-                            self.instance.setScale(1)
-                            self.instance.setPixmapFromFile(tmpIcon)
-                            self.instance.show()
+                          self.instance.hide()
+                          if DBG: j00zekDEBUG("[j00zekVRicon:changed] Icon '%s' not found" % tmpPathIcon)

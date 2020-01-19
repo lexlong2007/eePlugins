@@ -10,7 +10,7 @@
 # Zgadzam sie jedynie na dystrybucje z repozytorium opkg
 #
 ################################################################################
-
+from Components.config import config
 from enigma import eWidget, eLabel, ePoint, eSize, gFont, \
     RT_HALIGN_LEFT, RT_HALIGN_CENTER, RT_HALIGN_RIGHT, RT_HALIGN_BLOCK, \
     RT_VALIGN_TOP, RT_VALIGN_CENTER, RT_VALIGN_BOTTOM, RT_WRAP
@@ -26,15 +26,17 @@ except Exception: DBG = False
 class j00zekLabel(Renderer):
     def __init__(self):
         Renderer.__init__(self)
-        self.txText      = ""
-        self.txtFlags    = 0
-        self.txFontName  = "Regular"
-        self.maxFontSize = 14
-        self.minFontSize = 0
-        self.txFont      = gFont(self.txFontName, self.maxFontSize)
-        self.txLabel     = None
-        self.soffset     = (0,0)
-        self.W = self.H  = 0
+        self.txText         = ""
+        self.txtFlags       = 0
+        self.txFontName     = "Regular"
+        self.maxFontSize    = 14
+        self.minFontSize    = 0
+        self.cfgminFontSize = 0
+        self.cfgContext     = ''
+        self.txFont         = gFont(self.txFontName, self.maxFontSize)
+        self.txLabel        = None
+        self.soffset        = (0,0)
+        self.W = self.H     = 0
 
     GUI_WIDGET = eWidget
 
@@ -77,12 +79,19 @@ class j00zekLabel(Renderer):
                     self.txFont = parseFont(value, ((1,1),(1,1)))
                     self.maxFontSize = int(value.split(';')[1].strip())
                     self.txFontName = value.split(';')[0]
-                    if self.minFontSize == 0:
-                        self.minFontSize = int(self.maxFontSize  * 3 / 4)
-                    if DBG: j00zekDEBUG("[j00zekLabel:applySkin] txfontName='%s', maxFontSize='%s', minFontSize='%s'" % (self.txFontName, self.maxFontSize, self.minFontSize)) 
                 elif attrib == "minFontSize":
                     self.minFontSize = int(value.strip())
                     if DBG: j00zekDEBUG("[j00zekLabel:applySkin] minFontSize='%s'" % self.minFontSize)
+                elif attrib == "cfgContext":
+                    try:
+                        self.cfgContext = value.strip()
+                        if self.cfgContext == 'SN':
+                            self.cfgminFontSize = float(config.plugins.j00zekCC.j00zekLabelSN.value)
+                        elif self.cfgContext == 'EN':
+                            self.cfgminFontSize = float(config.plugins.j00zekCC.j00zekLabelEN.value)
+                        if DBG: j00zekDEBUG("[j00zekLabel:applySkin] cfgContext='%s', cfgminFontSize='%s'" % (self.cfgContext, self.cfgminFontSize ))
+                    except Exception as e:
+                        if DBG: j00zekDEBUG("[j00zekLabel:applySkin] cfgContext, Exception '%s'" % str(e))
                 elif attrib == "foregroundColor":
                     self.txLabel.setForegroundColor(parseColor(value))
                 elif attrib in ("shadowColor","borderColor"):    # fake for openpli-enigma2
@@ -110,6 +119,13 @@ class j00zekLabel(Renderer):
                         self.txLabel.setTransparent(int(value))
                         
             self.skinAttributes = attribs
+        #
+        if self.cfgminFontSize == 0:
+            if self.minFontSize == 0:
+                self.minFontSize = int(self.maxFontSize  * 3 / 4)
+        else:
+            self.minFontSize = int(self.cfgminFontSize  * self.maxFontSize)
+        if DBG: j00zekDEBUG("[j00zekLabel:applySkin] cfgContext= '%s', txfontName='%s', maxFontSize='%s', minFontSize='%s', cfgminFontSize='%s'" % (self.cfgContext, self.txFontName, self.maxFontSize, self.minFontSize,self.cfgminFontSize)) 
         ret = Renderer.applySkin(self, desktop, screen)
         
         self.txLabel.setFont(self.txFont)
@@ -155,11 +171,11 @@ class j00zekLabel(Renderer):
             self.txLabel.setFont(parseFont("%s;%s" % (self.txFontName, currSize), ((1,1),(1,1))))
             text_size = self.txLabel.calculateSize()
             if (self.txtFlags & RT_WRAP):
-                if DBG: j00zekDEBUG("[j00zekLabel:setFontSize] Size of wrapped text for font %s is %s/%s" % (currSize, text_size.height(), self.H))
+                if DBG: j00zekDEBUG("[j00zekLabel(%s):setFontSize] Size of wrapped text for font %s is %s/%s" % (self.cfgContext, currSize, text_size.height(), self.H))
                 if text_size.height() <= self.H:
                     break
             else:
-                if DBG: j00zekDEBUG("[j00zekLabel:setFontSize] Size of not wrapped text for font %s is %s/%s" % (currSize, text_size.width(), self.W))
+                if DBG: j00zekDEBUG("[j00zekLabel(%s):setFontSize] Size of not wrapped text for font %s is %s/%s" % (self.cfgContext, currSize, text_size.width(), self.W))
                 if text_size.width() <= self.W:
                     break
 

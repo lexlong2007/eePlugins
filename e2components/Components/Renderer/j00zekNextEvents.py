@@ -1,7 +1,7 @@
 from Components.VariableText import VariableText
 from Renderer import Renderer
 from enigma import eLabel, eEPGCache
-from time import localtime
+from time import time, localtime
 from datetime import datetime
 
 class j00zekNextEvents(VariableText, Renderer):
@@ -18,7 +18,7 @@ class j00zekNextEvents(VariableText, Renderer):
 
     def changed(self, what):
         now = datetime.now()
-        todayInMins = int(now.hour * 60 + now.minute)
+        currentEPOC = int(time())
         if what[0] == self.CHANGED_CLEAR:
             self.text = ""
         else:
@@ -32,7 +32,7 @@ class j00zekNextEvents(VariableText, Renderer):
                         begin = localtime(event[0])
                         end = localtime(event[0]+event[1])
                         try:
-                            if todayInMins < int(begin[3] * 60 + begin[4]):
+                            if currentEPOC < event[0]:
                                 event_str = "%02d:%02d - %02d:%02d  %s\n" % (begin[3],begin[4],end[3],end[4], event[2])
                                 text = text + event_str
                                 i = i + 1

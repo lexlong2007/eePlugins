@@ -20,7 +20,7 @@ from enigma import iServiceInformation, iPlayableService
 from Components.Element import cached
 from Components.config import config
 
-class j00zekVR(Poll, Converter, object):
+class j00zekVideoResolution(Poll, Converter, object):
     VideoResolution = 0
 
     def __init__(self, type):

@@ -4,6 +4,7 @@
 from Renderer import Renderer
 from enigma import ePixmap
 from Components.AVSwitch import AVSwitch
+from Components.config import config
 from Tools.Directories import resolveFilename
 try:
     from Tools.Directories import SCOPE_CURRENT_SKIN
@@ -18,6 +19,7 @@ class j00zekPixmap(Renderer):
         self.picload = ePicLoad()
         self.picload.PictureData.get().append(self.paintIconPixmapCB)
         self.iconFileName = ""
+        self.currIcon = ''
 
     GUI_WIDGET = ePixmap
 

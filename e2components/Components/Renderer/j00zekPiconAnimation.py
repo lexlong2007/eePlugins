@@ -6,17 +6,10 @@
 #    Uszanuj moja prace i nie kasuj/zmieniaj informacji kto jest autorem renderera
 #    Please respect my work and don't delete/change name of the renderer author
 #
-#    Nie zgadzam sie na wykorzystywanie tego renderera w projektach platnych jak np. Graterlia!!!
+#    Nie zgadzam sie na wykorzystywanie tego skryptu w projektach platnych jak np. Graterlia!!!
 #
-#    This program is free software; you can redistribute it and/or
-#    modify it under the terms of the GNU General Public License
-#    as published by the Free Software Foundation; either version 2
-#    of the License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    Prosze NIE dystrybuowac tego skryptu w formie archwum zip, czy tar.gz
+#    Zgadzam sie jedynie na dystrybucje z repozytorium opkg
 #    
 #    To use it do the following:
 #       - download package of animated picons, for example from my opkg
@@ -47,28 +40,19 @@
 #                         create /usr/shareenigma2/animatedPicons/OldMovie subfolder with second animation png's
 #
 ####################################################################### 
-from Tools.LoadPixmap import LoadPixmap
-from Components.Pixmap import Pixmap
-from Renderer import Renderer
-from enigma import ePixmap, eTimer, iPlayableService
-from Components.config import config, ConfigSubsection, ConfigYesNo, ConfigDirectory
+from Components.config import config
 from Components.Harddisk import harddiskmanager
+from Components.Pixmap import Pixmap
+from enigma import ePixmap, eTimer, iPlayableService
 from random import randint
+from Renderer import Renderer
+from Tools.LoadPixmap import LoadPixmap
 import os
 
-config.plugins.j00zekPiconAnimation = ConfigSubsection() 
-config.plugins.j00zekPiconAnimation.UserPathEnabled = ConfigYesNo(default = False) 
-config.plugins.j00zekPiconAnimation.UserPath = ConfigDirectory(default = "")  
-##### write log in /tmp folder #####
 DBG = False
 try:
-    from Components.j00zekComponents import j00zekDEBUG
-except Exception:
-    def j00zekDEBUG(myText=None):
-        if not myText is None:
-            try: print(myText)
-            except Exception: pass
-#####
+    if DBG: from Components.j00zekComponents import j00zekDEBUG
+except Exception: DBG = False 
 
 searchPaths = ['/usr/share/enigma2/']
 
@@ -171,12 +155,10 @@ class j00zekPiconAnimation(Renderer):
         self.skinAttributes = attribs
         #Load animation into memory
         try:
-            if config.plugins.j00zekPiconAnimation.UserPathEnabled.value == True and self.doLockPath == False:
-                if DBG: j00zekDEBUG('if config.plugins.j00zekPiconAnimation.UserPathEnabled.value == True and self.doLockPath == False:')
-                if os.path.exists(config.plugins.j00zekPiconAnimation.UserPath.value):
-                    self.loadPNGsAnim(config.plugins.j00zekPiconAnimation.UserPath.value)
-                    self.loadPNGsSubFolders(config.plugins.j00zekPiconAnimation.UserPath.value)
-                elif DBG: j00zekDEBUG('[j00zekPiconAnimation]:[applySkin] User path "%s" selected but does NOT exist' % config.plugins.j00zekPiconAnimation.UserPath.value)
+            if os.path.exists(config.plugins.j00zekCC.PiconAnimation_UserPath.value) and self.doLockPath == False:
+                if DBG: j00zekDEBUG('UserPath exists and self.doLockPath == False')
+                self.loadPNGsAnim(config.plugins.j00zekCC.PiconAnimation_UserPath.value)
+                self.loadPNGsSubFolders(config.plugins.j00zekCC.PiconAnimation_UserPath.value)
             else:
                 if DBG: j00zekDEBUG('if self.doLockPath == True:')
                 for path in searchPaths:

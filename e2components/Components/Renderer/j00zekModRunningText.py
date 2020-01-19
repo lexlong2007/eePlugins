@@ -51,22 +51,22 @@ try:
 except Exception: DBG = False 
 
 # scroll type:
-NONE     = 0
-RUNNING  = 1
-SWIMMING = 2
-AUTO     = 3
+NONE     = 1
+RUNNING  = 2
+SWIMMING = 3
+AUTO     = 4
 # direction:
-LEFT     = 0
-RIGHT    = 1
-TOP      = 2
-BOTTOM   = 3
+LEFT     = 1
+RIGHT    = 2
+TOP      = 3
+BOTTOM   = 4
 # halign:
 #LEFT     = 0
 #RIGHT    = 1
 CENTER   = 2
 BLOCK    = 3
 
-class RunningText_mod_j00zek(Renderer):
+class j00zekModRunningText(Renderer):
     def __init__(self):
         Renderer.__init__(self)
         self.type     = NONE

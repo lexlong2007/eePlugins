@@ -2,9 +2,9 @@ Package: enigma2---j00zeks-components
 Priority: optional
 Section: utils
 Depends: 
-Description: e2 components used in BlackHarmony and UserSkin
+Description: e2 components used in varius packages
 Maintainer: j00zek
 Source: http://github.com/j00zek/eePlugins
-Version: 20.01.15.1654
+Version: 20.01.19.0834
 Architecture: all
 DestinationPath: /usr/lib/enigma2/python

@@ -39,7 +39,7 @@ try:
 except:
     correctChannelNumber = False
 
-class ServiceName2_mod_j00zek(Converter, object):
+class j00zekModServiceName2(Converter, object):
     NAME = 0
     NUMBER = 1
     BOUQUET = 2

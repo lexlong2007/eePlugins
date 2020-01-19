@@ -14,8 +14,10 @@
 
 from Renderer import Renderer
 
+from Components.config import config
 from enigma import ePixmap, ePicLoad, eSize, iServiceInformation
 from Tools.Directories import pathExists, SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, resolveFilename
+import os
 
 DBG = False
 try:
@@ -23,7 +25,7 @@ try:
 except Exception:
     DBG = False
     
-class j00zekFEicon(Renderer):
+class j00zekFrontEndIcon(Renderer):
    
     def __init__(self):
         Renderer.__init__(self)
@@ -42,6 +44,7 @@ class j00zekFEicon(Renderer):
                 attribs.remove((attrib, value))
 
         self.skinAttributes = attribs
+        
         return Renderer.applySkin(self, desktop, parent)
 
     GUI_WIDGET = ePixmap
@@ -66,16 +69,22 @@ class j00zekFEicon(Renderer):
                                     tmpIcon = 'ico_%s.png' % tpdata.get('tuner_type', '').lower()
                                 else:
                                     tmpIcon = 'ico_%s2.png' % tpdata.get('tuner_type', '').lower()
-                        if pathExists('%s/%s' %(self.iconPath, tmpIcon)):
-                            tmpIcon ='%s/%s' %(self.iconPath, tmpIcon)
-                        elif pathExists('%s/%s' %(self.iconPath, tmpIcon.replace('-','_'))):
-                            tmpIcon ='%s/%s' %(self.iconPath, tmpIcon.replace('-','_'))
-                        if tmpIcon == '':
-                            self.instance.hide()
-                            if DBG: j00zekDEBUG("[j00zekFEicon:changed] Path for icon '%s' not found" % tmpIcon)
-                        elif tmpIcon != self.currIcon:
-                            if DBG: j00zekDEBUG("[j00zekFEicon:changed] displaying icon '%s'" % tmpIcon)
-                            self.currIcon = tmpIcon
-                            self.instance.setScale(1)
-                            self.instance.setPixmapFromFile(tmpIcon)
-                            self.instance.show()
+                        
+                        if tmpIcon != '':
+                            tmpPathIcon = os.path.join(config.plugins.j00zekCC.AlternateUserIconsPath.value, tmpIcon)
+                            if not pathExists(tmpPathIcon):
+                                if DBG: j00zekDEBUG("[j00zekFrontEndIcon:changed] AlternateUserIconsPath='%s' does not exist" % tmpPathIcon)
+                                tmpPathIcon = os.path.join(self.iconPath, tmpIcon)
+
+                            if not pathExists(tmpPathIcon):
+                                self.instance.hide()
+                                if DBG: j00zekDEBUG("[j00zekFrontEndIcon:changed] Icon '%s' not found" % tmpPathIcon)
+                            elif tmpIcon != self.currIcon:
+                                if DBG: j00zekDEBUG("[j00zekFrontEndIcon:changed] displaying icon '%s'" % tmpPathIcon)
+                                self.currIcon = tmpPathIcon
+                                self.instance.setScale(1)
+                                self.instance.setPixmapFromFile(self.currIcon)
+                                self.instance.show()
+                        else:
+                          self.instance.hide()
+                          if DBG: j00zekDEBUG("[j00zekFrontEndIcon:changed] Icon '%s' not found" % tmpPathIcon)
