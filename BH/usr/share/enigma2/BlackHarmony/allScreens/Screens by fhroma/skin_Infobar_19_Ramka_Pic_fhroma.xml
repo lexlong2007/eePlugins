@@ -7,8 +7,8 @@
     <widget source="session.CurrentService" render="j00zekLabel" position="680,748" size="290,25" font="Roboto_HD; 22" halign="center" foregroundColor="#00A693" backgroundColor="black" transparent="1">
       <convert type="ServiceName">Provider</convert>
     </widget>
-    <widget source="session.CurrentService" render="j00zekFEicon" position="989,750" size="44,20" zPosition="3" alphatest="blend"/> 
-    <widget source="session.CurrentService" render="j00zekVRicon" position="1094,750" size="37,20" zPosition="5" alphatest="blend"/> 
+    <widget source="session.CurrentService" render="j00zekFrontEndIcon" position="989,750" size="44,20" zPosition="3" alphatest="blend"/> 
+    <widget source="session.CurrentService" render="j00zekVideoResolutionIcon" position="1094,750" size="37,20" zPosition="5" alphatest="blend"/> 
     <ePixmap position="1145,750" size="57,20" zPosition="1" pixmap="BlackHarmony/icons/ico_dolby_off.png" alphatest="blend" />
     <widget source="session.CurrentService" render="Pixmap" position="1145,750" size="57,20" zPosition="2" pixmap="BlackHarmony/icons/ico_dolby_on.png" alphatest="blend">
       <convert type="ServiceInfo">IsMultichannel</convert>

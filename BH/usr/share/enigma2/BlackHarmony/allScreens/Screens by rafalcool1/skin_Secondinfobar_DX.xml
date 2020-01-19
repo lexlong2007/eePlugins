@@ -330,6 +330,6 @@
   <widget source="session.CurrentService" render="Label" position="1523,850" size="85,25" font="Roboto_HD; 22" backgroundColor="black" transparent="1" text="DVB-S2" halign="left" zPosition="1" foregroundColor="green">
     <convert type="BlackHarmonyServiceName2">%s </convert>
   </widget>
-  <widget source="session.CurrentService" render="j00zekVRicon" position="999,770" size="37,20" zPosition="5" alphatest="blend"/> 
+  <widget source="session.CurrentService" render="j00zekVideoResolutionIcon" position="999,770" size="37,20" zPosition="5" alphatest="blend"/> 
 </screen>
 </skin>

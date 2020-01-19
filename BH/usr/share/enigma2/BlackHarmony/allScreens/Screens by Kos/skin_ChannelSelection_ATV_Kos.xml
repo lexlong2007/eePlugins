@@ -28,7 +28,7 @@
     <widget source="ServiceEvent" render="Label" position="750,55" size="400,35" font="Roboto_HD; 25" halign="center" foregroundColor="#00F0A30A" backgroundColor="black" transparent="1">
       <convert type="BlackHarmonyServiceName2">Provider</convert>
     </widget>
-    <widget render="BlackHarmonyRunningText" source="ServiceEvent" position="1185,465" size="655,265" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=scroll,startdelay=6000,oneshot=5000,wrap" halign="left" font="Roboto_HD; 28" backgroundColor="black" transparent="1">
+    <widget render="j00zekModRunningText" source="ServiceEvent" position="1185,465" size="655,265" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=scroll,startdelay=6000,oneshot=5000,wrap" halign="left" font="Roboto_HD; 28" backgroundColor="black" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
     <widget source="ServiceEvent" render="Progress" position="1358,768" size="376,6" pixmap="BlackHarmony/gfx/progress_cs.png" transparent="1">

@@ -9,7 +9,7 @@
     </widget>
     <eLabel text="Historia przełączania" position="1134,40" size="320,40" font="Roboto_HD; 32" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget position="685,165" size="220,132" source="ServiceEvent" render="j00zekPicons" picontype="picon" alphatest="blend" zPosition="1">
-      <convert type="ServiceName2">Reference</convert>
+      <convert type="j00zekModServiceName2">Reference</convert>
     </widget>
     <widget source="ServiceEvent" render="Label" position="1000,220" size="140,50" font="Roboto_HD; 40" halign="right" backgroundColor="black" transparent="1" foregroundColor="lemon">
       <convert type="EventTime">StartTime</convert>
@@ -27,7 +27,7 @@
 	
 	<eLabel backgroundColor="linie" foregroundColor="lemon" position="684,363" size="760,1" />
     
-	<widget backgroundColor="background" font="Roboto_HD; 30" halign="left" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=4,startdelay=6000,wrap" position="675,385" render="BlackHarmonyRunningText" size="775,280" source="ServiceEvent" transparent="1">
+	<widget backgroundColor="background" font="Roboto_HD; 30" halign="left" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=4,startdelay=6000,wrap" position="675,385" render="j00zekModRunningText" size="775,280" source="ServiceEvent" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
 	

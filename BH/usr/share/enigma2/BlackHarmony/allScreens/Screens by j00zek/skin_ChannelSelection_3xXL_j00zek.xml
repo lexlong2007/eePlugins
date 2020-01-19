@@ -14,7 +14,7 @@
     <widget source="Title" render="Label" position="10,75" size="500,30" font="Roboto_HD;30" backgroundColor="black" transparent="1" halign="left" foregroundColor="light_yellow" />
 	<widget name="list" position="20,125" size="950,850" selectionPixmap="BlackHarmony/menu/sel_1005_40.png" scrollbarMode="showOnDemand" enableWrapAround="1" colorServiceDescription="#ddae55" colorServiceDescriptionSelected="#ddae55" colorEventProgressbarBorder="border" colorEventProgressbarBorderSelected="border" picServiceEventProgressbar="BlackHarmony/gfx/progcl.png" foregroundColorServiceNotAvail="#737373" serviceItemHeight="61" serviceNumberFont="Roboto_HD;32" serviceNameFont="Roboto_HD;40" serviceInfoFont="Roboto_HD;48" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" transparent="1" />
 	<!--Aktualne wydarzenie po kolei od gory-->
-    <widget source="ServiceEvent" render="Label" position="980,487" size="835,45" font="HD_Thin;40" backgroundColor="black" transparent="1" halign="left" noWrap="1" foregroundColor="#cc9329">
+    <widget source="ServiceEvent" render="j00zekLabel" cfgContext="EN" position="980,487" size="835,45" font="HD_Thin;40" backgroundColor="black" transparent="1" halign="left" noWrap="1" foregroundColor="#cc9329">
       <convert type="EventName">Name</convert>
     </widget>
     <widget source="ServiceEvent" render="Label" position="980,537" size="80,20" font="Roboto_HD; 46" backgroundColor="background" transparent="1">
@@ -29,7 +29,7 @@
     <widget source="ServiceEvent" render="Progress" position="1225,550" size="460,6" pixmap="BlackHarmony/gfx/progress_scan.png" transparent="1">
       <convert type="EventTime">Progress</convert>
     </widget>
-    <widget render="BlackHarmonyRunningText" source="ServiceEvent" position="980,592" size="835,276" options="movetype=running,startpoint=0,direction=top,steptime=80,repeat=0,startdelay=6000,wrap" halign="left" font="Roboto_HD; 40" backgroundColor="background" transparent="1">
+    <widget render="j00zekModRunningText" source="ServiceEvent" position="980,592" size="835,276" options="movetype=running,startpoint=0,direction=top,steptime=80,repeat=0,startdelay=6000,wrap" halign="left" font="Roboto_HD; 40" backgroundColor="background" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
 	<!--Nastepne audycje-->

@@ -41,7 +41,7 @@
     <widget source="ServiceEvent" render="Label" position="1205,55" size="635,30" font="Roboto_HD; 25" backgroundColor="dark_grey" transparent="1" halign="right" noWrap="1" valign="center" text="19.2E  DVB-S2  10627 27500 3/4 8PSK" zPosition="3">
       <convert type="BlackHarmonyServiceName2">%O  %s  %F %p %Y %f %M %b</convert>
     </widget>
-    <widget render="BlackHarmonyRunningText" source="ServiceEvent" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=6000,wrap" halign="left" font="Roboto_HD; 28" backgroundColor="background" position="1185,465" size="655,265" transparent="1">
+    <widget render="j00zekModRunningText" source="ServiceEvent" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=6000,wrap" halign="left" font="Roboto_HD; 28" backgroundColor="background" position="1185,465" size="655,265" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
     <widget source="ServiceEvent" render="Progress" position="1358,768" size="376,6" pixmap="BlackHarmony/gfx/progress_cs.png" transparent="1">
@@ -356,7 +356,7 @@
     <widget source="session.CurrentService" render="Label" position="1523,850" size="85,25" font="Roboto_HD; 22" backgroundColor="black" transparent="1" text="DVB-S2" halign="left" zPosition="1" foregroundColor="green">
       <convert type="BlackHarmonyServiceName2">%s </convert>
     </widget>
-    <widget alphatest="blend" position="999,770" render="j00zekVRicon" size="37,20" source="session.CurrentService" zPosition="4"/>
+    <widget alphatest="blend" position="999,770" render="j00zekVideoResolutionIcon" size="37,20" source="session.CurrentService" zPosition="4"/>
   </screen>
   <screen name="SecondInfoBar" backgroundColor="transparent" flags="wfNoBorder" position="0,52" size="1920,1080">
     <ePixmap position="10,0" zPosition="-2" size="1920,699" pixmap="BlackHarmony/bg_design/secondinfobar.png"/>
@@ -690,7 +690,7 @@
     <widget source="session.CurrentService" render="Label" position="1523,850" size="85,25" font="Roboto_HD; 22" backgroundColor="black" transparent="1" text="DVB-S2" halign="left" zPosition="1" foregroundColor="green">
       <convert type="BlackHarmonyServiceName2">%s </convert>
     </widget>
-    <widget alphatest="blend" position="999,770" render="j00zekVRicon" size="37,20" source="session.CurrentService" zPosition="4"/>
+    <widget alphatest="blend" position="999,770" render="j00zekVideoResolutionIcon" size="37,20" source="session.CurrentService" zPosition="4"/>
   </screen>
   <screen name="Menu" position="70,75" size="1920,1080" title="Main menu" flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="710,950" pixmap="BlackHarmony/bg_design/menubg.png"/>
@@ -765,7 +765,7 @@
       <convert type="ServicePosition">Remaining,Negate</convert>
     </widget>
     <widget source="session.CurrentService" render="Label" font="Roboto_HD; 26" position="1032,978" size="170,30" halign="left" backgroundColor="black" transparent="1" foregroundColor="light_yellow">
-      <convert type="j00zekVR">VideoResolution</convert>
+      <convert type="j00zekVideoResolution">VideoResolution</convert>
     </widget>
     <widget source="session.CurrentService" render="Label" position="395,978" size="110,30" font="Roboto_HD; 26" halign="center" backgroundColor="black" transparent="1">
       <convert type="ServicePosition">Length</convert>
@@ -921,7 +921,7 @@
       <convert type="ServiceTime">Duration</convert>
       <convert type="ClockToText">InMinutes</convert>
     </widget>
-    <widget render="BlackHarmonyRunningText" source="Service" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=6000,wrap" halign="left" backgroundColor="background" position="95,806" size="1465,135" font="Roboto_HD; 28" transparent="1">
+    <widget render="j00zekModRunningText" source="Service" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=6000,wrap" halign="left" backgroundColor="background" position="95,806" size="1465,135" font="Roboto_HD; 28" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="110,996" size="35,27" alphatest="blend"/>
@@ -997,7 +997,7 @@
       <convert type="ServiceName">Name</convert>
     </widget>
     <widget name="list" position="120,178" size="920,770" itemHeight="45" font="Roboto_HD; 31" scrollbarMode="showOnDemand" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" selectionPixmap="BlackHarmony/menu/sel_920_45.png" backgroundColor="transpBlack" transparent="1"/>
-    <widget render="BlackHarmonyRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=6000,wrap" halign="left" font="Roboto_HD; 29" backgroundColor="background" position="1113,360" size="675,580" transparent="1">
+    <widget render="j00zekModRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=6000,wrap" halign="left" font="Roboto_HD; 29" backgroundColor="background" position="1113,360" size="675,580" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
     <widget alphatest="blend" position="1110,183" render="j00zekPicons" picontype="picon" size="220,132" source="Service">
@@ -1942,7 +1942,7 @@
     <widget source="Event" render="Label" position="1190,337" size="650,70" font="Roboto_HD; 32" backgroundColor="background" transparent="1" foregroundColor="green" halign="left" valign="bottom">
       <convert type="EventName">Name</convert>
     </widget>
-    <widget source="Event" render="BlackHarmonyRunningText" position="1190,423" zPosition="2" size="650,500" font="Roboto_HD; 28" halign="left" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,oneshot=1,startdelay=6000,wrap" backgroundColor="background" transparent="1" valign="top">
+    <widget source="Event" render="j00zekModRunningText" position="1190,423" zPosition="2" size="650,500" font="Roboto_HD; 28" halign="left" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,oneshot=1,startdelay=6000,wrap" backgroundColor="background" transparent="1" valign="top">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
     <widget source="Event" render="Label" position="1655,195" size="120,38" font="Roboto_HD; 28" backgroundColor="black" transparent="1" valign="center" halign="center" foregroundColor="light_red">
@@ -4760,7 +4760,7 @@
     <widget font="Roboto_HD; 34" foregroundColor="light_yellow" position="57,750" render="Label" size="960,40" valign="center" backgroundColor="background" source="Service" zPosition="1" halign="left" transparent="1">
       <convert type="ServiceName">Name</convert>
     </widget>
-    <widget render="BlackHarmonyRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=8000,wrap" halign="left" font="Roboto_HD; 26" backgroundColor="background" position="1040,753" size="820,180" transparent="1">
+    <widget render="j00zekModRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=8000,wrap" halign="left" font="Roboto_HD; 26" backgroundColor="background" position="1040,753" size="820,180" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="70,955" size="35,27" alphatest="blend"/>
@@ -4925,7 +4925,7 @@
       <convert type="EventTime">Remaining</convert>
       <convert type="RemainingToText">InMinutes</convert>
     </widget>
-    <widget source="Event" render="BlackHarmonyRunningText" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" foregroundColor="white" backgroundColor="background" position="1240,335" size="600,600" font="Roboto_HD; 26" transparent="1">
+    <widget source="Event" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" foregroundColor="white" backgroundColor="background" position="1240,335" size="600,600" font="Roboto_HD; 26" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
     <widget name="JumpInterval" position="980,164" size="200,25" zPosition="5" halign="right" font="Roboto_HD; 22" backgroundColor="background" foregroundColor="green" transparent="1"/>
@@ -6074,7 +6074,7 @@
     </widget>
     <widget name="timeline_text" position="0,194" selectionDisabled="1" size="1850,35" transparent="1"/>
     <widget name="list" position="78,235" CoolBackColorSel="#ffd200" CoolCurrentColSel="#ffd200" CoolNowColSel="#ffd200" size="1760,540" scrollbarMode="showNever" transparent="1"/>
-    <widget source="Event" render="BlackHarmonyRunningText" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" position="78,790" size="1760,170" font="Roboto_HD;28" foregroundColor="white" backgroundColor="background" transparent="1">
+    <widget source="Event" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" position="78,790" size="1760,170" font="Roboto_HD;28" foregroundColor="white" backgroundColor="background" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
     <widget name="timeline_now" position="0,235" zPosition="2" size="19,540" pixmap="BlackHarmony/gfx/timeline-ct.png" alphatest="blend"/>
@@ -6118,7 +6118,7 @@
     </widget>
     <widget name="timeline_text" position="0,194" selectionDisabled="1" size="1850,35" transparent="1"/>
     <widget name="list" position="78,235" size="1760,540" CoolBackColorSel="#ffd200" CoolCurrentColSel="#ffd200" CoolNowColSel="#ffd200" scrollbarMode="showNever" transparent="1"/>
-    <widget source="Event" render="BlackHarmonyRunningText" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" position="78,790" size="1760,170" font="Roboto_HD;28" foregroundColor="white" backgroundColor="background" transparent="1">
+    <widget source="Event" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" position="78,790" size="1760,170" font="Roboto_HD;28" foregroundColor="white" backgroundColor="background" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
     <widget name="timeline_now" position="0,235" zPosition="2" size="19,540" pixmap="BlackHarmony/gfx/timeline-ct.png" alphatest="blend"/>
@@ -6170,7 +6170,7 @@
     <widget alphatest="blend" position="1390,163" size="400,170" render="j00zekPicons" picontype="zzpicon" source="Service" transparent="1">
       <convert type="BlackHarmonyServiceName2">Reference</convert>
     </widget>
-    <widget source="Event" render="BlackHarmonyRunningText" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" position="1350,525" size="480,425" font="Roboto_HD;28" halign="left" foregroundColor="white" backgroundColor="background" transparent="1">
+    <widget source="Event" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" position="1350,525" size="480,425" font="Roboto_HD;28" halign="left" foregroundColor="white" backgroundColor="background" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="95,1001" size="35,27" alphatest="blend"/>
@@ -6220,7 +6220,7 @@
     <widget alphatest="blend" position="1390,163" size="400,170" render="j00zekPicons" picontype="zzpicon" source="Service" transparent="1">
       <convert type="BlackHarmonyServiceName2">Reference</convert>
     </widget>
-    <widget source="Event" render="BlackHarmonyRunningText" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" position="1350,525" size="480,425" font="Roboto_HD;28" halign="left" foregroundColor="white" backgroundColor="background" transparent="1">
+    <widget source="Event" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" position="1350,525" size="480,425" font="Roboto_HD;28" halign="left" foregroundColor="white" backgroundColor="background" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="95,1001" size="35,27" alphatest="blend"/>
@@ -6268,7 +6268,7 @@
     <widget alphatest="blend" position="1345,163" size="400,170" render="j00zekPicons" picontype="zzpicon" source="Service" transparent="1">
       <convert type="BlackHarmonyServiceName2">Reference</convert>
     </widget>
-    <widget source="Event" render="BlackHarmonyRunningText" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" position="1251,525" size="580,425" font="Roboto_HD;28" halign="left" foregroundColor="white" backgroundColor="background" transparent="1">
+    <widget source="Event" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" position="1251,525" size="580,425" font="Roboto_HD;28" halign="left" foregroundColor="white" backgroundColor="background" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="95,1001" size="35,27" alphatest="blend"/>
@@ -6316,7 +6316,7 @@
     <widget alphatest="blend" position="1335,226" size="400,170" render="j00zekPicons" picontype="zzpicon" source="Service" transparent="1">
       <convert type="BlackHarmonyServiceName2">Reference</convert>
     </widget>
-    <widget source="Event" render="BlackHarmonyRunningText" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" position="90,581" size="1740,335" font="Roboto_HD;28" halign="left" foregroundColor="white" backgroundColor="background" transparent="1">
+    <widget source="Event" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" position="90,581" size="1740,335" font="Roboto_HD;28" halign="left" foregroundColor="white" backgroundColor="background" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="95,1001" size="35,27" alphatest="blend"/>
@@ -6363,7 +6363,7 @@
     <widget alphatest="blend" position="1345,163" size="400,170" render="j00zekPicons" picontype="zzpicon" source="Service" transparent="1">
       <convert type="BlackHarmonyServiceName2">Reference</convert>
     </widget>
-    <widget source="Event" render="BlackHarmonyRunningText" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" position="1251,525" size="580,425" font="Roboto_HD;28" halign="left" foregroundColor="white" backgroundColor="background" transparent="1">
+    <widget source="Event" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" position="1251,525" size="580,425" font="Roboto_HD;28" halign="left" foregroundColor="white" backgroundColor="background" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="95,1001" size="35,27" alphatest="blend"/>
@@ -7529,7 +7529,7 @@
     </widget>
     <eLabel text="EPG Search" position="994,80" size="820,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget name="list" position="120,185" size="920,630" itemHeight="70" font="Roboto_HD; 31" scrollbarMode="showOnDemand" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" selectionPixmap="BlackHarmony/menu/sel_920_70.png" backgroundColor="transpBlack" transparent="1"/>
-    <widget render="BlackHarmonyRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=6000,wrap" halign="left" font="Roboto_HD; 29" backgroundColor="background" position="1113,185" size="675,680" transparent="1">
+    <widget render="j00zekModRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=6000,wrap" halign="left" font="Roboto_HD; 29" backgroundColor="background" position="1113,185" size="675,680" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
     <widget backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="1113,900" render="Label" size="110,30" source="Event" transparent="1">
@@ -7844,7 +7844,7 @@
       <convert type="EventTime">Remaining</convert>
       <convert type="RemainingToText">InMinutes</convert>
     </widget>
-    <widget render="BlackHarmonyRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=4,startdelay=8000,wrap" foregroundColor="white" backgroundColor="background" position="65,287" size="1095,460" font="Roboto_HD; 29" transparent="1" zPosition="1">
+    <widget render="j00zekModRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=4,startdelay=8000,wrap" foregroundColor="white" backgroundColor="background" position="65,287" size="1095,460" font="Roboto_HD; 29" transparent="1" zPosition="1">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="41,850" size="35,27" alphatest="blend" />
@@ -7886,7 +7886,7 @@
       <convert type="EventTime">Remaining</convert>
       <convert type="RemainingToText">InMinutes</convert>
     </widget>
-    <widget render="BlackHarmonyRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=4,startdelay=8000,wrap" foregroundColor="white" backgroundColor="background" position="68,739" size="1782,216" font="Roboto_HD; 29" transparent="1">
+    <widget render="j00zekModRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=4,startdelay=8000,wrap" foregroundColor="white" backgroundColor="background" position="68,739" size="1782,216" font="Roboto_HD; 29" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
     <widget name="JumpInterval" position="978,148" size="200,25" zPosition="5" halign="right" font="Roboto_HD; 22" backgroundColor="background" foregroundColor="green" transparent="1" />

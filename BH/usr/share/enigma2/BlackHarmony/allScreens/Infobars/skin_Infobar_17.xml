@@ -285,31 +285,7 @@
   <eLabel backgroundColor="black" font="Roboto_HD; 22" foregroundColor="green" halign="left" position="1643,917" size="65,25" text="SNR:" transparent="1" />
   <eLabel backgroundColor="black" font="Roboto_HD; 22" foregroundColor="blue" halign="left" position="1643,957" size="65,25" text="CPU:" transparent="1" />
   <eLabel text="BTR:" position="1670,997" size="65,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" foregroundColor="orange" />
-  <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_uhd_on.png" position="950,805" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="4">
-    <convert type="ServiceInfo">VideoHeight</convert>
-    <convert type="ValueRange">1081,1920</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-  <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_hd_on_1080.png" position="950,805" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="3">
-    <convert type="ServiceInfo">VideoHeight</convert>
-    <convert type="ValueRange">1001,1080</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-    <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_hd_on_960.png" position="950,805" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="3">
-      <convert type="ServiceInfo">VideoWidth</convert>
-      <convert type="ValueRange">960,1000</convert>
-      <convert type="ConditionalShowHide"/>
-    </widget>
-  <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_hd_on_720.png" position="950,805" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="2">
-    <convert type="ServiceInfo">VideoHeight</convert>
-    <convert type="ValueRange">720,1000</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-  <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_sd_on_576.png" position="950,805" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="1">
-    <convert type="ServiceInfo">VideoWidth</convert>
-    <convert type="ValueRange">0,1279</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
+  <widget source="session.CurrentService" render="j00zekVideoResolutionIcon" position="950,805" size="37,20" zPosition="4" alphatest="blend"/>  
   <ePixmap alphatest="blend" pixmap="BlackHarmony/icons/ico_sd_off_576.png" position="950,805" size="37,20" zPosition="0" />
   <widget backgroundColor="background" font="HD_Thin;22" foregroundColor="light_grey" halign="center" position="60,997" render="VtiEmuInfo" size="235,25" source="session.CurrentService" transparent="1" valign="center" zPosition="3" />
 </screen>

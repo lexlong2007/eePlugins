@@ -37,7 +37,7 @@
       <convert type="ServicePosition">Remaining,Negate</convert>
     </widget>
     <widget source="session.CurrentService" render="Label" font="Roboto_HD; 26" position="1032,978" size="170,30" halign="left" backgroundColor="black" transparent="1" foregroundColor="light_yellow">
-      <convert type="j00zekVR">VideoResolution</convert>
+      <convert type="j00zekVideoResolution">VideoResolution</convert>
     </widget>
     <widget source="session.CurrentService" render="Label" position="395,978" size="110,30" font="Roboto_HD; 26" halign="center" backgroundColor="black" transparent="1">
       <convert type="ServicePosition">Length</convert>
@@ -172,7 +172,7 @@
     <widget source="Service" render="Label" position="1113,480" size="675,60" font="HD_Thin; 28" backgroundColor="black" valign="center" halign="left" transparent="1" foregroundColor="light_yellow">
       <convert type="EMCEventName">Name</convert>
     </widget>
-    <widget source="Service" render="BlackHarmonyRunningText" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=scroll,startdelay=6000,oneshot=5000,wrap" position="1113,560" size="675,380" font="Roboto_HD; 26" backgroundColor="black" transparent="1" halign="left" valign="top">
+    <widget source="Service" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=scroll,startdelay=6000,oneshot=5000,wrap" position="1113,560" size="675,380" font="Roboto_HD; 26" backgroundColor="black" transparent="1" halign="left" valign="top">
       <convert type="EMCEventName">FullDescription</convert>
     </widget>
     <widget source="Service" render="Label" position="1113,430" size="675,32" font="HD_Thin; 30" halign="left" backgroundColor="black" transparent="1" foregroundColor="green">
@@ -337,7 +337,7 @@
       <convert type="ServiceTime">Duration</convert>
       <convert type="ClockToText">InMinutes</convert>
     </widget>
-    <widget render="BlackHarmonyRunningText" source="Service" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=6000,wrap" halign="left" backgroundColor="background" position="95,806" size="1465,135" font="Roboto_HD; 28" transparent="1">
+    <widget render="j00zekModRunningText" source="Service" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=6000,wrap" halign="left" backgroundColor="background" position="95,806" size="1465,135" font="Roboto_HD; 28" transparent="1">
       <convert type="EMCEventName">FullDescription</convert>
     </widget>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="110,996" size="35,27" alphatest="blend"/>

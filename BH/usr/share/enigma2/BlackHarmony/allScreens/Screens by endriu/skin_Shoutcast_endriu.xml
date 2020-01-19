@@ -14,7 +14,7 @@
 	<widget source="headertext" render="j00zekLabel" position="140,180" size="910,40" zPosition="1" font="Roboto_HD;30" halign="center" valign="center" foregroundColor="#00F0A30A" backgroundColor="black"  transparent="1" />
 	<widget name="list"  position="140,250" size="910,660" font="Roboto_HD;30" enableWrapAround="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" scrollbarMode="showOnDemand" scrollbarWidth="10" selectionPixmap="BlackHarmony/menu/sel_1095_110.png" backgroundColor="black" transparent="1" />
 	<widget name="cover" position="1220,170" size="500,500" zPosition="3" alphatest="blend" />
-	<widget source="station" render="j00zekRunningText" options="movetype=running" position="1100,700" zPosition="1" size="705,40" font="Roboto_HD; 30" transparent="1" backgroundColor="black" foregroundColor="#66CC99" halign="center" />
+	<widget source="station" render="j00zekModRunningText" options="movetype=running" position="1100,700" zPosition="1" size="705,40" font="Roboto_HD; 30" transparent="1" backgroundColor="black" foregroundColor="#66CC99" halign="center" />
         <widget source="titel" render="j00zekLabel" position="1100,740" zPosition="1" size="705,100" font="Roboto_HD; 30" transparent="1" backgroundColor="black" halign="center" foregroundColor="green" />
 	<!--eLabel text="Gramy od:" position="1100,850" size="130,30" zPosition="1" font="Roboto_HD; 25" halign="left" foregroundColor="#58ccff" backgroundColor="black" transparent="1" /-->
         <widget source="session.CurrentService" render="Label" position="1100,850" size="130,30" zPosition="1" font="Roboto_HD; 25" halign="left" foregroundColor="#66CC99" backgroundColor="black" transparent="1" >

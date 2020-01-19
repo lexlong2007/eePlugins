@@ -135,30 +135,6 @@
  <widget source="session.FrontendStatus" render="Label" position="1766,944" size="100,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" zPosition="1">
   <convert type="FrontendInfo">AGC</convert>
 </widget> 
-  <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_uhd_on.png" position="1135,805" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="4">
-    <convert type="ServiceInfo">VideoHeight</convert>
-    <convert type="ValueRange">1921,2160</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-  <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_hd_on_1080.png" position="1135,805" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="3">
-    <convert type="ServiceInfo">VideoHeight</convert>
-    <convert type="ValueRange">1001,1080</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-    <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_hd_on_960.png" position="1135,805" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="3">
-      <convert type="ServiceInfo">VideoWidth</convert>
-      <convert type="ValueRange">960,1000</convert>
-      <convert type="ConditionalShowHide"/>
-    </widget>
-  <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_hd_on_720.png" position="1135,805" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="2">
-    <convert type="ServiceInfo">VideoHeight</convert>
-    <convert type="ValueRange">720,1000</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-  <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_sd_on_576.png" position="1135,805" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="1">
-    <convert type="ServiceInfo">VideoWidth</convert>
-    <convert type="ValueRange">0,1279</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
+  <widget source="session.CurrentService" render="j00zekVideoResolutionIcon" position="1135,805" size="37,20" zPosition="4" alphatest="blend"/>  
 </screen>
 </skin>

@@ -54,7 +54,7 @@
 	
 	
 	<eLabel position="75,780" size="1774,2" backgroundColor="yellow" />
-	<widget render="BlackHarmonyRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=scroll,startdelay=6000,oneshot=5000,wrap" halign="left" font="Roboto_HD; 30" position="75,790" size="1780,174" foregroundColor="white" backgroundColor="black" transparent="1" >
+	<widget render="j00zekModRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=scroll,startdelay=6000,oneshot=5000,wrap" halign="left" font="Roboto_HD; 30" position="75,790" size="1780,174" foregroundColor="white" backgroundColor="black" transparent="1" >
     <convert type="EventName">ExtendedDescription</convert>
  </widget>
 	<ePixmap pixmap="BlackHarmony/buttons/red.png" position="95,1001" size="35,27" alphatest="blend" />

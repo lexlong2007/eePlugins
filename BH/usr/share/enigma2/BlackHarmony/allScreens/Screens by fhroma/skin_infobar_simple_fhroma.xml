@@ -16,23 +16,7 @@
     <convert type="ServiceInfo">IsWidescreen</convert>
     <convert type="ConditionalShowHide" />
   </widget>
-
-  <widget source="session.CurrentService" render="Pixmap" position="1079,800" size="37,20" zPosition="2" pixmap="BlackHarmony/icons/ico_hd_on_1080.png" alphatest="blend">
-    <convert type="ServiceInfo">VideoWidth</convert>
-    <convert type="ValueRange">721,1980</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-  
-  <widget source="session.CurrentService" render="Pixmap" position="1079,800" size="37,20" zPosition="2" pixmap="BlackHarmony/icons/ico_sd_on_576.png" alphatest="blend">
-    <convert type="ServiceInfo">VideoWidth</convert>
-    <convert type="ValueRange">0,720</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-   <widget source="session.CurrentService" render="Pixmap" position="1079,800" size="37,20" zPosition="2" pixmap="BlackHarmony/icons/ico_uhd_on.png" alphatest="blend">
-    <convert type="ServiceInfo">VideoWidth</convert>
-    <convert type="ValueRange">1921,3840</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
+  <widget source="session.CurrentService" render="j00zekVideoResolutionIcon" position="1079,800" size="37,20" zPosition="2" alphatest="blend"/>  
   	<ePixmap position="1031,800" size="33,20" zPosition="1" pixmap="BlackHarmony/icons/ico_txt_off.png" alphatest="blend" />
 	<widget source="session.CurrentService" render="Pixmap" position="1031,800" size="33,20" zPosition="2" pixmap="BlackHarmony/icons/ico_txt_on.png" alphatest="blend">
 	<convert type="ServiceInfo">HasTelext</convert>

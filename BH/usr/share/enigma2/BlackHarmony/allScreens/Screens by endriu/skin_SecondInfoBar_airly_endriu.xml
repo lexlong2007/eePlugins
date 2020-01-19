@@ -16,23 +16,7 @@
     <convert type="ServiceInfo">IsWidescreen</convert>
     <convert type="ConditionalShowHide" />
   </widget>
-
-  <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_hd_on_1080.png" position="1079,745" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="2">
-    <convert type="ServiceInfo">VideoWidth</convert>
-    <convert type="ValueRange">721,1980</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-  
-  <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_sd_on_576.png" position="1079,745" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="2">
-    <convert type="ServiceInfo">VideoWidth</convert>
-    <convert type="ValueRange">0,720</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-   <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_uhd_on.png" position="1079,745" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="2">
-    <convert type="ServiceInfo">VideoWidth</convert>
-    <convert type="ValueRange">1921,3840</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
+  <widget source="session.CurrentService" render="j00zekVideoResolutionIcon" position="1079,745" size="37,20" zPosition="2" alphatest="blend"/>  
   	<ePixmap alphatest="blend" pixmap="BlackHarmony/icons/ico_txt_off.png" position="1031,745" size="33,20" zPosition="1" />
 	<widget alphatest="blend" pixmap="BlackHarmony/icons/ico_txt_on.png" position="1031,745" render="Pixmap" size="33,20" source="session.CurrentService" zPosition="2">
 	<convert type="ServiceInfo">HasTelext</convert>
@@ -137,7 +121,7 @@
     <convert type="ClockToText">Default</convert>
   </widget>
   <widget alphatest="blend" picontype="zzpicon" position="55,786" render="j00zekPicons" size="400,170" source="session.CurrentService" transparent="1" zPosition="4">
-    <convert type="ServiceName2">Reference</convert>
+    <convert type="j00zekModServiceName2">Reference</convert>
   </widget>
   <widget backgroundColor="black" font="HD_Thin; 26" foregroundColor="#66CC99" halign="center" noWrap="1" position="1410,733" render="Label" size="300,30" source="global.CurrentTime" transparent="1" valign="center">
     <convert type="ClockToText">Format:%d %B %Y </convert>
@@ -435,7 +419,7 @@
   <eLabel backgroundColor="black" font="Roboto_HD; 22" foregroundColor="lemon" halign="left" position="480,930" size="65,25" text="RSV:" transparent="1" />
  
   <widget backgroundColor="black" font="Roboto_HD; 22" foregroundColor="white" halign="left" position="545,930" render="Label" size="170,25" source="session.CurrentService" transparent="1">
-    <convert type="j00zekVR">VideoResolution</convert>
+    <convert type="j00zekVideoResolution">VideoResolution</convert>
   </widget>
   
   

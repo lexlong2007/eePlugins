@@ -17,7 +17,7 @@
   <widget backgroundColor="background" font="HD_Thin; 32" foregroundColor="light_yellow" position="75,123" render="Label" size="850,40" source="session.Event_Now" transparent="0">
     <convert type="EventName">Name</convert>
   </widget>
-  <widget backgroundColor="background" halign="left" render="BlackHarmonyRunningText" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=10000,wrap" font="Roboto_HD; 28" foregroundColor="white" position="75,190" size="850,365" source="session.Event_Now" transparent="1">
+  <widget backgroundColor="background" halign="left" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=10000,wrap" font="Roboto_HD; 28" foregroundColor="white" position="75,190" size="850,365" source="session.Event_Now" transparent="1">
     <convert type="EventName">ExtendedDescription</convert>
   </widget>
   <eLabel backgroundColor="black" font="HD_Thin; 27" foregroundColor="blue" position="997,55" size="100,40" text="Potem:" transparent="1" />
@@ -36,7 +36,7 @@
   <widget backgroundColor="black" font="HD_Thin; 32" foregroundColor="light_yellow" position="997,123" render="Label" size="850,40" source="session.Event_Next" transparent="1">
     <convert type="EventName">Name</convert>
   </widget>
-  <widget backgroundColor="background" halign="left" render="BlackHarmonyRunningText" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=10000,wrap" font="Roboto_HD; 28" foregroundColor="white" position="997,190" size="850,365" source="session.Event_Next" transparent="1">
+  <widget backgroundColor="background" halign="left" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=10000,wrap" font="Roboto_HD; 28" foregroundColor="white" position="997,190" size="850,365" source="session.Event_Next" transparent="1">
     <convert type="EventName">ExtendedDescription</convert>
   </widget>
   <widget font="HD_Thin; 26" halign="center" position="997,613" render="Label" size="850,32" source="session.CurrentService" zPosition="1" transparent="1" backgroundColor="black" foregroundColor="green">
@@ -180,6 +180,6 @@
   <widget source="session.FrontendStatus" render="Label" position="1766,944" size="100,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" zPosition="1">
     <convert type="FrontendInfo">AGC</convert>
   </widget> 
-  <widget source="session.CurrentService" render="j00zekVRicon" position="1135,805" size="37,20" zPosition="5" alphatest="blend"/> 
+  <widget source="session.CurrentService" render="j00zekVideoResolutionIcon" position="1135,805" size="37,20" zPosition="5" alphatest="blend"/> 
 </screen>
 </skin>

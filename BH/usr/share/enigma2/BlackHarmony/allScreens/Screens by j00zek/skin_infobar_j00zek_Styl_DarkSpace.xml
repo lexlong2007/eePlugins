@@ -14,7 +14,7 @@
 		<convert type="ClockToText">Default</convert>
 	</widget>
 	<eLabel text="-" position="360,0" size="115,85" font="HD_Thin; 30" valign="center" halign="right" backgroundColor="black" transparent="1" foregroundColor="light_grey" />
-	<widget source="session.Event_Now" render="j00zekLabel" position="490,0" size="800,85" font="HD_Thin; 42" valign="center" halign="left" backgroundColor="black" transparent="1" noWrap="1">
+	<widget source="session.Event_Now" render="j00zekLabel" cfgContext="EN" position="490,0" size="800,85" font="HD_Thin; 42" valign="center" halign="left" backgroundColor="black" transparent="1" noWrap="1">
 		<convert type="EventName">Name</convert>
 	</widget>
 	<widget source="session.Event_Now" render="Label" position="1300,0" size="180,85" font="HD_Thin; 32" valign="center" halign="right" backgroundColor="black" transparent="1">
@@ -32,7 +32,7 @@
 		<convert type="ClockToText">Default</convert>
 	</widget>
 	<eLabel text="-" position="360,85" size="115,85" font="HD_Thin; 30" valign="center" halign="right" foregroundColor="light_grey" backgroundColor="black" transparent="1" />
-	<widget source="session.Event_Next" render="j00zekLabel" position="490,85" size="800,85" font="HD_Thin; 42" valign="center" halign="left" backgroundColor="black" transparent="1" foregroundColor="light_grey" noWrap="1">
+	<widget source="session.Event_Next" render="j00zekLabel" cfgContext="EN" position="490,85" size="800,85" font="HD_Thin; 42" valign="center" halign="left" backgroundColor="black" transparent="1" foregroundColor="light_grey" noWrap="1">
 		<convert type="EventName">Name</convert>
 	</widget>
 	<widget source="session.Event_Next" render="Label" position="1300,85" size="180,85" font="HD_Thin; 32" valign="center" halign="right" foregroundColor="light_grey" backgroundColor="black" transparent="1">
@@ -43,15 +43,16 @@
 	<widget source="session.RecordState" render="Pixmap" position="1520,120" size="38,38" zPosition="2" pixmap="BlackHarmony/icons/recsign.png" alphatest="blend" transparent="1">
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
+  <widget source="session.CurrentService" render="j00zekFrontEndIcon" position="1655,100" size="88,40" zPosition="3" alphatest="blend"/> 
 	<!-- status tunera -->
-	<eLabel text="SNR:" position="1650,100" size="115,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" />
+	<!--eLabel text="SNR:" position="1650,100" size="115,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" />
 	<widget source="session.FrontendStatus" render="Label" position="1655,100" size="115,25" font="Roboto_HD; 22" halign="right" backgroundColor="black" transparent="1" zPosition="1" foregroundColor="green">
 		<convert type="FrontendInfo">SNR</convert>
 	</widget>
 	<eLabel text="BER:" position="1650,130" size="115,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" />
 	<widget source="session.FrontendStatus" render="Label" position="1655,130" size="115,25" font="Roboto_HD; 22" halign="right" backgroundColor="black" transparent="1" zPosition="1" foregroundColor="green">
 		<convert type="FrontendInfo">BER</convert>
-	</widget>
+	</widget-->
 	<!-- wykorzystanie glowic -->
 	<eLabel text="A" position="1580,100" zPosition="1" size="35,25" font="Roboto_HD; 22" halign="left" foregroundColor="#00dcdcdc" backgroundColor="black" transparent="1" />
 	<eLabel text="B" position="1580,100" zPosition="1" size="35,25" font="Roboto_HD; 22" halign="right" foregroundColor="#00dcdcdc" backgroundColor="black" transparent="1" />
@@ -97,5 +98,4 @@
     <convert type="ValueRange">3,3</convert>
     <convert type="ConditionalShowHide" />
   </widget>
-  <!--widget source="session.CurrentService" render="j00zekFEicon" position="1530,130" size="44,20" zPosition="3" alphatest="blend"/--> 
 </screen>

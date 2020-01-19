@@ -4,7 +4,7 @@
     <widget name="" pixmap="BlackHarmony/icons/ico_uhd_on.png" position="130,15" size="37,20" zPosition="2" transparent="0" alphatest="blend" />
   </previewXML>
   <widgetXML>
-    <widget alphatest="blend" position="130,15" render="j00zekVRicon" size="37,20" source="session.CurrentService" zPosition="4">
+    <widget alphatest="blend" position="130,15" render="j00zekVideoResolutionIcon" size="37,20" source="session.CurrentService" zPosition="4">
     </widget>
   </widgetXML>
 </definition>

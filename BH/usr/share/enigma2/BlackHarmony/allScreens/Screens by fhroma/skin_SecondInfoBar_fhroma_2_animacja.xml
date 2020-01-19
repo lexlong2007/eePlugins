@@ -16,23 +16,7 @@
     <convert type="ServiceInfo">IsWidescreen</convert>
     <convert type="ConditionalShowHide" />
   </widget>
-
-  <widget source="session.CurrentService" render="Pixmap" position="1079,745" size="37,20" zPosition="2" pixmap="BlackHarmony/icons/ico_hd_on_1080.png" alphatest="blend">
-    <convert type="ServiceInfo">VideoWidth</convert>
-    <convert type="ValueRange">721,1980</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-  
-  <widget source="session.CurrentService" render="Pixmap" position="1079,745" size="37,20" zPosition="2" pixmap="BlackHarmony/icons/ico_sd_on_576.png" alphatest="blend">
-    <convert type="ServiceInfo">VideoWidth</convert>
-    <convert type="ValueRange">0,720</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-   <widget source="session.CurrentService" render="Pixmap" position="1079,745" size="37,20" zPosition="2" pixmap="BlackHarmony/icons/ico_uhd_on.png" alphatest="blend">
-    <convert type="ServiceInfo">VideoWidth</convert>
-    <convert type="ValueRange">1921,3840</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
+  <widget source="session.CurrentService" render="j00zekVideoResolutionIcon" position="1079,745" size="37,20" zPosition="2" alphatest="blend"/>  
   	<ePixmap position="1031,745" size="33,20" zPosition="1" pixmap="BlackHarmony/icons/ico_txt_off.png" alphatest="blend" />
 	<widget source="session.CurrentService" render="Pixmap" position="1031,745" size="33,20" zPosition="2" pixmap="BlackHarmony/icons/ico_txt_on.png" alphatest="blend">
 	<convert type="ServiceInfo">HasTelext</convert>
@@ -443,7 +427,7 @@
   <eLabel text="RSV:" position="480,930" size="65,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" foregroundColor="lemon" />
  
   <widget source="session.CurrentService" render="Label" position="545,930" size="170,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" foregroundColor="white">
-    <convert type="j00zekVR">VideoResolution</convert>
+    <convert type="j00zekVideoResolution">VideoResolution</convert>
   </widget>
   
   
@@ -502,7 +486,7 @@
     <convert type="EventName">Name</convert>
   </widget>
 
-    <widget source="session.Event_Now" render="BlackHarmonyRunningText" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" position="75,185" size="850,360" font="Regular;24" foregroundColor="white" backgroundColor="transpBlack" transparent="1">
+    <widget source="session.Event_Now" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" position="75,185" size="850,360" font="Regular;24" foregroundColor="white" backgroundColor="transpBlack" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
   
@@ -524,7 +508,7 @@
     <convert type="EventName">Name</convert>
   </widget>
 
-     <widget source="session.Event_Next" render="BlackHarmonyRunningText" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" position="997,185" size="850,360" font="Regular;24" foregroundColor="grey" backgroundColor="transpBlack" transparent="1">
+     <widget source="session.Event_Next" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" position="997,185" size="850,360" font="Regular;24" foregroundColor="grey" backgroundColor="transpBlack" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
 	

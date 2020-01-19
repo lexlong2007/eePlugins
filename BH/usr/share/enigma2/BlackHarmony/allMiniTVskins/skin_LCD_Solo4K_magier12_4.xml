@@ -281,7 +281,7 @@
   <panel name="LCD09TunerTemplate" />
   <panel name="LCDTunerTemplate" />  
   
-  <widget source="session.Event_Now" render="BlackHarmonyRunningText" options="movetype=running,startpoint=0,direction=left,step=2,steptime=10,repeat=5000,startdelay=0,pause=0,always=0,oneshot=3500" noWrap="1" position="20,186" size="440,60" font="VFD;55" halign="left" valign="top">
+  <widget source="session.Event_Now" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=left,step=2,steptime=10,repeat=5000,startdelay=0,pause=0,always=0,oneshot=3500" noWrap="1" position="20,186" size="440,60" font="VFD;55" halign="left" valign="top">
     <convert type="EventName">Name</convert>
   </widget>
   
@@ -339,7 +339,7 @@
   <widget source="parent.ServiceEvent" render="j00zekPicons" position="20,45" size="220,132" zPosition="4" transparent="1" alphatest="blend">
     <convert type="ServiceName">Reference</convert>
   </widget>
-  <widget source="parent.ServiceEvent" render="BlackHarmonyRunningText" options="movetype=running,startpoint=0,direction=left,step=2,steptime=10,repeat=5000,startdelay=0,pause=0,always=0,oneshot=3500" noWrap="1" position="20,184" size="440,60" font="VFD;55" halign="left" valign="top">
+  <widget source="parent.ServiceEvent" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=left,step=2,steptime=10,repeat=5000,startdelay=0,pause=0,always=0,oneshot=3500" noWrap="1" position="20,184" size="440,60" font="VFD;55" halign="left" valign="top">
     <convert type="EventName">Name</convert>
   </widget>
   <eLabel name="progress" position="15,253" size="455,6" backgroundColor="#00FFFFFF" />

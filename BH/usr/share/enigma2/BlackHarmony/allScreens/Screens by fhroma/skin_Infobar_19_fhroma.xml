@@ -1,8 +1,8 @@
 <skin>
   <screen name="InfoBar" position="0,52" size="1920,1080" title="InfoBar" flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="30,710" zPosition="-2" size="1900,300" pixmap="BlackHarmony/bg_design/infobar_zpicon.png" />
-    <widget source="session.CurrentService" render="j00zekFEicon" position="989,750" size="44,20" zPosition="3" alphatest="blend"/> 
-    <widget source="session.CurrentService" render="j00zekVRicon" position="1094,750" size="37,20" zPosition="5" alphatest="blend"/> 
+    <widget source="session.CurrentService" render="j00zekFrontEndIcon" position="989,750" size="44,20" zPosition="3" alphatest="blend"/> 
+    <widget source="session.CurrentService" render="j00zekVideoResolutionIcon" position="1094,750" size="37,20" zPosition="5" alphatest="blend"/> 
     <widget source="session.CurrentService" render="Pixmap" pixmap="BlackHarmony/icons/ico_lan_on.png" position="870,750" zPosition="2" size="44,20" transparent="1" alphatest="blend">
       <convert type="BlackHarmonyRouteInfo">Lan</convert>
       <convert type="ConditionalShowHide" />

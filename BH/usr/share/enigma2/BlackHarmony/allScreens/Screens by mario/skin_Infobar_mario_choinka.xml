@@ -5,22 +5,7 @@
     <convert type="j00zekOPKGupgradeCheck">Blink</convert>
     <convert type="ConditionalShowHide" />
   </widget>
-  <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_dvb_c.png" position="1089,750" render="Pixmap" size="44,20" source="session.CurrentService" zPosition="3">
-    <convert type="BlackHarmonyServiceInfoEX">IsCable</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-  <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_dvb_s.png" position="1089,750" render="Pixmap" size="44,20" source="session.CurrentService" zPosition="3">
-    <convert type="BlackHarmonyServiceInfoEX">IsSatelliteS</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-  <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_dvb_s2.png" position="1089,750" render="Pixmap" size="44,20" source="session.CurrentService" zPosition="3">
-    <convert type="BlackHarmonyServiceInfoEX">IsSatelliteS2</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-  <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_dvb_t.png" position="1089,750" render="Pixmap" size="44,20" source="session.CurrentService" zPosition="3">
-    <convert type="BlackHarmonyServiceInfoEX">IsTerrestrial</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
+  <widget source="session.CurrentService" render="j00zekFrontEndIcon" position="1089,750" size="44,20" zPosition="3" alphatest="blend"/>
   <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_lan_on.png" position="1357,750" render="Pixmap" size="44,20" source="session.CurrentService" transparent="1" zPosition="2">
     <convert type="BlackHarmonyRouteInfo">Lan</convert>
     <convert type="ConditionalShowHide" />
@@ -284,9 +269,9 @@
   <eLabel backgroundColor="black" font="Roboto_HD; 23" foregroundColor="red" halign="left" position="1670,865" size="69,25" text="TMP:" transparent="1" />
   <eLabel backgroundColor="black" font="Roboto_HD; 23" foregroundColor="green" halign="left" position="1674,830" size="65,25" text="FAN:" transparent="1" />
   <eLabel backgroundColor="black" font="Roboto_HD; 23" foregroundColor="yellow" halign="left" position="1675,900" size="65,25" text="CPU:" transparent="1" />
-  <widget alphatest="blend" position="1147,750" render="j00zekVRicon" size="37,20" source="session.CurrentService" zPosition="4" />
+  <widget alphatest="blend" position="1147,750" render="j00zekVideoResolutionIcon" size="37,20" source="session.CurrentService" zPosition="4" />
       <widget backgroundColor="black" font="Roboto_HD; 22" foregroundColor="yellow" halign="left" position="995,796" render="Label" size="170,25" source="session.CurrentService" transparent="1">
-      <convert type="j00zekVR">VideoResolution</convert>
+      <convert type="j00zekVideoResolution">VideoResolution</convert>
   </widget>
   	 <widget backgroundColor="black" font="Roboto_HD; 28" foregroundColor="blue" halign="left" noWrap="1" position="635,740" render="Label" size="450,60" source="global.CurrentTime" transparent="1" zPosition="3">
     <convert type="BlackHarmonyimieniny" />
@@ -414,22 +399,7 @@
     <convert type="BlackHarmonyBoxInfo">Uptime</convert>
   </widget>
 <ePixmap pixmap="BlackHarmony/bg_design/infobar_zpicon.png" position="30,721" size="1900,300" zPosition="-2" />
-  <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_dvb_c.png" position="1089,750" render="Pixmap" size="44,20" source="session.CurrentService" zPosition="3">
-    <convert type="BlackHarmonyServiceInfoEX">IsCable</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-  <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_dvb_s.png" position="1089,750" render="Pixmap" size="44,20" source="session.CurrentService" zPosition="3">
-    <convert type="BlackHarmonyServiceInfoEX">IsSatelliteS</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-  <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_dvb_s2.png" position="1089,750" render="Pixmap" size="44,20" source="session.CurrentService" zPosition="3">
-    <convert type="BlackHarmonyServiceInfoEX">IsSatelliteS2</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-  <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_dvb_t.png" position="1089,750" render="Pixmap" size="44,20" source="session.CurrentService" zPosition="3">
-    <convert type="BlackHarmonyServiceInfoEX">IsTerrestrial</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
+  <widget source="session.CurrentService" render="j00zekFrontEndIcon" position="1089,750" size="44,20" zPosition="3" alphatest="blend"/>
   <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_lan_on.png" position="1357,750" render="Pixmap" size="44,20" source="session.CurrentService" transparent="1" zPosition="2">
     <convert type="BlackHarmonyRouteInfo">Lan</convert>
     <convert type="ConditionalShowHide" />
@@ -700,9 +670,9 @@
   <eLabel backgroundColor="black" font="Roboto_HD; 23" foregroundColor="red" halign="left" position="1670,865" size="69,25" text="TMP:" transparent="1" />
   <eLabel backgroundColor="black" font="Roboto_HD; 23" foregroundColor="green" halign="left" position="1674,830" size="65,25" text="FAN:" transparent="1" />
   <eLabel backgroundColor="black" font="Roboto_HD; 23" foregroundColor="yellow" halign="left" position="1675,900" size="65,25" text="CPU:" transparent="1" />
-  <widget alphatest="blend" position="1147,750" render="j00zekVRicon" size="37,20" source="session.CurrentService" zPosition="4" />
+  <widget alphatest="blend" position="1147,750" render="j00zekVideoResolutionIcon" size="37,20" source="session.CurrentService" zPosition="4" />
   <widget backgroundColor="black" font="Roboto_HD; 22" foregroundColor="yellow" halign="left" position="995,796" render="Label" size="170,25" source="session.CurrentService" transparent="1">
-   <convert type="j00zekVR">VideoResolution</convert>
+   <convert type="j00zekVideoResolution">VideoResolution</convert>
   </widget>
   <widget backgroundColor="black" font="Roboto_HD; 28" foregroundColor="blue" halign="left" noWrap="1" position="635,740" render="Label" size="450,60" source="global.CurrentTime" transparent="1" zPosition="3">
     <convert type="BlackHarmonyimieniny" />

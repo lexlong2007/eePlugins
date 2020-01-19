@@ -14,7 +14,7 @@
   <widget source="session.CurrentService" render="Label" position="798,750" size="60,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1">
     <convert type="ServiceInfo">VideoHeight</convert>
   </widget>
-  <widget source="session.CurrentService" render="j00zekFEicon" position="989,750" size="44,20" zPosition="3" alphatest="blend"/> 
+  <widget source="session.CurrentService" render="j00zekFrontEndIcon" position="989,750" size="44,20" zPosition="3" alphatest="blend"/> 
   <widget source="session.CurrentService" render="Pixmap" pixmap="BlackHarmony/icons/ico_lan_on.png" position="1315,750" zPosition="2" size="44,20" transparent="1" alphatest="blend">
     <convert type="BlackHarmonyRouteInfo">Lan</convert>
     <convert type="ConditionalShowHide" />
@@ -282,11 +282,7 @@
   <eLabel text="AGC:" position="177,958" size="69,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" />
   <eLabel text="SNR:" position="60,958" size="65,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" />
   <eLabel text="CPU:" position="302,958" size="65,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" />
-  <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_uhd_on.png" position="1095,751" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="4">
-    <convert type="ServiceInfo">VideoHeight</convert>
-    <convert type="ValueRange">1921,2160</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
+  <widget source="session.CurrentService" render="j00zekVideoResolutionIcon" position="1095,751" size="37,20" zPosition="4" alphatest="blend"/>  
   <widget source="session.Event_Next" render="Label" position="1305,790" size="105,35" halign="left" font="HD_Thin; 25" foregroundColor="yellow" backgroundColor="background" transparent="1">
     <convert type="EventTime">EndTime</convert>
     <convert type="ClockToText">Default</convert>

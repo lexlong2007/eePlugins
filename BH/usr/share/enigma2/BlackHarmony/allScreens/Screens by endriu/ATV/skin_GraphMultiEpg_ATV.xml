@@ -33,7 +33,7 @@
       <convert type="EventTime">Remaining</convert>
       <convert type="RemainingToText">InMinutes</convert>
     </widget>
-    <widget render="BlackHarmonyRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=scroll,startdelay=8000,oneshot=5000,wrap" position="80,739" size="1762,224" font="Roboto_HD; 30" foregroundColor="white" backgroundColor="black" transparent="1">
+    <widget render="j00zekModRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=scroll,startdelay=8000,oneshot=5000,wrap" position="80,739" size="1762,224" font="Roboto_HD; 30" foregroundColor="white" backgroundColor="black" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
     <widget name="JumpInterval" position="978,148" size="200,25" zPosition="5" halign="right" font="Roboto_HD; 22" foregroundColor="green" backgroundColor="background" transparent="1" />
@@ -83,7 +83,7 @@
       <convert type="RemainingToText">InMinutes</convert>
     </widget>
     <eLabel position="75,685" size="1211,3" backgroundColor="yellow" />
-	<widget render="BlackHarmonyRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=scroll,startdelay=8000,oneshot=5000,wrap" foregroundColor="white" backgroundColor="background" position="75,701" size="1211,262" font="Roboto_HD; 27" transparent="1">
+	<widget render="j00zekModRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=scroll,startdelay=8000,oneshot=5000,wrap" foregroundColor="white" backgroundColor="background" position="75,701" size="1211,262" font="Roboto_HD; 27" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
     <widget source="session.VideoPicture" render="Pig" position="1295,647" zPosition="3" size="550,309" backgroundColor="transparent" /> 
@@ -268,7 +268,7 @@
 			backgroundColor="black" transparent="1"/>
 			
 		<eLabel position="75,780" size="1774,2" backgroundColor="yellow" />
-		<widget render="BlackHarmonyRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=scroll,startdelay=6000,oneshot=5000,wrap" halign="left" font="Roboto_HD; 30" position="75,790" size="1780,174" foregroundColor="white" backgroundColor="black" transparent="1" >
+		<widget render="j00zekModRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=scroll,startdelay=6000,oneshot=5000,wrap" halign="left" font="Roboto_HD; 30" position="75,790" size="1780,174" foregroundColor="white" backgroundColor="black" transparent="1" >
           <convert type="EventName">ExtendedDescription</convert>
         </widget>
 		

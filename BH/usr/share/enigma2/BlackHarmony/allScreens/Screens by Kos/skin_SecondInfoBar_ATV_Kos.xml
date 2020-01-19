@@ -95,7 +95,7 @@
       <convert type="ValueRange">721,1980</convert>
       <convert type="ConditionalShowHide"/>
     </widget>
-    <widget alphatest="blend" position="999,770" render="j00zekVRicon" size="37,20" source="session.CurrentService" zPosition="4"/>
+    <widget alphatest="blend" position="999,770" render="j00zekVideoResolutionIcon" size="37,20" source="session.CurrentService" zPosition="4"/>
     <ePixmap position="952,770" size="30,20" zPosition="1" pixmap="BlackHarmony/icons/ico_sub_off.png" alphatest="blend" />
     <widget source="session.CurrentService" render="Pixmap" position="952,770" size="30,20" zPosition="2" pixmap="BlackHarmony/icons/ico_sub_on.png" alphatest="blend">
       <convert type="ServiceInfo">SubtitlesAvailable</convert>
@@ -110,22 +110,7 @@
       <convert type="ServiceInfo">HasTelext</convert>
       <convert type="ConditionalShowHide"/>
     </widget>
-    <widget source="session.CurrentService" render="Pixmap" pixmap="BlackHarmony/icons/ico_dvb_s.png" position="848,770" size="46,20" zPosition="1" alphatest="blend">
-      <convert type="BlackHarmonyServiceInfoEX">IsSatelliteS</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.CurrentService" render="Pixmap" pixmap="BlackHarmony/icons/ico_dvb_s2.png" position="848,770" size="46,20" zPosition="2" alphatest="blend">
-      <convert type="BlackHarmonyServiceInfoEX">IsSatelliteS2</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.CurrentService" render="Pixmap" pixmap="BlackHarmony/icons/ico_dvb_c.png" position="848,770" size="46,20" zPosition="3" alphatest="blend">
-      <convert type="BlackHarmonyServiceInfoEX">IsCable</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>	
-    <widget source="session.CurrentService" render="Pixmap" pixmap="BlackHarmony/icons/ico_dvb_t.png" position="848,770" size="46,20" zPosition="4" alphatest="blend">
-      <convert type="BlackHarmonyServiceInfoEX">IsTerrestrial</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>	
+    <widget source="session.CurrentService" render="j00zekFrontEndIcon" position="848,770" size="46,20" zPosition="1" alphatest="blend"/>
     <widget source="session.CurrentService" render="Pixmap" pixmap="BlackHarmony/icons/ico_iptv_on.png" position="848,770" size="46,20" zPosition="5" alphatest="blend">
       <convert type="BlackHarmonyServiceInfoEX">IsIPStream</convert>
       <convert type="ConditionalShowHide" />

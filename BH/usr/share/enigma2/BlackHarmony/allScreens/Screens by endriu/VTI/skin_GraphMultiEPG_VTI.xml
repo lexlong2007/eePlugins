@@ -33,7 +33,7 @@
       <convert type="RemainingToText">InMinutes</convert>
     </widget>
 	<eLabel position="75,785" size="1767,3" backgroundColor="yellow" />
-    <widget render="BlackHarmonyRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=scroll,startdelay=8000,oneshot=5000,wrap" position="80,795" size="1762,165" font="Roboto_HD; 30" foregroundColor="white" backgroundColor="black" transparent="1">
+    <widget render="j00zekModRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=scroll,startdelay=8000,oneshot=5000,wrap" position="80,795" size="1762,165" font="Roboto_HD; 30" foregroundColor="white" backgroundColor="black" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
     

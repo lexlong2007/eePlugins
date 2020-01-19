@@ -48,31 +48,7 @@
     <convert type="ConditionalShowHide" />
   </widget>
   <!-- sd,hd,uhd icon info -->
-  <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_uhd_on.png" position="1593,1029" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="4">
-    <convert type="ServiceInfo">VideoHeight</convert>
-    <convert type="ValueRange">1921,2160</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-  <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_hd_on_1080.png" position="1593,1029" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="3">
-    <convert type="ServiceInfo">VideoHeight</convert>
-    <convert type="ValueRange">1001,1080</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-    <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_hd_on_960.png" position="1593,1029" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="3">
-      <convert type="ServiceInfo">VideoWidth</convert>
-      <convert type="ValueRange">960,1000</convert>
-      <convert type="ConditionalShowHide"/>
-    </widget>
-  <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_hd_on_720.png" position="1593,1029" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="2">
-    <convert type="ServiceInfo">VideoHeight</convert>
-    <convert type="ValueRange">720,1000</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-  <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_sd_on_576.png" position="1593,1029" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="1">
-    <convert type="ServiceInfo">VideoWidth</convert>
-    <convert type="ValueRange">0,1279</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
+  <widget source="session.CurrentService" render="j00zekVideoResolutionIcon" position="1593,1029" size="37,20" zPosition="2" alphatest="blend"/>  
   <!-- name & event -->
   <widget source="session.CurrentService" render="Label" position="79,768" size="650,48" font="HD_Thin; 42" valign="top" noWrap="1" backgroundColor="black" transparent="1" halign="left">
     <convert type="BlackHarmonygExtraTuner">ServiceNumberName</convert>

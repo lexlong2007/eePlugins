@@ -79,7 +79,7 @@
       </widget>
 
 	  <eLabel text=" " position="0,290" size="800,6" font="RegularLCD;16" backgroundColor="#00777777" transparent="0" zPosition="1" />
-        <widget source="session.Event_Now" foregroundColor="#00FFFF" render="BlackHarmonyRunningText" options="movetype=running,startpoint=0,direction=left,step=2,steptime=10,repeat=99,startdelay=5000,always=0,oneshot=12000" position="30,300" size="740,140" font="SemiboldLCD;80" noWrap="1" halign="left" valign="top">
+        <widget source="session.Event_Now" foregroundColor="#00FFFF" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=left,step=2,steptime=10,repeat=99,startdelay=5000,always=0,oneshot=12000" position="30,300" size="740,140" font="SemiboldLCD;80" noWrap="1" halign="left" valign="top">
     <convert type="EventName">Name</convert>
   </widget>
  
@@ -161,7 +161,7 @@
    
 
 
-  <widget source="session.CurrentService" foregroundColor="#00FFFF" render="BlackHarmonyRunningText" options="movetype=running,startpoint=0,direction=left,step=2,steptime=10,repeat=99,startdelay=5000,always=0,oneshot=12000" position="30,370" size="740,105" font="SemiboldLCD;80" noWrap="1" halign="left" valign="top">
+  <widget source="session.CurrentService" foregroundColor="#00FFFF" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=left,step=2,steptime=10,repeat=99,startdelay=5000,always=0,oneshot=12000" position="30,370" size="740,105" font="SemiboldLCD;80" noWrap="1" halign="left" valign="top">
     <convert type="ServiceName">Name</convert>
   </widget>
 
@@ -203,7 +203,7 @@
 	  <eLabel text=" " position="0,270" size="800,6" font="RegularLCD;16" backgroundColor="#00777777" transparent="0" zPosition="1" />
 
      
-	        <widget source="parent.ServiceEvent" foregroundColor="#00FFFF" render="BlackHarmonyRunningText" options="movetype=running,startpoint=0,direction=left,step=2,steptime=10,repeat=99,startdelay=5000,always=0,oneshot=12000" position="30,285" size="740,100" font="SemiboldLCD;80" noWrap="1" halign="left" valign="top">
+	        <widget source="parent.ServiceEvent" foregroundColor="#00FFFF" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=left,step=2,steptime=10,repeat=99,startdelay=5000,always=0,oneshot=12000" position="30,285" size="740,100" font="SemiboldLCD;80" noWrap="1" halign="left" valign="top">
     <convert type="EventName">Name</convert>
   </widget>
 
@@ -389,7 +389,7 @@
 	
 <!-- Service Descriptions -->
 	<screen name="EventView_summary" position="0,0" size="800,480">
-		<widget source="parent.Title" foregroundColor="#00FFFF" render="BlackHarmonyRunningText" options="movetype=running,startpoint=0,direction=left,step=2,steptime=10,repeat=99,startdelay=5000,always=0,oneshot=12000" position="40,70" size="760,110" font="RegularLCD;80"  halign="center" noWrap="1" />
+		<widget source="parent.Title" foregroundColor="#00FFFF" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=left,step=2,steptime=10,repeat=99,startdelay=5000,always=0,oneshot=12000" position="40,70" size="760,110" font="RegularLCD;80"  halign="center" noWrap="1" />
         
 
 	</screen>

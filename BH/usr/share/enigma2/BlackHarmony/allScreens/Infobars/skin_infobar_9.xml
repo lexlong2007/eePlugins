@@ -270,31 +270,7 @@
     <widget source="session.CurrentService" render="Label" position="1724,950" size="150,25" font="Roboto_HD; 22" halign="left" zPosition="3" backgroundColor="black" transparent="1">
       <convert type="j00zekBitrate_BH">VideoBitrateUnits</convert>
     </widget>
-    <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_uhd_on.png" position="1135,805" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="4">
-      <convert type="ServiceInfo">VideoHeight</convert>
-      <convert type="ValueRange">1081,1920</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_hd_on_1080.png" position="1135,805" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="3">
-      <convert type="ServiceInfo">VideoHeight</convert>
-      <convert type="ValueRange">1001,1080</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_hd_on_960.png" position="1135,805" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="3">
-      <convert type="ServiceInfo">VideoWidth</convert>
-      <convert type="ValueRange">960,1000</convert>
-      <convert type="ConditionalShowHide"/>
-    </widget>
-    <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_hd_on_720.png" position="1135,805" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="2">
-      <convert type="ServiceInfo">VideoHeight</convert>
-      <convert type="ValueRange">720,1000</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_sd_on_576.png" position="1135,805" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="1">
-      <convert type="ServiceInfo">VideoWidth</convert>
-      <convert type="ValueRange">0,1279</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
+    <widget source="session.CurrentService" render="j00zekVideoResolutionIcon" position="1135,805" size="37,20" zPosition="4" alphatest="blend"/>  
     <ePixmap pixmap="BlackHarmony/icons/ico_sd_off_576.png" position="1135,805" size="37,20" zPosition="0" alphatest="blend" />
     <widget source="session.CurrentService" render="VtiEmuInfo" position="1657,984" size="210,40" zPosition="3" font="Roboto_HD;20" halign="haling" valign="center" backgroundColor="background" foregroundColor="light_yellow" transparent="1" />
     <widget noWrap="1" backgroundColor="background" font="HD_Thin; 42" render="Label" position="1200,48" size="97,48" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="center" transparent="1" foregroundColor="lemon">

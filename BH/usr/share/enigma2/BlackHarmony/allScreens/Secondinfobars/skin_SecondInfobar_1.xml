@@ -17,7 +17,7 @@
   <widget backgroundColor="background" font="HD_Thin; 32" foregroundColor="light_yellow" position="75,123" render="Label" size="850,40" source="session.Event_Now" transparent="0">
     <convert type="EventName">Name</convert>
   </widget>
-  <widget backgroundColor="background" halign="left" render="BlackHarmonyRunningText" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=10000,wrap" font="Roboto_HD; 28" foregroundColor="white" position="75,190" size="850,365" source="session.Event_Now" transparent="1">
+  <widget backgroundColor="background" halign="left" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=10000,wrap" font="Roboto_HD; 28" foregroundColor="white" position="75,190" size="850,365" source="session.Event_Now" transparent="1">
     <convert type="EventName">ExtendedDescription</convert>
   </widget>
   <eLabel backgroundColor="black" font="HD_Thin; 27" foregroundColor="blue" position="997,55" size="100,40" text="Potem:" transparent="1" />
@@ -36,7 +36,7 @@
   <widget backgroundColor="black" font="HD_Thin; 32" foregroundColor="light_yellow" position="997,123" render="Label" size="850,40" source="session.Event_Next" transparent="1">
     <convert type="EventName">Name</convert>
   </widget>
-  <widget backgroundColor="background" halign="left" render="BlackHarmonyRunningText" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=10000,wrap" font="Roboto_HD; 28" foregroundColor="white" position="997,190" size="850,365" source="session.Event_Next" transparent="1">
+  <widget backgroundColor="background" halign="left" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=10000,wrap" font="Roboto_HD; 28" foregroundColor="white" position="997,190" size="850,365" source="session.Event_Next" transparent="1">
     <convert type="EventName">ExtendedDescription</convert>
   </widget>
   <widget font="HD_Thin; 26" halign="center" position="997,613" render="Label" size="850,32" source="session.CurrentService" zPosition="1" transparent="1" backgroundColor="black" foregroundColor="green">
@@ -318,26 +318,7 @@
   </widget>
   <eLabel text="SNR:" position="1648,917" size="65,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" foregroundColor="green" />
   <eLabel text="CPU:" position="1762,917" size="65,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" foregroundColor="#00ea225f" />
-  <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_uhd_on.png" position="950,805" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="4">
-    <convert type="ServiceInfo">VideoHeight</convert>
-    <convert type="ValueRange">1081,1920</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-  <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_hd_on_1080.png" position="950,805" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="3">
-    <convert type="ServiceInfo">VideoHeight</convert>
-    <convert type="ValueRange">1001,1080</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-  <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_hd_on_720.png" position="950,805" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="2">
-    <convert type="ServiceInfo">VideoHeight</convert>
-    <convert type="ValueRange">720,1000</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-  <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_sd_on_576.png" position="950,805" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="1">
-    <convert type="ServiceInfo">VideoWidth</convert>
-    <convert type="ValueRange">0,1279</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
+  <widget source="session.CurrentService" render="j00zekVideoResolutionIcon" position="950,805" size="37,20" zPosition="4" alphatest="blend"/>  
   <ePixmap pixmap="BlackHarmony/icons/ico_sd_off_576.png" position="950,805" size="37,20" zPosition="0" alphatest="blend" />
   <widget source="session.CurrentService" render="VtiEmuInfo" position="1635,960" size="235,25" zPosition="3" font="HD_Thin;22" halign="center" valign="center" backgroundColor="background" foregroundColor="light_grey" transparent="1" />
 </screen>
