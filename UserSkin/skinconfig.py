@@ -111,7 +111,7 @@ isImageType() #inicjacja
 
 def getTunerName():
     myName = 'unknown'
-    if path.exists('/proc/stb/info/vumodel'):
+    if path.exists('/proc/stb/info/vumodel') and not path.exists('/proc/stb/info/boxtype'):
         with open('/proc/stb/info/vumodel', 'r') as file:
             myName = file.readline().strip()
             file.close()
@@ -240,7 +240,11 @@ class UserSkin_Config(Screen, ConfigListScreen):
                     mkdir(SkinPath + folder)
             
 ### initializing VFDskins ###
-            if DBG == True: printDEBUG('#### initializing VFDskins ###')
+            if getDesktop(1).size().width() >= 320:
+                desktopType = 'lcd'
+            else:
+                desktopType = 'vfd'
+            if DBG == True: printDEBUG('#### initializing %s skins ###' % desktopType)
             self.LCDscreensList = [("system", "system")]
             if  path.exists('/usr/lib/enigma2/python/Plugins/Extensions/LCDlinux'):
                 self.LCDscreensList.append(("LCDLinux", "LCDLinux"))
@@ -254,14 +258,15 @@ class UserSkin_Config(Screen, ConfigListScreen):
                         break
 
             for f in sorted(listdir(SkinPath + "allMiniTVskins/"), key=str.lower):
-                if f.startswith('skin_') and f.endswith('.xml'):
+                if f.startswith('skin_') and f.endswith('.xml') and f.lower().find(desktopType) > -1:
                     if not filterVFDskins4model or f.lower().find(tunerName) > -1:
                         if FullDBG == True: printDEBUG( path.join('BlackHarmony/allMiniTVskins/',f) )
                         self.LCDscreensList.append(( path.join('BlackHarmony/allMiniTVskins/',f), _(f[5:-4].replace("_", " ")) ))
                     
             self.LCDscreensList.extend( atvLCDskins() )
             self.LCDscreensList.extend( vtiLCDskins() )
-            self.LCDscreensList.extend( homarLCDskins() )
+            if  desktopType == 'lcd' and tunerName != 'unknown':
+                self.LCDscreensList.extend( homarLCDskins() )
 
             config.plugins.UserSkin.LCDmode = ConfigSelection(default="system", choices = self.LCDscreensList)
             if DBG == True: printDEBUG('#### initializing FONTS ###')
