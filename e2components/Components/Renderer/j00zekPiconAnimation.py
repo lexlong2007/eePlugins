@@ -150,17 +150,18 @@ class j00zekPiconAnimation(Renderer):
                 if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[applySkin] self.delayBetweenLoops=%s' % self.delayBetweenLoops)
             else:
                 attribs.append((attrib, value))
-                if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[applySkin] unknown %s=%s' % (attrib,value))
+                if attrib not in ('unknown','size','position','zPosition'):
+                    if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[applySkin] unknown %s=%s' % (attrib,value))
 
         self.skinAttributes = attribs
         #Load animation into memory
         try:
-            if os.path.exists(config.plugins.j00zekCC.PiconAnimation_UserPath.value) and self.doLockPath == False:
+            if self.doLockPath == False and os.path.exists(config.plugins.j00zekCC.PiconAnimation_UserPath.value):
                 if DBG: j00zekDEBUG('UserPath exists and self.doLockPath == False')
                 self.loadPNGsAnim(config.plugins.j00zekCC.PiconAnimation_UserPath.value)
                 self.loadPNGsSubFolders(config.plugins.j00zekCC.PiconAnimation_UserPath.value)
             else:
-                if DBG: j00zekDEBUG('if self.doLockPath == True:')
+                if DBG: j00zekDEBUG('self.doLockPath == True or UserPath does not exist:')
                 for path in searchPaths:
                     if self.loadPNGsAnim(os.path.join(path, self.pixmaps)) == True:
                         break
@@ -187,6 +188,7 @@ class j00zekPiconAnimation(Renderer):
         Renderer.connect(self, source)
 
     def doSuspend(self, suspended):
+        
         if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[doSuspend] >>> suspended=%s' % suspended)
         if suspended:
                 self.changed((self.CHANGED_CLEAR,))
@@ -256,7 +258,9 @@ class j00zekPiconAnimation(Renderer):
                                                                                                         )
                 except Exception as e:
                     j00zekDEBUG('[j00zekPiconAnimation]:[changed]  exception %s' % str(e))
-            if what[0] == self.CHANGED_CLEAR: #we are expecting a real update soon. do not bother polling NOW, but clear data
+            if self.FramesCount == 0:
+                self.instance.hide()
+            elif what[0] == self.CHANGED_CLEAR: #we are expecting a real update soon. do not bother polling NOW, but clear data
                 if not self.animTimer is None: self.animTimer.stop()
                 self.instance.hide()
                 self.slideFrame = 0
