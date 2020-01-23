@@ -38,6 +38,7 @@
 # take a look at the discussion: http://board.dreambox-tools.info/showthread.php?6050-Erweiterung-Running-Text-render
 ################################################################################
 
+from Components.config import config
 from enigma import eWidget, eLabel, eTimer, ePoint, eSize, gFont, \
     RT_HALIGN_LEFT, RT_HALIGN_CENTER, RT_HALIGN_RIGHT, RT_HALIGN_BLOCK, \
     RT_VALIGN_TOP, RT_VALIGN_CENTER, RT_VALIGN_BOTTOM, RT_WRAP
@@ -45,7 +46,7 @@ from enigma import eWidget, eLabel, eTimer, ePoint, eSize, gFont, \
 from Renderer import Renderer
 from skin import parseColor, parseFont
 
-DBG = False
+DBG = True
 try:
     if DBG: from Components.j00zekComponents import j00zekDEBUG
 except Exception: DBG = False 
@@ -54,7 +55,6 @@ except Exception: DBG = False
 NONE     = 1
 RUNNING  = 2
 SWIMMING = 3
-AUTO     = 4
 # direction:
 LEFT     = 1
 RIGHT    = 2
@@ -87,6 +87,7 @@ class j00zekModRunningText(Renderer):
         self.direction = LEFT
         self.mLoopTimeout = self.mOneShot = 0
         self.mRepeat = 0
+        self.currRepeats = 0
         self.mPageDelay = self.mPageLength = 0
         self.lineHeight = 0        # for text height auto correction on dmm-enigma2
         self.mShown = 0
@@ -220,6 +221,8 @@ class j00zekModRunningText(Renderer):
         if self.mLoopTimeout: self.mLoopTimeout = max(self.mStepTimeout, self.mLoopTimeout)
         if self.mPageDelay: self.mPageDelay = max(self.mStepTimeout, self.mPageDelay)
         
+        self.currType = self.type
+        
         self.scroll_label.setFont(self.txfont)
         if not (self.txtflags & RT_WRAP):
             self.scroll_label.setNoWrap(1)
@@ -264,58 +267,82 @@ class j00zekModRunningText(Renderer):
         self.scroll_label.move( ePoint( X-self.soffset[0], Y-self.soffset[1] ) )
 
     def calcMoving(self):
+        if config.plugins.j00zekCC.rtType.value == '0':
+            self.currType = self.type
+        else:
+            self.currType = int(config.plugins.j00zekCC.rtType.value)
         #if DBG: j00zekDEBUG("[j00zekRunningText:calcMoving] >>>")
         self.X = self.Y = 0
         if not (self.txtflags & RT_WRAP):
             self.txtext = self.txtext.replace("\xe0\x8a"," ").replace(chr(0x8A)," ").replace("\n"," ").replace("\r"," ")
 
-        if self.alternateFont is None and self.useBiggestPossibleFont == False:
-            self.scroll_label.setText(self.txtext)
-            text_size = self.scroll_label.calculateSize()
-            if DBG: j00zekDEBUG("[j00zekRunningText:calcMoving] dynamic font change disabled")
-        else:
+        currMaxFontSize = self.maxFontSize
+        CurrMinFontSize = self.minFontSize 
+        currUseBiggestPossibleFont = self.useBiggestPossibleFont
+        rtFontSize = 0
+        if config.plugins.j00zekCC.rtFontSize.value != '0':
+            try:
+                rtFontSize = float(config.plugins.j00zekCC.rtFontSize.value)
+                currMaxFontSize = int(self.maxFontSize * ( 1 + rtFontSize ))
+                CurrMinFontSize = int(self.maxFontSize * ( 1 - rtFontSize )) 
+                currUseBiggestPossibleFont = True
+            except Exception as e:
+                rtFontSize = 0
+                if DBG: j00zekDEBUG("[j00zekRunningText:calcMoving] Exception in rtFontSize:  %s" % str(e))
+            
+        if not self.alternateFont is None:
             self.scroll_label.setFont(self.txfont) #revert to standard in case alternate font used
-            self.scroll_label.setText(self.txtext)
-            text_size = self.scroll_label.calculateSize()
-            if (self.txtflags & RT_WRAP) and text_size.height() > self.H:
-                if self.useBiggestPossibleFont == True:
-                    if DBG: j00zekDEBUG("[j00zekRunningText:calcMoving] looking for best font size for current wrapped text '%s > %s'" % (text_size.height(), self.H))
-                    currSize = self.maxFontSize
-                    while currSize > self.minFontSize:
-                        currSize -= 1
-                        self.scroll_label.setFont(parseFont("%s;%s" % (self.txfontName, currSize), ((1,1),(1,1))))
-                        text_size = self.scroll_label.calculateSize()
-                        if DBG: j00zekDEBUG("[j00zekRunningText:calcMoving] Size of text for font %s is %s/%s" % (currSize, text_size.height(), self.H))
-                        if text_size.height() <= self.H:
-                            break
-                else:
-                    if DBG: j00zekDEBUG("[j00zekRunningText:calcMoving] switching to alternateFont because wrapped text > height '%s > %s'" % (text_size.height(), self.H))
-                    self.scroll_label.setFont(self.alternateFont)
-                    text_size = self.scroll_label.calculateSize()
-            elif text_size.width() > self.W:
-                if self.useBiggestPossibleFont == True:
-                    if DBG: j00zekDEBUG("[j00zekRunningText:calcMoving] looking for best font size for current not wrapped text '%s > %s'" % (text_size.width(), self.W))
-                    currSize = self.maxFontSize
-                    while currSize > self.minFontSize:
-                        currSize -= 1
-                        self.scroll_label.setFont(parseFont("%s;%s" % (self.txfontName, currSize), ((1,1),(1,1))))
-                        text_size = self.scroll_label.calculateSize()
-                        if DBG: j00zekDEBUG("[j00zekRunningText:calcMoving] Size of text for font %s is %s/%s" % (currSize, text_size.width(), self.W))
-                        if text_size.width() <= self.W:
-                            break
-                else:
-                    if DBG: j00zekDEBUG("[j00zekRunningText:calcMoving] switching to alternateFont because not wrapped text > width '%s > %s'" % (text_size.width(), self.W))
-                    self.scroll_label.setFont(self.alternateFont)
-                    text_size = self.scroll_label.calculateSize()
-              
+        self.scroll_label.setText(self.txtext)
+        
+        try:
+            if self.alternateFont is None and currUseBiggestPossibleFont == False and rtFontSize == 0:
+                text_size = self.scroll_label.calculateSize()
+                if DBG: j00zekDEBUG("[j00zekRunningText:calcMoving] dynamic font change disabled")
             else:
-                if DBG: j00zekDEBUG("[j00zekRunningText:calcMoving] reverting to mainFont because text < width '%s < %s'" % (text_size.width(), self.H))
+                self.scroll_label.setFont(parseFont("%s;%s" % (self.txfontName, currMaxFontSize), ((1,1),(1,1))))
+                text_size = self.scroll_label.calculateSize()
+                if (self.txtflags & RT_WRAP) and text_size.height() > self.H:
+                    if currUseBiggestPossibleFont == True:
+                        if DBG: j00zekDEBUG("[j00zekRunningText:calcMoving] looking for best font size for current wrapped text '%s > %s'" % (text_size.height(), self.H))
+                        currSize = currMaxFontSize
+                        while currSize > CurrMinFontSize:
+                            currSize -= 1
+                            self.scroll_label.setFont(parseFont("%s;%s" % (self.txfontName, currSize), ((1,1),(1,1))))
+                            text_size = self.scroll_label.calculateSize()
+                            if DBG: j00zekDEBUG("[j00zekRunningText:calcMoving] Size of text for font %s is %s/%s" % (currSize, text_size.height(), self.H))
+                            if text_size.height() <= self.H:
+                                break
+                    else:
+                        if DBG: j00zekDEBUG("[j00zekRunningText:calcMoving] switching to alternateFont because wrapped text > height '%s > %s'" % (text_size.height(), self.H))
+                        self.scroll_label.setFont(self.alternateFont)
+                        text_size = self.scroll_label.calculateSize()
+                elif text_size.width() > self.W:
+                    if currUseBiggestPossibleFont == True:
+                        if DBG: j00zekDEBUG("[j00zekRunningText:calcMoving] looking for best font size for current not wrapped text '%s > %s'" % (text_size.width(), self.W))
+                        currSize = currMaxFontSize
+                        while currSize > CurrMinFontSize:
+                            currSize -= 1
+                            self.scroll_label.setFont(parseFont("%s;%s" % (self.txfontName, currSize), ((1,1),(1,1))))
+                            text_size = self.scroll_label.calculateSize()
+                            if DBG: j00zekDEBUG("[j00zekRunningText:calcMoving] Size of text for font %s is %s/%s" % (currSize, text_size.width(), self.W))
+                            if text_size.width() <= self.W:
+                                break
+                    else:
+                        if DBG: j00zekDEBUG("[j00zekRunningText:calcMoving] switching to alternateFont because not wrapped text > width '%s > %s'" % (text_size.width(), self.W))
+                        self.scroll_label.setFont(self.alternateFont)
+                        text_size = self.scroll_label.calculateSize()
+              
+                else:
+                    if DBG: j00zekDEBUG("[j00zekRunningText:calcMoving] reverting to mainFont because text < width '%s < %s'" % (text_size.width(), self.H))
+        except Exception as e:
+            text_size = self.scroll_label.calculateSize()
+            if DBG: j00zekDEBUG("[j00zekRunningText:calcMoving] Exception:  %s" % str(e))
         
         text_width = text_size.width()
         text_height = text_size.height()
         
 
-        if self.txtext == "" or self.type == NONE:
+        if self.txtext == "" or self.currType == NONE:
             return False
         if self.direction in (LEFT,RIGHT) or not (self.txtflags & RT_WRAP):
             self.scroll_label.resize(eSize(self.txfont.pointSize * len(self.txtext),self.H)) # stupid workaround, have no better idea right now...
@@ -329,14 +356,14 @@ class j00zekModRunningText(Renderer):
             text_height = max(text_height, (text_height + self.lineHeight - 1) / self.lineHeight * self.lineHeight)
             
         
-#        self.type =        0 - NONE; 1 - RUNNING; 2 - SWIMMING; 3 - AUTO(???)
+#        self.currType =        1 - NONE; 2 - RUNNING; 3 - SWIMMING
 #        self.direction =    0 - LEFT; 1 - RIGHT;   2 - TOP;      3 - BOTTOM
 #        self.halign =        0 - LEFT; 1 - RIGHT;   2 - CENTER;   3 - BLOCK
 
         if self.direction in (LEFT,RIGHT):
             if not self.mAlways and text_width <= self.W:
                 return False
-            if self.type == RUNNING:
+            if self.currType == RUNNING:
                 self.A = self.X - text_width - self.soffset[0] - abs(self.mStep)
                 self.B = self.W - self.soffset[0] + abs(self.mStep)
                 if self.direction == LEFT:
@@ -352,7 +379,7 @@ class j00zekModRunningText(Renderer):
                         self.mStop = self.P = max(self.A, min(self.W, self.mStartPoint))
                     else:
                         self.mStop = self.P = max(self.A, min(self.B, self.mStartPoint - text_width + self.soffset[0]))
-            elif self.type == SWIMMING:
+            elif self.currType == SWIMMING:
                 if text_width < self.W:
                     self.A = self.X + 1            # incomprehensible indent '+ 1' ???
                     self.B = self.W - text_width - 1    # incomprehensible indent '- 1' ???
@@ -384,7 +411,7 @@ class j00zekModRunningText(Renderer):
         elif self.direction in (TOP,BOTTOM):
             if not self.mAlways and text_height <= self.H:
                 return False
-            if self.type == RUNNING:
+            if self.currType == RUNNING:
                 self.A = self.Y - text_height - self.soffset[1] - abs(self.mStep)
                 self.B = self.H - self.soffset[1] + abs(self.mStep)
                 if self.direction == TOP:
@@ -400,7 +427,7 @@ class j00zekModRunningText(Renderer):
                         self.mStop = self.P = max(self.A, min(self.H, self.mStartPoint))
                     else:
                         self.mStop = self.P = max(self.A, min(self.B, self.mStartPoint - text_height + self.soffset[1]))
-            elif self.type == SWIMMING:
+            elif self.currType == SWIMMING:
                 if text_height < self.H:
                     self.A = self.Y
                     self.B = self.H - text_height
@@ -433,7 +460,7 @@ class j00zekModRunningText(Renderer):
         
         self.scroll_label.resize(eSize(self.xW,self.xH))
         
-        if self.mStartDelay:
+        if self.mStartDelay or config.plugins.j00zekCC.rtStartDelay.value != '0':
             if self.direction in (LEFT,RIGHT):
                 self.moveLabel(self.P, self.Y)
             else: # if self.direction in (TOP,BOTTOM):
@@ -441,8 +468,15 @@ class j00zekModRunningText(Renderer):
                 
         
                 
-        self.mCount = self.mRepeat
-        self.mTimer.start(self.mStartDelay,True)
+        if config.plugins.j00zekCC.rtRepeat.value != '0':
+            self.currRepeats = int(config.plugins.j00zekCC.rtRepeat.value)
+        else:
+            self.currRepeats = self.mRepeat
+        self.mCount = self.currRepeats
+        if config.plugins.j00zekCC.rtStartDelay.value != '0':
+            self.mTimer.start(int(config.plugins.j00zekCC.rtStartDelay.value),True)
+        else:
+            self.mTimer.start(self.mStartDelay,True)
         return True
 
     def movingLoop(self):
@@ -451,12 +485,15 @@ class j00zekModRunningText(Renderer):
                 self.moveLabel(self.P, self.Y)
             else: # if self.direction in (TOP,BOTTOM)
                 self.moveLabel(self.X, self.P)
-            timeout = self.mStepTimeout
+            if config.plugins.j00zekCC.rtStepTimeout.value != '0':
+                timeout = int(config.plugins.j00zekCC.rtStepTimeout.value)
+            else:
+                timeout = self.mStepTimeout
             if (self.mStop is not None) and (self.mStop + abs(self.mStep) > self.P >= self.mStop):
-                if (self.type == RUNNING) and (self.mOneShot > 0):
-                    if (self.mRepeat > 0) and (self.mCount-1 <= 0): return
+                if (self.currType == RUNNING) and (self.mOneShot > 0):
+                    if (self.currRepeats > 0) and (self.mCount-1 <= 0): return
                     timeout = self.mOneShot
-                elif (self.type == SWIMMING) and (self.mPageLength > 0) and (self.mPageDelay > 0):
+                elif (self.currType == SWIMMING) and (self.mPageLength > 0) and (self.mPageDelay > 0):
                     if (self.direction == TOP) and (self.mStep < 0):
                         self.mStop -= self.mPageLength
                         if self.mStop < self.A:
@@ -468,11 +505,11 @@ class j00zekModRunningText(Renderer):
                             self.mStop = self.A
                         timeout = self.mPageDelay
         else:
-            if self.mRepeat > 0:
+            if self.currRepeats > 0:
                 self.mCount -= 1
                 if self.mCount == 0: return
             timeout = self.mLoopTimeout
-            if self.type == RUNNING:
+            if self.currType == RUNNING:
                 if self.P < self.A:
                     self.P = self.B + abs(self.mStep)
                 else:
@@ -481,7 +518,4 @@ class j00zekModRunningText(Renderer):
                 self.mStep = -self.mStep
         
         self.P += self.mStep
-        self.mTimer.start(timeout,True)
-
-
-
+        self.mTimer.start(timeout,True) 

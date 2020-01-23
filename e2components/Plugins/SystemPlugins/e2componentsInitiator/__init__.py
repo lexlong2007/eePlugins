@@ -40,14 +40,17 @@ config.plugins.j00zekCC.AlternateUserIconsPath = ConfigDirectory(default = _('no
 config.plugins.j00zekCC.j00zekLabelSN = ConfigSelection(default = "0", choices = MinFontChoices )
 config.plugins.j00zekCC.j00zekLabelEN = ConfigSelection(default = "0", choices = MinFontChoices )
 #runningText
-config.plugins.j00zekCC.rtType = ConfigSelection(default = "0", choices = [("0", _("Defined in skin")), ("0", _("NONE")),
-                                                                           ("1", _("RUNNING")), ("2", _("SWIMMING")), ("3", _("AUTO"))])
-config.plugins.j00zekCC.rtSpeed = ConfigSelection(default = "0", choices = [ ("0", _("Defined in skin")), ("25", _("40 px/s")),
-
+config.plugins.j00zekCC.rtType = ConfigSelection(default = "0", choices = [("0", _("Defined in skin")), ("1", _("don't move")), ("2", _("RUNNING")), ("3", _("SWIMMING"))])
+config.plugins.j00zekCC.rtFontSize = ConfigSelection(default = "0", choices = [("0", _("if defined in skin")), ("0.1", _("+/- 10%%")), ("0.2", "+/- 20%%")])
+config.plugins.j00zekCC.rtStartDelay = ConfigSelection(default = "0", choices =   [ ("0", _("Defined in skin")), ("1000", _("1s")), ("2000", _("2s")),
+                                                                                   ("4000", _("4s")), ("6000", _("6s")), ("8000", _("8s")) ])
+config.plugins.j00zekCC.rtStepTimeout = ConfigSelection(default = "0", choices = [ ("0", _("Defined in skin")), ("25", _("40 px/s")),
                                                                              ("50", _("20 px/s")), ("100", _("10 px/s")) ])
-config.plugins.j00zekCC.rtFontSize = ConfigSelection(default = "0", choices = [("0", _("Defined in skin")), ("0.1", _("+/- 10%%")), ("0.2", "+/- 20%%")])
-config.plugins.j00zekCC.rtInitialDelay = ConfigSelection(default = "0", choices =   [ ("0", _("Defined in skin")), ("1", _("1")), ("2", _("2")), ("3", _("3")) ])
+config.plugins.j00zekCC.rtRepeat = ConfigSelection(default = "0", choices = [ ("0", _("Defined in skin")), ("1", _("one time")),
+                                                                             ("5", _("5 times")), ("100", _("never stop")) ])
 #EventName
-config.plugins.j00zekCC.enDescrType = ConfigSelection(default = "0", choices = [("0", _("Defined in skin")), ("1", _("SHORT_DESCRIPTION")),
-                                                                                ("2", _("EXTENDED_DESCRIPTION")), ("3", _("FULL_DESCRIPTION")) ])
-#ConfigYesNo(default = False) #ConfigText(default = _("none")) #("", _(""))
+config.plugins.j00zekCC.enDescrType = ConfigSelection(default = "0", choices = [("0", _("Defined in skin")), ("1", _("Short")),
+                                                                                ("2", _("Extended or Short")), ("3", _("Short and Extended")),
+                                                                                ("4", _("Extended and short (if different)")) ])
+config.plugins.j00zekCC.enTMDBratingFirst = ConfigYesNo(default = False)
+#ConfigText(default = _("none")) #("", _(""))

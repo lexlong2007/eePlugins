@@ -48,14 +48,16 @@ class e2ComponentsConfig(Screen, ConfigListScreen):
         #
         self.list.append(getConfigListEntry(_(" "), config.plugins.j00zekCC.FakeEntry))
         self.list.append(getConfigListEntry(_("---Scrolling text---"), config.plugins.j00zekCC.FakeEntry))
-        #self.list.append(getConfigListEntry(_("Ammend Font size"), config.plugins.j00zekCC.rtFontSize))
-        #self.list.append(getConfigListEntry(_("Type on multiline"), config.plugins.j00zekCC.rtType))
-        #self.list.append(getConfigListEntry(_("Initial delay"), config.plugins.j00zekCC.rtInitialDelay))
-        #self.list.append(getConfigListEntry(_("Speed"), config.plugins.j00zekCC.rtSpeed))
+        self.list.append(getConfigListEntry(_("Ammend Font size"), config.plugins.j00zekCC.rtFontSize))
+        self.list.append(getConfigListEntry(_("Type"), config.plugins.j00zekCC.rtType))
+        self.list.append(getConfigListEntry(_("Initial delay"), config.plugins.j00zekCC.rtStartDelay))
+        self.list.append(getConfigListEntry(_("Speed"), config.plugins.j00zekCC.rtStepTimeout))
+        self.list.append(getConfigListEntry(_("Repeats"), config.plugins.j00zekCC.rtRepeat))
         #
         self.list.append(getConfigListEntry(_(" "), config.plugins.j00zekCC.FakeEntry))
         self.list.append(getConfigListEntry(_("---Event description (EventName)---"), config.plugins.j00zekCC.FakeEntry))
-        #self.list.append(getConfigListEntry(_("Information presented"),  config.plugins.j00zekCC.enDescrType ))
+        self.list.append(getConfigListEntry(_("Information presented"),  config.plugins.j00zekCC.enDescrType ))
+        self.list.append(getConfigListEntry(_("Show TMDB rating at the begining (when available)"),  config.plugins.j00zekCC.enTMDBratingFirst ))
         
         #self.list.append(getConfigListEntry(_("XXXX"), XXXX ))
         self["config"].list = self.list

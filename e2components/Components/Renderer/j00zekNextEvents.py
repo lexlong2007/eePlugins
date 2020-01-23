@@ -1,3 +1,4 @@
+from Components.config import config
 from Components.VariableText import VariableText
 from Renderer import Renderer
 from enigma import eLabel, eEPGCache
