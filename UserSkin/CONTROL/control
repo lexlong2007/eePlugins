@@ -5,6 +5,6 @@ Depends:
 Description: UserSkins configuration tool
 Maintainer: j00zek
 Source: http://github.com/j00zek/eePlugins
-Version: 20.01.21.1648
+Version: 20.01.23.0622
 Architecture: all
 DestinationPath: /usr/lib/enigma2/python/Plugins/Extensions/UserSkin

@@ -879,6 +879,8 @@ class UserSkin_Config(Screen, ConfigListScreen):
             f.close()
         if len(DefinedColors) < 1:
             return
+        #remove not real colors
+        myContent = myContent.replace('CoolDateColor=','').replace('CoolHighlightColor','').replace('CoolTitleColor','')
         #checking, if all colors defined
         r=re.findall(r'.*[Cc]olor="([^\W#]*)"',myContent)
         r=list(set(r)) #remove duplicates, no need to check for the same component several times
