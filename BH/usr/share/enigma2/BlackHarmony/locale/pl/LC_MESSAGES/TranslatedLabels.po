@@ -403,3 +403,22 @@ msgstr "Zachód"
 
 msgid "Mode 1 supports Kodi, PIP may not work. Mode 12 supports PIP, Kodi may not work"
 msgstr "Tryb 1 Wspiera Kodi, PIP może nie działać. Tryb 12 Wspiera PIP, Kodi może nie działać"
+
+msgid "Resolution:"
+msgstr "Rozdzielczość:"
+
+msgid "VideoCodec:"
+msgstr "Kodek wideo:"
+
+msgid "AudioCodec:"
+msgstr "Kodek audio:"
+
+msgid "HDD Temperature:"
+msgstr "Temperatura HDD:"
+
+msgid "CPU Temperature:"
+msgstr "Temperatura CPU:"
+
+msgid "Works:"
+msgstr "Pracuje:"
+
