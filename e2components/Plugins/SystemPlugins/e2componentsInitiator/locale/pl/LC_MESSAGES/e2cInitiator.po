@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: j00zekOPKGmanager\n"
 "POT-Creation-Date: 2016-01-07 12:00+0100\n"
-"PO-Revision-Date: 2020-01-19 12:43+0100\n"
+"PO-Revision-Date: 2020-01-24 09:23+0100\n"
 "Last-Translator: j00zek\n"
 "Language-Team: j00zek\n"
 "Language: pl\n"
@@ -19,8 +19,41 @@ msgstr ""
 msgid "AUTO"
 msgstr "Automatycznie"
 
+msgid "don't move"
+msgstr "Nie ruszaj się"
+
 msgid "Defined in skin"
 msgstr "Zdefinowane w skórce"
+
+msgid "Extended or Short"
+msgstr "Rozszerzony lub krótki"
+
+msgid "Extended and short (if different)"
+msgstr "Rozszerzony i krótki (jeśli inny)"
+
+msgid "FULL_DESCRIPTION"
+msgstr "Pełny opis"
+
+msgid "if defined in skin"
+msgstr "Jeśli zdefiniowano w skórce"
+
+msgid "Infobar summary"
+msgstr "Pokaż na wyświetlaczu:"
+
+msgid "never stop"
+msgstr "Nigdy nie przestawaj"
+
+msgid "Chanel name"
+msgstr "Nazwę kanału"
+
+msgid "CHname - EVname"
+msgstr "Nazwę i wydarzenie"
+
+msgid "Event name"
+msgstr "Nazwę wydarzenia"
+
+msgid "CHname - EVname (progress %)"
+msgstr "Nazwę i wydarzenie oraz postęp w ( % )"
 
 msgid "none"
 msgstr "Brak"
@@ -29,10 +62,34 @@ msgid "NONE"
 msgstr "Brak"
 
 msgid "not set"
-msgstr "nie zdefiniowana"
+msgstr "Nie zdefiniowana"
+
+msgid "one time"
+msgstr "Jeden raz"
+
+msgid "RUNNING"
+msgstr "W ruchu"
 
 msgid "same as defined font"
 msgstr "100% zdefiniowanej czcionki"
+
+msgid "Short"
+msgstr "Krótki"
+
+msgid "Short and Extended"
+msgstr "Krótkie i rozszerzone"
+
+msgid "same as max font"
+msgstr "Taka sama jak maksymalna czcionka"
+
+msgid "SWIMMING"
+msgstr "Pływanie"
+
+msgid "SHORT_DESCRIPTION"
+msgstr "Krótki opis"
+
+msgid "---VFD settings---"
+msgstr "--- Ustawienia VFD ---"
 
 msgid "75%% of defined font"
 msgstr "75% zdefiniowanej czcionki"
@@ -43,70 +100,61 @@ msgstr "67% zdefiniowanej czcionki"
 msgid "50%% of defined font"
 msgstr "50% zdefiniowanej czcionki"
 
-msgid "RUNNING"
-msgstr "W ruchu"
+msgid "5 times"
+msgstr "Pięć razy"
 
-msgid "same as max font"
-msgstr "taka sama jak maksymalna czcionka"
-
-msgid "SWIMMING"
-msgstr "Pływanie"
-
-msgid "SHORT_DESCRIPTION"
-msgstr "Krótki opis"
-
-msgid "FULL_DESCRIPTION"
-msgstr "Pełny opis"
+msgid "+/- 10%%"
+msgstr "+/- 10%"
 
 # buildList
 msgid "Alternate user icons path:"
 msgstr "Ścieżka użytkownika ikon alternatywnych:"
 
 msgid "Ammend Font size"
-msgstr "Zmień rozmiar czcionki"
+msgstr "Zmień rozmiar czcionki:"
 
 msgid "---Dynamic Font Size---"
 msgstr "--- Dynamiczna zmiana czcionki ---"
 
-msgid "FEicons user path:"
-msgstr "Ścieżka użytkownika FEicons:"
-
 msgid "Event Name minimum font size"
-msgstr "Minimalna wielkość tytułu audycji"
+msgstr "Minimalna wielkość tytułu audycji:"
 
 msgid "---Event description (EventName)---"
-msgstr "--- Opis zdarzenia (EventName) ---"
+msgstr "--- Nazwa zdarzenia (EventName) ---"
 
 msgid "Initial delay"
-msgstr "Początkowe opóźnienie"
+msgstr "Początkowe opóźnienie:"
 
 msgid "Information presented"
-msgstr "Informacje przedstawione"
+msgstr "Informacje przedstawione:"
 
 msgid "Picons animations user path:"
 msgstr "Ścieżka użytkownika animacji Picons:"
 
+msgid "Repeats"
+msgstr "Powtórzyć przewijany tekst:"
+
+msgid "Show TMDB rating at the begining (when available)"
+msgstr "Pokaż ocenę IMDB na początku (jeśli jest dostępna):"
+
 msgid "Speed"
-msgstr "Prędkość"
+msgstr "Prędkość przewijania:"
 
 msgid "---Scrolling text---"
 msgstr "--- Przewijanie tekstu ---"
 
 msgid "Service Name minimum font size"
-msgstr "Minimalna wielkość nazwy kanału"
+msgstr "Minimalna wielkość nazwy kanału:"
 
-msgid "Type on multiline"
-msgstr "Pisz na multilinii"
+msgid "Type"
+msgstr "Typ przewijania:"
 
 msgid "---User paths---"
 msgstr "--- Ścieżki użytkownika ---"
 
-msgid "VRicons user path:"
-msgstr "do ikon rozdzielczości video:"
-
 # other def
 msgid "Are you sure you want to save this configuration?"
-msgstr "Na pewno zapisać Tę konfigurację?"
+msgstr "Na pewno zapisać tą konfigurację?"
 
 msgid "Cancel"
 msgstr "Anuluj"

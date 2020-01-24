@@ -26,18 +26,25 @@
 # Version: 2.1 (07.01.2019) add DVB-T2 DVB-C2 system - Sirius
 # Version: 2.2 (07.01.2019) remove iptv provname add iptv list /etc/enigma2/iptvprov.list - Vasiliks
 # Version: 2.3 (15.01.2019) add terrestrial description - ikrom
+# Version: 2.3 (23.01.2020) add returning Name & event & progress - j00zek
 
 from Components.Converter.Converter import Converter
-from enigma import iServiceInformation, iPlayableService, iPlayableServicePtr, eServiceReference, eServiceCenter, eTimer, getBestPlayableServiceReference
+from enigma import iServiceInformation, iPlayableService, iPlayableServicePtr, eServiceReference, eServiceCenter, eTimer, getBestPlayableServiceReference, eEPGCache
 from Components.Element import cached
 from Components.config import config
+from time import time
 import NavigationInstance
 import os
+
 try:
     from Components.Renderer.ChannelNumber import ChannelNumberClasses
     correctChannelNumber = True
 except:
     correctChannelNumber = False
+
+#if enabled log into /tmp/e2components.log
+DBG = True
+if DBG: from Components.j00zekComponents import j00zekDEBUG 
 
 class j00zekModServiceName2(Converter, object):
     NAME = 0
@@ -50,9 +57,42 @@ class j00zekModServiceName2(Converter, object):
     SATELLITE = 7
     ALLREF = 8
     FORMAT = 9
+    USE_VFD_CFG = 10
+
+#Format description:
+# %A - AllRef           E.g. 1:0:1:3DD3:640:13E:820000:0:0:0
+# %B - Bouquet name     E.g. PL, aktualizacja 07-01-2020
+# %b -                  E.g. ?
+# %c -                  E.g. ?
+# %E - Event Name       E.g. Fakty
+# %e - Event progress%  E.g. ?
+# %F - frequency        E.g. 11508
+# %f -                  E.g. 3/4
+# %g -                  E.g. ? 
+# %h -                  E.g. ? 
+# %i -                  E.g. Auto
+# %M -                  E.g. 8PSK
+# %m -                  E.g. ? 
+# %N - Channel Name     E.g. TVN7 HD
+# %n - Channel Number   E.g. 8
+# %l -                  E.g. ?
+# %O -                  E.g. 13.0
+# %o -                  E.g. Auto
+# %P - Provider         E.g. TVN
+# %p - polarisation     E.g. V
+# %R - Reference        E.g. 1:0:1:3DD3:640:13E:820000:0:0:0::TVN7 HD
+# %r -                  E.g. 0.20
+# %S - Satellite Name   E.g. 13.0E Hotbird 13B/13C/13E
+# %s -                  E.g. DVB-S2
+# %T -                  E.g. 13.0Â°E 11508V 27500 3/4
+# %t -                  E.g. Satelita
+# %Y -                  E.g. 27500
+# Example of definition >%F  %Y %p  %f  %s  %M (%O)<
     
     def __init__(self, type):
         Converter.__init__(self, type)
+        self.epgQuery = eEPGCache.getInstance().lookupEventTime
+        if DBG: j00zekDEBUG('[j00zekModServiceName2:__init__] >>> type=%s' % type) 
         if type == "Name" or not len(str(type)):
             self.type = self.NAME
         elif type == "Number":
@@ -71,11 +111,13 @@ class j00zekModServiceName2(Converter, object):
             self.type = self.SATELLITE
         elif type == "AllRef":
             self.type = self.ALLREF
+        elif type == 'UseVFDcfg':
+            self.type = self.USE_VFD_CFG
         else:
             self.type = self.FORMAT
             self.sfmt = type[:]
         try:
-            if (self.type == 1 or (self.type == 9 and '%n' in self.sfmt)) and correctChannelNumber:
+            if (self.type == self.NUMBER or (self.type == self.FORMAT or self.type == self.USE_VFD_CFG and '%n' in self.sfmt)) and correctChannelNumber:
                 ChannelNumberClasses.append(self.forceChanged)
         except:
             pass
@@ -513,6 +555,7 @@ class j00zekModServiceName2(Converter, object):
 
     @cached
     def getText(self):
+        if DBG: j00zekDEBUG('[j00zekModServiceName2:getText] >>> self.type=%s' % self.type) 
         service = self.source.service
         if isinstance(service, iPlayableServicePtr):
             info = service and service.info()
@@ -613,7 +656,10 @@ class j00zekModServiceName2(Converter, object):
             elif '%3a' in tmpref:
                 return ':'.join(refstr.split(':')[:10])
             return tmpref
-        elif self.type == self.FORMAT:
+        elif self.type == self.FORMAT or self.type == self.USE_VFD_CFG:
+            if self.type == self.USE_VFD_CFG:
+                self.sfmt = config.plugins.j00zekCC.snVFDtype.value[:]
+                if DBG: j00zekDEBUG('[j00zekModServiceName2:getText] snVFDtype=%s' % self.sfmt)
             num = bouq = ''
             tmp = self.sfmt[:].split("%")
             if tmp:
@@ -623,7 +669,7 @@ class j00zekModServiceName2(Converter, object):
                 return ""
             for line in tmp:
                 f = line[:1]
-                if f == 'N':    # %N - Name
+                if f == 'N':      # %N - Name
                     name = ref and (info.getName(ref) or 'N/A') or (info.getName() or 'N/A')
                     postfix = ''
                     if self.ref:
@@ -663,7 +709,7 @@ class j00zekModServiceName2(Converter, object):
                         ret += self.refstr
                     else:
                         ret += refstr
-                elif f == 'S':    # %S - Satellite
+                elif f == 'S':    # %S - Satellite Name
                     if self.isStream:
                         ret += _("Internet")
                     else:
@@ -679,12 +725,33 @@ class j00zekModServiceName2(Converter, object):
                         ret += ':'.join(refstr.split(':')[:10])
                     else:
                         ret += tmpref
-                elif f in 'TtsFfiOMpYroclhmgbe':
+                elif f == 'E':    # %E - Event Name
+                    act_event = info and info.getEvent(0)
+                    if not act_event and info:
+                        refstr = info.getInfoString(iServiceInformation.sServiceref)
+                        act_event = self.epgQuery(eServiceReference(refstr), -1, 0)
+                    if not act_event is None:
+                        ret += act_event.getEventName()
+                elif f == 'e':    # %e - Event Progress in %
+                    act_event = info and info.getEvent(0)
+                    if not act_event and info:
+                        refstr = info.getInfoString(iServiceInformation.sServiceref)
+                        act_event = self.epgQuery(eServiceReference(refstr), -1, 0)
+                    if not act_event is None:
+                        eventDuration = act_event.getDuration()
+                        eventProgress = int(time()) - act_event.getBeginTime()
+                        if eventDuration > 0 and eventProgress >= 0:
+                            if eventProgress > eventDuration:
+                                eventProgress = eventDuration
+                            ret += '%s%%' % int(100 * eventProgress / eventDuration)
+                #the rest
+                elif f in 'TtsFfiOMpYroclhmgb':
                     if self.ref:
                         ret += self.getTransponderInfo(self.info, self.ref, f)
                     else:
                         ret += self.getTransponderInfo(info, ref, f)
                 ret += line[1:]
+                if DBG: j00zekDEBUG("[j00zekModServiceName2:getText] >>> after '%s' ret='%s'" % (f,ret))
             return '%s'%(ret.replace('N/A', '').strip())
 
     text = property(getText)
@@ -704,7 +771,7 @@ class j00zekModServiceName2(Converter, object):
         if what[0] != self.CHANGED_SPECIFIC or what[1] in (iPlayableService.evStart,):
             self.refstr = self.isStream = self.ref = self.info = self.tpdata = None
             if self.type in (self.NUMBER,self.BOUQUET) or \
-                (self.type == self.FORMAT and ('%n' in self.sfmt or '%B' in self.sfmt)):
+                (self.type == self.FORMAT and ('%n' in self.sfmt or '%B' in self.sfmt or '%e' in self.sfmt)):
                 self.what = what
                 self.Timer.start(200, True)
             else:

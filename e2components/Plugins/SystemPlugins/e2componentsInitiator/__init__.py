@@ -53,4 +53,10 @@ config.plugins.j00zekCC.enDescrType = ConfigSelection(default = "0", choices = [
                                                                                 ("2", _("Extended or Short")), ("3", _("Short and Extended")),
                                                                                 ("4", _("Extended and short (if different)")) ])
 config.plugins.j00zekCC.enTMDBratingFirst = ConfigYesNo(default = False)
+#j00zekModServiceName2
+config.plugins.j00zekCC.snVFDtype = ConfigSelection(default = "\x25N", choices = [("\x25N", _("Chanel name")), ("\x25n - \x25N", _("Channel number - Channel name")),
+                                                                                  ("\x25N - \x25S", _("Chanel name - Sat name")), ("\x25E", _("Event name")),
+                                                                                  ("\x25N - \x25E", _("CHname - EVname")), ("\x25n - \x25N - \x25E", _("CHnumber - CHname - EVname")),
+                                                                                  ("\x25N - \x25E (\x25e)", _("CHname - EVname (progress \x25)")),
+                                                                                  ("\x25n - \x25N - \x25E (\x25e)", _("CHnumber -CHname - EVname (progress \x25)")) ])
 #ConfigText(default = _("none")) #("", _(""))

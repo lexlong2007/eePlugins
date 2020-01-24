@@ -30,34 +30,38 @@ def sessionstart(session, **kwargs):
 def Plugins(**kwargs):
     return [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart)]
 ######################################################################################
-config.plugins.j00zekCC.FakeEntry = NoSave(ConfigNothing()) 
+#config.plugins.j00zekCC.FakeEntry = NoSave(ConfigNothing())
 ######################################################################################
 class e2ComponentsConfig(Screen, ConfigListScreen):
     def buildList(self):
         self.list = []
         #
-        self.list.append(getConfigListEntry(_(" "), config.plugins.j00zekCC.FakeEntry))
-        self.list.append(getConfigListEntry(_("---Dynamic Font Size---"), config.plugins.j00zekCC.FakeEntry))
+        #self.list.append(getConfigListEntry(_(" "), config.plugins.j00zekCC.FakeEntry))
+        self.list.append(getConfigListEntry('\c00289496' + _("---Dynamic Font Size---")))
         self.list.append(getConfigListEntry(_("Service Name minimum font size"), config.plugins.j00zekCC.j00zekLabelSN ))
         self.list.append(getConfigListEntry(_("Event Name minimum font size"), config.plugins.j00zekCC.j00zekLabelEN ))
         #
-        self.list.append(getConfigListEntry(_(" "), config.plugins.j00zekCC.FakeEntry))
-        self.list.append(getConfigListEntry(_("---User paths---"), config.plugins.j00zekCC.FakeEntry))
+        self.list.append(getConfigListEntry(""))
+        self.list.append(getConfigListEntry('\c00289496' + _("---User paths---")))
         self.list.append(getConfigListEntry(_("Picons animations user path:"), config.plugins.j00zekCC.PiconAnimation_UserPath ))
         self.list.append(getConfigListEntry(_("Alternate user icons path:"), config.plugins.j00zekCC.AlternateUserIconsPath))
         #
-        self.list.append(getConfigListEntry(_(" "), config.plugins.j00zekCC.FakeEntry))
-        self.list.append(getConfigListEntry(_("---Scrolling text---"), config.plugins.j00zekCC.FakeEntry))
+        self.list.append(getConfigListEntry(""))
+        self.list.append(getConfigListEntry('\c00289496' + _("---Scrolling text---")))
         self.list.append(getConfigListEntry(_("Ammend Font size"), config.plugins.j00zekCC.rtFontSize))
         self.list.append(getConfigListEntry(_("Type"), config.plugins.j00zekCC.rtType))
         self.list.append(getConfigListEntry(_("Initial delay"), config.plugins.j00zekCC.rtStartDelay))
         self.list.append(getConfigListEntry(_("Speed"), config.plugins.j00zekCC.rtStepTimeout))
         self.list.append(getConfigListEntry(_("Repeats"), config.plugins.j00zekCC.rtRepeat))
         #
-        self.list.append(getConfigListEntry(_(" "), config.plugins.j00zekCC.FakeEntry))
-        self.list.append(getConfigListEntry(_("---Event description (EventName)---"), config.plugins.j00zekCC.FakeEntry))
+        self.list.append(getConfigListEntry(""))
+        self.list.append(getConfigListEntry('\c00289496' + _("---Event description (EventName)---")))
         self.list.append(getConfigListEntry(_("Information presented"),  config.plugins.j00zekCC.enDescrType ))
         self.list.append(getConfigListEntry(_("Show TMDB rating at the begining (when available)"),  config.plugins.j00zekCC.enTMDBratingFirst ))
+        #
+        self.list.append(getConfigListEntry(""))
+        self.list.append(getConfigListEntry('\c00289496' + _("---VFD settings---")))
+        self.list.append(getConfigListEntry(_("Infobar summary"),  config.plugins.j00zekCC.snVFDtype ))
         
         #self.list.append(getConfigListEntry(_("XXXX"), XXXX ))
         self["config"].list = self.list
@@ -126,7 +130,8 @@ class e2ComponentsConfig(Screen, ConfigListScreen):
     def updateConfig(self, ret = False):
         if ret == True:
             for x in self["config"].list:
-                x[1].save()
+                if len(x) >= 2:
+                    x[1].save()
             configfile.save()
             self.close()
 
