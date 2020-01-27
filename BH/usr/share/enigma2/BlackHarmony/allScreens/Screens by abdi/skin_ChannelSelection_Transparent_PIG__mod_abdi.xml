@@ -1,22 +1,20 @@
-<skin>
 <screen name="ChannelSelection" position="center,center" size="1920,1110" title="Channel Selection" flags="wfNoBorder" backgroundColor="black">
   <ePixmap position="0,1" zPosition="-7" size="1920,10110" pixmap="BlackHarmony/bg_design/cs_pig.png" />
-  <widget source="global.CurrentTime" render="Label" position="50,50" size="120,30" font="Roboto_HD; 30" backgroundColor="white" transparent="1">
+  <widget source="global.CurrentTime" render="Label" position="50,50" size="120,30" font="Roboto_HD; 30" backgroundColor="black" transparent="1">
     <convert type="ClockToText">Format:%H:%M:%S</convert>
   </widget>
   <widget source="global.CurrentTime" render="Label" position="190,50" size="660,30" font="Roboto_HD; 30" foregroundColor="lemon" backgroundColor="black" transparent="1">
     <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
   </widget>
-  <widget source="Title" render="Label" position="300,50" size="635,30" font="Roboto_HD; 30" backgroundColor="white" transparent="1" halign="right" noWrap="1" valign="center" zPosition="3" />
+  <widget source="Title" render="Label" position="300,50" size="635,30" font="Roboto_HD; 30" backgroundColor="black" transparent="1" halign="right" noWrap="1" valign="center" zPosition="3" />
   <!--eLabel name="new eLabel" position="1460,80" size="365,30" font="Roboto_HD; 27" foregroundColor="white" backgroundColor="dark_grey" transparent="1" halign="right" text="Channel Selection" /-->
   <widget name="list"
 	position="62,162"
 	size="1070,790"
-	itemHeight="45"
+	itemHeight="50"
 	colorServiceDescription="light_yellow"
-	transparent="1"
 	scrollbarMode="showOnDemand"
-	selectionPixmap="BlackHarmony/menu/sel_1055_45.png"
+	selectionPixmap="BlackHarmony/menu/sel_1005_50.png"
 	colorServiceDescriptionSelected="lemon"
 	serviceNumberFont="Regular;34"
 	serviceInfoFont="Roboto_HD;32"
@@ -32,10 +30,10 @@
 	colorServiceDescriptionFallback="border"
 	colorServiceSelectedFallback="border"
 	colorServiceDescriptionSelectedFallback="border"
-	foregroundColor="white" />
-  <widget font="Roboto_HD; 26" position="1770,753" render="Label" size="70,30" source="ServiceEvent" transparent="1" zPosition="2" halign="left" backgroundColor="white">
+	foregroundColor="white" backgroundColor="black" transparent="1"/>
+  <widget font="Roboto_HD; 22" position="1740,758" render="j00zekLabel" size="150,30" source="ServiceEvent" transparent="1" zPosition="2" halign="left" backgroundColor="black">
     <convert type="EventTime">Remaining</convert>
-    <convert type="RemainingToText">NoSeconds</convert>
+    <convert type="RemainingToText">InMinutes</convert>
   </widget>
   <widget source="ServiceEvent" render="Label" position="1170,753" size="80,30" font="Roboto_HD; 26" backgroundColor="background" transparent="1">
     <convert type="EventTime">StartTime</convert>
@@ -45,8 +43,8 @@
     <convert type="EventTime">EndTime</convert>
     <convert type="ClockToText">Format:- %H:%M</convert>
   </widget>
-  <widget source="ServiceEvent" render="Label" position="1205,55" size="635,30" font="Roboto_HD; 30" backgroundColor="white" transparent="1" halign="right" noWrap="1" valign="center" text="19.2E  DVB-S2  10627 27500 3/4 8PSK" zPosition="3">
-    <convert type="BlackHarmonyServiceName2">%O  %s  %F %p %Y %f %M %b</convert>
+  <widget source="ServiceEvent" render="Label" position="1205,55" size="635,30" font="Roboto_HD; 30" backgroundColor="black" transparent="1" halign="right" noWrap="1" valign="center" text="19.2E  DVB-S2  10627 27500 3/4 8PSK" zPosition="3">
+    <convert type="j00zekModServiceName2">%O  %s  %F %p %Y %f %M %b</convert>
   </widget>
   <widget render="j00zekModRunningText" source="ServiceEvent" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=scroll,startdelay=6000,wrap" halign="left" font="Roboto_HD; 28" backgroundColor="background" position="1170,500" size="685,235" transparent="1">
     <convert type="EventName">ExtendedDescription</convert>
@@ -57,14 +55,14 @@
   <!--widget pointer="BlackHarmony/gfx/seekbutton.png:14,1" position="1360,763" render="BlackHarmonyPositionGauge" size="376,15" source="session.Event_Now" transparent="1" zPosition="3">
       <convert type="BlackHarmonyEventPosition">Gauge</convert>
   </widget-->
-  <widget source="ServiceEvent" render="Label" position="1170,450" size="685,35" font="HD_Thin; 32" backgroundColor="black" transparent="1" halign="left" noWrap="1" foregroundColor="light_yellow">
+  <widget source="ServiceEvent" render="j00zekLabel" position="1170,450" size="685,35" font="HD_Thin; 32" backgroundColor="black" transparent="1" halign="left" noWrap="1" foregroundColor="light_yellow">
     <convert type="EventName">Name</convert>
   </widget>
   <widget source="ServiceEvent" render="j00zekPicons" picontype="picon" position="1185,220" size="220,132" zPosition="2" transparent="1" alphatest="blend">
     <convert type="ServiceName">Reference</convert>
   </widget>
   <!--eLabel text="Next:" position="1170,810" size="100,30" font="HD_Thin; 27" backgroundColor="black" transparent="1" foregroundColor="light_yellow" /-->
-  <widget backgroundColor="background" font="HD_Thin; 36" halign="left" position="1170,390" render="Label" size="685,40" source="ServiceEvent" transparent="1" valign="center" foregroundColor="green">
+  <widget backgroundColor="background" font="HD_Thin; 36" halign="left" position="1170,390" render="j00zekLabel" size="685,40" source="ServiceEvent" transparent="1" valign="center" foregroundColor="green">
     <convert type="ServiceName">Name</convert>
   </widget>
   <widget alphatest="blend" render="BlackHarmonyEventListDisplay" position="1170,803" size="685,160" source="ServiceEvent" rowHeight="32" column0="0,70,green,Roboto_HD,25,0,0" column1="80,545,white,Roboto_HD,25,0,1" primetimeoffset="10">
@@ -85,7 +83,5 @@
     <convert type="ConfigEntryTest"></convert>
     <convert type="ConditionalShowHide" />
   </widget>
-<eLabel position="1461,169" zPosition="2" size="384,220" backgroundColor="black" transparent="0" />
+  <eLabel position="1461,169" zPosition="2" size="384,220" backgroundColor="black" transparent="0" />
 </screen>
-</skin>
-
