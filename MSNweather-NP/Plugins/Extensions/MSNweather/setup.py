@@ -23,14 +23,16 @@
 # for localized messages
 from . import _
 
-from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_VALIGN_CENTER
-from Screens.Screen import Screen
-from Screens.MessageBox import MessageBox
-from Components.MenuList import MenuList
-from Components.Sources.StaticText import StaticText
 from Components.ActionMap import ActionMap
 from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.config import ConfigSubsection, ConfigText, ConfigSelection, getConfigListEntry, config, configfile, ConfigEnableDisable
+from Components.GUIComponent import GUIComponent
+from Components.MenuList import MenuList
+from Components.Sources.StaticText import StaticText
+from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_VALIGN_CENTER
+from Screens.Screen import Screen
+from Screens.MessageBox import MessageBox
+from skin import parseFont
 from xml.etree.cElementTree import fromstring as cet_fromstring
 from twisted.web.client import getPage
 from urllib import quote as urllib_quote
@@ -95,8 +97,11 @@ class MSNWeatherEntriesListConfigScreen(Screen):
              "blue"  :    self.keyDelete,
              "menu"  :    self.keyMenu,
              }, -1)
+        self.onLayoutFinish.append(self.__onLayoutFinish)
+        
+    def __onLayoutFinish(self):
         self.updateList()
-
+        
     def updateList(self):
         self["entrylist"].buildList()
 
@@ -143,12 +148,41 @@ class MSNWeatherEntriesListConfigScreen(Screen):
 class WeatherEntryList(MenuList):
     def __init__(self, list, enableWrapAround = True):
         MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
-        self.l.setFont(0, gFont("Regular", 20))
-        self.l.setFont(1, gFont("Regular", 18))
+        GUIComponent.__init__(self)
+        
+        #default values:
+        self.font0 = gFont("Regular", 20)
+        self.font1 = gFont("Regular", 18)
+        self.itemHeight = 20
+        self.DimText0 = (5, 0, 400, 20, 1)
+        self.DimText1 = (410, 0, 80, 20, 1)
 
-    def postWidgetCreate(self, instance):
-        MenuList.postWidgetCreate(self, instance)
-        instance.setItemHeight(20)
+    def applySkin(self, desktop, parent):
+        def font(value):
+            self.font0 = parseFont(value, ((1,1),(1,1)))
+            self.font1 = parseFont(value, ((1,1),(1,1)))
+        def font0(value):
+            self.font0 = parseFont(value, ((1,1),(1,1)))
+        def font1(value):
+            self.font1 = parseFont(value, ((1,1),(1,1)))
+        def itemHeight(value):
+            self.itemHeight = int(value)
+        def DimText0(value):
+            self.DimText0 = ( int(value.split(',')[0]), int(value.split(',')[1]), int(value.split(',')[2]), int(value.split(',')[3]), int(value.split(',')[4]) )
+        def DimText1(value):
+            self.DimText1 = ( int(value.split(',')[0]), int(value.split(',')[1]), int(value.split(',')[2]), int(value.split(',')[3]), int(value.split(',')[4]) )
+          
+        for (attrib, value) in list(self.skinAttributes):
+            try:
+                locals().get(attrib)(value)
+                self.skinAttributes.remove((attrib, value))
+            except Exception as e:
+                pass
+                
+        self.l.setFont(0,self.font0)
+        self.l.setFont(1,self.font1)
+        self.l.setItemHeight(self.itemHeight)
+        return GUIComponent.applySkin(self, desktop, parent)
 
     def getCurrentIndex(self):
         return self.instance.getCurrentIndex()
@@ -158,8 +192,8 @@ class WeatherEntryList(MenuList):
         for c in config.plugins.WeatherPlugin.Entry:
             res = [
                 c,
-                (eListboxPythonMultiContent.TYPE_TEXT, 5, 0, 400, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, str(c.city.value)),
-                (eListboxPythonMultiContent.TYPE_TEXT, 410, 0, 80, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, str(c.degreetype .value)),
+                (eListboxPythonMultiContent.TYPE_TEXT, self.DimText0[0], self.DimText0[1], self.DimText0[2], self.DimText0[3], self.DimText0[4], RT_HALIGN_LEFT|RT_VALIGN_CENTER, str(c.city.value)),
+                (eListboxPythonMultiContent.TYPE_TEXT, self.DimText1[0], self.DimText1[1], self.DimText1[2], self.DimText1[3], self.DimText1[4], RT_HALIGN_LEFT|RT_VALIGN_CENTER, str(c.degreetype .value)),
             ]
             list.append(res)
         self.list = list
