@@ -46,7 +46,7 @@ from enigma import eWidget, eLabel, eTimer, ePoint, eSize, gFont, \
 from Renderer import Renderer
 from skin import parseColor, parseFont
 
-DBG = True
+DBG = False
 try:
     if DBG: from Components.j00zekComponents import j00zekDEBUG
 except Exception: DBG = False 
