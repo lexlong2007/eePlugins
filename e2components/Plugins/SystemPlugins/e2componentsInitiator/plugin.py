@@ -62,7 +62,14 @@ class e2ComponentsConfig(Screen, ConfigListScreen):
         self.list.append(getConfigListEntry(""))
         self.list.append(getConfigListEntry('\c00289496' + _("---VFD settings---")))
         self.list.append(getConfigListEntry(_("Infobar summary"),  config.plugins.j00zekCC.snVFDtype ))
-        
+        try: #use system config when possible
+            self.list.append(getConfigListEntry(_("Scrolling delay (rollerCharVFD)"),  config.lcd.scroll_delay ))
+            self.list.append(getConfigListEntry(_("Scrolling speed (rollerCharVFD)"),  config.lcd.scroll_speed ))
+        except Exception: #or own, when not
+            self.list.append(getConfigListEntry(_("Scrolling delay (rollerCharVFD)"),  config.plugins.j00zekCC.scroll_delay ))
+            self.list.append(getConfigListEntry(_("Scrolling speed (rollerCharVFD)"),  config.plugins.j00zekCC.scroll_speed ))
+        self.list.append(getConfigListEntry(_("Standby clock"),  config.plugins.j00zekCC.clockVFDstdby ))
+        self.list.append(getConfigListEntry(_("Standby clock position"),  config.plugins.j00zekCC.clockVFDpos ))
         #self.list.append(getConfigListEntry(_("XXXX"), XXXX ))
         self["config"].list = self.list
 

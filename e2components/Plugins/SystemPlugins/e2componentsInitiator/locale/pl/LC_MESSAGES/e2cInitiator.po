@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: j00zekOPKGmanager\n"
 "POT-Creation-Date: 2016-01-07 12:00+0100\n"
-"PO-Revision-Date: 2020-01-24 09:23+0100\n"
+"PO-Revision-Date: 2020-01-25 14:13+0100\n"
 "Last-Translator: j00zek\n"
 "Language-Team: j00zek\n"
 "Language: pl\n"
@@ -19,17 +19,47 @@ msgstr ""
 msgid "AUTO"
 msgstr "Automatycznie"
 
+msgid "center"
+msgstr "Centralnie"
+
+msgid "Chanel name"
+msgstr "Nazwę kanału"
+
+msgid "Channel number - Channel name"
+msgstr "Numer kanału - nazwę kanału"
+
+msgid "Chanel name - Sat name"
+msgstr "Nazwę kanału - nazwę satelity"
+
+msgid "CHname - EVname"
+msgstr "Nazwę kanału i wydarzenie"
+
+msgid "CHnumber - CHname - EVname"
+msgstr "Numer kanału - nazwę kanału i wydarzenie"
+
+msgid "CHname - EVname (progress %)"
+msgstr "Nazwę i wydarzenie oraz postęp w ( % )"
+
+msgid "CHnumber -CHname - EVname (progress %)"
+msgstr "Numer kanału - nazwę kanału - wydarzenie oraz postęp w ( % )"
+
 msgid "don't move"
 msgstr "Nie ruszaj się"
 
 msgid "Defined in skin"
 msgstr "Zdefinowane w skórce"
 
+msgid "Event name"
+msgstr "Nazwę wydarzenia"
+
 msgid "Extended or Short"
 msgstr "Rozszerzony lub krótki"
 
 msgid "Extended and short (if different)"
 msgstr "Rozszerzony i krótki (jeśli inny)"
+
+msgid "fast"
+msgstr "Szybko"
 
 msgid "FULL_DESCRIPTION"
 msgstr "Pełny opis"
@@ -40,20 +70,14 @@ msgstr "Jeśli zdefiniowano w skórce"
 msgid "Infobar summary"
 msgstr "Pokaż na wyświetlaczu:"
 
+msgid "left"
+msgstr "Lewa"
+
 msgid "never stop"
 msgstr "Nigdy nie przestawaj"
 
-msgid "Chanel name"
-msgstr "Nazwę kanału"
-
-msgid "CHname - EVname"
-msgstr "Nazwę i wydarzenie"
-
-msgid "Event name"
-msgstr "Nazwę wydarzenia"
-
-msgid "CHname - EVname (progress %)"
-msgstr "Nazwę i wydarzenie oraz postęp w ( % )"
+msgid "normal"
+msgstr "Normalny"
 
 msgid "none"
 msgstr "Brak"
@@ -67,8 +91,14 @@ msgstr "Nie zdefiniowana"
 msgid "one time"
 msgstr "Jeden raz"
 
+msgid "right"
+msgstr "Prawa"
+
 msgid "RUNNING"
 msgstr "W ruchu"
+
+msgid "slow"
+msgstr "Wolno"
 
 msgid "same as defined font"
 msgstr "100% zdefiniowanej czcionki"
@@ -91,6 +121,12 @@ msgstr "Krótki opis"
 msgid "---VFD settings---"
 msgstr "--- Ustawienia VFD ---"
 
+msgid "HH:MM day.month.year"
+msgstr "HH:MM dzień. Miesiąc. Rok"
+
+msgid "HH:MM Weekday Day MonthName"
+msgstr "HH:MM Dzień tygodnia. Dzień. Nazwa miesiąca"
+
 msgid "75%% of defined font"
 msgstr "75% zdefiniowanej czcionki"
 
@@ -112,6 +148,9 @@ msgstr "Ścieżka użytkownika ikon alternatywnych:"
 
 msgid "Ammend Font size"
 msgstr "Zmień rozmiar czcionki:"
+
+msgid "Delay"
+msgstr "Opóźnienie:"
 
 msgid "---Dynamic Font Size---"
 msgstr "--- Dynamiczna zmiana czcionki ---"
@@ -139,6 +178,21 @@ msgstr "Pokaż ocenę IMDB na początku (jeśli jest dostępna):"
 
 msgid "Speed"
 msgstr "Prędkość przewijania:"
+
+msgid "Scroll speed"
+msgstr "Prędkość przewijania:"
+
+msgid "Scrolling delay (rollerCharVFD)"
+msgstr "Opóźnienie przewijania:"
+
+msgid "Scrolling speed (rollerCharVFD)"
+msgstr "Prędkość przewijania:"
+
+msgid "Standby clock:"
+msgstr "Wyświetl w czuwaniu:"
+
+msgid "Standby clock position"
+msgstr "Ustaw położenie zegara:"
 
 msgid "---Scrolling text---"
 msgstr "--- Przewijanie tekstu ---"

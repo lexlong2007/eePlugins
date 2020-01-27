@@ -32,7 +32,7 @@ from Components.Converter.Converter import Converter
 from enigma import iServiceInformation, iPlayableService, iPlayableServicePtr, eServiceReference, eServiceCenter, eTimer, getBestPlayableServiceReference, eEPGCache
 from Components.Element import cached
 from Components.config import config
-from time import time
+from time import time, localtime, strftime
 import NavigationInstance
 import os
 
@@ -43,7 +43,7 @@ except:
     correctChannelNumber = False
 
 #if enabled log into /tmp/e2components.log
-DBG = True
+DBG = False
 if DBG: from Components.j00zekComponents import j00zekDEBUG 
 
 class j00zekModServiceName2(Converter, object):
@@ -64,6 +64,8 @@ class j00zekModServiceName2(Converter, object):
 # %B - Bouquet name     E.g. PL, aktualizacja 07-01-2020
 # %b -                  E.g. ?
 # %c -                  E.g. ?
+# %D - TIME             E.g. 07:18
+# %d - TIME             E.g. 7:18 
 # %E - Event Name       E.g. Fakty
 # %e - Event progress%  E.g. ?
 # %F - frequency        E.g. 11508
@@ -744,6 +746,10 @@ class j00zekModServiceName2(Converter, object):
                             if eventProgress > eventDuration:
                                 eventProgress = eventDuration
                             ret += '%s%%' % int(100 * eventProgress / eventDuration)
+                elif f == 'D':    # %D
+                    ret += strftime('%H:%M',localtime()) 
+                elif f == 'd':    # %d
+                    ret += strftime('%-H:%M',localtime()) 
                 #the rest
                 elif f in 'TtsFfiOMpYroclhmgb':
                     if self.ref:
@@ -771,8 +777,8 @@ class j00zekModServiceName2(Converter, object):
         if what[0] != self.CHANGED_SPECIFIC or what[1] in (iPlayableService.evStart,):
             self.refstr = self.isStream = self.ref = self.info = self.tpdata = None
             if self.type in (self.NUMBER,self.BOUQUET) or \
-                (self.type == self.FORMAT and ('%n' in self.sfmt or '%B' in self.sfmt or '%e' in self.sfmt)):
+                (self.type == self.FORMAT and ('%n' in self.sfmt or '%B' or '%D' in self.sfmt or '%d' in self.sfmt in self.sfmt or '%e' in self.sfmt)):
                 self.what = what
-                self.Timer.start(200, True)
+                self.Timer.start(1000, True)
             else:
                 Converter.changed(self, what)

@@ -58,5 +58,19 @@ config.plugins.j00zekCC.snVFDtype = ConfigSelection(default = "\x25N", choices =
                                                                                   ("\x25N - \x25S", _("Chanel name - Sat name")), ("\x25E", _("Event name")),
                                                                                   ("\x25N - \x25E", _("CHname - EVname")), ("\x25n - \x25N - \x25E", _("CHnumber - CHname - EVname")),
                                                                                   ("\x25N - \x25E (\x25e)", _("CHname - EVname (progress \x25)")),
-                                                                                  ("\x25n - \x25N - \x25E (\x25e)", _("CHnumber -CHname - EVname (progress \x25)")) ])
+                                                                                  ("\x25n - \x25N - \x25E (\x25e)", _("CHnumber -CHname - EVname (progress \x25)")),
+                                                                                  ("\x25D", _("HH:MM E.g. 07:23")), ("\x25d", _("HH:MM E.g. 7:23"))
+                                                                                 ])
+#rollerCharLCD
+config.plugins.j00zekCC.scroll_speed = ConfigSelection(default = "300", choices = [("500", _("slow")), ("300", _("normal")), ("100", _("fast"))])
+config.plugins.j00zekCC.scroll_delay = ConfigSelection(default = "10000", choices = [("10000", "10 " + _("seconds")), ("20000", "20 " + _("seconds")),
+                                                                                     ("30000", "30 " + _("seconds")), ("60000", "1 " + _("minute")),
+                                                                                     ("300000", "5 " + _("minutes")), ("noscrolling", _("off"))
+                                                                                    ])
+#j00zekModClockToText
+config.plugins.j00zekCC.clockVFDstdby = ConfigSelection(default = "\x25H:\x25M", choices = [("\x25H:\x25M", _("HH:MM E.g. 07:23")),("\x25-H:\x25M", _("HH:MM E.g. 7:23")),  
+                                                                                            ("\x25H:%M:\x25S", _("HH:MM:SS")),
+                                                                                  ("\x25H:\x25M \x25d.\x25m.\x25Y", _("HH:MM day.month.year")),
+                                                                                  ("\x25H:\x25M \x25a \x25d \x25b", _("HH:MM Weekday Day MonthName")) ])
+config.plugins.j00zekCC.clockVFDpos = ConfigSelection(default = "0", choices = [("0", _("Defined in skin")), ("1", _("left")), ("2", _("center")), ("3", _("right"))])
 #ConfigText(default = _("none")) #("", _(""))
