@@ -63,7 +63,7 @@
   </widget>
   <ePixmap position="1316,805" size="44,20" zPosition="1" pixmap="BlackHarmony/icons/ico_hbbtv_on.png" alphatest="blend" />
   <widget source="session.CurrentService" render="Pixmap" position="1316,805" size="44,20" zPosition="2" pixmap="BlackHarmony/icons/ico_hbbtv_off.png" alphatest="blend">
-    <convert type="BlackHarmonyServiceInfoEX">HasHBBTV</convert>
+    <convert type="j00zekModServiceInfoEX">HasHBBTV</convert>
     <convert type="ConditionalShowHide" />
   </widget>
   <widget source="global.CurrentTime" render="Label" position="1718,797" size="140,48" font="HD_Thin; 42" halign="right" backgroundColor="black" transparent="1" valign="center">

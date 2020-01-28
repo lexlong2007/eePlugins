@@ -54,7 +54,7 @@
     </widget>
     <ePixmap position="1215,750" size="44,20" zPosition="1" pixmap="BlackHarmony/icons/ico_hbbtv_on.png" alphatest="blend" />
     <widget source="session.CurrentService" render="Pixmap" position="1215,750" size="44,20" zPosition="2" pixmap="BlackHarmony/icons/ico_hbbtv_off.png" alphatest="blend">
-      <convert type="BlackHarmonyServiceInfoEX">HasHBBTV</convert>
+      <convert type="j00zekModServiceInfoEX">HasHBBTV</convert>
       <convert type="ConditionalShowHide" />
     </widget>
 <ePixmap alphatest="blend" pixmap="BlackHarmony/allScreens/Screens by Homar/clock/flip2/default.png" position="1636,740" size="360,200" zPosition="1" />

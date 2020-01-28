@@ -24,7 +24,7 @@
 	</widget>
   	<ePixmap alphatest="blend" pixmap="BlackHarmony/icons/ico_sub_off.png" position="983,745" size="33,20" zPosition="1" />
 	<widget alphatest="blend" pixmap="BlackHarmony/icons/ico_sub_on.png" position="983,745" render="Pixmap" size="33,20" source="session.CurrentService" zPosition="2">
-	<convert type="BlackHarmonyServiceInfoEX">SubtitlesAvailable</convert>
+	<convert type="j00zekModServiceInfoEX">SubtitlesAvailable</convert>
 	<convert type="ConditionalShowHide" />
 	</widget>
   
@@ -120,7 +120,7 @@
   </widget>
   <ePixmap position="1295,745" size="44,20" zPosition="1" pixmap="BlackHarmony/icons/ico_hbbtv_on.png" alphatest="blend" />
   <widget source="session.CurrentService" render="Pixmap" position="1295,745" size="44,20" zPosition="2" pixmap="BlackHarmony/icons/ico_hbbtv_off.png" alphatest="blend">
-    <convert type="BlackHarmonyServiceInfoEX">HasHBBTV</convert>
+    <convert type="j00zekModServiceInfoEX">HasHBBTV</convert>
     <convert type="ConditionalShowHide" />
   </widget>
   <widget source="global.CurrentTime" render="Label" position="1712,720" size="150,48" font="HD_Thin; 46" halign="left" backgroundColor="black" transparent="1" valign="center">
@@ -387,7 +387,7 @@
     <convert type="ConditionalShowHide" />
   </widget>
   <widget source="session.CurrentService" render="FixedLabel" text="FTA" font="Roboto_HD; 22" position="700,975" size="60,25" halign="center" backgroundColor="black" foregroundColor="yellow" zPosition="1" valign="center" transparent="1">
-    <convert type="BlackHarmonyServiceInfoEX">IsFta</convert>
+    <convert type="j00zekModServiceInfoEX">IsFta</convert>
     <convert type="ConditionalShowHide" />
   </widget>
   <widget source="session.CurrentService" render="FixedLabel" text="NET" font="Roboto_HD; 22" position="700,975" size="60,25" halign="center" backgroundColor="black" foregroundColor="green" zPosition="2" valign="center" transparent="1">

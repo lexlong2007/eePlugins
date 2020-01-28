@@ -185,19 +185,19 @@ options="movetype=running,startpoint=0,direction=left,steptime=70,repeat=0,start
 	</widget>	
 <widget alphatest="blend" 
 pixmap="HomarLCDskins/tunertypes/DVB-C.png" position="175,40" render="Pixmap" size="88,28" source="session.CurrentService" zPosition="1">
-    <convert type="BlackHarmonyServiceInfoEX">IsCable</convert>
+    <convert type="j00zekModServiceInfoEX">IsCable</convert>
     <convert type="ConditionalShowHide" />
   </widget>
   <widget alphatest="blend" pixmap="HomarLCDskins/tunertypes/DVB-S.png" position="175,40" render="Pixmap" size="88,28" source="session.CurrentService" zPosition="1">
-    <convert type="BlackHarmonyServiceInfoEX">IsSatelliteS</convert>
+    <convert type="j00zekModServiceInfoEX">IsSatelliteS</convert>
     <convert type="ConditionalShowHide" />
   </widget>
   <widget alphatest="blend" pixmap="HomarLCDskins/tunertypes/DVB-S2.png" position="175,40" render="Pixmap" size="88,28" source="session.CurrentService" zPosition="1">
-    <convert type="BlackHarmonyServiceInfoEX">IsSatelliteS2</convert>
+    <convert type="j00zekModServiceInfoEX">IsSatelliteS2</convert>
     <convert type="ConditionalShowHide" />
   </widget>
   <widget alphatest="blend" pixmap="HomarLCDskins/tunertypes/DVB-T.png" position="175,40" render="Pixmap" size="88,28" source="session.CurrentService" zPosition="1">
-    <convert type="BlackHarmonyServiceInfoEX">IsTerrestrial</convert>
+    <convert type="j00zekModServiceInfoEX">IsTerrestrial</convert>
     <convert type="ConditionalShowHide" />
   </widget>
   <widget alphatest="blend" path="/usr/share/enigma2/HomarLCDskins" picontype="MoonPhase" position="630,150" render="j00zekPicons" size="136,136" source="global.CurrentTime" zPosition="1">

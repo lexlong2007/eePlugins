@@ -294,7 +294,7 @@
       <convert type="ConditionalShowHide"/>
     </widget>
     <!--widget source="session.CurrentService" render="FixedLabel" text="FTA." font="Roboto_HD; 22" position="537,955" size="60,25" halign="center" backgroundColor="black" foregroundColor="yellow" zPosition="1" valign="center" transparent="1">
-      <convert type="BlackHarmonyServiceInfoEX">IsFta</convert>
+      <convert type="j00zekModServiceInfoEX">IsFta</convert>
       <convert type="ConditionalShowHide"/>
     </widget-->
     <widget source="session.CurrentService" render="FixedLabel" text="NET" font="Roboto_HD; 22" position="537,955" size="60,25" halign="center" backgroundColor="black" foregroundColor="#00FF00" zPosition="2" valign="center" transparent="1">
