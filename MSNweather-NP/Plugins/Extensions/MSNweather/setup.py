@@ -346,15 +346,19 @@ class MSNWeatherSearch(Screen):
         self["entrylist"] = MSNWeatherSearchResultList([])
         self["actions"] = ActionMap(["WizardActions","MenuActions","ShortcutActions"],
             {
-             "ok"    :    self.keyOK,
-             "green": self.keyOK,
-             "back"    :    self.keyClose,
-             "red": self.keyClose,
+             "ok"    : self.keyOK,
+             "green" : self.keyOK,
+             "back"  : self.keyClose,
+             "red"   : self.keyClose,
              }, -1)
-        self.updateList(xmlstring)
+        self.xmlstring = xmlstring
+        self.onLayoutFinish.append(self.__onLayoutFinish)
 
-    def updateList(self, xmlstring):
-        self["entrylist"].buildList(xmlstring)
+    def __onLayoutFinish(self):
+        self.updateList()
+        
+    def updateList(self):
+        self["entrylist"].buildList(self.xmlstring)
 
     def keyClose(self):
         self.close(None)
@@ -368,12 +372,41 @@ class MSNWeatherSearch(Screen):
 class MSNWeatherSearchResultList(MenuList):
     def __init__(self, list, enableWrapAround = True):
         MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
-        self.l.setFont(0, gFont("Regular", 20))
-        self.l.setFont(1, gFont("Regular", 18))
+        GUIComponent.__init__(self)
+        
+        #default values:
+        self.font0 = gFont("Regular", 20)
+        self.font1 = gFont("Regular", 18)
+        self.itemHeight = 44
+        self.DimText0 = (5, 0, 500, 20, 1)
+        self.DimText1 = (5, 22, 500, 20, 1)
 
-    def postWidgetCreate(self, instance):
-        MenuList.postWidgetCreate(self, instance)
-        instance.setItemHeight(44)
+    def applySkin(self, desktop, parent):
+        def font(value):
+            self.font0 = parseFont(value, ((1,1),(1,1)))
+            self.font1 = parseFont(value, ((1,1),(1,1)))
+        def font0(value):
+            self.font0 = parseFont(value, ((1,1),(1,1)))
+        def font1(value):
+            self.font1 = parseFont(value, ((1,1),(1,1)))
+        def itemHeight(value):
+            self.itemHeight = int(value)
+        def DimText0(value):
+            self.DimText0 = ( int(value.split(',')[0]), int(value.split(',')[1]), int(value.split(',')[2]), int(value.split(',')[3]), int(value.split(',')[4]) )
+        def DimText1(value):
+            self.DimText1 = ( int(value.split(',')[0]), int(value.split(',')[1]), int(value.split(',')[2]), int(value.split(',')[3]), int(value.split(',')[4]) )
+          
+        for (attrib, value) in list(self.skinAttributes):
+            try:
+                locals().get(attrib)(value)
+                self.skinAttributes.remove((attrib, value))
+            except Exception as e:
+                pass
+                
+        self.l.setFont(0,self.font0)
+        self.l.setFont(1,self.font1)
+        self.l.setItemHeight(self.itemHeight)
+        return GUIComponent.applySkin(self, desktop, parent)
 
     def getCurrentIndex(self):
         return self.instance.getCurrentIndex()
@@ -396,8 +429,8 @@ class MSNWeatherSearchResultList(MenuList):
                 geolongitude = childs.attrib.get("long").encode("utf-8", 'ignore')
                 res = [
                     (weatherlocationcode, searchlocation, weatherSearchFullName, geolatitude, geolongitude),
-                    (eListboxPythonMultiContent.TYPE_TEXT, 5, 0, 500, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, searchlocation),
-                    (eListboxPythonMultiContent.TYPE_TEXT, 5, 22, 500, 20, 1, RT_HALIGN_LEFT|RT_VALIGN_CENTER, '%s , (lat=%s, long=%s)' % (weatherSearchFullName, geolatitude, geolongitude)),
+                    (eListboxPythonMultiContent.TYPE_TEXT, self.DimText0[0], self.DimText0[1], self.DimText0[2], self.DimText0[3], self.DimText0[4], RT_HALIGN_LEFT|RT_VALIGN_CENTER, searchlocation),
+                    (eListboxPythonMultiContent.TYPE_TEXT, self.DimText1[0], self.DimText1[1], self.DimText1[2], self.DimText1[3], self.DimText1[4], RT_HALIGN_LEFT|RT_VALIGN_CENTER, '%s , (lat=%s, long=%s)' % (weatherSearchFullName, geolatitude, geolongitude)),
                 ]
                 list.append(res)
         self.list = list
