@@ -89,7 +89,7 @@
   <screen name="QuickEPG" position="center,center" size="1232,908" title="Eventview" flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png" />
     <widget alphatest="blend" position="940,135" render="j00zekPicons" picontype="picon" size="220,132" source="Service">
-      <convert type="BlackHarmonyServiceName2">Reference</convert>
+      <convert type="j00zekModServiceName2">Reference</convert>
     </widget>
     <widget source="global.CurrentTime" render="Label" position="40,25" size="80,30" font="Roboto_HD; 27" foregroundColor="white" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Default</convert>

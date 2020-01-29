@@ -91,7 +91,7 @@
     <convert type="BlackHarmonygExtraInfo">sid</convert>
   </widget>
   <widget source="session.CurrentService" render="Label" position="696,763" size="290,36" zPosition="0" font="HD_Thin; 26" valign="top" noWrap="1" backgroundColor="black" transparent="1" foregroundColor="lemon" halign="right">
-  <convert type="BlackHarmonyServiceName2">%P</convert>
+  <convert type="j00zekModServiceName2">%P</convert>
 </widget>
   <widget source="session.CurrentService" render="Label" position="599,955" zPosition="2" size="750,25" font="Roboto_HD; 22" valign="top" halign="left" transparent="1" backgroundColor="black">
     <convert type="BlackHarmonygExtraInfo">Source</convert>
@@ -277,7 +277,7 @@
     <convert type="ConditionalShowHide" />
   </widget>
   <widget source="session.CurrentService" render="Label" position="1523,850" size="85,25" font="Roboto_HD; 22" backgroundColor="black" transparent="1" text="DVB-S2" halign="left" zPosition="1" foregroundColor="green">
-    <convert type="BlackHarmonyServiceName2">%s </convert>
+    <convert type="j00zekModServiceName2">%s </convert>
   </widget>
   <widget alphatest="blend" pixmap="BlackHarmony/icons/ico_hd_on_1080.png" position="999,770" render="Pixmap" size="37,20" source="session.CurrentService" zPosition="4">
     <convert type="ServiceInfo">VideoHeight</convert>

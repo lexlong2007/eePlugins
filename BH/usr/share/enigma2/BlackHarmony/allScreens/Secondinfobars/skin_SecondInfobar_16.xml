@@ -43,7 +43,7 @@
     <convert type="BlackHarmonyBoxInfo">Uptime</convert>
   </widget>
   <widget backgroundColor="black" font="HD_Thin; 26" foregroundColor="light_yellow" noWrap="1" position="75,613" render="Label" size="850,32" source="session.CurrentService" transparent="1" halign="center">
-    <convert type="BlackHarmonyServiceName2">%F  %Y %p  %f  %s  %M (%O)</convert>
+    <convert type="j00zekModServiceName2">%F  %Y %p  %f  %s  %M (%O)</convert>
   </widget>
   <ePixmap position="30,760" zPosition="-2" size="1928,300" pixmap="BlackHarmony/bg_design/infobar_weather.png" />
   <widget source="session.CurrentService" render="Pixmap" position="785,805" zPosition="3" size="20,20" pixmap="BlackHarmony/icons/update.png" alphatest="blend">

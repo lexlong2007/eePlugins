@@ -50,7 +50,7 @@
   <ePixmap position="1540,1018" size="60,30" pixmap="BlackHarmony/buttons/key_menu.png" alphatest="blend" />
   <ePixmap position="1720,1018" size="60,30" pixmap="BlackHarmony/buttons/key_info.png" alphatest="blend" />
    <widget source="ServiceEvent" render="Label" position="1145,140" size="635,30" font="Roboto_HD; 25" backgroundColor="dark_grey" foregroundColor="lemon" transparent="1" halign="right" noWrap="1" valign="center" text="19.2E  DVB-S2  10627 27500 3/4 8PSK" zPosition="3">
-      <convert type="BlackHarmonyServiceName2">%O  %s  %F %p %Y %f %M %b</convert>
+      <convert type="j00zekModServiceName2">%O  %s  %F %p %Y %f %M %b</convert>
     </widget>
   <widget alphatest="blend" position="1330,190" render="j00zekPicons" picontype="zzpicon" size="400,170" source="ServiceEvent" transparent="1" zPosition="4">
     <convert type="ServiceName">Reference</convert>

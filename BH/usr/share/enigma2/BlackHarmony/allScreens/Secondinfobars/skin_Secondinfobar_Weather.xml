@@ -349,7 +349,7 @@
     <convert type="BlackHarmonyBoxInfo">Uptime</convert>
   </widget>
   <widget backgroundColor="black" font="HD_Thin; 22" noWrap="1" position="975,601" render="Label" size="470,25" source="session.CurrentService" transparent="1" halign="left">
-    <convert type="BlackHarmonyServiceName2">%F  %Y %p  %f  %s  %M (%O)</convert>
+    <convert type="j00zekModServiceName2">%F  %Y %p  %f  %s  %M (%O)</convert>
   </widget>
 </screen>
 </skin>

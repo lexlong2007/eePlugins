@@ -324,7 +324,7 @@
     <convert type="ConditionalShowHide" />
   </widget>
   <widget source="session.CurrentService" render="Label" position="1553,835" size="85,25" font="Roboto_HD; 22" backgroundColor="black" transparent="1" text="DVB-S2" halign="left" zPosition="1" foregroundColor="green">
-    <convert type="BlackHarmonyServiceName2">%s </convert>
+    <convert type="j00zekModServiceName2">%s </convert>
   </widget>
   <widget source="session.CurrentService" render="Label" font="Roboto_HD; 22" position="1735,875" size="130,25" halign="left" backgroundColor="background" transparent="1" noWrap="1">
     <convert type="BlackHarmonyFanTempInfo">TempInfo</convert>

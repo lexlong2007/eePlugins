@@ -274,7 +274,7 @@
     <convert type="ConditionalShowHide" />
   </widget>
   <widget source="session.CurrentService" render="Label" position="1523,850" size="85,25" font="Roboto_HD; 22" backgroundColor="black" transparent="1" text="DVB-S2" halign="left" zPosition="1" foregroundColor="green">
-    <convert type="BlackHarmonyServiceName2">%s </convert>
+    <convert type="j00zekModServiceName2">%s </convert>
   </widget>
   <widget source="session.CurrentService" render="Label" position="546,955" size="90,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1">
     <convert type="BlackHarmonygExtraInfo">ProvID</convert>

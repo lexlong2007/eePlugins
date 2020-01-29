@@ -52,7 +52,7 @@
     <convert type="FrontendInfo">AGC</convert>
   </widget>
   <widget source="session.CurrentService" render="Label" position="309,798" zPosition="1" size="480,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" text="19.2E  10627 V  27500  3/4  8PSK  DVB-S2" transparent="1">
-  <convert type="BlackHarmonyServiceName2">%O  %F  %p  %Y  %f  %M  %b  %s</convert>
+  <convert type="j00zekModServiceName2">%O  %F  %p  %Y  %f  %M  %b  %s</convert>
 </widget>
   <widget source="session.CurrentService" render="Label" position="1310,798" size="300,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" foregroundColor="white">
     <convert type="ServiceName">Provider</convert>

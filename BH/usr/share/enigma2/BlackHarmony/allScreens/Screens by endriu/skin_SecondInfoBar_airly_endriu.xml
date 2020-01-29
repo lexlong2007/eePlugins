@@ -410,7 +410,7 @@
     <convert type="ConditionalShowHide" />
   </widget>
   <widget backgroundColor="black" font="Roboto_HD; 22" foregroundColor="green" halign="left" position="800,975" render="Label" size="85,25" source="session.CurrentService" text="DVB-S2" transparent="1" zPosition="1">
-    <convert type="BlackHarmonyServiceName2">%s </convert>
+    <convert type="j00zekModServiceName2">%s </convert>
   </widget>
  <eLabel backgroundColor="black" font="Roboto_HD; 22" foregroundColor="yellow" halign="left" position="715,930" size="65,25" text="BTR:" transparent="1" />
   <widget backgroundColor="black" font="Roboto_HD; 22" halign="left" position="780,930" render="Label" size="150,25" source="session.CurrentService" transparent="1">

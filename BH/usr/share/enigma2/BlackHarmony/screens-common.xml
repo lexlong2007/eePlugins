@@ -39,7 +39,7 @@
     <convert type="EventName">ExtendedDescription</convert>
   </widget-->
     <widget source="ServiceEvent" render="Label" position="1205,55" size="635,30" font="Roboto_HD; 25" backgroundColor="dark_grey" transparent="1" halign="right" noWrap="1" valign="center" text="19.2E  DVB-S2  10627 27500 3/4 8PSK" zPosition="3">
-      <convert type="BlackHarmonyServiceName2">%O  %s  %F %p %Y %f %M %b</convert>
+      <convert type="j00zekModServiceName2">%O  %s  %F %p %Y %f %M %b</convert>
     </widget>
     <widget render="j00zekModRunningText" source="ServiceEvent" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=6000,wrap" halign="left" font="Roboto_HD; 28" backgroundColor="background" position="1185,465" size="655,265" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
@@ -354,7 +354,7 @@
       <convert type="ConditionalShowHide"/>
     </widget>
     <widget source="session.CurrentService" render="Label" position="1523,850" size="85,25" font="Roboto_HD; 22" backgroundColor="black" transparent="1" text="DVB-S2" halign="left" zPosition="1" foregroundColor="green">
-      <convert type="BlackHarmonyServiceName2">%s </convert>
+      <convert type="j00zekModServiceName2">%s </convert>
     </widget>
     <widget alphatest="blend" position="999,770" render="j00zekVideoResolutionIcon" size="37,20" source="session.CurrentService" zPosition="4"/>
   </screen>
@@ -688,7 +688,7 @@
       <convert type="ConditionalShowHide"/>
     </widget>
     <widget source="session.CurrentService" render="Label" position="1523,850" size="85,25" font="Roboto_HD; 22" backgroundColor="black" transparent="1" text="DVB-S2" halign="left" zPosition="1" foregroundColor="green">
-      <convert type="BlackHarmonyServiceName2">%s </convert>
+      <convert type="j00zekModServiceName2">%s </convert>
     </widget>
     <widget alphatest="blend" position="999,770" render="j00zekVideoResolutionIcon" size="37,20" source="session.CurrentService" zPosition="4"/>
   </screen>
@@ -1001,7 +1001,7 @@
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
     <widget alphatest="blend" position="1110,183" render="j00zekPicons" picontype="picon" size="220,132" source="Service">
-      <convert type="BlackHarmonyServiceName2">Reference</convert>
+      <convert type="j00zekModServiceName2">Reference</convert>
     </widget>
     <widget backgroundColor="black" font="Roboto_HD; 26" foregroundColor="white" position="1350,275" render="Label" size="110,30" source="Event" transparent="1">
       <convert type="EventTime">StartTime</convert>
@@ -1937,7 +1937,7 @@
     </widget>  
     <widget name="timerlist" position="95,175" size="1025,750" itemHeight="125" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_1025_125.png" backgroundColor="black" transparent="1"/>
     <widget source="ServiceEvent" render="j00zekPicons" picontype="picon" position="1270,170" size="220,132" zPosition="2" transparent="1" alphatest="blend">
-      <convert type="BlackHarmonyServiceName2">Reference</convert>
+      <convert type="j00zekModServiceName2">Reference</convert>
     </widget>
     <widget source="Event" render="Label" position="1190,337" size="650,70" font="Roboto_HD; 32" backgroundColor="background" transparent="1" foregroundColor="green" halign="left" valign="bottom">
       <convert type="EventName">Name</convert>
@@ -6058,7 +6058,7 @@
       <convert type="EventName">Name</convert>
     </widget>
     <widget alphatest="blend" position="1390,163" size="400,170" render="j00zekPicons" picontype="zzpicon" source="Service" transparent="1">
-      <convert type="BlackHarmonyServiceName2">Reference</convert>
+      <convert type="j00zekModServiceName2">Reference</convert>
     </widget>
     <widget source="Event" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" position="1350,525" size="480,425" font="Roboto_HD;28" halign="left" foregroundColor="white" backgroundColor="background" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
@@ -6108,7 +6108,7 @@
       <convert type="EventName">Name</convert>
     </widget>
     <widget alphatest="blend" position="1390,163" size="400,170" render="j00zekPicons" picontype="zzpicon" source="Service" transparent="1">
-      <convert type="BlackHarmonyServiceName2">Reference</convert>
+      <convert type="j00zekModServiceName2">Reference</convert>
     </widget>
     <widget source="Event" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" position="1350,525" size="480,425" font="Roboto_HD;28" halign="left" foregroundColor="white" backgroundColor="background" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
@@ -6156,7 +6156,7 @@
       <convert type="EventName">Name</convert>
     </widget>
     <widget alphatest="blend" position="1345,163" size="400,170" render="j00zekPicons" picontype="zzpicon" source="Service" transparent="1">
-      <convert type="BlackHarmonyServiceName2">Reference</convert>
+      <convert type="j00zekModServiceName2">Reference</convert>
     </widget>
     <widget source="Event" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" position="1251,525" size="580,425" font="Roboto_HD;28" halign="left" foregroundColor="white" backgroundColor="background" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
@@ -6204,7 +6204,7 @@
     <widget source="Service" render="CoolNextEvent" position="90,285" size="1130,290" font="Roboto_HD;30" halign="left" foregroundColor="white" backgroundColor="background" transparent="1">
     </widget>
     <widget alphatest="blend" position="1335,226" size="400,170" render="j00zekPicons" picontype="zzpicon" source="Service" transparent="1">
-      <convert type="BlackHarmonyServiceName2">Reference</convert>
+      <convert type="j00zekModServiceName2">Reference</convert>
     </widget>
     <widget source="Event" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" position="90,581" size="1740,335" font="Roboto_HD;28" halign="left" foregroundColor="white" backgroundColor="background" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
@@ -6251,7 +6251,7 @@
       <convert type="EventName">Name</convert>
     </widget>
     <widget alphatest="blend" position="1345,163" size="400,170" render="j00zekPicons" picontype="zzpicon" source="Service" transparent="1">
-      <convert type="BlackHarmonyServiceName2">Reference</convert>
+      <convert type="j00zekModServiceName2">Reference</convert>
     </widget>
     <widget source="Event" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" position="1251,525" size="580,425" font="Roboto_HD;28" halign="left" foregroundColor="white" backgroundColor="background" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
@@ -6278,7 +6278,7 @@
     </widget>
     <widget source="Title" render="Label" position="817,55" size="1025,35" font="Roboto_HD; 30" backgroundColor="black" transparent="1" halign="right"/>
     <widget alphatest="blend" position="110,181" render="j00zekPicons" picontype="zzpicon" size="400,170" source="Service">
-      <convert type="BlackHarmonyServiceName2">Reference</convert>
+      <convert type="j00zekModServiceName2">Reference</convert>
     </widget>
     <widget backgroundColor="background" font="HD_Thin; 35" foregroundColor="light_yellow" position="555,197" render="Label" size="735,45" source="Service" transparent="1">
       <convert type="ServiceName">Name</convert>
@@ -7708,7 +7708,7 @@
   <screen name="QuickEPG" position="345,93" size="1232,908" title="Eventview" flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png" />
     <widget alphatest="blend" position="940,135" render="j00zekPicons" picontype="picon" size="220,132" source="Service">
-      <convert type="BlackHarmonyServiceName2">Reference</convert>
+      <convert type="j00zekModServiceName2">Reference</convert>
     </widget>
     <widget source="global.CurrentTime" render="Label" position="40,25" size="80,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Default</convert>

@@ -320,7 +320,7 @@
       <convert type="ConditionalShowHide" />
     </widget>
     <widget source="session.CurrentService" render="Label" position="1523,850" size="85,25" font="Roboto_HD; 22" backgroundColor="black" transparent="1" text="DVB-S2" halign="left" zPosition="1" foregroundColor="green">
-      <convert type="BlackHarmonyServiceName2">%s </convert>
+      <convert type="j00zekModServiceName2">%s </convert>
     </widget>
     <widget source="session.CurrentService" render="j00zekVideoResolutionIcon" position="1034,770" size="37,20" zPosition="4" alphatest="blend"/>  
     <ePixmap pixmap="BlackHarmony/icons/ico_sd_off_576.png" position="1034,770" size="37,20" zPosition="0" alphatest="blend" />
