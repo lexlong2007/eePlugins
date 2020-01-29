@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WeatherPlugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-03 08:33+0100\n"
-"PO-Revision-Date: 2019-12-07 21:00+0100\n"
+"PO-Revision-Date: 2020-01-27 11:07+0100\n"
 "Last-Translator: Mariusz1970 <Mariusz1970@onet.eu>\n"
 "Language-Team: Björn Freise <Mariusz1970@onet.eu>\n"
 "Language: pl\n"
@@ -160,6 +160,9 @@ msgstr "Pogoda MSN v.NP"
 
 msgid "MSN weather configuration"
 msgstr "MSN weather konfiguracja"
+
+msgid "MSN weather: List of Entries"
+msgstr "Pogoda MSN: Lista wpisów"
 
 msgid "MSN service icons"
 msgstr "Ikony serwisu MSN"
