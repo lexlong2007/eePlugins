@@ -275,6 +275,9 @@
     <eLabel text="CPU:" position="1762,917" size="65,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" foregroundColor="#00ea225f" />
     <widget source="session.CurrentService" render="j00zekVideoResolutionIcon" position="950,805" size="37,20" zPosition="5" alphatest="blend"/> 
     <ePixmap pixmap="BlackHarmony/icons/ico_sd_off_576.png" position="950,805" size="37,20" zPosition="0" alphatest="blend" />
-    <widget source="session.CurrentService" render="VtiEmuInfo" position="1635,960" size="235,25" zPosition="3" font="HD_Thin;22" halign="center" valign="center" backgroundColor="background" foregroundColor="light_grey" transparent="1" />
+  <!-- emuname info -->
+  <widget source="session.CurrentService" render="Label" position="1635,960" size="235,25" font="HD_Thin;22" halign="center" foregroundColor="light_grey" backgroundColor="Background" transparent="1" noWrap="1"  valign="center" zPosition="3">
+      <convert type="j00zekModEmuName">camd</convert>
+  </widget>
   </screen>
 </skin>

@@ -283,7 +283,10 @@
     <convert type="j00zekBitrate_BH">VideoBitrateUnits</convert>
   </widget>
   <widget source="session.CurrentService" render="j00zekVideoResolutionIcon" position="1035,805" size="37,20" zPosition="4" alphatest="blend"/>  
-  <widget source="session.CurrentService" render="VtiEmuInfo" position="1666,997" size="210,25" zPosition="3" font="HD_Thin;22" halign="haling" valign="center" backgroundColor="background" foregroundColor="grey" transparent="1" />
+  <!-- emuname info -->
+  <widget source="session.CurrentService" render="Label" position="1666,997" size="210,25" font="HD_Thin;22" halign="center" foregroundColor="grey" backgroundColor="Background" transparent="1" noWrap="1"  valign="center" zPosition="3">
+      <convert type="j00zekModEmuName">camd</convert>
+  </widget>  
   <widget source="session.CurrentService" render="Label" position="1445,798" size="80,45" font="Wetter; 24" valign="center" backgroundColor="black" noWrap="1" transparent="1" zPosition="9">
     <convert type="VWeather">currentWeatherCode</convert>
   </widget>

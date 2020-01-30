@@ -105,7 +105,7 @@
 	<screen name="InfoBarMoviePlayerSummary" position="0,0" size="480,320">
 		<!--widget source="session.CurrentService" render="Label" position="0,5" size="480,50" font="FdLcD;45" halign="center" valign="center" foregroundColor="#05F7F3" >
 			<convert type="ServiceName">Name</convert>
-		</widget-->
+                </widget>-->
 		<widget source="session.Event_Now" render="j00zekLabel" position="0,5" size="480,165" font="FdLcD;50" halign="center" valign="center" foregroundColor="#FFFF00">
 			<convert type="EventName">Name</convert>
 		</widget>

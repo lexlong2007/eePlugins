@@ -21,9 +21,6 @@
     <convert type="EventTime">EndTime</convert>
     <convert type="ClockToText">Format:- %H:%M</convert>
   </widget>
-  <!--widget source="ServiceEvent" render="Label" position="105,515" size="635,300" font="Roboto_HD; 26" backgroundColor="background" transparent="1">
-    <convert type="EventName">ExtendedDescription</convert>
-  </widget-->
   <widget source="Title" render="Label" position="1025,43" size="835,30" font="Roboto_HD; 25" backgroundColor="dark_grey" transparent="1" halign="right" noWrap="1" valign="center" zPosition="3" />
   <widget render="j00zekModRunningText" source="ServiceEvent" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=6000,wrap" halign="left" font="Roboto_HD; 25" backgroundColor="background" position="770,505" size="480,405" transparent="1">
     <convert type="EventName">ExtendedDescription</convert>

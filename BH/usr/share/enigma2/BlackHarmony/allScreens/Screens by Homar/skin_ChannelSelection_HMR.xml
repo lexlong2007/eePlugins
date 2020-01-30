@@ -28,9 +28,6 @@
       <convert type="EventTime">Remaining</convert>
       <convert type="RemainingToText">NoSeconds</convert>
     </widget>
-    <!--widget source="ServiceEvent" render="Label" position="105,515" size="635,300" font="Roboto_HD; 26" backgroundColor="background" transparent="1">
-    <convert type="EventName">ExtendedDescription</convert>
-  </widget-->
 <eLabel position="80,726" size="940,1" backgroundColor="linie" foregroundColor="lemon" />
     <widget render="j00zekModRunningText" source="ServiceEvent" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=6000,wrap" halign="left" font="Roboto_HD; 28" backgroundColor="background" position="80,750" size="950,203" transparent="1">
     <convert type="EventName">ExtendedDescription</convert>

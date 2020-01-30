@@ -334,6 +334,9 @@
   <eLabel text="BTR:" position="1670,997" size="65,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" foregroundColor="orange" />
   <widget source="session.CurrentService" render="j00zekVideoResolutionIcon" position="950,805" size="37,20" zPosition="4" alphatest="blend"/>  
   <ePixmap alphatest="blend" pixmap="BlackHarmony/icons/ico_sd_off_576.png" position="950,805" size="37,20" zPosition="0" />
-  <widget backgroundColor="background" font="HD_Thin;22" foregroundColor="light_grey" halign="center" position="60,997" render="VtiEmuInfo" size="235,25" source="session.CurrentService" transparent="1" valign="center" zPosition="3" />
+  <!-- emuname info -->
+  <widget source="session.CurrentService" render="Label" position="60,997" size="235,25" font="HD_Thin;22" halign="center" foregroundColor="light_grey" backgroundColor="Background" transparent="1" noWrap="1"  valign="center" zPosition="3">
+      <convert type="j00zekModEmuName">camd</convert>
+  </widget>  
 </screen>
 </skin>

@@ -22,9 +22,6 @@
       <convert type="EventTime">EndTime</convert>
       <convert type="ClockToText">Format:- %H:%M</convert>
     </widget>
-    <!--widget source="ServiceEvent" render="Label" position="105,515" size="635,300" font="Roboto_HD; 26" backgroundColor="background" transparent="1">
-    <convert type="EventName">ExtendedDescription</convert>
-  </widget-->
     <widget source="ServiceEvent" render="Label" position="1205,55" size="635,30" font="Roboto_HD; 25" backgroundColor="dark_grey" transparent="1" halign="right" noWrap="1" valign="center" text="19.2E  DVB-S2  10627 27500 3/4 8PSK" zPosition="3">
       <convert type="j00zekModServiceName2">%O  %s  %F %p %Y %f %M %b</convert>
     </widget>

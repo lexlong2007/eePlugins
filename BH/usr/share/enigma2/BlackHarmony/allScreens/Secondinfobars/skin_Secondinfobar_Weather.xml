@@ -311,7 +311,10 @@
   </widget>
   <widget source="session.CurrentService" render="j00zekVideoResolutionIcon" position="1135,805" size="37,20" zPosition="4" alphatest="blend"/>  
   <ePixmap pixmap="BlackHarmony/icons/ico_sd_off_576.png" position="1135,805" size="37,20" zPosition="0" alphatest="blend" />
-  <widget source="session.CurrentService" render="VtiEmuInfo" position="1665,997" size="210,25" zPosition="3" font="HD_Thin;22" halign="haling" valign="center" backgroundColor="background" foregroundColor="light_grey" transparent="1" />
+  <!-- emuname info -->
+  <widget source="session.CurrentService" render="Label" position="1665,997" size="210,25" font="HD_Thin;22" halign="center" foregroundColor="light_grey" backgroundColor="Background" transparent="1" noWrap="1"  valign="center" zPosition="3">
+      <convert type="j00zekModEmuName">camd</convert>
+  </widget>  
   <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="186,579" size="80,80" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
     <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
   </widget>

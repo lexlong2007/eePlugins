@@ -149,6 +149,9 @@
     <widget source="session.CurrentService" render="Label" position="1682,975" size="170,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" foregroundColor="light_yellow">
       <convert type="j00zekVideoResolution">VideoResolution</convert>
     </widget>
-    <widget source="session.CurrentService" render="VtiEmuInfo" position="1645,925" size="217,25" zPosition="3" font="Roboto_HD;22" halign="center" valign="center" backgroundColor="background" foregroundColor="white" transparent="1" />
+  <!-- emuname info -->
+  <widget source="session.CurrentService" render="Label" position="1645,925" size="217,25" font="Roboto_HD;22" halign="center" foregroundColor="white" backgroundColor="Background" transparent="1" noWrap="1"  valign="center" zPosition="3">
+      <convert type="j00zekModEmuName">camd</convert>
+  </widget>  
   </screen>
 </skin>
