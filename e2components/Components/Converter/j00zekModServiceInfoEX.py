@@ -356,7 +356,7 @@ class j00zekModServiceInfoEX(Poll, Converter, object):
             type = self.tpdata.get('tuner_type', '')
             if service.streamed() is None: system = self.tpdata.get('system', 0)
             else: system = 'IPTV'
-            if DBG: j00zekDEBUG('[BlackHarmonyServiceInfoEX:getBoolean] tuner_type=%s, system = %s' % (type, system) ) 
+            if DBG: j00zekDEBUG('[j00zekModServiceInfoEX:getBoolean] tuner_type=%s, system = %s' % (type, system) ) 
         else:
             type = 'IP-TV'
         if self.type == self.HAS_TELETEXT:

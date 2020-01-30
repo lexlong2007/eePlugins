@@ -3,11 +3,17 @@ from Components.Element import cached
 from Converter import Converter
 from enigma import eTimer
 from time import localtime, strftime
+
 try:
     from boxbranding import getBoxType
 except Exception:
     def getBoxType():
         return 'unknown'
+
+DBG = False
+if DBG: 
+    try: from Components.j00zekComponents import j00zekDEBUG
+    except Exception: DBG = False
 
 class j00zekBlinkingClock(Converter, object):
     LEFT   = 0
@@ -32,6 +38,7 @@ class j00zekBlinkingClock(Converter, object):
         else:
             self.TYPE = self.FMT
             self.fmt_string = type.replace('Format:','')
+        if DBG: j00zekDEBUG('[j00zekBlinkingClock:__init__] type=%s, VFDsize = %s' % (type, self.VFDsize) ) 
 
     def blinkFunc(self):
         if self.CHAR == ":" and self.TYPE == self.VFDstdby:
@@ -57,6 +64,7 @@ class j00zekBlinkingClock(Converter, object):
 
         ClockText = strftime(self.fmt_string, t)
         ClockTextLen = len(ClockText)
+        if DBG: j00zekDEBUG('[j00zekBlinkingClock:getText] len(%s) = %s' % (ClockText, ClockTextLen) ) 
         
         if self.TYPE == self.VFDstdby and ClockTextLen <= self.VFDsize:
             ClockText = ClockText.replace(":", self.CHAR)

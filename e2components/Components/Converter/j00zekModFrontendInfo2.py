@@ -6,6 +6,11 @@ from Components.Element import cached
 from Components.j00zekModHex2strColor import Hex2strColor
 from Components.NimManager import nimmanager
 
+DBG = True
+if DBG: 
+    try: from Components.j00zekComponents import j00zekDEBUG
+    except Exception: DBG = False 
+
 class j00zekModFrontendInfo2(Converter, object):
     BER = 0
     SNR = 1
@@ -22,6 +27,8 @@ class j00zekModFrontendInfo2(Converter, object):
         Converter.__init__(self, type)
         self.colors = (0x0000FF00, 0x00FFFF00, 0x007F7F7F) # tuner active, busy, available colors
         
+        self.TunerMaskAttrib = None
+
         if type == "BER":
             self.type = self.BER
         elif type == "SNR":
@@ -43,9 +50,27 @@ class j00zekModFrontendInfo2(Converter, object):
             type = type.split(",")
             if len(type) == 4 and type[1].startswith('0x') and type[2].startswith('0x') and type[3].startswith('0x'):
                 self.colors = (int(type[1],0), int(type[2],0), int(type[3],0))
+            
+            try:
+                self.TunerMaskAttrib = self.source.tuner_mask
+            except Exception as e:
+                if DBG: j00zekDEBUG('[j00zekModFrontendInfo2:__init__] getting self.source.tuner_mask Exception: %s' % str(e) )  
+                try:
+                    from enigma import eDVBResourceManager
+                    res_mgr = eDVBResourceManager.getInstance()
+                    if res_mgr:
+                        res_mgr.frontendUseMaskChanged.get().append(self.updateTunerMask)
+                except Exception as e:
+                    if DBG: j00zekDEBUG('[j00zekModFrontendInfo2:__init__] setting res_mgr Exception: %s' % str(e) )  
+                    self.TunerMaskAttrib = None
         else:
             self.type = self.LOCK
 
+    def updateTunerMask(self, mask):
+        if DBG: j00zekDEBUG('[j00zekModFrontendInfo2:updateTunerMask] mask="%s"' % str(mask))
+        self.TunerMaskAttrib = mask
+        self.changed((self.CHANGED_ALL, ))
+        
     @cached
     def getText(self):
         assert self.type not in (self.LOCK, self.SLOT_NUMBER), "the text output of FrontendInfo cannot be used for lock info"
@@ -73,7 +98,7 @@ class j00zekModFrontendInfo2(Converter, object):
                 if n.type:
                     if n.slot == self.source.slot_number:
                         color = Hex2strColor(self.colors[0])
-                    elif self.source.tuner_mask & 1 << n.slot:
+                    elif not self.TunerMaskAttrib is None and self.TunerMaskAttrib & 1 << n.slot:
                         color = Hex2strColor(self.colors[1])
                     else:
                         color = Hex2strColor(self.colors[2])
@@ -147,3 +172,12 @@ class j00zekModFrontendInfo2(Converter, object):
 
     range = 65536
     value = property(getValue)
+    
+    def destroy(self):
+        try:
+            res_mgr = eDVBResourceManager.getInstance()
+            if res_mgr:
+                res_mgr.frontendUseMaskChanged.get().remove(self.updateTunerMask)
+            Source.destroy(self)
+        except Exception:
+            pass
