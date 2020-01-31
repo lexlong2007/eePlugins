@@ -28,6 +28,7 @@ caid_data = (
     ('0x2600', '0x2600', 'Biss',  'B',  True),
     ('0x4ae0', '0x4ae1', 'DreCrypt',  'DC',  False),
     ('0x4b00', '0x4bff', 'DG-Crypt',  'DG',  True),
+    ('0x4aea', '0x4aea', 'CryptoGuard', 'CG', True),
     ('0x4aee', '0x4aee', 'BulCrypt',  'B1',  False),
     ('0x5581', '0x5581', 'BulCrypt',  'B2',  False)
  )
@@ -83,6 +84,7 @@ class BlackHarmonyPliExtraInfo(Poll, Converter, object):
             ('CryptoCaidBulCrypt1Available', 'B1', False),
             ('CryptoCaidBulCrypt2Available', 'B2', False),
             ('CryptoCaidDG-CryptAvailable', 'DG', False),
+            ('CryptoCaidCryptoGuardAvailable', 'CG', False),
             ('CryptoCaidVerimatrixAvailable', 'VM', False),
             ('CryptoCaidTandbergAvailable', 'TB', False),
             ('CryptoCaidSeca MediaguardSelected', 'S', True),
@@ -99,6 +101,7 @@ class BlackHarmonyPliExtraInfo(Poll, Converter, object):
             ('CryptoCaidBulCrypt1Selected', 'B1', True),
             ('CryptoCaidBulCrypt2Selected', 'B2', True),
             ('CryptoCaidDG-CryptSelected', 'DG', True),
+            ('CryptoCaidCryptoGuardSelected', 'CG', True),
             ('CryptoCaidVerimatrixSelected', 'VM', True),
             ('CryptoCaidTandbergSelected', 'TB', True)
            )
