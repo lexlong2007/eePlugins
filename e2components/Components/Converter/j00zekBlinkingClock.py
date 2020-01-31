@@ -1,3 +1,18 @@
+# -*- coding: utf-8 -*-
+#
+#    j00zekBlinkingClock
+#
+#    Coded by j00zek (c)2019-2020
+#
+#    Uszanuj moja prace i nie kasuj/zmieniaj informacji kto jest autorem konwertera
+#    Please respect my work and don't delete/change name of the renderer author
+#
+#    Nie zgadzam sie na wykorzystywanie tego skryptu w projektach platnych jak np. Graterlia!!!
+#
+#    Prosze NIE dystrybuowac tego skryptu w formie archwum zip, czy tar.gz
+#    Zgadzam sie jedynie na dystrybucje z repozytorium opkg
+#    
+
 from Components.config import config
 from Components.Element import cached
 from Converter import Converter
@@ -62,7 +77,7 @@ class j00zekBlinkingClock(Converter, object):
         if self.TYPE == self.VFDstdby:
             self.fmt_string = config.plugins.j00zekCC.clockVFDstdby.value
 
-        ClockText = strftime(self.fmt_string, t)
+        ClockText = strftime(self.fmt_string, t).replace('ą','a').replace('Ś','S').replace('ź','z')
         ClockTextLen = len(ClockText)
         if DBG: j00zekDEBUG('[j00zekBlinkingClock:getText] len(%s) = %s' % (ClockText, ClockTextLen) ) 
         
