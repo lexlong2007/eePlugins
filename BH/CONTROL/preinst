@@ -9,10 +9,7 @@ if `grep -q 'osd.language=pl_PL' </etc/enigma2/settings`; then
 else
   Tekst="ERROR: incompatible environment found, skin won't work"
 fi
-if [ -e /usr/share/enigma2/Pingu-NavyBlue ] ; then
-  echo "$Tekst !"
-  exit 1
-elif [ `ls /usr/share/enigma2/|grep -c Pingu-NavyBlue` -gt 0 ] ; then
+if [ `ls /usr/share/enigma2/|grep -c NavyBlue` -gt 0 ] ; then
   echo "$Tekst !!"
   exit 1
 elif [ `ls /usr/share/enigma2/|grep -c GoldenNight` -gt 0 ] ; then
