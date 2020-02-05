@@ -28,7 +28,7 @@
 	<eLabel backgroundColor="linie" foregroundColor="lemon" position="684,363" size="760,1" />
     
 	<widget backgroundColor="background" font="Roboto_HD; 30" halign="left" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=4,startdelay=6000,wrap" position="675,385" render="j00zekModRunningText" size="775,280" source="ServiceEvent" transparent="1">
-      <convert type="EventName">ExtendedDescription</convert>
+      <convert type="j00zekModEventName">ExtendedDescription</convert>
     </widget>
 	
 	<eLabel backgroundColor="linie" foregroundColor="lemon" position="684,685" size="760,1" />

@@ -145,6 +145,7 @@ find -L /usr/share/enigma2/BlackHarmony/allScreens/ChannelSelections -name *.xml
 find -L /usr/share/enigma2/BlackHarmony/allScreens/Infobars -name *.xml -type l -exec  rm {} +
 find -L /usr/share/enigma2/BlackHarmony/allScreens/Secondinfobars -name *.xml -type l -exec  rm {} +
 find -L /usr/share/enigma2/BlackHarmony/allScreens/Volume -name *.xml -type l -exec  rm {} +
+find -L /usr/share/enigma2/BlackHarmony/allScreens/Messageboxes -name *.xml -type l -exec  rm {} +
 #tworzenie linkow w strukturze drzewa
 find /usr/share/enigma2/BlackHarmony/allScreens -iname skin_channelselection_*.xml|while read f; do
   #echo "$f"
@@ -175,6 +176,15 @@ find /usr/share/enigma2/BlackHarmony/allScreens -iname skin_volume_*.xml|while r
   #echo "$f"
   if [ `echo "$f"|grep -c '/Volume/'` -eq 0 ]; then
     f2="`echo \"$f\"|sed 's;\(^.*/allScreens/\).*\(/skin_*\);\1Volume\2;'`"
+    #echo "$f2"
+    ln -sf "$f" "$f2"
+  fi
+done
+sync
+find /usr/share/enigma2/BlackHarmony/allScreens -iname skin_*Messagebox_*.xml|while read f; do
+  #echo "$f"
+  if [ `echo "$f"|grep -c '/Messageboxes/'` -eq 0 ]; then
+    f2="`echo \"$f\"|sed 's;\(^.*/allScreens/\).*\(/skin_*\);\1Messageboxes\2;'`"
     #echo "$f2"
     ln -sf "$f" "$f2"
   fi

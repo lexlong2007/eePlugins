@@ -52,48 +52,7 @@
         <convert type="FrontendInfo">BER</convert>
     </widget>
     <!-- wykorzystanie glowic -->
-    <eLabel text="A" position="1580,130" zPosition="1" size="35,25" font="Roboto_HD; 22" halign="left" foregroundColor="#00dcdcdc" backgroundColor="black" transparent="1" />
-    <eLabel text="B" position="1580,130" zPosition="1" size="35,25" font="Roboto_HD; 22" halign="right" foregroundColor="#00dcdcdc" backgroundColor="black" transparent="1" />
-    <eLabel text="C" position="1580,160" zPosition="1" size="35,25" font="Roboto_HD; 22" halign="left" foregroundColor="#00dcdcdc" backgroundColor="black" transparent="1" />
-    <eLabel text="D" position="1580,160" zPosition="1" size="35,25" font="Roboto_HD; 22" halign="right" foregroundColor="#00dcdcdc" backgroundColor="black" transparent="1" />
-    <widget source="session.TunerInfo" render="FixedLabel" text="A" position="1580,130" zPosition="2" size="35,25" font="Roboto_HD; 22" halign="left" foregroundColor="yellow" backgroundColor="black" transparent="1">
-      <convert type="TunerInfo">TunerUseMask</convert>
-      <convert type="ValueBitTest">1</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.FrontendInfo" render="FixedLabel" text="A" position="1580,130" zPosition="3" size="35,25" font="Roboto_HD; 22" halign="left" foregroundColor="blue" backgroundColor="dark_blue" transparent="1">
-      <convert type="FrontendInfo">NUMBER</convert>
-      <convert type="ValueRange">0,0</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-  <widget source="session.TunerInfo" render="FixedLabel" text="B" position="1580,130" zPosition="2" size="35,25" font="Roboto_HD; 22" halign="right" foregroundColor="yellow" backgroundColor="black" transparent="1">
-    <convert type="TunerInfo">TunerUseMask</convert>
-    <convert type="ValueBitTest">2</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-  <widget source="session.FrontendInfo" render="FixedLabel" text="B" position="1580,130" zPosition="3" size="35,25" font="Roboto_HD; 22" halign="right" foregroundColor="blue" backgroundColor="dark_blue" transparent="1">
-    <convert type="FrontendInfo">NUMBER</convert>
-    <convert type="ValueRange">1,1</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-  <widget source="session.TunerInfo" render="FixedLabel" text="C" position="1580,160" zPosition="2" size="35,25" font="Roboto_HD; 22" halign="center" foregroundColor="yellow" backgroundColor="black" transparent="1">
-    <convert type="TunerInfo">TunerUseMask</convert>
-    <convert type="ValueBitTest">4</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-  <widget source="session.FrontendInfo" render="FixedLabel" text="C" position="1580,160" zPosition="3" size="35,25" font="Roboto_HD; 22" halign="center" foregroundColor="blue" backgroundColor="dark_blue" transparent="1">
-    <convert type="FrontendInfo">NUMBER</convert>
-    <convert type="ValueRange">2,2</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-  <widget source="session.TunerInfo" render="FixedLabel" text="D" position="1580,160" zPosition="2" size="35,25" font="Roboto_HD; 22" halign="center" foregroundColor="yellow" backgroundColor="black" transparent="1">
-    <convert type="TunerInfo">TunerUseMask</convert>
-    <convert type="ValueBitTest">8</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-  <widget source="session.FrontendInfo" render="FixedLabel" text="D" position="1580,160" zPosition="3" size="35,25" font="Roboto_HD; 22" halign="center" foregroundColor="blue" backgroundColor="dark_blue" transparent="1">
-    <convert type="FrontendInfo">NUMBER</convert>
-    <convert type="ValueRange">3,3</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
+        <widget source="session.FrontendInfo" render="Label" position="1580,160" size="140,25" zPosition="3" font="Roboto_HD;22" halign="center" transparent="1">
+                <convert type="j00zekModFrontendInfo2">ACTIVE_BUSY_AVAILABLE_TUNER_COLORS,0x0000FF00,0x00FFFF00,0x00DCDCDC</convert>
+        </widget>
 </screen>
