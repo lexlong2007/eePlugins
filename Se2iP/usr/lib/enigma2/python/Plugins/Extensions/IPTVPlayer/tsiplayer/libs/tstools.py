@@ -5,6 +5,7 @@ from Plugins.Extensions.IPTVPlayer.components.asynccall         import MainSessi
 from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.pCommon       import common, CParsingHelper
 #from Plugins.Extensions.IPTVPlayer.libs.pCommon                import common, CParsingHelper 
 from Plugins.Extensions.IPTVPlayer.libs.urlparser               import urlparser
+from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.urlparser     import urlparser as ts_urlparser
 from Plugins.Extensions.IPTVPlayer.tools.iptvtools              import CSearchHistoryHelper, GetCookieDir, printDBG, printExc
 from Plugins.Extensions.IPTVPlayer.libs.e2ijson                 import loads as json_loads, dumps as json_dumps
 from Plugins.Extensions.IPTVPlayer.libs.crypto.cipher.aes_cbc   import AES_CBC
@@ -178,7 +179,7 @@ class TSCBaseHostClass:
     def __init__(self, params={}):
         self.sessionEx = MainSessionWrapper() 
         self.up = urlparser()
-        
+        self.ts_urlpars = ts_urlparser()
         proxyURL = params.get('proxyURL', '')
         useProxy = params.get('useProxy', False)
         self.cm = common(proxyURL, useProxy)
@@ -191,6 +192,25 @@ class TSCBaseHostClass:
             self.COOKIE_FILE = GetCookieDir(params['cookie'])
         self.moreMode = False
 
+    def std_host_name(self,name_):
+        if '|' in name_:
+            n1 = name_.split('|')[-1]
+            n2 = name_.replace(name_.split('|')[-1],'')
+            if self.ts_urlpars.checkHostSupportbyname(n1):
+                name_=n2+tscolor('\c0090??20')+n1.replace('embed.','').title()	
+            elif self.ts_urlpars.checkHostNotSupportbyname(n1):
+                name_=n2+tscolor('\c00??1020')+n1.replace('embed.','').title()
+            else:
+                name_=n2+tscolor('\c00999999')+n1.replace('embed.','').title()                	
+        else: 
+            if self.ts_urlpars.checkHostSupportbyname(name_):
+                name_=tscolor('\c0090??20')+name_.replace('embed.','').title()
+            elif self.ts_urlpars.checkHostNotSupportbyname(name_):
+                name_=tscolor('\c00??5050')+name_.replace('embed.','').title()	
+              
+                				
+        return name_ 
+		
 
     def uniform_titre(self,titre,year_op=0):
 		titre=titre.replace('مشاهدة وتحميل مباشر','').replace('مشاهدة','').replace('اون لاين','')
@@ -453,4 +473,3 @@ class TSCBaseHostClass:
             self.afterMoreItemList  = []
         self.moreMode = False
     
-

@@ -30,7 +30,7 @@ class TSIPHost(TSCBaseHostClass):
 		TSCBaseHostClass.__init__(self,{'cookie':'dpstream.cookie'})
 		self.USER_AGENT = 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0'
 		self.cookieHeader=''
-		self.MAIN_URL = 'https://www.dpstream.top'
+		self.MAIN_URL = 'https://ww.dpstream.top'
 		self.HEADER = {'User-Agent': self.USER_AGENT, 'Connection': 'keep-alive', 'Accept-Encoding':'gzip', 'Content-Type':'application/x-www-form-urlencoded','Referer':self.getMainUrl(), 'Origin':self.getMainUrl()}
 		self.defaultParams = {'header':self.HEADER, 'with_metadata':True, 'use_cookie': True, 'load_cookie': True, 'save_cookie': True, 'cookiefile': self.COOKIE_FILE}
 		#self.getPage = self.cm.getPage

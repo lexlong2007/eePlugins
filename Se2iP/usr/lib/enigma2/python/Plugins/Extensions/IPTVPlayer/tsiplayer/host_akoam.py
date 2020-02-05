@@ -301,7 +301,6 @@ class TSIPHost(TSCBaseHostClass):
 		return urlTab
 
 
-
 	def get_links(self,cItem): 	
 		urlTab = []
 		try:
@@ -314,16 +313,19 @@ class TSIPHost(TSCBaseHostClass):
 			self.getPage(URL, paramsUrl)
 			paramsUrl.pop('use_new_session')
 			data = self.cm.getCookieItems(self.COOKIE_FILE)
+			printDBG('1111')
 			if 'golink' in data:
 				data = json_loads(urllib.unquote(data['golink']))
 				paramsUrl = dict(self.defaultParams)
 				paramsUrl['header']['Referer'] = cItem['url']
-				url_=data['route']			
+				url_=data['route']	
+				printDBG('1111000')				
 				sts, data = self.getPage(url_, paramsUrl)
 				if sts:
+					printDBG('111122')
 					cUrl = data.meta['url']
 					url_dat=re.findall('<iframe[^>]+?src=[\'"]([^"^\']+?)[\'"]', data, re.S | re.IGNORECASE)
-					if not url_dat:	
+					if (not url_dat) or ('ads.com' in url_dat[0]):	
 						GetIPTVSleep().Sleep(6)
 						paramsUrl = dict(self.defaultParams) 
 						paramsUrl['header'] = dict(self.AJAX_HEADER)
@@ -342,8 +344,6 @@ class TSIPHost(TSCBaseHostClass):
 		except:
 			printDBG('Erreur')					
 		return urlTab	
-
-
 
 
 

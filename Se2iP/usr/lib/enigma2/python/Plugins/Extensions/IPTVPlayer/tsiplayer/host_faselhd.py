@@ -210,15 +210,16 @@ class TSIPHost(TSCBaseHostClass):
 						Liste_els_3 = re.findall('download_wrapper">.*?href="(.*?)"', data.lower(), re.S)			
 						if Liste_els_3:	
 							sts, data = self.cm.getPage(Liste_els_3[0])
-							Liste_els_4 = re.findall('<div class="other_servers">(.*?)</div>', data, re.S)			
-							if Liste_els_4:
-								Liste_els_5 = re.findall('href="(.*?)".*?">(.*?)<', Liste_els_4[0], re.S)
-								for (url_,titre_)in Liste_els_5 :				
-									urlTab.append({'name':'|Download Server| '+titre_, 'url':url_, 'need_resolve':1})
+							if sts:
+								Liste_els_4 = re.findall('<div class="other_servers">(.*?)</div>', data, re.S)			
+								if Liste_els_4:
+									Liste_els_5 = re.findall('href="(.*?)".*?">(.*?)<', Liste_els_4[0], re.S)
+									for (url_,titre_)in Liste_els_5 :				
+										urlTab.append({'name':'|Download Server| '+titre_, 'url':url_, 'need_resolve':1})
 						
-							Liste_els_6 = re.findall('dl-link">.*?href="(.*?)"', data, re.S)
-							if Liste_els_6 :				
-								urlTab.append({'name':'|Download Server| T7meel', 'url':Liste_els_6[0], 'need_resolve':0,'type':'local'})
+								Liste_els_6 = re.findall('dl-link">.*?href="(.*?)"', data, re.S)
+								if Liste_els_6 :				
+									urlTab.append({'name':'|Download Server| T7meel', 'url':Liste_els_6[0], 'need_resolve':0,'type':'local'})
 							
 										
 			Liste_els = re.findall('onclick="player_iframe.*?\'(.*?)\'">(.*?)</a>', data0, re.S)

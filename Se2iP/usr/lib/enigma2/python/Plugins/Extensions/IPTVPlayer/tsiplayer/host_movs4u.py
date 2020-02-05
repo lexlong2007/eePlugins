@@ -20,7 +20,7 @@ import urllib
 def getinfo():
 	info_={}
 	info_['name']='Movs4u.To'
-	info_['version']='1.7.1 04/11/2019'
+	info_['version']='1.8 13/01/2019'
 	info_['dev']='RGYSoft'
 	info_['cat_id']='201'
 	info_['desc']='أفلام و مسلسلات اجنبية'
@@ -270,27 +270,35 @@ class TSIPHost(TSCBaseHostClass):
 				local=''
 				if 'movs' in srv.lower(): local='local'
 				srv=srv.lower().replace('openload.com','openload.co')
-				urlTab.append({'name':'|'+titre1+'| '+srv, 'url':'hst#tshost#'+data_url, 'need_resolve':1,'type':local})		
+				urlTab.append({'name':'|'+titre1+'| '+srv, 'url':'hst#tshost#'+data_url+'|'+cItem['url'], 'need_resolve':1,'type':local})		
 		return urlTab
 		
 		
-	def extractLink(self,videoUrl):
+	def extractLink(self,videoUrl,refer):
 		url_out='None'
+		printDBG('a1')
 		if 'gdriveplayer' in videoUrl:
+			printDBG('a2')
 			_data3 = re.findall('link=(.*?)&',videoUrl, re.S)
 			if _data3: 
 				url_out = _data3[0]
 		elif 'juicy.php?url=' in videoUrl:
+			printDBG('a3')
 			_data3 = re.findall('url=(.*)',videoUrl, re.S)
 			if _data3: 
 				url_out = _data3[0]
 		else:
-			sts, data = self.getPage(videoUrl)
+			printDBG('a4')
+			Params = dict(self.defaultParams)
+			Params['header']['Referer']=refer
+			sts, data = self.getPage(videoUrl,Params)
 			if sts:
+				printDBG('a5')
 				_data2 = re.findall('<iframe.*?src="(.*?)"',data, re.S)		 		
 				if _data2:			
 					url_out = _data2[0]
 				else:
+					printDBG('a6')
 					_data4 = re.findall('javascript">eval(.*?)</script>',data, re.S)
 					if _data4:
 						script_eval='eval'+_data4[0].strip()
@@ -301,15 +309,20 @@ class TSIPHost(TSCBaseHostClass):
 						if _data5:
 							url_out = _data5[0]
 					else:
-						_data2 = re.findall('<meta.*?url=(.*?)"',data, re.S)		 		
-						if _data2:			
-							url_out = _data2[0]					
+						printDBG('a7='+data)
+						_data4 = re.findall('"file".*?"(.*?)"',data, re.S)
+						if _data4:
+							printDBG('a9')
+							url_out = _data4[0]						
 						else:
-							_data4 = re.findall('"file".*?"(.*?)"',data, re.S)
-							if _data4:
-								url_out = _data4[0]
+							_data2 = re.findall('<meta.*?url=(.*?)"',data, re.S)		 		
+							if _data2:			
+								url_out = _data2[0]					
 		return url_out	
-	def getVideos(self,videoUrl):
+		
+		
+		
+	def getVideos_old(self,videoUrl):
 		urlTab = []	
 		url_ref=videoUrl
 		printDBG("1")
@@ -369,6 +382,69 @@ class TSIPHost(TSCBaseHostClass):
 				if _data0:	
 					urlTab.append((_data0[0],'1'))	
 		return urlTab
+
+	def getVideos(self,videoUrl):
+		urlTab = []	
+		url_ref,refer=videoUrl.split('|')
+		printDBG("1")
+		if videoUrl.startswith('http'):
+			i=0
+			while True:
+				i=i+1
+				printDBG(str(i)+">>>>Start<<<< "+videoUrl)
+				oldURL=videoUrl
+				videoUrl = self.extractLink(videoUrl,refer)
+				printDBG(str(i)+">>>>End<<<< "+videoUrl)
+				if videoUrl == 'None': 
+					printDBG('1') 			
+					urlTab.append((oldURL,'1'))
+					break 				
+					
+				elif '.m3u8' in videoUrl:
+					printDBG('2')
+					URL1=strwithmeta(videoUrl, {'Referer':url_ref})
+					urlTab.append((URL1,'3'))
+					break
+					
+				elif 'arabramadan' in videoUrl:
+					params = dict(self.defaultParams)
+					params['header']['Referer'] = oldURL
+					sts, data = self.getPage(videoUrl,params)
+					if sts:
+						_data3 = re.findall('JuicyCodes.Run\("(.*?)"\)',data, re.S)	
+						if _data3:
+							packed = base64.b64decode(_data3[0].replace('"+"',''))
+							printDBG('packed'+packed)
+							Unpacked = cPacker().unpack(packed)
+							printDBG('packed'+Unpacked)
+							
+
+							meta_ = {'Referer':'https://arabramadan.com/embed/L00w0FyU0if4mHD/'}
+
+							
+							_data3 = re.findall('src".*?"(.*?)".*?label":"(.*?)"',Unpacked, re.S)	
+							for (uurl,ttitre) in _data3:
+								uurl = strwithmeta(ttitre+'|'+uurl,meta_)
+								urlTab.append((uurl,'4'))
+					break									
+				elif (self.up.checkHostSupport(videoUrl) == 1):	
+					printDBG('3')
+					urlTab.append((videoUrl,'1'))
+					break
+				printDBG('4')								 									
+							 					
+		else:
+			printDBG("2")
+			post_data = {'action':'doo_player_ajax','post':videoUrl,'nume':'trailer','type':'movie'}		
+			sts, data2 = self.getPage(self.MAIN_URL+'/wp-admin/admin-ajax.php', post_data=post_data)
+			if sts:
+				printDBG("20")
+				_data0 = re.findall('<iframe.*?src="(.*?)"',data2, re.S)
+				if _data0:	
+					urlTab.append((_data0[0],'1'))	
+		return urlTab
+
+
 
 	
 	def start(self,cItem):      

@@ -218,11 +218,11 @@ class TSIPHost(TSCBaseHostClass):
 				URL_=URL_.replace("'",'')
 				if URL_.startswith('//'):
 					URL_='http:'+URL_ 
-				urlTab.append((URL_,'1'))
+				urlTab.append((URL_.replace('\r','').replace('\n',''),'1'))
 			else:
 				data=data.strip()
 				if data.startswith('http'):
-					urlTab.append((data,'1'))					
+					urlTab.append((data.replace('\r','').replace('\n',''),'1'))					
 		return urlTab
 		
 	def getArticle(self, cItem):

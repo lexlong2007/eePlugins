@@ -168,7 +168,7 @@ class IPTVHost(IHost):
     ###################################################
 
 class Host:
-    XXXversion = "2020.01.25.1"
+    XXXversion = "2020.02.02.0"
     XXXremote  = "0.0.0.0"
     currList = []
     MAIN_URL = ''
@@ -398,7 +398,7 @@ class Host:
            url = 'https://chaturbate.com/tags/%s' % config.plugins.iptvplayer.chaturbate.value
            valTab.append(CDisplayListItem('CHATURBATE',     'chaturbate.com', CDisplayListItem.TYPE_CATEGORY, [url],'CHATURBATE','http://www.adultcamfriendx.com/wp-content/uploads/2016/11/chaturbate-cams-logo.png', None)) 
            valTab.append(CDisplayListItem('XHAMSTERLIVE',       "Kamerki",       CDisplayListItem.TYPE_CATEGORY,['http://xhamsterlive.com'], 'xhamsterlive', 'https://cdn.stripst.com/assets/icons/favicon-196x196_xhamsterlive.com.png',None))
-           valTab.append(CDisplayListItem('CAM4 - KAMERKI',     'http://www.cam4.pl', CDisplayListItem.TYPE_CATEGORY, ['http://www.cam4.pl/female'],'CAM4-KAMERKI', 'https://www.cam4models.com/images/c4logo_white.png', None)) 
+           valTab.append(CDisplayListItem('CAM4',     'https://www.cam4.com', CDisplayListItem.TYPE_CATEGORY, ['https://www.cam4.com'],'CAM4-KAMERKI', 'https://www.cam4models.com/images/c4logo_white.png', None)) 
            valTab.append(CDisplayListItem('MYFREECAMS',     'http://www.myfreecams.com', CDisplayListItem.TYPE_CATEGORY, ['http://www.myfreecams.com/#Homepage'],'MYFREECAMS', 'http://www.adultcamfriendx.com/wp-content/uploads/2016/11/myfreecams-webcams-logo.png', None)) 
            #valTab.append(CDisplayListItem('LIVEJASMIN',     'http://www.livejasmin.com', CDisplayListItem.TYPE_CATEGORY, ['http://www.livejasmin.com/en/girl/free+chat?selectedFilters=12'],'LIVEJASMIN', 'http://livejasmins.fr/livejasmin-france.png', None)) 
            valTab.append(CDisplayListItem('BONGACAMS',     'https://bongacams.com/', CDisplayListItem.TYPE_CATEGORY, ['https://en.bongacams.com/ajax-categories'],'BONGACAMS', 'http://i.bongacams.com/images/bongacams_logo3_header.png', None)) 
@@ -1868,49 +1868,70 @@ class Host:
 
         if 'CAM4-KAMERKI' == name:
            printDBG( 'Host listsItems begin name='+name )
-           self.MAIN_URL = 'http://www.cam4.pl' 
-           query_data = { 'url': url, 'use_host': False, 'use_cookie': False, 'use_post': False, 'return_data': True }
-           try: data = self.cm.getURLRequestData(query_data)
-           except Exception as e:
+           self.MAIN_URL = 'https://www.cam4.com' 
+           COOKIEFILE = os_path.join(GetCookieDir(), 'cam4.cookie')
+           self.HTTP_HEADER = self.cm.getDefaultHeader(browser='chrome')
+           self.HTTP_HEADER['Referer'] = url
+           self.defaultParams = {'header':self.HTTP_HEADER, 'use_cookie': True, 'load_cookie': True, 'save_cookie': True, 'cookiefile': COOKIEFILE}
+           url = 'https://cam4.com/tags?json=true&index=0&count=75&category='
+           sts, data = self.get_Page(url, self.defaultParams)
+           if not sts: return valTab
+           self.page = 1
+           printDBG( 'Host listsItems data: '+data )
+           try:
+              result = byteify(simplejson.loads(data))
+              if result:
+                 for item in result:
+                    phTitle = str(item["name"])
+                    valTab.append(CDisplayListItem(phTitle, phTitle, CDisplayListItem.TYPE_CATEGORY, [phTitle], 'CAM4-KAMERKI-clips', '', None))                
+           except Exception:
               printExc()
-              msg = _("Last error:\n%s" % str(e))
-              GetIPTVNotify().push('%s' % msg, 'error', 20)
-              printDBG( 'Host listsItems query error url:'+url )
-              return valTab
-           #printDBG( 'Host listsItems data: '+data )
-           valTab.insert(0,CDisplayListItem("--- HD ---",       "HD",       CDisplayListItem.TYPE_CATEGORY,["http://www.cam4.pl/cams/hd"], 'CAM4-KAMERKI-clips', '',None))
-           valTab.insert(0,CDisplayListItem("--- Poland ---",       "Polskie",       CDisplayListItem.TYPE_CATEGORY,["http://www.cam4.pl/poland-cams"], 'CAM4-KAMERKI-clips', '',None))
-           valTab.insert(0,CDisplayListItem("--- Couples ---",       "Pary",       CDisplayListItem.TYPE_CATEGORY,["http://www.cam4.pl/couple"], 'CAM4-KAMERKI-clips', '',None))
-           valTab.insert(0,CDisplayListItem("--- Male ---",       "Mężczyźni",       CDisplayListItem.TYPE_CATEGORY,["http://www.cam4.pl/male"], 'CAM4-KAMERKI-clips', '',None))
-           valTab.insert(0,CDisplayListItem("--- Transsexual ---",       "Transseksualiści",       CDisplayListItem.TYPE_CATEGORY,["http://www.cam4.pl/shemale"], 'CAM4-KAMERKI-clips', '',None))
-           valTab.insert(0,CDisplayListItem("--- New ---",       "Nowe",       CDisplayListItem.TYPE_CATEGORY,["http://www.cam4.pl/new"], 'CAM4-KAMERKI-clips', '',None))
-           valTab.insert(0,CDisplayListItem("--- Female ---",       "Kobiety",       CDisplayListItem.TYPE_CATEGORY,["http://www.cam4.pl/female"], 'CAM4-KAMERKI-clips', '',None))
+           valTab.sort(key=lambda poz: poz.name)
+           #valTab.insert(0,CDisplayListItem("--- HD ---",       "HD",       CDisplayListItem.TYPE_CATEGORY,["hd"], 'CAM4-KAMERKI-clips', '',None))
+           valTab.insert(0,CDisplayListItem("--- Poland ---",       "Polskie",       CDisplayListItem.TYPE_CATEGORY,["female&country=pl"], 'CAM4-KAMERKI-clips', '',None))
+           #valTab.insert(0,CDisplayListItem("--- Couples ---",       "Pary",       CDisplayListItem.TYPE_CATEGORY,["couple"], 'CAM4-KAMERKI-clips', '',None))
+           valTab.insert(0,CDisplayListItem("--- Male ---",       "Mężczyźni",       CDisplayListItem.TYPE_CATEGORY,["male"], 'CAM4-KAMERKI-clips', '',None))
+           valTab.insert(0,CDisplayListItem("--- Transsexual ---",       "Transseksualiści",       CDisplayListItem.TYPE_CATEGORY,["shemale"], 'CAM4-KAMERKI-clips', '',None))
+           valTab.insert(0,CDisplayListItem("--- New ---",       "Nowe",       CDisplayListItem.TYPE_CATEGORY,["new"], 'CAM4-KAMERKI-clips', '',None))
+           valTab.insert(0,CDisplayListItem("--- Female ---",       "Kobiety",       CDisplayListItem.TYPE_CATEGORY,["female"], 'CAM4-KAMERKI-clips', '',None))
            return valTab 
         if 'CAM4-KAMERKI-clips' == name:
            printDBG( 'Host listsItems begin name='+name )
-           query_data = { 'url': url, 'use_host': False, 'use_cookie': False, 'use_post': False, 'return_data': True }
-           try: data = self.cm.getURLRequestData(query_data)
-           except:
-              printDBG( 'Host getResolvedURL query error url: '+url )
-              return ''
+           catUrl = self.currList[Index].possibleTypesOfSearch
+           printDBG( 'Host listsItems cat-url: '+str(catUrl) )
+           if catUrl == None: 
+              self.page = 1
+           else:
+              self.page += 1
+           COOKIEFILE = os_path.join(GetCookieDir(), 'cam4.cookie')
+           self.HTTP_HEADER = self.cm.getDefaultHeader(browser='chrome')
+           self.defaultParams = {'header':self.HTTP_HEADER, 'use_cookie': True, 'load_cookie': True, 'save_cookie': True, 'cookiefile': COOKIEFILE}
+           Url = 'https://www.cam4.com/directoryCams?directoryJson=true&online=true&url=true&gender={0}&page={1}'.format(url, str(self.page))
+           sts, data = self.get_Page(Url, self.defaultParams)
+           if not sts: return valTab
            printDBG( 'Host getResolvedURL data: '+data )
-           vr=''
-           next = self.cm.ph.getSearchGroups(data, '''<link rel="next" href=['"]([^"^']+?)['"]''', 1, True)[0]
-           data = self.cm.ph.getAllItemsBeetwenMarkers(data, 'class="profileDataBox', '</div> </div> </div>')
-           for item in data:
-              #phImage = self.cm.ph.getSearchGroups(item, '''data-src=['"]([^"^']+?)['"]''', 1, True)[0] 
-              phImage = self.cm.ph.getSearchGroups(item, '''data-profile=['"]([^"^']+?)['"]''', 1, True)[0] 
-              phUrl = self.cm.ph.getSearchGroups(item, '''href=['"]([^"^']+?)['"]''', 1, True)[0] 
-              phCountry = self.cm.ph.getSearchGroups(item, '''flag.+?title=['"]([^"^']+?)['"]''', 1, True)[0] 
-              phTitle = phUrl.strip('/')
-              if config.plugins.iptvplayer.cam4.value == '1':
-                  stream = '-rtmp-'
-              else:
-                  stream = '-m3u8-'
-              phImage = urlparser.decorateUrl(phImage, {'Referer': 'https://www.cam4.com'})
-              valTab.append(CDisplayListItem(phTitle+vr,phTitle+vr+'   [Country: '+phCountry+']   '+stream,CDisplayListItem.TYPE_VIDEO, [CUrlItem('', stream+'http://www.cam4.pl'+phUrl, 1)], 0, phImage, None)) 
-           if next:
-              valTab.append(CDisplayListItem('Next ', 'Page: '+next, CDisplayListItem.TYPE_CATEGORY, [next], name, '', None))                
+           try:
+              result = byteify(simplejson.loads(data))
+              if result:
+                 for item in result["users"]:
+                    phTitle = str(item["username"])
+                    try:
+                       phImage = 'https://snapshots.xcdnpro.com/thumbnails/{0}?s={1}'.format(str(item["username"]), str(item["thumbnailId"])) 
+                    except Exception:
+                       printExc()
+                       phImage = str(item["profileImageLink"])
+                    #phUrl = str(item["hlsPreviewUrl"])
+                    try:
+                       age = str(item["age"])
+                       countryCode = str(item["countryCode"])
+                    except Exception:
+                       printExc()
+                    phUrl = 'https://www.cam4.com/{0}'.format(str(item["username"]))
+                    valTab.append(CDisplayListItem(phTitle,'[Age: '+age+']  ' + phTitle+'\nCountry: '+countryCode.upper(),CDisplayListItem.TYPE_VIDEO, [CUrlItem('', phUrl, 1)], 0, phImage, None)) 
+           except Exception:
+              printExc()
+
+           valTab.append(CDisplayListItem('Next ', 'Page: '+str(self.page), CDisplayListItem.TYPE_CATEGORY, [url], name, '', 'next'))                
            return valTab 
 
         if 'CAMSODA' == name:
@@ -2222,16 +2243,16 @@ class Host:
 
         if 'MYFREECAMS' == name:
            printDBG( 'Host listsItems begin name='+name )
-           self.MAIN_URL = 'http://www.myfreecams.com' 
+           self.MAIN_URL = 'https://www.myfreecams.com/' 
            COOKIEFILE = os_path.join(GetCookieDir(), 'myfreecams.cookie')
            rm(COOKIEFILE)
            self.defaultParams = {'use_cookie': True, 'load_cookie': True, 'save_cookie': True, 'cookiefile': COOKIEFILE, 'return_data': True}
-           sts, data = self.cm.getPage(url, self.defaultParams)
+           sts, data = self.cm.getPage('https://new.myfreecams.com/server', self.defaultParams)
            if not sts: return valTab
            printDBG( 'Host listsItems data: '+data )
-           serwery = self.cm.ph.getDataBeetwenMarkers(data, 'ServerConfig = ', ';', False)[1]
+           #serwery = self.cm.ph.getDataBeetwenMarkers(data, 'ServerConfig = ', ';', False)[1]
            try:
-              result = byteify(simplejson.loads(serwery))
+              result = byteify(simplejson.loads(data))
               if result:
                  self.h5video_servers = result["h5video_servers"]
                  self.wzobs_servers = result["wzobs_servers"]
@@ -2240,10 +2261,14 @@ class Host:
                  #self.video_servers = result["video_servers"]
            except Exception:
               printExc()
+           self.defaultParams = {'use_cookie': True, 'load_cookie': True, 'save_cookie': True, 'cookiefile': COOKIEFILE, 'return_data': True}
+           sts, data = self.cm.getPage(self.MAIN_URL, self.defaultParams)
+           if not sts: return valTab
+           printDBG( 'Host listsItems data: '+data )
 
            self.cookieHeader = self.cm.getCookieHeader(COOKIEFILE)
-           self.baf = self.cm.getCookieItem(COOKIEFILE,'baf')
-           self.cid = self.cm.getCookieItem(COOKIEFILE,'cid')
+           self.baf = 'baf='+self.cm.getCookieItem(COOKIEFILE,'baf')+';'
+           self.cid = 'cid='+self.cm.getCookieItem(COOKIEFILE,'cid')+';'
 
            age = ''
            country = ''
@@ -7538,11 +7563,11 @@ class Host:
         if self.MAIN_URL == 'https://pl.bongacams.com':      return self.MAIN_URL
         if self.MAIN_URL == 'https://www.tnaflix.com':       return self.MAIN_URL
         if self.MAIN_URL == 'https://www.empflix.com':       return self.MAIN_URL
-        if self.MAIN_URL == 'http://www.myfreecams.com':     return self.MAIN_URL
+        if self.MAIN_URL == 'https://www.myfreecams.com/':   return self.MAIN_URL
         if self.MAIN_URL == 'http://www.drtuber.com':        return self.MAIN_URL
         if self.MAIN_URL == 'http://www.dachix.com':         return self.MAIN_URL
         if self.MAIN_URL == 'http://www.youjizz.com':        return self.MAIN_URL
-        if self.MAIN_URL == 'http://www.cam4.pl':            return self.MAIN_URL
+        if self.MAIN_URL == 'https://www.cam4.com':          return self.MAIN_URL
         if self.MAIN_URL == 'http://www.amateurporn.net':    return self.MAIN_URL
         if self.MAIN_URL == 'https://chaturbate.com':        return self.MAIN_URL
         if self.MAIN_URL == 'http://www.ah-me.com':          return self.MAIN_URL
@@ -7920,7 +7945,7 @@ class Host:
            if data:
               return newurl
 
-        if parser == 'http://www.myfreecams.com':
+        if parser == 'https://www.myfreecams.com/':
            host = "Mozilla/5.0 (Linux; U; Android 4.1.1; en-us; androVM for VirtualBox ('Tablet' version with phone caps) Build/JRO03S) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Safari/534.30"
            videoUrl = myfreecam_start(url)
            if videoUrl != '':
@@ -7950,7 +7975,14 @@ class Host:
               except Exception:
                  printExc()
               printDBG( 'Host videoUrl:  '+videoUrl )
-              videoUrl = strwithmeta(videoUrl, {'Origin': 'https://www.myfreecams.com', 'Cookie':self.cookieHeader})
+              videoUrl = strwithmeta(videoUrl, {'Origin': 'https://www.myfreecams.com'})
+              videoUrl = strwithmeta(videoUrl, {'Cookie':self.cookieHeader})
+              videoUrl = strwithmeta(videoUrl, {'iptv_proto':'m3u8', 'iptv_livestream':True})
+
+              #videoUrl = strwithmeta(videoUrl, {'Cookie':self.cookieHeader+'gw=1; user_id=0; _gat_gtag_UA_295864_20=1;'})
+              #videoUrl = strwithmeta(videoUrl, {'Origin': 'https://new.myfreecams.com', 'Cookie':self.cid, 'Referer':'https://new.myfreecams.com', 'User-Agent': ''})
+              #videoUrl = urlparser.decorateUrl(videoUrl, {'Origin': 'https://new.myfreecams.com', 'iptv_proto':'m3u8', 'iptv_livestream':True, 'User-Agent':host, 'Referer':'https://new.myfreecams.com'})
+
               tmp = getDirectM3U8Playlist(videoUrl, checkExt=False, variantCheck=False, checkContent=True, sortWithMaxBitrate=99999999)
               for item in tmp:
                  printDBG( 'Host listsItems valtab: '  +str(item))
@@ -8021,48 +8053,23 @@ class Host:
 
            return ''
 
-        if parser == 'http://www.cam4.pl':
-           if '-rtmp-' in url:
-              url = url.replace('-rtmp-','')
-              stream = 'rtmp'
-           if '-m3u8-' in url:
-              url = url.replace('-m3u8-','')
-              stream = 'm3u8'
+        if parser == 'https://www.cam4.com':
            COOKIEFILE = os_path.join(GetCookieDir(), 'cam4.cookie')
-           host = "Mozilla/5.0 (iPhone; CPU iPhone OS 8_0_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12A366 Safari/600.1.4"
-           header = {'User-Agent': host, 'Accept':'text/html,application/json','Accept-Language':'en,en-US;q=0.7,en;q=0.3'} 
-           query_data = { 'url': url, 'header': header, 'Referer':url, 'use_host': False, 'use_cookie': True, 'save_cookie': True, 'load_cookie': False, 'cookiefile': COOKIEFILE, 'use_post': False, 'return_data': True }
-           try:
-              data = self.cm.getURLRequestData(query_data)
-           except:
-              return ''
-           printDBG( 'Host getResolvedURL data: '+data )
-           parse = re.search('"playerUrl":"(.*?)"', data, re.S) 
-           if parse:
-              swfUrl = parse.group(1)
-              parse = re.search('"videoPlayUrl":"(.*?)"', data, re.S) 
-              if parse:
-                 videoPlayUrl = parse.group(1)
-                 parse = re.search('"videoAppUrl":"(.*?)"', data, re.S) 
-                 if parse:
-                    videoAppUrl = parse.group(1)
-                    printDBG( 'Host swfUrl: '  +swfUrl )
-                    printDBG( 'Host videoPlayUrl: '  +videoPlayUrl )
-                    printDBG( 'Host videoAppUrl: '  +videoAppUrl )
-                    if len(videoPlayUrl)<20: return ''
-                    if len(videoAppUrl)<20: return ''
-                    if stream == 'rtmp':
-                       Url = '%s playpath=%s?playToken=null swfUrl=%s conn=S:OK live=1 pageUrl=%s' % (videoAppUrl, videoPlayUrl, swfUrl, url)
-                       return Url+ ' flashVer=WIN 2024,0,0,186 '
-           if stream == 'm3u8':
-              Url = self.cm.ph.getSearchGroups(data, '''hlsUrl: ['"]([^"^']+?)['"]''')[0]+'?referer=cam4.com&timestamp='+str(int(time_time()*1000))
-              #Url = videoAppUrl.replace('rtmp','https').replace('cam4.com/','cam4.com:443/')+'/'+videoPlayUrl+'_aac/playlist.m3u8?referer=cam4.com&timestamp='+str(int(time_time()*1000))
-              Url = urlparser.decorateUrl(Url, {'User-Agent': host})
-              if self.cm.isValidUrl(Url): 
-                 tmp = getDirectM3U8Playlist(Url)
-                 for item in tmp:
-                    printDBG( 'Host listsItems valtab: '  +str(item))
-                    return urlparser.decorateUrl(item['url'], {'User-Agent': host})
+           self.HTTP_HEADER = self.cm.getDefaultHeader(browser='chrome')
+           self.HTTP_HEADER['Referer'] = url
+           self.defaultParams = {'header':self.HTTP_HEADER, 'use_cookie': True, 'load_cookie': True, 'save_cookie': True, 'cookiefile': COOKIEFILE}
+           sts, data = self.get_Page(url, self.defaultParams)
+           if not sts: return valTab
+           self.page = 1
+           printDBG( 'Host listsItems data: '+data )
+
+           Url = self.cm.ph.getSearchGroups(data, '''hlsUrl: ['"]([^"^']+?)['"]''')[0]+'?referer=cam4.com&timestamp='+str(int(time_time()*1000))
+           #Url = urlparser.decorateUrl(Url, {'User-Agent': host})
+           if self.cm.isValidUrl(Url): 
+              tmp = getDirectM3U8Playlist(Url, checkExt=False, variantCheck=False, checkContent=True, sortWithMaxBitrate=99999999)
+              for item in tmp:
+                 printDBG( 'Host listsItems valtab: '  +str(item))
+                 return item['url'] #urlparser.decorateUrl(item['url'], {'User-Agent': host})
            return ''
 
         if parser == 'https://www.camsoda.com/':
@@ -10579,8 +10586,9 @@ def myfreecam_start(url):
 		return ''
 	ws.close()
 	if CAMGIRLSERVER != 0:
-		Url="http://video"+str(CAMGIRLSERVER)+".myfreecams.com:1935/NxServer/ngrp:mfc_"+str(CAMGIRLCHANID)+".f4v_mobile/playlist.m3u8" #+'?nc='+str(int(time_time()*1000))  #+str(datetime.now()) #str(time_time()).encode('utf-8')
+		#Url="http://video"+str(CAMGIRLSERVER)+".myfreecams.com:1935/NxServer/ngrp:mfc_"+str(CAMGIRLCHANID)+".f4v_mobile/playlist.m3u8" #+'?nc='+str(int(time_time()*1000))  #+str(datetime.now()) #str(time_time()).encode('utf-8')
 		#Url="http://video"+str(CAMGIRLSERVER)+".myfreecams.com:1935/NxServer/mfc_"+str(CAMGIRLCHANID)+".f4v_aac/playlist.m3u8" #320x240
+		Url="https://video"+str(CAMGIRLSERVER)+".myfreecams.com/NxServer/ngrp:mfc_"+str(CAMGIRLCHANID)+".f4v_mobile/playlist.m3u8?nc="+str(random.random())
 		printDBG("Camgirl - "+CAMGIRL)
 		printDBG("Url  - "+Url)
 		return Url

@@ -251,29 +251,38 @@ class TSIPHost(TSCBaseHostClass):
 		if sts:
 			data_list = re.findall('class="TPlayerTb.*?trembed=(.*?)("|&quot;)', data, re.S)
 			for (url,x1) in data_list:
+				printDBG('etap 1')
 				url=url.replace('&amp;','&')
 				url=self.MAIN_URL+'/?trembed='+url.replace('&#038;','&')
 				sts, data2 = self.getPage(url,self.defaultParams)
-				printDBG(data2)
 				data_list2 = re.findall('src.*?["\'](.*?)["\']', data2, re.S)
 				if data_list2:
+					printDBG('etap 2')
 					url=data_list2[0]
 					sts, data3 = self.getPage(url,self.defaultParams)
-					printDBG('data222'+data3)
 					data_list3 = re.findall("var id.+?'(.+?)'", data3, re.S)
 					if data_list3:
+						printDBG('etap 3')
 						url1=self.MAIN_URL+'/?trhidee=1&trfex='+data_list3[0][::-1]
 						paramsUrl = dict(self.defaultParams)
 						paramsUrl['header']['Referer'] = url
 						sts, data3 = self.getPage(url1,paramsUrl)
-						printDBG('dataeta'+str(data3.meta))
 						Url=data3.meta['url']
-						if self.up.checkHostSupport(Url)==1:
-							urlTab.append({'name':gethostname(Url), 'url':Url, 'need_resolve':1})
-						elif 'hdsto' in Url:
+						printDBG('etap 5='+Url)
+						if 'hdsto' in Url:
 							URL = 'https://' + Url.split('/')[2] + '/hls/'+Url.split('id=')[1]+'/'+Url.split('id=')[1]+'.playlist.m3u8'
 							URL = strwithmeta(URL, {'Referer':Url})	
-							urlTab.extend(getDirectM3U8Playlist(URL, checkExt=True, checkContent=True, sortWithMaxBitrate=999999999))
+							urlTab.extend(getDirectM3U8Playlist(URL, checkExt=True, checkContent=True, sortWithMaxBitrate=999999999))						
+						elif 'tohds' in Url:
+							sts, data4 = self.getPage(Url,self.defaultParams)
+							if sts:
+								data_list4 = re.findall('<iframe.*?src=["\'](.*?)["\']', data4, re.S)
+								if data_list4:
+									Url = data_list4[0]
+									urlTab.append({'name':gethostname(Url), 'url':Url, 'need_resolve':1})
+						else:
+							urlTab.append({'name':gethostname(Url), 'url':Url, 'need_resolve':1})
+
 
 			#urlTab = getDirectM3U8Playlist(URL, checkExt=True, checkContent=True, sortWithMaxBitrate=999999999)		
 		return urlTab	
