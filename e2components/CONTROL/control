@@ -5,6 +5,6 @@ Depends:
 Description: e2 components used in varius packages
 Maintainer: j00zek
 Source: http://github.com/j00zek/eePlugins
-Version: 20.02.05.0634
+Version: 20.02.05.0738
 Architecture: all
 DestinationPath: /usr/lib/enigma2/python
