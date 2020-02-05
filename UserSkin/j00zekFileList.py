@@ -28,7 +28,11 @@ def FileEntryComponent(name, absolute = None, isDir = False, goBack = False, Dim
         
     def translateName(name):
         import re
-        wordsList=['Channel[ ]*Selections','Channel[ ]*Selection','Secondinfobars','Infobars','Infobar','_no_','Screens by','animated_zzpicon','animated_picon']
+        wordsList=['Channel[ ]*Selections','Channel[ ]*Selection','double-spaced','DoubleSpaced','fulllist','Full',
+                   'Secondinfobars','SecondInfobar', 'Infobars','Infobar',
+                   'Messageboxes', 'MovieSelection', 
+                   '_no_','Screens by', 'BigFonts',
+                   'animated_zzpicon','animated_picon', 'animated']
         for word in wordsList:
             name = re.sub(word , _(word), name, flags=re.I)
         name = re.sub('(\_|\-|\.|\+)',' ', name, flags=re.I) #cleaning

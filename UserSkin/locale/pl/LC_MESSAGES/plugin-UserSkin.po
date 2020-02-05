@@ -562,3 +562,27 @@ msgstr "Ostrzeżenie"
 
 msgid "---Weather---"
 msgstr "---Pogoda---"
+
+msgid "MovieSelection"
+msgstr "Wybór filmów"
+
+msgid "Messageboxes"
+msgstr "Okna wiadomości"
+
+msgid "animated"
+msgstr "animowany"
+
+msgid "double-spaced"
+msgstr "podwójny"
+
+msgid "DoubleSpaced"
+msgstr "podwójny"
+
+msgid "Full"
+msgstr "pełny"
+
+msgid "fulllist"
+msgstr "pełny"
+
+msgid "BigFonts"
+msgstr "duża czcionka"
