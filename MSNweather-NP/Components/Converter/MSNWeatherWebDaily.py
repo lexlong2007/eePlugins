@@ -70,6 +70,8 @@ class MSNWeatherWebDaily(Converter, object):
                         retTXT = str('%s. %s %s' % (line[1].strip().lower(), line[2].strip(), Month))
                     elif item ==  'info':
                         retTXT = str('%s/ %s/ %s\n%s' % (line[6].strip(), line[7].strip(), line[8].strip(), line[4].strip()))
+                    elif item in ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9'):
+                        retTXT = str('%s' % line[int(item)].strip())
             except Exception as e:
                 self.EXCEPTIONDEBUG('\t','Exception %s' % str(e))
         self.DEBUG('\t','retTXT="%s"' % retTXT)

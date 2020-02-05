@@ -46,13 +46,14 @@ class MSNWeatherWebhourly(Converter, object):
     def syncItems(self):
         self.DEBUG('MSNWeatherWebhourly(Converter).syncItems >>>')
         self.WebhourlyItems = self.source.getWebhourlyItems().copy()
+        self.DEBUG('\t len(self.WebhourlyItems) = %s' % len(self.WebhourlyItems) )
     
     @cached
     def getText(self): #self.mode = ('name','description','field1Name','field2Name','ObservationTime','field1Value','field1Status','field2Value','field2Status')
         self.DEBUG('MSNWeatherWebhourly(Converter).getText >>> self.mode="%s"' % self.mode)
         self.syncItems()
         retTXT = ''
-        self.DEBUG('MSNWeatherWebhourly(Converter).getText######\n%s\n#####' % str(self.WebhourlyItems).replace('Record=','\nRecord='))
+        #self.DEBUG('MSNWeatherWebhourly(Converter).getText###### >>>\n%s\n<<< #####\n' % str(self.WebhourlyItems).replace('Record=','\nRecord='))
         if len(self.WebhourlyItems) > 0:
             try:
                 if self.mode.lower() == 'title':
@@ -61,9 +62,16 @@ class MSNWeatherWebhourly(Converter, object):
                     line = line[0]
                     retTXT = '%s %s %s' % (line[0].strip(), line[1].strip(), line[2].strip())
                 else:
-                    line = self.WebhourlyItems.get(self.mode, [('', '', '', '', '', '', '', '')])
+                    mode = self.mode.split(',')
+                    line = self.WebhourlyItems.get(mode[0], [('', '', '', '', '', '', '', '')])
                     line = line[0]
-                    retTXT = str('%s\n\n\n%s\nTemp. %s\nOpady %s' % (line[0].strip(), line[1].strip(), line[3].strip(), line[4].strip()))
+                    self.DEBUG('\t','len(mode) =%s' % str(len(mode)))
+                    if len(mode) == 1:
+                        retTXT = str('%s\n\n\n%s\nTemp. %s\nOpady %s' % (line[0].strip(), line[1].strip(), line[3].strip(), line[4].strip()))
+                    else:
+                        item =  mode[1]
+                        if item in ('0', '1', '2', '3', '4', '5', '6', '7'):
+                            retTXT = str('%s' % line[int(item)].strip())
             except Exception as e:
                 self.EXCEPTIONDEBUG('MSNWeatherWebhourly(Converter).getText Exception %s' % str(e))
         self.DEBUG('MSNWeatherWebhourly(Converter).getText retTXT=%s' % retTXT)

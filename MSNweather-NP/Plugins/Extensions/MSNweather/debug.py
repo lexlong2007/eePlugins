@@ -4,7 +4,7 @@ from os import path, system
 def printDEBUG( myFUNC = '' , myText = '' ):
     try:
         from Components.config import config
-        if config.plugins.WeatherPlugin.DebugEnabled.value:
+        if config.plugins.WeatherPlugin.DebugEnabled.value or 'exception' in myText.lower():
             myDEBUGfile = '/tmp/MSNweather.log'
             print ("[%s] %s" % (myFUNC,myText))
             if myFUNC == 'INIT':

@@ -167,13 +167,15 @@ class MSNweather(Screen):
         self["feelsliketemp"] = StaticText()
 
         self.weatherPluginEntryIndex = -1
-        config.plugins.WeatherPlugin.currEntry.value = 0
-        self.weatherPluginEntryCount = config.plugins.WeatherPlugin.entrycount.value
-        if self.weatherPluginEntryCount >= 1:
-            self.weatherPluginEntry = config.plugins.WeatherPlugin.Entry[0]
-            self.weatherPluginEntryIndex = 1
-        else:
-            self.weatherPluginEntry = None
+        self.weatherPluginEntry = None
+        try:
+            config.plugins.WeatherPlugin.currEntry.value = 0
+            self.weatherPluginEntryCount = config.plugins.WeatherPlugin.entrycount.value
+            if self.weatherPluginEntryCount >= 1:
+                self.weatherPluginEntry = config.plugins.WeatherPlugin.Entry[0]
+                self.weatherPluginEntryIndex = 1
+        except Exception as e:
+            printDEBUG('MSNweather.__init__', ' Exception %s' % str(e))
 
 
         self.webSite = ""
