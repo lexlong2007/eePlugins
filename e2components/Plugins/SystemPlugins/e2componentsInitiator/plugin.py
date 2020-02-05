@@ -13,6 +13,7 @@
 ################################################################################
 from . import mygettext as _
 from Components.config import *
+from enigma import getDesktop
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
@@ -60,16 +61,22 @@ class e2ComponentsConfig(Screen, ConfigListScreen):
         self.list.append(getConfigListEntry(_("Show TMDB rating at the begining (when available)"),  config.plugins.j00zekCC.enTMDBratingFirst ))
         #
         self.list.append(getConfigListEntry(""))
-        self.list.append(getConfigListEntry('\c00289496' + _("---VFD settings---")))
-        self.list.append(getConfigListEntry(_("Infobar summary"),  config.plugins.j00zekCC.snVFDtype ))
-        try: #use system config when possible
-            self.list.append(getConfigListEntry(_("Scrolling delay (rollerCharVFD)"),  config.lcd.scroll_delay ))
-            self.list.append(getConfigListEntry(_("Scrolling speed (rollerCharVFD)"),  config.lcd.scroll_speed ))
-        except Exception: #or own, when not
-            self.list.append(getConfigListEntry(_("Scrolling delay (rollerCharVFD)"),  config.plugins.j00zekCC.scroll_delay ))
-            self.list.append(getConfigListEntry(_("Scrolling speed (rollerCharVFD)"),  config.plugins.j00zekCC.scroll_speed ))
-        self.list.append(getConfigListEntry(_("Standby clock"),  config.plugins.j00zekCC.clockVFDstdby ))
-        self.list.append(getConfigListEntry(_("Standby clock position"),  config.plugins.j00zekCC.clockVFDpos ))
+        self.list.append(getConfigListEntry('\c00289496' + _("---Frontend information---")))
+        self.list.append(getConfigListEntry(_("Show when FE is:"),  config.plugins.j00zekCC.feInfoType ))
+        self.list.append(getConfigListEntry(_("Title:"),  config.plugins.j00zekCC.feInfoTitle ))
+        
+        if getDesktop(1).size().width() < 320:
+            self.list.append(getConfigListEntry(""))
+            self.list.append(getConfigListEntry('\c00289496' + _("---VFD settings---")))
+            self.list.append(getConfigListEntry(_("Infobar summary"),  config.plugins.j00zekCC.snVFDtype ))
+            try: #use system config when possible
+                self.list.append(getConfigListEntry(_("Scrolling delay (rollerCharVFD)"),  config.lcd.scroll_delay ))
+                self.list.append(getConfigListEntry(_("Scrolling speed (rollerCharVFD)"),  config.lcd.scroll_speed ))
+            except Exception: #or own, when not
+                self.list.append(getConfigListEntry(_("Scrolling delay (rollerCharVFD)"),  config.plugins.j00zekCC.scroll_delay ))
+                self.list.append(getConfigListEntry(_("Scrolling speed (rollerCharVFD)"),  config.plugins.j00zekCC.scroll_speed ))
+            self.list.append(getConfigListEntry(_("Standby clock"),  config.plugins.j00zekCC.clockVFDstdby ))
+            self.list.append(getConfigListEntry(_("Standby clock position"),  config.plugins.j00zekCC.clockVFDpos ))
         #self.list.append(getConfigListEntry(_("XXXX"), XXXX ))
         self["config"].list = self.list
 

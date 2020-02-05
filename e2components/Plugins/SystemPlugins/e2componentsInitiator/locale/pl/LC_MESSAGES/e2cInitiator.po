@@ -61,6 +61,33 @@ msgstr "Rozszerzony i krótki (jeśli inny)"
 msgid "fast"
 msgstr "Szybko"
 
+msgid "---Frontend information---"
+msgstr "--- Informacja o głowicach tunera ---"
+
+msgid "Show when FE is:"
+msgstr "Pokaż, gdy głowica jest:"
+
+msgid "Active & Busy & Available"
+msgstr "Aktywna, zajęta, lub wolna"
+
+msgid "Active & Busy"
+msgstr "Aktywna, lub zajęta"
+
+msgid "Don't show FE state"
+msgstr "Nie pokazuj stanu głowic"
+
+msgid "Title:"
+msgstr "Tytuł sekcji:"
+
+msgid "No Title"
+msgstr "Bez tytułu"
+
+msgid "FE's in use:"
+msgstr "Używane głowice:"
+
+msgid "FE's"
+msgstr "Głowice:"
+
 msgid "FULL_DESCRIPTION"
 msgstr "Pełny opis"
 

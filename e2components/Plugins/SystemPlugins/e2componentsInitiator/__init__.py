@@ -73,4 +73,9 @@ config.plugins.j00zekCC.clockVFDstdby = ConfigSelection(default = "\x25H:\x25M",
                                                                                   ("\x25H:\x25M \x25d.\x25m.\x25Y", _("HH:MM day.month.year")),
                                                                                   ("\x25H:\x25M \x25a \x25d \x25b", _("HH:MM Weekday Day MonthName")) ])
 config.plugins.j00zekCC.clockVFDpos = ConfigSelection(default = "0", choices = [("0", _("Defined in skin")), ("1", _("left")), ("2", _("center")), ("3", _("right"))])
+
+#j00zekModFrontendInfo2
+config.plugins.j00zekCC.feInfoType = ConfigSelection(default = "11", choices = [("10", _("Active & Busy & Available")), ("11", _("Active & Busy")), ("12", _("Don't show FE state"))])
+config.plugins.j00zekCC.feInfoTitle = ConfigSelection(default = "", choices = [("", _("No Title")), (_("FE's in use:"), _("FE's in use:")), (_("FE's"), _("FE's"))])
+
 #ConfigText(default = _("none")) #("", _(""))

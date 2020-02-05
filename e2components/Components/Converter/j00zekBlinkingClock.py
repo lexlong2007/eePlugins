@@ -77,7 +77,7 @@ class j00zekBlinkingClock(Converter, object):
         if self.TYPE == self.VFDstdby:
             self.fmt_string = config.plugins.j00zekCC.clockVFDstdby.value
 
-        ClockText = strftime(self.fmt_string, t).replace('ą','a').replace('Ś','S').replace('ź','z')
+        ClockText = strftime(self.fmt_string, t).replace('ą','a').replace('Ś','S')replace('ś','s').replace('ź','z')
         ClockTextLen = len(ClockText)
         if DBG: j00zekDEBUG('[j00zekBlinkingClock:getText] len(%s) = %s' % (ClockText, ClockTextLen) ) 
         

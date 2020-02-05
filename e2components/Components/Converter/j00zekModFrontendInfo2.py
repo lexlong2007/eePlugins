@@ -1,6 +1,7 @@
 # j00zek modifications to org file:
 # USE_TUNERS_STRING returning available tuners with colors
 #
+from Components.config import config
 from Components.Converter.Converter import Converter
 from Components.Element import cached
 from Components.j00zekModHex2strColor import Hex2strColor
@@ -22,6 +23,9 @@ class j00zekModFrontendInfo2(Converter, object):
     SNR_ANALOG = 7
     AGC_ANALOG = 8
     ACTIVE_BUSY_AVAILABLE_TUNER_COLORS = 9
+    ACTIVE_BUSY_AVAILABLE = 10
+    ACTIVE_BUSY = 11
+    ACTIVE_BUSY_AVAILABLE_OFF = 12
 
     def __init__(self, type):
         Converter.__init__(self, type)
@@ -93,13 +97,21 @@ class j00zekModFrontendInfo2(Converter, object):
         elif self.type == self.TUNER_TYPE:
             return self.source.frontend_type and self.frontend_type or "Unknown"
         elif self.type == self.ACTIVE_BUSY_AVAILABLE_TUNER_COLORS:
-            string = ""
+            try:
+                myCfg = int(config.plugins.j00zekCC.feInfoType.value)
+            except Exception:
+                myCfg = self.ACTIVE_BUSY_AVAILABLE
+            if myCfg == self.ACTIVE_BUSY_AVAILABLE_OFF:
+                return ""
+            string = config.plugins.j00zekCC.feInfoTitle.value
             for n in nimmanager.nim_slots:
                 if n.type:
                     if n.slot == self.source.slot_number:
                         color = Hex2strColor(self.colors[0])
                     elif not self.TunerMaskAttrib is None and self.TunerMaskAttrib & 1 << n.slot:
                         color = Hex2strColor(self.colors[1])
+                    elif myCfg == self.ACTIVE_BUSY:
+                        continue
                     else:
                         color = Hex2strColor(self.colors[2])
                     if string:
