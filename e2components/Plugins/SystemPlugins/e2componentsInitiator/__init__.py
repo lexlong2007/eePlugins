@@ -77,5 +77,15 @@ config.plugins.j00zekCC.clockVFDpos = ConfigSelection(default = "0", choices = [
 #j00zekModFrontendInfo2
 config.plugins.j00zekCC.feInfoType = ConfigSelection(default = "11", choices = [("10", _("Active & Busy & Available")), ("11", _("Active & Busy")), ("12", _("Don't show FE state"))])
 config.plugins.j00zekCC.feInfoTitle = ConfigSelection(default = "", choices = [("", _("No Title")), (_("FE's in use:"), _("FE's in use:")), (_("FE's"), _("FE's"))])
+#j00zekModCaidInfo2
+config.plugins.j00zekCC.ciFormat = ConfigSelection(default = "", choices = [("", _("Defined in skin")), ("%SCFN %S %H %SY %PV %SP %PR %C %P %p %O %R %T", _("All info in a line")),
+                                                                             ("%SCN %n %S %n %H %n %SY %n %PV %n %SP %n %PR %n %C %n %P %n %p %n %O %n %R %n %T", _("All info in a column")),
+                                                                             ("%SCN", _("Running Softcam name")), (_("%SCFN"), _("Running Softcam file name")),
+                                                                             ("%SCFN , %R", _("Running Softcam file name, READER")),
+                                                                             (_("Coded program %SY"), _("TXT PROVIDER")),
+                                                                             ("CAID: %C PROV: %p HOPS: %H TIME: %T", _("CAID, PROV, HOPS, TIME")),
+                                                                             ("CAID: %C PROV: %p FROM: %S %SP HOPS: %H TIME: %T", _("CAID, PROV, FROM, HOPS, TIME")),
+                                                                             ("CAID: %C PROV: %p FROM: %O HOPS: %H TIME: %T", _("CAID, PROV, SOURCE, HOPS, TIME"))
+                                                                            ])
 
 #ConfigText(default = _("none")) #("", _(""))

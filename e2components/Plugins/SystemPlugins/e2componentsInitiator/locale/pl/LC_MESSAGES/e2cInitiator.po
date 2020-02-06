@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: j00zekOPKGmanager\n"
 "POT-Creation-Date: 2016-01-07 12:00+0100\n"
-"PO-Revision-Date: 2020-01-27 08:32+0100\n"
+"PO-Revision-Date: 2020-02-06 06:01+0100\n"
 "Last-Translator: j00zek\n"
 "Language-Team: j00zek\n"
 "Language: pl\n"
@@ -19,8 +19,17 @@ msgstr ""
 msgid "AUTO"
 msgstr "Automatycznie"
 
+msgid "All info in a line"
+msgstr "Wszystkie informacje w jednej lini"
+
+msgid "All info in a column"
+msgstr "Wszystkie informacje w kolumnie"
+
 msgid "center"
 msgstr "Centralnie"
+
+msgid "Coded program %SY"
+msgstr "Program zakodowany w %SY"
 
 msgid "Chanel name"
 msgstr "Nazwę kanału"
@@ -205,6 +214,12 @@ msgstr "Pokaż ocenę IMDB na początku (jeśli jest dostępna):"
 
 msgid "Speed"
 msgstr "Prędkość przewijania:"
+
+msgid "Show:"
+msgstr "Pokaż:"
+
+msgid "---SoftCam information---"
+msgstr "--- Informacje SoftCam ---"
 
 msgid "Scroll speed"
 msgstr "Prędkość przewijania:"

@@ -7,7 +7,7 @@ from Components.Element import cached
 from Components.j00zekModHex2strColor import Hex2strColor
 from Components.NimManager import nimmanager
 
-DBG = True
+DBG = False
 if DBG: 
     try: from Components.j00zekComponents import j00zekDEBUG
     except Exception: DBG = False 

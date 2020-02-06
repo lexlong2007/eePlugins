@@ -65,6 +65,11 @@ class e2ComponentsConfig(Screen, ConfigListScreen):
         self.list.append(getConfigListEntry(_("Show when FE is:"),  config.plugins.j00zekCC.feInfoType ))
         self.list.append(getConfigListEntry(_("Title:"),  config.plugins.j00zekCC.feInfoTitle ))
         
+        #
+        self.list.append(getConfigListEntry(""))
+        self.list.append(getConfigListEntry('\c00289496' + _("---SoftCam information---")))
+        self.list.append(getConfigListEntry(_("Show:"),  config.plugins.j00zekCC.ciFormat ))
+        
         if getDesktop(1).size().width() < 320:
             self.list.append(getConfigListEntry(""))
             self.list.append(getConfigListEntry('\c00289496' + _("---VFD settings---")))
