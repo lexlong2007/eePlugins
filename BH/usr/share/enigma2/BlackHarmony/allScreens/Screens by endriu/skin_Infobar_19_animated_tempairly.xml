@@ -5,7 +5,7 @@
     <convert type="j00zekOPKGupgradeCheck" />
     <convert type="ConditionalShowHide">Blink</convert>
   </widget>
-  <widget source="session.CurrentService" render="Label" position="1138,790" size="170,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1">
+  <widget source="session.CurrentService" render="Label" position="1138,785" size="170,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1">
       <convert type="j00zekVideoResolution">VideoResolution</convert>
     </widget>
     <widget source="session.CurrentService" render="j00zekFrontEndIcon" position="989,750" size="44,20" zPosition="3" alphatest="blend"/> 
@@ -39,21 +39,21 @@
     <widget source="session.CurrentService" render="Label" position="65,732" size="700,48" font="Roboto_HD; 38" valign="top" backgroundColor="black" transparent="1" halign="left" noWrap="1" foregroundColor="#00cc99">
       <convert type="BlackHarmonygExtraTuner">ServiceNumberName</convert>
     </widget>
-    <eLabel text="SNR :" position="1575,790" size="65,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" />
-    <widget source="session.FrontendStatus" render="Label" position="1795,790" size="60,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" zPosition="1" foregroundColor="green">
+    <eLabel text="SNR :" position="1575,785" size="65,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" />
+    <widget source="session.FrontendStatus" render="Label" position="1795,785" size="60,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" zPosition="1" foregroundColor="green">
       <convert type="FrontendInfo">SNR</convert>
     </widget>
-    <eLabel text="AGC :" position="1303,790" size="65,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" />
-    <widget source="session.FrontendStatus" render="Label" position="1500,790" size="60,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" zPosition="1" foregroundColor="green">
+    <eLabel text="AGC :" position="1303,785" size="65,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" />
+    <widget source="session.FrontendStatus" render="Label" position="1500,785" size="60,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" zPosition="1" foregroundColor="green">
       <convert type="FrontendInfo">AGC</convert>
     </widget>
-		    <widget source="session.FrontendStatus" render="Progress" position="1645,800" size="130,8" zPosition="5"  pixmap="BlackHarmony/gfx/bar_snr_130x15.png" transparent="1">
+		    <widget source="session.FrontendStatus" render="Progress" position="1645,795" size="130,8" zPosition="5"  pixmap="BlackHarmony/gfx/bar_snr_130x15.png" transparent="1">
       <convert type="FrontendInfo">SNR</convert>
     </widget>
-    <widget source="session.FrontendStatus" render="Progress" position="1363,800" size="130,8" zPosition="5"  pixmap="BlackHarmony/gfx/bar_snr_130x15.png" transparent="1">
+    <widget source="session.FrontendStatus" render="Progress" position="1363,795" size="130,8" zPosition="5"  pixmap="BlackHarmony/gfx/bar_snr_130x15.png" transparent="1">
       <convert type="FrontendInfo">AGC</convert>
     </widget>
-    <widget source="session.CurrentService" render="Label" position="500,790" zPosition="1" size="380,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1">
+    <widget source="session.CurrentService" render="Label" position="500,785" zPosition="1" size="370,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1">
       <convert type="BlackHarmonygExtraTuner">TunerInfo</convert>
     </widget>
     <widget source="session.CurrentService" render="Label" position="120,777" size="290,25" font="Roboto_HD; 22" halign="center" backgroundColor="black" transparent="1" foregroundColor="white">
@@ -114,106 +114,12 @@
    <widget position="1765,845" size="110,35" source="session.CurrentService" render="Label" font="Roboto_HD; 30" backgroundColor="black" halign="right" valign="top" noWrap="1" transparent="1" zPosition="3">
         <convert type="ABTCAirlyWidget">temp</convert>	
 	</widget> 
-    <eLabel text="A" position="893,790" zPosition="1" size="20,25" font="Roboto_HD; 22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" />
-    <eLabel text="B" position="918,790" zPosition="1" size="20,25" font="Roboto_HD; 22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" />
-    <eLabel text="C" position="943,790" zPosition="1" size="20,25" font="Roboto_HD; 22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" />
-    <eLabel text="D" position="968,790" zPosition="1" size="20,25" font="Roboto_HD; 22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" />
-	<eLabel text="E" position="993,790" zPosition="1" size="20,25" font="Roboto_HD; 22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" />
-    <eLabel text="F" position="1018,790" zPosition="1" size="20,25" font="Roboto_HD; 22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" />
-    <eLabel text="G" position="1043,790" zPosition="1" size="20,25" font="Roboto_HD; 22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" />
-    <eLabel text="H" position="1068,790" zPosition="1" size="20,25" font="Roboto_HD; 22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" />
-	<eLabel text="I" position="1093,790" zPosition="1" size="20,25" font="Roboto_HD; 22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" />
-    
-    <widget source="session.TunerInfo" render="FixedLabel" text="A" position="893,790" zPosition="2" size="20,25" font="Roboto_HD; 22" halign="center" foregroundColor="yellow" backgroundColor="black" transparent="1">
-      <convert type="TunerInfo">TunerUseMask</convert>
-      <convert type="ValueBitTest">1</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.FrontendInfo" render="FixedLabel" text="A" position="893,790" zPosition="3" size="20,25" font="Roboto_HD; 22" halign="center" foregroundColor="blue" backgroundColor="dark_blue" transparent="1">
-      <convert type="FrontendInfo">NUMBER</convert>
-      <convert type="ValueRange">0,0</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.TunerInfo" render="FixedLabel" text="B" position="918,790" zPosition="2" size="20,25" font="Roboto_HD; 22" halign="center" foregroundColor="yellow" backgroundColor="black" transparent="1">
-      <convert type="TunerInfo">TunerUseMask</convert>
-      <convert type="ValueBitTest">2</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.FrontendInfo" render="FixedLabel" text="B" position="918,790" zPosition="3" size="20,25" font="Roboto_HD; 22" halign="center" foregroundColor="blue" backgroundColor="dark_blue" transparent="1">
-      <convert type="FrontendInfo">NUMBER</convert>
-      <convert type="ValueRange">1,1</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.TunerInfo" render="FixedLabel" text="C" position="943,790" zPosition="2" size="20,25" font="Roboto_HD; 22" halign="center" foregroundColor="yellow" backgroundColor="black" transparent="1">
-      <convert type="TunerInfo">TunerUseMask</convert>
-      <convert type="ValueBitTest">4</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.FrontendInfo" render="FixedLabel" text="C" position="943,790" zPosition="3" size="20,25" font="Roboto_HD; 22" halign="center" foregroundColor="blue" backgroundColor="dark_blue" transparent="1">
-      <convert type="FrontendInfo">NUMBER</convert>
-      <convert type="ValueRange">2,2</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.TunerInfo" render="FixedLabel" text="D" position="968,790" zPosition="2" size="20,25" font="Roboto_HD; 22" halign="center" foregroundColor="yellow" backgroundColor="black" transparent="1">
-      <convert type="TunerInfo">TunerUseMask</convert>
-      <convert type="ValueBitTest">8</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.FrontendInfo" render="FixedLabel" text="D" position="968,790" zPosition="3" size="20,25" font="Roboto_HD; 22" halign="center" foregroundColor="blue" backgroundColor="dark_blue" transparent="1">
-      <convert type="FrontendInfo">NUMBER</convert>
-      <convert type="ValueRange">3,3</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-	<widget source="session.TunerInfo" render="FixedLabel" text="E" position="993,790" zPosition="2" size="20,25" font="Roboto_HD; 22" halign="center" foregroundColor="yellow" backgroundColor="black" transparent="1">
-      <convert type="TunerInfo">TunerUseMask</convert>
-      <convert type="ValueBitTest">16</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.FrontendInfo" render="FixedLabel" text="E" position="993,790" zPosition="3" size="20,25" font="Roboto_HD; 22" halign="center" foregroundColor="blue" backgroundColor="dark_blue" transparent="1">
-      <convert type="FrontendInfo">NUMBER</convert>
-      <convert type="ValueRange">4,4</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.TunerInfo" render="FixedLabel" text="F" position="1018,790" zPosition="2" size="20,25" font="Roboto_HD; 22" halign="center" foregroundColor="yellow" backgroundColor="black" transparent="1">
-      <convert type="TunerInfo">TunerUseMask</convert>
-      <convert type="ValueBitTest">32</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.FrontendInfo" render="FixedLabel" text="F" position="1018,790" zPosition="3" size="20,25" font="Roboto_HD; 22" halign="center" foregroundColor="blue" backgroundColor="dark_blue" transparent="1">
-      <convert type="FrontendInfo">NUMBER</convert>
-      <convert type="ValueRange">5,5</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.TunerInfo" render="FixedLabel" text="G" position="1043,790" zPosition="2" size="20,25" font="Roboto_HD; 22" halign="center" foregroundColor="yellow" backgroundColor="black" transparent="1">
-      <convert type="TunerInfo">TunerUseMask</convert>
-      <convert type="ValueBitTest">64</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.FrontendInfo" render="FixedLabel" text="G" position="1043,790" zPosition="3" size="20,25" font="Roboto_HD; 22" halign="center" foregroundColor="blue" backgroundColor="dark_blue" transparent="1">
-      <convert type="FrontendInfo">NUMBER</convert>
-      <convert type="ValueRange">6,6</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.TunerInfo" render="FixedLabel" text="H" position="1068,790" zPosition="2" size="20,25" font="Roboto_HD; 22" halign="center" foregroundColor="yellow" backgroundColor="black" transparent="1">
-      <convert type="TunerInfo">TunerUseMask</convert>
-      <convert type="ValueBitTest">128</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.FrontendInfo" render="FixedLabel" text="H" position="1068,790" zPosition="3" size="20,25" font="Roboto_HD; 22" halign="center" foregroundColor="blue" backgroundColor="dark_blue" transparent="1">
-      <convert type="FrontendInfo">NUMBER</convert>
-      <convert type="ValueRange">7,7</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-	 <widget source="session.TunerInfo" render="FixedLabel" text="I" position="1093,790" zPosition="2" size="20,25" font="Roboto_HD; 22" halign="center" foregroundColor="yellow" backgroundColor="black" transparent="1">
-      <convert type="TunerInfo">TunerUseMask</convert>
-      <convert type="ValueBitTest">256</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-	<widget source="session.FrontendInfo" render="FixedLabel" text="I" position="1093,790" zPosition="3" size="20,25" font="Roboto_HD; 22" halign="center" foregroundColor="blue" backgroundColor="dark_blue" transparent="1">
-      <convert type="FrontendInfo">NUMBER</convert>
-      <convert type="ValueRange">8,8</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
+   
+   <!-- wykorzystanie glowic dostepnych w tunerze-->
+        
+	<widget source="session.FrontendInfo" render="Label" position="870,773" size="260,50" zPosition="3" font="Roboto_HD;22" halign="center" valign="center" backgroundColor="black" transparent="1">
+    <convert type="j00zekModFrontendInfo2">ACTIVE_BUSY_AVAILABLE_TUNER_COLORS,0x0000FF00,0x00FFFF00,0x00DCDCDC</convert>
+     </widget>
 
     <widget source="session.RecordState" render="Pixmap" position="930,749" size="40,23" zPosition="3" pixmap="BlackHarmony/icons/ico_rec_on.png" alphatest="blend">
       <convert type="ConditionalShowHide">Blink</convert>

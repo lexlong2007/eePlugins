@@ -53,7 +53,7 @@
     <widget source="session.FrontendStatus" render="Progress" position="1363,795" size="130,8" zPosition="5"  pixmap="BlackHarmony/gfx/bar_snr_130x15.png" transparent="1">
       <convert type="FrontendInfo">AGC</convert>
     </widget>
-    <widget source="session.CurrentService" render="Label" position="500,785" zPosition="1" size="380,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1">
+    <widget source="session.CurrentService" render="Label" position="500,785" zPosition="1" size="370,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1">
       <convert type="BlackHarmonygExtraTuner">TunerInfo</convert>
     </widget>
     <widget source="session.CurrentService" render="Label" position="120,777" size="290,25" font="Roboto_HD; 22" halign="center" backgroundColor="black" transparent="1" foregroundColor="white">
@@ -114,10 +114,12 @@
     <widget noWrap="1" backgroundColor="black" font="Roboto_HD; 30" render="Label" position="1765,845" size="100,35" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="right" transparent="1" valign="top">
       <convert type="BlackHarmonyMSNWeather">temperature_current</convert>
     </widget>
-    <!-- wykorzystanie glowic dostepnych w tunerze-->
-        <widget source="session.FrontendInfo" render="Label" position="870,773" size="260,50" zPosition="3" font="Roboto_HD;22" halign="center" valign="center" transparent="1">
-                <convert type="j00zekModFrontendInfo2">ACTIVE_BUSY_AVAILABLE_TUNER_COLORS,0x0000FF00,0x00FFFF00,0x00DCDCDC</convert>
-        </widget>
+    
+	<!-- wykorzystanie glowic dostepnych w tunerze-->
+        
+    <widget source="session.FrontendInfo" render="Label" position="870,773" size="260,50" zPosition="3" font="Roboto_HD;22" halign="center" valign="center" backgroundColor="black" transparent="1">
+    <convert type="j00zekModFrontendInfo2">ACTIVE_BUSY_AVAILABLE_TUNER_COLORS,0x0000FF00,0x00FFFF00,0x00DCDCDC</convert>
+     </widget>
 
     <widget source="session.RecordState" render="Pixmap" position="930,749" size="40,23" zPosition="3" pixmap="BlackHarmony/icons/ico_rec_on.png" alphatest="blend">
       <convert type="ConditionalShowHide">Blink</convert>

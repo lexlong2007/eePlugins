@@ -1,9 +1,7 @@
 <skin>
 <screen name="InfoBar" position="0,52" size="1920,1080" title="InfoBar" flags="wfNoBorder" backgroundColor="transparent">
   <ePixmap position="30,721" zPosition="-2" size="1900,300" pixmap="BlackHarmony/bg_design/infobar_zpicon.png" />
-  <widget source="session.CurrentService" render="Label" position="983,796" size="170,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1">
-      <convert type="j00zekVideoResolution">VideoResolution</convert>
-  </widget>
+  
   <widget source="session.CurrentService" render="j00zekFrontEndIcon" position="989,750" size="44,20" zPosition="3" alphatest="blend"/> 
   <widget source="session.CurrentService" render="j00zekVideoResolutionIcon" position="1094,750" size="37,20" zPosition="5" alphatest="blend"/> 
   <widget source="session.CurrentService" render="Pixmap" pixmap="BlackHarmony/icons/ico_lan_on.png" position="1315,750" zPosition="2" size="44,20" transparent="1" alphatest="blend">
@@ -36,8 +34,8 @@
   <widget source="session.FrontendStatus" render="Label" position="1315,796" size="60,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" zPosition="1" foregroundColor="green">
     <convert type="FrontendInfo">SNR</convert>
   </widget>
-  <eLabel text="AGC :" position="1128,796" size="65,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" />
-  <widget source="session.FrontendStatus" render="Label" position="1188,796" size="60,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" zPosition="1" foregroundColor="green">
+  <eLabel text="AGC :" position="1138,796" size="65,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" />
+  <widget source="session.FrontendStatus" render="Label" position="1198,796" size="60,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" zPosition="1" foregroundColor="green">
     <convert type="FrontendInfo">AGC</convert>
   </widget>
   <widget source="session.CurrentService" render="Label" position="500,796" zPosition="1" size="370,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1">
@@ -105,9 +103,9 @@
     <convert type="BlackHarmonyMSNWeather">temperature_current</convert>
   </widget>
     <!-- wykorzystanie glowic dostepnych w tunerze-->
-        <widget source="session.FrontendInfo" render="Label" position="878,796" size="95,25" zPosition="3" font="Roboto_HD;22" halign="center" transparent="1">
-                <convert type="j00zekModFrontendInfo2">ACTIVE_BUSY_AVAILABLE_TUNER_COLORS,0x0000FF00,0x00FFFF00,0x00DCDCDC</convert>
-        </widget>
+   <widget source="session.FrontendInfo" render="Label" position="865,784" size="260,49" zPosition="3" font="Roboto_HD;22" halign="center" valign="center" backgroundColor="black" transparent="1">
+   <convert type="j00zekModFrontendInfo2">ACTIVE_BUSY_AVAILABLE_TUNER_COLORS,0x0000FF00,0x00FFFF00,0x00DCDCDC</convert>
+    </widget>
   <widget source="session.RecordState" render="Pixmap" position="930,749" size="40,23" zPosition="3" pixmap="BlackHarmony/icons/ico_rec_on.png" alphatest="blend">
     <convert type="ConditionalShowHide">Blink</convert>
   </widget>
