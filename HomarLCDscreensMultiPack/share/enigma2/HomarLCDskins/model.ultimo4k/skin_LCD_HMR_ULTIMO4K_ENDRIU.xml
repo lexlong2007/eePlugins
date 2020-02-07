@@ -861,7 +861,7 @@ options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,start
   <convert type="ClockToText">Format:%H</convert>
   </widget>
   <widget source="global.CurrentTime" render="FixedLabel" text=":" font="DIGI; 199" position="380,160" size="40,100" halign="center" zPosition="3" valign="center" transparent="1">
-    <convert type="HomarBlinkingClock" />
+    <convert type="j00zekShareBlinkingClock" />
     <convert type="ConditionalShowHide">Blink</convert>
   </widget>
 <widget source="global.CurrentTime" render="Label" position="390,80" size="250,190" font="DIGI;199" transparent="1" halign="right" >
@@ -883,7 +883,7 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
   <convert type="ClockToText">Format:%H</convert>
   </widget>
   <widget source="global.CurrentTime" render="FixedLabel" text=":" font="DIGI; 190" position="360,80" size="30,100" halign="center" zPosition="3" valign="center" transparent="1" foregroundColor="#001BA1E3" >
-    <convert type="HomarBlinkingClock" />
+    <convert type="j00zekShareBlinkingClock" />
     <convert type="ConditionalShowHide">Blink</convert>
   </widget>
 <widget source="global.CurrentTime" render="Label" position="390,0" size="200,200" font="DIGI;195" transparent="1" halign="right" foregroundColor="#001BA1E3" >
