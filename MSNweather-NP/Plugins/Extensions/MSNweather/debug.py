@@ -1,11 +1,11 @@
 from datetime import datetime
 from os import path, system
 
-def printDEBUG( myFUNC = '' , myText = '' ):
+def printDEBUG( myFUNC = '' , myText = '' , logFileName = 'MSNweather.log'):
     try:
         from Components.config import config
-        if config.plugins.WeatherPlugin.DebugEnabled.value or 'exception' in myText.lower():
-            myDEBUGfile = '/tmp/MSNweather.log'
+        if config.plugins.WeatherPlugin.DebugEnabled.value or myFUNC == 'devDBG':
+            myDEBUGfile = '/tmp/%s' % logFileName
             print ("[%s] %s" % (myFUNC,myText))
             if myFUNC == 'INIT':
                 f = open(myDEBUGfile, 'w')

@@ -30,7 +30,7 @@ import time
 class MSNWeatherNP(Source):
 
     def __init__(self):
-        self.DEBUG('MSNWeather(Source) __init__')
+        self.DEBUG( '__init__')
         Source.__init__(self)
         #weathermsn.callbacksAllIconsDownloaded.append(self.callbackAllIconsDownloaded)
         weathermsn.callbacks.append(self.refreshCallback)
@@ -38,39 +38,39 @@ class MSNWeatherNP(Source):
 
     def EXCEPTIONDEBUG(self, myFUNC = '' , myText = '' ):
         from Plugins.Extensions.MSNweather.debug import printDEBUG
-        printDEBUG( myFUNC , myText )
+        printDEBUG( myFUNC , myText , 'MSNWeatherSource.log')
             
     def DEBUG(self, myFUNC = '' , myText = '' ):
         if config.plugins.WeatherPlugin.DebugMSNWeatherSource.value:
             from Plugins.Extensions.MSNweather.debug import printDEBUG
-            printDEBUG( myFUNC , myText )
+            printDEBUG( myFUNC , myText , 'MSNWeatherSource.log')
     
     def getIconPath(self):
-        #self.DEBUG('MSNWeather(Source) getThingSpeakItems')
+        #self.DEBUG( 'getThingSpeakItems')
         return weathermsn.weatherData.iconpath
         
     def getThingSpeakItems(self):
-        #self.DEBUG('MSNWeather(Source) getThingSpeakItems')
+        #self.DEBUG( 'getThingSpeakItems')
         return weathermsn.weatherData.thingSpeakItems
         
     def getWebCurrentItems(self):
-        #self.DEBUG('MSNWeather(Source) getWebCurrentItems')
+        #self.DEBUG( 'getWebCurrentItems')
         return weathermsn.weatherData.WebCurrentItems
         
     def getWebhourlyItems(self):
-        #self.DEBUG('MSNWeather(Source) getWebhourlyItems')
+        #self.DEBUG( 'getWebhourlyItems')
         return weathermsn.weatherData.WebhourlyItems
         
     def getWebDailyItems(self):
-        #self.DEBUG('MSNWeather(Source) getWebDailyItems')
+        #self.DEBUG( 'getWebDailyItems')
         return weathermsn.weatherData.WebDailyItems
         
     def refreshCallback(self, result = None, errortext=None):
-        self.DEBUG('MSNWeather(Source) refreshCallback')
+        self.DEBUG( 'refreshCallback')
         self.changed((self.CHANGED_ALL,))
             
     def callbackAllIconsDownloaded(self, result = None, errortext=None):
-        self.DEBUG('MSNWeather(Source) callbackAllIconsDownloaded')
+        self.DEBUG( 'callbackAllIconsDownloaded')
         self.changed((self.CHANGED_ALL,))
     
     def getCity(self):
@@ -82,7 +82,7 @@ class MSNWeatherNP(Source):
             retVal = weathermsn.weatherData.weatherItems[skey].observationpoint
         else:
             retVal = ''
-        self.DEBUG('MSNWeather(Source) getObservationPoint = "%s"' % retVal)
+        self.DEBUG( 'getObservationPoint = "%s"' % retVal)
         return retVal
         
     def getObservationTime(self):
@@ -107,13 +107,13 @@ class MSNWeatherNP(Source):
             try:
                 if skey == '-1': skey = "0"
                 else: skey = str( int(skey) - 1)
-                #self.DEBUG('MSNWeather(Source) getTemperature_Heigh skey = "%s"' % skey)
+                #self.DEBUG( 'getTemperature_Heigh skey = "%s"' % skey)
                 line = self.getWebDailyItems().get("Record=%s" % skey, [('day=UNKNOWN', '', '', '', '', '', '', '', '')])[0]
-                self.DEBUG('MSNWeather(Source) getTemperature_Heigh "Record=%s" = "%s"' % (skey,str(line)))
+                self.DEBUG( 'getTemperature_Heigh "Record=%s" = "%s"' % (skey,str(line)))
                 retVal = "%s%s" % (line[6].strip(), weathermsn.weatherData.degreetype)
             except Exception as e:
-                self.EXCEPTIONDEBUG('MSNWeather(Source) Exception %s' % str(e) )
-        self.DEBUG('MSNWeather(Source) getTemperature_Heigh(%s) = "%s"' % (str(key),retVal))
+                self.EXCEPTIONDEBUG( 'Exception %s' % str(e) )
+        self.DEBUG( 'getTemperature_Heigh(%s) = "%s"' % (str(key),retVal))
         return retVal
     
     def getTemperature_Low(self, key):
@@ -128,13 +128,13 @@ class MSNWeatherNP(Source):
             try:
                 if skey == '-1': skey = "0"
                 else: skey = str( int(skey) - 1)
-                #self.DEBUG('MSNWeather(Source) getTemperature_Low skey = "%s"' % skey)
+                #self.DEBUG( 'getTemperature_Low skey = "%s"' % skey)
                 line = self.getWebDailyItems().get("Record=%s" % skey, [('day=UNKNOWN', '', '', '', '', '', '', '', '')])[0]
-                self.DEBUG('MSNWeather(Source) getTemperature_Low "Record=%s" = "%s"' % (skey,str(line)))
+                self.DEBUG( 'getTemperature_Low "Record=%s" = "%s"' % (skey,str(line)))
                 retVal = "%s%s" % (line[7].strip(), weathermsn.weatherData.degreetype)
             except Exception as e:
-                self.EXCEPTIONDEBUG('MSNWeather(Source) getTemperature_Low Exception %s' % str(e) )
-        self.DEBUG('MSNWeather(Source) getTemperature_Low(%s) = "%s"' % (str(key),retVal))
+                self.EXCEPTIONDEBUG( 'getTemperature_Low Exception %s' % str(e) )
+        self.DEBUG( 'getTemperature_Low(%s) = "%s"' % (str(key),retVal))
         return retVal
             
     def getTemperature_Heigh_Low(self, key):
@@ -150,15 +150,15 @@ class MSNWeatherNP(Source):
             try:
                 if skey == '-1': skey = "0"
                 else: skey = str( int(skey) - 1)
-                #self.DEBUG('MSNWeather(Source) getTemperature_Heigh_Low skey = "%s"' % skey)
+                #self.DEBUG( 'getTemperature_Heigh_Low skey = "%s"' % skey)
                 line = self.getWebDailyItems().get("Record=%s" % skey, [('day=UNKNOWN', '', '', '', '', '', '', '', '')])[0]
-                self.DEBUG('MSNWeather(Source) getTemperature_Heigh_Low "Record=%s" = "%s"' % (skey,str(line)))
+                self.DEBUG( 'getTemperature_Heigh_Low "Record=%s" = "%s"' % (skey,str(line)))
                 retVal = "%s%s | %s%s" % (line[6].strip(), weathermsn.weatherData.degreetype, line[7].strip(), weathermsn.weatherData.degreetype)
             except Exception as e:
-                self.EXCEPTIONDEBUG('MSNWeather(Source) getTemperature_Heigh_Low Exception %s' % str(e) )
-        self.DEBUG('MSNWeather(Source) getTemperature_Heigh_Low(%s) = "%s"' % (str(key),retVal))
+                self.EXCEPTIONDEBUG( 'getTemperature_Heigh_Low Exception %s' % str(e) )
+        self.DEBUG( 'getTemperature_Heigh_Low(%s) = "%s"' % (str(key),retVal))
         return retVal
-        self.DEBUG('MSNWeather(Source) getTemperature_Heigh_Low(%s) = "%s"' % (str(key),retVal))
+        self.DEBUG( 'getTemperature_Heigh_Low(%s) = "%s"' % (str(key),retVal))
         return retVal
     
     def getTemperature_Text(self, key):
@@ -178,7 +178,7 @@ class MSNWeatherNP(Source):
         skey = "-1"
         if weathermsn.weatherData.weatherItems.has_key(skey):
             retVal = "%s°%s" % (weathermsn.weatherData.weatherItems[skey].temperature, weathermsn.weatherData.degreetype)
-        self.DEBUG('MSNWeather(Source) getTemperature_Current() = "%s"' % (retVal))
+        self.DEBUG( 'getTemperature_Current() = "%s"' % (retVal))
         return retVal
             
     def getFeelslike(self):
@@ -242,24 +242,30 @@ class MSNWeatherNP(Source):
             return '-?-'
             
     def getWeatherIconFilename(self, key):
+        self.DEBUG( 'getWeatherIconFilename(%s) >>>' % str(key))
         retVal = ''
         skey = str(key)
         if weathermsn.weatherData.weatherItems.has_key(skey):
+            self.DEBUG('\t weathermsn.weatherData.weatherItems.has_key(%s)' % skey)
             retVal = weathermsn.weatherData.weatherItems[skey].iconFilename
         if retVal == '':
             try:
                 if skey == '-1': skey = "0"
                 else: skey = str( int(skey) - 1)
-                #self.DEBUG('MSNWeather(Source) getWeatherIconFilename recordID = "%s"' % skey)
+                #self.DEBUG( 'getWeatherIconFilename recordID = "%s"' % skey)
                 retVal = self.getWebDailyItems().get('WeatherIcon4Record=%s' % skey , '')
                 #self.DEBUG(str(self.getWebDailyItems()).replace("'WeatherIcon4Record=","\n'WeatherIcon4Record=").replace("'Record=","\n'Record="))
                 if retVal == '':
                     line = self.getWebDailyItems().get("Record=%s" % skey, [('day=UNKNOWN', '', '', '', '', '', '', '', '')])[0]
-                    retVal = '/usr/lib/enigma2/python/Plugins/Extensions/WeatherPlugin/icons/%s' % str('%s' % line[3].strip()).split('?')[0].split('/')[-1][:-4]
-                    self.DEBUG('MSNWeather(Source) getWeatherIconFilename "Record=%s" = "%s"' % (skey,str(line)))
+                    if line[3].strip() == '':
+                        self.DEBUG('\t getWebDailyItems(Record=%s) returned nothing' % skey)
+                        return ''
+                    else:
+                        self.DEBUG('\t getWebDailyItems(Record=%s) returned "%s"' % (skey,str(line)))
+                        retVal = '/usr/lib/enigma2/python/Plugins/Extensions/MSNweather/icons/%s' % str('%s' % line[3].strip()).split('?')[0].split('/')[-1][:-4]
             except Exception as e:
-                self.EXCEPTIONDEBUG('MSNWeather(Source) getWeatherIconFilename Exception %s' % str(e) )
-        self.DEBUG('MSNWeather(Source) getWeatherIconFilename(%s) = "%s"' % (str(key),retVal))
+                self.EXCEPTIONDEBUG('\t Exception: %s' % str(e) )
+        self.DEBUG('\t IconFilename(%s) = "%s"' % (str(key),retVal))
         return retVal
             
     def getCode(self, key):
@@ -271,13 +277,13 @@ class MSNWeatherNP(Source):
             try:
                 if skey == '-1': skey = "0"
                 else: skey = str( int(skey) - 1)
-                #self.DEBUG('MSNWeather(Source) getCode skey = "%s"' % skey)
+                #self.DEBUG( 'getCode skey = "%s"' % skey)
                 line = self.getWebDailyItems().get("Record=%s" % skey, [('day=UNKNOWN', '', '', '', '', '', '', '', '')])[0]
-                self.DEBUG('MSNWeather(Source) getCode "Record=%s" = "%s"' % (skey,str(line)))
+                self.DEBUG( 'getCode "Record=%s" = "%s"' % (skey,str(line)))
                 #retVal = line[7].strip()
             except Exception as e:
-                self.EXCEPTIONDEBUG('MSNWeather(Source) getCode Exception %s' % str(e) )
-        self.DEBUG('MSNWeather(Source) getCode(%s) = "%s"' % (str(key),retVal))
+                self.EXCEPTIONDEBUG( 'getCode Exception %s' % str(e) )
+        self.DEBUG( 'getCode(%s) = "%s"' % (str(key),retVal))
         return retVal
 
     def destroy(self):

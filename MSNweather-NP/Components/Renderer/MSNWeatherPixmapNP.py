@@ -50,21 +50,21 @@ class MSNWeatherPixmapNP(Renderer):
             self.ePicLoadScale = True
         self.picload = ePicLoad()
         #self.picload.PictureData.get().append(self.paintIconPixmapCB)
-        self.DEBUG('MSNWeatherPixmap(Renderer)__init__ pixdelay=%s' % self.pixdelay)
+        self.DEBUG('__init__ pixdelay=%s' % self.pixdelay)
 
     GUI_WIDGET = ePixmap
 
     def EXCEPTIONDEBUG(self, myFUNC = '' , myText = '' ):
         from Plugins.Extensions.MSNweather.debug import printDEBUG
-        printDEBUG( myFUNC , myText )
+        printDEBUG( myFUNC , myText , 'MSNWeatherPixmapRenderer.log' )
             
     def DEBUG(self, myFUNC = '' , myText = '' ):
         if config.plugins.WeatherPlugin.DebugMSNWeatherPixmapRenderer.value:
             from Plugins.Extensions.MSNweather.debug import printDEBUG
-            printDEBUG( myFUNC , myText )
+            printDEBUG( myFUNC , myText , 'MSNWeatherPixmapRenderer.log' )
     
     def applySkin(self, desktop, parent):
-        self.DEBUG('MSNWeatherPixmap(Renderer).applySkin >>>')
+        self.DEBUG('applySkin >>>')
         attribs = self.skinAttributes[:]
         for attrib, value in self.skinAttributes:
             if attrib == "size":
@@ -81,7 +81,7 @@ class MSNWeatherPixmapNP(Renderer):
             self._aspectRatio = eSize(sc[0], sc[1])
             self.picload.setPara((self._scaleSize.width(), self._scaleSize.height(), sc[0], sc[1], True, 2, '#ff000000')) 
         except Exception as e:
-            self.DEBUG('MSNWeatherPixmap(Renderer).setSize exception %s' % str(e))
+            self.DEBUG('setSize exception %s' % str(e))
 
         self.skinAttributes = attribs
         return Renderer.applySkin(self, desktop, parent) 
@@ -104,22 +104,22 @@ class MSNWeatherPixmapNP(Renderer):
                 
     def doAnimation(self, pngAnimPath):
         if config.plugins.WeatherPlugin.IconsType.value == 'animIcons' and os.path.exists(pngAnimPath):
-            self.DEBUG('MSNWeatherPixmap(Renderer).doAnimation(pngAnimPath=%s) returns True' % pngAnimPath)
+            self.DEBUG('doAnimation(pngAnimPath=%s) returns True' % pngAnimPath)
             return True
         else:
-            self.DEBUG('MSNWeatherPixmap(Renderer).doAnimation(pngAnimPath=%s) returns False' % pngAnimPath)
+            self.DEBUG('doAnimation(pngAnimPath=%s) returns False' % pngAnimPath)
             return False
                 
     def updateIcon(self, filename):
-        self.DEBUG('MSNWeatherPixmap(Renderer).updateIcon(%s) lastPic= %s' % (filename,self.lastPic))
+        self.DEBUG('updateIcon(%s) lastPic= %s' % (filename,self.lastPic))
         if self.lastPic != filename and filename[-4:].lower() in ('.png','.jpg'):
             self.lastPic = filename
             IconName = os.path.basename(self.lastPic)
             pngAnimPath = os.path.join(self.pngAnimPath, IconName)[:-4]
-            self.DEBUG('MSNWeatherPixmap(Renderer).updateIcon pngAnimPath=%s' % pngAnimPath)
+            self.DEBUG('updateIcon pngAnimPath=%s' % pngAnimPath)
             if self.doAnimation(pngAnimPath):
                 reverseSlides = False
-                self.DEBUG('MSNWeatherPixmap(Renderer).updateIcon pngAnimPath exists')
+                self.DEBUG('updateIcon pngAnimPath exists')
                 if os.path.exists(os.path.join(pngAnimPath,'.ctrl')):
                     with open(os.path.join(pngAnimPath,'.ctrl')) as cf:
                         for line in cf:
@@ -141,7 +141,7 @@ class MSNWeatherPixmapNP(Renderer):
                 self.picsIconsCount = len(self.picsIcons)
                 if self.picsIconsCount > 0: 
                     self.timer.start(self.pixdelay, True)
-                    self.DEBUG('MSNWeatherPixmap(Renderer).updateIcon picsIconsCount=%s' % self.picsIconsCount)
+                    self.DEBUG('updateIcon picsIconsCount=%s' % self.picsIconsCount)
             else:
                 self.instance.setPixmap(LoadPixmap(path=self.lastPic))
 
@@ -154,4 +154,4 @@ class MSNWeatherPixmapNP(Renderer):
             self.instance.setPixmap(self.picsIcons[self.slideIcon])
             self.timer.start(self.pixdelay, True)
         except Exception as e:
-            self.EXCEPTIONDEBUG('MSNWeatherPixmap(Renderer).timerEvent exception %s' % str(e))
+            self.EXCEPTIONDEBUG('timerEvent exception %s' % str(e))

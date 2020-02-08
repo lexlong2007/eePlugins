@@ -38,7 +38,7 @@ class MSNWeatherWebCurrent(Converter, object):
             
     def EXCEPTIONDEBUG(self, myFUNC = '' , myText = '' ):
         from Plugins.Extensions.MSNweather.debug import printDEBUG
-        printDEBUG( myFUNC , myText )
+        printDEBUG( myFUNC , myText, 'MSNWeatherWebCurrentConverter.log' )
             
     def DEBUG(self, myFUNC = '' , myText = '' ):
         if config.plugins.WeatherPlugin.DebugMSNWeatherWebCurrentConverter.value:
@@ -68,14 +68,15 @@ class MSNWeatherWebCurrent(Converter, object):
                     for line in self.WebCurrentItems.get('nowData', []):
                         retTXT += str(line[1]).strip() + '\n'
                     retTXT = retTXT[:-1].replace('Temperatura', 'Temp.')
+                elif self.mode.lower() == 'barometr':
+                    line = self.WebCurrentItems.get('nowData', [])[2]
+                    if self.valueOnly:
+                        retTXT = str(line[1].strip())
+                    else:
+                        retTXT = str(_('Pressure %s') % (line[1].strip()))
                 else:
                     for line in self.WebCurrentItems.get('nowData', []):
-                        if line[0].lower() == self.mode.lower() and self.mode.lower() == 'barometr':
-                            if self.valueOnly:
-                                retTXT = str(line[1].strip())
-                            else:
-                                retTXT = str(_('Pressure %s') % (line[1].strip()))
-                        elif line[0].lower() == self.mode.lower(): #available: 'Temperatura odczuwalna','Wiatr','Barometr','Widoczno\xc5\x9b\xc4\x87','Wilgotno\xc5\x9b\xc4\x87','Temperatura punktu rosy'
+                        if line[0].lower() == self.mode.lower(): #available: 'Temperatura odczuwalna','Wiatr','Barometr','Widoczno\xc5\x9b\xc4\x87','Wilgotno\xc5\x9b\xc4\x87','Temperatura punktu rosy'
                             if self.valueOnly:
                                 retTXT = str(line[1].strip())
                             else:

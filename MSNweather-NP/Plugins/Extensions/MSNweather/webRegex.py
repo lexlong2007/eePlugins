@@ -35,6 +35,22 @@ iconsMap={
     'slonecznie'            :   '32.png',
     'przewaznieslonecznie'  :   '34.png',
     'burze'                 :   '37.png',
+    #EN
+    #'lekkideszczzesniegiem' :   '6.png',
+    "rainshowers"           :   '9.png',
+    'lightrain'             :   '11.png',
+    'rain'                  :   '11.png',
+    #"niewielkieopadysniegu" :   '13.png', 
+    #'snieg'                 :   '16.png',
+    #"zachmurzeniecalkowite" :   '26.png',
+    #'zachmurzenieduze'      :   '28.png',
+    #'zachmurzeniemale'      :   '29.png',
+    #'czesciowoslonecznie'   :   '30.png',
+    #'bezchmurnie'           :   '31.png',
+    'sunny'                  :   '32.png',
+    'mostlysunny'            :   '34.png',
+    #'burze'                 :   '37.png',
+    #DE
     }
 
 def plTOansi(text):
@@ -49,7 +65,7 @@ def decodeHTML(text):
 
 import re
 # instantiate the parser and fed it some HTML
-def getWeather(webContent, DBGnow = False, DBGhourly = False, DBGdaily = False):
+def getWeather(webContent, DBGnow = False, DBGhourly = False, DBGdaily = False, reportMissingIcons = True):
     webContent = decodeHTML(webContent)
     def findInContent( WC, reFindString ):
         retTxt = ''
@@ -65,6 +81,8 @@ def getWeather(webContent, DBGnow = False, DBGhourly = False, DBGdaily = False):
                 retList.append(i)
         return retList
     #now
+    if reportMissingIcons:
+        open("/tmp/MSNWeatherWebRegex.log", "w").write('')
     nowContent = findInContent(webContent, '<div class="weather-info">(.*?)</div>')
     nowDict = {}
     nowDict['title'] = getList([], nowContent, '<span>(.*?)</span>.*<ul>')
@@ -97,6 +115,8 @@ def getWeather(webContent, DBGnow = False, DBGhourly = False, DBGdaily = False):
         try:
             weatherIconName = plTOansi(dailyDict['Record=%s' % id][0][4])
             dailyDict['WeatherIcon4Record=%s' % id] = iconsMap.get(weatherIconName, '')
+            if reportMissingIcons:
+                open("/tmp/MSNWeatherWebRegex.log", "a").write('iconsMap(%s) returned nothing\n' % weatherIconName)
         except Exception:
             dailyDict['WeatherIcon4Record=%s' % id] = ''
         if DBGdaily:

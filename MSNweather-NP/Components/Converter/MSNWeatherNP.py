@@ -67,6 +67,7 @@ class MSNWeatherNP(Converter, object):
         self.mode = None
         self.path = None
         self.extension = None
+        self.indexTXT = None
         if type == "city": self.mode = self.CITY
         elif type == "observationtime": self.mode = self.OBSERVATIONTIME
         elif type == "observationpoint": self.mode = self.OBSERVATIONPOINT
@@ -87,22 +88,23 @@ class MSNWeatherNP(Converter, object):
             if self.mode is not None:
                 dd = type.split(",")
                 if len(dd) >= 2:
-                    self.index = self.getIndex(dd[1])
+                    self.indexTXT = dd[1]
+                    self.index = self.getIndex(self.indexTXT)
                 if self.mode == self.ICON and len(dd) == 4:
                     self.path = dd[2]
                     self.extension = dd[3]
                     
     def EXCEPTIONDEBUG(self, myFUNC = '' , myText = '' ):
         from Plugins.Extensions.MSNweather.debug import printDEBUG
-        printDEBUG( myFUNC , myText )
+        printDEBUG( myFUNC , myText , 'MSNWeatherConverter.log' )
             
     def DEBUG(self, myFUNC = '' , myText = '' ):
         if config.plugins.WeatherPlugin.DebugMSNWeatherConverter.value:
             from Plugins.Extensions.MSNweather.debug import printDEBUG
-            printDEBUG( myFUNC , myText )
+            printDEBUG( myFUNC , myText , 'MSNWeatherConverter.log' )
 
     def getIndex(self, key):
-        self.DEBUG('MSNWeather(Converter).getIndex key="%s"' % key) 
+        self.DEBUG('getIndex key="%s"' % key) 
         if key == "current": return self.CURRENT
         elif key == "day1": return self.DAY1
         elif key == "day2": return self.DAY2
@@ -122,7 +124,7 @@ class MSNWeatherNP(Converter, object):
 
     @cached
     def getText(self):
-        self.DEBUG('MSNWeather(Converter).getText self.mode=%s, self.index=%s' %( self.mode, self.index)) 
+        self.DEBUG('getText self.mode=%s, self.index=%s (%s)' %( self.mode, self.index, str(self.indexTXT))) 
         retText = ''
         if self.mode == self.CITY:
             retText = self.source.getCity()
@@ -160,17 +162,23 @@ class MSNWeatherNP(Converter, object):
     
     @cached
     def getIconFilename(self):
+        self.DEBUG('getIconFilename >>> self.mode = %s , self.index = %s (%s)' % (self.ICON,self.index, str(self.indexTXT)) )
         retVal = ''
         if self.mode == self.ICON and self.index in (self.CURRENT, self.DAY1, self.DAY2, self.DAY3, self.DAY4, self.DAY5):
+            self.DEBUG('\t self.mode = self.ICON')
             if self.path is not None and self.extension is not None:
+                self.DEBUG('\t self.path is not None and self.extension is not None')
                 retVal = self.path + self.source.getCode(self.index) + "." + self.extension
             else:
+                self.DEBUG('\t self.path is None and self.extension is None')
                 retVal = self.source.getWeatherIconFilename(self.index)
-                if len(retVal) <= 2:
+                self.DEBUG('\t getWeatherIconFilename(%s) returned %s' % (self.index,retVal))
+                if not retVal.endswith('.png'):
                     retVal = retVal + ".png"
                 if len(retVal) <= 6:
                     retVal = self.source.getIconPath() + retVal
         
+        self.DEBUG('\t Finally converter returns for index "%s" than icon is "%s"' % (self.index,retVal))
         return retVal
             
     iconfilename = property(getIconFilename)
