@@ -1,0 +1,10 @@
+Package: blackharmonyfhd-addon-bar.standard.light.menu
+Priority: optional
+Section: utils
+Depends: enigma2---j00zeks-components enigma2-plugin-skins--j00zeks-blackharmonyfhd
+Description: blackharmonyfhd addon
+Maintainer: j00zek
+Source: http://github.com/j00zek/eePlugins
+Version: 20.02.06.1445
+Architecture: all
+DestinationPath: /usr/share/enigma2/BlackHarmony/allBars/bar_standard_light.menu

@@ -1,0 +1,3 @@
+#!/bin/sh
+[ -e /usr/share/enigma2/BlackHarmony/allBars/bar_standard_light.menu ] && rm -rf /usr/share/enigma2/BlackHarmony/allBars/bar_standard_light.menu
+exit 0
