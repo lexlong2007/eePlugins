@@ -36,26 +36,25 @@ iconsMap={
     'przewaznieslonecznie'  :   '34.png',
     'burze'                 :   '37.png',
     #EN
-    #'lekkideszczzesniegiem' :   '6.png',
     "rainshowers"           :   '9.png',
     'lightrain'             :   '11.png',
     'rain'                  :   '11.png',
-    #"niewielkieopadysniegu" :   '13.png', 
-    #'snieg'                 :   '16.png',
-    #"zachmurzeniecalkowite" :   '26.png',
-    #'zachmurzenieduze'      :   '28.png',
-    #'zachmurzeniemale'      :   '29.png',
-    #'czesciowoslonecznie'   :   '30.png',
-    #'bezchmurnie'           :   '31.png',
-    'sunny'                  :   '32.png',
-    'mostlysunny'            :   '34.png',
-    #'burze'                 :   '37.png',
+    'sunny'                 :   '32.png',
+    'mostlysunny'           :   '34.png',
     #DE
+    'regenschauer'          :   '11.png',
+    'schnee'                :   '16.png',
+    "bewoelkt"              :   '26.png',
+    "meistbewoelkt"         :   '27.png', #28
+    "teilweisebewoelkt"     :   '29.png',
+    'teilweisesonnig'       :   '30.png',
+    
     }
 
-def plTOansi(text):
+def utfTOansi(text):
     text = text.replace(" ","").replace("Ś","s").replace("ś","s").replace("ł","l").strip()
     text = text.replace("ę","e").replace("ć","c").replace("ó","o").strip().replace("ż","z").strip()
+    text = text.replace("ö","oe")
     return text.lower()
   
 def decodeHTML(text):
@@ -113,9 +112,9 @@ def getWeather(webContent, DBGnow = False, DBGhourly = False, DBGdaily = False, 
         if DBGdaily: print '---------------------------------- Line ----------------------\n' , Line
         dailyDict['Record=%s' % id] = getList([], Line, 'role="button" href="\?(.*?)".*<span>(.*?)<.*<span>(.*?)<.*src="(.*?)".*alt="(.*?)" .*data-icon="(.*?)".*daytemphigh">(.*?)<.*<p>(.*?)</p>.*<span>(.*?)<')
         try:
-            weatherIconName = plTOansi(dailyDict['Record=%s' % id][0][4])
+            weatherIconName = utfTOansi(dailyDict['Record=%s' % id][0][4])
             dailyDict['WeatherIcon4Record=%s' % id] = iconsMap.get(weatherIconName, '')
-            if reportMissingIcons:
+            if reportMissingIcons and dailyDict['WeatherIcon4Record=%s' % id] == '':
                 open("/tmp/MSNWeatherWebRegex.log", "a").write('iconsMap(%s) returned nothing\n' % weatherIconName)
         except Exception:
             dailyDict['WeatherIcon4Record=%s' % id] = ''
