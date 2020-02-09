@@ -586,3 +586,12 @@ msgstr "pełny"
 
 msgid "BigFonts"
 msgstr "duża czcionka"
+
+msgid "gray"
+msgstr "szara"
+
+msgid "gold"
+msgstr "złota"
+
+msgid "%s addon"
+msgstr "Dodatek %s"

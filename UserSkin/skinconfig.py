@@ -306,14 +306,27 @@ class UserSkin_Config(Screen, ConfigListScreen):
                                           choices = mylist))
             else:
                 self.myUserSkin_style = NoSave(ConfigSelection(default = 'colors_default.xml', choices = mylist))
-            if DBG == True: printDEBUG('#### initializing USER BARS ###')
 #### initializing USER BARS ###
+            if DBG == True: printDEBUG('#### initializing USER BARS ###')
             mylist = []
+            usedNames = []
+            #first directories
             for f in sorted(listdir(SkinPath + "allBars/"), key=str.lower):
                 if path.isdir(path.join(SkinPath + "allBars/", f)) and f.startswith('bar_') and f.find('.') > 1:
                     friendly_name = f.split(".", 1)[0]
                     friendly_name = friendly_name[4:].replace("_", " ")
                     mylist.append((f, _(friendly_name)))
+                    usedNames.append(f)
+                    if DBG == True: printDEBUG(f)
+            #second packages
+            if DBG == True: printDEBUG('\t Packages')
+            for f in sorted(listdir(SkinPath + "allBars/"), key=str.lower):
+                if path.isfile(path.join(SkinPath + "allBars/", f)) and f.startswith('bar_') and f.endswith('.pkg') and not f[:-4] in usedNames:
+                    if DBG == True: printDEBUG(f)
+                    friendly_name = f[4:-4].split(".", 1)[0]
+                    friendly_name = _('%s addon') % friendly_name.replace("_", " ")
+                    mylist.append((f, _(friendly_name)))
+                
             if len(mylist) == 0:
                 mylist.append(("default", _("default") ))
                 self.myUserSkin_bar = NoSave(ConfigSelection(default = "default", choices = mylist))
@@ -385,6 +398,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
         self.createConfigList()
         self.updateEntries = False
         self.LCD_widgets_selected = False
+        system('opkg update &' )
         if DBG == True: printDEBUG('__init__  <<< ENDS')
 
     def createConfigList(self):
@@ -563,10 +577,15 @@ class UserSkin_Config(Screen, ConfigListScreen):
             #### USER BARS
             if path.exists(SkinPath + 'skin_user_bar') or path.islink(SkinPath + 'skin_user_bar'):
                 remove(SkinPath + 'skin_user_bar')
-            if path.exists(SkinPath + "allBars/" + self.myUserSkin_bar.value):
-                symlink(SkinPath + "allBars/" + self.myUserSkin_bar.value , 'skin_user_bar')
+            if self.myUserSkin_bar.value.endswith('.pkg'):
+                with open(SkinPath + "allBars/" + self.myUserSkin_bar.value) as fpkg:
+                    package = fpkg.readline().strip()
+                    fpkg.close()
+                system('opkg install %s ; sync' % package )
+            if path.exists(SkinPath + "allBars/" + self.myUserSkin_bar.value.replace('.pkg','')):
+                symlink(SkinPath + "allBars/" + self.myUserSkin_bar.value.replace('.pkg','') , 'skin_user_bar')
                 sourcePath = path.join(SkinPath , 'skin_user_bar')
-                destFolder = self.myUserSkin_bar.value.split(".", 1)[1]
+                destFolder = self.myUserSkin_bar.value.replace('.pkg','').split(".", 1)[1]
                 destPath = path.join(SkinPath , destFolder)
                 printDEBUG("cp -fr %s %s" % (sourcePath,destPath))
                 self.UserSkinToolSet.ClearMemory()
