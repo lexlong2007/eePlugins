@@ -10,7 +10,7 @@
     </widget>
     <!-- EMU -->
     <widget source="session.CurrentService" render="Label" position="10,20" size="1245,40" halign="right" valign="center" zPosition="1" font="Regular; 16" foregroundColor="foreground" backgroundColor="background" transparent="1" noWrap="1">
-      <convert type="j00zekInfo">EcmInfo</convert>
+      <convert type="j00zekModCaidInfo2">UseCFG</convert>
     </widget> 
         <!--Lista kanalow-->
     <!--ePixmap position="10,80" size="960,40" zPosition="-5" pixmap="BlackHarmony/bg_design/j00zekBelka40x960.png" /-->

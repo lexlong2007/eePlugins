@@ -30,6 +30,7 @@ class fakeSourcesMSNWaether(Source):
     def getCode(self, key): return ""
     def destroy(self): Source.destroy(self)
     def getWebCurrentItems(self): return {}
+    def getIconPath(self): return ''
 
 try:
     from Components.Sources.MSNWeatherNP import MSNWeatherNP as BlackHarmonyMSNWeather

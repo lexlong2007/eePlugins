@@ -423,7 +423,7 @@
     </widget>
     <eLabel text="Emulator :" position="60,120" size="120,35" font="Roboto_HD; 27" foregroundColor="white" backgroundColor="black" transparent="1" />
     <widget source="session.CurrentService" render="Label" position="190,120" size="600,35" font="Roboto_HD; 27" halign="left" noWrap="1" foregroundColor="#00FFFF" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonyQuickEcmInfo">emuname</convert>
+      <convert type="j00zekModEmuName">camd</convert>
     </widget>
     <eLabel text="Decoded from :" position="60,160" size="200,35" font="Roboto_HD; 27" foregroundColor="white" backgroundColor="black" transparent="1" />
     <widget source="session.CurrentService" render="FixedLabel" text="FTA" font="Roboto_HD; 27" position="250,160" size="880,35" zPosition="1" foregroundColor="#FFFF00" backgroundColor="black" transparent="1">
@@ -466,9 +466,9 @@
     <widget source="session.CurrentService" render="Label" position="60,480" zPosition="3" size="880,35" font="Roboto_HD; 27" foregroundColor="#CADC79" backgroundColor="black" transparent="1">
       <convert type="BlackHarmonyCaidInfo2">ECM Time : %T</convert>
     </widget>
-    <eLabel position="60,340" size="400,192" zPosition="2" backgroundColor="background" transparent="0" />
-    <widget source="session.CurrentService" render="Label" position="60,340" size="400,255" font="Roboto_HD; 27" zPosition="1" backgroundColor="black" transparent="1" >
-    <convert type="BlackHarmonyQuickEcmInfo">ecmfile</convert>
+    <eLabel position="60,300" size="400,225" zPosition="2" backgroundColor="background" transparent="0" />
+    <widget source="session.CurrentService" render="Label" position="60,300" size="400,290" font="Roboto_HD; 27" zPosition="1" backgroundColor="black" transparent="1" >
+    <convert type="j00zekModCaidInfo2">ecmfile</convert>
     </widget>
     <eLabel text="Coding System : " position="60,610" size="210,35" font="Roboto_HD; 27" foregroundColor="#00F0A30A" backgroundColor="black" transparent="1" />
     <widget source="session.CurrentService" render="Label" position="260,610" zPosition="3" size="880,35" font="Roboto_HD; 27" foregroundColor="green" backgroundColor="black" transparent="1">
@@ -476,7 +476,7 @@
     </widget>
     <eLabel text="System Coding : " position="60,650" size="210,35" font="Roboto_HD; 27" foregroundColor="#00F0A30A" backgroundColor="black" transparent="1" />
     <widget source="session.CurrentService" render="Label" position="260,650" zPosition="3" size="690,70" font="Roboto_HD; 27" foregroundColor="light_yellow" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonyQuickEcmInfo">caids</convert>
+      <convert type="j00zekModServiceInfoEX">caids</convert>
     </widget>
     <widget source="session.CurrentService" render="Label" position="60,750" zPosition="3" size="880,35" font="Roboto_HD; 27" halign="center" backgroundColor="black" transparent="1" >
       <convert type="BlackHarmonyPliExtraInfo">CryptoBar</convert>
@@ -9149,5 +9149,26 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2,orgpos.y()))
     <widget source="key_green" render="Label" position="710,906" zPosition="1" size="210,30" font="Roboto_HD; 27" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_yellow" render="Label" position="1090,906" zPosition="1" size="210,30" font="Roboto_HD; 27" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_blue" render="Label" position="1480,906" zPosition="1" size="210,30" font="Roboto_HD; 27" halign="center" backgroundColor="dark_grey" transparent="1" />
+  </screen>
+  <screen name="AtileHD_Config" position="center,center" size="1920,1080" title="AtileHD Setup" flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap position="1,1" zPosition="-5" size="1920,1080" pixmap="BlackHarmony/bg_design/info.png"/>
+    <widget source="global.CurrentTime" render="Label" position="110,80" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="195,80" size="360,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+    </widget>
+    <widget source="Title" render="Label" position="980,80" size="820,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget name="config" position="124,190" size="920,740" font="Roboto_HD; 27" itemHeight="40" selectionPixmap="BlackHarmony/menu/sel_920_40.png" backgroundColor="black" transparent="1"/>
+    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="110,991" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="400,991" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="890,991" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="1280,991" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_menu.png" position="1753,988" size="60,30" alphatest="blend"/>
+    <widget name="key_red" position="160,990" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <widget name="key_green" position="450,990" size="390,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <widget name="key_yellow" position="940,990" size="300,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <widget name="key_blue" position="1330,990" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <widget name="Picture" position="1113,185" size="680,500" zPosition="2" alphatest="on"/>
   </screen>
 </skin>

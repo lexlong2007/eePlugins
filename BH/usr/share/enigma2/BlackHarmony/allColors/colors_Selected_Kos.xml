@@ -59,4 +59,8 @@
       <pixmap pos="bpBottomRight" filename="BlackHarmony/bg_design/bs_br.png"/>
     </borderset>
   </windowstyle>
+  <parameters>
+    <parameter name="ConfigListSlider" value="22,1"/>
+    <parameter name="ConfigListSeperator" value="550"/>
+  </parameters>
 </skin>
