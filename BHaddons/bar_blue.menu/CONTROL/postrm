@@ -1,2 +1,3 @@
 #!/bin/sh
+[ -e /usr/share/enigma2/BlackHarmony/allBars/bar_blue.menu ] && rm -rf /usr/share/enigma2/BlackHarmony/allBars/bar_blue.menu
 exit 0
