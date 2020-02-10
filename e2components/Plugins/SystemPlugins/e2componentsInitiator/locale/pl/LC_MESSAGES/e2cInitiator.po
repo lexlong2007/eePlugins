@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: j00zekOPKGmanager\n"
 "POT-Creation-Date: 2016-01-07 12:00+0100\n"
-"PO-Revision-Date: 2020-02-09 10:13+0100\n"
+"PO-Revision-Date: 2020-02-10 16:17+0100\n"
 "Last-Translator: j00zek\n"
 "Language-Team: j00zek\n"
 "Language: pl\n"
@@ -62,7 +62,7 @@ msgid "CHnumber -CHname - EVname (progress %)"
 msgstr "Numer kanału - nazwę kanału - wydarzenie oraz postęp w ( % )"
 
 msgid "don't move"
-msgstr "Nie ruszaj się"
+msgstr "Nie przewijaj ( Stop )"
 
 msgid "Defined in skin"
 msgstr "Zdefiniowane w skórce"
@@ -104,7 +104,7 @@ msgid "No Title"
 msgstr "Bez tytułu"
 
 msgid "never stop"
-msgstr "Nigdy nie przestawaj"
+msgstr "Przewijaj ciągle ( Pętla )"
 
 msgid "normal"
 msgstr "Normalny"
@@ -121,11 +121,14 @@ msgstr "Nie zdefiniowana"
 msgid "one time"
 msgstr "Jeden raz"
 
+msgid "Provider"
+msgstr "„Dostawca”"
+
 msgid "right"
 msgstr "Prawa"
 
 msgid "RUNNING"
-msgstr "W ruchu"
+msgstr "Przewijaj ( Włączone )"
 
 msgid "Running Softcam name"
 msgstr "Nazwę \"Emulatora\""
@@ -152,13 +155,25 @@ msgid "same as max font"
 msgstr "Taka sama jak maksymalna czcionka"
 
 msgid "SWIMMING"
-msgstr "Pływanie"
+msgstr "Przewiń długość tekstu i wróć ( Odbijanie )"
 
 msgid "SHORT_DESCRIPTION"
 msgstr "Krótki opis"
 
 msgid "Show when FE is:"
 msgstr "Pokaż, gdy głowica jest:"
+
+msgid "Signal type"
+msgstr "„Rodzaj sygnału”"
+
+msgid "Sat name"
+msgstr "„Nazwa satelity”"
+
+msgid "Bouquet name"
+msgstr "„Nazwa bukietu”"
+
+msgid "Transponder info"
+msgstr "„Informacje o transponderze”"
 
 msgid "Title:"
 msgstr "Tytuł sekcji:"
@@ -244,6 +259,9 @@ msgstr "Prędkość przewijania:"
 
 msgid "Standby clock"
 msgstr "Wyświetl w czuwaniu:"
+
+msgid "Service info:"
+msgstr "Informacje serwisowe:"
 
 msgid "Standby clock position"
 msgstr "Ustaw położenie zegara:"

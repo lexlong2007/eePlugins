@@ -88,7 +88,7 @@ class j00zekModServiceName2(Converter, object):
 # %r -                  E.g. 0.20
 # %S - Satellite Name   E.g. 13.0E Hotbird 13B/13C/13E
 # %s -                  E.g. DVB-S2
-# %T -                  E.g. 13.0Â°E 11508V 27500 3/4
+# %T -                  E.g. 13.0°E 11508 V 27500 3/4
 # %t -                  E.g. Satelita
 # %Y -                  E.g. 27500
 # Example of definition >%F  %Y %p  %f  %s  %M (%O)<
@@ -280,7 +280,7 @@ class j00zekModServiceName2(Converter, object):
             elif type == 'IP-TV':
                 return _("Streaming")
             else:
-                fmt = ["O ","F","p ","Y ","f"]        #(orbital_position frequency polarization symbol_rate fec)
+                fmt = ["O ","F ","p ","Y ","f"]        #(orbital_position frequency polarization symbol_rate fec)
         for line in fmt:
             f = line[:1]
             if f == 't':    # %t - tuner_type (dvb-s/s2/c/t)
