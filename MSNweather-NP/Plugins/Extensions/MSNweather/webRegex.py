@@ -39,10 +39,14 @@ iconsMap={
     "rainshowers"           :   '9.png',
     'lightrain'             :   '11.png',
     'rain'                  :   '11.png',
+    'cloudy'                :   '26.png',
     'sunny'                 :   '32.png',
     'mostlysunny'           :   '34.png',
     #DE
+    'leichterregenundschnee':   '6.png',
+    'leichterregen'         :   '9.png',
     'regenschauer'          :   '11.png',
+    'regen'                 :   '11.png',
     'schnee'                :   '16.png',
     "bewoelkt"              :   '26.png',
     "meistbewoelkt"         :   '27.png', #28
