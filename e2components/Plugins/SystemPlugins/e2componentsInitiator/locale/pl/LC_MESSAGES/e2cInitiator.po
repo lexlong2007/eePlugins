@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: j00zekOPKGmanager\n"
 "POT-Creation-Date: 2016-01-07 12:00+0100\n"
-"PO-Revision-Date: 2020-02-06 06:01+0100\n"
+"PO-Revision-Date: 2020-02-09 10:13+0100\n"
 "Last-Translator: j00zek\n"
 "Language-Team: j00zek\n"
 "Language: pl\n"
@@ -24,6 +24,15 @@ msgstr "Wszystkie informacje w jednej lini"
 
 msgid "All info in a column"
 msgstr "Wszystkie informacje w kolumnie"
+
+msgid "Active & Busy & Available"
+msgstr "Aktywna, zajęta, lub wolna"
+
+msgid "Active & Busy"
+msgstr "Aktywna, lub zajęta"
+
+msgid "Don't show FE state"
+msgstr "Nie pokazuj stanu głowic"
 
 msgid "center"
 msgstr "Centralnie"
@@ -56,7 +65,7 @@ msgid "don't move"
 msgstr "Nie ruszaj się"
 
 msgid "Defined in skin"
-msgstr "Zdefinowane w skórce"
+msgstr "Zdefiniowane w skórce"
 
 msgid "Event name"
 msgstr "Nazwę wydarzenia"
@@ -70,27 +79,6 @@ msgstr "Rozszerzony i krótki (jeśli inny)"
 msgid "fast"
 msgstr "Szybko"
 
-msgid "---Frontend information---"
-msgstr "--- Informacja o głowicach tunera ---"
-
-msgid "Show when FE is:"
-msgstr "Pokaż, gdy głowica jest:"
-
-msgid "Active & Busy & Available"
-msgstr "Aktywna, zajęta, lub wolna"
-
-msgid "Active & Busy"
-msgstr "Aktywna, lub zajęta"
-
-msgid "Don't show FE state"
-msgstr "Nie pokazuj stanu głowic"
-
-msgid "Title:"
-msgstr "Tytuł sekcji:"
-
-msgid "No Title"
-msgstr "Bez tytułu"
-
 msgid "FE's in use:"
 msgstr "Używane głowice:"
 
@@ -100,6 +88,9 @@ msgstr "Głowice:"
 msgid "FULL_DESCRIPTION"
 msgstr "Pełny opis"
 
+msgid "---Frontend information---"
+msgstr "--- Informacja o głowicach tunera ---"
+
 msgid "if defined in skin"
 msgstr "Jeśli zdefiniowano w skórce"
 
@@ -108,6 +99,9 @@ msgstr "Pokaż na wyświetlaczu:"
 
 msgid "left"
 msgstr "Lewa"
+
+msgid "No Title"
+msgstr "Bez tytułu"
 
 msgid "never stop"
 msgstr "Nigdy nie przestawaj"
@@ -133,6 +127,15 @@ msgstr "Prawa"
 msgid "RUNNING"
 msgstr "W ruchu"
 
+msgid "Running Softcam name"
+msgstr "Nazwę \"Emulatora\""
+
+msgid "Running Softcam file name"
+msgstr "Nazwę pliku \"Emulatora\""
+
+msgid "Running Softcam file name, READER"
+msgstr "Nazwę pliku \"Emulatora\" oraz czytnik"
+
 msgid "slow"
 msgstr "Wolno"
 
@@ -153,6 +156,15 @@ msgstr "Pływanie"
 
 msgid "SHORT_DESCRIPTION"
 msgstr "Krótki opis"
+
+msgid "Show when FE is:"
+msgstr "Pokaż, gdy głowica jest:"
+
+msgid "Title:"
+msgstr "Tytuł sekcji:"
+
+msgid "TXT PROVIDER"
+msgstr "Nazwę tekstową dostawcy systemu kodowania"
 
 msgid "---VFD settings---"
 msgstr "--- Ustawienia VFD ---"
@@ -216,7 +228,7 @@ msgid "Speed"
 msgstr "Prędkość przewijania:"
 
 msgid "Show:"
-msgstr "Pokaż:"
+msgstr "Pokaż w infobarze:"
 
 msgid "---SoftCam information---"
 msgstr "--- Informacje SoftCam ---"

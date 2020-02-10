@@ -1,7 +1,7 @@
 #######################################################################
 #
 #    Renderer for Enigma2
-#    Coded by j00zek (c)2018
+#    Coded by j00zek (c)2018-2020
 #
 #    Uszanuj moja prace i nie kasuj/zmieniaj informacji kto jest autorem renderera
 #    Please respect my work and don't delete/change name of the renderer author
@@ -56,6 +56,8 @@ except Exception: DBG = False
 
 searchPaths = ['/usr/share/enigma2/']
 
+isGrabEnabled = False
+
 def initPiconPaths():
     if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[initPiconPaths] >>>')
     for part in harddiskmanager.getMountedPartitions():
@@ -106,6 +108,7 @@ class j00zekPiconAnimation(Renderer):
     def __init__(self):
         Renderer.__init__(self)
         self.pixmaps = 'animatedPicons'
+        self.animName = self.pixmaps
         self.delayBetweenFrames = 50
         self.delayBetweenLoops = self.delayBetweenFrames * 5
         self.doAnim = False
@@ -188,7 +191,6 @@ class j00zekPiconAnimation(Renderer):
         Renderer.connect(self, source)
 
     def doSuspend(self, suspended):
-        
         if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[doSuspend] >>> suspended=%s' % suspended)
         if suspended:
                 self.changed((self.CHANGED_CLEAR,))
@@ -196,6 +198,7 @@ class j00zekPiconAnimation(Renderer):
                 self.changed((self.CHANGED_DEFAULT,))
             
     def loadPNGsSubFolders(self, animPath):
+        self.animName = os.path.basename(os.path.normpath(animPath))
         self.animationsFoldersList = []
         if len(self.FramesList) == 0 and os.path.exists(animPath):
             picsFolder = [f for f in os.listdir(animPath) if (os.path.isdir(os.path.join(animPath, f)) and not f.endswith(".off"))]
@@ -274,13 +277,34 @@ class j00zekPiconAnimation(Renderer):
                 self.instance.show()
                 self.animTimer.start(self.delayBetweenFrames, True)
 
+    def doGrabPICs(self):
+        try:
+            if isGrabEnabled:
+                if not os.path.exists('/tmp/PreviewAnim'):
+                    os.mkdir('/tmp/PreviewAnim')
+                if not os.path.exists('/tmp/PreviewAnim/.ctrl'):
+                    open('/tmp/PreviewAnim/.ctrl', 'w').write('%sDelay=%s\n' % (self.animName,self.delayBetweenFrames))
+                if self.slideFrame < 10:
+                    myChar = '0'
+                else:
+                    myChar = ''
+                #os.system('grab -dqp /tmp/PreviewAnim/%s-%s_%s%s.png' % (self.animName, self.delayBetweenFrames, myChar, self.slideFrame))
+                os.system('grab -dqj 85 /tmp/PreviewAnim/%s-%s_%s%s.jpg' % (self.animName, self.delayBetweenFrames, myChar, self.slideFrame))
+        except Exception:
+            pass
+    
     def timerEvent(self):
         if DBG: j00zekDEBUG('[j00zekPiconAnimation]:[timerEvent] >>> self.slideFrame=%s' % self.slideFrame)
         self.animTimer.stop()
+        self.doGrabPICs()
         if self.slideFrame < self.FramesCount:
             self.instance.setPixmap(self.FramesList[self.slideFrame])
             self.slideFrame += 1
-            if self.slideFrame >= self.FramesCount: self.slideFrame = self.FramesCount
+            if self.slideFrame >= self.FramesCount:
+                self.slideFrame = self.FramesCount
+                if isGrabEnabled:
+                    global isGrabEnabled
+                    isGrabEnabled = False
             self.animTimer.start(self.delayBetweenFrames, True)
         elif self.slideFrame == self.FramesCount: #Note last frame does NOT exists
             if self.doInLoop == True:

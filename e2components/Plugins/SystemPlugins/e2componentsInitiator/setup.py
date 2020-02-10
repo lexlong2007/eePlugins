@@ -51,6 +51,7 @@ def buildList():
     Mlist.append(getConfigListEntry('\c00289496' + _("---Frontend information---")))
     Mlist.append(getConfigListEntry(_("Show when FE is:"),  config.plugins.j00zekCC.feInfoType ))
     Mlist.append(getConfigListEntry(_("Title:"),  config.plugins.j00zekCC.feInfoTitle ))
+    Mlist.append(getConfigListEntry(_("Service info:"),  config.plugins.j00zekCC.snINFOtype ))
     #
     Mlist.append(getConfigListEntry(""))
     Mlist.append(getConfigListEntry('\c00289496' + _("---SoftCam information---")))

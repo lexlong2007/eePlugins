@@ -28,10 +28,11 @@
 # Version: 2.3 (15.01.2019) add terrestrial description - ikrom
 # Version: 2.3 (23.01.2020) add returning Name & event & progress - j00zek
 
-from Components.Converter.Converter import Converter
-from enigma import iServiceInformation, iPlayableService, iPlayableServicePtr, eServiceReference, eServiceCenter, eTimer, getBestPlayableServiceReference, eEPGCache
-from Components.Element import cached
 from Components.config import config
+from Components.Converter.Converter import Converter
+from Components.Element import cached
+from Components.j00zekModHex2strColor import Hex2strColor
+from enigma import iServiceInformation, iPlayableService, iPlayableServicePtr, eServiceReference, eServiceCenter, eTimer, getBestPlayableServiceReference, eEPGCache
 from time import time, localtime, strftime
 import NavigationInstance
 import os
@@ -58,6 +59,7 @@ class j00zekModServiceName2(Converter, object):
     ALLREF = 8
     FORMAT = 9
     USE_VFD_CFG = 10
+    USE_CFG = 11
 
 #Format description:
 # %A - AllRef           E.g. 1:0:1:3DD3:640:13E:820000:0:0:0
@@ -93,6 +95,8 @@ class j00zekModServiceName2(Converter, object):
     
     def __init__(self, type):
         Converter.__init__(self, type)
+        
+        self.colors = (0x0000FF00, 0x00FFFF00, 0x007F7F7F) # tuner active, busy, available colors
         self.epgQuery = eEPGCache.getInstance().lookupEventTime
         if DBG: j00zekDEBUG('[j00zekModServiceName2:__init__] >>> type=%s' % type) 
         if type == "Name" or not len(str(type)):
@@ -115,11 +119,13 @@ class j00zekModServiceName2(Converter, object):
             self.type = self.ALLREF
         elif type == 'UseVFDcfg':
             self.type = self.USE_VFD_CFG
+        elif type == 'UseCFG':
+            self.type = self.USE_CFG
         else:
             self.type = self.FORMAT
             self.sfmt = type[:]
         try:
-            if (self.type == self.NUMBER or (self.type == self.FORMAT or self.type == self.USE_VFD_CFG and '%n' in self.sfmt)) and correctChannelNumber:
+            if (self.type == self.NUMBER or (self.type == self.FORMAT or self.type == self.USE_CFG or self.type == self.USE_VFD_CFG and '%n' in self.sfmt)) and correctChannelNumber:
                 ChannelNumberClasses.append(self.forceChanged)
         except:
             pass
@@ -658,10 +664,13 @@ class j00zekModServiceName2(Converter, object):
             elif '%3a' in tmpref:
                 return ':'.join(refstr.split(':')[:10])
             return tmpref
-        elif self.type == self.FORMAT or self.type == self.USE_VFD_CFG:
+        elif self.type == self.FORMAT or self.type == self.USE_VFD_CFG  or self.type == self.USE_CFG:
             if self.type == self.USE_VFD_CFG:
                 self.sfmt = config.plugins.j00zekCC.snVFDtype.value[:]
                 if DBG: j00zekDEBUG('[j00zekModServiceName2:getText] snVFDtype=%s' % self.sfmt)
+            elif self.type == self.USE_CFG:
+                self.sfmt = config.plugins.j00zekCC.snINFOtype.value[:]
+                if DBG: j00zekDEBUG('[j00zekModServiceName2:getText] snINFOtype=%s' % self.sfmt)
             num = bouq = ''
             tmp = self.sfmt[:].split("%")
             if tmp:

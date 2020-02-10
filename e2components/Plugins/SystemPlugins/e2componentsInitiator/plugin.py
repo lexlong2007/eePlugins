@@ -64,6 +64,7 @@ class e2ComponentsConfig(Screen, ConfigListScreen):
         self.list.append(getConfigListEntry('\c00289496' + _("---Frontend information---")))
         self.list.append(getConfigListEntry(_("Show when FE is:"),  config.plugins.j00zekCC.feInfoType ))
         self.list.append(getConfigListEntry(_("Title:"),  config.plugins.j00zekCC.feInfoTitle ))
+        self.list.append(getConfigListEntry(_("Service info:"),  config.plugins.j00zekCC.snINFOtype ))
         
         #
         self.list.append(getConfigListEntry(""))

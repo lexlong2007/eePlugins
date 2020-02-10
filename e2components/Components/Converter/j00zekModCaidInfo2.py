@@ -123,8 +123,8 @@ class j00zekModCaidInfo2(Poll, Converter, object):
         elif type == "BisEcm": self.type = self.BISS_C
         elif type == "Crd": self.type = self.CRD
         elif type == "CrdTxt": self.type = self.CRDTXT
-        elif  type == "IsFta": self.type = self.IS_FTA
-        elif  type == "IsCrypted": self.type = self.IS_CRYPTED
+        elif type == "IsFta": self.type = self.IS_FTA
+        elif type == "IsCrypted": self.type = self.IS_CRYPTED
         elif type == "Short": self.type = self.SHORT
         elif type == "Default" or type == "" or type == None or type == "%": self.type = self.ALL
         elif type == "emuname": self.type = self.SOFTCAMNAME

@@ -2,8 +2,9 @@ from version import Version
 Info='@j00zek %s' % Version
 
 ########################### Tlumaczenia ###########################################
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS
+from Components.j00zekModHex2strColor import Hex2strColor as h2c
 from Components.Language import language
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 import gettext
 from os import environ
 
@@ -60,6 +61,11 @@ config.plugins.j00zekCC.snVFDtype = ConfigSelection(default = "\x25N", choices =
                                                                                   ("\x25N - \x25E (\x25e)", _("CHname - EVname (progress \x25)")),
                                                                                   ("\x25n - \x25N - \x25E (\x25e)", _("CHnumber -CHname - EVname (progress \x25)")),
                                                                                   ("\x25D", _("HH:MM E.g. 07:23")), ("\x25d", _("HH:MM E.g. 7:23"))
+                                                                                 ])
+config.plugins.j00zekCC.snINFOtype = ConfigSelection(default = "\x25S", choices = [(h2c(0x0000FF00) + " \x25s " + h2c(0x00FFCC00) + " \x25S " + h2c(0x007F7F7F) + " \x25P", '%s %s %s %s %s %s' %( h2c(0x0000FF00), _('Signal type'), h2c(0x00FFCC00), _('Sat name'), h2c(0x007F7F7F), _('Provider'))),
+                                                                                   (h2c(0x0000FF00) + " \x25s " + h2c(0x00FFCC00) + " \x25S " + h2c(0x007F7F7F) + " \x25T", '%s %s %s %s %s %s' %( h2c(0x0000FF00), _('Signal type'), h2c(0x00FFCC00), _('Sat name'), h2c(0x007F7F7F), _('Transponder info'))),
+                                                                                   (h2c(0x0000FF00) + " \x25s " + h2c(0x00FFCC00) + " \x25T " + h2c(0x007F7F7F) + " \x25B", '%s %s %s %s %s %s' %( h2c(0x0000FF00), _('Signal type'), h2c(0x00FFCC00), _('Transponder info'), h2c(0x007F7F7F), _('Bouquet name'))),
+                                                                                   (h2c(0x0000FF00) + " \x25s " + h2c(0x00FFCC00) + " \x25T " + h2c(0x007F7F7F) + " \x25P", '%s %s %s %s %s %s' %( h2c(0x0000FF00), _('Signal type'), h2c(0x00FFCC00), _('Transponder info'), h2c(0x007F7F7F), _('Provider'))),
                                                                                  ])
 #rollerCharLCD
 config.plugins.j00zekCC.scroll_speed = ConfigSelection(default = "300", choices = [("500", _("slow")), ("300", _("normal")), ("100", _("fast"))])
