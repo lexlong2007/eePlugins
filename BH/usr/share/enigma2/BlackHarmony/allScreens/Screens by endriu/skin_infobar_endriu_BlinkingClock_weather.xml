@@ -11,7 +11,7 @@
  <eLabel position="56,810" size="2,186" backgroundColor="linie" />
  <eLabel position="360,810" size="2,186" backgroundColor="linie" /> 
 
- <widget source="session.CurrentService" render="j00zekLabel" position="373,805" size="1000,45" font="HD_Thin; 42" noWrap="1" backgroundColor="black" transparent="1" halign="center" valign="center" foregroundColor="#66CCCC" >
+ <widget source="session.CurrentService" render="j00zekLabel" position="373,800" size="1000,45" font="HD_Thin; 42" noWrap="1" backgroundColor="black" transparent="1" halign="center" valign="center" foregroundColor="#66CCCC" >
     <convert type="BlackHarmonygExtraTuner">ServiceNumberName</convert>
    </widget>
  <ePixmap alphatest="blend" pixmap="BlackHarmony/icons/ico_rec_off2.png" position="1375,810" size="20,20" zPosition="1" />
@@ -22,7 +22,7 @@
       <convert type="EventTime">StartTime</convert>
       <convert type="ClockToText">Default</convert>
     </widget>
- <widget source="session.Event_Now" render="j00zekLabel" position="485,852" size="720,45" font="Regular; 32" halign="left" valign="center" backgroundColor="black" foregroundColor="white" transparent="1" zPosition="1">
+ <widget source="session.Event_Now" render="j00zekLabel" position="485,845" size="720,59" font="Regular; 34" halign="left" valign="center" backgroundColor="black" foregroundColor="white" transparent="1" zPosition="1">
       <convert type="EventName">Name</convert>
     </widget>
  <widget source="session.Event_Now" render="Label" position="1205,852" size="180,44" font="Regular; 30" halign="right" valign="center" backgroundColor="black" transparent="1" >
@@ -37,7 +37,7 @@
       <convert type="EventTime">StartTime</convert>
       <convert type="ClockToText">Default</convert>
     </widget>
- <widget source="session.Event_Next" render="j00zekLabel" position="485,935" size="720,45" font="Regular; 32" halign="left" valign="center" backgroundColor="black" transparent="1" foregroundColor="#00595959">
+ <widget source="session.Event_Next" render="j00zekLabel" position="485,928" size="720,59" font="Regular; 34" halign="left" valign="center" backgroundColor="black" transparent="1" foregroundColor="#00595959">
       <convert type="EventName">Name</convert>
     </widget>
  <widget source="session.Event_Next" render="Label" position="1205,935" size="180,45" font="Regular; 30" halign="right" valign="center" backgroundColor="black" transparent="1" foregroundColor="#00595959">

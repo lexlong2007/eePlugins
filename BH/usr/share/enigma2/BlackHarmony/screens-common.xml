@@ -8809,50 +8809,65 @@
     <ePixmap pixmap="icons/input_info.png" position="c-50,c-110" size="100,100" alphatest="on" />
     <widget name="text" position="center,c+5" size="720,100" font="Regular;22" halign="center" />
   </screen>
-  <screen name="MessageBox" position="center,center" size="790,10" title="Message">
-    <widget name="text" position="110,8" size="680,0" font="Roboto_HD; 25" transparent="1" />
-    <widget name="ErrorPixmap" pixmap="BlackHarmony/icons/error.png" position="5,5" size="100,100" alphatest="blend"/>
-    <widget name="QuestionPixmap" pixmap="BlackHarmony/icons/question.png" position="5,5" size="100,100" alphatest="blend"/>
-    <widget name="InfoPixmap" pixmap="BlackHarmony/icons/info.png" position="5,5" size="100,100" alphatest="blend"/>
-    <widget name="list" font="Roboto_HD; 27" position="15,70" size="750,0" backgroundColor="background" itemHeight="35" selectionPixmap="BlackHarmony/menu/sel_750_35.png" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" transparent="1"/>
+<screen name="MessageBox" position="center,center" size="790,180" title="Message">
+    <widget name="QuestionPixmap" pixmap="BlackHarmony/icons/transparent.png" position="0,10" size="140,140" alphatest="blend"/>
+    <widget source="session.CurrentService" render="j00zekPiconAnimation" pixdelay="100" loopdelay="100" loop="True" lockpath="True" pixmaps="BlackHarmony/icons/Confused_Homar80/" position="0,10" zPosition="10" size="140,140" alphatest="blend" />
+    <widget name="text" position="0,0" size="0,0" font="Roboto_HD; 30" transparent="1" valign="center" />
+    <widget name="list" font="Roboto_HD; 27" position="0,0" size="0,0" backgroundColor="background" itemHeight="35" selectionPixmap="BlackHarmony/menu/sel_900_35.png" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" transparent="1"/>
+    <!-- tylko aby skin sie nie plul, ze brak -->
+        <widget name="ErrorPixmap" pixmap="BlackHarmony/icons/transparent.png" position="5,5" size="120,180" alphatest="blend"/>
+    <widget name="InfoPixmap" pixmap="BlackHarmony/icons/transparent.png" position="5,5" size="120,180" alphatest="blend"/>
     <applet type="onLayoutFinish">
 # this should be factored out into some helper code, but currently demonstrates applets.
 from enigma import eSize, ePoint
 
-orgwidth = self.instance.size().width()
-orgheight = self.instance.size().height()
-orgpos = self.instance.position()
-textsize = self["text"].getSize()
+animPosition = (0, 0)
+animWidth = self["QuestionPixmap"].instance.size().width()
+animHeight = self["QuestionPixmap"].instance.size().height()
+WindowWidth = self.instance.size().width()
+windowHeight = self.instance.size().height()
+orgWindowPos = self.instance.position()
+offset = 10
+textFont = 25
+listItemHeight = 35
 
-# y size still must be fixed in font stuff...
-textsize = (textsize[0] + 80, textsize[1] + 80)
-offset = 20
-#if self.type == self.TYPE_YESNO:
-#        offset = 80
-wsizex = textsize[0] + 120
-wsizey = textsize[1] + offset
-if (790 &gt; wsizex):
-        wsizex = 790
+# Move and Resize label
+textPos = (offset + animWidth, offset)
+textWidth = WindowWidth - offset * 2 - animPosition[0] - animWidth
+textTmpHeight = textFont * 2 + offset
+textSize = ( textWidth, textTmpHeight)
+self["text"].instance.move(ePoint(textPos[0], textPos[1]))
+self["text"].instance.resize(eSize(textWidth, textTmpHeight))
+textHeight = self["text"].instance.calculateSize().height()
+if textHeight > textTmpHeight:
+        self["text"].instance.resize(eSize(textWidth, textHeight))
+else:
+        textHeight = textTmpHeight
 
-# resize label
-self["text"].instance.resize(eSize(*textsize))
+listHeight = listItemHeight * len(self.list)
+if (textPos[1] + textHeight + offset + listHeight + offset) > (animPosition[1] + animHeight + offset):
+        listPos = (offset, animPosition[1] + animHeight + offset)
+        listSize = (WindowWidth - offset * 2, listHeight)
+        newWindowHeight = listPos[1] + listSize[1] + offset
+else:
+        newWindowHeight = animPosition[1] + animHeight + offset
+        listPos = (textPos[0], textHeight + offset) 
+        listSize =  (textWidth, listHeight)
 
-# move list
-count = len(self.list)
-listsize = (wsizex - 20, 35 * count)
-self["list"].instance.move(ePoint(10, textsize[1] + 10 ))
-self["list"].instance.resize(eSize(*listsize))
+# Move and Resize list
+self["list"].instance.move(ePoint(listPos[0], listPos[1]))
+self["list"].instance.resize(eSize(*listSize))
 
 # resize window
-wsize = (wsizex, wsizey + listsize[1] + 10)
+wsize = (WindowWidth, newWindowHeight)
 self.instance.resize(eSize(*wsize))
 
 # center window
 newwidth = wsize[0]
 newheight = wsize[1]
-self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2 , orgpos.y() + (orgheight - newheight)/2 ))
+self.instance.move(ePoint(orgWindowPos.x() , orgWindowPos.y() + (windowHeight - newWindowHeight)/2 ))
     </applet>
-  </screen> 
+</screen>
 <!-- HistoryZapDefaultSkin screen by endriu-->
   <screen name="HistoryZapDefaultSkinFullHD" position="0,0" size="850,1080" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="850,1080" pixmap="BlackHarmony/bg_design/zap_history.png" />
@@ -9829,7 +9844,49 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2 , orgpos.y() + (o
     <widget source="key_blue" render="Label" position="605,750" size="150,26" zPosition="1" font="Roboto_HD;24" halign="left" backgroundColor="dark_grey" transparent="1" />
   </screen>
   <!-- screens by Kos -->
-  <screen name="menu_epgloadsave_menu" position="70,30" size="1920,1080" title=" " flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
+<screen name="LogManager" position="462,128" size="1000,820" title="Log Manager" flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap position="0,0" zPosition="-10" size="1000,820" pixmap="BlackHarmony/bg_design/small.png"/>
+    <widget source="global.CurrentTime" render="Label" position="45,30" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
+    <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="130,30" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
+    <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+    </widget>
+    <widget source="Title" render="Label" position="560,30" size="380,35" zPosition="1" halign="right" font="Roboto_HD; 27" foregroundColor="white" backgroundColor="black" transparent="1" /> 
+    <widget name="list" position="50,130" size="900,510" font="Roboto_HD; 27" itemHeight="35" zPosition="1" scrollbarMode="showOnDemand" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" selectionPixmap="BlackHarmony/menu/sel_900_35.png" backgroundColor="black" transparent="1"/>
+        <widget name="LogsSize" position="220,680" size="550,35" font="Regular;25" halign="center" valign="center" foregroundColor="light_yellow" backgroundColor="black" transparent="1"/>
+    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="70,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="370,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="570,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="770,750" size="35,27" alphatest="blend" />
+    <widget source="key_red" render="Label" position="120,749" size="220,30" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="key_green" render="Label" position="420,749" size="200,30" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+        <widget source="key_yellow" render="Label" position="620,749" size="200,30" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+        <widget source="key_blue" render="Label" position="820,749" size="200,30" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+  </screen>  
+  <screen name="LogManagerFb" position="462,128" size="1000,820" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap position="0,0" zPosition="-10" size="1000,820" pixmap="BlackHarmony/bg_design/small.png"/>
+    <widget source="global.CurrentTime" render="Label" position="45,30" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
+    <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="130,30" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
+    <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+    </widget>
+    <widget source="Title" render="Label" position="560,30" size="380,35" zPosition="1" halign="right" font="Roboto_HD; 27" foregroundColor="white" backgroundColor="black" transparent="1" /> 
+    <widget name="list" position="50,130" size="900,550" font="Roboto_HD; 27" itemHeight="35" zPosition="1" scrollbarMode="showOnDemand" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" selectionPixmap="BlackHarmony/menu/sel_900_35.png" backgroundColor="black" transparent="1"/>
+    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="70,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="370,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="570,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="770,750" size="35,27" alphatest="blend" />
+    <widget name="key_red" position="120,749" size="220,30" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <widget name="key_green" position="420,749" size="200,30" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+        <widget name="key_yellow" position="620,749" size="200,30" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+        <widget name="key_blue" position="820,749" size="200,30" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+  </screen> 
+  <screen name="LogManagerViewLog" position="0,0" size="1920,1080" backgroundColor="transparent" flags="wfNoBorder">
+    <widget name="list" position="0,0" size="1920,1080" itemHeight="40" backgroundColor="black" transparent="0"/>
+  </screen> 
+  <screen name="HideVBILine" position="0,0" size="1280,2" backgroundColor="black" flags="wfNoBorder"/>  <screen name="menu_epgloadsave_menu" position="70,30" size="1920,1080" title=" " flags="wfNoBorder" NoAnimationAfter="1" backgroundColor="transparent">
     <panel name="menu_mainmenu" />
   </screen> 
   <screen name="SlimChannelSelection" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
