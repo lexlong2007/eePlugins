@@ -68,7 +68,6 @@ if isSlowCPU() == False:
 else:
     config.plugins.UserSkin.jpgPreview = ConfigYesNo(default = False)
 
-config.plugins.UserSkin.FontScale = ConfigSelectionNumber(default=100, min=50, max=200, stepwidth=1)
 config.plugins.UserSkin.SafeMode = ConfigYesNo(default = True)
 
 imageType=None
@@ -411,7 +410,6 @@ class UserSkin_Config(Screen, ConfigListScreen):
         self.list.append(self.set_myatile)
         self.list.append(self.set_color)
         self.list.append(self.set_font)
-        #self.list.append(getConfigListEntry(_("Font scale (50-200)%:"), config.plugins.UserSkin.FontScale))
         self.list.append(self.set_bar)
         if isSlowCPU() == True:
             self.list.append(getConfigListEntry(_("No JPG previews:"), config.plugins.UserSkin.jpgPreview))
@@ -651,8 +649,8 @@ class UserSkin_Config(Screen, ConfigListScreen):
         return
       
     def keyMenu(self):
-        if path.exists(resolveFilename(SCOPE_PLUGINS, 'SystemPlugins/e2componentsInitiator/plugin.pyo')):
-            from Plugins.SystemPlugins.e2componentsInitiator.plugin import e2ComponentsConfig
+        if path.exists(resolveFilename(SCOPE_PLUGINS, 'SystemPlugins/e2componentsInitiator')):
+            from Plugins.SystemPlugins.e2componentsInitiator.setup import e2ComponentsConfig
             try:
                 self.session.openWithCallback(self.doNothing, e2ComponentsConfig)
             except Exception as e:
@@ -1065,6 +1063,9 @@ class TreeUserSkinScreens(Screen):
         self.PreviewTimer = eTimer()
         self.PreviewTimer.callback.append(self.PreviewTimerCB)
         self.PreviewsURL = None
+        self.PreviewAnims = None
+        self.PreviewAnimsDelay = 100
+        self.PreviewAnimCurrent = 0
         if pathExists("%s%s" % (SkinPath,'skin.config')):
             with open("%s%s" % (SkinPath,'skin.config'), 'r') as cf:
                 for cfg in cf:
@@ -1085,13 +1086,29 @@ class TreeUserSkinScreens(Screen):
             self["PreviewPicture"].show()
 
         def webPreview(response = None):
-            printDEBUG("[UserSkin:PreviewTimerCB] downloaded '%s%s.jpg'" % (self.PreviewsURL, pic) )
-            UpdatePreviewPicture('/tmp/preview.jpg')
+            if not self.PreviewAnimsDelay is None:
+                printDEBUG("[UserSkin:PreviewTimerCB] downloaded '%s%s.jpg'" % (self.PreviewsURL, self.PreviewAnims[self.PreviewAnimCurrent]) )
+                UpdatePreviewPicture(self.PreviewAnims[self.PreviewAnimCurrent])
+                self.PreviewTimer.start(self.PreviewAnimsDelay,False)
+            else:
+                printDEBUG("[UserSkin:PreviewTimerCB] downloaded '%s%s.jpg'" % (self.PreviewsURL, pic) )
+                UpdatePreviewPicture('/tmp/preview.jpg')
         
         def webError(response = None):
             printDEBUG("[UserSkin:PreviewTimerCB] webError('%s')" % str(response) )
             self["PreviewPicture"].hide()
         
+        def getPIC(picName):
+            printDEBUG("[UserSkin:PreviewTimerCB] getPIC('%s')" % picName )
+            if path.exists('/tmp/preview.jpg'):
+                remove('/tmp/preview.jpg')
+            if not self.PreviewAnims is None:
+                self.PreviewAnims[self.PreviewAnimCurrent] = '/tmp/preview-%s.jpg' % self.PreviewAnimCurrent
+                downloadPage( picName , file('/tmp/preview-%s.jpg' % self.PreviewAnimCurrent, 'wb')).addCallback(webPreview).addErrback(webError)
+            else:
+                picName = picName.replace(' ','%20')
+                downloadPage( picName , file('/tmp/preview.jpg', 'wb')).addCallback(webPreview).addErrback(webError)
+                
         self.PreviewTimer.stop()
         
         if self["filelist"].getSelection()[1] == True: # isDir
@@ -1099,7 +1116,29 @@ class TreeUserSkinScreens(Screen):
             return
 
         pic =  self.filelist.getFilename()[:-4]
-        if path.exists(self.allPreviews_dir + "preview_" + pic + '.png'):
+        if not self.PreviewAnims is None:
+            self.PreviewAnimCurrent += 1
+            if self.PreviewAnimCurrent >= len(self.PreviewAnims):
+                self.PreviewAnimCurrent = 0
+            if self.PreviewAnims[self.PreviewAnimCurrent].startswith('/tmp/preview'):
+                webPreview()
+            else:
+                getPIC('%s%s.jpg' % (self.PreviewsURL, self.PreviewAnims[self.PreviewAnimCurrent]))
+        elif path.exists(self.allPreviews_dir + "preview_" + pic + '.anim'):
+            for line in open(self.allPreviews_dir + "preview_" + pic + '.anim', 'r'):
+                line = line.strip()
+                if self.PreviewAnimsDelay is None: #delay has to be always in first line!!!!
+                    try:
+                        self.PreviewAnimsDelay = int(line)
+                    except Exception as e:
+                        printDEBUG("[UserSkin:PreviewTimerCB] self.PreviewAnimsDelay exception: %s" % str(e) )
+                        self.PreviewAnimsDelay = 100
+                else:
+                    if self.PreviewAnims is None:
+                        self.PreviewAnims = []
+                    self.PreviewAnims.append(line)
+            getPIC('%s%s.jpg' % (self.PreviewsURL, self.PreviewAnims[self.PreviewAnimCurrent]))
+        elif path.exists(self.allPreviews_dir + "preview_" + pic + '.png'):
             UpdatePreviewPicture(self.allPreviews_dir + "preview_" + pic + '.png')
         elif path.exists(self.allPreviews_dir + "preview_" + pic + '.jpg'):
             UpdatePreviewPicture(self.allPreviews_dir + "preview_" + pic + '.jpg')
@@ -1111,8 +1150,7 @@ class TreeUserSkinScreens(Screen):
             if path.exists('/tmp/preview.jpg'):
                 remove('/tmp/preview.jpg')
             if self.PreviewsURL is not None:
-                self.PreviewsURL = self.PreviewsURL.replace(' ','%20')
-                downloadPage('%s%s.jpg' % (self.PreviewsURL, pic), file('/tmp/preview.jpg', 'wb')).addCallback(webPreview).addErrback(webError)
+                getPIC('%s%s.jpg' % (self.PreviewsURL, pic))
             else:
                 printDEBUG("[UserSkin:PreviewTimerCB] '%s.jpg' not found" % pic )
                 self["PreviewPicture"].hide()
@@ -1179,8 +1217,9 @@ class TreeUserSkinScreens(Screen):
             print "Nothing to Delete ;)"
             
     def keyCancel(self):
-        if path.exists('/tmp/preview.jpg'):
-            remove('/tmp/preview.jpg')
+        for f in listdir("/tmp"):
+            if f.startswith('preview') and f.endswith('.jpg'):
+                remove('/tmp/%s' % f)
         self.close()
 ####################### FOR NEW TREE SELECTOR ###################################
     def __onLayoutFinish(self):
@@ -1219,6 +1258,11 @@ class TreeUserSkinScreens(Screen):
         self.setInfo()
         
     def setInfo(self):
+        self.PreviewTimer.stop()
+        self.PreviewAnims = None
+        self.PreviewAnimsDelay = None
+        self.PreviewAnimCurrent = 0
+        
         selection = self["filelist"].getSelection()
         if selection is None:
             return
