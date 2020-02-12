@@ -127,7 +127,8 @@
       <convert type="FrontendInfo">AGC</convert>
     </widget>
     <widget source="session.CurrentService" render="Label" position="1410,895" zPosition="1" size="460,25" font="Roboto_HD; 21" halign="center" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonygExtraTuner">TunerInfo</convert>
+      <!--convert type="BlackHarmonygExtraTuner">TunerInfo</convert-->
+      <convert type="j00zekModServiceName2">UseCFG</convert>
     </widget>
     <widget source="session.Event_Now" render="Progress" position="313,880" zPosition="1" size="1032,6" pixmap="BlackHarmony/gfx/progress_ib.png" transparent="1">
       <convert type="EventTime">Progress</convert>
@@ -182,7 +183,7 @@
     <widget source="session.CurrentService" render="Label" position="474,955" size="60,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1">
       <convert type="BlackHarmonygExtraInfo">sid</convert>
     </widget>
-    <widget source="session.CurrentService" render="Label" position="599,955" zPosition="2" size="750,30" font="Roboto_HD; 22" valign="top" halign="left" transparent="1" backgroundColor="black">
+    <widget source="session.CurrentService" render="j00zekLabel" position="599,955" zPosition="2" size="750,30" font="Roboto_HD; 22" valign="top" halign="left" transparent="1" backgroundColor="black">
       <convert type="j00zekModCaidInfo2">UseCFG</convert>
     </widget>
     <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1407,764" size="55,55" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">

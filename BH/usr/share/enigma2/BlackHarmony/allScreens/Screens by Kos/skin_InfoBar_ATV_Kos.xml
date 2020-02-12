@@ -71,8 +71,9 @@
     <widget source="session.FrontendStatus" render="Label" position="1682,850" size="60,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" zPosition="1" foregroundColor="green">
       <convert type="FrontendInfo">AGC</convert>
     </widget>
-    <widget source="session.CurrentService" render="Label" position="1410,895" zPosition="1" size="460,25" font="Roboto_HD; 21" halign="center" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonygExtraTuner">TunerInfo</convert>
+    <widget source="session.CurrentService" render="j00zekModRunningText" position="1410,895" zPosition="1" size="460,25" font="Roboto_HD; 21" halign="center" backgroundColor="black" transparent="1">
+      <!--convert type="BlackHarmonygExtraTuner">TunerInfo</convert-->
+      <convert type="j00zekModServiceName2">UseCFG</convert>
     </widget>
     <widget source="session.Event_Now" render="Progress" position="313,880" zPosition="1" size="1032,6" pixmap="BlackHarmony/gfx/progress_ib.png" transparent="1">
       <convert type="EventTime">Progress</convert>
