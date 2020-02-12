@@ -21,7 +21,7 @@ from os import path as os_path
 ######################################################################################
 #config.plugins.j00zekCC.FakeEntry = NoSave(ConfigNothing())
 ######################################################################################
-def buildList():
+def buildMlist():
     Mlist = []
     #
     #self.list.append(getConfigListEntry(_(" "), config.plugins.j00zekCC.FakeEntry))
@@ -75,7 +75,7 @@ def buildList():
 ######################################################################################
 class e2ComponentsConfig(Screen, ConfigListScreen):
     def buildList(self):
-        self["config"].list = buildList()
+        self["config"].list = buildMlist()
 
     def __init__(self, session):
         from enigma import getDesktop

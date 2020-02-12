@@ -18,7 +18,7 @@ from Poll import Poll
 from Tools.Directories import fileExists
 import os
 
-DBG = True
+DBG = False
 if DBG: 
     try: from Components.j00zekComponents import j00zekDEBUG
     except Exception: DBG = False
