@@ -1099,7 +1099,7 @@ class TreeUserSkinScreens(Screen):
             self["PreviewPicture"].hide()
         
         def getPIC(picName):
-            printDEBUG("[UserSkin:PreviewTimerCB] getPIC('%s')" % picName )
+            #printDEBUG("[UserSkin:PreviewTimerCB] getPIC('%s')" % picName )
             if path.exists('/tmp/preview.jpg'):
                 remove('/tmp/preview.jpg')
             if not self.PreviewAnims is None:
