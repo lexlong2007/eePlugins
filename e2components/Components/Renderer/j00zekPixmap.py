@@ -72,4 +72,8 @@ class j00zekPixmap(Renderer):
     def changed(self, what):
         if what[0] != self.CHANGED_CLEAR:
             if self.instance:
-                self.picload.startDecode(self.iconFileName)
+                if self.iconFileName == "":
+                    if self.source.text is not None and self.source.text != '':
+                        self.picload.startDecode(self.source.text)
+                else:
+                    self.picload.startDecode(self.iconFileName)

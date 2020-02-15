@@ -2,7 +2,7 @@ from version import Version
 Info='@j00zek %s' % Version
 
 ########################### Tlumaczenia ###########################################
-from Components.j00zekModHex2strColor import Hex2strColor as h2c
+from Components.j00zekModHex2strColor import Hex2strColor as h2c, clr
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 import gettext
@@ -62,12 +62,12 @@ config.plugins.j00zekCC.snVFDtype = ConfigSelection(default = "\x25N", choices =
                                                                                   ("\x25n - \x25N - \x25E (\x25e)", _("CHnumber -CHname - EVname (progress \x25)")),
                                                                                   ("\x25D", _("HH:MM E.g. 07:23")), ("\x25d", _("HH:MM E.g. 7:23"))
                                                                                  ])
-config.plugins.j00zekCC.snINFOtype = ConfigSelection(default = "\x25S", choices = [("\x25S", _('Sat name')),("\x25T", _('Transponder info')),
-                                                                                   (h2c(0x0000FF00) + " \x25s " + h2c(0x00FFCC00) + " \x25T ", '%s %s %s %s' %( h2c(0x0000FF00), _('Signal type'), h2c(0x00FFCC00), _('Transponder info'))),
-                                                                                   (h2c(0x0000FF00) + " \x25s " + h2c(0x00FFCC00) + " \x25S " + h2c(0x007F7F7F) + " \x25P", '%s %s %s %s %s %s' %( h2c(0x0000FF00), _('Signal type'), h2c(0x00FFCC00), _('Sat name'), h2c(0x007F7F7F), _('Provider'))),
-                                                                                   (h2c(0x0000FF00) + " \x25s " + h2c(0x00FFCC00) + " \x25S " + h2c(0x007F7F7F) + " \x25T", '%s %s %s %s %s %s' %( h2c(0x0000FF00), _('Signal type'), h2c(0x00FFCC00), _('Sat name'), h2c(0x007F7F7F), _('Transponder info'))),
-                                                                                   (h2c(0x0000FF00) + " \x25s " + h2c(0x00FFCC00) + " \x25T " + h2c(0x007F7F7F) + " \x25B", '%s %s %s %s %s %s' %( h2c(0x0000FF00), _('Signal type'), h2c(0x00FFCC00), _('Transponder info'), h2c(0x007F7F7F), _('Bouquet name'))),
-                                                                                   (h2c(0x0000FF00) + " \x25s " + h2c(0x00FFCC00) + " \x25T " + h2c(0x007F7F7F) + " \x25P", '%s %s %s %s %s %s' %( h2c(0x0000FF00), _('Signal type'), h2c(0x00FFCC00), _('Transponder info'), h2c(0x007F7F7F), _('Provider'))),
+config.plugins.j00zekCC.snINFOtype = ConfigSelection(default = "\x25S", choices = [("\x25S", _('Sat name')), ("\x25T", _('Transponder info')),
+                                                                                   ("\x25cB \x25s \x25cY \x25T", '%s %s %s %s' %( clr['B'], _('Signal type'), clr['Y'], _('Transponder info'))),
+                                                                                   ("\x25cB \x25s \x25cY \x25S \x25cG \x25P", '%s %s %s %s %s %s' %( clr['B'], _('Signal type'), clr['Y'], _('Sat name'), clr['G'], _('Provider'))),
+                                                                                   ("\x25cB \x25s \x25cY \x25S \x25cG \x25T", '%s %s %s %s %s %s' %( clr['B'], _('Signal type'), clr['Y'], _('Sat name'), clr['G'], _('Transponder info'))),
+                                                                                   ("\x25cB \x25s \x25cY \x25T \x25cG \x25B", '%s %s %s %s %s %s' %( clr['B'], _('Signal type'), clr['Y'], _('Transponder info'), clr['G'], _('Bouquet name'))),
+                                                                                   ("\x25cB \x25s \x25cY \x25T \x25cG \x25P", '%s %s %s %s %s %s' %( clr['B'], _('Signal type'), clr['Y'], _('Transponder info'), clr['G'], _('Provider')))
                                                                                  ])
 #rollerCharLCD
 config.plugins.j00zekCC.scroll_speed = ConfigSelection(default = "300", choices = [("500", _("slow")), ("300", _("normal")), ("100", _("fast"))])
@@ -89,11 +89,17 @@ config.plugins.j00zekCC.feInfoTitle = ConfigSelection(default = "", choices = [(
 config.plugins.j00zekCC.ciFormat = ConfigSelection(default = "", choices = [("", _("Defined in skin")), ("%SCFN %S %H %SY %PV %SP %PR %C %P %p %O %R %T", _("All info in a line")),
                                                                              ("%SCN %n %S %n %H %n %SY %n %PV %n %SP %n %PR %n %C %n %P %n %p %n %O %n %R %n %T", _("All info in a column")),
                                                                              ("%SCN", _("Running Softcam name")), (_("%SCFN"), _("Running Softcam file name")),
+                                                                             (h2c(0x0000CC99) + " %SCFN ", '%s %s ' %( h2c(0x0000CC99), _('Running Softcam file name'))),
                                                                              ("%SCFN , %R", _("Running Softcam file name, READER")),
+                                                                             (h2c(0x0000FF00) + " %SCFN " + h2c(0x00FFCC00) + " %R", '%s %s %s %s' %( h2c(0x0000FF00), _('Running Softcam file name'), h2c(0x00FFCC00), _('READER'))),
                                                                              (_("Coded program %SY"), _("TXT PROVIDER")),
                                                                              ("CAID: %C PROV: %p HOPS: %H TIME: %T", _("CAID, PROV, HOPS, TIME")),
                                                                              ("CAID: %C PROV: %p FROM: %S %SP HOPS: %H TIME: %T", _("CAID, PROV, FROM, HOPS, TIME")),
-                                                                             ("CAID: %C PROV: %p FROM: %O HOPS: %H TIME: %T", _("CAID, PROV, SOURCE, HOPS, TIME"))
+                                                                             ("CAID: %C PROV: %p FROM: %O HOPS: %H TIME: %T", _("CAID, PROV, SOURCE, HOPS, TIME")),
+                                                                             (h2c(0x00FFCC00) + " CAID: %C PROV: %p HOPS: %H TIME: %T ", '%s %s ' %( h2c(0x00FFCC00), _('CAID, PROV, HOPS, TIME'))),
+                                                                             (h2c(0x0000CC99) + " CAID: %C PROV: %p FROM: %S %SP HOPS: %H TIME: %T ", '%s %s ' %( h2c(0x0000CC99), _('CAID, PROV, FROM, HOPS, TIME'))),
+                                                                             (h2c(0x0000B7EB) + " CAID: %C PROV: %p FROM: %O HOPS: %H TIME: %T ", '%s %s ' %( h2c(0x0000B7EB), _('CAID, PROV, SOURCE, HOPS, TIME'))),
+                                                                             (h2c(0x0000FF00) + " CAID: %C " + h2c(0x00FFCC00) + " PROV: %p " + h2c(0x0000CC99) + " FROM: %S %SP " + h2c(0x0000FF00) + " HOPS: %H " + h2c(0x00FFCC00) + " TIME: %T", '%s %s %s %s %s %s %s %s %s %s' %( h2c(0x0000FF00), _('CAID:'), h2c(0x00FFCC00), _('PROV:'), h2c(0x0000CC99), _('FROM:'), h2c(0x0000FF00), _('HOPS:'), h2c(0x00FFCC00), _('TIME:')))
                                                                             ])
 
 #ConfigText(default = _("none")) #("", _(""))

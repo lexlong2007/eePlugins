@@ -18,9 +18,11 @@ class j00zekModEventName(Converter, object):
     PDCTIME = 11
     PDCTIMESHORT = 12
     ISRUNNINGSTATUS = 13
+    EPGPIC = 14
 
     def __init__(self, type):
         Converter.__init__(self, type)
+        self.picFileName = ''
         if type == "Description":
             self.type = self.SHORT_DESCRIPTION
         elif type == "ExtendedDescription":
@@ -47,6 +49,9 @@ class j00zekModEventName(Converter, object):
             self.type = self.PDCTIMESHORT
         elif type == "IsRunningStatus":
             self.type = self.ISRUNNINGSTATUS
+        elif typestartswith('ifEPGpic:'):
+            self.type = self.EPGPIC
+            self.picFileName = type.split(':')[1]
         else:
             self.type = self.NAME
 
@@ -104,6 +109,8 @@ class j00zekModEventName(Converter, object):
                 return ""
             else:
                 return getGenreStringSub(genre.getLevel1(), genre.getLevel2())
+        elif self.type == self.EPGPIC:
+            pass
         elif self.type == self.NAME_NOW:
             return pgettext("now/next: 'now' event label", "Now") + ": " + event.getEventName()
         elif self.type == self.NAME_NEXT:

@@ -31,7 +31,7 @@
 from Components.config import config
 from Components.Converter.Converter import Converter
 from Components.Element import cached
-from Components.j00zekModHex2strColor import Hex2strColor
+from Components.j00zekModHex2strColor import Hex2strColor, clr
 from enigma import iServiceInformation, iPlayableService, iPlayableServicePtr, eServiceReference, eServiceCenter, eTimer, getBestPlayableServiceReference, eEPGCache
 from time import time, localtime, strftime
 import NavigationInstance
@@ -92,6 +92,8 @@ class j00zekModServiceName2(Converter, object):
 # %t -                  E.g. Satelita
 # %Y -                  E.g. 27500
 # Example of definition >%F  %Y %p  %f  %s  %M (%O)<
+
+#%cY yellow
     
     def __init__(self, type):
         Converter.__init__(self, type)
@@ -679,8 +681,13 @@ class j00zekModServiceName2(Converter, object):
             else:
                 return ""
             for line in tmp:
-                f = line[:1]
-                if f == 'N':      # %N - Name
+                LineSpilitChar = 1
+                f = line[:LineSpilitChar]
+                colDef = line[1:].strip()
+                if f == 'c' and colDef in ('Y','R','G','B','Gray'):
+                    ret += clr.get(colDef, Hex2strColor(0x00e6e6e6))
+                    LineSpilitChar += len(colDef)
+                elif f == 'N':      # %N - Name
                     name = ref and (info.getName(ref) or 'N/A') or (info.getName() or 'N/A')
                     postfix = ''
                     if self.ref:
@@ -765,7 +772,7 @@ class j00zekModServiceName2(Converter, object):
                         ret += self.getTransponderInfo(self.info, self.ref, f)
                     else:
                         ret += self.getTransponderInfo(info, ref, f)
-                ret += line[1:]
+                ret += line[LineSpilitChar:]
                 if DBG: j00zekDEBUG("[j00zekModServiceName2:getText] >>> after '%s' ret='%s'" % (f,ret))
             return '%s'%(ret.replace('N/A', '').strip())
 

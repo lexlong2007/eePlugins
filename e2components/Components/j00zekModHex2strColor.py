@@ -15,3 +15,10 @@ def Hex2strColor(rgb):
   for i in range(28, -1, -4):
     out += "%s" % chr(0x30 + (rgb >> i & 0x0F))
   return "\c%s" % out
+
+clr={'Y':       Hex2strColor(0x00ffcc00), #yellow
+     'R':       Hex2strColor(0x00FF3333), #red
+     'G':       Hex2strColor(0x0066FF33), #
+     'B':       Hex2strColor(0x0033ccff), #
+     'Gray':    Hex2strColor(0x00e6e6e6)  #gray
+  }

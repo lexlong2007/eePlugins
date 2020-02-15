@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: j00zekOPKGmanager\n"
 "POT-Creation-Date: 2016-01-07 12:00+0100\n"
-"PO-Revision-Date: 2020-02-10 16:17+0100\n"
+"PO-Revision-Date: 2020-02-12 20:57+0100\n"
 "Last-Translator: j00zek\n"
 "Language-Team: j00zek\n"
 "Language: pl\n"
@@ -88,9 +88,6 @@ msgstr "Głowice:"
 msgid "FULL_DESCRIPTION"
 msgstr "Pełny opis"
 
-msgid "---Frontend information---"
-msgstr "--- Informacja o głowicach tunera ---"
-
 msgid "if defined in skin"
 msgstr "Jeśli zdefiniowano w skórce"
 
@@ -133,11 +130,17 @@ msgstr "Przewijaj ( Włączone )"
 msgid "Running Softcam name"
 msgstr "Nazwę \"Emulatora\""
 
-msgid "Running Softcam file name"
-msgstr "Nazwę pliku \"Emulatora\""
+msgid "Running Softcam file name "
+msgstr "Nazwę pliku \"Emulatora\" "
 
 msgid "Running Softcam file name, READER"
-msgstr "Nazwę pliku \"Emulatora\" oraz czytnik"
+msgstr "Nazwę pliku \"Emulatora\"  oraz czytnik"
+
+msgid "READER"
+msgstr "oraz czytnik"
+
+msgid "Running Softcam file name"
+msgstr "Nazwę pliku \"Emulatora\""
 
 msgid "slow"
 msgstr "Wolno"
@@ -181,9 +184,6 @@ msgstr "Tytuł sekcji:"
 msgid "TXT PROVIDER"
 msgstr "Nazwę tekstową dostawcy systemu kodowania"
 
-msgid "---VFD settings---"
-msgstr "--- Ustawienia VFD ---"
-
 msgid "HH:MM day.month.year"
 msgstr "HH:MM dzień. Miesiąc. Rok"
 
@@ -216,13 +216,16 @@ msgid "Delay"
 msgstr "Opóźnienie:"
 
 msgid "---Dynamic Font Size---"
-msgstr "--- Dynamiczna zmiana czcionki ---"
+msgstr "*** Dynamiczna zmiana czcionki ***"
 
 msgid "Event Name minimum font size"
 msgstr "Minimalna wielkość tytułu audycji:"
 
 msgid "---Event description (EventName)---"
-msgstr "--- Nazwa zdarzenia (EventName) ---"
+msgstr "*** Nazwa zdarzenia (EventName) ***"
+
+msgid "---Frontend information---"
+msgstr "*** Informacja o głowicach tunera ***"
 
 msgid "Initial delay"
 msgstr "Początkowe opóźnienie:"
@@ -246,7 +249,7 @@ msgid "Show:"
 msgstr "Pokaż w infobarze:"
 
 msgid "---SoftCam information---"
-msgstr "--- Informacje SoftCam ---"
+msgstr "*** Informacje SoftCam ***"
 
 msgid "Scroll speed"
 msgstr "Prędkość przewijania:"
@@ -267,7 +270,7 @@ msgid "Standby clock position"
 msgstr "Ustaw położenie zegara:"
 
 msgid "---Scrolling text---"
-msgstr "--- Przewijanie tekstu ---"
+msgstr "*** Przewijanie tekstu ***"
 
 msgid "Service Name minimum font size"
 msgstr "Minimalna wielkość nazwy kanału:"
@@ -276,7 +279,10 @@ msgid "Type"
 msgstr "Typ przewijania:"
 
 msgid "---User paths---"
-msgstr "--- Ścieżki użytkownika ---"
+msgstr "*** Ścieżki użytkownika ***"
+
+msgid "---VFD settings---"
+msgstr "*** Ustawienia VFD ***"
 
 # other def
 msgid "Are you sure you want to save this configuration?"
