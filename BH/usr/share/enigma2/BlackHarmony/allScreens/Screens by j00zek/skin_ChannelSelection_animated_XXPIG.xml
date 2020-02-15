@@ -26,7 +26,10 @@
       <convert type="EventTime">EndTime</convert>
       <convert type="ClockToText">Format:- %H:%M</convert>
     </widget>
-    <ePixmap pixmap="BlackHarmony/gfx/progress_gray.png" position="1225,540" size="460,6" zPosition="-10" alphatest="blend" />
+    <!--ePixmap pixmap="BlackHarmony/gfx/progress_gray.png" position="1225,540" size="460,6" zPosition="-1" alphatest="blend" /-->
+        <widget source="ServiceEvent" render="j00zekPixmap" position="1225,540" size="460,6" zPosition="-1" alphatest="blend">
+                <convert type="j00zekModEventName">isEPGpic:BlackHarmony/gfx/progress_gray.png</convert>
+        </widget>
     <widget source="ServiceEvent" render="Progress" position="1225,540" size="460,6" pixmap="BlackHarmony/gfx/progress_scan.png" transparent="1">
       <convert type="EventTime">Progress</convert>
     </widget>
