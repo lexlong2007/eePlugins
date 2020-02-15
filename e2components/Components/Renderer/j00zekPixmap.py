@@ -74,6 +74,11 @@ class j00zekPixmap(Renderer):
             if self.instance:
                 if self.iconFileName == "":
                     if self.source.text is not None and self.source.text != '':
-                        self.picload.startDecode(self.source.text)
+                        if self.source.text.startswith('/'):
+                            self.picload.startDecode(self.source.text)
+                        else:
+                            self.picload.startDecode(resolveFilename(SCOPE_CURRENT_SKIN, self.source.text))
+                    else:
+                        self.instance.setPixmap(None)
                 else:
                     self.picload.startDecode(self.iconFileName)
