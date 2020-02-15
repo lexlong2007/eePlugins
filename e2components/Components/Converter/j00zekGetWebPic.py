@@ -18,7 +18,7 @@ from Components.Element import cached
 from Components.j00zekComponents import isINETworking
 from Converter import Converter
 from enigma import eTimer
-import os, urllib, urllib2
+import os
 
 DBG = False
 if DBG: 
@@ -72,6 +72,10 @@ class j00zekGetWebPic(Converter, object):
                 f.write("downloadToFile=/tmp/randomWebPic.jpg\n")
                 f.close()
         if DBG: j00zekDEBUG('\n\t read params: type="%s"\n\t\t self.RefreshTimeMS=%s, self.downloadCommand=%s,\n\t\t self.downloadToFile=%s' % (type,self.RefreshTimeMS,self.downloadCommand,self.downloadToFile)) 
+        self.lastFile = '%s.last.jpg' % self.downloadToFile
+        MoveCMD = 'mv -f %s %s' % (self.downloadToFile, self.lastFile)
+        rmCMD = 'rm -f %s' % self.lastFile
+        self.runCMD = '%s;%s;%s' % (MoveCMD, self.downloadCommand, rmCMD)
         self.refreshTimer.start(100)         
 
     def getPic(self):
@@ -80,7 +84,7 @@ class j00zekGetWebPic(Converter, object):
         if isINETworking():
             try:
                 with open("/proc/sys/vm/drop_caches", "w") as f: f.write("1\n")
-                self.myConsole.ePopen('rm -f %s;%s' % (self.downloadToFile, self.downloadCommand))
+                self.myConsole.ePopen(self.runCMD)
                 #os.system('rm -f %s;%s &' % (self.downloadToFile, self.downloadCommand))
             except Exception as e:
                 if DBG: j00zekDEBUG('j00zekGetWebPic:getPic] got Exception: %s' % str(e))
@@ -101,7 +105,10 @@ class j00zekGetWebPic(Converter, object):
         retVal = ''
         if os.path.exists(self.downloadToFile):
             retVal = self.downloadToFile
-        if DBG: j00zekDEBUG('[j00zekGetWebPic:getText] = %s' % self.downloadToFile)
+            if DBG: j00zekDEBUG('[j00zekGetWebPic:getText] newFile = %s' % self.downloadToFile)
+        elif os.path.exists(self.lastFile):
+            retVal = self.lastFile
+            if DBG: j00zekDEBUG('[j00zekGetWebPic:getText] lastFile = %s' % self.downloadToFile)
         return retVal
         
     text = property(getText)
