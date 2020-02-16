@@ -2,8 +2,15 @@ from Components.config import config
 from Components.Converter.Converter import Converter
 from Components.Element import cached
 from Components.Converter.genre import getGenreStringSub
+from Components.Converter.Poll import Poll
 
-class j00zekModEventName(Converter, object):
+DBG = False
+try:
+    if DBG: from Components.j00zekComponents import j00zekDEBUG
+except Exception:
+    DBG = False
+
+class j00zekModEventName(Poll, Converter, object):
     NAME = 0
     SHORT_DESCRIPTION = 1
     EXTENDED_DESCRIPTION = 2
@@ -22,7 +29,10 @@ class j00zekModEventName(Converter, object):
 
     def __init__(self, type):
         Converter.__init__(self, type)
+        Poll.__init__(self)
         self.picFileName = ''
+        self.poll_interval = 100
+        self.WaitForEvent = True
         
         if type == "Description":
             self.type = self.SHORT_DESCRIPTION
@@ -72,8 +82,19 @@ class j00zekModEventName(Converter, object):
     def getText(self):
         event = self.source.event
         if event is None:
+            if self.WaitForEvent == True:
+                if DBG: j00zekDEBUG("[j00zekModEventName:getText] event is None, wating 100ms")
+                self.poll_enabled = True
+                self.WaitForEvent = False
+            else:
+                self.poll_enabled = False
+                if DBG: j00zekDEBUG("[j00zekModEventName:getText] event is None")
             return ""
-
+        else:
+            if DBG: j00zekDEBUG("[j00zekModEventName:getText] event data found")
+            self.WaitForEvent = True #for next event
+            self.poll_enabled = False
+            
         if self.type == self.NAME:
             return event.getEventName()
         elif self.type == self.SRATING:
@@ -111,6 +132,7 @@ class j00zekModEventName(Converter, object):
             else:
                 return getGenreStringSub(genre.getLevel1(), genre.getLevel2())
         elif self.type == self.EPGPIC:
+            if DBG: j00zekDEBUG("[j00zekModEventName:getText] self.type == self.EPGPIC, returning '%s'" % self.picFileName)
             return self.picFileName
         elif self.type == self.NAME_NOW:
             return pgettext("now/next: 'now' event label", "Now") + ": " + event.getEventName()
@@ -177,4 +199,4 @@ class j00zekModEventName(Converter, object):
                 return tmdbRating + description + extended
                       
 
-    text = property(getText)
+    text = property(getText) 

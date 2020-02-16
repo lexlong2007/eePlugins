@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: j00zekOPKGmanager\n"
 "POT-Creation-Date: 2016-01-07 12:00+0100\n"
-"PO-Revision-Date: 2020-02-12 20:57+0100\n"
+"PO-Revision-Date: 2020-02-16 06:33+0100\n"
 "Last-Translator: j00zek\n"
 "Language-Team: j00zek\n"
 "Language: pl\n"
@@ -290,6 +290,9 @@ msgstr "Na pewno zapisać tą konfigurację?"
 
 msgid "Cancel"
 msgstr "Anuluj"
+
+msgid "e2components @j00zek %s"
+msgstr "Menu komponentów wersja: %s"
 
 msgid "Exit"
 msgstr "Wyjście"

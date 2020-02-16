@@ -18,6 +18,7 @@ from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap
 from os import path as os_path
+from version import Version
 ######################################################################################
 #config.plugins.j00zekCC.FakeEntry = NoSave(ConfigNothing())
 ######################################################################################
@@ -108,7 +109,9 @@ class e2ComponentsConfig(Screen, ConfigListScreen):
                 "yellow": self.yellowButton,
             }, -2)
         ConfigListScreen.__init__(self, [], session)
-        self.title = _("j00zek e2components configuration")
+        #self.title = _("j00zek e2components configuration")
+        self.title = _("e2components @j00zek %s" % Version)
+        self.setTitle(_("e2components @j00zek %s") % Version)
         self.buildList()
 
     def selectFolder(self):

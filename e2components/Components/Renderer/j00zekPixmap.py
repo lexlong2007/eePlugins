@@ -13,6 +13,12 @@ except Exception:
  
 from enigma import eEnv, ePicLoad, eRect, eSize, gPixmapPtr
 
+DBG = False
+try:
+    if DBG: from Components.j00zekComponents import j00zekDEBUG
+except Exception:
+    DBG = False
+
 class j00zekPixmap(Renderer):
     def __init__(self):
         Renderer.__init__(self)
@@ -73,6 +79,7 @@ class j00zekPixmap(Renderer):
         if what[0] != self.CHANGED_CLEAR:
             if self.instance:
                 if self.iconFileName == "":
+                    if DBG: j00zekDEBUG("[j00zekPixmap:changed] dynamic mode, self.source.text='%s'" % str(self.source.text))
                     if self.source.text is not None and self.source.text != '':
                         if self.source.text.startswith('/'):
                             self.picload.startDecode(self.source.text)
