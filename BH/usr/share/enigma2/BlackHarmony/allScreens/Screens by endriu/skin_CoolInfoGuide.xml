@@ -84,7 +84,7 @@
     
 	<widget name="list" CoolFontColSel="lemon" position="85,206" size="1140,750" itemHeight="50" CoolFont="Roboto_HD;40" CoolEventFont="Roboto_HD;40" selectionPixmap="BlackHarmony/menu/sel_1200_50.png" scrollbarWidth="10" CoolBackColorSel="background" CoolDayPos="0" CoolDayHPos="3" CoolDaySize="80" CoolTimePos="95" CoolTimeHPos="3" CoolTimeSize="102" CoolEventPos="210" CoolEventHPos="3" CoolEventSize="910" CoolDayColor="white" CoolTunerCol="white" CoolTimeColor="blue" CoolEventColor="white" CoolRecColor="red" transparent="1" scrollbarMode="showOnDemand" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f"/>
     <widget source="Event" render="Label" position="1251,355" zPosition="5" size="580,100" font="HD_Thin; 35" halign="left" foregroundColor="light_yellow" backgroundColor="background" transparent="1" valign="center">
-      <convert type="EventName">Name</convert>
+      <convert type="j00zekModEventName">Name</convert>
     </widget>
     <widget alphatest="blend" position="1345,163" size="400,170" render="j00zekPicons" picontype="zzpicon" source="Service" transparent="1">
       <convert type="j00zekModServiceName2">Reference</convert>

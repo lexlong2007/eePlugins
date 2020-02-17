@@ -99,7 +99,7 @@
     </widget>
     <widget source="Title" render="Label" position="796,25" size="392,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1" zPosition="1" />
     <widget source="Event" render="Label" position="65,127" size="700,140" font="HD_Thin; 33" foregroundColor="light_yellow" backgroundColor="background" transparent="1" valign="bottom" zPosition="1">
-      <convert type="EventName">Name</convert>
+      <convert type="j00zekModEventName">Name</convert>
     </widget>
     <widget source="Event" render="Label" position="65,769" size="75,30" font="Roboto_HD; 25" halign="right" backgroundColor="background" transparent="1" foregroundColor="green" zPosition="1">
       <convert type="EventTime">StartTime</convert>
@@ -115,7 +115,7 @@
       <convert type="RemainingToText">InMinutes</convert>
     </widget>
     <widget render="j00zekModRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=4,startdelay=8000,wrap" foregroundColor="white" backgroundColor="background" position="65,287" size="1095,460" font="Roboto_HD; 29" transparent="1" zPosition="1">
-      <convert type="EventName">ExtendedDescription</convert>
+      <convert type="j00zekModEventName">ExtendedDescription</convert>
     </widget>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="41,850" size="35,27" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="328,850" size="35,27" alphatest="blend" />
@@ -140,7 +140,7 @@
     <widget name="list" position="84,210" size="1758,470" itemHeight="40" zPosition="3" EntryNowBackgroundColor="green_epg" EntryBorderColor="#3b3e3f" EntryBackgroundColor="background" EntryBackgroundColorSelected="red" EntryNowBackgroundColorSelected="#ffd200" scrollbarMode="showOnDemand" EntryRecColor="red" foregroundColorSelected="white" enableWrapAround="1" transparent="1" />
     <widget name="timeline_now" position="80,210" zPosition="4" size="15,470" pixmap="BlackHarmony/gfx/timeline-ct1.png" alphatest="blend" />
     <widget source="Event" render="Label" position="244,675" size="1100,46" font="HD_Thin; 33" foregroundColor="light_yellow" backgroundColor="background" transparent="1" valign="bottom">
-      <convert type="EventName">Name</convert>
+      <convert type="j00zekModEventName">Name</convert>
     </widget>
     <widget source="Event" render="Label" position="64,690" size="75,30" font="Roboto_HD; 25" halign="right" backgroundColor="background" transparent="1" foregroundColor="green">
       <convert type="EventTime">StartTime</convert>
@@ -156,7 +156,7 @@
       <convert type="RemainingToText">InMinutes</convert>
     </widget>
     <widget render="j00zekModRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=4,startdelay=8000,wrap" foregroundColor="white" backgroundColor="background" position="68,739" size="1782,216" font="Roboto_HD; 29" transparent="1">
-      <convert type="EventName">ExtendedDescription</convert>
+      <convert type="j00zekModEventName">ExtendedDescription</convert>
     </widget>
     <widget name="JumpInterval" position="978,148" size="200,25" zPosition="5" halign="right" font="Roboto_HD; 22" backgroundColor="background" foregroundColor="green" transparent="1" />
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="95,1000" size="35,27" alphatest="blend" />
@@ -184,7 +184,7 @@
     <widget name="list" position="84,545" size="1758,370" itemHeight="35" zPosition="3" EntryNowBackgroundColor="green_epg" EntryBorderColor="#3b3e3f" EntryBackgroundColor="background" EntryBackgroundColorSelected="red" EntryNowBackgroundColorSelected="#ffd200" scrollbarMode="showOnDemand" EntryRecColor="red" foregroundColorSelected="white" enableWrapAround="1" transparent="1" />
     <widget name="timeline_now" position="80,545" zPosition="4" size="15,370" pixmap="BlackHarmony/gfx/timeline-ct1.png" alphatest="blend" />
     <widget source="Event" render="Label" position="244,912" size="1100,46" font="HD_Thin;34" foregroundColor="light_yellow" backgroundColor="background" transparent="1" valign="bottom">
-      <convert type="EventName">Name</convert>
+      <convert type="j00zekModEventName">Name</convert>
     </widget>
     <widget source="Event" render="Label" position="64,925" size="75,30" font="Roboto_HD;25" halign="right" backgroundColor="background" transparent="1" foregroundColor="green">
       <convert type="EventTime">StartTime</convert>
@@ -200,7 +200,7 @@
       <convert type="RemainingToText">InMinutes</convert>
     </widget>
     <widget render="Label" source="Event" foregroundColor="white" backgroundColor="background" position="84,160" size="1222,316" font="Roboto_HD;27" transparent="1" valign="top">
-      <convert type="EventName">ExtendedDescription</convert>
+      <convert type="j00zekModEventName">ExtendedDescription</convert>
     </widget>
     <widget source="session.VideoPicture" render="Pig" position="1310,160" zPosition="3" size="535,315" backgroundColor="transparent" />
     <widget name="JumpInterval" position="978,495" size="200,25" zPosition="5" halign="right" font="Roboto_HD;22" backgroundColor="background" foregroundColor="green" transparent="1" />

@@ -18,7 +18,7 @@
     <widget name="list" position="75,180" size="1767,500" itemHeight="40" zPosition="3" EntryNowBackgroundColor="red" EntryBorderColor="#3b3e3f" EntryBackgroundColor="background" EntryBackgroundColorSelected="red" EntryNowBackgroundColorSelected="#ffd200" scrollbarMode="showOnDemand" EntryRecColor="red" foregroundColorSelected="white" enableWrapAround="1" scrollbarWidth="15" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" transparent="1" />
     <widget name="timeline_now" position="75,180" zPosition="4" size="15,495" pixmap="BlackHarmony/gfx/timeline-ct1.png" alphatest="blend" />
     <widget source="Event" render="Label" position="330,675" size="1200,46" font="HD_Thin; 34" valign="bottom" foregroundColor="light_yellow" backgroundColor="black" transparent="1">
-      <convert type="EventName">Name</convert>
+      <convert type="j00zekModEventName">Name</convert>
     </widget>
     <widget source="Event" render="Label" position="20,680" size="150,40" font="Roboto_HD; 34" halign="right" foregroundColor="green" backgroundColor="background" transparent="1">
       <convert type="EventTime">StartTime</convert>
@@ -34,7 +34,7 @@
       <convert type="RemainingToText">InMinutes</convert>
     </widget>
     <widget render="j00zekModRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=scroll,startdelay=8000,oneshot=5000,wrap" position="80,739" size="1762,224" font="Roboto_HD; 30" foregroundColor="white" backgroundColor="black" transparent="1">
-      <convert type="EventName">ExtendedDescription</convert>
+      <convert type="j00zekModEventName">ExtendedDescription</convert>
     </widget>
     <widget name="JumpInterval" position="978,148" size="200,25" zPosition="5" halign="right" font="Roboto_HD; 22" foregroundColor="green" backgroundColor="background" transparent="1" />
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="95,1001" size="35,27" alphatest="blend" />
@@ -67,7 +67,7 @@
     <widget name="list" position="75,180" size="1767,460" itemHeight="35" zPosition="3" EntryNowBackgroundColor="green_epg" EntryBorderColor="#3b3e3f" EntryBackgroundColor="background" EntryBackgroundColorSelected="red" EntryNowBackgroundColorSelected="#ffd200" scrollbarMode="showOnDemand" EntryRecColor="red" foregroundColorSelected="white" enableWrapAround="1" scrollbarWidth="15" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" transparent="1" />
     <widget name="timeline_now" position="75,180" zPosition="4" size="15,455" pixmap="BlackHarmony/gfx/timeline-ct1.png" alphatest="blend" />
     <widget source="Event" render="Label" position="250,650" size="900,32" font="Roboto_HD;30" foregroundColor="light_yellow" backgroundColor="background" transparent="1" >
-      <convert type="EventName">Name</convert>
+      <convert type="j00zekModEventName">Name</convert>
     </widget>
     <widget source="Event" render="Label" position="70,652" size="70,30" font="Roboto_HD;25" halign="right" backgroundColor="background" transparent="1" foregroundColor="green">
       <convert type="EventTime">StartTime</convert>
@@ -84,7 +84,7 @@
     </widget>
     <eLabel position="75,685" size="1211,3" backgroundColor="yellow" />
 	<widget render="j00zekModRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=scroll,startdelay=8000,oneshot=5000,wrap" foregroundColor="white" backgroundColor="background" position="75,701" size="1211,262" font="Roboto_HD; 27" transparent="1">
-      <convert type="EventName">ExtendedDescription</convert>
+      <convert type="j00zekModEventName">ExtendedDescription</convert>
     </widget>
     <widget source="session.VideoPicture" render="Pig" position="1295,647" zPosition="3" size="550,309" backgroundColor="transparent" /> 
 	
@@ -269,7 +269,7 @@
 			
 		<eLabel position="75,780" size="1774,2" backgroundColor="yellow" />
 		<widget render="j00zekModRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=scroll,startdelay=6000,oneshot=5000,wrap" halign="left" font="Roboto_HD; 30" position="75,790" size="1780,174" foregroundColor="white" backgroundColor="black" transparent="1" >
-          <convert type="EventName">ExtendedDescription</convert>
+          <convert type="j00zekModEventName">ExtendedDescription</convert>
         </widget>
 		
 	<ePixmap pixmap="BlackHarmony/buttons/red.png" position="95,1001" size="35,27" alphatest="blend" />
@@ -312,7 +312,7 @@
 			<convert type="ClockToText">Default</convert>
 		</widget>
 		<widget source="session.Event_Now" render="Label" position="1234,640" size="611,30" font="Roboto_HD;26" noWrap="1" backgroundColor="black" transparent="1">
-			<convert type="EventName">Name</convert>
+			<convert type="j00zekModEventName">Name</convert>
 		</widget>
 		
 		<widget source="session.Event_Next" render="Label" position="1154,690" size="70,30" font="Roboto_HD;26" backgroundColor="black" transparent="1" foregroundColor="#000090e6" >
@@ -321,7 +321,7 @@
 		</widget>
 		
 		<widget source="session.Event_Next" render="Label" position="1234,690" size="611,30" font="Roboto_HD;26" noWrap="1" backgroundColor="black" transparent="1">
-			<convert type="EventName">Name</convert>
+			<convert type="j00zekModEventName">Name</convert>
 		</widget>
 	</screen>
   </skin>

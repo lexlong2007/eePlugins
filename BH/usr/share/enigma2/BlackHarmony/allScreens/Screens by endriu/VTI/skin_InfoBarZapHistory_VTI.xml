@@ -22,7 +22,7 @@
       <convert type="ClockToText">Format:%H:%M</convert>
     </widget>
     <widget source="ServiceEvent" render="BlackHarmonyTypeLabel" position="675,310" size="775,45" font="HD_Thin; 35" halign="left" foregroundColor="light_yellow" backgroundColor="black" transparent="1">
-      <convert type="EventName">Name</convert>
+      <convert type="j00zekModEventName">Name</convert>
     </widget>
 	
 	<eLabel backgroundColor="linie" foregroundColor="lemon" position="684,363" size="760,1" />

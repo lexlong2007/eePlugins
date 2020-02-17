@@ -23,7 +23,7 @@
       <convert type="ClockToText">Default</convert>
     </widget>
  <widget source="session.Event_Now" render="j00zekLabel" position="485,845" size="720,59" font="Regular; 34" halign="left" valign="center" backgroundColor="black" foregroundColor="white" transparent="1" zPosition="1">
-      <convert type="EventName">Name</convert>
+      <convert type="j00zekModEventName">Name</convert>
     </widget>
  <widget source="session.Event_Now" render="Label" position="1205,852" size="180,44" font="Regular; 30" halign="right" valign="center" backgroundColor="black" transparent="1" >
       <convert type="EventTime">Remaining</convert>
@@ -38,7 +38,7 @@
       <convert type="ClockToText">Default</convert>
     </widget>
  <widget source="session.Event_Next" render="j00zekLabel" position="485,928" size="720,59" font="Regular; 34" halign="left" valign="center" backgroundColor="black" transparent="1" foregroundColor="#00595959">
-      <convert type="EventName">Name</convert>
+      <convert type="j00zekModEventName">Name</convert>
     </widget>
  <widget source="session.Event_Next" render="Label" position="1205,935" size="180,45" font="Regular; 30" halign="right" valign="center" backgroundColor="black" transparent="1" foregroundColor="#00595959">
       <convert type="EventTime">Duration</convert>

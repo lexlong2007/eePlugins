@@ -1,4 +1,4 @@
-<screen name="InfoBar" position="center,52" size="1920,1080" title="InfoBar" flags="wfNoBorder" backgroundColor="transparent">
+s<creen name="InfoBar" position="center,52" size="1920,1080" title="InfoBar" flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="45,711" zPosition="-2" size="1900,300" pixmap="BlackHarmony/bg_design/infobar_zpicon.png" />
     <widget source="session.CurrentService" render="j00zekFrontEndIcon" position="989,750" size="44,20" zPosition="3" alphatest="blend" /> 
     <widget source="session.CurrentService" render="j00zekVideoResolutionIcon" position="1094,750" size="37,20" zPosition="5" alphatest="blend" /> 
@@ -48,7 +48,7 @@
   </widget>
   <eLabel text="-" position="580,822" size="20,36" font="Roboto_HD; 36" halign="left" backgroundColor="black" transparent="1" foregroundColor="white" valign="top" />
   <widget source="session.Event_Now" render="Label" position="600,821" size="900,50" font="Roboto_HD; 38" halign="left" backgroundColor="black" transparent="1" foregroundColor="lemon">
-    <convert type="EventName">Name</convert>
+    <convert type="j00zekModEventName">Name</convert>
   </widget>
   <widget source="session.Event_Now" render="Label" position="1490,825" size="150,40" font="Roboto_HD; 36" halign="right" backgroundColor="black" transparent="1">
     <convert type="EventTime">Remaining</convert>
@@ -60,7 +60,7 @@
   </widget>
   <eLabel text="-" position="580,891" size="20,36" font="Roboto_HD; 36" halign="left" foregroundColor="light_grey" backgroundColor="black" transparent="1" valign="top" />
   <widget source="session.Event_Next" render="Label" position="600,889" size="900,50" font="Roboto_HD; 38" halign="left" backgroundColor="black" transparent="1" foregroundColor="light_grey">
-    <convert type="EventName">Name</convert>
+    <convert type="j00zekModEventName">Name</convert>
   </widget>
   <widget source="session.Event_Next" render="Label" position="1490,892" size="150,40" font="Roboto_HD; 36" halign="right" foregroundColor="light_grey" backgroundColor="black" transparent="1">
     <convert type="EventTime">Duration</convert>

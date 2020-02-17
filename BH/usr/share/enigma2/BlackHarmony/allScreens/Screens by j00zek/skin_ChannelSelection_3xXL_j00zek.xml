@@ -31,11 +31,11 @@
       <convert type="ClockToText">Format:%H:%M</convert>
     </widget>
     <widget source="ServiceEvent" render="j00zekLabel" cfgContext="EN" position="770,755" size="900,46" font="HD_Thin;44" backgroundColor="black" transparent="1" halign="left" noWrap="1" foregroundColor="#cc9329">
-      <convert type="EventName">Name</convert>
+      <convert type="j00zekModEventName">Name</convert>
     </widget>
         <!--Opis-->
     <widget render="j00zekModRunningText" source="ServiceEvent" position="20,810" size="935,270" options="movetype=running,startpoint=0,direction=top,steptime=80,repeat=0,startdelay=6000,wrap" halign="left" font="Roboto_HD; 40" backgroundColor="background" transparent="1">
-      <convert type="EventName">ExtendedDescription</convert>
+      <convert type="j00zekModEventName">ExtendedDescription</convert>
     </widget>
         <!--Nastepne audycje-->
         <widget source="ServiceEvent" render="j00zekNextEvents" position="980,810" size="835,172" zPosition="2" noWrap="1" font="Roboto_HD; 36" backgroundColor="black" transparent="1" foregroundColor="light_yellow" >

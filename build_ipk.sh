@@ -24,6 +24,7 @@ plugAbsPath=$(readlink -fn "$1")
 PluginName_lower=`grep 'Package:' < $plugAbsPath/CONTROL/control|cut -d ':' -f2|xargs`
 PluginPath=`grep 'DestinationPath:' < $plugAbsPath/CONTROL/control|cut -d ':' -f2|xargs`
 ExcludeFolder=`grep 'ExcludeFolder' < $plugAbsPath/CONTROL/control|cut -d ':' -f2|xargs`
+RunScriptBeforeBuild=`grep 'RunScriptBeforeBuild' < $plugAbsPath/CONTROL/control|cut -d ':' -f2|xargs`
 
 #find $plugAbsPath -iname "*.py" | 
 #  while read F 
@@ -46,6 +47,9 @@ sed -i "s/^Version\:.*/Version: $version/" $plugAbsPath//CONTROL/control
 [ -e $plugAbsPath/version.py ] && echo "Version='$version'" > $plugAbsPath/version.py
 [ -e $plugAbsPath/Plugins/Extensions/MSNweather/version.py ] && echo "Version='$version'" > $plugAbsPath/Plugins/Extensions/MSNweather/version.py
 find $plugAbsPath/ -type f -name *.po  -exec bash -c 'msgfmt "$1" -o "${1%.po}".mo' - '{}' \;
+if [ ! -z $RunScriptBeforeBuild ] && [ -e $plugAbsPath/$RunScriptBeforeBuild ];then
+  $plugAbsPath/$RunScriptBeforeBuild
+fi
 
 [ -e $ipkdir ] && sudo rm -rf $ipkdir
 mkdir -p $ipkdir$PluginPath/

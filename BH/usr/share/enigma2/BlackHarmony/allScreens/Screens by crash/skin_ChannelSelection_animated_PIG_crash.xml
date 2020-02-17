@@ -25,13 +25,13 @@
     <convert type="j00zekModServiceName2">%O  %s  %F %p %Y %f %M %b</convert>
   </widget>
   <widget render="j00zekModRunningText" source="ServiceEvent" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=6000,wrap" halign="left" font="Roboto_HD; 28" backgroundColor="background" position="1185,465" size="655,265" transparent="1">
-    <convert type="EventName">ExtendedDescription</convert>
+    <convert type="j00zekModEventName">ExtendedDescription</convert>
   </widget>
   <widget source="ServiceEvent" render="Progress" position="1358,768" size="376,6" pixmap="BlackHarmony/gfx/progress_cs.png" transparent="1">
     <convert type="EventTime">Progress</convert>
   </widget>
   <widget source="ServiceEvent" render="Label" position="1185,420" size="655,35" font="HD_Thin; 30" backgroundColor="black" transparent="1" halign="left" noWrap="1" foregroundColor="light_yellow">
-    <convert type="EventName">Name</convert>
+    <convert type="j00zekModEventName">Name</convert>
   </widget>
     <widget backgroundColor="background" font="HD_Thin; 34" halign="left" position="1185,365" render="Label" size="655,38" source="ServiceEvent" transparent="1" valign="center" foregroundColor="green">
     <convert type="ServiceName">Name</convert>

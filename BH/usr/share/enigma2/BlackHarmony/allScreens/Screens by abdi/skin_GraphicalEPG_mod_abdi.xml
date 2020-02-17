@@ -16,7 +16,7 @@
     <widget name="list" position="84,200" size="1758,470" ServiceBorderColor="white" ServiceBorderWidth="1" ServiceNamePadding="3" EventBorderWidth="1" EventNamePadding="3" itemHeight="40" zPosition="3" EntryNowBackgroundColor="red" EntryBorderColor="#3b3e3f" EntryBackgroundColor="background" EntryBackgroundColorSelected="#00A693" EntryNowBackgroundColorSelected="#ffd200" scrollbarMode="showOnDemand" EntryRecColor="red" foregroundColorSelected="white" enableWrapAround="1" scrollbarWidth="15" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" backgroundColor="black" transparent="1" />
     <widget name="timeline_now" position="80,200" zPosition="4" size="15,463" pixmap="BlackHarmony/gfx/timeline-ct1.png" alphatest="blend" />
     <widget source="Event" render="Label" position="330,678" size="1200,35" font="Roboto_HD; 30" halign="left" foregroundColor="light_yellow" backgroundColor="black" transparent="1">
-      <convert type="EventName">Name</convert>
+      <convert type="j00zekModEventName">Name</convert>
     </widget>
     <ePixmap position="290,687" zPosition="3" size="20,20" pixmap="BlackHarmony/icons/now.png"/>
     <widget source="Event" render="Label" position="70,680" size="90,35" font="Roboto_HD; 28" halign="right" foregroundColor="green" backgroundColor="black" transparent="1">
@@ -36,7 +36,7 @@
 	  <convert type="EventTime">Progress</convert>
 	</widget>
     <widget render="j00zekModRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=scroll,startdelay=8000,oneshot=5000,wrap" position="84,739" size="1762,216" font="Roboto_HD; 27" foregroundColor="white" backgroundColor="black" transparent="1">
-      <convert type="EventName">ExtendedDescription</convert>
+      <convert type="j00zekModEventName">ExtendedDescription</convert>
     </widget>
     <widget name="JumpInterval" position="978,148" size="200,25" zPosition="5" halign="right" font="Roboto_HD; 22" foregroundColor="green" backgroundColor="black" transparent="1" />
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="95,1001" size="35,27" alphatest="blend" />

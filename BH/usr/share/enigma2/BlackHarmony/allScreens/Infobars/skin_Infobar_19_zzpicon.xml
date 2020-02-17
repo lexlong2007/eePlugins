@@ -52,7 +52,7 @@
     </widget>
     <eLabel text="-" position="602,839" size="20,36" font="HD_Thin; 30" halign="left" backgroundColor="black" transparent="1" foregroundColor="white" />
     <widget backgroundColor="background" font="HD_Thin; 30" foregroundColor="blue" halign="left" noWrap="1" position="625,839" render="BlackHarmonyTypeLabel" size="860,36" source="session.Event_Now" transparent="1" typeCaret="1" typeRepeats="1" typeSpeed="700" typeStartDelay="2000" zPosition="1">
-      <convert type="EventName">Name</convert>
+      <convert type="j00zekModEventName">Name</convert>
     </widget>
     <widget source="session.Event_Now" render="Label" position="1490,839" size="140,36" font="HD_Thin; 28" halign="right" backgroundColor="black" transparent="1">
       <convert type="EventTime">Remaining</convert>
@@ -64,7 +64,7 @@
     </widget>
     <eLabel text="-" position="602,905" size="20,36" font="HD_Thin; 30" halign="left" foregroundColor="light_grey" backgroundColor="black" transparent="1" />
     <widget source="session.Event_Next" render="Label" position="624,905" size="845,36" font="HD_Thin; 30" halign="left" backgroundColor="black" transparent="1" foregroundColor="light_grey">
-      <convert type="EventName">Name</convert>
+      <convert type="j00zekModEventName">Name</convert>
     </widget>
     <widget source="session.Event_Next" render="Label" position="1490,905" size="140,36" font="HD_Thin; 28" halign="right" foregroundColor="light_grey" backgroundColor="black" transparent="1">
       <convert type="EventTime">Duration</convert>

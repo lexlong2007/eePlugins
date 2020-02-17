@@ -23,14 +23,14 @@
    <widget source="Title" render="Label" position="1205,55" size="635,30" font="Roboto_HD; 25" backgroundColor="dark_grey" transparent="1" halign="right" noWrap="1" valign="center" text="19.2E  DVB-S2  10627 27500 3/4 8PSK" zPosition="3"/>
  
   <widget render="j00zekModRunningText" source="ServiceEvent" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=3,startdelay=6000,wrap" halign="left" font="Roboto_HD; 28" backgroundColor="background" position="100,200" size="1045,240" transparent="1">
-    <convert type="EventName">ExtendedDescription</convert>
+    <convert type="j00zekModEventName">ExtendedDescription</convert>
   </widget>
    <eLabel position="1400,437" size="373,2" backgroundColor="linie" foregroundColor="linie" />
   <widget source="ServiceEvent" render="Progress" position="1400,435" size="376,6" pixmap="BlackHarmony/gfx/progress_cs.png" transparent="1">
     <convert type="EventTime">Progress</convert>
   </widget>
   <widget source="ServiceEvent" render="Label" position="100,140" size="900,35" font="HD_Thin; 30" backgroundColor="black" transparent="1" halign="left" noWrap="1" foregroundColor="green">
-    <convert type="EventName">Name</convert>
+    <convert type="j00zekModEventName">Name</convert>
   </widget>
     <widget backgroundColor="background" font="HD_Thin; 34" halign="center" position="1235,370" render="Label" size="600,38" source="ServiceEvent" transparent="1" valign="center" foregroundColor="green">
     <convert type="ServiceName">Name</convert>

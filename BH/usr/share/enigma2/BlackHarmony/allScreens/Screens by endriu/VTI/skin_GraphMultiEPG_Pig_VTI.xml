@@ -18,7 +18,7 @@
     <widget name="timeline_now" position="75,148" zPosition="4" size="15,506" pixmap="BlackHarmony/gfx/timeline-ct1.png" alphatest="blend" />
     
 	<widget source="Event" render="Label" position="330,672" size="806,40" font="Roboto_HD; 32" foregroundColor="light_yellow" backgroundColor="background" transparent="1" >
-      <convert type="EventName">Name</convert>
+      <convert type="j00zekModEventName">Name</convert>
     </widget>
     <widget source="Event" render="Label" position="74,672" size="95,40" font="Roboto_HD;32" halign="right" backgroundColor="background" transparent="1" foregroundColor="green">
       <convert type="EventTime">StartTime</convert>

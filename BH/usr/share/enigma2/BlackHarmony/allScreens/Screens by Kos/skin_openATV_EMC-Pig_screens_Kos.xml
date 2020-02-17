@@ -355,7 +355,7 @@
       <convert type="BlackHarmonyMovieReference"/>
     </widget>
     <widget source="Service" render="Label" position="95,745" size="1200,38" font="HD_Thin; 33" backgroundColor="black" valign="center" halign="left" transparent="1" foregroundColor="light_yellow">
-      <convert type="EventName">Name</convert>
+      <convert type="j00zekModEventName">Name</convert>
     </widget>
     <ePixmap zPosition="1" position="1545,170" size="277,410" pixmap="BlackHarmony/gfx/No-Cover.png" backgroundColor="background" alphatest="blend" transparent="0"/>
     <ePixmap zPosition="3" position="1507,163" size="340,440" pixmap="BlackHarmony/gfx/No-Cover_bg.png" backgroundColor="background" alphatest="blend" transparent="0"/>

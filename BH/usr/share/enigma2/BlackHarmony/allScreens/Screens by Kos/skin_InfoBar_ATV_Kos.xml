@@ -85,10 +85,11 @@
       <convert type="EventTime">StartTime</convert>
       <convert type="ClockToText">Default</convert>
     </widget>
-    <ePixmap position="412,838" zPosition="2" size="20,20" halign="center" pixmap="BlackHarmony/buttons/event-right.png" alphatest="blend"/>
-    <!--eLabel text="-" position="412,827" size="20,36" font="HD_Thin; 30" halign="left" backgroundColor="black" transparent="1" foregroundColor="light_grey"/-->
+    <widget source="session.Event_Now" render="j00zekPixmap" position="412,838" zPosition="2" size="14,14" alphatest="blend">
+	  <convert type="j00zekModEventName">isEPGpic:BlackHarmony/buttons/event-right.png</convert>
+	</widget>
     <widget source="session.Event_Now" render="j00zekLabel" position="436,827" size="710,36" font="HD_Thin; 32" halign="left" backgroundColor="black" transparent="1">
-      <convert type="EventName">Name</convert>
+      <convert type="j00zekModEventName">Name</convert>
     </widget>
     <widget source="session.Event_Now" render="j00zekLabel" position="1155,827" size="190,36" font="Roboto_HD; 32" halign="right" backgroundColor="black" transparent="1">
       <convert type="EventTime">Remaining</convert>
@@ -98,10 +99,11 @@
       <convert type="EventTime">StartTime</convert>
       <convert type="ClockToText">Default</convert>
     </widget>
-    <ePixmap position="412,913" zPosition="2" size="20,20" halign="center" pixmap="BlackHarmony/buttons/event-right.png" alphatest="blend"/>
-    <!--eLabel text="-" position="412,901" size="20,36" font="HD_Thin; 30" halign="left" foregroundColor="light_grey" backgroundColor="black" transparent="1"/-->
+    <widget source="session.Event_Now" render="j00zekPixmap" position="412,913" zPosition="2" size="14,14" alphatest="blend">
+	  <convert type="j00zekModEventName">isEPGpic:BlackHarmony/buttons/event-right.png</convert>
+	</widget>
     <widget source="session.Event_Next" render="j00zekLabel" position="436,901" size="710,36" font="HD_Thin; 32" halign="left" foregroundColor="light_grey" backgroundColor="black" transparent="1">
-      <convert type="EventName">Name</convert>
+      <convert type="j00zekModEventName">Name</convert>
     </widget>
     <widget source="session.Event_Next" render="j00zekLabel" position="1155,901" size="190,36" font="Roboto_HD; 32" halign="right" foregroundColor="light_grey" backgroundColor="black" transparent="1">
       <convert type="EventTime">Duration</convert>

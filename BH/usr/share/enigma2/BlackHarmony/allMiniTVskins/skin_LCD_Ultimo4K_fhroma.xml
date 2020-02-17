@@ -80,7 +80,7 @@
 
 	  <eLabel text=" " position="0,290" size="800,6" font="RegularLCD;16" backgroundColor="#00777777" transparent="0" zPosition="1" />
         <widget source="session.Event_Now" foregroundColor="#00FFFF" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=left,step=2,steptime=10,repeat=99,startdelay=5000,always=0,oneshot=12000" position="30,300" size="740,140" font="SemiboldLCD;80" noWrap="1" halign="left" valign="top">
-    <convert type="EventName">Name</convert>
+    <convert type="j00zekModEventName">Name</convert>
   </widget>
  
       <widget source="session.Event_Now" render="Label" noWrap="1" foregroundColor="#00cc99" position="30,380" size="160,70" font="RegularLCD;70" halign="left" valign="top">
@@ -204,7 +204,7 @@
 
      
 	        <widget source="parent.ServiceEvent" foregroundColor="#00FFFF" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=left,step=2,steptime=10,repeat=99,startdelay=5000,always=0,oneshot=12000" position="30,285" size="740,100" font="SemiboldLCD;80" noWrap="1" halign="left" valign="top">
-    <convert type="EventName">Name</convert>
+    <convert type="j00zekModEventName">Name</convert>
   </widget>
 
 	  
@@ -265,7 +265,7 @@
 		</widget>
         <eLabel position="0,92" size="800,2" backgroundColor="#FF0000" />
 		<widget source="parent.Event" render="Label" position="20,100" size="720,130" foregroundColor="#00FFFF" font="RegularLCD;60" halign="center" valign="center" >
-			<convert type="EventName">Name</convert>
+			<convert type="j00zekModEventName">Name</convert>
 		</widget>
 		<widget source="parent.Event" render="Progress" position="30,400" size="750,40"  borderWidth="3" borderColor="#00cc99"  pixmap="BlackHarmony/gfx/bar_snr_470x25.png" zPosition="1" transparent="1">
 			<convert type="EventTime">Progress</convert>

@@ -140,7 +140,7 @@
  <widget source="parent.ServiceEvent" render="j00zekModRunningText" 
 options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,startdelay=200,always=0,oneshot=0" noWrap="1" position="16,240" size="460,72" font="VFD;65" transparent="1" halign="left" valign="top" foregroundColor="#ffff00">
 
-      <convert type="EventName">Name</convert>
+      <convert type="j00zekModEventName">Name</convert>
     </widget>
   </screen>
 

@@ -25,13 +25,13 @@
     <convert type="j00zekModServiceName2">%O  %s  %F %p %Y %f %M %b</convert>
   </widget>
   <widget backgroundColor="background" foregroundColor="light_yellow" font="Roboto_HD; 28" halign="left" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=6000,wrap" position="1184,483" render="j00zekModRunningText" size="655,255" source="ServiceEvent" transparent="1">
-    <convert type="EventName">ExtendedDescription</convert>
+    <convert type="j00zekModEventName">ExtendedDescription</convert>
   </widget>
   <widget pixmap="BlackHarmony/gfx/progress_cs_mario.png" position="1358,768" render="Progress" size="376,6" source="ServiceEvent" transparent="1">
     <convert type="EventTime">Progress</convert>
   </widget>
   <widget backgroundColor="black" font="HD_Thin; 30" foregroundColor="blue" halign="left" noWrap="1" position="1185,420" render="Label" size="655,35" source="ServiceEvent" transparent="1">
-    <convert type="EventName">Name</convert>
+    <convert type="j00zekModEventName">Name</convert>
   </widget>
     <widget backgroundColor="background" font="HD_Thin; 34" foregroundColor="yellow" halign="left" position="1185,365" render="Label" size="655,38" source="ServiceEvent" transparent="1" valign="center">
     <convert type="ServiceName">Name</convert>

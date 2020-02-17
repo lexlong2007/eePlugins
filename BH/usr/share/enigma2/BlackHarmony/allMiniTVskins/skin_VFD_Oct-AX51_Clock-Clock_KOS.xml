@@ -24,7 +24,7 @@
 <!-- EPG Panel -->    
     <screen name="MyEPGPanel" position="0,0" size="132,64">
 	  <widget source="parent.Event" render="Label" position="0,0" size="132,64" >
-		 <convert type="EventName">Name</convert>
+		 <convert type="j00zekModEventName">Name</convert>
       </widget>
 	</screen>
 

@@ -23,13 +23,13 @@
     <convert type="ClockToText">Format:- %H:%M</convert>
   </widget>
   <widget render="j00zekModRunningText" source="ServiceEvent" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=6000,wrap" halign="left" font="Roboto_HD; 28" backgroundColor="background" position="1170,527" size="685,235" transparent="1">
-    <convert type="EventName">ExtendedDescription</convert>
+    <convert type="j00zekModEventName">ExtendedDescription</convert>
   </widget>
   <widget source="ServiceEvent" render="Progress" position="1343,796" size="415,6" pixmap="BlackHarmony/gfx/csx_progress.png" transparent="1">
     <convert type="EventTime">Progress</convert>
   </widget>
   <widget source="ServiceEvent" render="Label" position="1170,480" size="685,35" font="HD_Thin; 32" backgroundColor="black" transparent="1" halign="left" noWrap="1" foregroundColor="light_yellow">
-    <convert type="EventName">Name</convert>
+    <convert type="j00zekModEventName">Name</convert>
   </widget>
   <widget source="ServiceEvent" render="j00zekPicons" picontype="picon" position="1185,225" size="220,132" zPosition="2" transparent="1" alphatest="blend">
     <convert type="ServiceName">Reference</convert>

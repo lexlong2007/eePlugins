@@ -16,7 +16,7 @@
 	<widget name="list" position="20,125" size="950,850" selectionPixmap="BlackHarmony/menu/sel_1005_40.png" scrollbarMode="showOnDemand" enableWrapAround="1" colorServiceDescription="#cc9329" colorServiceDescriptionSelected="#cc9329" colorEventProgressbarBorder="border" colorEventProgressbarBorderSelected="border" picServiceEventProgressbar="BlackHarmony/gfx/progcl.png" foregroundColorServiceNotAvail="#737373" serviceItemHeight="61" serviceNumberFont="Roboto_HD;32" serviceNameFont="Roboto_HD;44" serviceInfoFont="Roboto_HD;38" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" transparent="1" />
 	<!--Aktualne wydarzenie po kolei od gory-->
     <widget source="ServiceEvent" render="j00zekLabel" cfgContext="EN" position="980,487" size="835,35" font="HD_Thin;30" backgroundColor="black" transparent="1" halign="left" noWrap="1" foregroundColor="#cc9329">
-      <convert type="EventName">Name</convert>
+      <convert type="j00zekModEventName">Name</convert>
     </widget>
     <widget source="ServiceEvent" render="Label" position="980,527" size="80,30" font="Roboto_HD; 26" backgroundColor="background" transparent="1">
       <convert type="EventTime">StartTime</convert>
@@ -34,7 +34,7 @@
       <convert type="EventTime">Progress</convert>
     </widget>
     <widget render="j00zekModRunningText" source="ServiceEvent" position="980,562" size="835,276" options="movetype=running,startpoint=0,direction=top,steptime=80,repeat=2,startdelay=6000,wrap" halign="left" font="Roboto_HD; 30" backgroundColor="background" transparent="1">
-      <convert type="EventName">ExtendedDescription</convert>
+      <convert type="j00zekModEventName">ExtendedDescription</convert>
     </widget>
 	<!--Nastepne audycje-->
 	<widget source="ServiceEvent" render="j00zekNextEvents" position="980,867" size="835,145" zPosition="2" noWrap="1" font="Roboto_HD; 26" backgroundColor="black" transparent="1" foregroundColor="light_yellow" >

@@ -226,8 +226,11 @@
       <convert type="BlackHarmonygExtraTuner">ServiceNumberName</convert>
     </widget>
     <widget source="ServiceEvent" render="j00zekLabel" position="1185,700" size="655,35" font="HD_Thin; 30" halign="center" noWrap="1" foregroundColor="light_yellow" backgroundColor="black" transparent="1">
-      <convert type="EventName">Name</convert>
+      <convert type="j00zekModEventName">Name</convert>
     </widget>
+    <widget source="ServiceEvent" render="j00zekPixmap" position="1358,768" size="376,5" zPosition="-1" alphatest="blend">
+	  <convert type="j00zekModEventName">isEPGpic:BlackHarmony/gfx/progress_dark_green.png</convert>
+	</widget>
     <widget source="ServiceEvent" render="Progress" position="1358,768" size="376,6" pixmap="BlackHarmony/gfx/progress_cs.png" transparent="1">
       <convert type="EventTime">Progress</convert>
     </widget>
@@ -320,7 +323,7 @@
     </widget>
     <eLabel text="-" position="437,874" size="20,38" font="HD_Thin; 33" halign="left" foregroundColor="light_grey" backgroundColor="black" transparent="1"/>
     <widget source="session.Event_Now" render="j00zekLabel" position="461,874" size="980,38" font="HD_Thin; 33" halign="left" backgroundColor="black" transparent="1">
-      <convert type="EventName">Name</convert>
+      <convert type="j00zekModEventName">Name</convert>
     </widget>
     <widget source="session.Event_Now" render="j00zekLabel" position="1450,874" size="200,38" font="HD_Thin; 33" halign="right" backgroundColor="black" transparent="1">
       <convert type="EventTime">Remaining</convert>
@@ -332,7 +335,7 @@
     </widget>
     <eLabel text="-" position="437,970" size="20,38" font="HD_Thin; 33" halign="left" foregroundColor="light_grey" backgroundColor="black" transparent="1"/>
     <widget source="session.Event_Next" render="j00zekLabel" position="461,970" size="980,38" font="HD_Thin; 33" halign="left" foregroundColor="light_grey" backgroundColor="black" transparent="1">
-      <convert type="EventName">Name</convert>
+      <convert type="j00zekModEventName">Name</convert>
     </widget>
     <widget source="session.Event_Next" render="j00zekLabel" position="1450,970" size="200,38" font="HD_Thin; 33" halign="right" foregroundColor="light_grey" backgroundColor="black" transparent="1">
       <convert type="EventTime">Duration</convert>
@@ -579,7 +582,7 @@
     </widget>
     <widget name="list" position="120,178" size="930,770" itemHeight="45" font="Roboto_HD; 27" scrollbarMode="showOnDemand" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" selectionPixmap="BlackHarmony/menu/sel_920_45.png" backgroundColor="black" transparent="1"/>
     <widget render="j00zekModRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=scroll,startdelay=6000,oneshot=5000,wrap" font="Roboto_HD; 29" position="1113,360" size="675,580" halign="left" foregroundColor="white" backgroundColor="black" transparent="1">
-      <convert type="EventName">ExtendedDescription</convert>
+      <convert type="j00zekModEventName">ExtendedDescription</convert>
     </widget>
     <widget alphatest="blend" position="1110,183" render="j00zekPicons" picontype="picon" size="220,132" source="Service">
       <convert type="j00zekModServiceName2">Reference</convert>
@@ -640,7 +643,7 @@
     <widget name="date" position="710,192" size="350,30" font="Roboto_HD; 26" valign="center" halign="right" foregroundColor="light_yellow" backgroundColor="black" transparent="1"/>
     <widget name="list" position="110,275" size="950,660" itemHeight="45" font="Roboto_HD; 27" scrollbarMode="showOnDemand" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" selectionPixmap="BlackHarmony/menu/sel_950_40.png" backgroundColor="black" transparent="1"/>
     <widget render="j00zekModRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=scroll,startdelay=6000,oneshot=5000,wrap" font="Roboto_HD; 29" position="1113,360" size="675,580" halign="left" foregroundColor="white" backgroundColor="black" transparent="1">
-      <convert type="EventName">ExtendedDescription</convert>
+      <convert type="j00zekModEventName">ExtendedDescription</convert>
     </widget>
     <widget alphatest="blend" position="1110,183" render="j00zekPicons" picontype="picon" size="220,132" source="Service">
       <convert type="j00zekModServiceName2">Reference</convert>
@@ -721,7 +724,7 @@
       <convert type="ClockToText">Default</convert>
     </widget>
     <widget source="session.Event_Now" render="Label" position="284,95" size="740,32" font="HD_Thin; 30" halign="left" foregroundColor="white" backgroundColor="black" transparent="1">
-      <convert type="EventName">Name</convert>
+      <convert type="j00zekModEventName">Name</convert>
     </widget>
     <widget source="session.Event_Now" render="Label" position="1040,95" size="200,32" font="HD_Thin; 30" halign="left" foregroundColor="white" backgroundColor="black" transparent="1">
       <convert type="EventTime">Remaining</convert>
@@ -737,7 +740,7 @@
       <convert type="ClockToText">Default</convert>
     </widget>
     <widget source="session.Event_Next" render="Label" position="282,137" size="740,32" font="HD_Thin; 30" halign="left" foregroundColor="light_grey" backgroundColor="black" transparent="1">
-      <convert type="EventName">Name</convert>
+      <convert type="j00zekModEventName">Name</convert>
     </widget>
     <widget source="session.Event_Next" render="Label" position="1040,137" size="200,32" font="HD_Thin; 30" halign="center" foregroundColor="light_grey" backgroundColor="black" transparent="1">
       <convert type="EventTime">Duration</convert>
@@ -1743,10 +1746,10 @@ self.instance.resize(eSize(*wsize))
       <convert type="j00zekModServiceName2">Reference</convert>
     </widget>
     <widget source="Event" render="Label" position="1190,337" size="650,70" font="Roboto_HD; 32" backgroundColor="black" transparent="1" foregroundColor="green" halign="left" valign="bottom">
-      <convert type="EventName">Name</convert>
+      <convert type="j00zekModEventName">Name</convert>
     </widget>
     <widget source="Event" render="j00zekModRunningText" position="1190,423" zPosition="2" size="650,500" font="Roboto_HD; 28" halign="left" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,oneshot=1,startdelay=6000,wrap" backgroundColor="black" transparent="1" valign="top">
-      <convert type="EventName">ExtendedDescription</convert>
+      <convert type="j00zekModEventName">ExtendedDescription</convert>
     </widget>
     <widget source="Event" render="Label" position="1655,195" size="120,38" font="Roboto_HD; 28" backgroundColor="black" transparent="1" valign="center" halign="center" foregroundColor="light_red">
       <convert type="EventTime">StartTime</convert>
@@ -2150,7 +2153,7 @@ self['config'].l.setSeperation(int(300*f))
       <convert type="MovieInfo">FileSize</convert>
     </widget>
     <widget source="Service" render="Label" position="1120,345" size="660,580" font="Roboto_HD; 26" backgroundColor="black" transparent="1">
-      <convert type="EventName">ExtendedDescription</convert>
+      <convert type="j00zekModEventName">ExtendedDescription</convert>
     </widget>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="110,991" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="550,991" size="35,27" alphatest="blend"/>
@@ -4109,7 +4112,7 @@ self['config'].l.setSeperation(int(300*f))
       <convert type="ServiceName">Name</convert>
     </widget>
     <widget render="j00zekModRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=8000,wrap" halign="left" font="Roboto_HD; 26" backgroundColor="black" position="1040,753" size="820,180" transparent="1">
-      <convert type="EventName">ExtendedDescription</convert>
+      <convert type="j00zekModEventName">ExtendedDescription</convert>
     </widget>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="70,955" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="540,955" size="35,27" alphatest="blend"/>
@@ -4231,7 +4234,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget name="list" position="80,210" size="1110,720" itemHeight="40" zPosition="3" EntryNowBackgroundColor="green_epg" EntryBorderColor="#3b3e3f" EntryBackgroundColor="black" EntryBackgroundColorSelected="blue_epg" EntryNowBackgroundColorSelected="#ffd200" scrollbarMode="showOnDemand" EntryRecColor="red" foregroundColorSelected="white" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" backgroundColor="black" transparent="1" FontSize1="20" FontSize2="18" />
     <widget name="timeline_now" position="80,210" zPosition="4" size="15,720" pixmap="BlackHarmony/gfx/timeline-ct1.png" alphatest="blend"/>
     <widget source="Event" render="Label" position="1240,165" size="600,90" font="HD_Thin; 34" foregroundColor="light_yellow" backgroundColor="black" transparent="1" valign="bottom">
-      <convert type="EventName">Name</convert>
+      <convert type="j00zekModEventName">Name</convert>
     </widget>
     <widget source="Event" render="Label" position="1240,280" size="75,30" font="Roboto_HD; 25" halign="right" backgroundColor="black" transparent="1">
       <convert type="EventTime">StartTime</convert>
@@ -4247,7 +4250,7 @@ self['config'].l.setSeperation(int(300*f))
       <convert type="RemainingToText">InMinutes</convert>
     </widget>
     <widget source="Event" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" foregroundColor="white" position="1240,335" size="600,600" font="Roboto_HD; 26" backgroundColor="black" transparent="1">
-      <convert type="EventName">ExtendedDescription</convert>
+      <convert type="j00zekModEventName">ExtendedDescription</convert>
     </widget>
     <widget name="JumpInterval" position="980,164" size="200,25" zPosition="5" halign="right" font="Roboto_HD; 22" backgroundColor="black" foregroundColor="green" transparent="1"/>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="95,1001" size="35,27" alphatest="blend"/>
@@ -4337,7 +4340,7 @@ self['config'].l.setSeperation(int(300*f))
       <convert type="ServiceName"/>
     </widget>
     <widget source="MasterService" render="Label" position="110,850" size="640,100" font="Regular;30" backgroundColor="background" transparent="1" foregroundColor="white" halign="center">
-      <convert type="EventName"/>
+      <convert type="j00zekModEventName"/>
     </widget>
     <widget source="MasterService" render="j00zekPicons" picontype="picon" position="280,30" zPosition="1" size="400,160" transparent="1" alphatest="blend">
       <convert type="ServiceName">Reference</convert>
@@ -4347,7 +4350,7 @@ self['config'].l.setSeperation(int(300*f))
       <convert type="ServiceName"/>
     </widget>
     <widget source="SlaveService" render="Label" position="1070,850" size="640,100" font="Regular;30" backgroundColor="background" transparent="1" foregroundColor="white" halign="center">
-      <convert type="EventName"/>
+      <convert type="j00zekModEventName"/>
     </widget>
     <widget source="SlaveService" render="j00zekPicons" picontype="picon" position="1240,30" zPosition="1" size="400,160" transparent="1" alphatest="blend">
       <convert type="ServiceName">Reference</convert>
@@ -5943,7 +5946,7 @@ self['config'].l.setSeperation(int(300*f))
     </widget>
     <widget name="list" position="120,178" size="930,770" itemHeight="45" font="Roboto_HD; 27" scrollbarMode="showOnDemand" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" selectionPixmap="BlackHarmony/menu/sel_920_45.png" backgroundColor="black" transparent="1"/>
     <widget render="j00zekModRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=scroll,startdelay=6000,oneshot=5000,wrap" font="Roboto_HD; 29" position="1113,360" size="675,580" halign="left" foregroundColor="white" backgroundColor="black" transparent="1">
-      <convert type="EventName">ExtendedDescription</convert>
+      <convert type="j00zekModEventName">ExtendedDescription</convert>
     </widget>
     <widget alphatest="blend" position="1110,183" render="j00zekPicons" picontype="picon" size="220,132" source="Service">
       <convert type="j00zekModServiceName2">Reference</convert>
@@ -6543,10 +6546,13 @@ self['config'].l.setSeperation(int(300*f))
     <widget name="key_blue" position="952,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget name="key_ok" position="65,760" size="1095,35" font="Roboto_HD; 27" halign="center" backgroundColor="black" transparent="1" foregroundColor="light_yellow"/>
   </screen>
-  <screen name="IPTVUpdateMainWindow" position="360,140" size="1200,800" title="">
-    <widget name="sub_title" position="10,20" zPosition="2" size="1180,50" valign="center" halign="left" font="Roboto_HD; 26" transparent="1" foregroundColor="white"/>
-    <widget name="list" position="12,88" zPosition="1" size="1180,680" transparent="1" scrollbarMode="showOnDemand"/>
-    <widget name="console" position="320,380" zPosition="2" size="540,80" valign="center" halign="center" font="Roboto_HD;34" transparent="0" foregroundColor="light_yellow" backgroundColor="black"/>
+  <screen name="IPTVUpdateWindow" position="center,center" size="850,1080" title=" " backgroundColor="transparent" flags="wfNoBorder">
+    <ePixmap position="0,0" zPosition="-10" size="850,1080" pixmap="BlackHarmony/bg_design/zap_history.png"/>
+	<widget name="sub_title" position="40,20" size="780,35" font="Roboto_HD; 27" halign="center" foregroundColor="white" backgroundColor="black" transparent="1"/>
+	<widget source="console" render="Label" position="40,70" size="780,35" font="Roboto_HD; 27" halign="center" valign="center" foregroundColor="light_yellow" backgroundColor="black" transparent="1"/>  
+	<widget name="list" position="28,133" size="792,880" itemHeight="80" enableWrapAround="1" selectionPixmap="BlackHarmony/menu/sel_910_75.png" scrollbarMode="showOnDemand" backgroundColor="black" transparent="1"/>
+	<ePixmap position="650,1033" size="60,30" pixmap="BlackHarmony/buttons/key_ok.png" alphatest="blend" />
+    <ePixmap position="750,1033" size="60,30" pixmap="BlackHarmony/buttons/key_exit.png" alphatest="blend" />
   </screen>
   <screen name="YoutubeTVSettings" position="460,130" size="1000,820" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1000,820" pixmap="BlackHarmony/bg_design/small.png"/>
@@ -7034,6 +7040,275 @@ self['config'].l.setSeperation(int(300*f))
     <ePixmap pixmap="BlackHarmony/buttons/key_left.png" position="1210,960" size="40,30" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_right.png" position="1300,960" size="40,30" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_menu.png" position="1380,960" size="60,30" alphatest="blend"/>
+  </screen>
+  <screen name="MSNweather" position="0,0" size="1920,1080" title=" " flags="wfNoBorder" backgroundColor="black">
+    <widget source="session.CurrentService" render="j00zekPixmap" position="0,0" zPosition="-10" size="1920,1080" pixmap="BlackHarmony/icons/BingPicOfTheDay.jpg" alphatest="blend">
+      <convert type="j00zekRefreshBingPicOfTheDay"></convert>
+    </widget>
+    <ePixmap position="0,0" zPosition="-10" size="1920,1080" pixmap="BlackHarmony/bg_design/bg_1902x1080.png" transparent="1" alphatest="blend"/>
+    <!-- header -->
+    <widget source="global.CurrentTime" render="Label" position="85,70" size="80,35" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="170,70" size="460,35" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+    </widget>
+    <widget source="Title" render="Label" position="1295,70" size="520,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+<!-- top left -->
+    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="208,202" size="128,128" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+        <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
+    </widget>
+    <widget render="Label" source="currentTemp" font="Roboto_HD; 40" position="285,234" size="140,45" backgroundColor="black" zPosition="3" transparent="1" halign="right" valign="center" foregroundColor="light_yellow"/>
+    <widget source="session.BlackHarmonyMSNWeather" render="Label" position="120,330" size="340,35" font="HD_Thin; 26" halign="center" valign="center" transparent="1" backgroundColor="black">
+        <convert type="BlackHarmonyMSNWeather">temperature_text,current</convert>
+    </widget>
+<!-- top second from left -->
+    <widget source="session.BlackHarmonyMSNWeather" render="Label" position="550,247" size="370,180" font="HD_Thin; 26" halign="left" valign="top" transparent="1" backgroundColor="black" noWrap="1" >
+        <convert type="BlackHarmonyMSNWeatherWebCurrent">AllTitles</convert>
+    </widget>
+    <widget source="session.BlackHarmonyMSNWeather" render="Label" position="550,247" size="370,180" font="HD_Thin; 26" halign="right" valign="top" transparent="1" backgroundColor="black" noWrap="1" >
+        <convert type="BlackHarmonyMSNWeatherWebCurrent">AllInfo</convert>
+    </widget>
+<!-- top second from right -->
+        <!-- WSCHOD -->
+        <ePixmap pixmap="BlackHarmony/icons/Weather/wsch.png" position="1020,185" zPosition="1" size="99,50" alphatest="blend" />
+        <widget source="global.CurrentTime" render="Label" position="1020,235" size="100,35" font="HD_Thin; 22" halign="center" valign="center" transparent="1" backgroundColor="black">
+            <convert type="j00zekSun">wschod</convert>
+        </widget>
+        <!-- ZACHOD -->
+        <ePixmap pixmap="BlackHarmony/icons/Weather/zach.png" position="1145,185" zPosition="1" size="99,50" alphatest="blend" />
+        <widget source="global.CurrentTime" render="Label" position="1145,235" size="100,35" font="HD_Thin; 22" halign="center" valign="center" transparent="1" backgroundColor="black" foregroundColor="grey">
+            <convert type="j00zekSun">zachod</convert>
+        </widget>
+        <!-- MOON -->
+        <widget source="global.CurrentTime" render="j00zekPicons" position="1295,185" size="50,50" path="/usr/share/enigma2/BlackHarmony/icons" picontype="MoonPhase" showdefaultpic="no" zPosition="8"  alphatest="blend">
+            <convert type="j00zekMoon">obraz</convert>
+        </widget>
+        <widget source="global.CurrentTime" render="Label" position="1270,235" size="100,30" zPosition="1" font="Regular;22" halign="center" transparent="1" backgroundColor="black" foregroundColor="grey">
+            <convert type="j00zekMoon">oswietlenie</convert>
+        </widget>
+    <widget render="Label" position="1010,270" size="390,70" source="observationtime" font="Roboto_HD;26" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center" foregroundColor="green"/>
+    <widget render="Label" position="1010,300" size="390,80" source="caption" font="HD_Thin; 28" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center" foregroundColor="light_yellow"/>
+    <widget render="Label" position="1010,372" size="390,80" source="observationpoint" font="Roboto_HD; 24" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top"/>
+<!-- top right AIRLY-->
+    <widget position="100,107" size="1710,70" source="session.CurrentService" render="Label" font="Roboto_HD; 27" foregroundColor="foreground" backgroundColor="black" halign="center" noWrap="1" transparent="1" zPosition="10">
+        <convert type="BlackHarmonyABTCAirlyWidget">ldesc</convert>
+    </widget>
+    <widget position="1440,207" size="120,120" source="session.CurrentService" render="BlackHarmonyABTCAirlyPixmap" alphatest="blend" transparent="1" zPosition="9">
+        <convert type="BlackHarmonyABTCAirlyWidget">indexBackPNG</convert>
+    </widget>
+    <widget position="1420,189" size="160,160" source="session.CurrentService" render="Label" font="Roboto_HD; 50" foregroundColor="foreground" backgroundColor="black" halign="center" valign="center" noWrap="1" transparent="1" zPosition="10">
+        <convert type="BlackHarmonyABTCAirlyWidget">caqi</convert>
+    </widget>
+    <widget position="1590,204" size="240,35" source="session.CurrentService" render="Label" font="HD_Thin; 27" foregroundColor="foreground" backgroundColor="black" halign="left" valign="center" noWrap="1" transparent="1" zPosition="10">
+        <convert type="BlackHarmonyABTCAirlyWidget">pm25</convert>
+    </widget>
+    <widget position="1590,235" size="240,35" source="session.CurrentService" render="Label" font="HD_Thin; 27" foregroundColor="foreground" backgroundColor="black" halign="left" valign="center" noWrap="1" transparent="1" zPosition="10">
+        <convert type="BlackHarmonyABTCAirlyWidget">pm10</convert>
+    </widget>
+    <widget position="1590,266" size="240,35" source="session.CurrentService" render="Label" font="HD_Thin; 27" foregroundColor="foreground" backgroundColor="black" halign="left" valign="center" noWrap="1" transparent="1" zPosition="10">
+        <convert type="BlackHarmonyABTCAirlyWidget">pm1</convert>
+    </widget>
+    <widget position="1590,307" size="240,35" source="session.CurrentService" render="Label" font="Roboto_HD; 26" foregroundColor="green" backgroundColor="black" halign="left" noWrap="1" transparent="1" zPosition="10">
+        <convert type="BlackHarmonyABTCAirlyWidget">schtime</convert>
+    </widget>
+    <widget position="1430,342" size="390,35" source="session.CurrentService" render="Label" font="HD_Thin; 25" foregroundColor="light_yellow" backgroundColor="black" halign="center" valign="center" noWrap="1" transparent="1" zPosition="10">
+        <convert type="BlackHarmonyABTCAirlyWidget">homeid</convert>
+    </widget>
+    <widget position="1430,371" size="390,35" source="session.CurrentService" render="Label" font="HD_Thin; 25" foregroundColor="light_yellow" backgroundColor="black" halign="center" valign="center" noWrap="1" transparent="1" zPosition="10">
+        <convert type="BlackHarmonyABTCAirlyWidget">city</convert>
+    </widget>
+    <widget position="1430,399" size="390,35" source="session.CurrentService" render="Label" font="HD_Thin; 25" foregroundColor="light_yellow" backgroundColor="black" halign="center" valign="center" noWrap="1" transparent="1" zPosition="10">
+        <convert type="BlackHarmonyABTCAirlyWidget">street</convert>
+    </widget>
+<!--HOURLY DATA-->
+    <ePixmap pixmap="BlackHarmony/gfx/line.png" position="420,455" size="1200,2" zPosition="3" transparent="1" alphatest="blend"/>
+    <widget position="100,440" size="350,30" zPosition="3" halign="left" valign="top" render="Label" source="session.BlackHarmonyMSNWeather" font="Roboto_HD; 24" transparent="1" foregroundColor="green">
+      <convert type="BlackHarmonyMSNWeatherWebhourly">title</convert>
+    </widget>
+    <!-- h0 -->
+    <widget position="90,470" size="150,190" zPosition="3" halign="center" valign="top" render="Label" source="session.BlackHarmonyMSNWeather" font="Roboto_HD; 22" transparent="1" backgroundColor="black">
+      <convert type="BlackHarmonyMSNWeatherWebhourly">Record=0</convert>
+    </widget>
+    <widget position="140,500" size="50,50" zPosition="5" alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" source="session.BlackHarmonyMSNWeather" transparent="1">
+        <convert type="BlackHarmonyMSNWeatherWebhourly">Record=0</convert>
+    </widget>
+    <!-- h1 -->
+    <widget position="250,470" size="150,190" zPosition="3" halign="center" valign="top" render="Label" source="session.BlackHarmonyMSNWeather" font="Roboto_HD; 22" transparent="1" backgroundColor="black">
+      <convert type="BlackHarmonyMSNWeatherWebhourly">Record=1</convert>
+    </widget>
+    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="300,500" size="50,50" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+        <convert type="BlackHarmonyMSNWeatherWebhourly">Record=1</convert>
+    </widget>
+    <!-- h2 -->
+    <widget position="410,470" size="150,190" zPosition="3" halign="center" valign="top" render="Label" source="session.BlackHarmonyMSNWeather" font="Roboto_HD; 22" transparent="1" backgroundColor="black">
+      <convert type="BlackHarmonyMSNWeatherWebhourly">Record=2</convert>
+    </widget>
+    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="460,500" size="50,50" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+        <convert type="BlackHarmonyMSNWeatherWebhourly">Record=2</convert>
+    </widget>
+    <!-- h3 -->
+    <widget position="570,470" size="150,190" zPosition="3" halign="center" valign="top" render="Label" source="session.BlackHarmonyMSNWeather" font="Roboto_HD; 22" transparent="1" backgroundColor="black">
+      <convert type="BlackHarmonyMSNWeatherWebhourly">Record=3</convert>
+    </widget>
+    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="620,500" size="50,50" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+        <convert type="BlackHarmonyMSNWeatherWebhourly">Record=3</convert>
+    </widget>
+    <!-- h4 -->
+    <widget position="730,470" size="150,190" zPosition="3" halign="center" valign="top" render="Label" source="session.BlackHarmonyMSNWeather" font="Roboto_HD; 22" transparent="1" backgroundColor="black">
+      <convert type="BlackHarmonyMSNWeatherWebhourly">Record=4</convert>
+    </widget>
+    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="780,500" size="50,50" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+        <convert type="BlackHarmonyMSNWeatherWebhourly">Record=4</convert>
+    </widget>
+    <!-- h5 -->
+    <widget position="890,470" size="150,190" zPosition="3" halign="center" valign="top" render="Label" source="session.BlackHarmonyMSNWeather" font="Roboto_HD; 22" transparent="1" backgroundColor="black">
+      <convert type="BlackHarmonyMSNWeatherWebhourly">Record=5</convert>
+    </widget>
+    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="940,500" size="50,50" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+        <convert type="BlackHarmonyMSNWeatherWebhourly">Record=5</convert>
+    </widget>
+    <!-- h6 -->
+    <widget position="1050,470" size="150,190" zPosition="3" halign="center" valign="top" render="Label" source="session.BlackHarmonyMSNWeather" font="Roboto_HD; 22" transparent="1" backgroundColor="black">
+      <convert type="BlackHarmonyMSNWeatherWebhourly">Record=6</convert>
+    </widget>
+    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1100,500" size="50,50" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+        <convert type="BlackHarmonyMSNWeatherWebhourly">Record=6</convert>
+    </widget>
+    <!-- h7 -->
+    <widget position="1210,470" size="150,190" zPosition="3" halign="center" valign="top" render="Label" source="session.BlackHarmonyMSNWeather" font="Roboto_HD; 22" transparent="1" backgroundColor="black">
+      <convert type="BlackHarmonyMSNWeatherWebhourly">Record=7</convert>
+    </widget>
+    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1260,500" size="50,50" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+        <convert type="BlackHarmonyMSNWeatherWebhourly">Record=7</convert>
+    </widget>
+    <!-- h8 -->
+    <widget position="1370,470" size="150,190" zPosition="3" halign="center" valign="top" render="Label" source="session.BlackHarmonyMSNWeather" font="Roboto_HD; 22" transparent="1" backgroundColor="black">
+      <convert type="BlackHarmonyMSNWeatherWebhourly">Record=8</convert>
+    </widget>
+    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1420,500" size="50,50" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+        <convert type="BlackHarmonyMSNWeatherWebhourly">Record=8</convert>
+    </widget>
+    <!-- h9 -->
+    <widget position="1530,470" size="150,190" zPosition="3" halign="center" valign="top" render="Label" source="session.BlackHarmonyMSNWeather" font="Roboto_HD; 22" transparent="1" backgroundColor="black">
+      <convert type="BlackHarmonyMSNWeatherWebhourly">Record=9</convert>
+    </widget>
+    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1580,500" size="50,50" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+        <convert type="BlackHarmonyMSNWeatherWebhourly">Record=9</convert>
+    </widget>
+    <!-- h10 -->
+    <widget position="1690,470" size="150,190" zPosition="3" halign="center" valign="top" render="Label" source="session.BlackHarmonyMSNWeather" font="Roboto_HD; 22" transparent="1" backgroundColor="black">
+      <convert type="BlackHarmonyMSNWeatherWebhourly">Record=10</convert>
+    </widget>
+    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1740,500" size="50,50" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+        <convert type="BlackHarmonyMSNWeatherWebhourly">Record=10</convert>
+    </widget>
+    <ePixmap pixmap="BlackHarmony/gfx/line.png" position="300,665" size="1200,2" zPosition="3" transparent="1" alphatest="blend"/>
+<!--TODAY-->
+    <widget source="session.BlackHarmonyMSNWeather" render="Label" font="Roboto_HD; 26" position="100,680" size="190,30" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center">
+      <convert type="BlackHarmonyMSNWeatherWebDaily">Record=0,date</convert>
+    </widget>
+    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="128,730" size="128,128" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+        <convert type="BlackHarmonyMSNWeatherWebDaily">Record=0</convert>
+    </widget>
+    <widget source="session.BlackHarmonyMSNWeather" render="Label" font="Roboto_HD; 26" position="100,860" size="190,110" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top">
+      <convert type="BlackHarmonyMSNWeatherWebDaily">Record=0,info</convert>
+    </widget>
+<!--DAY1-->
+    <widget source="session.BlackHarmonyMSNWeather" render="Label" font="Roboto_HD; 26" position="290,680" size="190,30" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center">
+      <convert type="BlackHarmonyMSNWeatherWebDaily">Record=1,date</convert>
+    </widget>
+    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="318,730" size="128,128" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+        <convert type="BlackHarmonyMSNWeatherWebDaily">Record=1</convert>
+    </widget>
+    <widget source="session.BlackHarmonyMSNWeather" render="Label" font="Roboto_HD; 26" position="290,860" size="190,110" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top">
+      <convert type="BlackHarmonyMSNWeatherWebDaily">Record=1,info</convert>
+    </widget>
+<!--DAY2-->
+    <widget source="session.BlackHarmonyMSNWeather" render="Label" font="Roboto_HD; 26" position="480,680" size="190,30" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center">
+      <convert type="BlackHarmonyMSNWeatherWebDaily">Record=2,date</convert>
+    </widget>
+    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="508,730" size="128,128" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+        <convert type="BlackHarmonyMSNWeatherWebDaily">Record=2</convert>
+    </widget>
+    <widget source="session.BlackHarmonyMSNWeather" render="Label" font="Roboto_HD; 26" position="480,860" size="190,110" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top">
+      <convert type="BlackHarmonyMSNWeatherWebDaily">Record=2,info</convert>
+    </widget>
+<!--DAY3-->
+    <widget source="session.BlackHarmonyMSNWeather" render="Label" font="Roboto_HD; 26" position="670,680" size="190,30" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center">
+      <convert type="BlackHarmonyMSNWeatherWebDaily">Record=3,date</convert>
+    </widget>
+    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="698,730" size="128,128" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+        <convert type="BlackHarmonyMSNWeatherWebDaily">Record=3</convert>
+    </widget>
+    <widget source="session.BlackHarmonyMSNWeather" render="Label" font="Roboto_HD; 26" position="670,860" size="190,110" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top">
+      <convert type="BlackHarmonyMSNWeatherWebDaily">Record=3,info</convert>
+    </widget>
+<!--DAY4-->
+    <widget source="session.BlackHarmonyMSNWeather" render="Label" font="Roboto_HD; 26" position="860,680" size="190,30" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center">
+      <convert type="BlackHarmonyMSNWeatherWebDaily">Record=4,date</convert>
+    </widget>
+    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="888,730" size="128,128" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+        <convert type="BlackHarmonyMSNWeatherWebDaily">Record=4</convert>
+    </widget>
+    <widget source="session.BlackHarmonyMSNWeather" render="Label" font="Roboto_HD; 26" position="860,860" size="190,110" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top">
+      <convert type="BlackHarmonyMSNWeatherWebDaily">Record=4,info</convert>
+    </widget>
+<!--DAY5-->
+    <widget source="session.BlackHarmonyMSNWeather" render="Label" font="Roboto_HD; 26" position="1050,680" size="190,30" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center">
+      <convert type="BlackHarmonyMSNWeatherWebDaily">Record=5,date</convert>
+    </widget>
+    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1078,730" size="128,128" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+        <convert type="BlackHarmonyMSNWeatherWebDaily">Record=5</convert>
+    </widget>
+    <widget source="session.BlackHarmonyMSNWeather" render="Label" font="Roboto_HD; 26" position="1050,860" size="190,110" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top">
+      <convert type="BlackHarmonyMSNWeatherWebDaily">Record=5,info</convert>
+    </widget>
+<!--DAY6-->
+    <widget source="session.BlackHarmonyMSNWeather" render="Label" font="Roboto_HD; 26" position="1240,680" size="190,30" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center">
+      <convert type="BlackHarmonyMSNWeatherWebDaily">Record=6,date</convert>
+    </widget>
+    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1268,730" size="128,128" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+        <convert type="BlackHarmonyMSNWeatherWebDaily">Record=6</convert>
+    </widget>
+    <widget source="session.BlackHarmonyMSNWeather" render="Label" font="Roboto_HD; 26" position="1240,860" size="190,110" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top">
+      <convert type="BlackHarmonyMSNWeatherWebDaily">Record=6,info</convert>
+    </widget>
+<!--DAY7-->
+    <widget source="session.BlackHarmonyMSNWeather" render="Label" font="Roboto_HD; 26" position="1430,680" size="190,30" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center">
+      <convert type="BlackHarmonyMSNWeatherWebDaily">Record=7,date</convert>
+    </widget>
+    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1458,730" size="128,128" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+        <convert type="BlackHarmonyMSNWeatherWebDaily">Record=7</convert>
+    </widget>
+    <widget source="session.BlackHarmonyMSNWeather" render="Label" font="Roboto_HD; 26" position="1430,860" size="190,110" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top">
+      <convert type="BlackHarmonyMSNWeatherWebDaily">Record=7,info</convert>
+    </widget>
+<!--DAY8-->
+    <widget source="session.BlackHarmonyMSNWeather" render="Label" font="Roboto_HD; 26" position="1620,680" size="190,30" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center">
+      <convert type="BlackHarmonyMSNWeatherWebDaily">Record=8,date</convert>
+    </widget>
+    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1648,730" size="128,128" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+        <convert type="BlackHarmonyMSNWeatherWebDaily">Record=8</convert>
+    </widget>
+    <widget source="session.BlackHarmonyMSNWeather" render="Label" font="Roboto_HD; 26" position="1620,860" size="190,110" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top">
+      <convert type="BlackHarmonyMSNWeatherWebDaily">Record=8,info</convert>
+    </widget>
+    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="80,980" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="360,980" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="600,980" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="980,980" size="35,27" alphatest="blend"/>
+    <eLabel text="Close" position="120,980" size="150,35" font="Roboto_HD; 24" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="session.CurrentService" render="Label" position="400,979" size="150,35" font="Roboto_HD; 24" backgroundColor="dark_grey" transparent="1">
+    <convert type="j00zekTranslator">Show Maps</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="640,979" size="380,35" font="Roboto_HD; 24" backgroundColor="dark_grey" transparent="1">
+    <convert type="j00zekTranslator">Show Histograms</convert>
+    </widget>
+    <!--eLabel text="" position="1020,979" size="1000,55" font="Roboto_HD; 24" backgroundColor="dark_grey" transparent="1"/-->
+    <ePixmap pixmap="BlackHarmony/buttons/key_left.png" position="1610,980" size="40,30" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_right.png" position="1700,980" size="40,30" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_menu.png" position="1780,980" size="60,30" alphatest="blend"/>
   </screen>	
   <!--DynamicLCDbrightnessInStandbyConfiguration-->
   <screen name="DynamicLCDbrightnessInStandbyConfiguration" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
@@ -7295,7 +7570,7 @@ self['config'].l.setSeperation(int(300*f))
     </widget>
     <widget source="Title" render="Label" position="796,25" size="392,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1" zPosition="1" />
     <widget source="Event" render="Label" position="65,221" size="700,46" font="HD_Thin; 33" foregroundColor="light_yellow" backgroundColor="black" transparent="1" valign="bottom" zPosition="1">
-      <convert type="EventName">Name</convert>
+      <convert type="j00zekModEventName">Name</convert>
     </widget>
     <widget source="Event" render="Label" position="65,769" size="75,30" font="Roboto_HD; 25" halign="right" backgroundColor="black" transparent="1" foregroundColor="green" zPosition="1">
       <convert type="EventTime">StartTime</convert>
@@ -7311,7 +7586,7 @@ self['config'].l.setSeperation(int(300*f))
       <convert type="RemainingToText">InMinutes</convert>
     </widget>
     <widget render="j00zekModRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=4,startdelay=8000,wrap" foregroundColor="white" position="65,287" size="1095,460" font="Roboto_HD; 29" backgroundColor="black" transparent="1" zPosition="1">
-      <convert type="EventName">ExtendedDescription</convert>
+      <convert type="j00zekModEventName">ExtendedDescription</convert>
     </widget>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="41,850" size="35,27" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="328,850" size="35,27" alphatest="blend" />
@@ -7341,7 +7616,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget name="list" position="84,200" size="1758,470" ServiceBorderColor="white" ServiceBorderWidth="1" ServiceNamePadding="3" EventBorderWidth="1" EventNamePadding="3" itemHeight="40" zPosition="3" EntryNowBackgroundColor="red" EntryBorderColor="#3b3e3f" EntryBackgroundColor="background" EntryBackgroundColorSelected="#00A693" EntryNowBackgroundColorSelected="#ffd200" scrollbarMode="showOnDemand" EntryRecColor="red" foregroundColorSelected="white" enableWrapAround="1" scrollbarWidth="15" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" backgroundColor="black" transparent="1" />
     <widget name="timeline_now" position="80,200" zPosition="4" size="15,463" pixmap="BlackHarmony/gfx/timeline-ct1.png" alphatest="blend" />
     <widget source="Event" render="Label" position="330,678" size="1200,35" font="Roboto_HD; 30" halign="left" foregroundColor="light_yellow" backgroundColor="black" transparent="1">
-      <convert type="EventName">Name</convert>
+      <convert type="j00zekModEventName">Name</convert>
     </widget>
     <ePixmap position="290,687" zPosition="3" size="20,20" pixmap="BlackHarmony/icons/now.png"/>
     <widget source="Event" render="Label" position="70,680" size="90,35" font="Roboto_HD; 28" halign="right" foregroundColor="green" backgroundColor="black" transparent="1">
@@ -7361,7 +7636,7 @@ self['config'].l.setSeperation(int(300*f))
 	  <convert type="EventTime">Progress</convert>
 	</widget>
     <widget render="j00zekModRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=scroll,startdelay=8000,oneshot=5000,wrap" position="84,739" size="1762,216" font="Roboto_HD; 27" foregroundColor="white" backgroundColor="black" transparent="1">
-      <convert type="EventName">ExtendedDescription</convert>
+      <convert type="j00zekModEventName">ExtendedDescription</convert>
     </widget>
     <widget name="JumpInterval" position="978,148" size="200,25" zPosition="5" halign="right" font="Roboto_HD; 22" foregroundColor="green" backgroundColor="black" transparent="1" />
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="95,1001" size="35,27" alphatest="blend" />
@@ -7394,7 +7669,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget name="list" position="84,200" size="1758,470" ServiceBorderColor="white" ServiceBorderWidth="1" ServiceNamePadding="3" EventBorderWidth="1" EventNamePadding="3" itemHeight="40" zPosition="3" EntryNowBackgroundColor="red" EntryBorderColor="#3b3e3f" EntryBackgroundColor="background" EntryBackgroundColorSelected="#00A693" EntryNowBackgroundColorSelected="#ffd200" scrollbarMode="showOnDemand" EntryRecColor="red" foregroundColorSelected="white" enableWrapAround="1" scrollbarWidth="15" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" backgroundColor="black" transparent="1" />
     <widget name="timeline_now" position="80,200" zPosition="4" size="15,463" pixmap="BlackHarmony/gfx/timeline-ct1.png" alphatest="blend" />
     <widget source="Event" render="Label" position="330,678" size="720,35" font="Roboto_HD; 30" halign="left" foregroundColor="light_yellow" backgroundColor="black" transparent="1">
-      <convert type="EventName">Name</convert>
+      <convert type="j00zekModEventName">Name</convert>
     </widget>
     <ePixmap position="290,688" zPosition="3" size="20,20" pixmap="BlackHarmony/icons/now.png"/>
     <widget source="Event" render="Label" position="70,680" size="90,35" font="Roboto_HD; 28" halign="right" foregroundColor="green" backgroundColor="black" transparent="1">
@@ -7414,7 +7689,7 @@ self['config'].l.setSeperation(int(300*f))
 	  <convert type="EventTime">Progress</convert>
 	</widget>
     <widget render="j00zekModRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=scroll,startdelay=8000,oneshot=5000,wrap" position="84,739" size="1190,216" font="Roboto_HD; 27" foregroundColor="white" backgroundColor="black" transparent="1">
-      <convert type="EventName">ExtendedDescription</convert>
+      <convert type="j00zekModEventName">ExtendedDescription</convert>
     </widget>
     <widget source="session.VideoPicture" render="Pig" position="1280,670" zPosition="3" size="560,290" backgroundColor="transparent" /> 
     <widget name="JumpInterval" position="978,148" size="200,25" zPosition="5" halign="right" font="Roboto_HD;22" foregroundColor="green" backgroundColor="black" transparent="1" />
@@ -7502,7 +7777,7 @@ self['config'].l.setSeperation(int(300*f))
     <convert type="RemainingToText">InMinutes</convert>
     </widget>
 	<widget render="j00zekModRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=scroll,startdelay=6000,oneshot=5000,wrap" zPosition="1" halign="left" position="50,100" size="1730,270" font="HD_Thin;26" foregroundColor="white" backgroundColor="black" transparent="1">
-    <convert type="EventName">ExtendedDescription</convert>
+    <convert type="j00zekModEventName">ExtendedDescription</convert>
     </widget>
   </screen>
   <screen name="HdmiCECSetupScreen" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
@@ -8694,10 +8969,11 @@ self['config'].l.setSeperation(int(300*f))
     <widget name="text" position="center,c+5" size="800,100" font="Roboto_HD; 27" halign="center" borderColor="black" transparent="1"/>
   </screen>
   <screen name="MessageBox" zPosition="11" position="center,center" size="790,10" title="Message">
-    <widget name="text" position="110,8" size="680,0" font="Roboto_HD; 25" backgroundColor="black" transparent="1"/>
-    <widget name="ErrorPixmap" pixmap="BlackHarmony/icons/error.png" position="5,5" size="100,100" alphatest="blend"/>
-    <widget name="QuestionPixmap" pixmap="BlackHarmony/icons/question.png" position="5,5" size="100,100" alphatest="blend"/>
-    <widget name="InfoPixmap" pixmap="BlackHarmony/icons/info.png" position="5,5" size="100,100" alphatest="blend"/>
+    <widget name="text" position="150,8" size="680,0" font="Roboto_HD; 25" backgroundColor="black" transparent="1"/>
+    <widget source="session.CurrentService" render="j00zekPiconAnimation" pixdelay="100" loopdelay="100" loop="True" lockpath="True" pixmaps="BlackHarmony/icons/Confused_Homar80/" position="0,0" zPosition="10" size="140,140" alphatest="blend" />
+    <widget name="ErrorPixmap" pixmap="BlackHarmony/icons/transparent.png" position="0,0" size="100,100" alphatest="blend"/>
+    <widget name="QuestionPixmap" pixmap="BlackHarmony/icons/transparent.png" position="0,0" size="100,100" alphatest="blend"/>
+    <widget name="InfoPixmap" pixmap="BlackHarmony/icons/transparent.png" position="0,0" size="100,100" alphatest="blend"/>
     <widget name="list" font="Roboto_HD; 27" position="15,70" size="750,330" itemHeight="35" selectionPixmap="BlackHarmony/menu/sel_750_35.png" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" backgroundColor="black" transparent="1"/>
     <applet type="onLayoutFinish">
 # this should be factored out into some helper code,but currently demonstrates applets.
@@ -8706,9 +8982,9 @@ from enigma import eSize,ePoint, getDesktop
 #orgheight = self.instance.size().height()
 #---
 offset_listposx = 10
-offset_listposy = 20
+offset_listposy = 40
 offset_listwidth = 10
-offset_listheight = 35
+offset_listheight = 40
 offset_textwidth = 35
 offset_textheight = 20
 min_width = 280
@@ -8873,7 +9149,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2,orgpos.y()))
 	  <convert type="EventTime">Progress</convert>
 	</widget>
 	<widget render="j00zekModRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=scroll,startdelay=6000,oneshot=5000,wrap" halign="left" font="Roboto_HD; 27" position="75,800" size="1780,174" foregroundColor="white" backgroundColor="black" transparent="1" >
-      <convert type="EventName">ExtendedDescription</convert>
+      <convert type="j00zekModEventName">ExtendedDescription</convert>
     </widget>
 	<ePixmap pixmap="BlackHarmony/buttons/red.png" position="95,1001" size="35,27" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="430,1001" size="35,27" alphatest="blend" />
@@ -8948,7 +9224,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2,orgpos.y()))
 	  <convert type="ClockToText">Default</convert>
 	</widget>
 	<widget source="session.Event_Now" render="Label" position="1230,700" size="480,30" font="Roboto_HD;24" noWrap="1" backgroundColor="black" transparent="1">
-	  <convert type="EventName">Name</convert>
+	  <convert type="j00zekModEventName">Name</convert>
 	</widget>
 	<widget source="session.Event_Now" render="Label" position="1710,700" size="140,30" font="Roboto_HD;24" halign="right" backgroundColor="black" transparent="1">
 	  <convert type="EventTime">Remaining</convert>
@@ -8959,7 +9235,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2,orgpos.y()))
 	  <convert type="ClockToText">Default</convert>
 	</widget>
 	<widget source="session.Event_Next" render="Label" position="1230,740" size="480,30" font="Roboto_HD;24" noWrap="1" backgroundColor="black" transparent="1">
-	  <convert type="EventName">Name</convert>
+	  <convert type="j00zekModEventName">Name</convert>
 	</widget>
 	<widget source="session.Event_Next" render="Label" position="1710,740" size="140,30" font="Roboto_HD;24" halign="right" backgroundColor="black" transparent="1">
 	  <convert type="EventTime">Duration</convert>
@@ -8967,7 +9243,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2,orgpos.y()))
 	</widget>
 	<eLabel position="75,780" size="1774,2" backgroundColor="yellow" />
 	<widget render="j00zekModRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=scroll,startdelay=6000,oneshot=5000,wrap" halign="left" font="Roboto_HD; 27" position="75,790" size="1780,174" foregroundColor="white" backgroundColor="black" transparent="1" >
-      <convert type="EventName">ExtendedDescription</convert>
+      <convert type="j00zekModEventName">ExtendedDescription</convert>
     </widget>
 	<ePixmap pixmap="BlackHarmony/buttons/red.png" position="95,1001" size="35,27" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="430,1001" size="35,27" alphatest="blend" />

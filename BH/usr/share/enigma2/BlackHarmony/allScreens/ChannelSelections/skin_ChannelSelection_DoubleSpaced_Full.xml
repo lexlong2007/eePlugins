@@ -23,13 +23,13 @@
   </widget>
   <widget source="Title" render="Label" position="1025,43" size="835,30" font="Roboto_HD; 25" backgroundColor="dark_grey" transparent="1" halign="right" noWrap="1" valign="center" zPosition="3" />
   <widget render="j00zekModRunningText" source="ServiceEvent" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=6000,wrap" halign="left" font="Roboto_HD; 25" backgroundColor="background" position="770,505" size="480,405" transparent="1">
-    <convert type="EventName">ExtendedDescription</convert>
+    <convert type="j00zekModEventName">ExtendedDescription</convert>
   </widget>
   <widget source="ServiceEvent" render="Progress" position="939,952" size="220,6" pixmap="BlackHarmony/gfx/progress_cs.png" transparent="1">
     <convert type="EventTime">Progress</convert>
   </widget>
   <widget source="ServiceEvent" render="Label" position="770,420" size="480,70" font="HD_Thin; 30" backgroundColor="black" transparent="1" halign="center" foregroundColor="light_yellow">
-    <convert type="EventName">Name</convert>
+    <convert type="j00zekModEventName">Name</convert>
   </widget>
   <widget source="ServiceEvent" render="j00zekPicons" picontype="zzpicon" position="810,171" size="400,170" zPosition="2" transparent="1" alphatest="blend">
     <convert type="ServiceName">Reference</convert>

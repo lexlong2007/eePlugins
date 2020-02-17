@@ -1,5 +1,5 @@
 <skin>
-  <screen name="ChannelSelection" position="center,center" size="1920,1080" title=" " flags="wfNoBorder" backgroundColor="transparent">
+ <screen name="ChannelSelection" position="center,center" size="1920,1080" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,1" zPosition="-7" size="1920,1080" pixmap="BlackHarmony/bg_design/cs.png"/>
     <widget source="global.CurrentTime" render="Label" position="75,55" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Default</convert>
@@ -28,14 +28,17 @@
     <widget source="ServiceEvent" render="Label" position="750,55" size="400,35" font="Roboto_HD; 25" halign="center" foregroundColor="#00F0A30A" backgroundColor="black" transparent="1">
       <convert type="j00zekModServiceName2">Provider</convert>
     </widget>
-    <widget render="j00zekModRunningText" source="ServiceEvent" position="1185,465" size="655,265" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=scroll,startdelay=6000,oneshot=5000,wrap" halign="left" font="Roboto_HD; 28" backgroundColor="black" transparent="1">
-      <convert type="EventName">ExtendedDescription</convert>
+    <widget render="j00zekModRunningText" source="ServiceEvent" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=6000,wrap" position="1185,465" size="655,265" halign="left" font="Roboto_HD; 28" backgroundColor="black" transparent="1">
+      <convert type="j00zekModEventName">FullDescription</convert>
     </widget>
+    <widget source="ServiceEvent" render="j00zekPixmap" position="1358,768" size="376,5" zPosition="-1" alphatest="blend">
+	  <convert type="j00zekModEventName">isEPGpic:BlackHarmony/gfx/progress_dark_green.png</convert>
+	</widget>
     <widget source="ServiceEvent" render="Progress" position="1358,768" size="376,6" pixmap="BlackHarmony/gfx/progress_cs.png" transparent="1">
       <convert type="EventTime">Progress</convert>
     </widget>
     <widget source="ServiceEvent" render="j00zekLabel" position="1185,420" size="655,35" font="HD_Thin; 30" halign="left" noWrap="1" foregroundColor="light_yellow" backgroundColor="black" transparent="1">
-      <convert type="EventName">Name</convert>
+      <convert type="j00zekModEventName">Name</convert>
     </widget>
     <eLabel position="1313,163" size="404,174" zPosition="1" backgroundColor="#866423" transparent="0"/>
     <widget source="ServiceEvent" render="j00zekPicons" picontype="zzpicon" position="1315,165" size="400,170" zPosition="2" alphatest="blend" transparent="1">

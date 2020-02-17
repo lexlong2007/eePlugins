@@ -15,7 +15,7 @@
     <convert type="ClockToText">AsLength</convert>
   </widget>
   <widget render="j00zekModRunningText" source="Service" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=6000,wrap" halign="left" backgroundColor="background" position="370,700" size="670,220" font="Roboto_HD; 27" transparent="1">
-    <convert type="EventName">ExtendedDescription</convert>
+    <convert type="j00zekModEventName">ExtendedDescription</convert>
   </widget>
   <ePixmap pixmap="BlackHarmony/buttons/red.png" position="110,991" size="35,27" alphatest="blend" />
   <ePixmap pixmap="BlackHarmony/buttons/green.png" position="500,991" size="35,27" alphatest="blend" />
@@ -34,7 +34,7 @@
     <convert type="BlackHarmonyMovieReference" />
   </widget>
   <widget source="Service" render="Label" position="1110,190" size="540,70" font="HD_Thin; 26" backgroundColor="black" valign="top" halign="left" transparent="1" foregroundColor="yellow">
-    <convert type="EventName">Name</convert>
+    <convert type="j00zekModEventName">Name</convert>
   </widget>
   <widget source="Service" render="BlackHarmonyCover" position="1270,302" size="350,510" zPosition="2" backgroundColor="background" alphatest="blend" transparent="1" />
 </screen>
