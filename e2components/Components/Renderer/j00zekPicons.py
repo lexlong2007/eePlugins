@@ -26,9 +26,7 @@ DBG = False
 try:
     from Components.j00zekComponents import j00zekDEBUG
 except Exception:
-    def j00zekDEBUG(myText=None):
-        if not myText is None:
-            print(myText)
+    DBG = False
 #####
 
 def initPiconPaths():
@@ -77,8 +75,8 @@ def onPartitionChange(why, part):
         searchPaths.remove(part.mountpoint)
 
 
-def findPicon(serviceName, selfPiconType = 'picon'):
-    if serviceName is None or serviceName == '':
+def findPicon(sName, selfPiconType, serviceName):
+    if sName is None or sName == '':
         return None
     pngname = None
     findPiconTypeName='%s%s' % (selfPiconType,serviceName)
@@ -88,14 +86,14 @@ def findPicon(serviceName, selfPiconType = 'picon'):
     else:
         for path in searchPaths:
             sPath = path + selfPiconType + '/'
-            if DBG: j00zekDEBUG('[j00zekPicons:findPicon] searching for %s%s.[png|gif]' % (sPath,serviceName) )
-            if pathExists(sPath + serviceName + '.png'):
-                pngname = sPath + serviceName + '.png'
+            if DBG: j00zekDEBUG('[j00zekPicons:findPicon] searching for %s%s.[png|gif]' % (sPath,sName) )
+            if pathExists(sPath + sName + '.png'):
+                pngname = sPath + sName + '.png'
                 lastPiconsDict[findPiconTypeName] = pngname
                 if DBG: j00zekDEBUG('[j00zekPicons:findPicon] lastPiconsDict[%s] = %s' % (findPiconTypeName, pngname) )
                 break
-            elif pathExists(sPath + serviceName + '.gif'):
-                pngname = sPath + serviceName + '.gif'
+            elif pathExists(sPath + sName + '.gif'):
+                pngname = sPath + sName + '.gif'
                 lastPiconsDict[findPiconTypeName] = pngname
                 if DBG: j00zekDEBUG('[j00zekPicons:findPicon] lastPiconsDict[%s] = %s' % (findPiconTypeName, pngname) )
                 break
@@ -104,31 +102,50 @@ def findPicon(serviceName, selfPiconType = 'picon'):
 
 def getPiconName(serviceName, selfPiconType):
     if DBG: j00zekDEBUG('[j00zekPicons:getPiconName] >>>')
-    name = 'unknown'
-    sname = '_'.join(GetWithAlternative(serviceName).split(':', 10)[:10])
-    pngname = findPicon(sname, selfPiconType)
+    name = None
+    sname = None
+    pngname = None
+    if selfPiconType == 'piconProv':
+        if DBG: j00zekDEBUG('[j00zekPicons:getPiconName] looking for piconProv')
+        pngname = findPicon(serviceName.upper(), selfPiconType, serviceName)
+    elif selfPiconType == 'piconSat':
+        if DBG: j00zekDEBUG('[j00zekPicons:getPiconName] looking for piconSat')
+        pngname = findPicon(serviceName.upper().replace('.', '').replace('\xc2\xb0', ''), selfPiconType, serviceName)
     if not pngname:
+        name = 'unknown'
+        sname = '_'.join(GetWithAlternative(serviceName).split(':', 10)[:10])
+        pngname = findPicon(sname, selfPiconType, serviceName)
+    if not pngname:
+        if DBG: j00zekDEBUG('[j00zekPicons:getPiconName] pngname not found by sname')
         fields = sname.split('_', 3)
         isChanged = False
         if len(fields) > 2 and fields[2] != '2' and fields[2] != '1':
             fields[2] = '1'
             isChanged = True
-        if len(fields) > 0 and fields[0] == '4097':
+        if len(fields) > 0 and (fields[0] == '4097' or fields[0] == '5001' or fields[0] == '5002'):
             fields[0] = '1'
             isChanged = True
         if isChanged == True:
-            pngname = findPicon('_'.join(fields), selfPiconType)
-    if not pngname:
-        name = ServiceReference(serviceName).getServiceName()
-        name = unicodedata.normalize('NFKD', unicode(name, 'utf_8', errors='ignore')).encode('ASCII', 'ignore')
-        name = re.sub('[^a-z0-9]', '', name.replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
-        name = name.replace('fhd', 'hd').replace('uhd', 'hd') #iptv streams names correction
-        if len(name) > 0:
-            pngname = findPicon(name, selfPiconType)
-            if not pngname and len(name) > 2 and name.endswith('hd'):
-                pngname = findPicon(name[:-2], selfPiconType)
-            elif not pngname and len(name) > 2 and name.endswith('pl'):
-                pngname = findPicon(name[:-2], selfPiconType)
+            pngname = findPicon('_'.join(fields), selfPiconType, serviceName)
+        if not pngname:
+            if DBG: j00zekDEBUG('[j00zekPicons:getPiconName] pngname not found by reference, trying by service name')
+            name = ServiceReference(serviceName).getServiceName()
+            name = unicodedata.normalize('NFKD', unicode(name, 'utf_8', errors='ignore')).encode('ASCII', 'ignore')
+            name = re.sub('[^a-z0-9]', '', name.replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
+            name = name.replace('fhd', 'hd').replace('uhd', 'hd') #iptv streams names correction
+            if len(name) > 0:
+                pngname = findPicon(name, selfPiconType, serviceName)
+                if not pngname and len(name) > 2 and name.endswith('hd'):
+                    pngname = findPicon(name[:-2], selfPiconType, serviceName)
+                elif not pngname and len(name) > 2 and name.endswith('pl'):
+                    pngname = findPicon(name[:-2], selfPiconType, serviceName)
+            if not pngname:
+                if DBG: j00zekDEBUG('[j00zekPicons:getPiconName] service name not found in lamedb, trying provided name')
+                pngname = findPicon(serviceName, selfPiconType, serviceName)
+                if not pngname:
+                    pngname = findPicon(serviceName.upper(), selfPiconType, serviceName)
+                    if not pngname:
+                        pngname = findPicon(serviceName.lower(), selfPiconType, serviceName)
     if DBG:
         j00zekDEBUG('[j00zekPicons:getPiconName] serviceName=%s, picon=%s, %s, piconFile=%s, selfPiconType=%s' %(str(serviceName),
                                                                 sname, name, str(pngname), selfPiconType) )
