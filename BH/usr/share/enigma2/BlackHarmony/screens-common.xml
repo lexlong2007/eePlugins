@@ -1,4 +1,5 @@
 <skin>
+<!-- >>>>>>>>>> screens-common.xml <<<<<<<<<< -->
   <screen name="SubtitleDisplay" position="0,0" size="1920,1080" zPosition="-1" backgroundColor="transparent" flags="wfNoBorder"/>
   <screen name="Subtitles" position="462,128" size="1000,820" title="Subtitles" flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1000,820" pixmap="BlackHarmony/bg_design/small.png"/>
