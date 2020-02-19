@@ -1,22 +1,23 @@
 <skin>
  <screen name="InfoBar" position="0,0" size="1920,1080" backgroundColor="transparent"  flags="wfNoBorder" >
   <ePixmap pixmap="BlackHarmony/bg_design/infobar_epg.png" position="30,775" zPosition="-10" size="1860,298" />
- <widget source="session.CurrentService" render="j00zekPicons" picontype="picon" position="59,813" size="300,180" zPosition="4" backgroundColor="black" transparent="1" alphatest="blend">
+ <widget source="session.CurrentService" render="j00zekPicons" picontype="picon" position="59,815" size="300,176" zPosition="4" backgroundColor="black" transparent="1" alphatest="blend">
       <convert type="ServiceName2">Reference</convert>
    </widget>
- <widget source="session.CurrentService" render="j00zekPiconAnimation" position="59,813" size="300,180" zPosition="5" transparent="1" alphatest="blend" />
+ <widget source="session.CurrentService" render="j00zekPiconAnimation" position="59,815" size="300,176" zPosition="5" transparent="1" alphatest="blend" />
  <eLabel position="58,810" size="302,2" backgroundColor="linie" />
  <eLabel position="58,994" size="302,2" backgroundColor="linie" />
  <eLabel position="56,810" size="2,186" backgroundColor="linie" />
  <eLabel position="360,810" size="2,186" backgroundColor="linie" /> 
 
- <widget source="session.CurrentService" render="j00zekLabel" position="373,805" size="1000,45" font="HD_Thin; 42" noWrap="1" backgroundColor="black" transparent="1" halign="center" valign="center" foregroundColor="#66CCCC" >
+ <widget source="session.CurrentService" render="j00zekLabel" position="373,800" size="1000,45" font="HD_Thin; 42" noWrap="1" backgroundColor="black" transparent="1" halign="center" valign="center" foregroundColor="#66CCCC" >
     <convert type="BlackHarmonygExtraTuner">ServiceNumberName</convert>
    </widget>
- <ePixmap alphatest="blend" pixmap="BlackHarmony/icons/ico_rec_off2.png" position="1375,810" size="20,20" zPosition="1" />
- <widget pixmap="BlackHarmony/icons/ico_rec_on2.png" alphatest="blend" position="1375,810" render="Pixmap" size="20,20" source="session.RecordState" zPosition="3">
-    <convert type="ConditionalShowHide">Blink</convert>
-   </widget>
+ <widget source="session.CurrentService" render="Pixmap" position="1375,810" zPosition="2" size="20,20" pixmap="BlackHarmony/icons/update.png" alphatest="blend">
+    <convert type="j00zekOPKGupgradeCheck" />
+	<convert type="ConditionalShowHide">Blink</convert>
+  </widget> 
+  
  <widget source="session.Event_Now" render="Label" position="365,852" size="117,44" font="Regular; 30" halign="center" valign="center" backgroundColor="black" transparent="1" >
       <convert type="EventTime">StartTime</convert>
       <convert type="ClockToText">Default</convert>
@@ -43,6 +44,10 @@
       <convert type="EventTime">Duration</convert>
       <convert type="ClockToText">InMinutes</convert>
     </widget>
+ <ePixmap alphatest="blend" pixmap="BlackHarmony/icons/ico_rec_off2.png" position="1370,904" size="20,20" zPosition="1" />
+ <widget pixmap="BlackHarmony/icons/ico_rec_on2.png" alphatest="blend" position="1370,904" render="Pixmap" size="20,20" source="session.RecordState" zPosition="3">
+    <convert type="ConditionalShowHide">Blink</convert>
+   </widget>	
 
  <ePixmap position="64,1013" size="26,20" zPosition="1" pixmap="BlackHarmony/icons/ico_crypt_off.png" alphatest="blend" />
  <widget source="session.CurrentService" render="Pixmap" position="64,1013" size="26, 20" zPosition="2" pixmap="BlackHarmony/icons/ico_crypt_on.png" alphatest="blend">
@@ -50,40 +55,35 @@
     <convert type="ConditionalShowHide" />
   </widget>
  <eLabel text="-" backgroundColor="black" font="Regular;23"  halign="left" position="95,1007" size="15,35" transparent="1" />
-  <widget source="session.CurrentService" render="Label" position="111,1007" size="260,35" zPosition="2" font="Regular;23" halign="left"  foregroundColor="#00ff6215" backgroundColor="background" transparent="1">
-    <convert type="BlackHarmonyCaidInfo2">CryptInfo2</convert>
+ <widget source="session.CurrentService" render="j00zekLabel" position="111,1007" size="255,30" zPosition="2" font="Regular;25" halign="left"  foregroundColor="#00ff6215" backgroundColor="background" transparent="1">
+    <convert type="j00zekModCaidInfo2">CryptInfo2</convert>
  </widget>	
- 
- <widget source="session.CurrentService" render="FixedLabel" text="FTA" font="Regular;23" position="340,1007" size="60,25" halign="center" backgroundColor="black" foregroundColor="yellow" zPosition="1"  transparent="1">
-    <convert type="j00zekModServiceInfoEX">IsFta</convert>
+ <widget source="session.CurrentService" render="FixedLabel" text="NET" font="Regular;23" position="360,1007" size="60,25" halign="center" backgroundColor="black" foregroundColor="orange" zPosition="2"  transparent="1">
+    <convert type="j00zekModCaidInfo2">Net</convert>
     <convert type="ConditionalShowHide" />
   </widget>
- <widget source="session.CurrentService" render="FixedLabel" text="NET" font="Regular;23" position="340,1007" size="60,25" halign="center" backgroundColor="black" foregroundColor="orange" zPosition="2"  transparent="1">
-    <convert type="BlackHarmonyCaidInfo2">Net</convert>
+ <widget source="session.CurrentService" render="FixedLabel" text="CRD" font="Regular;23" position="360,1007" size="60,25" halign="center" backgroundColor="black" foregroundColor="blue" zPosition="3"  transparent="1">
+    <convert type="j00zekModCaidInfo2">Crd</convert>
     <convert type="ConditionalShowHide" />
   </widget>
- <widget source="session.CurrentService" render="FixedLabel" text="CRD" font="Regular;23" position="340,1007" size="60,25" halign="center" backgroundColor="black" foregroundColor="blue" zPosition="3"  transparent="1">
-    <convert type="BlackHarmonyCaidInfo2">Crd</convert>
+ <widget source="session.CurrentService" render="FixedLabel" text="EMU" font="Regular;23" position="360,1007" size="60,25" halign="center" backgroundColor="black" foregroundColor="orange" zPosition="4"  transparent="1">
+    <convert type="j00zekModCaidInfo2">Emu</convert>
     <convert type="ConditionalShowHide" />
   </widget>
- <widget source="session.CurrentService" render="FixedLabel" text="EMU" font="Regular;23" position="340,1007" size="60,25" halign="center" backgroundColor="black" foregroundColor="orange" zPosition="4"  transparent="1">
-    <convert type="BlackHarmonyCaidInfo2">Emu</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
- <eLabel text="CA:" position="410,1007" size="45,25" font="Regular;23" foregroundColor="cyan" backgroundColor="black"  transparent="1" />
- <widget source="session.CurrentService" render="Label" position="455,1007" zPosition="2" size="70,25" font="Regular;23" halign="left" transparent="1" backgroundColor="black">
+ <eLabel text="CA:" position="430,1007" size="45,25" font="Regular;23" foregroundColor="cyan" backgroundColor="black"  transparent="1" />
+ <widget source="session.CurrentService" render="Label" position="475,1007" zPosition="2" size="70,25" font="Regular;23" halign="left" transparent="1" backgroundColor="black">
     <convert type="BlackHarmonygExtraInfo">CaidID</convert>
   </widget>
- <widget source="session.CurrentService" render="Label" position="520,1007" zPosition="2" size="540,25" font="Regular;23"  halign="right" transparent="1" backgroundColor="black">
+ <widget source="session.CurrentService" render="Label" position="540,1007" zPosition="2" size="540,25" font="Regular;23"  halign="center" transparent="1" backgroundColor="black">
     <convert type="BlackHarmonygExtraInfo">Source</convert>
   </widget>
 	
-<eLabel position="377,994" size="1010,2" backgroundColor="linie" />
-<eLabel position="1406,821" size="2,213" backgroundColor="linie" /> 
+ <eLabel position="377,994" size="1010,2" backgroundColor="linie" />
+ <eLabel position="1406,821" size="2,213" backgroundColor="linie" /> 
 	
 	<!--data godzina-->
 
- <widget backgroundColor="black" font="Roboto_HD; 28" halign="center" position="1420,807" render="Label" size="220,32" source="global.CurrentTime" transparent="1" noWrap="1" foregroundColor="lemon" >
+<widget backgroundColor="black" font="Roboto_HD; 28" halign="center" position="1420,807" render="Label" size="220,32" source="global.CurrentTime" transparent="1" noWrap="1" foregroundColor="lemon" >
       <convert type="ClockToText">Format:%A</convert>
     </widget>	
  <widget backgroundColor="black" font="LCD; 30" halign="center" position="1438,840" render="Label" size="165,32" source="global.CurrentTime" transparent="1" noWrap="1" foregroundColor="lemon" >
@@ -130,32 +130,9 @@
   
 <eLabel position="1427,967" size="434,2" backgroundColor="linie" />
 
- <widget source="session.CurrentService" render="FixedLabel" text="DVB-S" position="1425,975" size="95,24" font="Regular; 23" halign="left" zPosition="1" foregroundColor="#66CCCC" backgroundColor="black" transparent="1" >
-      <convert type="j00zekModServiceInfoEX">IsSatelliteS</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
- <widget source="session.CurrentService" render="FixedLabel" text="DVB-S2" position="1425,975" size="95,24" font="Regular; 23" halign="left" zPosition="2" foregroundColor="#66CCCC" backgroundColor="black" transparent="1" >
-      <convert type="j00zekModServiceInfoEX">IsSatelliteS2</convert>
-      <convert type="ConditionalShowHide" />
+ <widget source="session.CurrentService" render="j00zekLabel" backgroundColor="background" font="Regular; 25" halign="left"  position="1425,974" size="440,70" transparent="1" zPosition="3">
+      <convert type="j00zekModServiceName2">UseCFG</convert>
     </widget>	
- <widget source="session.CurrentService" render="FixedLabel" text="DVB-T" position="1425,975" size="95,24" font="Regular; 23" halign="left" zPosition="3" foregroundColor="yellow" backgroundColor="black" transparent="1" >
-      <convert type="j00zekModServiceInfoEX">IsTerrestrial</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
- <widget source="session.CurrentService" render="FixedLabel" text="DVB-T2" position="1425,975" size="95,24" font="Regular; 23" halign="left" zPosition="4" foregroundColor="yellow" backgroundColor="black" transparent="1" >
-      <convert type="j00zekModServiceInfoEX">IsTerrestrialT2</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
- <widget source="session.CurrentService" render="FixedLabel" text="IP-TV" position="1425,975" size="95,24" font="Regular; 23" halign="left" zPosition="5" foregroundColor="#93F600" backgroundColor="black" transparent="1" >
-      <convert type="j00zekModServiceInfoEX">IsStreamTV</convert>
-      <convert type="ConditionalShowHide" />
-    </widget> 
- <widget source="session.CurrentService" render="Label" backgroundColor="background" font="Regular; 23" halign="left"  position="1543,975" size="321,24"  foregroundColor="green" transparent="1" zPosition="3">
-      <convert type="j00zekModServiceName2">%S</convert>
-    </widget>
-<widget source="session.CurrentService" render="j00zekLabel" position="1425,1006" size="442,30" font="Roboto_HD; 28" halign="center" valign="center" backgroundColor="black" transparent="1" >
-    <convert type="ServiceName">Provider</convert>
-  </widget>	
   
      <!--ikony-->
    
@@ -185,7 +162,7 @@
       <convert type="ConditionalShowHide" />
     </widget>
  <ePixmap position="1346,1013" size="36,20" zPosition="1" pixmap="BlackHarmony/icons/ico_format_off.png" alphatest="blend" />
-    <widget source="session.CurrentService" render="Pixmap" pixmap="BlackHarmony/icons/ico_format_on.png" position="1346,1013" size="36,20" zPosition="2" alphatest="blend">
+ <widget source="session.CurrentService" render="Pixmap" pixmap="BlackHarmony/icons/ico_format_on.png" position="1346,1013" size="36,20" zPosition="2" alphatest="blend">
       <convert type="j00zekModServiceInfoEX">IsWidescreen</convert>
       <convert type="ConditionalShowHide" />
     </widget>
@@ -205,10 +182,6 @@
     <convert type="j00zekModServiceInfoEX">SubtitlesAvailable</convert>
       <convert type="ConditionalShowHide" />
     </widget>
- <widget source="session.CurrentService" render="Pixmap" position="1080,1013" zPosition="2" size="20,20" pixmap="BlackHarmony/icons/update.png" alphatest="blend">
-    <convert type="j00zekOPKGupgradeCheck" />
-	<convert type="ConditionalShowHide">Blink</convert>
-  </widget>   
   
 </screen>
 </skin>
