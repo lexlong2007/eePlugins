@@ -25,6 +25,7 @@ class j00zekPixmap(Renderer):
         self.picload = ePicLoad()
         self.picload.PictureData.get().append(self.paintIconPixmapCB)
         self.iconFileName = ""
+        self.iconPath = ""
         self.currIcon = ''
 
     GUI_WIDGET = ePixmap
@@ -35,9 +36,15 @@ class j00zekPixmap(Renderer):
                 x, y = value.split(',')
                 self._scaleSize = eSize(int(x), int(y))
             elif attrib == "pixmap":
-                self.iconFileName = value
-                if not self.iconFileName.startswith('/'):
-                    self.iconFileName = resolveFilename(SCOPE_CURRENT_SKIN, self.iconFileName)
+                if attrib.endswith('/*'):
+                    if attrib.startswith('/'):
+                        self.iconFileName = resolveFilename(SCOPE_CURRENT_SKIN, attrib[:-1])
+                    else:
+                        self.iconPath = attrib[:-1]
+                else:
+                    self.iconFileName = value
+                    if not self.iconFileName.startswith('/'):
+                        self.iconFileName = resolveFilename(SCOPE_CURRENT_SKIN, self.iconFileName)
         sc = AVSwitch().getFramebufferScale()
         self._aspectRatio = eSize(sc[0], sc[1])
         self.picload.setPara((self._scaleSize.width(), self._scaleSize.height(), sc[0], sc[1], True, 2, '#ff000000'))

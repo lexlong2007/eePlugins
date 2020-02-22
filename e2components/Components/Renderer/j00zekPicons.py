@@ -247,7 +247,7 @@ class j00zekPicons(Renderer):
                         pngname = getPiconName(self.source.text, self.piconType)
                         if DBG: j00zekDEBUG('[j00zekPicons]:[changed] gifname=%s, pngname=%s' %(gifname,pngname))
                     if pngname is None and self.ShowDefault == True:
-                        pngname = findPicon('picon_default', self.piconType)
+                        pngname = findPicon('picon_default', self.piconType, 'picon_default')
                         if pngname is None and pathExists(resolveFilename(SCOPE_CURRENT_SKIN, 'picon_default.png')):
                             pngname = resolveFilename(SCOPE_CURRENT_SKIN, 'picon_default.png')
                     if pngname is None:
