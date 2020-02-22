@@ -88,14 +88,8 @@ echo '<skin>' > $BHfolder/skin.xml
 cat $BHfolder/skin-head.xml >> $BHfolder/skin.xml
 cat $BHfolder/allFonts/font_default.xml|grep -v 'skin>' >> $BHfolder/skin.xml
 cat $BHfolder/allColors/colors_default.xml|grep -v 'skin>' >> $BHfolder/skin.xml
-cat /usr/share/enigma2/BlackHarmony/screens-common.xml|grep -v 'skin>' >> /usr/share/enigma2/BlackHarmony/skin.xml
-sync
-#kopiowanie ekranow wszystkich wtyczek
-find /usr/share/enigma2/BlackHarmony/screensPlugins -iname *.xml|while read f;
-do
-  #echo "<!-- from: $f -->" >> /usr/share/enigma2/BlackHarmony/skin.xml
-  cat "$f"|grep -v 'skin>' >> /usr/share/enigma2/BlackHarmony/skin.xml
-done
+cat /usr/share/enigma2/BlackHarmony/screens-Plugins.xml|grep -v 'skin>' >> $BHfolder/skin.xml
+cat /usr/share/enigma2/BlackHarmony/screens-common.xml|grep -v 'skin>' >> $BHfolder/skin.xml
 sync
 
 if [ "$systemType" == 'VTI' ];then

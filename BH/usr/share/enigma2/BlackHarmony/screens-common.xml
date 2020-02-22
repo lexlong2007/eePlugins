@@ -1,5 +1,5 @@
 <skin>
-<!-- >>>>>>>>>> screens-common.xml <<<<<<<<<< -->
+<!-- >>>>>>>>>> COMMON SCREENS <<<<<<<<<< -->
   <screen name="SubtitleDisplay" position="0,0" size="1920,1080" zPosition="-1" backgroundColor="transparent" flags="wfNoBorder"/>
   <screen name="Subtitles" position="462,128" size="1000,820" title="Subtitles" flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1000,820" pixmap="BlackHarmony/bg_design/small.png"/>
@@ -10558,4 +10558,3 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
     <widget zPosition="-25" name="key_blue" position="1330,990" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget zPosition="-25" name="Picture" position="1113,185" size="680,500" zPosition="2" alphatest="on"/>
   </screen-->
-</skin>

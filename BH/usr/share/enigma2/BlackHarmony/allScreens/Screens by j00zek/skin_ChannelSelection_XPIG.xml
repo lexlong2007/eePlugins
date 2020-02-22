@@ -31,7 +31,7 @@
       <convert type="EventTime">EndTime</convert>
       <convert type="ClockToText">Format:- %H:%M</convert>
     </widget>
-    <ePixmap pixmap="BlackHarmony/gfx/progress_bcs.png" position="1355,452" size="376,6" zPosition="-10" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/gfx/progress_black_443x8.png" position="1355,452" size="376,6" zPosition="-10" alphatest="blend" />
     <widget source="ServiceEvent" render="Progress" position="1355,452" size="376,6" pixmap="BlackHarmony/gfx/progress_cs.png" transparent="1">
       <convert type="EventTime">Progress</convert>
     </widget>

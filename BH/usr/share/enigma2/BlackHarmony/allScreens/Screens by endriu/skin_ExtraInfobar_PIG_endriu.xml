@@ -20,7 +20,7 @@
     <convert type="ClockToText">Format:- %H:%M</convert>
      </widget>
 	 <eLabel backgroundColor="linie"  position="416,60" size="266,1" zPosition="1" />
- <widget source="session.Event_Now" render="Progress" position="416,55" zPosition="2" size="266,12" pixmap="BlackHarmony/gfx/Progress_266_12.png" transparent="2">
+ <widget source="session.Event_Now" render="Progress" position="416,55" zPosition="2" size="266,12" pixmap="BlackHarmony/gfx/Progress_color_dots_266x12.png" transparent="2">
       <convert type="EventTime">Progress</convert>
       </widget>
   <widget backgroundColor="black" font="Regular; 33" foregroundColor="white" halign="right" position="725,39" render="Label" size="200,40" source="session.Event_Now" transparent="1">
