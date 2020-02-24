@@ -4,6 +4,12 @@
 # some images doesn't present title, some doesn't translate
 # this converter is to manage over both situations
 #
+#      <!-- zamiast elabel - widget source="session.CurrentService" render="Label"-->
+"""
+    <widget source="session.CurrentService" render="Label" backgroundColor="black" font="Roboto_HD; 26" foregroundColor="light_yellow" position="65,210" size="210,32" transparent="1">
+      <convert type="j00zekAlternateTitle">Plugin browser</convert>
+    </widget>
+"""
 
 from Components.Converter.Converter import Converter
 from Components.Element import cached

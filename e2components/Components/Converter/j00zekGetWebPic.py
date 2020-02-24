@@ -100,6 +100,13 @@ class j00zekGetWebPic(Converter, object):
         if suspended == 1: 
             self.refreshTimer.stop()
             self.isSuspended = True
+            try:
+                if os.path.exists('%s.last.jpg' % self.downloadToFile):
+                    os.remove('%s.last.jpg' % self.downloadToFile)
+                if os.path.exists(self.downloadToFile):
+                    os.remove(self.downloadToFile)
+            except Exception as e:
+                if DBG: j00zekDEBUG('[j00zekGetWebPic:doSuspend] Exception: %s' % str(e))
         else: 
               if self.isSuspended:
                   if DBG: j00zekDEBUG('[j00zekGetWebPic:doSuspend] initiates refreshTimer')

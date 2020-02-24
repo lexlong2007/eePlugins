@@ -302,8 +302,8 @@ class j00zekPiconAnimation(Renderer):
             self.slideFrame += 1
             if self.slideFrame >= self.FramesCount:
                 self.slideFrame = self.FramesCount
+                global isGrabEnabled
                 if isGrabEnabled:
-                    global isGrabEnabled
                     isGrabEnabled = False
             self.animTimer.start(self.delayBetweenFrames, True)
         elif self.slideFrame == self.FramesCount: #Note last frame does NOT exists
