@@ -26,6 +26,35 @@ PluginPath=`grep 'DestinationPath:' < $plugAbsPath/CONTROL/control|cut -d ':' -f
 ExcludeFolder=`grep 'ExcludeFolder' < $plugAbsPath/CONTROL/control|cut -d ':' -f2|xargs`
 RunScriptBeforeBuild=`grep 'RunScriptBeforeBuild' < $plugAbsPath/CONTROL/control|cut -d ':' -f2|xargs`
 
+#sprawdzanie czy xmle nie maja bledow
+find $plugAbsPath -iname "*.xml" | 
+  while read F 
+  do
+    xmllint --noout "$F"
+    if [[ $? -gt 0 ]];then
+      echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ERROR in XML !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+      exit 1
+    fi
+  done
+[ $? -gt 0 ] && exit 1
+#sprawdzanie czy py nie maja bledow
+echo "import sys
+filename = sys.argv[1]
+source = open(filename, 'r').read() + '\n'
+compile(source, filename, 'exec')
+" > /tmp/checker.py
+
+find $plugAbsPath -iname "*.py" | 
+  while read F 
+  do
+    python /tmp/checker.py "$F"
+    if [[ $? -gt 0 ]];then
+      echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ERROR in PY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+      exit 1
+      break
+    fi
+  done
+[ $? -gt 0 ] && exit 1
 #find $plugAbsPath -iname "*.py" | 
 #  while read F 
 #  do
