@@ -5588,7 +5588,6 @@ self['config'].l.setSeperation(int(300*f))
     <widget name="key_yellow" position="538,759" size="180,26" zPosition="1" font="Roboto_HD;24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1"/>
     <widget name="key_blue" position="763,759" size="180,26" zPosition="1" font="Roboto_HD;24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1"/>
   </screen>
-  </screen>
   <!--       MerlinMusicPlayer         -->
   <screen name="MerlinMusicPlayerScreen" position="0,0" size="1920,1080" title="Merlin Music Player" flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap pixmap="BlackHarmony/bg_design/mmp.png" position="0,0" size="1920,1080" zPosition="-10"/>

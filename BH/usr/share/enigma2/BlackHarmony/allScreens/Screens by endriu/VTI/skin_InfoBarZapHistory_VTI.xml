@@ -1,4 +1,4 @@
-</skin>
+<skin>
  <screen name="InfoBarZapHistory" position="204,34" size="1522,1022" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="-2,0" zPosition="-10" size="1522,1022" pixmap="BlackHarmony/bg_design/network.png"/>
     <widget source="global.CurrentTime" render="Label" position="62,40" size="90,40" font="Roboto_HD; 32" backgroundColor="black" transparent="1">
@@ -45,4 +45,4 @@
 	
 	
   </screen>
-  </skin>
+</skin>

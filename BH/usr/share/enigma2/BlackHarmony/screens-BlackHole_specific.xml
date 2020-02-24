@@ -1,12 +1,12 @@
-  <!-- >>>>>>>>>> BllackHole SPECIFIC SCREENS prepared/modified by fhroma <<<<<<<<<< -->
+<skin>
+<!-- >>>>>>>>>> BllackHole SPECIFIC SCREENS prepared/modified by fhroma <<<<<<<<<< -->
   <screen name="DeliteGreenPanel" position="center,center" size="1920,1080" title=" " flags="wfNoBorder"  backgroundColor="transparent" >
-    <ePixmap position="0,0" zPosition="-10" size="1920,1080" pixmap="BlackHarmony/bg_design/info.png" />
-         <ePixmap position="1280,400"  size="315,315"  pixmap="BlackHarmony/gfx/gp.png"  alphatest="blend" />
-         
-    
-             <ePixmap position="1030,180" zPosition="2" size="35,767" pixmap="BlackHarmony/gfx/scroll.png" alphatest="blend" transparent="1" />
-
-    <eLabel text="Green Panel" position="980,88" size="820,50" font="Roboto_HD; 38" halign="right" backgroundColor="dark_grey" foregroundColor="#00cc33" transparent="1" />
+  <ePixmap position="0,0" zPosition="-10" size="1920,1080" pixmap="BlackHarmony/bg_design/info.png" />
+  <ePixmap position="1280,400"  size="315,315"  pixmap="BlackHarmony/gfx/gp.png"  alphatest="blend" />
+  <ePixmap position="1030,180" zPosition="2" size="35,767" pixmap="BlackHarmony/gfx/scroll.png" alphatest="blend" transparent="1" />
+  <widget source="session.CurrentService" render="Label" position="980,88" size="820,50" font="Roboto_HD; 38" halign="right" backgroundColor="dark_grey" foregroundColor="#00cc33" transparent="1" >
+    <convert type="j00zekAlternateTitle">Green Panel</convert>
+  </widget>
 
     <widget source="global.CurrentTime" render="Label" position="110,80" size="100,35" font="Roboto_HD; 28" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Default</convert>
@@ -36,8 +36,7 @@
     <widget name="key_green" position="550,990" size="300,32" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget name="key_yellow" position="940,990" size="200,32" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget name="key_blue" position="1330,990" size="200,32" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
-
-</screen>
+  </screen>
   <screen name="BhSetupGreen" position="462,128" size="1000,820" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1000,500" pixmap="BlackHarmony/bg_design/short.png" />
     <widget source="global.CurrentTime" render="Label" position="45,30" size="100,35" font="Roboto_HD; 24" backgroundColor="black" transparent="1">
@@ -2591,3 +2590,4 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2,orgpos.y()))
         <widget name="connect" position="0,0" size="540,280" zPosition="-1" pixmaps="BlackHarmony/gfx/startcam.png"  transparent="1" />
         <widget name="lab1" position="20,185" halign="center" size="460,60" zPosition="1" font="Regular;20" valign="top" transparent="1" />
   </screen>
+</skin>

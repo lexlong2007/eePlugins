@@ -1,4 +1,5 @@
-  <!-- >>>>>>>>>> some various general screens for unknown images <<<<<<<<<< -->
+<skin>
+<!-- >>>>>>>>>> some various general screens for unknown images <<<<<<<<<< -->
   <screen name="PluginBrowser" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png"/>
     <widget source="global.CurrentTime" render="Label" position="40,25" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
@@ -7,7 +8,9 @@
     <widget source="global.CurrentTime" render="Label" position="125,25" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Plugin browser" position="860,25" size="320,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="session.CurrentService" render="Label" position="860,25" size="320,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekAlternateTitle">Plugin browser</convert>
+    </widget>
     <!-- Na openPLi i openVix nie dziala skalowanie pluginlist wiec nzawy sa ucinane na 440 pikselach -->
     <widget name="list" position="65,147" scrollbarMode="showOnDemand" size="1095,630" itemHeight="70" zPosition="3" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" selectionPixmap="BlackHarmony/menu/sel_1095_70.png" backgroundColor="background" transparent="1">
       <!--convert type="TemplatedMultiContent">{"template": 
@@ -47,3 +50,4 @@
       <convert type="j00zekOPKGversionBHcheck"/>
     </widget>
   </screen>
+</skin>

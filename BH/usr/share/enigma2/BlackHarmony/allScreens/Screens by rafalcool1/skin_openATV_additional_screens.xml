@@ -1,3 +1,4 @@
+<skin>
 <!-- ######Add#for#OpenATV#by#ralalcool1##### -->
 <screen name="Infopanel" position="345,93" size="1240,908" title="Info Panel" backgroundColor="transparent" flags="wfNoBorder">
   <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png" />

@@ -1,5 +1,5 @@
- </skin>
-<screen name="GraphMultiEPG" position="center,center" size="1920,1080" title="Electronic Program Guide" flags="wfNoBorder" backgroundColor="black">
+<skin>
+  <screen name="GraphMultiEPG" position="center,center" size="1920,1080" title="Electronic Program Guide" flags="wfNoBorder" backgroundColor="black">
     <ePixmap position="0,1" zPosition="-7" size="1920,1080" pixmap="BlackHarmony/bg_design/EPGPig.png" />
     
     <widget source="global.CurrentTime" render="Label" position="75,25" size="80,35" font="Roboto_HD;27" backgroundColor="black" transparent="1">
@@ -56,5 +56,5 @@
     <ePixmap position="1789,1013" size="60,30" pixmap="BlackHarmony/buttons/key_ok.png" alphatest="blend" />
     <ePixmap position="1650,1013" size="60,30" pixmap="BlackHarmony/buttons/key_menu.png" alphatest="blend" />
     <ePixmap position="1720,1013" size="60,30" pixmap="BlackHarmony/buttons/key_info.png" alphatest="blend" />
-</screen>
- </skin>
+  </screen>
+</skin>

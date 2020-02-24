@@ -1,4 +1,5 @@
-s<creen name="InfoBar" position="center,52" size="1920,1080" title="InfoBar" flags="wfNoBorder" backgroundColor="transparent">
+<skin>
+<screen name="InfoBar" position="center,52" size="1920,1080" title="InfoBar" flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="45,711" zPosition="-2" size="1900,300" pixmap="BlackHarmony/bg_design/infobar_zpicon.png" />
     <widget source="session.CurrentService" render="j00zekFrontEndIcon" position="989,750" size="44,20" zPosition="3" alphatest="blend" /> 
     <widget source="session.CurrentService" render="j00zekVideoResolutionIcon" position="1094,750" size="37,20" zPosition="5" alphatest="blend" /> 
@@ -227,3 +228,4 @@ s<creen name="InfoBar" position="center,52" size="1920,1080" title="InfoBar" fla
     <convert type="BlackHarmonyEventPosition">Gauge</convert>
   </widget>
 </screen>
+</skin>

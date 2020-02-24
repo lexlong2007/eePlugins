@@ -114,7 +114,7 @@
 			<convert type="EventTime">Remaining</convert>
 			<convert type="RemainingToText">FOLLOW</convert>
 		</widget-->
-		<panel name="SummaryClockPanel" /-->
+		<panel name="SummaryClockPanel" />
 		<panel name="InfoBarSummary" />
 	</screen>
 	<screen name="QuickEPG_summary" position="0,0" size="480,320">

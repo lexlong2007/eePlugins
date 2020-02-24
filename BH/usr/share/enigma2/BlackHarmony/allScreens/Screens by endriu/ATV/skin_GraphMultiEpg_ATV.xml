@@ -1,4 +1,4 @@
-   </skin>
+<skin>
   <!--GraphicalEPG-->
   
   <screen name="GraphicalEPG" position="center,center" size="1920,1080" title="Electronic Program Guide" flags="wfNoBorder" backgroundColor="transparent">
@@ -324,4 +324,4 @@
 			<convert type="j00zekModEventName">Name</convert>
 		</widget>
 	</screen>
-  </skin>
+ </skin>

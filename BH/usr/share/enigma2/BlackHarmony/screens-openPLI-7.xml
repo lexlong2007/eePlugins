@@ -8,7 +8,9 @@
     <widget source="global.CurrentTime" render="Label" position="125,25" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Plugin browser" position="860,25" size="320,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="session.CurrentService" render="Label" position="860,25" size="320,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekAlternateTitle">Plugin browser</convert>
+    </widget>
     <!-- Na openPLi i openVix nie dziala skalowanie pluginlist wiec nzawy sa ucinane na 440 pikselach -->
     <widget name="list" position="65,147" scrollbarMode="showOnDemand" size="1095,630" itemHeight="70" zPosition="3" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" selectionPixmap="BlackHarmony/menu/sel_1095_70.png" backgroundColor="background" transparent="1">
       <!--convert type="TemplatedMultiContent">{"template": 
@@ -39,7 +41,9 @@
     <widget source="global.CurrentTime" render="Label" position="125,25" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Odbiornik/System" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="session.CurrentService" render="Label" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekTranslator">Tuner/System</convert>
+    </widget>
     <widget name="AboutScrollLabel" position="65,140" size="1095,640" itemHeight="40" font="Roboto_HD; 30" selectionDisabled="1" scrollbarMode="showOnDemand" scrollbarWidth="10" backgroundColor="transpBlack" transparent="1"/>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="41,850" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="328,850" size="35,27" alphatest="blend"/>

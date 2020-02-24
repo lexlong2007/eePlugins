@@ -1,3 +1,4 @@
+<skin>
   <copyright>
     <orginal author="Crash" version="4.3" name="BlackHarmony" license="No public modifications allowed without my permission"/>
     <support url="www.sat-4-all.com"/>
@@ -139,3 +140,4 @@
     <sub name="Subtitle_Bold" font="Napisy;70" foregroundColor="white" shadowColor="black" shadowOffset="4,4"/>
     <sub name="Subtitle_Italic" font="Napisy;70" foregroundColor="white" shadowColor="black" shadowOffset="4,4"/>
   </subtitles>
+</skin>

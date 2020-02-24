@@ -1,4 +1,5 @@
-  <!-- >>>>>>>>>> VTI SPECIFIC SCREENS <<<<<<<<<< -->
+<!-- >>>>>>>>>> VTI SPECIFIC SCREENS <<<<<<<<<< -->
+<skin>
   <!-- old VirtualKeyBoard z VTI -->
   <screen name="VirtualKeyBoard" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png"/>
@@ -458,3 +459,4 @@ newwidth = wsize[0]
 self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2,orgpos.y()))
     </applet>
   </screen>
+</skin>

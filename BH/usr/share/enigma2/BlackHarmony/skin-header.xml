@@ -1,3 +1,4 @@
+<skin>
   <copyright>
     <orginal author="Crash" version="4.3" name="BlackHarmony" license="No public modifications allowed without my permission"/>
     <homepage url="http://www.blackharmony.pl"/>
@@ -226,3 +227,4 @@
       <pixmap pos="bpBottomRight" filename="BlackHarmony/bg_design/bs_br.png"/>
     </borderset>
   </windowstyle>
+</skin>

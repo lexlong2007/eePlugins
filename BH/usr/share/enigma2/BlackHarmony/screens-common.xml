@@ -9,7 +9,9 @@
     <widget source="global.CurrentTime" render="Label" position="129,30" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Subtitles" position="661,30" size="280,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="session.CurrentService" render="Label" position="661,30" size="280,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekAlternateTitle">Subtitles</convert>
+    </widget>
     <widget name="config" position="75,140" size="845,560" selectionPixmap="BlackHarmony/menu/sel_850_35.png" itemHeight="35" scrollbarMode="showOnDemand" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" backgroundColor="black" transparent="1"/>
   </screen>
   <screen name="ChannelSelection" position="center,center" size="1920,1080" title=" " flags="wfNoBorder" backgroundColor="transparent">
@@ -10558,3 +10560,4 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
     <widget zPosition="-25" name="key_blue" position="1330,990" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget zPosition="-25" name="Picture" position="1113,185" size="680,500" zPosition="2" alphatest="on"/>
   </screen-->
+</skin>

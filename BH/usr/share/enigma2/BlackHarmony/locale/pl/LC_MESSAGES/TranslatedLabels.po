@@ -424,3 +424,30 @@ msgstr "Pracuje:"
 
 msgid "You are in WRONG PLACE, use UserSkin to configure BlackHarmony instead !!!"
 msgstr "Jesteś w ZŁYM miejscu, użyj UserSkin aby sutawić skórkę BlackHarmony !!!"
+
+msgid "Tuner/System"
+msgstr "Odbiornik/System"
+
+msgid "Plugin browser"
+msgstr "Przeglądarka wtyczek"
+
+msgid "Subtitles"
+msgstr "Napisy"
+
+msgid "Green Panel"
+msgstr "Zielony panel"
+
+msgid "MSN weather config"
+msgstr "Konfiguracja pogody MSN"
+
+msgid "MSN weather"
+msgstr "Pogoda MSN"
+
+msgid "J00zekMenuChannels"
+msgstr "Menu kanałów j00zka"
+
+msgid "AdvancedMovieSelection"
+msgstr "Zaawansowany wybór filmów"
+
+msgid "AdvancedMovieSelection Button Setup"
+msgstr "Konfiguracja klawiszy zaawansowanego wyboru filmów"

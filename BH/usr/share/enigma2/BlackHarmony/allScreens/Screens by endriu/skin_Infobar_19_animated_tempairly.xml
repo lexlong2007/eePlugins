@@ -112,7 +112,7 @@
       <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
     </widget>
    <widget position="1765,845" size="110,35" source="session.CurrentService" render="Label" font="Roboto_HD; 30" backgroundColor="black" halign="right" valign="top" noWrap="1" transparent="1" zPosition="3">
-        <convert type="ABTCAirlyWidget">temp</convert>	
+        <convert type="BlackHarmonyABTCAirlyWidget">temp</convert>	
 	</widget> 
    
    <!-- wykorzystanie glowic dostepnych w tunerze-->

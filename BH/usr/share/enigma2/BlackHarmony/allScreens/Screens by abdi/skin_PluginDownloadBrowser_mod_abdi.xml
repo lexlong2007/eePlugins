@@ -1,4 +1,5 @@
-<screen name="PluginBrowser" position="345,93" size="1920,1080" title=" " flags="wfNoBorder" backgroundColor="transparent">
+<skin>
+  <screen name="PluginBrowser" position="345,93" size="1920,1080" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1920,1080" pixmap="BlackHarmony/bg_design/mainbg.png"/>
     <widget source="global.CurrentTime" render="Label" position="40,25" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Default</convert>
@@ -48,4 +49,5 @@
     <widget source="session.CurrentService" render="Label" position="350,870" size="700,30" zPosition="1" font="Roboto_HD;25" halign="left" valign="center" noWrap="0" foregroundColor="white" backgroundColor="black" transparent="1">
       <convert type="BlackHarmonypliLayoutInfo">FleshInfo,Full</convert>
     </widget>
-</screen>
+  </screen>
+</skin>

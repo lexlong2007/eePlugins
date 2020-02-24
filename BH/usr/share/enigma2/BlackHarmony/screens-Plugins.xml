@@ -30,7 +30,9 @@
     <widget source="global.CurrentTime" render="Label" position="130,30" size="260,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <!--eLabel text="MSN weather config" position="460,30" size="480,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/-->
+    <widget source="session.CurrentService" render="Label" position="460,30" size="480,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekAlternateTitle">MSN weather config</convert>
+    </widget>
     <widget name="config" position="72,145" size="850,550" itemHeight="35" font="Roboto_HD; 27" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_850_35.png" backgroundColor="transpBlack" transparent="1"/>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="47,760" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="273,760" size="35,27" alphatest="blend"/>
@@ -53,8 +55,10 @@
     <widget source="global.CurrentTime" render="Label" position="170,70" size="460,35" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Pogoda MSN" position="1395,70" size="420,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
-<!-- top left -->
+    <widget source="session.CurrentService" render="Label" position="1395,70" size="420,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekAlternateTitle">MSN weather</convert>
+    </widget>
+    <!-- top left -->
     <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="208,202" size="128,128" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
         <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
     </widget>
@@ -470,7 +474,9 @@
     <widget source="global.CurrentTime" render="Label" position="125,25" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="J00zekMenuChannels" position="865,25" size="320,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="session.CurrentService" render="Label" position="865,25" size="320,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekAlternateTitle">J00zekMenuChannels</convert>
+    </widget>
     <widget name="config" font="Roboto_HD; 27" position="65,145" size="1095,630" itemHeight="35" selectionPixmap="BlackHarmony/menu/sel_1095_35.png" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" scrollbarMode="showOnDemand" backgroundColor="background"/>
     <ePixmap pixmap="BlackHarmony/buttons/red.png" position="41,850" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="328,850" size="35,27" alphatest="blend"/>
@@ -484,7 +490,9 @@
   <!-- ########## AdvancedMovieSelection fhroma ########## -->
   <screen name="AdvancedMovieSelection" position="center,center" size="1920,1080" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="1,0" zPosition="-5" size="1920,1080" pixmap="BlackHarmony/bg_design/info.png" />
-    <eLabel text="AdvancedMovieSelection" position="980,88" size="820,40" font="Roboto_HD; 26" halign="right" backgroundColor="dark_grey" transparent="1" />
+    <widget source="session.CurrentService" render="Label" position="980,88" size="820,40" font="Roboto_HD; 26" halign="right" backgroundColor="dark_grey" transparent="1" >
+      <convert type="j00zekAlternateTitle">AdvancedMovieSelection</convert>
+    </widget>
 
     <widget source="global.CurrentTime" render="Label" position="110,80" size="100,35" font="Roboto_HD; 28" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Default</convert>
@@ -525,8 +533,10 @@
     <widget source="global.CurrentTime" render="Label" position="140,25" size="460,40" font="Roboto_HD; 28" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="AdvancedMovieSelection Button Setup" position="660,25" size="520,45" font="Roboto_HD; 32" halign="right" backgroundColor="dark_grey" transparent="1" />
-<widget name="config"  position="65,140" size="1095,640" font="Roboto_HD;26"  enableWrapAround="1" scrollbarMode="showOnDemand" foregroundColor="white" backgroundColor="black" backgroundColorSelected="dark_grey" itemHeight="40" selectionPixmap="BlackHarmony/menu/sel_1095_40.png"  transparent="1" />
+    <widget source="session.CurrentService" render="Label" position="660,25" size="520,45" font="Roboto_HD; 32" halign="right" backgroundColor="dark_grey" transparent="1" >
+      <convert type="j00zekAlternateTitle">Plugin browser</convert>
+    </widget>
+    <widget name="config"  position="65,140" size="1095,640" font="Roboto_HD;26"  enableWrapAround="1" scrollbarMode="showOnDemand" foregroundColor="white" backgroundColor="black" backgroundColorSelected="dark_grey" itemHeight="40" selectionPixmap="BlackHarmony/menu/sel_1095_40.png"  transparent="1" />
      <ePixmap pixmap="BlackHarmony/buttons/red.png" position="41,850" size="35,27" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="328,850" size="35,27" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="615,850" size="35,27" alphatest="blend" />

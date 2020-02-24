@@ -85,7 +85,7 @@ fi
 
 #build skin.xml
 echo '<skin>' > $BHfolder/skin.xml
-cat $BHfolder/skin-head.xml >> $BHfolder/skin.xml
+cat $BHfolder/skin-head.xml|grep -v 'skin>' >> $BHfolder/skin.xml
 cat $BHfolder/allFonts/font_default.xml|grep -v 'skin>' >> $BHfolder/skin.xml
 cat $BHfolder/allColors/colors_default.xml|grep -v 'skin>' >> $BHfolder/skin.xml
 cat /usr/share/enigma2/BlackHarmony/screens-Plugins.xml|grep -v 'skin>' >> $BHfolder/skin.xml

@@ -327,8 +327,8 @@
    </widget>
    <ePixmap alphatest="blend" pixmap="BlackHarmony/weather_icons/temp_high_low.png" position="1616,72" size="26,70" transparent="1" zPosition="3" />
    <widget source="session.BlackHarmonyMSNWeather" render="Label" position="1281,152" size="313,35" font="HD_Thin; 22" halign="center" valign="center" transparent="1" backgroundColor="black" foregroundColor="yellow" zPosition="8">
-   <convert type="MSNWeatherWebCurrent">Barometr</convert>
-
+    <convert type="MSNWeatherWebCurrent">Barometr</convert>
+   </widget>
 #--wschod--# 
   <widget backgroundColor="black" font="HD_Thin; 22" foregroundColor="blue" halign="center" position="1368,338" render="Label" size="100,35" source="global.CurrentTime" transparent="1" valign="center">
   <convert type="j00zekSun">wschod</convert>

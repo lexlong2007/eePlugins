@@ -427,7 +427,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
     <ePixmap pixmap="BlackHarmony/buttons/green.png" position="230,850" size="35,27" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/yellow_info.png" position="460,850" size="35,27" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/key_exit.png" position="1100,850" size="60,30" alphatest="blend" />
-    <eLabel position="90,850" size="130,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" text="Wyjœcie" />
+    <eLabel position="90,850" size="130,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" text="Exit" />
     <widget name="key_green" position="270,850" size="185,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <eLabel position="500,850" size="280,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" text="Info o zmianach OE-A" />
   </screen>

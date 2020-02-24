@@ -1,5 +1,0 @@
-<screen name="SecondInfoBar" backgroundColor="transparent" flags="wfNoBorder" position="-2,10" size="1920,1080">
-  <widget source="global.CurrentTime" render="j00zekPixmap" position="1520,680" size="400,400" alphatest="blend">
-      <convert type="j00zekGetWebPic">/etc/enigma2/user_webCam1.cfg</convert>
-  </widget>
-</screen>

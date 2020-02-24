@@ -1,4 +1,4 @@
- </skin>
+<skin>
   <screen name="VerticalEPGView_FHD" position="center,center" size="1920,1080" title="" flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,1" zPosition="-7" size="1920,1080" pixmap="BlackHarmony/bg_design/cool.png" />
 	
@@ -70,4 +70,4 @@
 	<ePixmap position="1789,999" size="60,30" pixmap="BlackHarmony/buttons/key_menu.png" alphatest="blend" />
 	
 	</screen>
-	</skin>
+</skin>

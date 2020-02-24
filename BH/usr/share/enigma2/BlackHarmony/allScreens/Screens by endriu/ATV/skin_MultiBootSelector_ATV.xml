@@ -22,4 +22,4 @@
     <ePixmap alphatest="blend" pixmap="BlackHarmony/buttons/key_ok.png" position="800,752" size="60,30" />
     <ePixmap alphatest="blend" pixmap="BlackHarmony/buttons/key_exit.png" position="898,752" size="60,30" />
 	</screen>
-<skin>
+</skin>

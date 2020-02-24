@@ -344,4 +344,4 @@
   </widget>
   <widget source="session.CurrentService" render="j00zekVideoResolutionIcon" position="999,770" size="37,20" zPosition="4" alphatest="blend"/>  
 </screen>
-<skin>
+</skin>
