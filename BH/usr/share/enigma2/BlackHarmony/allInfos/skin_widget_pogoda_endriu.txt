@@ -1,0 +1,7 @@
+Ładna belka na całość ekranu u góry.
+Zawiera:
+- aktualną pogodę
+- pogodę na 3 następne dni
+- wschód i zachód słońca
+- fazę księżyca
+- informację kto obchodzi urodziny
