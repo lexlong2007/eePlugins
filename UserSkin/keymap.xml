@@ -50,6 +50,7 @@
     <key id="KEY_ESC" mapto="keyCancel" flags="m" />
     <key id="KEY_RED" mapto="keyCancel" flags="m" />
     <key id="KEY_GREEN" mapto="keyCancel" flags="m" />
+    <key id="KEY_BLUE" mapto="doGrab" flags="m" />
   </map>
   <map context="UserSkinMiniTVmakerActions">
     <key id="\x0a" mapto="keyOK" flags="m" />

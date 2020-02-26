@@ -990,6 +990,7 @@ class TreeUserSkinScreens(Screen):
     <widget source="Title" render="Label" position="70,47" size="950,43" font="Regular;35" foregroundColor="#00ffffff" backgroundColor="#004e4e4e" transparent="1" />
     <widget name="filelist" position="70,115" size="700,480" zPosition="1" font="Regular;20" transparent="1" scrollbarMode="showOnDemand"/>
     <widget name="PreviewPicture" position="808,342" size="400,225" alphatest="on" />
+    <widget name="PreviewInfo" position="808,575" size="400,225" font="Regular;25" foregroundColor="#00ffeedd" backgroundColor="#004e4e4e" transparent="1" />
     <widget source="key_red" render="Label" position="70,635" size="260,25" zPosition="1" font="Regular;20" halign="left" foregroundColor="#00ffffff" backgroundColor="#20b81c46" transparent="1" />
     <widget source="key_green" render="Label" position="365,635" size="260,25" zPosition="1" font="Regular;20" halign="left" foregroundColor="#00ffffff" backgroundColor="#20009f3c" transparent="1" />
     <widget source="key_yellow" render="Label" position="650,635" size="260,25" zPosition="1" font="Regular;20" halign="left" foregroundColor="#00ffffff" transparent="1" />
@@ -1008,15 +1009,16 @@ class TreeUserSkinScreens(Screen):
         self.setTitle(myTitle)
         try:
             self["title"] = StaticText(myTitle)
-        except:
+        except Exception:
             pass
         
         self["key_red"] = StaticText(_("Exit"))
         self["key_green"] = StaticText("")
         self["key_yellow"] = StaticText(_("Refresh"))
-        self["key_blue"] = StaticText("")
+        self["key_blue"] = StaticText(_("Preview"))
         
         self["PreviewPicture"] = Pixmap()
+        self["PreviewInfo"] = StaticText("")
         
         self.LastFolderSelected = None
         
@@ -1066,6 +1068,7 @@ class TreeUserSkinScreens(Screen):
         self.PreviewAnims = None
         self.PreviewAnimsDelay = 100
         self.PreviewAnimCurrent = 0
+        self.shownPreview = None
         if pathExists("%s%s" % (SkinPath,'skin.config')):
             with open("%s%s" % (SkinPath,'skin.config'), 'r') as cf:
                 for cfg in cf:
@@ -1084,6 +1087,7 @@ class TreeUserSkinScreens(Screen):
             if isImageType('vuplus') == False: self["PreviewPicture"].instance.setScale(1)
             self["PreviewPicture"].instance.setPixmap(LoadPixmap(path=PreviewFileName))
             self["PreviewPicture"].show()
+            self.shownPreview = PreviewFileName
 
         def webPreview(response = None):
             if not self.PreviewAnimsDelay is None:
@@ -1110,12 +1114,34 @@ class TreeUserSkinScreens(Screen):
                 downloadPage( picName , file('/tmp/preview.jpg', 'wb')).addCallback(webPreview).addErrback(webError)
                 
         self.PreviewTimer.stop()
-        
+        self.shownPreview = None
+
         if self["filelist"].getSelection()[1] == True: # isDir
             self["PreviewPicture"].hide()
             return
 
         pic =  self.filelist.getFilename()[:-4]
+        #info when exists
+        myInfoFile=SkinPath + "allInfos/" + pic + ".txt"
+        printDEBUG("[UserSkin:PreviewTimerCB] myInfoFile='%s'" % myInfoFile )
+        if path.exists(myInfoFile):
+            info = ''
+            hasLangDef = False
+            with open(myInfoFile, 'r') as f:
+                for line in f:
+                    line = line.strip()
+                    if line == '#Lang:%s' % currLang.upper():
+                        info = ''
+                        hasLangDef = True
+                    elif hasLangDef and line == '#Lang:':
+                        break
+                    else:
+                        info += line + '\n'
+            printDEBUG("[UserSkin:PreviewTimerCB] PreviewInfo='%s'" % info.strip() )
+            self["PreviewInfo"].setText(info.strip())
+        else:
+            self["PreviewInfo"].setText("")
+        #picture
         if not self.PreviewAnims is None:
             self.PreviewAnimCurrent += 1
             if self.PreviewAnimCurrent >= len(self.PreviewAnims):
@@ -1272,7 +1298,6 @@ class TreeUserSkinScreens(Screen):
             self["key_yellow"].setText(_("Refresh"))
             self.DeleteScreen = False
             self["PreviewPicture"].hide()
-            self["key_blue"].setText("")
         else:
             self["key_green"].setText(_("Edit"))
             self.EditScreen = True
@@ -1282,11 +1307,6 @@ class TreeUserSkinScreens(Screen):
             else:
                 self["key_yellow"].setText(_("Delete"))
                 self.DeleteScreen = True
-
-            if self.filelist.getFilename().lower().find('infobar') != -1:
-                self["key_blue"].setText(_("Preview"))
-            else:
-                self["key_blue"].setText("")
 
             self.PreviewTimer.start(100,False)
             
@@ -1302,71 +1322,52 @@ class TreeUserSkinScreens(Screen):
         return
 
     def keyBlue(self):
+        printDEBUG("[keyBlue] >>> ")
+        previewSkin = None
         selection = self["filelist"].getSelection()
         if selection is None or selection[1] == True: # isDir
             return
-        if self.filelist.getFilename().lower().find('infobar') != -1 and path.exists(self.filelist.getCurrentDirectory() + '/' + self.filelist.getFilename()):
+        selectedXML = self.filelist.getCurrentDirectory() + '/' + self.filelist.getFilename()
+        printDEBUG("[keyBlue] selectedXML= %s" % selectedXML)
+        if path.exists(selectedXML):
+            printDEBUG("[keyBlue] selectedXML exists")
             import xml.etree.cElementTree as ET
             root = ET.parse(self.filelist.getCurrentDirectory() + '/' + self.filelist.getFilename()).getroot()
             NumberOfScreens = len(root.findall('screen'))
+            printDEBUG("[keyBlue] NumberOfScreens= %s" % NumberOfScreens)
+            if not self.shownPreview is None:
+                previewSkin = """
+<screen name="UserSkinPreviewSkin" backgroundColor="transparent" flags="wfNoBorder" position="0,0" size="1920,1080">
+  <widget source="global.CurrentTime" render="j00zekPixmap" pixmap="%s" position="0,0" size="1920,1080" alphatest="blend"/>
+</screen>""" % self.shownPreview
             if NumberOfScreens == 1:
-                self.keyBlueRet( ('First screen',1) )
-            elif NumberOfScreens > 1:
-                from Screens.ChoiceBox import ChoiceBox
-                NumberOfChilds = len(root.findall('*'))
-                currentScreenID = 0
-                childID = 0
-                screensList = []
-                while childID < NumberOfChilds:
-                    if root[childID].tag == 'screen':
-                        try: 
-                            currentScreenID += 1
-                            screensList.append((root[childID].attrib['name'], currentScreenID))
-                        except Exception, e:
-                            printDEBUG("Exception:" + str(e))
-                    childID += 1
-                if len(screensList) > 0:
-                    self.session.openWithCallback(self.keyBlueRet, ChoiceBox, title = _("Select screen:"), list = screensList)
-
-    def keyBlueRet(self, ret = ('fake',0) ):
-        if DBG == True: printDEBUG(ret)
-        if ret and ret[1] > 0:
-            try:
-                self.session.openWithCallback(self.doNothing, UserSkinPreviewSkin, self.filelist.getCurrentDirectory() + '/' + self.filelist.getFilename(), ret[1])
-            except Exception as e:
-                pass
+                try:
+                    for myScreen in root.findall('screen'):
+                        printDEBUG("[keyBlue] myScreen= %s" % myScreen.attrib['name'])
+                        if myScreen.attrib['name'] in ('InfoBar','SecondInfoBar'):
+                            printDEBUG("[keyBlue] reading %s" % myScreen.attrib['name'])
+                            previewSkin = open(selectedXML, "r").read().replace('name="%s"' % myScreen.attrib['name'],'name="UserSkinPreviewSkin"')
+                            break
+                except Exception as e:
+                    printDEBUG("[keyBlue] Exception: %s" % str(e))
+            if not previewSkin is None:
+                self.session.openWithCallback(self.doNothing, UserSkinPreviewSkin, previewSkin, selectedXML)
 
 ################################################################################################################################################################
-import xml.etree.cElementTree as ET
 class UserSkinPreviewSkin(Screen):
-    def __init__(self, session, ScreenFile, whichScreen = 1):
-        printDEBUG("!!!!!!!!!! PREVIEW screen %s, %s" %(whichScreen,ScreenFile))
-        self.ScreenFile = ScreenFile
-        self.skin = self.readSkin(whichScreen)
+    def __init__(self, session, previewSkin, selectedXML):
+        printDEBUG("[UserSkinPreviewSkin:__init__] >>> ")
+        printDEBUG("[keyBlue] previewSkin= %s" % previewSkin)
+        self.skin = previewSkin.replace("<skin>","").replace("</skin>","")
+        self.grabFile = "/tmp/%s.jpg" % path.basename(selectedXML)[:-4]
         self.session = session
         Screen.__init__(self, session)
 
         self["actions"]  = ActionMap(["UserSkinPreviewSkinActions"], {
             "keyCancel": self.close,
             "keyOK": self.close,
+            "doGrab": self.doGrab,
             }, -1)
-
-    def readSkin(self, whichMarker = 1):
-        previewSkin = ''
-        sectionMarker = False
-        currMarker = 0
-        with open (self.ScreenFile, "r") as myFile:
-            for line in myFile:
-                if line.find('<skin>') != -1 or line.find('</skin>') != -1:
-                    continue
-                if line.find('<screen') != -1:
-                    currMarker += 1
-                    if sectionMarker == False and currMarker == whichMarker:
-                        sectionMarker = True
-                elif line.find('</screen>') != -1 and sectionMarker == True:
-                    previewSkin = previewSkin + line
-                    break
-                if sectionMarker == True:
-                    previewSkin = previewSkin + line
-            myFile.close()
-        return previewSkin
+    def doGrab(self):
+        system('grab -dj 85 %s' % self.grabFile )
+        

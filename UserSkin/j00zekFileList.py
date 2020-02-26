@@ -26,23 +26,10 @@ def FileEntryComponent(name, absolute = None, isDir = False, goBack = False, Dim
         info = open(myInfoFile, 'r').read().strip()
         return info
         
-    def translateName(name):
-        import re
-        wordsList=['Channel[ ]*Selections','Channel[ ]*Selection','double-spaced','DoubleSpaced','fulllist','Full',
-                   'Secondinfobars','SecondInfobar', 'Infobars','Infobar',
-                   'Messageboxes', 'MovieSelection', 
-                   '_no_','Screens by', 'BigFonts',
-                   'animated_zzpicon','animated_picon', 'animated']
-        for word in wordsList:
-            name = re.sub(word , _(word), name, flags=re.I)
-        name = re.sub('(\_|\-|\.|\+)',' ', name, flags=re.I) #cleaning
-        name = re.sub('(  [ ]*)',' ', name, flags=re.I) #merge multiple (2+) spaces into one
-        return name
-    
     res = [ (absolute, isDir) ]
     
     if isDir:
-        res.append(( eListboxPythonMultiContent.TYPE_TEXT, DimText0[0], DimText0[1], DimText0[2], DimText0[3], 0, RT_HALIGN_LEFT, translateName(name) ))
+        res.append(( eListboxPythonMultiContent.TYPE_TEXT, DimText0[0], DimText0[1], DimText0[2], DimText0[3], 0, RT_HALIGN_LEFT, _(name) ))
         res.append(( eListboxPythonMultiContent.TYPE_TEXT, DimText1[0], DimText1[1], DimText1[2], DimText1[3], 1, RT_HALIGN_LEFT, ""))
         if goBack == True:
             png = LoadPixmap( cached=True, path = getPixmapPath("back.png") )
@@ -51,8 +38,8 @@ def FileEntryComponent(name, absolute = None, isDir = False, goBack = False, Dim
         res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, DimPIC[0], DimPIC[1], DimPIC[2], DimPIC[3], png))
         res.append(("f"))
     else:
-        description = getInfo(name)
-        res.append((eListboxPythonMultiContent.TYPE_TEXT, DimText0[0], DimText0[1], DimText0[2], DimText0[3], 0, RT_HALIGN_LEFT, translateName(name) ))
+        description = '' #getInfo(name)
+        res.append((eListboxPythonMultiContent.TYPE_TEXT, DimText0[0], DimText0[1], DimText0[2], DimText0[3], 0, RT_HALIGN_LEFT, _(name) ))
         res.append((eListboxPythonMultiContent.TYPE_TEXT, DimText1[0], DimText1[1], DimText1[2], DimText1[3], 1, RT_HALIGN_LEFT, description))
         fileName = os_path.basename(absolute)
         if os_path.exists(SkinPath + "UserSkin_Selections/" + fileName):
