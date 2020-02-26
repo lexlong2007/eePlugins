@@ -1,0 +1,29 @@
+<skin>
+<screen name="InfoBar" position="0,0" size="1920,1080" title="InfoBar" flags="wfNoBorder" backgroundColor="transparent">
+  	<ePixmap position="30,8" zPosition="-2" size="625,120" pixmap="BlackHarmony/bg_design/infobar_pogoda.png" />
+	<widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="240,27" size="85,85" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="3">
+      <convert type="BlackHarmonyMSNWeather">weathericon,day2</convert>
+    </widget> 
+	<ePixmap pixmap="BlackHarmony/weather_icons/temp+.png" position="365,72" size="20,50" zPosition="3" transparent="1" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/weather_icons/temp+.png" position="55,72" size="20,50" zPosition="3" transparent="1" alphatest="blend" />
+	<ePixmap pixmap="BlackHarmony/weather_icons/temp-.png" position="215,52" size="20,50" zPosition="3" transparent="1" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/weather_icons/temp-.png" position="525,52" size="20,50" zPosition="3" transparent="1" alphatest="blend" />
+	<eLabel name="new eLabel" position="342,23" size="1,90" backgroundColor="blue" />
+    
+	<widget source="session.CurrentService" render="Label" position="125,30" size="120,30"  font="Roboto_HD; 24" transparent="1" zPosition="3" foregroundColor="lemon" backgroundColor="black" >
+          <convert type="j00zekTranslator">Tomorrow</convert>
+        </widget>
+    <widget source="session.BlackHarmonyMSNWeather" render="Label" position="75,72" size="140,30" font="Roboto_HD; 20" halign="center" valign="center" transparent="1" zPosition="3">
+      <convert type="BlackHarmonyMSNWeather">temperature_heigh_low,day2</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="400,30" size="130,30"  font="Roboto_HD; 24" transparent="1" zPosition="3" foregroundColor="green" backgroundColor="black" >
+          <convert type="j00zekTranslator">Day after tomorrow</convert>
+        </widget>
+    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="550,27" size="85,85" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+      <convert type="BlackHarmonyMSNWeather">weathericon,day3</convert>
+    </widget>
+    <widget source="session.BlackHarmonyMSNWeather" render="Label" position="383,72" size="140,30" font="Roboto_HD; 20" halign="center" valign="center" transparent="1" zPosition="3">
+      <convert type="BlackHarmonyMSNWeather">temperature_heigh_low,day3</convert>
+    </widget>
+  </screen>
+</skin>

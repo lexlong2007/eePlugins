@@ -1,0 +1,68 @@
+<skin>
+<screen name="InfoBar" position="0,0" size="1920,1080" title="InfoBar" flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap position="25,8" zPosition="-2" size="900,150" pixmap="BlackHarmony/bg_design/infobar_pogoda2.png" />
+	<widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="500,33" size="85,85" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+      <convert type="BlackHarmonyMSNWeather">weathericon,day2</convert>
+    </widget>
+    <ePixmap pixmap="BlackHarmony/weather_icons/wiatr.png" position="60,34" size="30,30" zPosition="3" transparent="1" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/weather_icons/humidity_outdoor.png" position="60,77" size="28,30" zPosition="4" transparent="1" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/weather_icons/temp.png" position="800,58" size="20,50" zPosition="3" transparent="1" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/weather_icons/temp.png" position="590,58" size="20,50" zPosition="3" transparent="1" alphatest="blend" />
+    
+    <widget source="session.CurrentService" render="Label" position="580,26" size="80,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" foregroundColor="light_yellow" >
+      <convert type="j00zekTranslator">Tomorrow</convert>
+    </widget>
+    <widget source="session.BlackHarmonyMSNWeather" render="Label" font="Roboto_HD; 22" position="620,57" size="65,25" backgroundColor="black" zPosition="3" transparent="1" valign="center" halign="center">
+      <convert type="BlackHarmonyMSNWeather">temperature_high,day2</convert>
+    </widget>
+    <widget source="session.BlackHarmonyMSNWeather" render="Label" font="Roboto_HD; 22" position="620,83" size="65,25" backgroundColor="black" zPosition="3" transparent="1" valign="center" halign="center">
+      <convert type="BlackHarmonyMSNWeather">temperature_low,day2</convert>
+    </widget>
+    <widget backgroundColor="black" font="Roboto_HD; 22" foregroundColor="white" render="Label" position="108,36" size="110,25" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="left" transparent="1">
+      <convert type="BlackHarmonyMSNWeather">winddisplay</convert>
+    </widget>
+    <widget backgroundColor="black" font="Roboto_HD; 22" foregroundColor="white" render="Label" position="80,80" size="55,25" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="right" transparent="1">
+      <convert type="BlackHarmonyMSNWeather">humidity</convert>
+    </widget>
+  
+    <eLabel name="new eLabel" position="485,23" size="1,90" backgroundColor="blue" />
+  
+    <eLabel text="%" position="140,80" size="30,25" backgroundColor="black" transparent="1" font="Roboto_HD; 21" foregroundColor="white" />
+    
+    
+    <widget source="session.CurrentService" render="Label" position="780,26" size="85,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" foregroundColor="light_yellow" >
+      <convert type="j00zekTranslator">Day after tomorrow</convert>
+    </widget>
+    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="700,33" size="85,85" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+      <convert type="BlackHarmonyMSNWeather">weathericon,day3</convert>
+    </widget>
+    <widget noWrap="1" backgroundColor="black" font="Roboto_HD; 22" render="Label" position="830,57" size="65,25" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="center" transparent="1">
+      <convert type="BlackHarmonyMSNWeather">temperature_high,day3</convert>
+    </widget>
+    <widget noWrap="1" backgroundColor="black" font="Roboto_HD; 22" render="Label" position="830,83" size="65,25" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="center" transparent="1">
+      <convert type="BlackHarmonyMSNWeather">temperature_low,day3</convert>
+    </widget>
+  
+   <!--AIRLY-->
+  
+    <widget position="20,115" size="900,70" source="session.CurrentService" render="Label" font="Roboto_HD; 22" foregroundColor="#66CCCC" backgroundColor="black" halign="center" noWrap="1" transparent="1" zPosition="2">
+      <convert type="BlackHarmonyABTCAirlyWidget">ldesc</convert>
+	</widget>
+	<widget position="220,30" size="80,80" source="session.CurrentService" render="BlackHarmonyABTCAirlyPixmap" alphatest="blend" transparent="1" zPosition="9">
+      <convert type="BlackHarmonyABTCAirlyWidget">indexBackPNG</convert>
+    </widget>
+    <widget position="220,31" size="85,85" source="session.CurrentService" render="Label" font="Roboto_HD; 30" foregroundColor="foreground" backgroundColor="black" halign="center" valign="center" noWrap="1" transparent="1" zPosition="10">
+      <convert type="BlackHarmonyABTCAirlyWidget">caqi</convert>
+    </widget>
+    <widget position="315,26" size="240,35" source="session.CurrentService" render="Label" font="HD_Thin; 20" foregroundColor="foreground" backgroundColor="black" halign="left" valign="center" noWrap="1" transparent="1" zPosition="10">
+      <convert type="BlackHarmonyABTCAirlyWidget">pm25</convert>
+    </widget>
+    <widget position="315,55" size="240,35" source="session.CurrentService" render="Label" font="HD_Thin; 20" foregroundColor="foreground" backgroundColor="black" halign="left" valign="center" noWrap="1" transparent="1" zPosition="10">
+      <convert type="BlackHarmonyABTCAirlyWidget">pm10</convert>
+    </widget>
+    <widget position="315,84" size="240,35" source="session.CurrentService" render="Label" font="HD_Thin; 20" foregroundColor="foreground" backgroundColor="black" halign="left" valign="center" noWrap="1" transparent="1" zPosition="10">
+      <convert type="BlackHarmonyABTCAirlyWidget">pm1</convert>	
+    </widget>
+	
+  </screen>
+</skin>
