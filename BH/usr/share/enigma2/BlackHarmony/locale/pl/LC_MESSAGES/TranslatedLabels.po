@@ -451,3 +451,9 @@ msgstr "Zaawansowany wybór filmów"
 
 msgid "AdvancedMovieSelection Button Setup"
 msgstr "Konfiguracja klawiszy zaawansowanego wyboru filmów"
+
+msgid "Weather Widgets"
+msgstr "Widżety pogody"
+
+msgid "WebCam Widgets"
+msgstr "Widżety kamer internetowych"
