@@ -14,17 +14,17 @@ from debug import printDEBUG
 ##################################################### treeSelector #####################################################
 
 def FileEntryComponent(name, absolute = None, isDir = False, goBack = False, DimText0 = (60, 2, 500, 22), DimText1 = (80, 24, 500, 32), DimPIC = (2, 2, 54, 54) ):
-    def getInfo(info):#currLang
-        info =  "_skin_" + info + ".txt"
-        if os_path.exists(SkinPath + "allInfos/info_" + currLang + info):
-            myInfoFile=SkinPath + "allInfos/info_" + currLang + info
-        elif os_path.exists(SkinPath + "allInfos/info_en_" + info):
-            myInfoFile=SkinPath + "allInfos/info_en_" + info
-        else:
-            #return 'No Info'
-            return ''
-        info = open(myInfoFile, 'r').read().strip()
-        return info
+    def tr(name):#currLang
+        infoFile =  SkinPath + "allInfos/skin_" + name + ".txt"
+        open("/tmp/test2.txt", "a").write('"%s"="%s"\n' % (name, str(absolute)))
+        if os_path.exists(infoFile):
+            with open(infoFile, 'r') as f:
+                for line in f:
+                    line = line.strip()
+                    if line.startswith('#title%s:' % currLang.upper()):
+                        name = line.split(':')[1]
+                        break
+        return _(name)
         
     res = [ (absolute, isDir) ]
     
@@ -39,7 +39,7 @@ def FileEntryComponent(name, absolute = None, isDir = False, goBack = False, Dim
         res.append(("f"))
     else:
         description = '' #getInfo(name)
-        res.append((eListboxPythonMultiContent.TYPE_TEXT, DimText0[0], DimText0[1], DimText0[2], DimText0[3], 0, RT_HALIGN_LEFT, _(name) ))
+        res.append((eListboxPythonMultiContent.TYPE_TEXT, DimText0[0], DimText0[1], DimText0[2], DimText0[3], 0, RT_HALIGN_LEFT, tr(name) ))
         res.append((eListboxPythonMultiContent.TYPE_TEXT, DimText1[0], DimText1[1], DimText1[2], DimText1[3], 1, RT_HALIGN_LEFT, description))
         fileName = os_path.basename(absolute)
         if os_path.exists(SkinPath + "UserSkin_Selections/" + fileName):

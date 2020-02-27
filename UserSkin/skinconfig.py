@@ -157,13 +157,13 @@ def homarLCDskins( skinlist = [] , tunerName = getTunerName() ):
     def find(arg, dirname, names):
         for x in names:
             if x.startswith('skin_LCD_HMR') and x.endswith('.xml'):
-                if FullDBG == True: printDEBUG("\t dirname ='%s', skinname='%s'" % (dirname, x))
+                if FullDBG: printDEBUG("\t dirname ='%s', skinname='%s'" % (dirname, x))
                 if dirname != myRoot:
                     subdir = dirname[len(myRoot):]
                     skinname = path.join(subRoot,subdir,x)
                 else:
                     skinname = path.join(subRoot,x)
-                if FullDBG == True: printDEBUG("homarLCDskins skinname'%s'" % (skinname))
+                if FullDBG: printDEBUG("homarLCDskins skinname'%s'" % (skinname))
                 skinlist.append(( skinname, _(x[len('skin_LCD_'):-4].replace("_", " ")) ))
     
     if path.exists('/usr/share/enigma2/HomarLCDskins/konfiguracja'):
@@ -259,7 +259,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
             for f in sorted(listdir(SkinPath + "allMiniTVskins/"), key=str.lower):
                 if f.startswith('skin_') and f.endswith('.xml') and f.lower().find(desktopType) > -1:
                     if not filterVFDskins4model or f.lower().find(tunerName) > -1:
-                        if FullDBG == True: printDEBUG( path.join('BlackHarmony/allMiniTVskins/',f) )
+                        if FullDBG: printDEBUG( path.join('BlackHarmony/allMiniTVskins/',f) )
                         self.LCDscreensList.append(( path.join('BlackHarmony/allMiniTVskins/',f), _(f[5:-4].replace("_", " ")) ))
                     
             self.LCDscreensList.extend( atvLCDskins() )
@@ -850,7 +850,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
                     os.system('rm -f /usr/share/enigma2/skin_LCD_UserSkin.xml' )
                 
             #checking if all scripts are in the system
-            if FullDBG == True: printDEBUG("########################### Final User Skin\n%s\n##############################################\n" % user_skin)
+            if FullDBG: printDEBUG("########################### Final User Skin\n%s\n##############################################\n" % user_skin)
             self.checkComponent(user_skin, 'render' , resolveFilename(SCOPE_PLUGINS, '../Components/Renderer/') )
             self.checkComponent(user_skin, 'convert type' , resolveFilename(SCOPE_PLUGINS, '../Components/Converter/') )
             self.checkComponent(user_skin, 'pixmap' , resolveFilename(SCOPE_SKIN, '') )
@@ -925,9 +925,9 @@ class UserSkin_Config(Screen, ConfigListScreen):
         printDEBUG("Found %d definitions of %s:\n" % (len(r),look4Component))
         if r:
             for myComponent in set(r):
-                if FullDBG == True: printDEBUG(" [UserSkin] checks if %s exists" % myComponent)
+                if FullDBG: printDEBUG(" [UserSkin] checks if %s exists" % myComponent)
                 if look4Component == 'pixmap':
-                    if FullDBG == True: printDEBUG("%s\n%s\n" % (myComponent,myPath + myComponent))
+                    if FullDBG: printDEBUG("%s\n%s\n" % (myComponent,myPath + myComponent))
                     if myComponent.startswith('/'):
                         if not path.exists(myComponent):
                             updateLackOfFile(myComponent, '\n')
@@ -1135,6 +1135,8 @@ class TreeUserSkinScreens(Screen):
                         hasLangDef = True
                     elif hasLangDef and line == '#Lang:':
                         break
+                    elif line.startswith('#'):
+                        continue
                     else:
                         info += line + '\n'
             printDEBUG("[UserSkin:PreviewTimerCB] PreviewInfo='%s'" % info.strip() )
@@ -1334,13 +1336,13 @@ class TreeUserSkinScreens(Screen):
             import xml.etree.cElementTree as ET
             root = ET.parse(self.filelist.getCurrentDirectory() + '/' + self.filelist.getFilename()).getroot()
             NumberOfScreens = len(root.findall('screen'))
-            printDEBUG("[keyBlue] NumberOfScreens= %s" % NumberOfScreens)
+            printDEBUG("[keyBlue] repo='%s', NumberOfScreens= %s" % (repo, NumberOfScreens))
             if not self.shownPreview is None:
                 previewSkin = """
 <screen name="UserSkinPreviewSkin" backgroundColor="transparent" flags="wfNoBorder" position="0,0" size="1920,1080">
   <widget source="global.CurrentTime" render="j00zekPixmap" pixmap="%s" position="0,0" size="1920,1080" alphatest="blend"/>
 </screen>""" % self.shownPreview
-            if NumberOfScreens == 1:
+            if repo == 'd' and NumberOfScreens == 1:
                 try:
                     for myScreen in root.findall('screen'):
                         printDEBUG("[keyBlue] myScreen= %s" % myScreen.attrib['name'])
@@ -1357,7 +1359,7 @@ class TreeUserSkinScreens(Screen):
 class UserSkinPreviewSkin(Screen):
     def __init__(self, session, previewSkin, selectedXML):
         printDEBUG("[UserSkinPreviewSkin:__init__] >>> ")
-        printDEBUG("[keyBlue] previewSkin= %s" % previewSkin)
+        if FullDBG: printDEBUG("[keyBlue] previewSkin= %s" % previewSkin)
         self.skin = previewSkin.replace("<skin>","").replace("</skin>","")
         self.grabFile = "/tmp/%s.jpg" % path.basename(selectedXML)[:-4]
         self.session = session
