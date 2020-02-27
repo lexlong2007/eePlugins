@@ -328,3 +328,12 @@ msgstr "so."
 
 msgid "niedz."
 msgstr "nd."
+
+msgid "Airly sensor Latitude"
+msgstr "Szerokość geograficzna czujnika airly"
+
+msgid "Airly sensor Longitude"
+msgstr "Długość geograficzna czujnika airly"
+
+msgid "Foreca location"
+msgstr "Lokalizacja w serwisie foreca"

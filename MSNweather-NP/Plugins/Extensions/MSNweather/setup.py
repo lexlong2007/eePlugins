@@ -50,6 +50,11 @@ def initWeatherPluginEntryConfig():
     s.geolongitude = ConfigText(default = "auto", visible_width = 100, fixed_size = False)
     s.weatherSearchFullName = ConfigText(default = "", visible_width = 100, fixed_size = False)
     s.thingSpeakChannelID = ConfigText(default = "", visible_width = 100, fixed_size = False)
+
+    s.airlylatitude = ConfigText(default = "", visible_width = 100, fixed_size = False)
+    s.airlylongitude = ConfigText(default = "", visible_width = 100, fixed_size = False)
+
+    s.Fcity =  ConfigText(default = "www.foreca.com/\c00289496Poland/Warsaw", visible_width = 100, fixed_size = False)
     config.plugins.WeatherPlugin.Entry.append(s)
     return s
 
@@ -246,6 +251,9 @@ class MSNWeatherEntryConfigScreen(ConfigListScreen, Screen):
             getConfigListEntry(_("Geo Latitude"), self.current.geolatitude),
             getConfigListEntry(_("Geo Longitude"), self.current.geolongitude),
             getConfigListEntry(_("thingSpeak meteo channel ID"), self.current.thingSpeakChannelID),
+            getConfigListEntry(_("Airly sensor Latitude"), self.current.airlylatitude),
+            getConfigListEntry(_("Airly sensor Longitude"), self.current.airlylongitude),
+            getConfigListEntry(_("Foreca location"), self.current.Fcity),
         ]
 
         ConfigListScreen.__init__(self, cfglist, session)
