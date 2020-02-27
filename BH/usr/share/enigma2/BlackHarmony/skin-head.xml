@@ -133,6 +133,9 @@
     <parameter name="VirtualKeyBoardShiftColors" value="16777215, 16777215, 65535, 16711935"/>
     <!--             SHOUTcastList                      -->
     <parameter name="SHOUTcastListItem" value="25, 25, 45, 110, 35, 37, 75, 35"/>
+    <!--             Audio selection                      -->
+    <parameter name="AudioSelectionSliderSeparation" value="275" />
+    <parameter name="ConfigListSliderSeparation" value="250" />
   </parameters>
   <subtitles>
     <sub name="Subtitle_TTX" font="Napisy;70" foregroundColor="white" shadowColor="black" shadowOffset="4,4"/>

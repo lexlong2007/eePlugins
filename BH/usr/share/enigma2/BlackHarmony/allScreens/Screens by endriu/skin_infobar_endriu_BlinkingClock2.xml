@@ -2,7 +2,7 @@
  <screen name="InfoBar" position="0,0" size="1920,1080" backgroundColor="transparent"  flags="wfNoBorder" >
   <ePixmap pixmap="BlackHarmony/bg_design/infobar_epg.png" position="30,775" zPosition="-10" size="1860,298" />
  <widget source="session.CurrentService" render="j00zekPicons" picontype="picon" position="59,815" size="300,176" zPosition="4" backgroundColor="black" transparent="1" alphatest="blend">
-      <convert type="ServiceName2">Reference</convert>
+      <convert type="j00zekModServiceName2">Reference</convert>
    </widget>
  <widget source="session.CurrentService" render="j00zekPiconAnimation" position="59,815" size="300,176" zPosition="5" transparent="1" alphatest="blend" />
  

@@ -409,7 +409,7 @@
       <convert type="FrontendInfo">SNR</convert>
     </widget>
     <widget source="session.FrontendStatus" render="Label" position="1766,909" size="90,25" font="Roboto_HD; 22" halign="left" zPosition="1" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonyFrontendInfo2">SNRdB</convert>
+      <convert type="j00zekModFrontendInfo2">SNRdB</convert>
     </widget>
     <widget source="session.FrontendStatus" render="Label" position="1766,944" size="100,25" font="Roboto_HD; 22" halign="left" zPosition="1" backgroundColor="black" transparent="1">
       <convert type="FrontendInfo">AGC</convert>
@@ -434,40 +434,40 @@
       <convert type="ConditionalShowHide" />
     </widget>
     <widget source="session.CurrentService" render="FixedLabel" text="Internet" font="Roboto_HD; 27" position="250,160" size="880,35" zPosition="2" foregroundColor="#00FF00" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonyCaidInfo2">Net</convert>
+      <convert type="j00zekModCaidInfo2">Net</convert>
       <convert type="ConditionalShowHide" />
     </widget>
     <widget source="session.CurrentService" render="FixedLabel" text="Tuner slot" font="Roboto_HD; 27" position="250,160" size="880,35" zPosition="3" foregroundColor="blue" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonyCaidInfo2">Crd</convert>
+      <convert type="j00zekModCaidInfo2">Crd</convert>
       <convert type="ConditionalShowHide" />
     </widget>
     <widget source="session.CurrentService" render="FixedLabel" text="EMU" font="Roboto_HD; 27" position="250,160" size="880,35" zPosition="4" foregroundColor="orange" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonyCaidInfo2">Emu</convert>
+      <convert type="j00zekModCaidInfo2">Emu</convert>
       <convert type="ConditionalShowHide" />
     </widget>
     <widget source="session.CurrentService" render="Label" position="60,200" zPosition="3" size="880,35" font="Roboto_HD; 27" foregroundColor="white" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonyCaidInfo2">Protocul : %PR</convert>
+      <convert type="j00zekModCaidInfo2">Protocul : %PR</convert>
     </widget>
     <widget source="session.CurrentService" render="Label" position="60,240" zPosition="3" size="880,35" font="Roboto_HD; 27" foregroundColor="white" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonyCaidInfo2">Reader : %R</convert>
+      <convert type="j00zekModCaidInfo2">Reader : %R</convert>
       </widget>
     <widget source="session.CurrentService" render="Label" position="60,280" zPosition="3" size="880,35" font="Roboto_HD; 27" foregroundColor="yellow" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonyCaidInfo2">Used CAID : %C</convert>
+      <convert type="j00zekModCaidInfo2">Used CAID : %C</convert>
     </widget>
     <widget source="session.CurrentService" render="Label" position="60,320" zPosition="3" size="880,35" font="Roboto_HD; 27" foregroundColor="white" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonyCaidInfo2">Used EcmPID : %P</convert>
+      <convert type="j00zekModCaidInfo2">Used EcmPID : %P</convert>
     </widget>
     <widget source="session.CurrentService" render="Label" position="60,360" zPosition="3" size="880,35" font="Roboto_HD; 27" foregroundColor="green" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonyCaidInfo2">Provider : %p</convert>
+      <convert type="j00zekModCaidInfo2">Provider : %p</convert>
     </widget>
     <widget source="session.CurrentService" render="Label" position="60,400" zPosition="3" size="880,35" font="Roboto_HD; 27" foregroundColor="white" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonyCaidInfo2">From : %S</convert>
+      <convert type="j00zekModCaidInfo2">From : %S</convert>
     </widget>
     <widget source="session.CurrentService" render="Label" position="60,440" zPosition="3" size="880,35" font="Roboto_HD; 27" foregroundColor="white" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonyCaidInfo2">Hops : %H</convert>
+      <convert type="j00zekModCaidInfo2">Hops : %H</convert>
     </widget>
     <widget source="session.CurrentService" render="Label" position="60,480" zPosition="3" size="880,35" font="Roboto_HD; 27" foregroundColor="#CADC79" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonyCaidInfo2">ECM Time : %T</convert>
+      <convert type="j00zekModCaidInfo2">ECM Time : %T</convert>
     </widget>
     <eLabel position="60,300" size="400,225" zPosition="2" backgroundColor="background" transparent="0" />
     <widget source="session.CurrentService" render="Label" position="60,300" size="400,290" font="Roboto_HD; 27" zPosition="1" backgroundColor="black" transparent="1" >
@@ -475,14 +475,14 @@
     </widget>
     <eLabel text="Coding System : " position="60,610" size="210,35" font="Roboto_HD; 27" foregroundColor="#00F0A30A" backgroundColor="black" transparent="1" />
     <widget source="session.CurrentService" render="Label" position="260,610" zPosition="3" size="880,35" font="Roboto_HD; 27" foregroundColor="green" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonyCaidInfo2">CryptInfo</convert>
+      <convert type="j00zekModCaidInfo2">CryptInfo</convert>
     </widget>
     <eLabel text="System Coding : " position="60,650" size="210,35" font="Roboto_HD; 27" foregroundColor="#00F0A30A" backgroundColor="black" transparent="1" />
     <widget source="session.CurrentService" render="Label" position="260,650" zPosition="3" size="690,70" font="Roboto_HD; 27" foregroundColor="light_yellow" backgroundColor="black" transparent="1">
       <convert type="j00zekModServiceInfoEX">caids</convert>
     </widget>
     <widget source="session.CurrentService" render="Label" position="60,750" zPosition="3" size="880,35" font="Roboto_HD; 27" halign="center" backgroundColor="black" transparent="1" >
-      <convert type="BlackHarmonyPliExtraInfo">CryptoBar</convert>
+      <convert type="j00zekModPliExtraInfo">CryptoBar</convert>
     </widget>   
   </screen>
   <screen name="BouquetSelector" position="462,128" size="1000,820" title="Choose bouquet" flags="wfNoBorder" backgroundColor="transparent">

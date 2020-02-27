@@ -157,22 +157,22 @@
       <convert type="BlackHarmonyMSNWeather">feelslike</convert>
     </widget>
     <widget source="session.CurrentService" render="Label" position="500,954" size="410,25" font="Roboto_HD; 22" zPosition="3" halign="left" backgroundColor="black" transparent="1" >
-      <convert type="BlackHarmonyPliExtraInfo">CryptoBar</convert>
+      <convert type="j00zekModPliExtraInfo">CryptoBar</convert>
     </widget>
     <eLabel text="BTR:" position="920,954" size="65,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" foregroundColor="blue" />
     <widget source="session.CurrentService" render="Label" position="970,954" size="130,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1">
       <convert type="j00zekBitrate_BH">VideoBitrateUnits</convert>
     </widget>
     <widget source="session.CurrentService" render="FixedLabel" text="NET" font="Roboto_HD; 22" position="1090,954" size="60,25" halign="center" backgroundColor="black" foregroundColor="#00FF00" zPosition="2" valign="center" transparent="1">
-      <convert type="BlackHarmonyCaidInfo2">Net</convert>
+      <convert type="j00zekModCaidInfo2">Net</convert>
       <convert type="ConditionalShowHide" />
     </widget>
     <widget source="session.CurrentService" render="FixedLabel" text="CRD" font="Roboto_HD; 22" position="1090,954" size="60,25" halign="center" backgroundColor="black" foregroundColor="blue" zPosition="3" valign="center" transparent="1">
-      <convert type="BlackHarmonyCaidInfo2">Crd</convert>
+      <convert type="j00zekModCaidInfo2">Crd</convert>
       <convert type="ConditionalShowHide" />
     </widget>
     <widget source="session.CurrentService" render="FixedLabel" text="EMU" font="Roboto_HD; 22" position="1090,954" size="60,25" halign="center" backgroundColor="black" foregroundColor="orange" zPosition="4" valign="center" transparent="1">
-      <convert type="BlackHarmonyCaidInfo2">Emu</convert>
+      <convert type="j00zekModCaidInfo2">Emu</convert>
       <convert type="ConditionalShowHide"/>
     </widget>
     <widget source="session.CurrentService" render="j00zekLabel" position="1160,956" zPosition="6" size="710,25" halign="left" font="Roboto_HD; 22" backgroundColor="black" foregroundColor="#00cc99" transparent="1">

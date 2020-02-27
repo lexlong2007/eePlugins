@@ -92,7 +92,7 @@
 	<eLabel backgroundColor="linie"  position="980,849" size="2,124" zPosition="1" />
      
  <widget source="session.CurrentService" render="j00zekPicons" picontype="picon" position="788,573" size="192,120" zPosition="5" alphatest="blend">
-    <convert type="ServiceName2">Reference</convert>
+    <convert type="j00zekModServiceName2">Reference</convert>
  </widget>
 	
  <widget source="session.CurrentService" render="j00zekPicons" picontype="piconProv" position="788,712" size="192,120" zPosition="5" transparent="1" alphatest="blend">

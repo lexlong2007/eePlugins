@@ -175,7 +175,7 @@
     <convert type="FrontendInfo">SNR</convert>
   </widget>
   <widget source="session.FrontendStatus" render="Label" position="1766,909" size="90,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" zPosition="1">
-    <convert type="BlackHarmonyFrontendInfo2">SNRdB</convert>
+    <convert type="j00zekModFrontendInfo2">SNRdB</convert>
   </widget>
   <widget source="session.FrontendStatus" render="Label" position="1766,944" size="100,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" zPosition="1">
     <convert type="FrontendInfo">AGC</convert>

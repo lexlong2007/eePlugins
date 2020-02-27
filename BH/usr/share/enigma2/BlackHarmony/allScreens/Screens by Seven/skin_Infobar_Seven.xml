@@ -186,15 +186,15 @@
     <convert type="ConditionalShowHide" />
   </widget>
   <widget source="session.CurrentService" render="FixedLabel" text="NET" font="Roboto_HD; 22" position="704,952" size="60,25" halign="center" backgroundColor="black" foregroundColor="green" zPosition="2" valign="center" transparent="1">
-    <convert type="BlackHarmonyCaidInfo2">Net</convert>
+    <convert type="j00zekModCaidInfo2">Net</convert>
     <convert type="ConditionalShowHide" />
   </widget>
   <widget source="session.CurrentService" render="FixedLabel" text="CRD" font="Roboto_HD; 22" position="704,952" size="60,25" halign="center" backgroundColor="black" foregroundColor="yellow" zPosition="3" valign="center" transparent="1">
-    <convert type="BlackHarmonyCaidInfo2">Crd</convert>
+    <convert type="j00zekModCaidInfo2">Crd</convert>
     <convert type="ConditionalShowHide" />
   </widget>
   <widget source="session.CurrentService" render="FixedLabel" text="EMU" font="Roboto_HD; 22" position="704,952" size="60,25" halign="center" backgroundColor="black" foregroundColor="orange" zPosition="4" valign="center" transparent="1">
-    <convert type="BlackHarmonyCaidInfo2">Emu</convert>
+    <convert type="j00zekModCaidInfo2">Emu</convert>
     <convert type="ConditionalShowHide" />
   </widget>
   <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1470,27" size="85,85" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="3">
