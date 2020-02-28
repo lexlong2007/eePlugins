@@ -30,7 +30,7 @@
     <convert type="RemainingToText">InMinutes</convert>
     </widget>
  <eLabel position="371,914" size="985,1" backgroundColor="linie" zPosition="1" /> 	
- <widget source="session.Event_Now" render="Progress" pixmap="BlackHarmony/gfx/Progress2.png" position="371,908" size="985,12" zPosition="2" borderWidth="1" borderColor="black" transparent="1">
+ <widget source="session.Event_Now" render="Progress" pixmap="BlackHarmony/gfx/Progress_color_dots_985x12.png" position="371,908" size="985,12" zPosition="2" borderWidth="1" borderColor="black" transparent="1">
       <convert type="EventTime">Progress</convert>
     </widget> 
  <widget source="session.Event_Next" render="Label" position="365,935" size="117,45" font="Regular; 30" halign="center" valign="center" backgroundColor="black" transparent="1" noWrap="1" zPosition="1" foregroundColor="#00595959">

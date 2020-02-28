@@ -4,4 +4,4 @@ Zawiera:
 - pogodę na 3 następne dni
 - wschód i zachód słońca
 - fazę księżyca
-- informację kto obchodzi urodziny
+- informację kto obchodzi imieniny
