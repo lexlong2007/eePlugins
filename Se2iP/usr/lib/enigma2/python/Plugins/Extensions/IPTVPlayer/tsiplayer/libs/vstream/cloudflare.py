@@ -2,7 +2,6 @@
 # https://github.com/Kodi-vStream/venom-xbmc-addons
 #
 #alors la j'ai pas le courage
-from __future__ import division
 from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.vstream.config import GestionCookie
 
 from requests.adapters import HTTPAdapter
@@ -320,8 +319,6 @@ class CloudflareBypass(object):
                 else:
                     self.Memorised_Cookies = Gived_headers['Cookie']
 
-        #For debug
-
 
         self.hostComplet = re.sub(r'(https*:\/\/[^/]+)(\/*.*)','\\1',url)
         self.host = re.sub(r'https*:\/\/','',self.hostComplet)
@@ -333,7 +330,6 @@ class CloudflareBypass(object):
                 cookies = cookieMem
             else:
                 cookies = self.Memorised_Cookies + '; ' + cookieMem
-
                 
         data = {}
         if postdata:
@@ -480,7 +476,8 @@ class CloudflareScraper(Session):
 
         # Check if Cloudflare anti-bot is on
         if self.ifCloudflare(resp):
-                  
+            
+            
             resp2 = self.solve_cf_challenge(resp, **kwargs)
             
             #self.MemCookie.update( resp.cookies.get_dict() )
@@ -489,15 +486,14 @@ class CloudflareScraper(Session):
             return resp2
             
         # Otherwise, no Cloudflare anti-bot detected
-
             
         return resp
 
     def ifCloudflare(self, resp):
         if resp.headers.get('Server', '').startswith('cloudflare'):
-            #if self.cf_tries >= 3:
-            #    VSlog('Failed to solve Cloudflare challenge!' )
-            if b'/cdn-cgi/l/chk_captcha' in resp.content:
+            if self.cf_tries >= 3:
+				aaaaa=1
+            elif b'/cdn-cgi/l/chk_captcha' in resp.content:
                 #One more try ?
                 if not self.GetCaptha:
                     self.GetCaptha = True
@@ -507,8 +503,6 @@ class CloudflareScraper(Session):
             elif resp.status_code == 503:
                 return True
 
-            #elif resp.status_code == 403:
-            #    VSlog('403 Forbidden' )
 
             resp = False
             return False
@@ -537,10 +531,6 @@ class CloudflareScraper(Session):
         #fh.close()
         
 
-            
-            #fh = open('c:\\test.txt', "w")
-            #fh.write(body)
-            #fh.close()
         
         try:
             cf_delay = float(re.search('submit.*?(\d+)', body, re.DOTALL).group(1)) / 1000.0

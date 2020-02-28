@@ -8,13 +8,13 @@ import re
 def getinfo():
 	info_={}
 	info_['name']='Arblionz.Tv'
-	info_['version']='1.4 25/11/2019'
+	info_['version']='1.5 20/02/2020'
 	info_['dev']='RGYSoft'
 	info_['cat_id']='201'
 	info_['desc']='أفلام و مسلسلات عربية و اجنبية'
 	info_['icon']='https://i.ibb.co/16pJgMF/unnamed.jpg'
 	info_['recherche_all']='1'
-	info_['update']='Fix sub category'	
+	#info_['update']='Fix sub category'	
 
 	return info_
 
@@ -211,6 +211,7 @@ class TSIPHost(TSCBaseHostClass):
 		HTTP_HEADER= { 'X-Requested-With':'XMLHttpRequest' }
 		sts, data = self.getPage(videoUrl,{'header':HTTP_HEADER})
 		if sts:
+			printDBG('result='+data)
 			_data2 = re.findall('<iframe.*?(src|SRC)=(.*?) ',data, re.S) 
 			if _data2:
 				URL_=_data2[0][1]
@@ -221,7 +222,9 @@ class TSIPHost(TSCBaseHostClass):
 				urlTab.append((URL_.replace('\r','').replace('\n',''),'1'))
 			else:
 				data=data.strip()
+				printDBG('result1='+data)
 				if data.startswith('http'):
+					printDBG('result2='+data)
 					urlTab.append((data.replace('\r','').replace('\n',''),'1'))					
 		return urlTab
 		

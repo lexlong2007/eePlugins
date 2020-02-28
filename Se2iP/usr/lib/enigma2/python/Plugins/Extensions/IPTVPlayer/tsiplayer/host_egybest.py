@@ -10,11 +10,12 @@ import re
 import urllib
 from Plugins.Extensions.IPTVPlayer.components.iptvplayerinit import GetIPTVSleep
 from Plugins.Extensions.IPTVPlayer.libs.urlparserhelper            import getDirectM3U8Playlist
+from Plugins.Extensions.IPTVPlayer.libs.urlparser import urlparser
 
 def getinfo():
 	info_={}
 	info_['name']='Egy.Best'
-	info_['version']='1.3 21/12/2019'
+	info_['version']='1.4 23/02/2020'
 	info_['dev']='RGYSoft | Thx to >> @maxbambi & @zadmario <<'
 	info_['cat_id']='201'
 	info_['desc']='أفلام عربية و اجنبية + مسلسلات اجنبية'
@@ -30,6 +31,7 @@ class TSIPHost(TSCBaseHostClass):
 		TSCBaseHostClass.__init__(self,{'cookie':'egybest5.cookie'})
 		self.USER_AGENT = 'Mozilla/5.0 (Linux; Android 7.0; PLUS Build/NRD90M) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.98 Mobile Safari/537.36'
 		self.MAIN_URL = 'https://tool.egybest.ltd'
+		self.VID_URL  = 'https://vidstream.kim'
 		self.HTTP_HEADER = {'User-Agent': self.USER_AGENT, 'DNT':'1', 'Accept': 'text/html', 'Accept-Encoding':'gzip, deflate', 'Referer':self.getMainUrl(), 'Origin':self.getMainUrl()}
 		self.AJAX_HEADER = dict(self.HTTP_HEADER)
 		self.AJAX_HEADER.update( {'X-Requested-With': 'XMLHttpRequest', 'Accept-Encoding':'gzip, deflate', 'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8', 'Accept':'application/json, text/javascript, */*; q=0.01'} )
@@ -270,14 +272,14 @@ class TSIPHost(TSCBaseHostClass):
 		if sts:
 			Liste_els0 = re.findall('<iframe.*?src="(.*?)"', data, re.S)
 			if Liste_els0:			
-				urlTab.append({'name':'|HLS| Vidstream.to', 'url':'hst#tshost#'+Liste_els0[0], 'need_resolve':1,'type':'local'})
+				urlTab.append({'name':'|HLS| Vidstream', 'url':'hst#tshost#'+Liste_els0[0], 'need_resolve':1,'type':'local'})
 			
 			Liste_els0 = re.findall('<table(.*?)</table>', data, re.S)
 			if Liste_els0:
 				printDBG('data='+Liste_els0[-1])
 				Liste_els1 = re.findall('<tr>.*?<td>(.*?)<td class.*?url="(.*?)"', Liste_els0[-1], re.S)
 				for (titre,url) in Liste_els1:
-					urlTab.append({'name':'|'+ph.clean_html(titre)+'| Vidstream.to', 'url':'hst#tshost#'+url+'&v=1', 'need_resolve':1,'type':'local'})
+					urlTab.append({'name':'|'+ph.clean_html(titre)+'| Vidstream', 'url':'hst#tshost#'+url+'&v=1', 'need_resolve':1,'type':'local'})
 				
 		return urlTab
 
@@ -292,6 +294,10 @@ class TSIPHost(TSCBaseHostClass):
 			sts, data = self.getPage(videoUrl)
 			if sts:
 				URL = data.meta['location']
+				VID_URL = urlparser.getDomain(URL, onlyDomain=False)
+				if VID_URL.endswith('/'): VID_URL = VID_URL[:-1]
+				self.VID_URL = VID_URL
+				printDBG('HOST vstream = '+self.VID_URL)
 				urlTab = self.parserVIDSTREAM(URL)
 		return urlTab	 							
 		
@@ -357,7 +363,7 @@ class TSIPHost(TSCBaseHostClass):
 	def parserVIDSTREAM(self, url,hst='vidstream'):
 		if hst=='vidstream':
 			COOKIE_FILE = GetCookieDir('vidstream5.cookie')
-			main_url='https://vidstream.to'
+			main_url=self.VID_URL
 		else:
 			COOKIE_FILE = self.COOKIE_FILE
 			main_url=self.MAIN_URL	
@@ -374,7 +380,7 @@ class TSIPHost(TSCBaseHostClass):
 		if not sts:
 			return
 		url2 = re.findall("<source src=[\"'](.*?)[\"']", data)
-		printDBG('Data0='+data)
+		#printDBG('Data0='+data)
 		if (not url2) or ('/' not in url2[0]):
 			# look for javascript
 			script =''
@@ -385,7 +391,6 @@ class TSIPHost(TSCBaseHostClass):
 					break
 
 			if script:
-				#printDBG("------------")
 				printDBG(script)
 				printDBG("------------")
 
@@ -398,9 +403,6 @@ class TSIPHost(TSCBaseHostClass):
 					step = 128
 
 				printDBG("----> step: %s -> %s" % (tmpStep[0], step))
-
-				# search post data
-				# ,'data':{'_OvhoOHFYjej7GIe':'ok'}
 				post_key = re.findall("'data':{'(_[0-9a-zA-Z]{10,20})':'ok'", script)
 				if post_key:
 					post_key = post_key[0]
@@ -415,10 +417,7 @@ class TSIPHost(TSCBaseHostClass):
 					var_list = tmpVar[0].replace('var a=','wordList=').replace("];","]").replace(";","|")
 					printDBG("-----var_list-------")
 					printDBG(var_list)
-					#printDBG("------------")
 					exec(var_list)
-					#for i in range(0, 20):
-					#    printDBG(wordList[i])
 					printDBG(script)
 					# search for second list of vars
 					tmpVar2 = re.findall(";q\(\);(var .*?)\$\('\*'\)", script, re.S)
@@ -443,34 +442,21 @@ class TSIPHost(TSCBaseHostClass):
 
 						var2_list=tmpVar2[0].split(';')
 						printDBG("------------ var2_list %s" % str(var2_list))
-						# populate array
 						charList0={}
 						charList1={}
 						charList2={}
 						for v in var2_list:
 							if v.startswith('charList'):
 								exec(v)
-
 						bigString=''
 						for i in range(0,len(charList2)):
-							#printDBG(charList2[i])
 							if charList2[i] in charList1:
 								bigString = bigString + charList1[charList2[i]]
-							#else:
-								#printDBG("missing key %s " % charList2[i])
 						printDBG("------------ bigString %s" % bigString)
-
-#                            self.cm.clearCookie(COOKIE_FILE, ['PHPSID'])
-
 						sts, data = self.cm.getPage(main_url+"/cv.php", http_params)
 						zone = self.cm.ph.getSearchGroups(data, '''name=['"]zone['"] value=['"]([^'^"]+?)['"]''')[0]
 						rb = self.cm.ph.getSearchGroups(data, '''name=['"]rb['"] value=['"]([^'^"]+?)['"]''')[0]
 						printDBG("------------ zone[%s] rb[%s]" % (zone, rb))
-
-#                            postData={ 'rb' : rb, 'zone' : zone}
-#                            sts, data = self.cm.getPage("http://deloplen.com/?z={0}".format(zone), http_params, postData)
-#                            printDBG("------------ deloplen[%s]" % data)
-
 						cv_url = main_url+"/cv.php?verify=" + bigString
 						postData={ post_key : 'ok'}
 						AJAX_HEADER = {
@@ -493,7 +479,7 @@ class TSIPHost(TSCBaseHostClass):
 								GetIPTVSleep().Sleep(1)
 								http_params['header']['Referer'] = url
 								sts, data = self.cm.getPage(url2, http_params)
-		printDBG('Data1='+data)
+		#printDBG('Data1='+data)
 		urlTab=[]
 		url3 = re.findall("<source src=[\"'](.*?)[\"']", data)
 		if url3:

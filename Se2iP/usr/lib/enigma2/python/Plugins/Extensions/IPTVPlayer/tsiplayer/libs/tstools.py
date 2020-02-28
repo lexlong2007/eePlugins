@@ -192,18 +192,20 @@ class TSCBaseHostClass:
             self.COOKIE_FILE = GetCookieDir(params['cookie'])
         self.moreMode = False
 
-    def std_host_name(self,name_):
+    def std_host_name(self,name_, direct=False):
         if '|' in name_:
             n1 = name_.split('|')[-1]
             n2 = name_.replace(name_.split('|')[-1],'')
-            if self.ts_urlpars.checkHostSupportbyname(n1):
+            if direct=='direct': name_=n2+tscolor('\c0090??20')+n1.replace('embed.','').title()
+            elif self.ts_urlpars.checkHostSupportbyname(n1):
                 name_=n2+tscolor('\c0090??20')+n1.replace('embed.','').title()	
             elif self.ts_urlpars.checkHostNotSupportbyname(n1):
                 name_=n2+tscolor('\c00??1020')+n1.replace('embed.','').title()
             else:
                 name_=n2+tscolor('\c00999999')+n1.replace('embed.','').title()                	
         else: 
-            if self.ts_urlpars.checkHostSupportbyname(name_):
+            if direct=='direct': name_=tscolor('\c0090??20')+name_.replace('embed.','').title()
+            elif self.ts_urlpars.checkHostSupportbyname(name_):
                 name_=tscolor('\c0090??20')+name_.replace('embed.','').title()
             elif self.ts_urlpars.checkHostNotSupportbyname(name_):
                 name_=tscolor('\c00??5050')+name_.replace('embed.','').title()	
@@ -247,6 +249,17 @@ class TSCBaseHostClass:
 			if qual != tscolor('\c00????00')+ 'Quality: '+tscolor('\c00??????'):
 				desc = desc+qual[:-3]+'\n'
 
+		pat = 'موسم.*?([0-9]{1,2}).*?حلقة.*?([0-9]{1,2})'
+		data = re.findall(pat, titre, re.S)
+		if data:
+			sa = data[0][0]
+			ep = data[0][1]
+			if len(sa)==1: sa='0'+sa
+			if len(ep)==1: ep='0'+ep			
+			ep_out = tscolor('\c0000????')+'S'+sa+tscolor('\c0000????')+'E'+ep+tscolor('\c00??????')
+			titre = ep_out+' '+re.sub(pat,'',titre)
+			
+			
 		return desc,self.cleanHtmlStr(titre).replace('()','').strip()
 
         

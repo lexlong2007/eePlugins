@@ -109,7 +109,7 @@ rm -rf $destE2iplayerPath/bin/sh4
 ############################## Delete some unwanted hosts ##############################
 cd $destE2iplayerPath
 #step 1 remove all definitevely unwanted
-HostsList='chomikuj favourites disabled blocked localmedia wolnelekturypl iptvplayerinfo hostwatchwrestling hostwatchwrestlinguno'
+HostsList='chomikuj favourites disabled blocked christusvincit greek myfreemp3 wolnelekturypl iptvplayerinfo hostwatchwrestling hostwatchwrestlinguno'
 for myfile in $HostsList
 do
   rm -rf ./hosts/*$myfile*

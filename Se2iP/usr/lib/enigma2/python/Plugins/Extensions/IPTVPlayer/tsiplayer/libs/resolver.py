@@ -8,13 +8,14 @@ from Plugins.Extensions.IPTVPlayer.tools.iptvtools import printDBG
 from Components.config import config
 
 myHosts      = ['openload','samaup','yourupload','thevid','vidbom']
-vStreamHosts = ['mystream']
+vStreamHosts = ['vidbm']
 
 
 
 
 class URLResolver():
 	def __init__(self,sHosterUrl):
+		sHosterUrl = sHosterUrl.replace('\r','').replace('\n','')
 		if not '://' in sHosterUrl: sHostName = sHosterUrl
 		else: sHostName = sHosterUrl.split('/')[2]
 		self.sHostName  = sHostName
@@ -22,8 +23,6 @@ class URLResolver():
 
 	def getLinks(self):
 		urlTab=[]
-		
-		
 		if config.plugins.iptvplayer.tsi_resolver.value=='tsiplayer':
 			ts_parse = ts_urlparser()
 			e2_parse = urlparser()
@@ -31,9 +30,26 @@ class URLResolver():
 			ts_parse = urlparser()
 			e2_parse = ts_urlparser()
 			
-			
-		if ts_parse.checkHostSupport(self.sHosterUrl)==1:
-			urlTab = ts_parse.getVideoLinkExt(self.sHosterUrl)
+		tmp_=self.sHostName.replace('embed.','').replace('www.','')
+		if '.' in tmp_: tmp_=tmp_.split('.')[0]
+		sHosterFileName = tmp_.lower()	
+		
+		if sHosterFileName in ['mystream']:
+			exec "from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.vstream.hosters." + sHosterFileName + " import cHoster"
+			oHoster = cHoster()
+			oHoster.setUrl(self.sHosterUrl)
+			aLink = oHoster.getMediaLink()
+			printDBG('aLink='+str(aLink))
+			if (aLink[0] == True):
+				URL = aLink[1]
+				if '|User-Agent=' in URL:
+					URL,UA=aLink[1].split('|User-Agent=',1)
+				URL = strwithmeta(URL, {'User-Agent':UA})
+				printDBG('URL='+URL)
+				urlTab.append({'url':URL , 'name': sHosterFileName})
 		else:
-			urlTab = e2_parse.getVideoLinkExt(self.sHosterUrl)			
+			if ts_parse.checkHostSupport(self.sHosterUrl)==1:
+				urlTab = ts_parse.getVideoLinkExt(self.sHosterUrl)
+			else:
+				urlTab = e2_parse.getVideoLinkExt(self.sHosterUrl)			
 		return urlTab

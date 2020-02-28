@@ -64,7 +64,7 @@ class TSIPHost(TSCBaseHostClass):
 		gnr=cItem['sub_mode']
 		if gnr==0:						
 			Cat_TAB = [
-						{'category':hst,'title': 'Tous',                'mode':'30','url':'https://hdss.to/films/'},
+						{'category':hst,'title': 'Tous',                'mode':'30','url':'https://hdss.to/films-a/'},
 						{'category':hst,'title': 'Les Plus Populaires', 'mode':'30','url':'https://hdss.to/populaires/'},
 						{'category':hst,'title': 'Les Mieux Notés',     'mode':'30','url':'https://hdss.to/mieux-notes/'},
 						{'category':hst,'title': 'Par Genre',           'mode':'20','sub_mode':3},

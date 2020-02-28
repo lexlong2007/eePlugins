@@ -20,6 +20,8 @@ from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.packer           import cPacke
 from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.vstream.aadecode import AADecoder
 from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.vstream.jjdecode import JJDecoder
 from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.vstream.parser   import cParser
+from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.vstream.jsunfuck import JSUnfuck
+
 ###################################################
 # FOREIGN import
 ###################################################
@@ -200,18 +202,67 @@ class urlparser:
 
 		
 	def setHostsMap(self):
-		self.hostMap = {'vidshare.tv'     : self.pp.parserXFILESHARE,
-						'vidbm.com'       : self.pp.parserXFILESHARE,
-						'vidbom.com'      : self.pp.parserXFILESHARE,
-						'vidfast.co'      : self.pp.parserXFILESHARE,
-						'hdvid.tv'        : self.pp.parserXFILESHARE,
-						'gounlimited.to'  : self.pp.parserSTD02,
-						'mp4upload.com'   : self.pp.parserSTD02,
+		self.hostMap = {'thevideobee.to'  : self.pp.parserUNI01,
+						'uqload.com'      : self.pp.parserUNI01,
+						'vidia.tv'        : self.pp.parserUNI01,
+						'vidfast.co'      : self.pp.parserUNI01,
+						'vidoza.net'      : self.pp.parserUNI01,
+						'upstream.to'     : self.pp.parserUNI01,
+						'samaup.co'       : self.pp.parserUNI01,
+						'clipwatching.com': self.pp.parserUNI01,	
+						'vidhd.net'       : self.pp.parserUNI01,#self.pp.parserCLIPWATCHINGCOM,
+						'youdbox.com'     : self.pp.parserUNI01,	
+						'vidlox.tv'       : self.pp.parserUNI01, 
+						'vidlox.me'       : self.pp.parserUNI01,   
+ 						'gounlimited.to'  : self.pp.parserUNI01,
+ 						'filerio.in'      : self.pp.parserUNI01,
+						'cloudvideo.tv'   : self.pp.parserUNI01,#self.pp.parserCLOUDVIDEOTV,
+						'vup.to'          : self.pp.parserUNI01,#self.pp.parserVIDOZANET,	
+						'video.sibnet.ru' : self.pp.parserUNI01,#self.pp.parserSIBNET,
+						'watchvideo.us'   : self.pp.parserUNI01,
+						'letsupload.co'   : self.pp.parserUNI01, 
+						'vidsat.net'      : self.pp.parserUNI01,
+						'hdvid.tv'        : self.pp.parserUNI01,	
+						'mp4upload.com'   : self.pp.parserUNI01,
+						'supervideo.tv'   : self.pp.parserUNI01,
+						'vudeo.net'	      : self.pp.parserUNI01,	
+						'streamwire.net'  : self.pp.parserUNI01,						
+						'deepmic.com'     : self.pp.parserDEEPMIC,#self.pp.parserVIDOZANET,							
+						'mixdrop.to'      : self.pp.parserMIXDROP,	
+						'mixdrop.co'      : self.pp.parserMIXDROP,								
+						'jawcloud.co'     : self.pp.parserJAWCLOUDCO,						
+						'vidtodo.com'     : self.pp.parserVIDTODOCOM,						
+						'mystream.to'     : self.pp.parserVSTREAM,
+						'tune.pk'         : self.pp.parseTUNEPK,
+						'dailymotion.com' : self.pp.parserDAILYMOTION,
+						'youtube.com'     : self.pp.parserYOUTUBE, 
+						'youtu.be'        : self.pp.parserYOUTUBE,
+						'ok.ru'           : self.pp.parserOKRU,						
+						'flashx.tv'       : self.pp.parserFLASHXTV, 
+						'flashx.pw'       : self.pp.parserFLASHXTV, 
+						'flashx.co'       : self.pp.parserFLASHXTV,
+						'uptobox.com'     : self.pp.parserUPTOSTREAMCOM, 
+						'uptostream.com'  : self.pp.parserUPTOSTREAMCOM,	
+						'google.com'      : self.pp.parserGOOGLE, 
+						'fembed.com'      : self.pp.parserXSTREAMCDNCOM, 
+						'fembed.net'	  : self.pp.parserFEURL, 						
+						'feurl.com'	      : self.pp.parserFEURL, 					
+						#					
+						#'hqq.tv'          : self.pp.parserHQQ,
 						'verystream.com'  : self.pp.parserVERYSTREAM,
-						'woof.tube'       : self.pp.parserVERYSTREAM,						
-						'jawcloud.co'     : self.pp.parserJAWCLOUDCO,
+						'woof.tube'       : self.pp.parserVERYSTREAM,	
+						'thevid.live'     : self.pp.parserTHEVIDLIVE, 
+						'thevid.net'      : self.pp.parserTHEVIDLIVE, 
+						'onlystream.tv'   : self.pp.parserSTD03,
+						'vcstream.to'     : self.pp.parserVCSTREAMTO,
+						'vidcloud.co'     : self.pp.parserVCSTREAMTO,
+						'rapidvideo.com'  : self.pp.parserRAPIDVIDEO,
+						'rapidvideo.is'   : self.pp.parserRAPIDVIDEO,
+						'rapidvid.to'     : self.pp.parserRAPIDVIDEO,
+						'streamcherry.com': self.pp.parserSTREAMANGOCOM,
+						'govid.me'        : self.pp.parserGOVIDME, 		
+						'vidspeed.net'    : self.pp.parserSTD05,					
 						#'streamango.com'  : self.pp.parserSTREAMANGOCOM,
-						'ok.ru'           : self.pp.parserOKRU,
 						#'openload.co'     : self.pp.parserOPENLOADCO, 
 						#'openload.pw'     : self.pp.parserOPENLOADCO, 
 						#'oload.tv'        : self.pp.parserOPENLOADCO, 
@@ -220,56 +271,34 @@ class urlparser:
 						#'oload.download'  : self.pp.parserOPENLOADCO, 
 						#'oload.life'      : self.pp.parserOPENLOADCO,
 						#'oload.biz'       : self.pp.parserOPENLOADCO,
-						'uptobox.com'     : self.pp.parserUPTOSTREAMCOM, 
-						'uptostream.com'  : self.pp.parserUPTOSTREAMCOM,
-						'vidoza.net'      : self.pp.parserVIDOZANET,
-						'thevid.live'     : self.pp.parserTHEVIDLIVE, 
-						'thevid.net'      : self.pp.parserTHEVIDLIVE,
-						'flashx.tv'       : self.pp.parserFLASHXTV, 
-						'flashx.pw'       : self.pp.parserFLASHXTV, 
-						'flashx.co'       : self.pp.parserFLASHXTV,
-						'tune.pk'         : self.pp.parseTUNEPK,
-						'dailymotion.com' : self.pp.parserDAILYMOTION,
-						'youtube.com'     : self.pp.parserYOUTUBE, 
-						'youtu.be'        : self.pp.parserYOUTUBE,
-						'vidlox.tv'       : self.pp.parserSTD01, 
-						'vidlox.me'       : self.pp.parserSTD01,     
-						'uqload.com'      : self.pp.parserSTD01,
-						'thevideobee.to'  : self.pp.parserSTD01,
-						'mystream.to'     : self.pp.parserMYSTREAMTO,
 						#'vev.io'          : self.pp.parserTHEVIDEOME, 						
 						#'vev.red'         : self.pp.parserTHEVIDEOME,
 						#'thevideo.me'     : self.pp.parserTHEVIDEOME,
-						'clipwatching.com': self.pp.parserCLIPWATCHINGCOM,
-						'vidhd.net'       : self.pp.parserCLIPWATCHINGCOM,
-						'onlystream.tv'   : self.pp.parserSTD03,
-						'vup.to'          : self.pp.parserVIDOZANET,
-						'vcstream.to'     : self.pp.parserVCSTREAMTO,
-						'vidcloud.co'     : self.pp.parserVCSTREAMTO,
-						'fembed.com'      : self.pp.parserXSTREAMCDNCOM, 
-						'rapidvideo.com'  : self.pp.parserRAPIDVIDEO,
-						'rapidvideo.is'   : self.pp.parserRAPIDVIDEO,
-						'rapidvid.to'     : self.pp.parserRAPIDVIDEO,
-						'streamcherry.com': self.pp.parserSTREAMANGOCOM,
-						'cloudvideo.tv'   : self.pp.parserCLOUDVIDEOTV,
-						'google.com'      : self.pp.parserGOOGLE, 
 						#'deepmic.com'      : self.pp.parserSTD04,
 						#'vidstream.in'    : self.pp.parserVIDSTREAM,
 						#'vidstream.to'    : self.pp.parserVIDSTREAM,
 						#'faststream.in'   : self.pp.parserVIDSTREAM,   						 
-						'govid.me'        : self.pp.parserGOVIDME, 
-						#'hqq.watch'       : self.pp.parserHQQ,
 						#'waaw.tv'         : self.pp.parserHQQ,
-						'vidia.tv'        : self.pp.parserSTD03,
-						'upstream.to'     : self.pp.parserSTD05,
-						'mixdrop.to'      : self.pp.parserMIXDROP,
-						'samaup.co'       : self.pp.parserSAMAUP,
-						'youdbox.com'     : self.pp.parserYOUDBOX,
-						'vidsat.net'      : self.pp.parserSTD05,
-						'vidspeed.net'    : self.pp.parserSTD05,
-						'supervideo.tv'   : self.pp.parserSTD06,
 												}
 		return
+
+	def checkHostNotSupportbyname(self, name):
+		nothostMap_404 = ['vidbom.com','streamango.com','videoz.me','yourupload.com','openload.co','openload.pw','oload.tv','oload.stream','oload.site','oload.download','oload.life','oload.biz']
+		nothostMap_not_found = ['file-up.org',]
+		nothostMap_not_work = ['jetload.net','hqq.tv','waaw.tv','videomega.co','vidbm.com','vidshare.tv','vidbm.com','vev.red','vev.io','hqq.watch','hqq.tv','netu','videoz.me','file-up.org','deepmic.com']
+		nothostMap = nothostMap_404 + nothostMap_not_found + nothostMap_not_work
+		if '|' in name: name=name.split('|')[-1].strip() 
+		name=name.lower().replace('embed.','').replace('www.','').replace(' ','')
+		found = False
+		for key in nothostMap:
+			if name in key:
+				found=True
+				break
+			elif name in key.replace('.',''):	
+				found=True
+				break				
+		return found
+
 
 	def getHostName(self, url, nameOnly = False):
 		hostName = strwithmeta(url).meta.get('host_name', '')
@@ -328,25 +357,7 @@ class urlparser:
 		
 		return found
 
-	def checkHostNotSupportbyname(self, name):
-		
-		
-		nothostMap_404 = ['streamango.com','videoz.me','yourupload.com','openload.co','openload.pw','oload.tv','oload.stream','oload.site','oload.download','oload.life','oload.biz']
-		nothostMap_not_found = ['file-up.org',]
-		nothostMap_not_work = ['mystream.to','vev.red','vev.io','hqq.watch','hqq.tv','netu','videoz.me','file-up.org','deepmic.com']
-		nothostMap = nothostMap_404 + nothostMap_not_found + nothostMap_not_work
-		if '|' in name: name=name.split('|')[-1].strip() 
-		name=name.lower().replace('embed.','').replace('www.','').replace(' ','')
-		found = False
-		for key in nothostMap:
-			if name in key:
-				found=True
-				break
-			elif name in key.replace('.',''):	
-				found=True
-				break				
-		
-		return found
+
 		
 	def isHostsNotSupported(self, host):
 		return host in ['rapidgator.net', 'oboom.com']
@@ -954,9 +965,7 @@ class pageParser(CaptchaHelper):
 
 	def parserFLASHXTV(self, baseUrl):
 		printDBG("parserFLASHXTV baseUrl[%s]" % baseUrl)
-		
 		HTTP_HEADER = self.cm.getDefaultHeader()
-		
 		COOKIE_FILE = GetCookieDir('flashxtv.cookie')
 		params = {'header':HTTP_HEADER, 'cookiefile':COOKIE_FILE, 'use_cookie': True, 'save_cookie':True}
 		
@@ -2214,18 +2223,17 @@ class pageParser(CaptchaHelper):
 		urlParams = {'header': HTTP_HEADER}
 		sts, data = self.cm.getPage(baseUrl, urlParams)
 		if not sts: return False
-		
 		lst_data = re.findall("(eval\(function.*?)</script>", data, re.S)
 		if lst_data:		
-			data = cPacker().unpack(lst_data[0].strip())
-			lst_data = re.findall('MDCore.wurl.*?"(.*?)"', data, re.S)
+			data0 = cPacker().unpack(lst_data[0].strip())
+			lst_data = re.findall('MDCore.wurl.*?"(.*?)"', data0, re.S)
 			if lst_data:
 				url_ = lst_data[0]
 				if url_.startswith('//'): url_ = 'http:'+url_
 				vidTab.append({'name':'[MP4]', 'url':url_})
-
-		return vidTab
-		
+				return vidTab
+		if 'Video will be converted and ready to play' in data: SetIPTVPlayerLastHostError('Video will be converted and ready to play soon')
+		return []	
 	def parserSAMAUP(self, baseUrl):
 		printDBG("parserSAMAUP baseUrl[%r]" % baseUrl)
 		vidTab = []
@@ -2294,4 +2302,124 @@ class pageParser(CaptchaHelper):
 						hlsTab.extend(getDirectM3U8Playlist(url, checkExt=False, checkContent=True, sortWithMaxBitrate=999999999))
 					elif 'mp4' in url:
 						mp4Tab.append({'name':'[MP4] '+label, 'url':url})
-	
+						
+	def parserUNI01(self, baseUrl):
+		printDBG("parserUNI01 baseUrl[%r]" % baseUrl)
+		videoTab = []
+		url = baseUrl
+		HTTP_HEADER= {'User-Agent':"Mozilla/5.0"}
+		if 'Referer' in strwithmeta(baseUrl).meta:
+			HTTP_HEADER['Referer'] = strwithmeta(baseUrl).meta['Referer']
+		COOKIE_FILE = GetCookieDir('UNI01.cookie')	
+		self.cm.clearCookie(COOKIE_FILE, ['__cfduid', 'cf_clearance'])
+		urlParams = {'header': HTTP_HEADER, 'use_cookie': True, 'save_cookie': True, 'load_cookie': True, 'cookiefile': COOKIE_FILE}
+		sts, data = self.getPageCF(url, urlParams)
+		#sts, data = self.cm.getPage(url)
+		printDBG('data='+'#'+str(data)+'#')
+		if not sts: return False
+		if 'sibnet' in baseUrl: data = data.replace('player.src','sources')
+		lst_data = re.findall('sources.{,9}?(\[.*?\])', data, re.S)
+		if not lst_data:
+			lst_data0 = re.findall('(eval\(function\(p.*?)</script>', data, re.S)
+			if lst_data0:
+				printDBG('eval trouver='+lst_data0[0].strip()+'#')
+				data0 = cPacker().unpack(lst_data0[0].strip())
+				lst_data = re.findall('sources.*?(\[.*?\])', data0, re.S)
+				if not lst_data:
+					lst_data = re.findall('holaplayer.*?src:"(.*?)"', data0, re.S)
+					if not lst_data:
+						lst_data = re.findall('file.*?"(.*?)"', data, re.S)
+						if not lst_data:
+							lst_data = re.findall('<video.*?src="(.*?)"', data, re.S)
+			else:
+				lst_data = re.findall('<source.*?src="(.*?)"', data, re.S)
+				if not lst_data:
+					lst_data = re.findall('.setup\({.*?file:.*?"(.*?)"', data, re.S)
+		if lst_data:
+			videoTab = self.parserUNI01_GET(lst_data,baseUrl,HTTP_HEADER)
+		else:
+			if 'Video is processing now.' in data: SetIPTVPlayerLastHostError('Video is processing now.')
+		return videoTab	
+
+	def parserUNI01_GET(self, lst_data,baseUrl,HTTP_HEADER):
+		hlsTab  = []
+		mp4Tab  = []
+		dashTab = []
+		src = str(lst_data[0])
+		src = src.replace('label:','"label":').replace('file:','"file":').replace('src:','"file":').replace('type:','"type":').replace('res:','"res":').replace('\\/','/')
+		printDBG('src='+'#'+src+'#')
+		src =src.replace(',]',']')
+		if ('[' not in src) and ('{' not in src): src='["'+src+'"]'
+		printDBG('src='+'#'+src+'#')
+		items = json.loads(src)
+		printDBG('items='+str(items))
+		cookieHeader = self.cm.getCookieHeader(GetCookieDir('UNI01.cookie'))
+		for item in items:
+			printDBG('item='+str(item))
+
+			if isinstance(item, unicode): item = str(item)
+			if isinstance(item, str): 
+				if not item.startswith('http'): item = urlparser.getDomain(baseUrl,False)+item
+				url = strwithmeta(item,  {'Cookie':cookieHeader,'Referer':baseUrl, 'User-Agent':HTTP_HEADER['User-Agent']})
+				label = ''
+				type_ = ''				
+			else:
+				url = item.get('file','')
+
+				if not url.startswith('http'): url = urlparser.getDomain(baseUrl,False)+url
+				url = strwithmeta(url, {'Cookie':cookieHeader,'Referer':baseUrl, 'User-Agent':HTTP_HEADER['User-Agent']})
+				label = item.get('label','')
+				type_ = item.get('type','').lower()				
+			if 'm3u8' in url:
+				hlsTab.extend(getDirectM3U8Playlist(url, checkExt=False, checkContent=True, sortWithMaxBitrate=999999999))
+			elif ('mp4' in url) or ('mp4' in type_):
+				if label=='':
+					label = 'MP4'
+				else:
+					label = 'MP4 [%s]' % label
+				mp4Tab.append({'name':label, 'url':url})
+			#elif 'mdp' in url:
+			#	dashTab.extend(getMPDLinksWithMeta(url, False))								
+		videoTab = []
+		videoTab.extend(hlsTab)		
+		videoTab.extend(mp4Tab)
+		videoTab.extend(dashTab)
+		return videoTab	
+		
+
+	def parserVIDTODOCOM(self, baseUrl):
+		printDBG("parserVIDTODOCOM baseUrl[%r]" % baseUrl)
+		url = baseUrl
+		if 'emb.html?' in baseUrl:
+			id_tab = re.findall('\?(.*?)=', baseUrl, re.S)
+			if id_tab:
+				url='https://vidtodo.com/embed-'+id_tab[0]+'.html?auto=1'
+		return self.parserUNI01(url)
+
+	def parserFEURL(self, baseUrl):
+		printDBG("parserFEURL baseUrl[%r]" % baseUrl)
+		url = baseUrl.replace('/v/','/api/source/')
+		HTTP_HEADER= {'User-Agent':"Mozilla/5.0"}
+		urlParams = {'header': HTTP_HEADER}
+		post_data = {'r':'','d':'feurl.com'}
+		sts, data = self.cm.getPage(url, urlParams,post_data)
+		printDBG('data='+'#'+str(data)+'#')
+		if not sts: return False
+		lst_data = re.findall('"data":(\[.*?])', data, re.S)
+		if lst_data:
+			videoTab = self.parserUNI01_GET(lst_data,baseUrl,HTTP_HEADER)		
+			return videoTab
+		else:
+			return []
+
+	def parserDEEPMIC(self, baseUrl):
+		printDBG("parserDEEPMIC baseUrl[%r]" % baseUrl)
+		videoTab = []
+		videoTab.append({'name':'MP4', 'url':baseUrl.replace('embed.php','videos.php')})
+		return videoTab	
+
+		
+	def parserVSTREAM(self, baseUrl):
+		printDBG("parserVSTREAM baseUrl[%r]" % baseUrl)
+		videoTab = []
+		return videoTab		

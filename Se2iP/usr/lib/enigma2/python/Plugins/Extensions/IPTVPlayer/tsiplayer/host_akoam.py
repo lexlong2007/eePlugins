@@ -25,13 +25,13 @@ import time
 def getinfo():
 	info_={}
 	info_['name']='Akoam'
-	info_['version']='1.7 01/12/2019'
+	info_['version']='1.8 20/02/2020'
 	info_['dev']='RGYSoft'
 	info_['cat_id']='201'
 	info_['desc']='أفلام, مسلسلات و انمي عربية و اجنبية'
 	info_['icon']='https://i.ibb.co/pLWdJQn/akoam.png'
 	info_['recherche_all']='1'
-	info_['update']='Fix Links Extract'
+	#info_['update']='Fix Links Extract'
 	return info_
 	
 	
@@ -39,7 +39,7 @@ class TSIPHost(TSCBaseHostClass):
 	def __init__(self):
 		TSCBaseHostClass.__init__(self,{'cookie':'rmdan.cookie'})
 		self.USER_AGENT = 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0'
-		self.MAIN_URL = 'https://w5.akoam.net'
+		self.MAIN_URL = 'https://web.akoam.net'
 		#self.COOKIE_FILE1 = '/media/hdd/IPTVCache/cookies/rmdan2.cookie'
 		self.HEADER = {'User-Agent': self.USER_AGENT, 'DNT':'1', 'Accept': 'text/html', 'Accept-Encoding':'gzip, deflate','Referer':self.getMainUrl(), 'Origin':self.getMainUrl()}
 		self.AJAX_HEADER = MergeDicts(self.HEADER, {'X-Requested-With': 'XMLHttpRequest', 'Accept-Encoding':'gzip, deflate', 'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8', 'Accept':'application/json, text/javascript, */*; q=0.01'})

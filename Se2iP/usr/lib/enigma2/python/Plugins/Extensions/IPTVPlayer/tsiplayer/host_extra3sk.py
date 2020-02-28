@@ -137,7 +137,7 @@ class TSIPHost(TSCBaseHostClass):
 		referer,q,n=videoUrl.split('|')
 		post_data = {'q':q,'i':n,'out':'0'}
 		header = {'Host': 'extra-3sk.com', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:71.0) Gecko/20100101 Firefox/71.0','Accept': '*/*',\
-		'Accept-Language': 'fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3','Accept-Encoding': 'gzip, deflate, br','Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',\
+		'Accept-Language': 'fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3','Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',\
 		'X-Requested-With': 'XMLHttpRequest','Origin': 'https://extra-3sk.com','Connection': 'keep-alive','Referer': referer}
 		params = dict(self.defaultParams) 
 		params['header']=header

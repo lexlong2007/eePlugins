@@ -14,7 +14,7 @@ def getinfo():
 	info_['name']='N300.Me'
 	info_['version']='1.1 06/07/2019'
 	info_['dev']='RGYSoft'
-	info_['cat_id']='201'
+	info_['cat_id']='104'
 	info_['desc']='افلام و مسلسلات عربية واجنبية'
 	info_['icon']='http://www.n300.me/IMGCenter/IMGSystem/LOGO/LOGO_N300_me_200px.png'
 	info_['recherche_all']='0'
