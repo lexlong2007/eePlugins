@@ -5284,7 +5284,8 @@ self['config'].l.setSeperation(int(300*f))
     </widget>
     <widget source="Title" render="Label" position="633,50" size="820,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget name="filelist" itemHeight="75" font0="Roboto_HD;27" font1="Roboto_HD;25" DimText0="70,2,700,35" DimText1="70,41,700,30" DimPIC="5,15,54,54" position="83,185" size="735,525" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_735_75.png" backgroundColor="black" transparent="1"/>
-    <widget name="PreviewPicture" position="889,285" size="550,290" alphatest="blend"/>
+    <widget name="PreviewPicture" position="889,185" size="550,290" alphatest="blend" transparent="1"/>
+    <widget source="PreviewInfo" render="Label" position="889,490" size="550,220" zPosition="2" font="Roboto_HD; 27" halign="center" valign="center" foregroundColor="light_yellow" backgroundColor="black" transparent="1"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="72,779" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="447,779" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="835,779" size="35,27" alphatest="blend"/>
