@@ -39,10 +39,10 @@
   <widget alphatest="blend" column0="0,30,yellow,Roboto_HD,25,0,0" column1="80,545,white,Roboto_HD,25,0,1" position="1185,795" primetimeoffset="10" render="BlackHarmonyEventListDisplay" rowHeight="32" size="655,166" source="ServiceEvent">
     <convert type="BlackHarmonyEventList">primetime=yes,eventcount=5</convert>
   </widget>
-  <ePixmap alphatest="blend" pixmap="BlackHarmony/buttons/red.png" position="95,1001" size="35,27" />
-  <ePixmap alphatest="blend" pixmap="BlackHarmony/buttons/green.png" position="430,1001" size="35,27" />
-  <ePixmap alphatest="blend" pixmap="BlackHarmony/buttons/yellow.png" position="760,1001" size="35,27" />
-  <ePixmap alphatest="blend" pixmap="BlackHarmony/buttons/blue.png" position="1090,1001" size="35,27" />
+  <ePixmap alphatest="blend" pixmap="BlackHarmony/buttons/key_red.png" position="95,1001" size="35,27" />
+  <ePixmap alphatest="blend" pixmap="BlackHarmony/buttons/key_green.png" position="430,1001" size="35,27" />
+  <ePixmap alphatest="blend" pixmap="BlackHarmony/buttons/key_yellow.png" position="760,1001" size="35,27" />
+  <ePixmap alphatest="blend" pixmap="BlackHarmony/buttons/key_blue.png" position="1090,1001" size="35,27" />
   <widget backgroundColor="dark_grey" font="Roboto_HD; 24" halign="left" name="key_red" position="150,1000" size="240,27" transparent="1" valign="bottom" zPosition="1" />
   <widget backgroundColor="dark_grey" font="Roboto_HD; 24" halign="left" name="key_green" position="480,1000" size="240,27" transparent="1" zPosition="1" />
   <widget backgroundColor="dark_grey" font="Roboto_HD; 24" halign="left" name="key_yellow" position="810,1000" size="240,27" transparent="1" zPosition="1" />

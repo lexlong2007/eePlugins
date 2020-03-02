@@ -31,8 +31,8 @@
     <widget name="pass" position="150,265" size="750,32" font="Roboto_HD; 27" backgroundColor="black" transparent="1"/>
     <widget name="scan_progress" position="150,310" size="750,20" borderWidth="2" borderColor="dark_grey" foregroundColor="lemon" backgroundColor="black"/>
     <widget name="servicelist" position="150,350" size="750,350" itemHeight="35" font="Roboto_HD; 27" selectionDisabled="1" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_860_35.png" backgroundColor="black" transparent="1"/>
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="70,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="270,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="70,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="270,750" size="35,27" alphatest="blend" />
     <widget source="key_red" render="Label" position="120,750" size="200,30" zPosition="1" font="Roboto_HD; 24" halign="left" noWrap="1" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_green" render="Label" position="320,750" size="200,30" zPosition="1" font="Roboto_HD; 24" halign="left" noWrap="1" backgroundColor="dark_grey" transparent="1" />
   </screen>

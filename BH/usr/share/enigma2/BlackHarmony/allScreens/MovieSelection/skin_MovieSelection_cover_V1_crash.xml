@@ -17,10 +17,10 @@
   <widget render="j00zekModRunningText" source="Service" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=6000,wrap" halign="left" backgroundColor="background" position="95,801" size="1465,140" font="Roboto_HD; 28" transparent="1">
     <convert type="j00zekModEventName">ExtendedDescription</convert>
   </widget>
-  <ePixmap pixmap="BlackHarmony/buttons/red.png" position="110,996" size="35,27" alphatest="blend" />
-  <ePixmap pixmap="BlackHarmony/buttons/green.png" position="500,996" size="35,27" alphatest="blend" />
-  <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="890,996" size="35,27" alphatest="blend" />
-  <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="1280,996" size="35,27" alphatest="blend" />
+  <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="110,996" size="35,27" alphatest="blend" />
+  <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="500,996" size="35,27" alphatest="blend" />
+  <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="890,996" size="35,27" alphatest="blend" />
+  <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="1280,996" size="35,27" alphatest="blend" />
   <widget name="key_red" position="160,995" size="300,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
   <widget name="key_green" position="550,995" size="300,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
   <widget name="key_yellow" position="940,995" size="300,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />

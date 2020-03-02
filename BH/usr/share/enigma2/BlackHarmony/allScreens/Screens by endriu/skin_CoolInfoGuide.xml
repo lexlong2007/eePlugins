@@ -44,10 +44,10 @@
     
 	<widget name="date" position="193,877" size="277,40" font="Roboto_HD; 30" halign="center" foregroundColor="green" backgroundColor="background" transparent="1"/>
     
-	<ePixmap pixmap="BlackHarmony/buttons/red.png" position="65,955" size="35,27" alphatest="blend"/>
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="414,955" size="35,27" alphatest="blend"/>
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="764,955" size="35,27" alphatest="blend"/>
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="1114,955" size="35,27" alphatest="blend"/>
+	<ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="65,955" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="414,955" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="764,955" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="1114,955" size="35,27" alphatest="blend"/>
 	<ePixmap pixmap="BlackHarmony/buttons/key_menu.png" position="1385,955" size="60,30" alphatest="blend"/>
     <widget name="key_red" position="116,954" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget name="key_green" position="464,954" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
@@ -92,10 +92,10 @@
     <widget source="Event" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" position="1251,525" size="580,425" font="Roboto_HD;30" halign="left" foregroundColor="white" backgroundColor="background" transparent="1">
       <convert type="j00zekModEventName">ExtendedDescription</convert>
     </widget>
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="95,1001" size="35,27" alphatest="blend"/>
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="430,1001" size="35,27" alphatest="blend"/>
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="760,1001" size="35,27" alphatest="blend"/>
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="1090,1001" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="95,1001" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="430,1001" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="760,1001" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="1090,1001" size="35,27" alphatest="blend"/>
     <widget name="key_red" position="150,1000" size="240,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" valign="bottom"/>
     <widget name="key_green" position="480,1000" size="240,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget name="key_yellow" position="810,1000" size="240,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>

@@ -42,10 +42,10 @@
       <convert type="ServiceName">Name</convert>
     </widget>
     <widget source="ServiceEvent" render="BlackHarmonyEGEpgListNobile" position="1196,810" size="655,160" font="Regular; 26" valign="top" halign="center" foregroundColor="yellow" backgroundColor="background" zPosition="5" transparent="1" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="95,1020" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="430,1020" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="760,1020" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="1090,1020" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="95,1020" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="430,1020" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="760,1020" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="1090,1020" size="35,27" alphatest="blend" />
     <widget name="key_red" position="150,1020" size="240,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" valign="bottom" />
     <widget name="key_green" position="480,1020" size="240,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget name="key_yellow" position="810,1020" size="240,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />

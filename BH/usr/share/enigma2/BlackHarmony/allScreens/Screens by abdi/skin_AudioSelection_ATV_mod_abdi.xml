@@ -11,16 +11,16 @@
 	<ePixmap position="860,125" size="60,30" pixmap="BlackHarmony/buttons/right.png" alphatest="blend" />
     <widget name="switchdescription" position="230,125" size="530,30" font="Roboto_HD; 26" halign="center" foregroundColor="white" backgroundColor="black" transparent="1"/>
     <widget name="config" position="120,200" size="800,210" font="Roboto_HD; 26" itemHeight="35" scrollbarMode="showOnDemand" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" selectionPixmap="BlackHarmony/menu/sel_860_40.png" backgroundColor="black" transparent="1"/>
-    <widget source="key_red" render="Pixmap" pixmap="BlackHarmony/buttons/red.png" position="90,205" size="35,25" alphatest="blend">
+    <widget source="key_red" render="Pixmap" pixmap="BlackHarmony/buttons/key_red.png" position="90,205" size="35,25" alphatest="blend">
       <convert type="ConditionalShowHide"/>
     </widget>
-    <widget source="key_green" render="Pixmap" pixmap="BlackHarmony/buttons/green.png" position="90,240" size="35,25" alphatest="blend">
+    <widget source="key_green" render="Pixmap" pixmap="BlackHarmony/buttons/key_green.png" position="90,240" size="35,25" alphatest="blend">
       <convert type="ConditionalShowHide"/>
     </widget>
-    <widget source="key_yellow" render="Pixmap" pixmap="BlackHarmony/buttons/yellow.png" position="90,275" size="35,25" alphatest="blend">
+    <widget source="key_yellow" render="Pixmap" pixmap="BlackHarmony/buttons/key_yellow.png" position="90,275" size="35,25" alphatest="blend">
       <convert type="ConditionalShowHide"/>
     </widget>
-    <widget source="key_blue" render="Pixmap" pixmap="BlackHarmony/buttons/blue.png" position="90,310" size="35,25" alphatest="blend">
+    <widget source="key_blue" render="Pixmap" pixmap="BlackHarmony/buttons/key_blue.png" position="90,310" size="35,25" alphatest="blend">
       <convert type="ConditionalShowHide"/>
     </widget>
     <ePixmap position="60,420" zPosition="10" size="985,1" pixmap="BlackHarmony/gfx/linia_md.png" />

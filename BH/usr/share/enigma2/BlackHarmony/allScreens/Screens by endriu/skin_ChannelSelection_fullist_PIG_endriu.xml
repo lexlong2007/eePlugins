@@ -62,10 +62,10 @@
   <eLabel backgroundColor="linie"  position="55,703" size="1810,2" />
   <eLabel backgroundColor="linie"  position="1306,722" size="2,245" />
     
-    <ePixmap alphatest="blend" pixmap="BlackHarmony/buttons/red.png" position="590,1001" size="35,27" />
-    <ePixmap alphatest="blend" pixmap="BlackHarmony/buttons/green.png" position="855,1001" size="35,27" />
-    <ePixmap alphatest="blend" pixmap="BlackHarmony/buttons/yellow.png" position="1140,1001" size="35,27" />
-    <ePixmap alphatest="blend" pixmap="BlackHarmony/buttons/blue.png" position="1410,1001" size="35,27" />
+    <ePixmap alphatest="blend" pixmap="BlackHarmony/buttons/key_red.png" position="590,1001" size="35,27" />
+    <ePixmap alphatest="blend" pixmap="BlackHarmony/buttons/key_green.png" position="855,1001" size="35,27" />
+    <ePixmap alphatest="blend" pixmap="BlackHarmony/buttons/key_yellow.png" position="1140,1001" size="35,27" />
+    <ePixmap alphatest="blend" pixmap="BlackHarmony/buttons/key_blue.png" position="1410,1001" size="35,27" />
     <widget backgroundColor="dark_grey" font="Roboto_HD; 24" halign="left" name="key_red" position="630,1000" size="240,27" transparent="1" valign="bottom" zPosition="1" />
     <widget backgroundColor="dark_grey" font="Roboto_HD; 24" halign="left" name="key_green" position="895,1000" size="240,27" transparent="1" zPosition="1" />
     <widget backgroundColor="dark_grey" font="Roboto_HD; 24" halign="left" name="key_yellow" position="1180,1000" size="240,27" transparent="1" zPosition="1" />

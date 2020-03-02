@@ -20,10 +20,10 @@
         }
       </convert>
     </widget>
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="43,848" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="378,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="43,848" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="378,850" size="35,27" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/menu.png" position="1099,850" size="60,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="722,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="722,850" size="35,27" alphatest="blend" />
     <widget name="red" position="91,849" size="270,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget name="green" position="428,849" size="270,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget name="blue" position="772,849" size="270,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />

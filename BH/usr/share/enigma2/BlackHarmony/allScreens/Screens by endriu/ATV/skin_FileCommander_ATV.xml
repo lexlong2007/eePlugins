@@ -47,10 +47,10 @@
 	
 	<widget name="list_right" position="968,270" size="848,675" itemHeight="45" font="Roboto_HD; 35" scrollbarSliderBorderWidth="1" scrollbarWidth="6" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="scrollbarSliderbordercolor" scrollbarMode="showOnDemand" backgroundColor="transparent" foregroundColor="white" backgroundColorSelected="#ffd200"  transparent="1" selectionPixmap="BlackHarmony/menu/sel_860_45.png" />
     
-	<ePixmap pixmap="BlackHarmony/buttons/red.png" position="95,1001" size="35,27" alphatest="blend"/>
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="430,1001" size="35,27" alphatest="blend"/>
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="760,1001" size="35,27" alphatest="blend"/>
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="1090,1001" size="35,27" alphatest="blend"/>
+	<ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="95,1001" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="430,1001" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="760,1001" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="1090,1001" size="35,27" alphatest="blend"/>
 	
 	<widget name="key_red" position="150,1000" size="200,27" transparent="1" font="Roboto_HD; 24" halign="left"/>
 	<widget name="key_green" position="480,1000" size="200,27"  transparent="1" font="Roboto_HD; 24" halign="left"/>

@@ -54,13 +54,13 @@
     </widget>
     <widget name="HelpWindow" pixmap="BlackHarmony/gfx/vkey_icon.png" position="515,806" zPosition="7" size="60,50" backgroundColor="black" transparent="1" alphatest="blend"/>
     <widget name="thumbnail" position="647,28" size="150,112" alphatest="blend" backgroundColor="black" transparent="1"/>
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="84,953" size="35,27" alphatest="blend"/>
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="385,953" size="35,27" alphatest="blend"/>
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="685,951" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="84,953" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="385,953" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="685,951" size="35,27" alphatest="blend"/>
     <widget name="key_red" position="129,953" size="240,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget name="key_green" position="430,953" size="240,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget name="key_yellow" position="730,953" size="240,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
-    <widget name="ButtonBlue" pixmap="BlackHarmony/buttons/blue.png" position="985,953" size="35,27" alphatest="blend"/>
+    <widget name="ButtonBlue" pixmap="BlackHarmony/buttons/key_blue.png" position="985,953" size="35,27" alphatest="blend"/>
     <ePixmap position="1126,952" size="60,30" pixmap="BlackHarmony/buttons/key_menu.png" alphatest="blend"/>
     <ePixmap position="1211,952" size="60,30" pixmap="BlackHarmony/buttons/key_info.png" alphatest="blend"/>
   </screen>
@@ -75,10 +75,10 @@
     <eLabel text="MyTubeSettingsScreen..." position="870,50" size="420,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget name="title" position="78,185" size="1200,50" zPosition="5" valign="center" halign="left" font="Roboto_HD;28" backgroundColor="black" transparent="1"/>
     <widget name="config" position="78,264" size="1200,620" font="Roboto_HD;28" itemHeight="40" scrollbarMode="showOnDemand" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" enableWrapAround="1" selectionPixmap="BlackHarmony/menu/sel_1200_40.png" backgroundColor="black" transparent="1" foregroundColor="white"/>
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="84,953" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="84,953" size="35,27" alphatest="blend"/>
     <widget name="key_red" position="129,953" size="240,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget name="key_green" position="430,953" size="240,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="385,953" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="385,953" size="35,27" alphatest="blend"/>
   </screen>
   <screen name="MyTubeSuggestionsListScreen" position="360,255" zPosition="6" size="1215,697" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <eLabel position="0,0" size="1215,697" backgroundColor="background" zPosition="-2"/>
@@ -131,7 +131,7 @@
     <widget name="tags" position="79,672" size="1035,30" zPosition="10" font="Roboto_HD; 26" transparent="1" foregroundColor="light_yellow" backgroundColor="black" halign="left" valign="top"/>
     <widget name="detailtext" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" position="79,712" size="1200,200" zPosition="10" font="Roboto_HD;24" foregroundColor="white" backgroundColor="black" transparent="1" halign="left" valign="top"/>
     <widget name="thumbnail" position="1081,738" size="195,147" alphatest="blend" backgroundColor="black" transparent="1"/>
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="84,953" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="84,953" size="35,27" alphatest="blend"/>
     <widget name="key_red" position="129,953" size="240,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
   </screen>
   <screen name="MyTubeVideoHelpScreen" position="283,34" size="1354,1022" title=" " flags="wfNoBorder" backgroundColor="transparent">
@@ -145,7 +145,7 @@
     <eLabel text="MyTubeVideoHelpScreen..." position="870,50" size="420,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget name="title" position="78,161" size="1200,40" zPosition="5" valign="center" halign="left" font="Roboto_HD;28" transparent="1" backgroundColor="black"/>
     <widget name="detailtext" position="78,210" size="1200,700" zPosition="10" font="Roboto_HD;28" backgroundColor="black" transparent="1" halign="left" valign="center"/>
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="84,953" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="84,953" size="35,27" alphatest="blend"/>
     <widget name="key_red" position="129,953" size="240,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
   </screen>
   <screen name="MyTubeTasksScreen" position="283,34" size="1354,1022" title=" " flags="wfNoBorder" backgroundColor="transparent">
@@ -171,7 +171,7 @@
 				}
 	  </convert>
     </widget>
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="84,953" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="84,953" size="35,27" alphatest="blend"/>
     <widget name="key_red" position="129,953" size="240,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
   </screen>
   <screen name="MyTubePlayer" position="center,center" size="1920,1080" title="InfoBar" flags="wfNoBorder" backgroundColor="transparent">

@@ -21,10 +21,10 @@
                         "itemHeight": 70
                     }</convert>
     </widget>
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="41,850" size="35,27" alphatest="blend"/>
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="328,850" size="35,27" alphatest="blend"/>
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="615,850" size="35,27" alphatest="blend"/>
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="902,850" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="41,850" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="328,850" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="615,850" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="902,850" size="35,27" alphatest="blend"/>
     <widget name="key_red" position="91,849" size="250,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget name="key_green" position="378,849" size="250,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget name="key_yellow" position="665,849" size="250,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
@@ -41,8 +41,8 @@
     <widget source="Title" render="Label" position="480,50" size="470,35" noWrap="1" halign="right" valign="center" font="Roboto_HD; 27" backgroundColor="black" transparent="1" zPosition="1" />
     <widget name="config" position="50,120" size="895,190" itemHeight="30" font="Roboto_HD; 29" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColorSelected="layer-a-selection-background" transparent="1" zPosition="1" />
     <widget name="description" position="50,320" size="895,78" halign="center" valign="center" transparent="1" zPosition="1" font="Roboto_HD; 27" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="40,435" size="35,27" transparent="1" alphatest="blend" zPosition="1" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="220,435" size="35,27" transparent="1" alphatest="blend" zPosition="1" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="40,435" size="35,27" transparent="1" alphatest="blend" zPosition="1" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="220,435" size="35,27" transparent="1" alphatest="blend" zPosition="1" />
     <ePixmap pixmap="BlackHarmony/buttons/key_ok.png" position="880,435" size="60,30" transparent="1" alphatest="blend" zPosition="1" />
     <widget render="Label" source="key_red" position="80,435" size="120,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget render="Label" source="key_green" position="260,435" size="120,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
@@ -91,10 +91,10 @@
     <widget font="Regular; 28" name="actifcam2" position="607,370" size="480,32" halign="right" />
     <eLabel backgroundColor="grey" position="40,420" size="1110,2" zPosition="0" />
     <widget font="Roboto_HD; 24" name="ecminfo" position="40,439" size="764,350" foregroundColor="unffffe1" backgroundColor="transpBlack_1" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="41,850" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="308,850" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="665,850" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="945,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="41,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="308,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="665,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="945,850" size="35,27" alphatest="blend" />
     <widget name="key_red" position="82,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget name="key_green" position="347,849" size="310,27" zPosition="1" font="Roboto_HD; 24" halign="center" backgroundColor="dark_grey" transparent="1" />
     <widget name="key_yellow" position="705,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="center" backgroundColor="dark_grey" transparent="1" />
@@ -115,8 +115,8 @@
 				}
 			</convert>
     </widget>
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="41,850" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="328,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="41,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="328,850" size="35,27" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/key_ok.png" position="649,849" size="60,30" alphatest="blend" />
     <widget source="key_red" render="Label" position="91,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_green" render="Label" position="378,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
@@ -131,9 +131,9 @@
   </screen>
   <screen name="QuickMenu" position="center,center" size="1920,1080" flags="wfNoBorder" backgroundColor="transparent" zPosition="0">
     <widget name="description" position="235,843" size="1438,110" zPosition="1" font="Roboto_HD; 28" halign="center" backgroundColor="black" transparent="1" foregroundColor="yellow" valign="center" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="95,1001" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="430,1001" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="760,1001" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="95,1001" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="430,1001" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="760,1001" size="35,27" alphatest="blend" />
     <widget name="key_red" position="141,999" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget name="key_green" position="478,999" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget name="key_yellow" position="808,999" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
@@ -184,8 +184,8 @@
     <widget name="feedstatusRED" position="1620,836" size="200,30" zPosition="1" font="Regular;25" halign="left" transparent="1" />
     <widget name="feedstatusYELLOW" position="1620,873" size="200,30" zPosition="1" font="Regular;25" halign="left" transparent="1" />
     <widget name="feedstatusGREEN" position="1620,908" size="200,30" zPosition="1" font="Regular;25" halign="left" transparent="1" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="95,1001" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="430,1001" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="95,1001" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="430,1001" size="35,27" alphatest="blend" />
     <widget name="key_red" position="141,999" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget name="key_green" position="478,999" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
   </screen>
@@ -279,8 +279,8 @@
     <eLabel text="Ipkg Installer" position="760,25" size="420,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1" />
     <widget name="list" position="65,140" size="1095,580" itemHeight="60" scrollbarMode="showOnDemand" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" selectionPixmap="BlackHarmony/menu/sel_1095_60.png" backgroundColor="black" transparent="1" />
     <widget source="introduction" render="Label" position="65,760" size="1095,35" font="Roboto_HD; 27" halign="center" backgroundColor="black" transparent="1" foregroundColor="light_yellow" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="41,850" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="328,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="41,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="328,850" size="35,27" alphatest="blend" />
     <widget source="key_red" render="Label" position="91,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_green" render="Label" position="378,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
   </screen>
@@ -333,10 +333,10 @@
     <widget render="j00zekModRunningText" source="Event" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=4,startdelay=8000,wrap" foregroundColor="white" backgroundColor="background" position="65,287" size="1095,460" font="Roboto_HD; 29" transparent="1" zPosition="1">
       <convert type="j00zekModEventName">ExtendedDescription</convert>
     </widget>
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="41,850" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="328,850" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="615,850" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="902,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="41,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="328,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="615,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="902,850" size="35,27" alphatest="blend" />
     <widget name="key_red" position="91,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget name="key_green" position="378,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget name="key_yellow" position="665,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
@@ -376,10 +376,10 @@
       <convert type="j00zekModEventName">ExtendedDescription</convert>
     </widget>
     <widget name="JumpInterval" position="978,148" size="200,25" zPosition="5" halign="right" font="Roboto_HD; 22" backgroundColor="background" foregroundColor="green" transparent="1" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="95,1001" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="430,1001" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="760,1001" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="1090,1001" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="95,1001" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="430,1001" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="760,1001" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="1090,1001" size="35,27" alphatest="blend" />
     <widget name="key_red" position="150,1000" size="240,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" valign="bottom" />
     <widget name="key_green" position="480,1000" size="240,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget name="key_yellow" position="810,983" size="240,55" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
@@ -423,10 +423,10 @@
     </widget>
     <widget source="session.VideoPicture" render="Pig" position="1295,639" zPosition="3" size="560,315" backgroundColor="transparent" /> 
     <widget name="JumpInterval" position="978,148" size="200,25" zPosition="5" halign="right" font="Roboto_HD;22" backgroundColor="background" foregroundColor="green" transparent="1" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="95,1001" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="430,1001" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="760,1001" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="1090,1001" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="95,1001" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="430,1001" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="760,1001" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="1090,1001" size="35,27" alphatest="blend" />
     <widget name="key_red" render="Label" position="150,1000" size="240,27" zPosition="1" font="Roboto_HD;24" halign="left" backgroundColor="dark_grey" transparent="1" valign="bottom" />
     <widget name="key_green" render="Label" position="480,1000" size="240,27" zPosition="1" font="Roboto_HD;24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget name="key_yellow" render="Label" position="810,983" size="240,55" zPosition="1" font="Roboto_HD;24" halign="left" backgroundColor="dark_grey" transparent="1" />
@@ -464,10 +464,10 @@
     <widget name="key_green" render="Label" position="440,290" size="240,27" zPosition="1" font="Roboto_HD;20" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget name="key_yellow" render="Label" position="770,290" size="240,27" zPosition="1" font="Roboto_HD;20" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget name="key_blue" render="Label" position="1100,290" size="480,27" zPosition="1" font="Roboto_HD;20" halign="left" backgroundColor="dark_grey" transparent="1" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="55,290" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="390,290" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="720,290" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="1040,290" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="55,290" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="390,290" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="720,290" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="1040,290" size="35,27" alphatest="blend" />
     <ePixmap position="1720,290" size="60,30" pixmap="BlackHarmony/buttons/key_ok.png" alphatest="blend" />
     <ePixmap position="1600,290" size="60,30" pixmap="BlackHarmony/buttons/key_menu.png" alphatest="blend" />
     <ePixmap position="1660,290" size="60,30" pixmap="BlackHarmony/buttons/key_info.png" alphatest="blend" />
@@ -478,10 +478,10 @@
   <widget source="current_address" render="Label" position="120,720" size="380,30" font="Roboto_HD; 20" foregroundColor="blue" halign="center" backgroundColor="background" valign="center" transparent="1" />
   <widget source="fixed_address" render="Label" position="748,720" size="380,30" font="Roboto_HD; 20" foregroundColor="blue" halign="center" backgroundColor="background" valign="center" transparent="1" />
   <widget name="config" font="Roboto_HD; 27" position="65,140" size="1095,640" itemHeight="35" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_1095_35.png" backgroundColor="black" transparent="1" />
-  <ePixmap pixmap="BlackHarmony/buttons/red.png" position="41,850" size="35,27" alphatest="blend" />
-  <ePixmap pixmap="BlackHarmony/buttons/green.png" position="328,850" size="35,27" alphatest="blend" />
-  <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="615,850" size="35,27" alphatest="blend" />
-  <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="902,850" size="35,27" alphatest="blend" />
+  <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="41,850" size="35,27" alphatest="blend" />
+  <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="328,850" size="35,27" alphatest="blend" />
+  <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="615,850" size="35,27" alphatest="blend" />
+  <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="902,850" size="35,27" alphatest="blend" />
   <widget source="key_red" render="Label" position="91,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
   <widget source="key_green" render="Label" position="378,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
   <widget source="key_yellow" render="Label" position="665,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
@@ -509,10 +509,10 @@
     <widget name="ci1active" position="710,604" zPosition="1" pixmap="skin_default/icons/lock_on.png" size="32,32" alphatest="on" />
     <widget name="ci1inactive" position="710,604" zPosition="2" pixmap="skin_default/icons/lock_off.png" size="32,32" alphatest="on" />
     <ePixmap position="840,200" size="256,256" zPosition="2" pixmap="BlackHarmony/icons/menu_ci_cihelper_setup.png" transparent="1" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="41,850" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="328,850" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="615,850" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="902,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="41,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="328,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="615,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="902,850" size="35,27" alphatest="blend" />
     <widget name="key_red" position="91,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget name="key_green" position="378,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget name="key_yellow" position="665,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
@@ -528,7 +528,7 @@
     </widget>
     <widget source="Title" render="Label" position="665,30" size="280,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1" />
     <widget name="config" position="73,140" size="850,560" font="Roboto_HD; 26" itemHeight="35" enableWrapAround="1" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_900_35.png" transparent="1" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="47,760" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="47,760" size="35,27" alphatest="blend" />
     <widget source="key_red" render="Label" position="92,759" size="180,27" zPosition="1" font="Roboto_HD; 24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1" />
   </screen>
   <screen name="EventViewSimple" position="center,660" size="1500,340" backgroundColor="transparent" flags="wfNoBorder">
@@ -582,10 +582,10 @@
     <widget name="extralabel" position="65,260" size="770,560" font="Regular;22" transparent="1" />
     <widget name="statusbar" position="55,845" size="790,70" font="Regular;24" halign="center" valign="center" foregroundColor="yellow" zPosition="2" transparent="1" />
     <widget name="poster" position="890,170" size="250,364" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="70,950" size="35,27" alphatest="on" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="325,950" size="35,27" alphatest="on" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="580,950" size="35,27" alphatest="on" />
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="835,950" size="35,27" alphatest="on" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="70,950" size="35,27" alphatest="on" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="325,950" size="35,27" alphatest="on" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="580,950" size="35,27" alphatest="on" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="835,950" size="35,27" alphatest="on" />
     <ePixmap position="1390,950" size="60,30" pixmap="BlackHarmony/buttons/key_menu.png" alphatest="on" />
     <widget name="key_red" position="105,950" size="200,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" zPosition="1" />
     <widget name="key_green" position="360,950" size="200,27" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" zPosition="1" />
@@ -621,8 +621,8 @@
     <widget name="choosen" position="65,545" size="860,60" font="Regular; 22" scrollbarMode="showOnDemand" transparent="0" zPosition="1" />
     <ePixmap pixmap="BlackHarmony/gfx/linia_md.png" position="50,617" size="895,1" alphatest="blend" zPosition="1" />
     <widget name="description" position="65,630" size="860,80" font="Regular; 20" halign="center" valign="center" transparent="0" zPosition="1" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="50,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="300,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="50,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="300,750" size="35,27" alphatest="blend" />
     <widget name="key_red" position="90,750" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget name="key_green" position="340,750" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
   </screen>
@@ -636,8 +636,8 @@
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
     <widget name="config" position="50,120" size="895,280" itemHeight="35" font="Roboto_HD; 26" scrollbarMode="showOnDemand" enableWrapAround="1" selectionPixmap="BlackHarmony/menu/sel_900_35.png" transparent="1" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="50,430" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="280,430" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="50,430" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="280,430" size="35,27" alphatest="blend" />
     <widget name="key_red" position="90,430" size="170,27" noWrap="1" zPosition="1" font="Roboto_HD; 24" halign="left" transparent="1" backgroundColor="background" />
     <widget name="key_green" position="320,430" size="170,27" noWrap="1" zPosition="1" font="Roboto_HD; 24" halign="left" transparent="1" />
     <ePixmap position="880,428" size="60,30" zPosition="10" pixmap="BlackHarmony/buttons/key_exit.png" transparent="1" alphatest="blend" />
@@ -664,10 +664,10 @@
 			</convert>
     </widget>
     <widget name="lab1" zPosition="2" position="106,149" size="800,40" font="Regular;22" halign="center" transparent="1" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="50,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="250,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="450,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="650,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="50,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="250,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="450,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="650,750" size="35,27" alphatest="blend" />
     <widget name="key_red" position="90,750" size="250,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget name="key_green" position="290,750" size="150,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget name="key_yellow" position="490,750" size="150,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
@@ -684,8 +684,8 @@
     <widget source="Title" render="Label" position="630,35" size="320,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1" zPosition="1" />
     <widget name="config" position="50,120" size="890,240" itemHeight="35" font="Roboto_HD; 26" scrollbarMode="showOnDemand" enableWrapAround="1" selectionPixmap="BlackHarmony/menu/sel_900_35.png" transparent="1" />
     <widget name="Linconn" position="50,365" size="890,40" font="Regular;22" halign="center" valign="center" transparent="1" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="50,435" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="250,435" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="50,435" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="250,435" size="35,27" alphatest="blend" />
     <ePixmap position="883,432" size="60,30" zPosition="10" pixmap="BlackHarmony/buttons/key_exit.png" transparent="1" alphatest="blend" />
     <widget name="key_red" position="90,435" size="150,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget name="key_green" position="290,435" size="150,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
@@ -709,9 +709,9 @@
     <widget name="autostart_off" position="120,350" zPosition="1" pixmap="skin_default/icons/lock_off.png" size="32,32" alphatest="on" />
     <widget name="autostart_on" position="120,350" zPosition="2" pixmap="skin_default/icons/lock_on.png" size="32,32" alphatest="on" />
     <widget name="lab1" position="200,350" size="620,30" font="Regular;20" valign="center" transparent="1" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="45,430" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="235,430" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="425,430" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="45,430" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="235,430" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="425,430" size="35,27" alphatest="blend" />
     <widget source="key_red" render="Label" position="85,430" size="150,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_green" render="Label" position="275,430" size="150,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_yellow" render="Label" position="465,430" size="150,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
@@ -728,8 +728,8 @@
     </widget>
     <widget name="lab1" position="70,130" size="860,40" font="Regular; 24" valign="center" halign="left" transparent="1" />
     <widget name="list" position="70,190" size="860,510" itemHeight="35" font="Roboto_HD; 26" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_900_35.png" transparent="1" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="50,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="250,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="50,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="250,750" size="35,27" alphatest="blend" />
     <widget source="key_red" render="Label" position="90,750" size="150,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_green" render="Label" position="290,750" size="150,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <ePixmap position="880,748" size="60,30" zPosition="10" pixmap="BlackHarmony/buttons/key_exit.png" transparent="1" alphatest="blend" />
@@ -762,10 +762,10 @@
     <widget name="ServiceList" position="50,180" size="890,400" itemHeight="40" font="Roboto_HD; 27" scrollbarMode="showOnDemand" enableWrapAround="1" selectionPixmap="BlackHarmony/menu/sel_920_40.png" transparent="1" />
     <ePixmap pixmap="BlackHarmony/gfx/linia_md.png" position="50,592" size="890,1" alphatest="blend" />
     <widget source="press_menu" render="Label" position="50,605" size="890,110" font="Regular; 22" halign="center" valign="center" transparent="1" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="40,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="230,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="420,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="610,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="40,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="230,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="420,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="610,750" size="35,27" alphatest="blend" />
     <widget source="key_red" render="Label" position="75,750" size="150,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_green" render="Label" position="265,750" size="150,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_yellow" render="Label" position="455,750" size="150,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
@@ -783,9 +783,9 @@
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
     <widget name="config" position="50,120" size="890,280" itemHeight="35" font="Roboto_HD; 26" scrollbarMode="showOnDemand" enableWrapAround="1" selectionPixmap="BlackHarmony/menu/sel_900_35.png" transparent="1" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="50,435" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="230,435" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="410,435" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="50,435" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="230,435" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="410,435" size="35,27" alphatest="blend" />
     <widget source="key_red" render="Label" position="90,435" size="130,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_green" render="Label" position="270,435" size="130,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_yellow" render="Label" position="450,435" size="130,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
@@ -803,9 +803,9 @@
     <widget name="config" position="50,130" size="890,440" itemHeight="40" font="Roboto_HD; 27" scrollbarMode="showOnDemand" enableWrapAround="1" selectionPixmap="BlackHarmony/menu/sel_920_40.png" transparent="1" />
     <ePixmap pixmap="BlackHarmony/gfx/linia_md.png" position="50,582" size="890,1" alphatest="blend" />
     <widget source="infotext" render="Label" position="50,595" size="890,125" font="Regular; 20" halign="center" valign="center" transparent="1" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="50,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="230,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="410,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="50,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="230,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="410,750" size="35,27" alphatest="blend" />
     <widget source="key_red" render="Label" position="90,750" size="130,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_green" render="Label" position="270,750" size="130,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_yellow" render="Label" position="450,750" size="130,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
@@ -821,10 +821,10 @@
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
     <widget name="list" position="60,130" size="870,580" scrollbarMode="showNever" fieldMargins="5" itemsDistances="5" progressbarHeight="8" progressBarWidth="50" progressbarBorderWidth="1" colorServiceRecorded="red" colorServicePseudoRecorded="light_red" colorServiceStreamed="orange" colorServiceDescription="light_yellow" colorServiceDescriptionSelected="light_yellow" colorEventProgressbarBorder="light_yellow" colorEventProgressbarBorderSelected="light_yellow" foregroundColorServiceNotAvail="#00555555" serviceItemHeight="35" serviceNumberFont="Regular;24" serviceNameFont="Regular;24" serviceInfoFont="Regular;22" transparent="0" selectionPixmap="BlackHarmony/menu/sel_900_35.png" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="50,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="230,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="410,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="590,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="50,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="230,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="410,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="590,750" size="35,27" alphatest="blend" />
     <widget name="key_red" position="90,750" size="130,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget name="key_green" position="270,750" size="130,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget name="key_yellow" position="450,750" size="130,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
@@ -842,9 +842,9 @@
     </widget>
     <widget name="introduction" render="Label" position="75,110" zPosition="10" size="850,35" font="Roboto_HD; 27" halign="left" backgroundColor="black" transparent="1" foregroundColor="light_yellow"/>
     <widget name="list" position="73,140" size="850,240" font="Roboto_HD; 27" itemHeight="35" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_845_35.png" backgroundColor="transpBlack" transparent="1"/>
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="47,440" size="35,27" alphatest="blend"/>
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="273,440" size="35,27" alphatest="blend"/>
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="723,440" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="47,440" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="273,440" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="723,440" size="35,27" alphatest="blend"/>
     <widget source="key_red" render="Label" position="87,439" size="180,27" zPosition="1" font="Roboto_HD; 24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1"/>
     <widget source="key_green" render="Label" position="313,439" size="180,27" zPosition="1" font="Roboto_HD; 24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1"/>
     <widget source="key_blue" render="Label" position="763,439" size="180,26" zPosition="1" font="Roboto_HD;24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1"/>
@@ -863,8 +863,8 @@
     <widget name="lab2" position="180,290" size="150,30" font="Regular;22" valign="center" halign="left" transparent="1" />
     <widget name="labstop" position="630,290" size="172,30" font="Regular;22" valign="center" halign="center" backgroundColor="red" zPosition="1" foregroundColor="black" />
     <widget name="labrun" position="630,290" size="172,30" font="Regular;22" valign="center" halign="center" backgroundColor="green" zPosition="2" foregroundColor="black" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="50,435" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="270,435" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="50,435" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="270,435" size="35,27" alphatest="blend" />
     <ePixmap position="790,433" size="60,30" zPosition="10" pixmap="BlackHarmony/buttons/key_ok.png" transparent="1" alphatest="blend" />
     <ePixmap position="885,433" size="60,30" zPosition="10" pixmap="BlackHarmony/buttons/key_exit.png" transparent="1" alphatest="blend" />
     <widget name="key_green" position="90,435" size="170,27" noWrap="1" zPosition="1" valign="center" font="Roboto_HD; 24" halign="left" transparent="1" />
@@ -884,8 +884,8 @@
     <widget name="lab2" position="180,290" size="150,30" font="Regular;22" valign="center" halign="left" transparent="1" />
     <widget name="labstop" position="630,290" size="172,30" font="Regular;22" valign="center" halign="center" backgroundColor="red" zPosition="1" foregroundColor="black" />
     <widget name="labrun" position="630,290" size="172,30" font="Regular;22" valign="center" halign="center" backgroundColor="green" zPosition="2" foregroundColor="black" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="50,435" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="270,435" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="50,435" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="270,435" size="35,27" alphatest="blend" />
     <ePixmap position="790,433" size="60,30" zPosition="10" pixmap="BlackHarmony/buttons/key_ok.png" transparent="1" alphatest="blend" />
     <ePixmap position="885,433" size="60,30" zPosition="10" pixmap="BlackHarmony/buttons/key_exit.png" transparent="1" alphatest="blend" />
     <widget name="key_green" position="90,435" size="170,27" noWrap="1" zPosition="1" valign="center" font="Roboto_HD; 24" halign="left" transparent="1" />
@@ -905,9 +905,9 @@
     <widget name="lab2" position="180,290" size="150,30" font="Regular;22" valign="center" halign="left" transparent="1" />
     <widget name="labstop" position="630,290" size="172,30" font="Regular;22" valign="center" halign="center" backgroundColor="red" zPosition="1" foregroundColor="black" />
     <widget name="labrun" position="630,290" size="172,30" font="Regular;22" valign="center" halign="center" backgroundColor="green" zPosition="2" foregroundColor="black" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="50,435" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="270,435" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="490,435" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="50,435" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="270,435" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="490,435" size="35,27" alphatest="blend" />
     <ePixmap position="885,433" size="60,30" zPosition="10" pixmap="BlackHarmony/buttons/key_exit.png" transparent="1" alphatest="blend" />
     <widget name="key_red" position="90,435" size="170,27" noWrap="1" zPosition="1" valign="center" font="Roboto_HD; 24" halign="left" transparent="1" />
     <widget name="key_green" position="310,435" size="170,27" noWrap="1" zPosition="1" valign="center" font="Roboto_HD; 24" halign="left" transparent="1" />
@@ -925,7 +925,7 @@
     <widget name="menulist" position="50,125" size="440,265" zPosition="10" itemHeight="35" font="Roboto_HD; 26" enableWrapAround="1" selectionPixmap="BlackHarmony/menu/sel_520_35.png" scrollbarMode="showOnDemand" />
     <eLabel position="499,125" size="2,265" backgroundColor="dark_grey" />
     <widget source="introduction" render="Label" position="510,125" size="430,265" font="Regular;22" halign="center" valign="center" transparent="1" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="50,430" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="50,430" size="35,27" alphatest="blend" />
     <widget source="key_red" render="Label" position="90,430" size="160,27" noWrap="1" zPosition="1" valign="center" font="Roboto_HD; 24" halign="left" transparent="1" />
   </screen>
   <screen name="InputDeviceSelection" position="center,center" size="1000,820" title="Setup" flags="wfNoBorder" backgroundColor="transparent">
@@ -950,8 +950,8 @@
     </widget>
     <ePixmap pixmap="BlackHarmony/gfx/linia_md.png" position="60,627" size="870,1" alphatest="blend" />
     <widget source="introduction" render="Label" position="60,640" size="870,75" font="Regular; 22" halign="center" walign="center" transparent="1" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="40,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="270,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="40,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="270,750" size="35,27" alphatest="blend" />
     <widget source="key_red" render="Label" position="80,750" size="170,27" noWrap="1" zPosition="1" valign="center" font="Roboto_HD; 24" halign="left" transparent="1" />
     <widget source="key_green" render="Label" position="310,750" size="170,27" noWrap="1" zPosition="1" valign="center" font="Roboto_HD; 24" halign="left" transparent="1" />
     <ePixmap position="875,748" size="60,30" zPosition="10" pixmap="BlackHarmony/buttons/key_exit.png" transparent="1" alphatest="blend" />
@@ -968,8 +968,8 @@
     <widget name="config" position="60,130" size="875,440" itemHeight="40" font="Roboto_HD; 27" scrollbarMode="showOnDemand" enableWrapAround="1" selectionPixmap="BlackHarmony/menu/sel_920_40.png" transparent="1" />
     <ePixmap pixmap="BlackHarmony/gfx/linia_md.png" position="60,582" size="875,1" alphatest="blend" zPosition="1" />
     <widget source="introduction" render="Label" position="60,595" size="875,120" font="Regular; 22" halign="center" valign="center" transparent="1" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="40,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="270,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="40,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="270,750" size="35,27" alphatest="blend" />
     <widget source="key_red" render="Label" position="80,750" size="170,27" noWrap="1" zPosition="1" valign="center" font="Roboto_HD; 24" halign="left" transparent="1" />
     <widget source="key_green" render="Label" position="310,750" size="170,27" noWrap="1" zPosition="1" valign="center" font="Roboto_HD; 24" halign="left" transparent="1" />
     <ePixmap position="875,748" size="60,30" zPosition="10" pixmap="BlackHarmony/buttons/key_exit.png" transparent="1" alphatest="blend" />
@@ -988,9 +988,9 @@
     <eLabel text="https://github.com/openatv" position="790,470" size="380,30" font="Roboto_HD; 20" halign="center" transparent="0" zPosition="1" />
     <eLabel text="https://github.com/oe-alliance" position="790,520" size="380,30" font="Roboto_HD; 20" halign="center" transparent="0" zPosition="1" />
     <ePixmap position="852,195" size="256,256" zPosition="10" pixmap="MetrixHD/icons/menu_information_about.png" transparent="1" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="50,850" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="230,850" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="410,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="50,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="230,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="410,850" size="35,27" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/key_exit.png" position="1100,850" size="60,30" alphatest="blend" />
     <widget name="key_red" position="90,850" size="130,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget name="key_green" position="270,850" size="130,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
@@ -1008,7 +1008,7 @@
     <widget name="config" position="50,120" size="890,440" itemHeight="40" font="Roboto_HD; 27" scrollbarMode="showOnDemand" enableWrapAround="1" selectionPixmap="BlackHarmony/menu/sel_920_40.png" transparent="1" />
     <ePixmap pixmap="BlackHarmony/gfx/linia_bp.png" position="50,572" size="890,1" alphatest="blend" />
     <widget name="HelpWindow" position="50,585" size="890,128" zPosition="1" transparent="1" alphatest="blend" font="Regular; 20" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="50,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="50,750" size="35,27" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/key_exit.png" position="890,743" size="60,30" alphatest="blend" />
     <widget source="key_red" render="Label" position="90,750" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
   </screen>
@@ -1038,10 +1038,10 @@
     <widget name="labstop" position="310,610" size="190,40" font="Regular;24" valign="center" halign="center" backgroundColor="red" zPosition="1" transparent="0" />
     <widget name="labrun" position="310,610" size="190,40" font="Regular;24" valign="center" halign="center" backgroundColor="green" zPosition="2" transparent="0" />
     <widget name="key" position="50,665" size="1130,150" font="Regular; 22" halign="center" valign="center" transparent="1" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="40,850" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="290,850" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="540,850" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="790,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="40,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="290,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="540,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="790,850" size="35,27" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/key_exit.png" position="1100,848" size="60,30" alphatest="blend" />
     <widget source="key_red" render="Label" position="80,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_green" render="Label" position="330,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
@@ -1069,10 +1069,10 @@
     </widget>
     <widget source="Title" render="Label" position="760,25" size="420,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1" />
     <widget name="detailtext" position="50,120" size="1125,690" font="Regular;22" transparent="1" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="40,850" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="290,850" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="540,850" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="790,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="40,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="290,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="540,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="790,850" size="35,27" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/key_exit.png" position="1100,848" size="60,30" alphatest="blend" />
     <widget source="key_red" render="Label" position="80,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_green" render="Label" position="330,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
@@ -1089,10 +1089,10 @@
     </widget>
     <widget source="Title" render="Label" position="760,25" size="420,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1" />
     <widget name="detailtext" position="50,120" size="1125,690" font="Regular;22" transparent="1" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="40,850" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="290,850" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="540,850" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="790,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="40,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="290,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="540,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="790,850" size="35,27" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/key_exit.png" position="1100,848" size="60,30" alphatest="blend" />
     <widget source="key_red" render="Label" position="80,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_green" render="Label" position="330,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
@@ -1127,8 +1127,8 @@
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
     <widget name="config" position="75,135" size="845,510" itemHeight="40" font="Roboto_HD; 27" enableWrapAround="1" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_850_40.png" transparent="1" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="40,750" size="35,27" transparent="1" alphatest="blend" zPosition="1" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="230,750" size="35,27" transparent="1" alphatest="blend" zPosition="1" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="40,750" size="35,27" transparent="1" alphatest="blend" zPosition="1" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="230,750" size="35,27" transparent="1" alphatest="blend" zPosition="1" />
     <ePixmap pixmap="BlackHarmony/buttons/key_ok.png" position="880,748" size="60,30" transparent="1" alphatest="blend" zPosition="1" />
     <ePixmap pixmap="BlackHarmony/buttons/key_exit.png" position="800,748" size="60,30" transparent="1" alphatest="blend" zPosition="1" />
     <eLabel text="Anuluj" position="80,750" size="140,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
@@ -1148,10 +1148,10 @@
     <widget name="info-multi" position="70,336" zPosition="1" size="855,150" font="Roboto_HD; 24" halign="center" valign="center" transparent="1" />
     <ePixmap pixmap="BlackHarmony/gfx/linia_md.png" position="60,500" size="870,1" alphatest="blend" zPosition="1" />
     <widget name="info-usb" position="70,513" zPosition="1" size="855,205" font="Roboto_HD; 24" halign="center" valign="center" transparent="1" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="45,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="205,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="375,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="565,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="45,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="205,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="375,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="565,750" size="35,27" alphatest="blend" />
     <ePixmap position="885,748" size="60,30" zPosition="10" pixmap="BlackHarmony/buttons/key_exit.png" transparent="1" alphatest="blend" />
     <widget source="key_red" render="Label" position="85,750" size="110,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_green" render="Label" position="245,750" size="120,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
@@ -1170,10 +1170,10 @@
     <eLabel text="OPEN SOURCE" position="690,160" size="260,55" font="HD_Thin; 40" halign="center" zPosition="1" />
     <ePixmap position="700,230" size="256,256" zPosition="2" pixmap="MetrixHD/icons/menu_information_about.png" transparent="1" alphatest="blend" />
     <widget name="list" position="50,160" size="640,540" zPosition="2" itemHeight="40" font="Regular;30" selectionPixmap="BlackHarmony/menu/sel_660_40.png" transparent="1" scrollbarMode="showOnDemand" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="45,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="205,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="375,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="565,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="45,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="205,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="375,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="565,750" size="35,27" alphatest="blend" />
     <ePixmap position="885,748" size="60,30" zPosition="10" pixmap="BlackHarmony/buttons/key_exit.png" transparent="1" alphatest="blend" />
     <ePixmap position="805,748" size="60,30" zPosition="10" pixmap="BlackHarmony/buttons/key_ok.png" transparent="1" alphatest="blend" />
     <widget source="key_red" render="Label" position="85,750" size="110,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
@@ -1195,10 +1195,10 @@
     <eLabel text="https://github.com/openatv" position="790,470" size="380,30" font="Roboto_HD; 20" halign="center" transparent="0" zPosition="1" />
     <eLabel text="https://github.com/oe-alliance" position="790,520" size="380,30" font="Roboto_HD; 20" halign="center" transparent="0" zPosition="1" />
     <ePixmap position="852,195" size="256,256" zPosition="10" pixmap="MetrixHD/icons/menu_information_about.png" transparent="1" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="40,850" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="290,850" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="540,850" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="790,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="40,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="290,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="540,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="790,850" size="35,27" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/key_ok.png" position="1035,848" size="60,30" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/key_exit.png" position="1115,848" size="60,30" alphatest="blend" />
     <widget source="key_red" render="Label" position="80,850" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
@@ -1221,8 +1221,8 @@
     <eLabel text="https://github.com/openatv" position="790,470" size="380,30" font="Roboto_HD; 20" halign="center" transparent="0" zPosition="1" />
     <eLabel text="https://github.com/oe-alliance" position="790,520" size="380,30" font="Roboto_HD; 20" halign="center" transparent="0" zPosition="1" />
     <ePixmap position="852,195" size="256,256" zPosition="10" pixmap="MetrixHD/icons/menu_information_about.png" transparent="1" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="40,850" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="290,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="40,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="290,850" size="35,27" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/key_ok.png" position="1035,848" size="60,30" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/key_exit.png" position="1115,848" size="60,30" alphatest="blend" />
     <widget source="key_red" render="Label" position="80,850" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
@@ -1276,13 +1276,13 @@
     </widget>
     <widget source="job_status" render="Label" position="170,298" size="660,33" font="Regular;20" transparent="1" />
     <widget name="config" position="150,335" size="700,60" itemHeight="30" font="Regular; 20" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_700_30.png" transparent="1" />
-    <widget source="cancelable" render="Pixmap" pixmap="BlackHarmony/buttons/red.png" position="50,435" size="35,27" alphatest="blend">
+    <widget source="cancelable" render="Pixmap" pixmap="BlackHarmony/buttons/key_red.png" position="50,435" size="35,27" alphatest="blend">
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="finished" render="Pixmap" pixmap="BlackHarmony/buttons/green.png" position="270,435" size="35,27" alphatest="blend">
+    <widget source="finished" render="Pixmap" pixmap="BlackHarmony/buttons/key_green.png" position="270,435" size="35,27" alphatest="blend">
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="backgroundable" render="Pixmap" pixmap="BlackHarmony/buttons/blue.png" position="490,435" size="35,27" alphatest="blend">
+    <widget source="backgroundable" render="Pixmap" pixmap="BlackHarmony/buttons/key_blue.png" position="490,435" size="35,27" alphatest="blend">
       <convert type="ConditionalShowHide" />
     </widget>
     <widget source="cancelable" render="FixedLabel" position="90,435" size="170,27" zPosition="1" valign="center" font="Roboto_HD; 24" halign="left" noWrap="1" transparent="1">
@@ -1306,8 +1306,8 @@
     <widget source="Title" render="Label" position="565,30" size="380,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1" />
     <widget source="curdir" render="Label" position="90,150" size="810,35" font="Roboto_HD; 27" halign="left" valign="center" backgroundColor="background" transparent="1" noWrap="1" foregroundColor="light_yellow" />
     <widget name="filelist" position="135,210" size="720,480" font="Roboto_HD; 27" itemHeight="40" selectionPixmap="BlackHarmony/menu/sel_720_40.png" scrollbarMode="showOnDemand" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="47,760" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="273,760" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="47,760" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="273,760" size="35,27" alphatest="blend" />
     <widget source="key_red" render="Label" position="87,759" size="180,27" zPosition="1" font="Roboto_HD; 24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_green" render="Label" position="313,759" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1" />
   </screen>
@@ -1331,7 +1331,7 @@
       </convert>
     </widget>
     <widget source="introduction" render="Label" position="145,680" size="700,32" font="Regular;20" halign="center" transparent="1" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="40,750" size="35,27" alphatest="blend" zPosition="1" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="40,750" size="35,27" alphatest="blend" zPosition="1" />
     <widget source="key_red" render="Label" position="80,750" size="160,26" zPosition="1" font="Roboto_HD;22" halign="left" backgroundColor="black" transparent="1" />
     <ePixmap pixmap="BlackHarmony/buttons/key_exit.png" position="890,748" size="60,30" alphatest="blend" />
   </screen>
@@ -1350,10 +1350,10 @@
     <widget name="lab2" position="280,290" size="230,30" font="Roboto_HD; 27" valign="center" halign="left" backgroundColor="black" transparent="1"/>
     <widget name="labstop" position="510,290" size="200,30" font="Roboto_HD; 27" valign="center" halign="center" backgroundColor="red" zPosition="1" foregroundColor="white" transparent="0"/>
     <widget name="labrun" position="510,290" size="200,30" font="Roboto_HD; 27" valign="center" halign="center" backgroundColor="green" zPosition="2" foregroundColor="black" transparent="0"/>
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="50,435" size="35,27" alphatest="blend"/>
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="270,435" size="35,27" alphatest="blend"/>
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="480,435" size="35,27" alphatest="blend"/>
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="690,435" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="50,435" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="270,435" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="480,435" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="690,435" size="35,27" alphatest="blend"/>
     <widget name="key_red" position="90,433" size="170,30" noWrap="1" zPosition="1" valign="center" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget name="key_green" position="310,433" size="170,30" noWrap="1" zPosition="1" valign="center" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget name="key_yellow" position="520,433" size="170,30" noWrap="1" zPosition="1" valign="center" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
@@ -1386,10 +1386,10 @@
     <widget name="lab2" position="280,290" size="230,30" font="Roboto_HD; 27" valign="center" halign="left" backgroundColor="black" transparent="1"/>
     <widget name="labstop" position="510,290" size="200,30" font="Roboto_HD; 27" valign="center" halign="center" backgroundColor="red" zPosition="1" foregroundColor="white" transparent="0"/>
     <widget name="labrun" position="510,290" size="200,30" font="Roboto_HD; 27" valign="center" halign="center" backgroundColor="green" zPosition="2" foregroundColor="black" transparent="0"/>
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="50,435" size="35,27" alphatest="blend"/>
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="270,435" size="35,27" alphatest="blend"/>
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="480,435" size="35,27" alphatest="blend"/>
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="690,435" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="50,435" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="270,435" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="480,435" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="690,435" size="35,27" alphatest="blend"/>
     <widget name="key_red" position="90,433" size="170,30" noWrap="1" zPosition="1" valign="center" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget name="key_green" position="310,433" size="170,30" noWrap="1" zPosition="1" valign="center" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget name="key_yellow" position="520,433" size="170,30" noWrap="1" zPosition="1" valign="center" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
@@ -1409,10 +1409,10 @@
     <widget name="lab2" position="280,290" size="230,30" font="Roboto_HD; 27" valign="center" halign="left" backgroundColor="black" transparent="1"/>
     <widget name="labstop" position="510,290" size="200,30" font="Roboto_HD; 27" valign="center" halign="center" backgroundColor="red" zPosition="1" foregroundColor="white" transparent="0"/>
     <widget name="labrun" position="510,290" size="200,30" font="Roboto_HD; 27" valign="center" halign="center" backgroundColor="green" zPosition="2" foregroundColor="black" transparent="0"/>
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="50,435" size="35,27" alphatest="blend"/>
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="270,435" size="35,27" alphatest="blend"/>
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="480,435" size="35,27" alphatest="blend"/>
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="690,435" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="50,435" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="270,435" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="480,435" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="690,435" size="35,27" alphatest="blend"/>
     <widget name="key_red" position="90,433" size="170,30" noWrap="1" zPosition="1" valign="center" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget name="key_green" position="310,433" size="170,30" noWrap="1" zPosition="1" valign="center" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget name="key_yellow" position="520,433" size="170,30" noWrap="1" zPosition="1" valign="center" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
@@ -1432,10 +1432,10 @@
     <widget name="lab2" position="280,290" size="230,30" font="Roboto_HD; 27" valign="center" halign="left" backgroundColor="black" transparent="1"/>
     <widget name="labstop" position="510,290" size="200,30" font="Roboto_HD; 27" valign="center" halign="center" backgroundColor="red" zPosition="1" foregroundColor="white" transparent="0"/>
     <widget name="labrun" position="510,290" size="200,30" font="Roboto_HD; 27" valign="center" halign="center" backgroundColor="green" zPosition="2" foregroundColor="black" transparent="0"/>
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="50,435" size="35,27" alphatest="blend"/>
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="270,435" size="35,27" alphatest="blend"/>
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="480,435" size="35,27" alphatest="blend"/>
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="690,435" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="50,435" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="270,435" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="480,435" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="690,435" size="35,27" alphatest="blend"/>
     <widget name="key_red" position="90,433" size="170,30" noWrap="1" zPosition="1" valign="center" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget name="key_green" position="310,433" size="170,30" noWrap="1" zPosition="1" valign="center" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget name="key_yellow" position="520,433" size="170,30" noWrap="1" zPosition="1" valign="center" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
@@ -1457,10 +1457,10 @@
     <widget name="labrun" position="510,200" size="200,30" font="Roboto_HD; 27" valign="center" halign="center" backgroundColor="green" zPosition="2" foregroundColor="black" transparent="0"/>
     <widget name="labconfig" position="250,300" size="500,30" font="Roboto_HD; 27" valign="center" halign="left" foregroundColor="light_yellow" backgroundColor="black" transparent="1"/>
     <widget name="labconfigfilename" position="100,360" size="800,30" font="Roboto_HD; 27" halign="center" zPosition="2" backgroundColor="black" transparent="1"/>
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="50,435" size="35,27" alphatest="blend"/>
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="270,435" size="35,27" alphatest="blend"/>
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="480,435" size="35,27" alphatest="blend"/>
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="690,435" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="50,435" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="270,435" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="480,435" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="690,435" size="35,27" alphatest="blend"/>
     <widget name="key_red" position="90,433" size="170,30" noWrap="1" zPosition="1" valign="center" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget name="key_green" position="310,433" size="170,30" noWrap="1" zPosition="1" valign="center" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget name="key_yellow" position="520,433" size="170,30" noWrap="1" zPosition="1" valign="center" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
@@ -1477,8 +1477,8 @@
     </widget>
     <widget name="config" position="50,130" size="900,530" itemHeight="35" font="Roboto_HD; 27" zPosition="1" scrollbarMode="showOnDemand" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" selectionPixmap="BlackHarmony/menu/sel_900_35.png" backgroundColor="black" transparent="1"/>
         <widget name="HelpWindow" position="510,600" size="402,128" zPosition="1" transparent="1" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="70,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="270,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="70,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="270,750" size="35,27" alphatest="blend" />
     <widget source="key_red" render="Label" position="120,750" size="200,30" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_green" render="Label" position="320,750" size="200,30" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
   </screen>
@@ -1492,10 +1492,10 @@
     <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
     <widget name="checkList" position="50,120" size="900,530" zPosition="1" itemHeight="35" font="Roboto_HD; 27" scrollbarMode="showOnDemand" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" selectionPixmap="BlackHarmony/menu/sel_900_35.png" backgroundColor="black" transparent="1"/>
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="70,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="270,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="470,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="720,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="70,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="270,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="470,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="720,750" size="35,27" alphatest="blend" />
     <widget source="key_red" render="Label" position="120,750" size="100,30" zPosition="1" font="Roboto_HD;24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_green" render="Label" position="320,750" size="100,30" zPosition="1" font="Roboto_HD;24" halign="left" backgroundColor="dark_grey" transparent="1" />
         <widget source="key_yellow" render="Label" position="520,750" size="200,30" zPosition="1" font="Roboto_HD;24" halign="left" backgroundColor="dark_grey" transparent="1" />
@@ -1538,10 +1538,10 @@
         <widget name="dlna" position="440,580" size="300,30" font="Roboto_HD; 25" valign="center" halign="left" foregroundColor="white" backgroundColor="black" transparent="1" />
         <widget name="dlnaactive" position="400,580" zPosition="1" pixmap="skin_default/icons/lock_on.png" size="32,32" alphatest="on" />
         <widget name="dlnainactive" position="400,580" zPosition="2" pixmap="skin_default/icons/lock_off.png" size="32,32" alphatest="on" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="70,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="300,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="470,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="670,750" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="70,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="300,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="470,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="670,750" size="35,27" alphatest="blend"/>
     <widget source="key_red" render="Label" position="120,750" size="200,30" zPosition="1" font="Roboto_HD; 24" halign="left" noWrap="1" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_green" render="Label" position="350,750" size="200,30" zPosition="1" font="Roboto_HD; 24" halign="left" noWrap="1" backgroundColor="dark_grey" transparent="1" />
         <widget source="key_yellow" render="Label" position="520,750" size="400,35" zPosition="1" font="Roboto_HD; 24" halign="left" noWrap="1" backgroundColor="dark_grey" transparent="1"/>
@@ -1582,10 +1582,10 @@
         <widget name="dlna" position="110,580" size="300,30" font="Roboto_HD; 25" valign="center" halign="left" foregroundColor="white" backgroundColor="black" transparent="1" />
         <widget name="dlnaactive" position="70,580" zPosition="1" pixmap="skin_default/icons/lock_on.png" size="32,32" alphatest="on" />
         <widget name="dlnainactive" position="70,580" zPosition="2" pixmap="skin_default/icons/lock_off.png" size="32,32" alphatest="on" />
-        <ePixmap pixmap="BlackHarmony/buttons/red.png" position="70,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="300,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="470,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="670,750" size="35,27" alphatest="blend"/>
+        <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="70,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="300,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="470,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="670,750" size="35,27" alphatest="blend"/>
     <widget source="key_red" render="Label" position="120,750" size="200,30" zPosition="1" font="Roboto_HD; 24" halign="left" noWrap="1" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_green" render="Label" position="350,750" size="200,30" zPosition="1" font="Roboto_HD; 24" halign="left" noWrap="1" backgroundColor="dark_grey" transparent="1" />
         <widget source="key_yellow" render="Label" position="520,750" size="400,35" zPosition="1" font="Roboto_HD; 24" halign="left" noWrap="1" backgroundColor="dark_grey" transparent="1"/>
@@ -1619,10 +1619,10 @@
         <widget name="sactive" position="70,490" zPosition="2" pixmap="skin_default/icons/lock_on.png" size="35,35" alphatest="on" />
         <widget name="system" position="110,490" size="100,30" font="Roboto_HD; 25" valign="center" halign="left" foregroundColor="white" backgroundColor="black" transparent="1" />
         <widget name="labsys" position="320,490" size="350,30" font="Roboto_HD; 25" valign="center" foregroundColor="white" backgroundColor="black" transparent="1" />
-        <ePixmap pixmap="BlackHarmony/buttons/red.png" position="70,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="300,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="470,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="670,750" size="35,27" alphatest="blend"/>
+        <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="70,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="300,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="470,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="670,750" size="35,27" alphatest="blend"/>
     <widget source="key_red" render="Label" position="120,750" size="200,30" zPosition="1" font="Roboto_HD; 24" halign="left" noWrap="1" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_green" render="Label" position="350,750" size="200,30" zPosition="1" font="Roboto_HD; 24" halign="left" noWrap="1" backgroundColor="dark_grey" transparent="1" />
         <widget source="key_yellow" render="Label" position="520,750" size="400,35" zPosition="1" font="Roboto_HD; 24" halign="left" noWrap="1" backgroundColor="dark_grey" transparent="1"/>
@@ -1640,7 +1640,7 @@
     <widget source="Title" render="Label" position="560,30" size="380,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
                 <widget name="config" position="50,130" size="900,530" itemHeight="35" font="Roboto_HD; 27" zPosition="1" scrollbarMode="showOnDemand" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" selectionPixmap="BlackHarmony/menu/sel_900_35.png" backgroundColor="black" transparent="1"/>
         <widget name="HelpWindow" position="510,600" size="402,128" zPosition="1" transparent="1" alphatest="blend" />
-        <ePixmap pixmap="BlackHarmony/buttons/red.png" position="70,750" size="35,27" alphatest="blend" />
+        <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="70,750" size="35,27" alphatest="blend" />
     <widget source="key_red" render="Label" position="120,750" size="200,30" zPosition="1" font="Roboto_HD; 24" halign="left" noWrap="1" backgroundColor="dark_grey" transparent="1" />
   </screen>
   <screen name="NetworkInadynLog" position="345,93" size="1232,908" title="Inadyn Log" flags="wfNoBorder" backgroundColor="transparent">
@@ -1667,7 +1667,7 @@
     </widget>
     <widget name="menulist" position="70,125" size="860,180" zPosition="1" itemHeight="35" font="Roboto_HD; 26" enableWrapAround="1" selectionPixmap="BlackHarmony/menu/sel_860_35.png" scrollbarMode="showOnDemand" backgroundColor="black" transparent="1"/>
     <widget source="introduction" render="Label" position="70,340" size="850,40" font="Roboto_HD; 26" zPosition="2" halign="center" foregroundColor="light_yellow" backgroundColor="black" transparent="1" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="50,430" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="50,430" size="35,27" alphatest="blend" />
     <widget source="key_red" render="Label" position="90,430" size="160,27" noWrap="1" zPosition="1" valign="center" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <ePixmap position="750,430" size="60,30" zPosition="10" pixmap="BlackHarmony/buttons/key_ok.png" alphatest="blend" transparent="1"/>
     <ePixmap position="820,430" size="60,30" zPosition="10" pixmap="BlackHarmony/buttons/key_help.png" alphatest="blend" transparent="1"/>
@@ -1712,8 +1712,8 @@
         <widget name="config" position="160,240" size="700,420" zPosition="1" font="Roboto_HD; 27" scrollbarSliderBorderWidth="1" scrollbarWidth="10" selectionPixmap="BlackHarmony/menu/sel_720_40.png" itemHeight="40" scrollbarMode="showOnDemand" backgroundColor="black" transparent="1"/>
         <ePixmap pixmap="BlackHarmony/menu/network.png" position="370,310" size="270,270" halign="center" alphatest="blend" />
         <ePixmap pixmap="BlackHarmony/gfx/linia_md.png" position="70,580" size="985,1" alphatest="blend"/>
-        <ePixmap pixmap="BlackHarmony/buttons/red.png" position="70,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="270,750" size="35,27" alphatest="blend" />
+        <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="70,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="270,750" size="35,27" alphatest="blend" />
     <widget source="key_red" render="Label" position="120,750" size="200,30" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_green" render="Label" position="320,750" size="200,30" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
   </screen>
@@ -1728,9 +1728,9 @@
     </widget>
     <widget name="config" position="50,120" size="900,150" font="Roboto_HD;27" itemHeight="40" zPosition="1" scrollbarMode="showOnDemand" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" selectionPixmap="BlackHarmony/menu/sel_920_40.png" backgroundColor="black" transparent="1"/>
         <widget source="description" render="Label" position="180,600" size="650,120" font="Roboto_HD;27" halign="center" foregroundColor="light_yellow" backgroundColor="black" transparent="1" />
-        <ePixmap pixmap="BlackHarmony/buttons/red.png" position="70,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="270,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="470,750" size="35,27" alphatest="blend" />
+        <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="70,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="270,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="470,750" size="35,27" alphatest="blend" />
     <widget source="key_red" render="Label" position="120,749" size="120,30" zPosition="1" font="Roboto_HD;24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_green" render="Label" position="320,749" size="120,30" zPosition="1" font="Roboto_HD;24" halign="left" backgroundColor="dark_grey" transparent="1" />
         <widget source="key_yellow" render="Label" position="520,749" size="200,30" zPosition="1" font="Roboto_HD;24" halign="left" backgroundColor="dark_grey" transparent="1" />
@@ -1748,7 +1748,7 @@
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
     <widget name="History" position="60,130" size="880,510" itemHeight="40" font="Roboto_HD; 27" scrollbarMode="showOnDemand" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" selectionPixmap="BlackHarmony/menu/sel_920_40.png" backgroundColor="black" transparent="1"/>
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="45,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="45,750" size="35,27" alphatest="blend" />
     <widget source="key_red" render="Label" position="85,748" size="110,35" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
   </screen>
   <screen name="PU_Restore" position="center,center" size="1000,820" title=" " flags="wfNoBorder" backgroundColor="transparent">
@@ -1761,9 +1761,9 @@
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
     <widget name="ListSetting" position="40,130" size="900,510" itemHeight="40" font="Roboto_HD; 27" scrollbarMode="showOnDemand" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" selectionPixmap="BlackHarmony/menu/sel_920_40.png" backgroundColor="black" transparent="1"/>
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="45,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="205,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="445,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="45,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="205,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="445,750" size="35,27" alphatest="blend" />
     <widget source="key_red" render="Label" position="85,748" size="110,35" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_green" render="Label" position="245,748" size="180,35" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_yellow" render="Label" position="485,748" size="210,35" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
@@ -1780,9 +1780,9 @@
     <widget name="MenuListSetting" position="40,130" size="900,510" itemHeight="40" font="Roboto_HD; 27" scrollbarMode="showOnDemand" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" selectionPixmap="BlackHarmony/menu/sel_920_40.png" backgroundColor="black" transparent="1"/>
     <widget name="description" position="170,600" size="660,60" font="Roboto_HD; 27" halign="center" valign="center" foregroundColor="light_yellow" backgroundColor="black" transparent="1"/>
     <widget name="update" position="640,748" size="140,35" font="Roboto_HD; 24" halign="left" foregroundColor="light_yellow" backgroundColor="black" transparent="1"/>
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="45,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="205,750" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="395,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="45,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="205,750" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="395,750" size="35,27" alphatest="blend" />
     <widget source="key_red" render="Label" position="85,748" size="110,35" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_green" render="Label" position="245,748" size="140,35" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_yellow" render="Label" position="435,748" size="210,35" zPosition="1" font="Roboto_HD; 24" halign="left" foregroundColor="light_yellow" backgroundColor="dark_grey" transparent="1" />
@@ -1959,10 +1959,10 @@
           <convert type="j00zekModEventName">ExtendedDescription</convert>
         </widget>
                 
-        <ePixmap pixmap="BlackHarmony/buttons/red.png" position="95,1001" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="430,1001" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="760,1001" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="1090,1001" size="35,27" alphatest="blend" />
+        <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="95,1001" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="430,1001" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="760,1001" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="1090,1001" size="35,27" alphatest="blend" />
     <widget name="key_red" position="150,1000" size="240,27" zPosition="1" font="Roboto_HD;24" halign="left" backgroundColor="dark_grey" transparent="1" valign="bottom" />
     <widget name="key_green" position="480,1000" size="240,27" zPosition="1" font="Roboto_HD;24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget name="key_yellow" position="810,983" size="240,55" zPosition="1" font="Roboto_HD;24" halign="left" backgroundColor="dark_grey" transparent="1" />

@@ -17,8 +17,8 @@
 	<widget name="Path" position="500,130" size="770,28" font="Regular;24" halign="left" transparent="1" />
 	
 	 <widget name="config"  position="65,250" size="1095,640" font="Roboto_HD; 28" itemHeight="40" enableWrapAround="1"    scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_1095_40.png" backgroundColor="black" transparent="1" />
-    <ePixmap pixmap="BlackHarmony/buttons/red.png" position="41,850" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="328,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="41,850" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="328,850" size="35,27" alphatest="blend" />
     <widget source="key_red" render="Label"  position="91,849" size="200,32" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
   <widget source="key_green" render="Label" position="378,849" size="200,32" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
 
@@ -33,8 +33,8 @@
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
     <widget name="config" font="Roboto_HD; 27" position="73,140" size="850,240" itemHeight="35" enableWrapAround="1"  scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_845_35.png" backgroundColor="transpBlack" transparent="1" />
-	 <ePixmap pixmap="BlackHarmony/buttons/red.png" position="47,440" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="273,440" size="35,27" alphatest="blend" />
+	 <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="47,440" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="273,440" size="35,27" alphatest="blend" />
 
     <widget source="key_red" render="Label" position="87,439" size="180,32" zPosition="1" font="Roboto_HD; 24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_green" render="Label" position="313,439" size="180,32" zPosition="1" font="Roboto_HD; 24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1" />

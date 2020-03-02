@@ -20,5 +20,18 @@ do
   if [ `grep -c 'type="BlackHarmonyPliExtraInfo"' < "$F"` -gt 0 ];then
     sed -i 's/type="BlackHarmonyPliExtraInfo"/type="j00zekModPliExtraInfo"/g' "$F"
   fi
+#klawisze kolorow
+  if [ `grep -c 'buttons/green.png' < "$F"` -gt 0 ];then
+    sed -i 's;buttons/green.png;buttons/key_green.png;g' "$F"
+  fi
+  if [ `grep -c 'buttons/yellow.png' < "$F"` -gt 0 ];then
+    sed -i 's;buttons/yellow.png;buttons/key_yellow.png;g' "$F"
+  fi
+  if [ `grep -c 'buttons/red.png' < "$F"` -gt 0 ];then
+    sed -i 's;buttons/red.png;buttons/key_red.png;g' "$F"
+  fi
+  if [ `grep -c 'buttons/blue.png' < "$F"` -gt 0 ];then
+    sed -i 's;buttons/blue.png;buttons/key_blue.png;g' "$F"
+  fi
 done
 exit 0

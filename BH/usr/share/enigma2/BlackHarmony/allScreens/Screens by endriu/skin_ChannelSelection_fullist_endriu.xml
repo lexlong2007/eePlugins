@@ -14,10 +14,10 @@
 	 
 	<widget name="list" position="55,125" size="1810,840" colorEventProgressbarBorder="border" colorEventProgressbarBorderSelected="border" colorServiceDescription="blue" colorServiceDescriptionSelected="white" enableWrapAround="1" foregroundColorSelected="blue" foregroundColorServiceNotAvail="#777777"  picServiceEventProgressbar="BlackHarmony/gfx/progcl_mario.png" scrollbarWidth="6" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_1808_60.png" serviceInfoFont="Roboto_HD;50" serviceItemHeight="60" serviceNameFont="Roboto_HD;40" serviceNumberFont="Roboto_HD;40"  transparent="1" />
 	
-    <ePixmap alphatest="blend" pixmap="BlackHarmony/buttons/red.png" position="35,1001" size="35,27" />
-    <ePixmap alphatest="blend" pixmap="BlackHarmony/buttons/green.png" position="325,1001" size="35,27" />
-    <ePixmap alphatest="blend" pixmap="BlackHarmony/buttons/yellow.png" position="620,1001" size="35,27" />
-    <ePixmap alphatest="blend" pixmap="BlackHarmony/buttons/blue.png" position="930,1001" size="35,27" />
+    <ePixmap alphatest="blend" pixmap="BlackHarmony/buttons/key_red.png" position="35,1001" size="35,27" />
+    <ePixmap alphatest="blend" pixmap="BlackHarmony/buttons/key_green.png" position="325,1001" size="35,27" />
+    <ePixmap alphatest="blend" pixmap="BlackHarmony/buttons/key_yellow.png" position="620,1001" size="35,27" />
+    <ePixmap alphatest="blend" pixmap="BlackHarmony/buttons/key_blue.png" position="930,1001" size="35,27" />
     <widget backgroundColor="dark_grey" font="Roboto_HD; 24" halign="left" name="key_red" position="80,1000" size="240,27" transparent="1" valign="bottom" zPosition="1" />
     <widget backgroundColor="dark_grey" font="Roboto_HD; 24" halign="left" name="key_green" position="370,1000" size="240,27" transparent="1" zPosition="1" />
     <widget backgroundColor="dark_grey" font="Roboto_HD; 24" halign="left" name="key_yellow" position="670,1000" size="240,27" transparent="1" zPosition="1" />

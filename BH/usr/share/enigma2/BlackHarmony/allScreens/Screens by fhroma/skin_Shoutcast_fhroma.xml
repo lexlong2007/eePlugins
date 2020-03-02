@@ -18,10 +18,10 @@
     <widget name="console" position="1282,1157" zPosition="1" size="560,40" font="Roboto_HD; 18" transparent="1" backgroundColor="black" halign="left" />
 	
 		<widget name="cover" position="1220,150" size="520,620" zPosition="3" alphatest="blend" />
-	<ePixmap pixmap="BlackHarmony/buttons/red.png" position="110,991" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/green.png" position="500,991" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="890,991" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="1280,991" size="35,27" alphatest="blend" />
+	<ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="110,991" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="500,991" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="890,991" size="35,27" alphatest="blend" />
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="1280,991" size="35,27" alphatest="blend" />
     <widget source="key_red" render="Label" position="160,990" size="200,32" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_green" render="Label" position="550,990" size="300,32" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
     <widget source="key_yellow" render="Label" position="940,990" size="200,32" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />

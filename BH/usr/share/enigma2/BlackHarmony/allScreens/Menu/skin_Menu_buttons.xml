@@ -33,9 +33,9 @@
   <widget noWrap="1" backgroundColor="black" font="HD_Thin; 24" render="Label" position="553,7258" size="70,30" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="left" transparent="1" foregroundColor="blue">
     <convert type="BlackHarmonyMSNWeather">temperature_low,day1</convert>
   </widget>
-  <ePixmap pixmap="BlackHarmony/buttons/green.png" position="54,871" size="35,27" alphatest="blend" />
-  <ePixmap pixmap="BlackHarmony/buttons/yellow.png" position="253,871" size="35,27" alphatest="blend" />
-  <ePixmap pixmap="BlackHarmony/buttons/blue.png" position="454,871" size="35,27" alphatest="blend" />
+  <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="54,871" size="35,27" alphatest="blend" />
+  <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="253,871" size="35,27" alphatest="blend" />
+  <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="454,871" size="35,27" alphatest="blend" />
   <widget name="green" position="94,870" size="150,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
   <widget name="yellow" position="294,870" size="150,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
   <widget name="blue" position="494,870" size="150,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
