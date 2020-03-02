@@ -32,6 +32,7 @@ from Components.Sources.StaticText import StaticText
 from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_VALIGN_CENTER
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
+from Screens.VirtualKeyBoard import VirtualKeyBoard
 from skin import parseFont
 from xml.etree.cElementTree import fromstring as cet_fromstring
 from twisted.web.client import getPage
@@ -54,7 +55,7 @@ def initWeatherPluginEntryConfig():
     s.airlylatitude = ConfigText(default = "", visible_width = 100, fixed_size = False)
     s.airlylongitude = ConfigText(default = "", visible_width = 100, fixed_size = False)
 
-    s.Fcity =  ConfigText(default = "www.foreca.com/\c00289496Poland/Warsaw", visible_width = 100, fixed_size = False)
+    s.Fcity =  ConfigText(default = "Poland/Warsaw", visible_width = 100, fixed_size = False)
     config.plugins.WeatherPlugin.Entry.append(s)
     return s
 
@@ -228,11 +229,12 @@ class MSNWeatherEntryConfigScreen(ConfigListScreen, Screen):
             "red": self.keyCancel,
             "blue": self.keyDelete,
             "yellow": self.searchLocation,
-            "cancel": self.keyCancel
+            "cancel": self.keyCancel,
+            "ok": self.keyOK
         }, -2)
 
         self["key_red"] = StaticText(_("Cancel"))
-        self["key_green"] = StaticText(_("OK"))
+        self["key_green"] = StaticText(_("Save"))
         self["key_blue"] = StaticText(_("Delete"))
         self["key_yellow"] = StaticText(_("Search Code"))
 
@@ -251,13 +253,25 @@ class MSNWeatherEntryConfigScreen(ConfigListScreen, Screen):
             getConfigListEntry(_("Geo Latitude"), self.current.geolatitude),
             getConfigListEntry(_("Geo Longitude"), self.current.geolongitude),
             getConfigListEntry(_("thingSpeak meteo channel ID"), self.current.thingSpeakChannelID),
-            getConfigListEntry(_("Airly sensor Latitude"), self.current.airlylatitude),
-            getConfigListEntry(_("Airly sensor Longitude"), self.current.airlylongitude),
-            getConfigListEntry(_("Foreca location"), self.current.Fcity),
+            #getConfigListEntry(_("Airly sensor Latitude"), self.current.airlylatitude),
+            #getConfigListEntry(_("Airly sensor Longitude"), self.current.airlylongitude),
+            getConfigListEntry(_("Location in www.foreca.com/<this part>"), self.current.Fcity),
         ]
 
         ConfigListScreen.__init__(self, cfglist, session)
+
+    def keyOK(self):
+        curIndex = self["config"].getCurrentIndex()
+        currItemCfg = self["config"].list[curIndex][1]
+        currItemNam = self["config"].list[curIndex][0]
+        self.session.openWithCallback(self.keyOKret, VirtualKeyBoard, title= currItemNam, text = currItemCfg.value)
         
+    def keyOKret(self, retVal):
+        if not retVal is None:
+            curIndex = self["config"].getCurrentIndex()
+            currItemCfg = self["config"].list[curIndex][1]
+            currItemCfg.value = retVal
+      
     def searchLocation(self):
         if self.current.city.value != "":
             language = config.osd.language.value.replace("_","-")

@@ -335,5 +335,5 @@ msgstr "Szerokość geograficzna czujnika airly"
 msgid "Airly sensor Longitude"
 msgstr "Długość geograficzna czujnika airly"
 
-msgid "Foreca location"
-msgstr "Lokalizacja w serwisie foreca"
+msgid "Location in www.foreca.com/<this part>"
+msgstr "Lokalizacja w www.foreca.com/<ta część>"

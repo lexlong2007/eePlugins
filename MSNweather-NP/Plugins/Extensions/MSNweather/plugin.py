@@ -201,6 +201,9 @@ class MSNweather(Screen):
                                             self.weatherPluginEntry.city.value,
                                             self.weatherPluginEntry.weatherSearchFullName.value,
                                             self.weatherPluginEntry.thingSpeakChannelID.value,
+                                            self.weatherPluginEntry.Fcity.value,
+                                            self.weatherPluginEntry.airlylatitude.value,
+                                            self.weatherPluginEntry.airlylongitude.value,
                                             self.getWeatherDataCallback,
                                             None) #self.showIcon)
         else:

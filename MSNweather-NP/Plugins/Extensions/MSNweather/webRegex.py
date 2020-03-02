@@ -66,7 +66,7 @@ def decodeHTML(text):
     text = text.replace('&#228;','ä').replace('&#196;','Ä').replace('&#246;','ö').replace('&#214;','Ö').replace('&#252;','ü').replace('&#220;','Ü').replace('&#223;','ß')
     return text
 
-import re
+import re, os
 # instantiate the parser and fed it some HTML
 def getWeather(webContent, DBGnow = False, DBGhourly = False, DBGdaily = False, reportMissingIcons = True):
     webContent = decodeHTML(webContent)
@@ -84,7 +84,7 @@ def getWeather(webContent, DBGnow = False, DBGhourly = False, DBGdaily = False, 
                 retList.append(i)
         return retList
     #now
-    if reportMissingIcons:
+    if reportMissingIcons and os.path.exists("/tmp/MSNWeatherWebRegex.log"):
         open("/tmp/MSNWeatherWebRegex.log", "w").write('')
     nowContent = findInContent(webContent, '<div class="weather-info">(.*?)</div>')
     nowDict = {}
