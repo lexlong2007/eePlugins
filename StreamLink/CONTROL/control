@@ -1,0 +1,10 @@
+Package: enigma2-plugin-extensions--j00zeks-mod-streamlink
+Priority: optional
+Section: utils
+Depends: python-pkgutil python-shell python python-ctypes python-requests python-subprocess python-core python-misc python-futures python-singledispatch python-pycrypto python-iso639 python-iso3166 rtmpdump python-websocket python-isodate python-argparse
+Description: pakiet zawiera wszystko co potrzebne, żeby strumienie w e2 działały z buforowaniem i innymi cudami
+Maintainer: j00zek
+Source: http://github.com/j00zek/eePlugins
+Version: 19.04.10.1229
+Architecture: all
+DestinationPath: /
