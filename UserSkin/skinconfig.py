@@ -317,14 +317,6 @@ class UserSkin_Config(Screen, ConfigListScreen):
                     mylist.append((f, _(friendly_name)))
                     usedNames.append(f)
                     if DBG == True: printDEBUG(f)
-            #second packages
-            if DBG == True: printDEBUG('\t Packages')
-            for f in sorted(listdir(SkinPath + "allBars/"), key=str.lower):
-                if path.isfile(path.join(SkinPath + "allBars/", f)) and f.startswith('bar_') and f.endswith('.pkg') and not f[:-4] in usedNames:
-                    if DBG == True: printDEBUG(f)
-                    friendly_name = f[4:-4].split(".", 1)[0]
-                    friendly_name = _('%s addon') % friendly_name.replace("_", " ")
-                    mylist.append((f, _(friendly_name)))
                 
             if len(mylist) == 0:
                 mylist.append(("default", _("default") ))
@@ -337,6 +329,27 @@ class UserSkin_Config(Screen, ConfigListScreen):
                 else:
                     mylist.append(("default", _("default") ))
                     self.myUserSkin_bar = NoSave(ConfigSelection(default = "default", choices = mylist))
+#### initializing USER BUTTONS ###
+            mylist = []
+            if path.exists(SkinPath + 'skin_user_bar'):
+                if DBG == True: printDEBUG('#### initializing USER BUTTONS ###')
+                usedNames = []
+                #first directories
+                for f in sorted(listdir(SkinPath + "allButtons/"), key=str.lower):
+                    if path.isdir(path.join(SkinPath + "allButtons/", f)) and f.endswith('.buttons'):
+                        friendly_name = f[:-8]
+                        mylist.append((f, _(friendly_name)))
+                        usedNames.append(f)
+                        if DBG == True: printDEBUG(f)
+            if len(mylist) == 0:
+                mylist.append(("default", _("default") ))
+                self.myUserSkin_buttons = NoSave(ConfigSelection(default = "default", choices = mylist))
+            else:
+                if path.exists(SkinPath + 'skin_user_buttons'):
+                    currDefault = path.basename(path.realpath( SkinPath + 'skin_user_buttons'))
+                else:
+                    currDefault = "Standard-mixed.buttons"
+                self.myUserSkin_buttons = NoSave(ConfigSelection(default = currDefault, choices = mylist))
 ##########################################################################################################3
         if path.exists(SkinPath + "mySkin"):
             self.myUserSkin_active = NoSave(ConfigYesNo(default= True))
@@ -403,6 +416,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
     def createConfigList(self):
         if DBG == True: printDEBUG('self.createConfigList() >>>')
         self.set_bar = getConfigListEntry(_("Selector bar style:"), self.myUserSkin_bar)
+        self.set_buttons = getConfigListEntry(_("Selector buttons style:"), self.myUserSkin_buttons)
         self.set_color = getConfigListEntry(_("Colors:"), self.myUserSkin_style)
         self.set_font = getConfigListEntry(_("Font:"), self.myUserSkin_font)
         self.set_myatile = getConfigListEntry(_("Enable skin personalization:"), self.myUserSkin_active)
@@ -411,6 +425,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
         self.list.append(self.set_color)
         self.list.append(self.set_font)
         self.list.append(self.set_bar)
+        self.list.append(self.set_buttons)
         if isSlowCPU() == True:
             self.list.append(getConfigListEntry(_("No JPG previews:"), config.plugins.UserSkin.jpgPreview))
         if self.LCDconfigKey != 'none':
@@ -442,6 +457,8 @@ class UserSkin_Config(Screen, ConfigListScreen):
                 self.setPicture(self.myUserSkin_font.value)
             elif self["config"].getCurrent() == self.set_bar:
                 self.setPicture(self.myUserSkin_bar.value)
+            elif self["config"].getCurrent() == self.set_buttons:
+                self.setPicture(self.myUserSkin_buttons.value)
             elif self["config"].getCurrent() == self.set_myatile:
                 if self.myUserSkin_active.value:
                     self["key_yellow"].setText(_("User skins"))
@@ -456,6 +473,8 @@ class UserSkin_Config(Screen, ConfigListScreen):
             self.setPicture(self.myUserSkin_font.value)
         elif self["config"].getCurrent() == self.set_bar:
             self.setPicture(self.myUserSkin_bar.value)
+        elif self["config"].getCurrent() == self.set_buttons:
+            self.setPicture(self.myUserSkin_buttons.value)
         else:
             self["Picture"].hide()
             
@@ -552,6 +571,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
             printDEBUG('self["config"].isChanged()')
             printDEBUG("self.myUserSkin_style.value=" + self.myUserSkin_style.value)
             printDEBUG("self.myUserSkin_bar.value=" + self.myUserSkin_bar.value)
+            printDEBUG("self.myUserSkin_buttons.value=" + self.myUserSkin_buttons.value)
             for x in self["config"].list:
                 x[1].save()
             configfile.save()
@@ -575,19 +595,27 @@ class UserSkin_Config(Screen, ConfigListScreen):
             #### USER BARS
             if path.exists(SkinPath + 'skin_user_bar') or path.islink(SkinPath + 'skin_user_bar'):
                 remove(SkinPath + 'skin_user_bar')
-            if self.myUserSkin_bar.value.endswith('.pkg'):
-                with open(SkinPath + "allBars/" + self.myUserSkin_bar.value) as fpkg:
-                    package = fpkg.readline().strip()
-                    fpkg.close()
-                system('opkg install %s ; sync' % package )
-            if path.exists(SkinPath + "allBars/" + self.myUserSkin_bar.value.replace('.pkg','')):
-                symlink(SkinPath + "allBars/" + self.myUserSkin_bar.value.replace('.pkg','') , 'skin_user_bar')
+            if path.exists(SkinPath + "allBars/" + self.myUserSkin_bar.value):
+                symlink(SkinPath + "allBars/" + self.myUserSkin_bar.value , 'skin_user_bar')
                 sourcePath = path.join(SkinPath , 'skin_user_bar')
-                destFolder = self.myUserSkin_bar.value.replace('.pkg','').split(".", 1)[1]
+                destFolder = self.myUserSkin_bar.value.split(".", 1)[1]
                 destPath = path.join(SkinPath , destFolder)
                 printDEBUG("cp -fr %s %s" % (sourcePath,destPath))
                 self.UserSkinToolSet.ClearMemory()
                 system("cp -fr %s/* %s/" %(sourcePath,destPath)) #for safety, nicely manage overwrite ;)
+            
+            #### BUTTONS >  self.myUserSkin_buttons.value
+            if path.exists(SkinPath + 'skin_user_buttons') or path.islink(SkinPath + 'skin_user_buttons'):
+                remove(SkinPath + 'skin_user_buttons')
+            if path.exists(SkinPath + "allButtons/" + self.myUserSkin_buttons.value):
+                symlink(SkinPath + "allButtons/" + self.myUserSkin_buttons.value , 'skin_user_buttons')
+                sourcePath = path.join(SkinPath , 'skin_user_buttons')
+                destFolder = self.myUserSkin_buttons.value.split(".", 1)[1]
+                destPath = path.join(SkinPath , destFolder)
+                printDEBUG("cp -fr %s %s" % (sourcePath,destPath))
+                self.UserSkinToolSet.ClearMemory()
+                system("cp -fr %s/* %s/" %(sourcePath,destPath)) #for safety, nicely manage overwrite ;)
+            
             #### SCREENS
             if self.myUserSkin_active.value:
                 if not path.exists("mySkin") and path.exists("UserSkin_Selections"):

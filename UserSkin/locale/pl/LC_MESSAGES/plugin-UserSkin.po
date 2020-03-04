@@ -595,3 +595,24 @@ msgstr "złota"
 
 msgid "%s addon"
 msgstr "Dodatek %s"
+
+msgid "Selector buttons style:"
+msgstr "Styl ikon klawiszy:"
+
+msgid "Circle"
+msgstr "Okrągłe"
+
+msgid "Donut"
+msgstr "Okręgi"
+
+msgid "Oval"
+msgstr "Owalne"
+
+msgid "Quad"
+msgstr "Kwadratowe"
+
+msgid "Rectangle"
+msgstr "Prostokątne"
+
+msgid "Standard-mixed"
+msgstr "Standardowe-wymieszane"

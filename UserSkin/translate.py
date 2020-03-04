@@ -21,7 +21,7 @@ def translateName(name):
                '_no_','Screens by', 'BigFonts',
                'animated_zzpicon','animated_picon', 'animated']
     for word in wordsList:
-        name = re.sub(word , _(word), name, flags=re.I)
+        name = re.sub(word , gettext.dgettext(PluginLanguageDomain, word), name, flags=re.I)
     name = re.sub('(\_|\-|\.|\+)',' ', name, flags=re.I) #cleaning
     name = re.sub('(  [ ]*)',' ', name, flags=re.I) #merge multiple (2+) spaces into one
     return name
