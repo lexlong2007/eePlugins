@@ -1,2 +1,27 @@
 #!/bin/sh
+ln -sf /usr/sbin/streamlinksrv /etc/init.d/streamlinksrv
+ln -sf /usr/sbin/streamlinksrv /etc/rc3.d/S50streamlinksrv
+ln -sf /usr/sbin/streamlinksrv /etc/rc4.d/S50streamlinksrv
+/etc/init.d/streamlinksrv start
+if [ -e /var/run/streamlink.pid ];then
+  if `grep -q 'osd.language=pl_PL' </etc/enigma2/settings`; then
+    echo ""
+    echo "streamlinksrv zainstalowany i uruchomiony na porcie 8088"
+    echo ""
+  else
+    echo ""
+    echo "streamlinksrv instalolled and started on port 8088"
+    echo ""
+  fi 
+else
+  if `grep -q 'osd.language=pl_PL' </etc/enigma2/settings`; then
+    echo ""
+    echo "BŁĄD uruchamiania streamlinksrv !!!"
+    echo ""
+  else
+    echo ""
+    echo "ERROR starting streamlinksrv !!!"
+    echo ""
+  fi 
+fi
 exit 0

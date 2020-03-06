@@ -30,7 +30,7 @@ from streamlink.stream.ffmpegmux import MuxedStream
 from streamlink import (StreamlinkError, PluginError, NoStreamsError, NoPluginError, StreamError)
 from streamlink.exceptions import FatalPluginError
 from streamlink import __version__ as streamlink_version
-from streamlink import __version_date__ as streamlink_version_date
+from streamlink import __version_date__ as streamlink_version_date #wymaga dodania w __init__.py linia 14: __version_date__ = get_versions()['date']
 import streamlink.logger as logger
 from streamlink.plugin import api
 from streamlink.cache import Cache
