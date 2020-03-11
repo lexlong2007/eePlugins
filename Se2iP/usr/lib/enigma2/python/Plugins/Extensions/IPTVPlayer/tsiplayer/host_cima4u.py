@@ -178,7 +178,7 @@ class TSIPHost(TSCBaseHostClass):
 	def get_links(self,cItem):
 		urlTab = []	
 		URL=cItem['url']
-		URL = urllib.quote(URL).replace('%3A//','://')
+		#URL = urllib.quote(URL).replace('%3A//','://')
 		sts, data = self.getPage(URL)
 		if sts:
 			Trailer_els = re.findall('class="modalTrailer".*?<iframe.*?src="(.*?)"', data, re.S)

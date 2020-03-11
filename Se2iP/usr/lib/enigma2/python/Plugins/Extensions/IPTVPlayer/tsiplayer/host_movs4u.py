@@ -290,12 +290,30 @@ class TSIPHost(TSCBaseHostClass):
 				if 'movs' in srv.lower(): local='local'
 				srv=srv.lower().replace('openload.com','openload.co')
 				tag = ''
-				if '/player_c.php'  in data_url: tag  = ' [Aflamyz M3U8 C]'
-				if '/player_y.php'  in data_url: tag  = ' [Aflamyz M3U8 Y]'				
-				if '/player_ok.php' in data_url: tag  = ' [Aflamyz MP4]'
-				if '/player_j.php'  in data_url: tag  = ' [Arabramadan MP4]'
-				
-				
+				if '/player_c.php'  in data_url:
+					tag  = ' [Aflamyz M3U8 (Mail.Ru)]'
+					local='local'
+				if '/main_player1.php'  in data_url:
+					tag  = ' [Arabramadan MAIN]'
+					local='local'	
+				if '/main_player.php'  in data_url:
+					tag  = ' [M3U8 MAIN (GOOGLE)]'
+					local='local'					
+				if '/player_y.php'  in data_url:
+					tag  = ' [Aflamyz M3U8 (YANDEX)]'
+					local='local'
+				if '/player_ok.php' in data_url:
+					tag  = ' [Aflamyz MP4 (OK.RU)]'
+					local='local'
+				if '/player_m.php' in data_url:
+					tag  = ' [Aflamyz MP4 (MEGA)]'
+					local='local'
+				if '/player_j.php'  in data_url:
+					tag  = ' [Arabramadan MP4 (GOOGLE)]'
+					local='local'
+				if '/player_e1.php'  in data_url:
+					tag  = ' [Gdrive] >> Only gstplayer OR buffering Mode <<'
+					local='local'
 				urlTab.append({'name':'|'+titre1+'| '+srv+tag, 'url':'hst#tshost#'+data_url+'|'+cItem['url'], 'need_resolve':1,'type':local})		
 		return urlTab
 		
@@ -303,12 +321,7 @@ class TSIPHost(TSCBaseHostClass):
 	def extractLink(self,videoUrl,refer):
 		url_out='None'
 		printDBG('a1')
-		if 'gdriveplayer' in videoUrl:
-			printDBG('a2')
-			_data3 = re.findall('link=(.*?)&',videoUrl, re.S)
-			if _data3: 
-				url_out = _data3[0]
-		elif 'juicy.php?url=' in videoUrl:
+		if 'juicy.php?url=' in videoUrl:
 			printDBG('a3')
 			_data3 = re.findall('url=(.*)',videoUrl, re.S)
 			if _data3: 
@@ -370,7 +383,6 @@ class TSIPHost(TSCBaseHostClass):
 					URL1=strwithmeta(videoUrl, {'Referer':url_ref})
 					urlTab.append((URL1,'3'))
 					break
-					
 				elif 'arabramadan' in videoUrl:
 					params = dict(self.defaultParams)
 					params['header']['Referer'] = oldURL
@@ -388,6 +400,64 @@ class TSIPHost(TSCBaseHostClass):
 								uurl = strwithmeta(ttitre+'|'+uurl,meta_)
 								urlTab.append((uurl,'4'))
 					break	
+				elif 'gdriveplayer' in videoUrl:
+					params = dict(self.defaultParams)
+					params['header']['Referer'] = oldURL
+					sts, data = self.getPage(videoUrl,params)
+					if sts:
+						result = re.findall('(eval\(function\(p.*?)</script>',data, re.S)	
+						if result:
+							data = result[0].strip()
+							printDBG('eval trouver='+result[0].strip()+'#')
+							data0 = cPacker().unpack(result[0].strip())
+							printDBG('data0='+data0+'#')
+							result = re.findall('data=.*?(\{.*?}).*?null.*?[\'"](.*?)[\'"]',data0, re.S)
+							if result:
+								code_ = json_loads(result[0][0])
+								printDBG('Code='+str(code_))
+								data1 = result[0][1].strip().replace('\\','')									
+								printDBG('data1='+data1)
+								lst = re.compile("[A-Za-z]{1,}").split(data1)
+								printDBG('lst='+str(lst))
+								script = ''
+								for elm in lst:
+									script = script+chr(int(elm))
+								printDBG('script='+script)
+								result = re.findall('pass.*?[\'"](.*?)[\'"]',script, re.S)
+								if result:
+									pass_ = result[0]								
+									printDBG('pass_='+pass_)
+									ciphertext = base64.b64decode(code_['ct'])
+									iv = unhexlify(code_['iv'])
+									salt = unhexlify(code_['s'])
+									b = pass_
+									decrypted = cryptoJS_AES_decrypt(ciphertext, b, salt)
+									printDBG('decrypted='+decrypted)
+									data2 = decrypted[1:-1]
+									#data2 = decrypted.replace('"','').strip()
+									printDBG('data2='+data2)									
+									data2 = cPacker().unpack(data2)
+									printDBG('data2='+data2)								
+									url_list = re.findall('sources:(\[.*?\])',data2, re.S)	
+									#for data3 in url_list:
+									data3= url_list[0]
+									data3 = data3.replace('\\','').replace('"+countcheck+"','')
+									printDBG('data3='+data3+'#')
+									src_lst = json_loads(data3)
+									printDBG('src_lst='+str(src_lst)+'#')
+									for elm in src_lst:
+										_url   = elm['file']
+										_label = elm.get('label','Google')
+										if 'm3u8' in _url:
+											urlTab.append((_url,'3'))	
+										else:
+											urlTab.append(('Google ('+_label+')|'+_url,'4'))															
+							
+								
+								
+
+					break
+				 
 				elif 'aflamyz' in videoUrl:
 					params = dict(self.defaultParams)
 					params['header']['Referer'] = oldURL
@@ -421,7 +491,7 @@ class TSIPHost(TSCBaseHostClass):
 											urlTab.append((_url,'3'))	
 										else:
 											urlTab.append(('Aflamyz ('+_label+')|'+_url,'4'))										
-							break
+					break
 
 				elif (self.up.checkHostSupport(videoUrl) == 1):	
 					printDBG('3')

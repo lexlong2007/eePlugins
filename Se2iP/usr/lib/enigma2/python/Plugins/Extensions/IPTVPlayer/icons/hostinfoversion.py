@@ -133,7 +133,7 @@ class IPTVHost(IHost):
     ###################################################
 
 class Host:
-    infoversion = "2020.02.12"
+    infoversion = "2020.03.01"
     inforemote  = "0.0.0"
     currList = []
     SEARCH_proc = ''
@@ -2037,42 +2037,44 @@ class Host:
 
         if 'hdontap' == name:
             printDBG( 'Host listsItems begin name='+name )
+            self.MAIN_URL = 'https://hdontap.com' 
             COOKIEFILE = os_path.join(GetCookieDir(), 'hdontap.cookie')
             self.defaultParams = {'use_cookie': True, 'load_cookie': True, 'save_cookie': True, 'cookiefile': COOKIEFILE}
             sts, data = self.getPage(url, 'hdontap.cookie', 'hdontap.com', self.defaultParams)
             if not sts: return ''
             printDBG( 'Host listsItems data1: '+str(data) )
-            data = self.cm.ph.getDataBeetwenMarkers(data, '<div id="secondary_nav">', '</div>', False)[1]
-            data = self.cm.ph.getAllItemsBeetwenMarkers(data, '<li', '</li>')
+            #data = self.cm.ph.getDataBeetwenMarkers(data, '<div id="secondary_nav">', '</div>', False)[1]
+            data = self.cm.ph.getAllItemsBeetwenMarkers(data, '<option value=', '</option>')
             for item in data:
-                Url = self.cm.ph.getSearchGroups(item, '''href=['"]([^"^']+?)['"]''', 1, True)[0] 
+                Url = self.cm.ph.getSearchGroups(item, '''value=['"]([^"^']+?)['"]''', 1, True)[0].replace(r'.','')
                 Title = self._cleanHtmlStr(item) 
                 Image = self.cm.ph.getSearchGroups(item, '''src=['"]([^"^']+?)['"]''', 1, True)[0] 
                 if Url.startswith('//'): Url = 'http:' + Url
                 if Url.startswith('/'): Url = 'http://hdontap.com' + Url
                 if Image.startswith('//'): Image = 'http:' + Image
                 if Image.startswith('/'): Image = 'http://hdontap.com' + Image
-                valTab.append(CDisplayListItem(Title, Url.split('/')[-1], CDisplayListItem.TYPE_CATEGORY, [Url], 'hdontap-clips', '', None))
+                valTab.append(CDisplayListItem(Title, Title, CDisplayListItem.TYPE_CATEGORY, [Url], 'hdontap-clips', '', None))
             return valTab
         if 'hdontap-clips' == name:
             printDBG( 'Host listsItems begin name='+name )
             COOKIEFILE = os_path.join(GetCookieDir(), 'hdontap.cookie')
             self.defaultParams = {'use_cookie': True, 'load_cookie': True, 'save_cookie': True, 'cookiefile': COOKIEFILE}
-            sts, data = self.getPage(url, 'hdontap.cookie', 'hdontap.com', self.defaultParams)
+            sts, data = self.getPage(self.MAIN_URL, 'hdontap.cookie', 'hdontap.com', self.defaultParams)
             if not sts: return ''
             printDBG( 'Host listsItems data1: '+str(data) )
             next = self.cm.ph.getDataBeetwenMarkers(data, 'pagination', 'NEXT', False)[1]
-            data = self.cm.ph.getAllItemsBeetwenMarkers(data, '<div class="video_stream">', '</p>')
+            data = self.cm.ph.getAllItemsBeetwenMarkers(data, 'BEGIN CAM CARD', 'END CAM CARD')
             for item in data:
                 Url = self.cm.ph.getSearchGroups(item, '''href=['"]([^"^']+?)['"]''', 1, True)[0] 
-                Title = self._cleanHtmlStr(item) 
+                Title = self.cm.ph.getSearchGroups(item, '''alt=['"]([^"^']+?)['"]''', 1, True)[0] 
                 Title2 = self._cleanHtmlStr(item).split('  ')[0].strip()
                 Image = self.cm.ph.getSearchGroups(item, '''src=['"]([^"^']+?)['"]''', 1, True)[0] 
                 if Url.startswith('//'): Url = 'http:' + Url
                 if Url.startswith('/'): Url = 'http://hdontap.com' + Url
                 if Image.startswith('//'): Image = 'http:' + Image
                 if Image.startswith('/'): Image = 'http://hdontap.com' + Image
-                valTab.append(CDisplayListItem(decodeHtml(Title2), decodeHtml(Title),  CDisplayListItem.TYPE_VIDEO, [CUrlItem('', Url, 1)], 0, Image, None))
+                if url in item:
+                    valTab.append(CDisplayListItem(decodeHtml(Title), decodeHtml(Title),  CDisplayListItem.TYPE_VIDEO, [CUrlItem('', Url, 1)], 0, Image, None))
             if next:
                 link = re.findall('href="(.*?)"', next, re.S|re.I)
                 if link:
@@ -2080,6 +2082,7 @@ class Host:
                     if next.startswith('/'): next = 'https://hdontap.com' + next
                     valTab.append(CDisplayListItem('Next', next, CDisplayListItem.TYPE_CATEGORY, [next], name, '', None))
             return valTab
+
         if 'darmowa' == name:
             valTab.insert(0,CDisplayListItem("--- Pastebin --- Przypadkowe listy m3u, wyszukane w google na stronie pastebin.com","Przypadkowe listy m3u, wyszukane w google na stronie pastebin.com",     CDisplayListItem.TYPE_CATEGORY,['https://pastebin.com'],'pastebin',    '',None))
             valTab.insert(0,CDisplayListItem("--- Zobacz.ws ---","Zobacz.ws",     CDisplayListItem.TYPE_CATEGORY,['http://zobacz.ws'],'zobacz_ws',    '',None))
@@ -2325,7 +2328,7 @@ class Host:
             if not sts: return valTab
             printDBG( 'Host listsItems data: '+data )
             next = self.cm.ph.getDataBeetwenMarkers(data, 'pagination', 'Next Page', False)[1]
-            data = data.split('<div class="video-thumb">')
+            data = data.split('data-id=')
             del data[0]
             for item in data:
                 Image  = self.cm.ph.getSearchGroups(item, 'src="([^"]+?)"')[0]
@@ -5152,6 +5155,7 @@ def decodeHtml(text):
 	text = text.replace('&#8222;', '"')
 	text = text.replace('&#8211;', '-')
 	text = text.replace('&#039;', "'")
+	text = text.replace('&#8217;', "'")
 
 	return text	
 def decodeNat1(text):

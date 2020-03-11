@@ -226,13 +226,16 @@ class urlparser:
 						'mp4upload.com'   : self.pp.parserUNI01,
 						'supervideo.tv'   : self.pp.parserUNI01,
 						'vudeo.net'	      : self.pp.parserUNI01,	
-						'streamwire.net'  : self.pp.parserUNI01,						
+						'streamwire.net'  : self.pp.parserUNI01,
+						'vidshare.tv'     : self.pp.parserUNI01,
+						'mystream.to'     : self.pp.parserVSTREAM,
+						'vidbm.com'       : self.pp.parserVSTREAM,
+						'vidbom.com'      : self.pp.parserVSTREAM,						
 						'deepmic.com'     : self.pp.parserDEEPMIC,#self.pp.parserVIDOZANET,							
 						'mixdrop.to'      : self.pp.parserMIXDROP,	
 						'mixdrop.co'      : self.pp.parserMIXDROP,								
 						'jawcloud.co'     : self.pp.parserJAWCLOUDCO,						
 						'vidtodo.com'     : self.pp.parserVIDTODOCOM,						
-						'mystream.to'     : self.pp.parserVSTREAM,
 						'tune.pk'         : self.pp.parseTUNEPK,
 						'dailymotion.com' : self.pp.parserDAILYMOTION,
 						'youtube.com'     : self.pp.parserYOUTUBE, 
@@ -246,7 +249,8 @@ class urlparser:
 						'google.com'      : self.pp.parserGOOGLE, 
 						'fembed.com'      : self.pp.parserXSTREAMCDNCOM, 
 						'fembed.net'	  : self.pp.parserFEURL, 						
-						'feurl.com'	      : self.pp.parserFEURL, 					
+						'feurl.com'	      : self.pp.parserFEURL, 
+						'playvid.pw'	  : self.pp.parserFEURL, 						
 						#					
 						#'hqq.tv'          : self.pp.parserHQQ,
 						'verystream.com'  : self.pp.parserVERYSTREAM,
@@ -283,9 +287,9 @@ class urlparser:
 		return
 
 	def checkHostNotSupportbyname(self, name):
-		nothostMap_404 = ['vidbom.com','streamango.com','videoz.me','yourupload.com','openload.co','openload.pw','oload.tv','oload.stream','oload.site','oload.download','oload.life','oload.biz']
+		nothostMap_404 = ['streamango.com','videoz.me','yourupload.com','openload.co','openload.pw','oload.tv','oload.stream','oload.site','oload.download','oload.life','oload.biz']
 		nothostMap_not_found = ['file-up.org',]
-		nothostMap_not_work = ['jetload.net','hqq.tv','waaw.tv','videomega.co','vidbm.com','vidshare.tv','vidbm.com','vev.red','vev.io','hqq.watch','hqq.tv','netu','videoz.me','file-up.org','deepmic.com']
+		nothostMap_not_work = ['jetload.net','hqq.tv','waaw.tv','videomega.co','vidshare.tv','vev.red','vev.io','hqq.watch','hqq.tv','netu','videoz.me','file-up.org','deepmic.com']
 		nothostMap = nothostMap_404 + nothostMap_not_found + nothostMap_not_work
 		if '|' in name: name=name.split('|')[-1].strip() 
 		name=name.lower().replace('embed.','').replace('www.','').replace(' ','')
@@ -440,7 +444,37 @@ class pageParser(CaptchaHelper):
 		sts, data = self.cm.getPageCFProtection(baseUrl, addParams, post_data)
 		return sts, data
 
+	def getHostName(self, url, nameOnly = False):
+		hostName = strwithmeta(url).meta.get('host_name', '')
+		if not hostName:
+			match = re.search('https?://(?:www.)?(.+?)/', url)
+			if match:
+				hostName = match.group(1)
+				if (nameOnly):
+					n = hostName.split('.')
+					try: hostName = n[-2]
+					except Exception: printExc()
+			hostName = hostName.lower()
+		return hostName
 
+	def parserVSTREAM(self, baseUrl):
+		printDBG("parserVSTREAM baseUrl[%r]" % baseUrl)
+		videoTab = []
+		hst_name = self.getHostName(baseUrl, True)
+		printDBG("Host Name="+hst_name)
+		exec "from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.vstream.hosters." + hst_name + " import cHoster"
+		oHoster = cHoster()
+		oHoster.setUrl(baseUrl)
+		aLink = oHoster.getMediaLink()
+		printDBG('aLink='+str(aLink))
+		if (aLink[0] == True):
+			URL = aLink[1]
+			if '|User-Agent=' in URL:
+				URL,UA=aLink[1].split('|User-Agent=',1)
+			URL = strwithmeta(URL, {'User-Agent':UA})
+			printDBG('URL='+URL)
+			videoTab.append({'url':URL , 'name': hst_name})		
+		return videoTab
 
 	def parserXFILESHARE(self, baseUrl):
 		printDBG("parserVIDSHARETV baseUrl[%s]" % baseUrl)
@@ -2397,8 +2431,9 @@ class pageParser(CaptchaHelper):
 		return self.parserUNI01(url)
 
 	def parserFEURL(self, baseUrl):
+		
 		printDBG("parserFEURL baseUrl[%r]" % baseUrl)
-		url = baseUrl.replace('/v/','/api/source/')
+		url = baseUrl.replace('/v/','/api/source/').replace('playvid.pw','feurl.com')
 		HTTP_HEADER= {'User-Agent':"Mozilla/5.0"}
 		urlParams = {'header': HTTP_HEADER}
 		post_data = {'r':'','d':'feurl.com'}
@@ -2417,9 +2452,4 @@ class pageParser(CaptchaHelper):
 		videoTab = []
 		videoTab.append({'name':'MP4', 'url':baseUrl.replace('embed.php','videos.php')})
 		return videoTab	
-
-		
-	def parserVSTREAM(self, baseUrl):
-		printDBG("parserVSTREAM baseUrl[%r]" % baseUrl)
-		videoTab = []
-		return videoTab		
+	
