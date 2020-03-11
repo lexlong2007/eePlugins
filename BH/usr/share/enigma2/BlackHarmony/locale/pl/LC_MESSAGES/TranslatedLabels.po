@@ -457,3 +457,27 @@ msgstr "Widżety pogody"
 
 msgid "WebCam Widgets"
 msgstr "Widżety kamer internetowych"
+
+msgid "Now:"
+msgstr "Teraz:"
+
+msgid "Next:"
+msgstr "Potem:"
+
+msgid "Sunrise:"
+msgstr "Wschód:"
+
+msgid "Sunset:"
+msgstr "Zachód:"
+
+msgid "Air pressure:"
+msgstr "ciśnienie atmosferyczne:"
+
+msgid "Current weather:"
+msgstr "Pogoda teraz:"
+
+msgid "Feeling temp."
+msgstr "temp.odczuwalna"
+
+msgid "Name-day:"
+msgstr "Imieniny:"

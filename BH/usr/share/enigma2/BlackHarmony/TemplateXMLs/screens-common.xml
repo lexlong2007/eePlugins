@@ -319,7 +319,9 @@
   </screen>
   <screen name="SecondInfoBar" backgroundColor="transparent" flags="wfNoBorder" position="0,52" size="1920,1080">
     <ePixmap position="10,0" zPosition="-2" size="1920,699" pixmap="BlackHarmony/bg_design/secondinfobar.png"/>
-    <eLabel backgroundColor="black" font="HD_Thin; 27" foregroundColor="green" position="75,55" size="90,40" text="Teraz:" transparent="1"/>
+    <widget source="session.CurrentService" render="j00zekLabel" backgroundColor="black" font="HD_Thin; 27" foregroundColor="green" position="75,55" size="90,40" transparent="1">
+      <convert type="j00zekTranslator">Now:</convert>
+    </widget>
     <widget backgroundColor="black" font="HD_Thin; 27" foregroundColor="white" halign="right" position="165,55" render="Label" size="90,40" source="session.Event_Now" transparent="1">
       <convert type="EventTime">StartTime</convert>
       <convert type="ClockToText">Default</convert>
@@ -338,7 +340,9 @@
     <widget backgroundColor="black" font="Roboto_HD; 28" foregroundColor="white" position="75,190" render="Label" size="850,360" source="session.Event_Now" transparent="1">
       <convert type="j00zekModEventName">ExtendedDescription</convert>
     </widget>
-    <eLabel backgroundColor="black" font="HD_Thin; 27" foregroundColor="blue" position="997,55" size="100,40" text="Potem:" transparent="1"/>
+    <widget source="session.CurrentService" render="j00zekLabel" backgroundColor="black" font="HD_Thin; 27" foregroundColor="blue" position="997,55" size="100,40" transparent="1">
+      <convert type="j00zekTranslator">Next:</convert>
+    </widget>
     <widget backgroundColor="black" font="HD_Thin; 27" halign="right" position="1097,55" render="Label" size="90,40" source="session.Event_Next" transparent="1">
       <convert type="EventTime">StartTime</convert>
       <convert type="ClockToText">Default</convert>
@@ -1537,10 +1541,14 @@
     </widget>
     <eLabel text="Positioner setup..." position="860,25" size="320,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget name="list" position="65,145" size="1095,250" itemHeight="35" selectionPixmap="BlackHarmony/menu/sel_1095_35.png" enableWrapAround="1" backgroundColor="black" transparent="1"/>
-    <widget name="red" position="110,440" size="250,100" backgroundColor="red" halign="center" valign="center" font="Regular;21"/>
-    <widget name="green" position="360,440" size="250,100" backgroundColor="green" halign="center" valign="center" font="Regular;21"/>
-    <widget name="yellow" position="610,440" size="250,100" backgroundColor="yellow" halign="center" valign="center" font="Regular;21"/>
-    <widget name="blue" position="860,440" size="250,100" backgroundColor="blue" halign="center" valign="center" font="Regular;21"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="41,850" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="328,850" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="615,850" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="902,850" size="35,27" alphatest="blend"/>
+    <widget name="key_red" position="91,849" size="220,27" zPosition="1" font="Roboto_HD; 22" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <widget name="key_green" position="378,849" size="220,27" zPosition="1" font="Roboto_HD; 22" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <widget name="key_yellow" position="665,849" size="220,27" zPosition="1" font="Roboto_HD; 22" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <widget name="key_blue" position="952,849" size="220,27" zPosition="1" font="Roboto_HD; 22" halign="left" backgroundColor="dark_grey" transparent="1"/>
     <widget name="snr_db" position="270,585" size="250,30" halign="center" valign="center" font="Roboto_HD; 24" backgroundColor="black" transparent="1"/>
     <eLabel text="SNR:" position="170,635" size="80,30" font="Roboto_HD; 26" backgroundColor="black" transparent="1" foregroundColor="light_yellow"/>
     <widget name="snr_bar" position="270,635" size="250,30" borderWidth="1" transparent="1"/>
@@ -1768,10 +1776,10 @@
     <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="328,850" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="615,850" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="902,850" size="35,27" alphatest="blend"/>
-    <widget name="red" position="91,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
-    <widget name="green" position="378,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
-    <widget name="yellow" position="665,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
-    <widget name="blue" position="952,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <widget name="key_red" position="91,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <widget name="key_green" position="378,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <widget name="key_yellow" position="665,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <widget name="key_blue" position="952,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
   </screen>
   <screen name="Setup" position="345,93" size="1232,908" title="Setup" flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png"/>
@@ -10276,70 +10284,6 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2,orgpos.y()))
     <ePixmap position="1100,678" size="60,30" zPosition="10" pixmap="BlackHarmony/buttons/key_ok.png" transparent="1" alphatest="on" />
     <ePixmap position="1180,678" size="60,30" zPosition="10" pixmap="BlackHarmony/buttons/key_exit.png" transparent="1" alphatest="on" />
   </screen>
-  <screen name="IPTVPlayerWidget" position="center,center" size="1522,1022" title=" " flags="wfNoBorder" backgroundColor="transparent">
-    <ePixmap position="0,0" zPosition="-10" size="1522,1022" pixmap="BlackHarmony/bg_design/wizard.png" />
-    <widget source="global.CurrentTime" render="Label" position="44,50" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
-      <convert type="ClockToText">Default</convert>
-    </widget>
-    <widget source="global.CurrentTime" render="Label" position="129,50" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
-      <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
-    </widget>
-    <widget source="Title" render="Label" position="830,50" size="620,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1" />
-    <widget name="headertext" position="70,170" zPosition="1" size="1100,40" font="Roboto_HD; 32" transparent="1" backgroundColor="background" foregroundColor="light_yellow" />
-    <widget name="statustext" position="415,430" zPosition="1" size="1020,90" font="Regular;20" halign="center" valign="center" transparent="1" backgroundColor="background" />
-    <widget name="list" position="415,230" zPosition="2" size="1020,480" font="Roboto_HD; 27" itemHeight="40" selectionPixmap="BlackHarmony/menu/sel_1095_40.png" enableWrapAround="1" scrollbarMode="showOnDemand" transparent="1" />
-    <widget name="console" position="415,735" zPosition="1" size="1020,170" font="Roboto_HD; 24" transparent="1" backgroundColor="background" foregroundColor="light_yellow" valign="center" halign="center" />
-    <widget name="cover" zPosition="2" position="75,339" size="315,425" alphatest="blend" backgroundColor="background" />
-    <widget name="playerlogo" zPosition="4" position="1315,170" size="120,40" alphatest="blend" />
-    <widget name="sequencer" position="61,163" zPosition="6" size="1383,751" font="Regular;160" halign="center" valign="center" transparent="1" backgroundColor="background" />
-    <widget name="spinner" zPosition="2" position="876,493" size="16,16" transparent="1" alphatest="blend" />
-    <widget name="spinner_1" zPosition="1" position="892,493" size="16,16" transparent="1" alphatest="blend" />
-    <widget name="spinner_2" zPosition="1" position="908,493" size="16,16" transparent="1" alphatest="blend" />
-    <widget name="spinner_3" zPosition="1" position="924,493" size="16,16" transparent="1" alphatest="blend" />
-    <widget name="spinner_4" zPosition="1" position="940,493" size="16,16" transparent="1" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="89,953" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="432,953" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="778,954" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="1143,954" size="35,27" alphatest="blend" />
-    <widget source="key_red" render="Label" position="139,953" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
-    <widget source="key_green" render="Label" position="483,953" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
-    <widget source="key_yellow" render="Label" position="828,954" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
-    <widget source="key_blue" render="Label" position="1194,953" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
-  </screen>
-  <screen name="IPTVSubDownloaderWidget" position="center,center" size="1090,580" title="IPTV Player v%s">
-    <ePixmap position="5,545" zPosition="4" size="35,27" pixmap="BlackHarmony/buttons/key_red.png" transparent="1" alphatest="on" />
-    <widget render="Label" source="key_red" position="59,545" size="210,27" zPosition="5" backgroundColor="black" font="Roboto_HD; 24" halign="left" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-    <widget name="headertext" position="5,15" zPosition="1" size="1080,23" font="Regular;20" transparent="1" backgroundColor="black" />
-    <widget name="statustext" position="5,100" zPosition="1" size="1080,180" font="Regular;20" halign="center" valign="center" transparent="1" backgroundColor="black" />
-    <widget name="list" position="5,60" zPosition="2" size="1080,280" itemHeight="40" font="Roboto_HD; 27" selectionPixmap="BlackHarmony/menu/sel_1130_40.png" enableWrapAround="1" scrollbarMode="showOnDemand" transparent="1" />
-    <widget name="console" position="5,380" zPosition="1" size="1080,140" font="Regular;20" transparent="1" backgroundColor="black" />
-    <ePixmap zPosition="4" position="5,355" size="1080,5" pixmap="BlackHarmony/gfx/line.png" transparent="1" />
-    <widget name="spinner" zPosition="2" position="508,200" size="16,16" transparent="1" alphatest="blend" />
-    <widget name="spinner_1" zPosition="1" position="508,200" size="16,16" transparent="1" alphatest="blend" />
-    <widget name="spinner_2" zPosition="1" position="524,200" size="16,16" transparent="1" alphatest="blend" />
-    <widget name="spinner_3" zPosition="1" position="540,200" size="16,16" transparent="1" alphatest="blend" />
-    <widget name="spinner_4" zPosition="1" position="556,200" size="16,16" transparent="1" alphatest="blend" />
-  </screen>
-  <screen name="IPTVChoiceBoxWidget" position="center,center" title="Wybierz scie¿kê napisów" size="1300,500">
-    <widget name="title" position="10,10" zPosition="1" size="1280,30" font="Regular;20" transparent="1" backgroundColor="black" />
-    <widget name="list" position="10,50" zPosition="2" size="1280,430" scrollbarMode="showOnDemand" transparent="1" itemHeight="40" font="Roboto_HD; 27" selectionPixmap="BlackHarmony/menu/sel_1345_40.png" enableWrapAround="1" />
-  </screen>
-  <screen name="IPTVDirectorySelectorWidget" position="center,center" size="1300,550" title="Wybierz plik">
-    <widget name="curr_dir" position="10,10" zPosition="2" size="800,35" valign="center" halign="left" font="Regular;28" transparent="1" foregroundColor="white" />
-    <widget name="list" position="10,55" zPosition="1" size="1280,425" itemHeight="40" font="Roboto_HD; 27" selectionPixmap="BlackHarmony/menu/sel_1345_40.png" transparent="1" scrollbarMode="showOnDemand" enableWrapAround="1" />
-    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="10,515" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="270,515" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="535,515" size="35,27" alphatest="blend" />
-    <widget name="key_red" position="50,515" zPosition="2" size="200,27" font="Roboto_HD; 24" halign="left" transparent="1" foregroundColor="red" />
-    <widget name="key_green" position="315,515" zPosition="2" size="200,27" font="Roboto_HD; 24" halign="left" transparent="1" foregroundColor="green" />
-    <widget name="key_blue" position="580,515" zPosition="2" size="200,27" font="Roboto_HD; 24" halign="left" transparent="1" foregroundColor="blue" />
-  </screen>
-  <screen name="IPTVFileSelectorWidget" position="center,center" size="1300,550" title="">
-    <widget name="curr_dir" position="10,10" zPosition="2" size="800,35" valign="center" halign="left" font="Regular;28" transparent="1" />
-    <widget name="list" position="10,55" zPosition="1" size="1280,425" itemHeight="40" font="Roboto_HD; 27" selectionPixmap="BlackHarmony/menu/sel_1345_40.png" transparent="1" scrollbarMode="showOnDemand" enableWrapAround="1" />
-    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="10,515" size="35,27" alphatest="blend" />
-    <widget name="key_red" position="50,515" zPosition="2" size="200,27" font="Roboto_HD; 24" halign="left" transparent="1" foregroundColor="red" />
-  </screen> 
   <screen name="MessageBoxExt" position="center,center" size="800,400" zPosition="10" title="Message">
     <eLabel name="underline" position="0,80" size="1280,1" backgroundColor="linie" />
     <widget name="text" position="10,85" size="780,50" font="Roboto_HD;24" valign="center" halign="center" />

@@ -417,46 +417,38 @@
     <widget source="key_green" render="Label" position="313,439" size="180,27" zPosition="1" font="Roboto_HD; 24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1"/>
     <widget source="key_blue" render="Label" position="763,439" size="180,26" zPosition="1" font="Roboto_HD;24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1"/>
   </screen>
-  <screen name="MessageBox" position="555,366" size="790,50" title="Message">
-    <widget name="text" position="110,8" size="680,0" font="Roboto_HD; 25"/>
-    <widget name="ErrorPixmap" pixmap="BlackHarmony/icons/error.png" position="5,5" size="100,100" alphatest="blend"/>
-    <widget name="QuestionPixmap" pixmap="BlackHarmony/icons/question.png" position="5,5" size="100,100" alphatest="blend"/>
-    <widget name="InfoPixmap" pixmap="BlackHarmony/icons/info.png" position="5,5" size="100,100" alphatest="blend"/>
-    <widget name="list" font="Roboto_HD; 27" position="15,70" size="750,320" backgroundColor="background" itemHeight="35" selectionPixmap="BlackHarmony/menu/sel_750_35.png" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" transparent="1"/>
-    <applet type="onLayoutFinish">
-# this should be factored out into some helper code, but currently demonstrates applets.
-from enigma import eSize, ePoint
-
-orgwidth = self.instance.size().width()
-orgpos = self.instance.position()
-textsize = self["text"].getSize()
-
-# y size still must be fixed in font stuff...
-textsize = (textsize[0] + 80, textsize[1] + 80)
-offset = 20
-if self.type == self.TYPE_YESNO:
-        offset = 80
-wsizex = textsize[0] + 120
-wsizey = textsize[1] + offset
-if (600 &gt; wsizex):
-        wsizex = 600
-wsize = (wsizex, wsizey)
-
-
-# resize
-self.instance.resize(eSize(*wsize))
-
-# resize label
-self["text"].instance.resize(eSize(*textsize))
-
-# move list
-listsize = (wsizex - 20, 80)
-self["list"].instance.move(ePoint(10, textsize[1]))
-self["list"].instance.resize(eSize(*listsize))
-
-# center window
-newwidth = wsize[0]
-self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2,orgpos.y()))
-    </applet>
+  <screen name="PositionerSetup" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png"/>
+    <widget source="global.CurrentTime" render="Label" position="40,25" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="125,25" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
+    </widget>
+    <eLabel text="Positioner setup..." position="860,25" size="320,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget name="list" position="65,145" size="1095,250" itemHeight="35" selectionPixmap="BlackHarmony/menu/sel_1095_35.png" enableWrapAround="1" backgroundColor="black" transparent="1"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="60,440" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="300,440" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="560,440" size="35,27" alphatest="blend"/>
+    <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="800,440" size="35,27" alphatest="blend"/>
+    <widget name="red" position="110,440" size="250,100" backgroundColor="red" halign="center" valign="center" font="Regular;21"/>
+    <widget name="green" position="360,440" size="250,100" backgroundColor="green" halign="center" valign="center" font="Regular;21"/>
+    <widget name="yellow" position="610,440" size="250,100" backgroundColor="yellow" halign="center" valign="center" font="Regular;21"/>
+    <widget name="blue" position="860,440" size="250,100" backgroundColor="blue" halign="center" valign="center" font="Regular;21"/>
+    <widget name="snr_db" position="270,585" size="250,30" halign="center" valign="center" font="Roboto_HD; 24" backgroundColor="black" transparent="1"/>
+    <eLabel text="SNR:" position="170,635" size="80,30" font="Roboto_HD; 26" backgroundColor="black" transparent="1" foregroundColor="light_yellow"/>
+    <widget name="snr_bar" position="270,635" size="250,30" borderWidth="1" transparent="1"/>
+    <widget name="snr_percentage" position="540,635" size="140,30" font="Regular;21" backgroundColor="black" transparent="1"/>
+    <eLabel text="BER:" position="170,685" size="80,30" font="Roboto_HD; 26" backgroundColor="black" transparent="1" foregroundColor="light_yellow"/>
+    <widget name="ber_bar" position="270,685" size="250,30" borderWidth="1" transparent="1"/>
+    <widget name="ber_value" position="540,685" size="140,30" font="Roboto_HD; 24" backgroundColor="black" transparent="1"/>
+    <eLabel text="Lock:" position="170,735" size="100,30" font="Roboto_HD; 26" backgroundColor="black" transparent="1" foregroundColor="light_yellow"/>
+    <widget name="lock_state" position="280,735" size="250,30" font="Roboto_HD; 24" backgroundColor="black" transparent="1"/>
+    <eLabel text="Frequency:" position="715,635" size="160,30" font="Roboto_HD; 26" backgroundColor="black" transparent="1" foregroundColor="light_yellow"/>
+    <widget name="frequency_value" position="895,635" size="170,30" font="Roboto_HD; 24" backgroundColor="black" transparent="1"/>
+    <eLabel text="Symbolrate:" position="715,685" size="160,30" font="Roboto_HD; 26" backgroundColor="black" transparent="1" foregroundColor="light_yellow"/>
+    <widget name="symbolrate_value" position="895,685" size="170,30" font="Roboto_HD; 24" backgroundColor="black" transparent="1"/>
+    <eLabel text="FEC:" position="715,735" size="160,30" font="Roboto_HD; 26" backgroundColor="black" transparent="1" foregroundColor="light_yellow"/>
+    <widget name="fec_value" position="895,735" size="170,30" font="Roboto_HD; 24" backgroundColor="black" transparent="1"/>
   </screen>
 </skin>
