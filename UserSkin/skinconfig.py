@@ -227,7 +227,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
             
         self.currentSkin = CurrentSkinName
         global imageType
-        printDEBUG("Image=%s, SkinPath=%s, skin=%s, currentSkin=%s" % (imageType, SkinPath, config.skin.primary_skin.value, self.currentSkin))
+        printDEBUG("UserSkinInfo=%s, Image=%s, SkinPath=%s, skin=%s, currentSkin=%s" % (UserSkinInfo, imageType, SkinPath, config.skin.primary_skin.value, self.currentSkin))
         if self.currentSkin != '':
                 self.currentSkin = '_' + self.currentSkin # default_skin = '', others '_skinname', used later
                 
@@ -308,14 +308,14 @@ class UserSkin_Config(Screen, ConfigListScreen):
 #### initializing USER BARS ###
             if DBG == True: printDEBUG('#### initializing USER BARS ###')
             mylist = []
-            usedNames = []
+            #usedNames = []
             #first directories
             for f in sorted(listdir(SkinPath + "allBars/"), key=str.lower):
                 if path.isdir(path.join(SkinPath + "allBars/", f)) and f.startswith('bar_') and f.find('.') > 1:
                     friendly_name = f.split(".", 1)[0]
                     friendly_name = friendly_name[4:].replace("_", " ")
                     mylist.append((f, _(friendly_name)))
-                    usedNames.append(f)
+                    #usedNames.append(f)
                     if DBG == True: printDEBUG(f)
                 
             if len(mylist) == 0:
@@ -331,16 +331,15 @@ class UserSkin_Config(Screen, ConfigListScreen):
                     self.myUserSkin_bar = NoSave(ConfigSelection(default = "default", choices = mylist))
 #### initializing USER BUTTONS ###
             mylist = []
-            if path.exists(SkinPath + 'skin_user_bar'):
-                if DBG == True: printDEBUG('#### initializing USER BUTTONS ###')
-                usedNames = []
-                #first directories
-                for f in sorted(listdir(SkinPath + "allButtons/"), key=str.lower):
-                    if path.isdir(path.join(SkinPath + "allButtons/", f)) and f.endswith('.buttons'):
-                        friendly_name = f[:-8]
-                        mylist.append((f, _(friendly_name)))
-                        usedNames.append(f)
-                        if DBG == True: printDEBUG(f)
+            if DBG == True: printDEBUG('#### initializing USER BUTTONS ###')
+            #if DBG == True: printDEBUG('\t' + SkinPath + "allButtons/")
+            for f in sorted(listdir(SkinPath + "allButtons/"), key=str.lower):
+                if DBG == True: printDEBUG('\t f="%s"' % f)
+                if path.isdir(path.join(SkinPath + "allButtons/", f)) and f.endswith('.buttons'):
+                    friendly_name = f[:-8]
+                    mylist.append((f, _(friendly_name)))
+                    if DBG == True: printDEBUG('\t appended=%s' % f)
+
             if len(mylist) == 0:
                 mylist.append(("default", _("default") ))
                 self.myUserSkin_buttons = NoSave(ConfigSelection(default = "default", choices = mylist))
@@ -362,7 +361,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
         self.list = []
         ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
 
-        if DBG == True: printDEBUG('#### initializing BUTTONS ###')
+        if DBG == True: printDEBUG('#### initializing Menu Buttons ###')
         self["key_red"] = Label(_("Cancel"))
         self["key_green"] = Label(_("OK"))
         self["key_yellow"] = Label()
