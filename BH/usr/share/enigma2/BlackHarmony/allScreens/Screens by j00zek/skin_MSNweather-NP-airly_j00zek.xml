@@ -251,8 +251,8 @@
     <widget source="session.BlackHarmonyMSNWeather" render="Label" font="Roboto_HD; 26" position="1620,860" size="190,110" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top">
       <convert type="BlackHarmonyMSNWeatherWebDaily">Record=8,info</convert>
     </widget>
-    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="1100,980" size="35,27" alphatest="blend"/>
-    <widget source="session.CurrentService" render="Label" position="1140,980" size="150,35" font="Roboto_HD; 24" backgroundColor="black" transparent="1">
+    <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="1000,980" size="35,27" alphatest="blend"/>
+    <widget source="session.CurrentService" render="Label" position="1040,980" size="250,35" font="Roboto_HD; 24" backgroundColor="black" transparent="1">
       <convert type="j00zekTranslator">Show Maps</convert>
     </widget>
     <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="1300,980" size="35,27" alphatest="blend"/>

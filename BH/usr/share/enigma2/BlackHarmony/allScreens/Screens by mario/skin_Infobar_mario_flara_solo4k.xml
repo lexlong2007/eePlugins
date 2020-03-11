@@ -349,7 +349,10 @@
 #--secondinfobar--#
 <screen backgroundColor="transparent" flags="wfNoBorder" name="SecondInfoBar" position="0,52" size="1920,1080">
   <ePixmap pixmap="BlackHarmony/bg_design/secondinfobar.png" position="10,0" size="1920,699" zPosition="-2" />
-  <eLabel backgroundColor="black" font="HD_Thin; 27" foregroundColor="green" position="75,55" size="90,40" text="Teraz:" transparent="1" />
+  
+    <widget source="session.CurrentService" render="j00zekLabel" ackgroundColor="black" font="HD_Thin; 27" foregroundColor="green" position="75,55" size="90,40" transparent="1">
+      <convert type="j00zekTranslator">Now:</convert>
+    </widget>
   <widget backgroundColor="black" font="HD_Thin; 27" foregroundColor="white" halign="right" position="165,55" render="Label" size="90,40" source="session.Event_Now" transparent="1">
     <convert type="EventTime">StartTime</convert>
     <convert type="ClockToText">Default</convert>
@@ -368,7 +371,9 @@
   <widget backgroundColor="black" font="Roboto_HD; 28" foregroundColor="white" position="75,190" render="Label" size="850,360" source="session.Event_Now" transparent="1">
     <convert type="j00zekModEventName">ExtendedDescription</convert>
   </widget>
-  <eLabel backgroundColor="black" font="HD_Thin; 27" foregroundColor="blue" position="997,55" size="100,40" text="Potem:" transparent="1" />
+    <widget source="session.CurrentService" render="j00zekLabel" backgroundColor="black" font="HD_Thin; 27" foregroundColor="blue" position="997,55" size="100,40" transparent="1">
+      <convert type="j00zekTranslator">Next:</convert>
+    </widget>
   <widget backgroundColor="black" font="HD_Thin; 27" halign="right" position="1097,55" render="Label" size="90,40" source="session.Event_Next" transparent="1">
     <convert type="EventTime">StartTime</convert>
     <convert type="ClockToText">Default</convert>

@@ -23,9 +23,6 @@
       <convert type="EventTime">EndTime</convert>
       <convert type="ClockToText">Format:- %H:%M</convert>
     </widget>
-    <!--widget source="ServiceEvent" render="Label" position="105,515" size="635,300" font="Roboto_HD; 26" backgroundColor="background" transparent="1">
-    <convert type="j00zekModEventName">ExtendedDescription</convert>
-  </widget-->
     <widget source="ServiceEvent" render="Label" position="1205,55" size="635,30" font="Roboto_HD; 25" backgroundColor="dark_grey" transparent="1" halign="right" noWrap="1" valign="center" text="19.2E  DVB-S2  10627 27500 3/4 8PSK" zPosition="3">
       <convert type="j00zekModServiceName2">%O  %s  %F %p %Y %f %M %b</convert>
     </widget>
@@ -46,8 +43,6 @@
       <convert type="ServiceName">Reference</convert>
     </widget>
    <eLabel position="1173,800" size="655,1" backgroundColor="linie" foregroundColor="linie" />
-    <!--eLabel text="Potem:" position="1058,815" size="100,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1" foregroundColor="#66CC99" /-->
-
     <widget alphatest="blend" render="BlackHarmonyEventListDisplay" position="1185,810" size="655,140" source="ServiceEvent" rowHeight="32" column0="0,70,green,Roboto_HD,24,0,0" column1="80,545,white,Roboto_HD,24,0,1" primetimeoffset="10">
       <convert type="BlackHarmonyEventList">eventcount=4</convert>
     </widget>

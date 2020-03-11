@@ -42,12 +42,11 @@
     <widget source="ServiceEvent" render="Label" position="1260,115" size="445,50" zPosition="5" font="Roboto_HD; 38" backgroundColor="background" transparent="1" foregroundColor="#66CC99" halign="center">
       <convert type="ServiceName">Name</convert>
     </widget>
-		<widget source="ServiceEvent" render="Label" position="1115,645" size="700,35" zPosition="5" halign="center" font="Regular;28" foregroundColor="green" backgroundColor="transpBlack" transparent="1" >
+		<widget source="ServiceEvent" render="j00zekLabel" position="1115,645" size="700,35" zPosition="5" halign="center" font="Regular;28" foregroundColor="green" backgroundColor="transpBlack" transparent="1" >
 			<convert type="j00zekModEventName">Name</convert>
 		</widget>	
     <eLabel position="1130,726" size="690,1" backgroundColor="linie" foregroundColor="lemon" />
-	 <eLabel position="1130,897" size="690,1" backgroundColor="linie" foregroundColor="lemon" />
-    <!--eLabel text="Potem:" position="1058,815" size="100,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1" foregroundColor="#66CC99" /-->
+    <eLabel position="1130,897" size="690,1" backgroundColor="linie" foregroundColor="lemon" />
 
     <widget alphatest="blend" render="BlackHarmonyEventListDisplay" position="1185,900" size="655,170" source="ServiceEvent" rowHeight="32" column0="0,70,green,Roboto_HD,24,0,0" column1="80,545,white,Roboto_HD,24,0,1" primetimeoffset="10">
       <convert type="BlackHarmonyEventList">eventcount=2</convert>

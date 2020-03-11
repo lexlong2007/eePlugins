@@ -313,7 +313,6 @@
     <widget backgroundColor="black" font="Roboto_HD; 30" foregroundColor="podsw" halign="right" noWrap="1" position="1755,900" render="Label" size="90,35" source="session.BlackHarmonyMSNWeather" transparent="1" valign="top" zPosition="3">
       <convert type="BlackHarmonyMSNWeather">feelslike</convert>
     </widget>
-   <!--<eLabel text="temp.odczuwalna" backgroundColor="black" font="Roboto_HD; 18" foregroundColor="yellow" halign="center" position="1715,875" size="150,20"  transparent="1" valign="center" zPosition="2" />-->
 	<widget source="session.CurrentService" render="Label" backgroundColor="black" font="Roboto_HD; 18" foregroundColor="yellow" halign="center" position="1705,875" size="160,20"  transparent="1" valign="center" zPosition="2" >
           <convert type="j00zekTranslator">Felt temperature</convert>
         </widget>
@@ -321,11 +320,9 @@
   <widget backgroundColor="black" font="Regular; 19" foregroundColor="grey" halign="center" noWrap="1" position="1500,937" render="Label" size="348,26" source="global.CurrentTime" transparent="1" zPosition="3">
       <convert type="BlackHarmonyimieniny" />
     </widget>
-   <!--<eLabel text="Imieniny:" backgroundColor="black" font="Roboto_HD; 22" foregroundColor="green" halign="center" position="1345,935" size="263,30"  transparent="1" valign="center" zPosition="2" />-->
    <widget source="session.CurrentService" render="Label" backgroundColor="black" font="Roboto_HD; 22" foregroundColor="green" halign="center" position="1345,935" size="263,30"  transparent="1" valign="center" zPosition="2" >
           <convert type="j00zekTranslator">name day</convert>
         </widget>
-	 <!--<eLabel text="Teraz:" backgroundColor="black" font="Regular; 35" foregroundColor="blue" position="75,50" size="100,40"  transparent="1" />-->
 	<widget source="session.CurrentService" render="Label" backgroundColor="black" font="Regular; 35" foregroundColor="blue" position="75,50" size="100,40"  transparent="1" >
           <convert type="j00zekTranslator">Now</convert>
         </widget>
@@ -348,7 +345,6 @@
     <widget backgroundColor="transpBlack" font="Regular;35" foregroundColor="white" options="movetype=running,startpoint=0,direction=top,steptime=100,repeat=2,startdelay=11000,wrap" position="75,185" render="VRunningText" size="850,360" source="session.Event_Now" transparent="1">
       <convert type="j00zekModEventName">ExtendedDescription</convert>
     </widget>
-  <!--<eLabel text="Potem:" backgroundColor="black" font="Regular; 35" foregroundColor="blue" position="997,50" size="115,40" transparent="1" />-->
   <widget source="session.CurrentService" render="Label" backgroundColor="black" font="Regular; 35" foregroundColor="blue" position="997,50" size="115,40" transparent="1" >
           <convert type="j00zekTranslator">later</convert>
         </widget>

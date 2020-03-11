@@ -43,8 +43,6 @@
       <convert type="ServiceName">Reference</convert>
     </widget>
    <eLabel position="73,810" size="1070,1" backgroundColor="linie" foregroundColor="linie" />
-    <!--eLabel text="Potem:" position="1058,815" size="100,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1" foregroundColor="#66CC99" /-->
-
     <widget alphatest="blend" render="BlackHarmonyEventListDisplay" position="1185,500" size="655,450" source="ServiceEvent" rowHeight="32" column0="0,70,green,Roboto_HD,24,0,0" column1="80,545,grey,Roboto_HD,24,0,1" primetimeoffset="10">
       <convert type="BlackHarmonyEventList">eventcount=14</convert>
     </widget>

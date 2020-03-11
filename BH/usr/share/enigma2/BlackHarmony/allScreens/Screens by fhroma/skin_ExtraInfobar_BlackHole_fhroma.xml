@@ -391,8 +391,9 @@
     <convert type="j00zekVideoResolution">VideoResolution</convert>
   </widget>
 
-
-  <eLabel backgroundColor="black" font="Regular; 27" foregroundColor="blue" position="75,55" size="90,40" text="Teraz:" transparent="1" />
+    <widget source="session.CurrentService" render="j00zekLabel" backgroundColor="black" font="Regular; 27" foregroundColor="blue" position="75,55" size="90,40" transparent="1">
+      <convert type="j00zekTranslator">Now:</convert>
+    </widget>
   <widget backgroundColor="black" font="Regular; 27" foregroundColor="white" halign="right" position="165,55" render="Label" size="90,40" source="session.Event_Now" transparent="1">
     <convert type="EventTime">StartTime</convert>
     <convert type="ClockToText">Default</convert>
@@ -413,8 +414,9 @@
       <convert type="j00zekModEventName">ExtendedDescription</convert>
     </widget>
   
-  
-  <eLabel backgroundColor="black" font="Regular; 27" foregroundColor="blue" position="997,55" size="100,40" text="Potem:" transparent="1" />
+    <widget source="session.CurrentService" render="j00zekLabel" backgroundColor="black" font="Regular; 27" foregroundColor="blue" position="997,55" size="100,40" transparent="1">
+      <convert type="j00zekTranslator">Next:</convert>
+    </widget>
   <widget backgroundColor="black" font="Regular; 27" halign="right" position="1097,55" render="Label" size="90,40" source="session.Event_Next" transparent="1">
     <convert type="EventTime">StartTime</convert>
     <convert type="ClockToText">Default</convert>
@@ -455,7 +457,10 @@
     <convert type="BlackHarmonyMSNWeather">humidity</convert>
   </widget>
   <eLabel text="%" position="509,644" size="30,25" backgroundColor="black" transparent="1" font="Regular; 21" foregroundColor="white" halign="right" />
-  <eLabel text="Jutro" position="586,614" size="75,47" font="Regular; 30" backgroundColor="black" halign="center" transparent="1" foregroundColor="yellow" />
+  
+    <widget source="session.CurrentService" render="j00zekLabel" position="586,614" size="75,47" font="Regular; 30" backgroundColor="black" halign="center" transparent="1" foregroundColor="yellow">
+      <convert type="j00zekTranslator">Tomorrow</convert>
+    </widget>
   <widget alphatest="blend" render="MSNWeatherPixmap" position="690,600" size="80,80" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
     <convert type="BlackHarmonyMSNWeather">weathericon,day2</convert>
   </widget>
@@ -471,14 +476,20 @@
   <widget source="global.CurrentTime" render="Label" position="1032,635" size="100,35" font="Regular; 22" halign="center" valign="center" transparent="1" backgroundColor="black">
     <convert type="j00zekSun">wschod</convert>
   </widget>
-  <eLabel name="snr" text="Wschód:" position="925,635" size="105,35" font="Regular; 24" halign="left" backgroundColor="black" transparent="1" valign="bottom" />
-  <eLabel name="snr" text="Zachód:" position="1135,635" size="105,35" font="Regular; 24" halign="left" backgroundColor="black" transparent="1" valign="bottom" />
+  <widget source="session.CurrentService" render="j00zekLabel" position="925,635" size="105,35" font="Regular; 24" halign="left" backgroundColor="black" transparent="1" valign="bottom">
+      <convert type="j00zekTranslator">Sunrise:</convert>
+    </widget>
+    <widget source="session.CurrentService" render="j00zekLabel" position="1135,635" size="105,35" font="Regular; 24" halign="left" backgroundColor="black" transparent="1" valign="bottom">
+      <convert type="j00zekTranslator">Sunset:</convert>
+    </widget>
   <widget source="global.CurrentTime" render="Label" position="1240,635" size="100,35" font="Regular; 22" halign="center" valign="center" transparent="1" backgroundColor="black" foregroundColor="grey">
     <convert type="j00zekSun">zachod</convert>
   </widget>
   <ePixmap pixmap="BlackHarmony/icons/Weather/wsch.png" position="1030,585" zPosition="1" size="99,50" alphatest="blend" />
   <ePixmap pixmap="BlackHarmony/icons/Weather/zach.png" position="1240,585" zPosition="1" size="99,50" alphatest="blend" />
- <eLabel font="Roboto_HD; 22" foregroundColor="green" halign="center" name="new eLabel" position="1560,610" size="200,70" text="ciśnienie atmosferyczne:" transparent="1" zPosition="2" valign="center" backgroundColor="black" />
+    <widget source="session.CurrentService" render="j00zekLabel" font="Roboto_HD; 22" foregroundColor="green" halign="center" position="1560,610" size="200,70" transparent="1" zPosition="2" valign="center" backgroundColor="black">
+      <convert type="j00zekTranslator">Air pressure</convert>
+    </widget>
    
     <widget source="session.BlackHarmonyMSNWeather" render="Label" position="1720,625" size="142,30" font="Regular;22" zPosition="2" halign="right" valign="center" foregroundColor="lemon" backgroundColor="background" transparent="1" noWrap="1">
   <convert type="MSNWeatherWebCurrent">barometrValue</convert>

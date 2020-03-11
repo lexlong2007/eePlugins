@@ -443,7 +443,9 @@
     <convert type="BlackHarmonyFanTempInfo">TempInfo</convert>
   </widget>
   <!-- POGODA -->
-    <eLabel text="Pogoda teraz :" position="1680,805" size="200,28" font="Roboto_HD; 23" backgroundColor="black" halign="center" transparent="1" foregroundColor="lemon" />
+    <widget source="session.CurrentService" render="j00zekLabel" position="1680,805" size="200,28" font="Roboto_HD; 23" backgroundColor="black" halign="center" transparent="1" foregroundColor="lemon">
+      <convert type="j00zekTranslator">Current weather:</convert>
+    </widget>
     <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1540,798" size="146,146" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
       <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
     </widget>
@@ -454,7 +456,9 @@
       <convert type="BlackHarmonyMSNWeather">feelslike</convert>
     </widget>
 
-    <eLabel font="Roboto_HD; 18" foregroundColor="yellow" halign="center" name="new eLabel" position="1715,875" size="150,20" text="temp.odczuwalna" transparent="1" zPosition="2" valign="center" backgroundColor="black" />
+    <widget source="session.CurrentService" render="j00zekLabel" font="Roboto_HD; 18" foregroundColor="yellow" halign="center" position="1715,875" size="150,20" transparent="1" zPosition="2" valign="center" backgroundColor="black">
+      <convert type="j00zekTranslator">Feeling temp.</convert>
+    </widget>
 
   <widget source="global.CurrentTime" render="Label" position="1500,937" size="348,26" font="Regular; 19" halign="center" transparent="1" backgroundColor="black" foregroundColor="grey" zPosition="3" noWrap="1">
       <convert type="BlackHarmonyimieniny" />
@@ -463,13 +467,11 @@
 
 
 
-      <eLabel font="Roboto_HD; 22" foregroundColor="green" halign="center" name="new eLabel" position="1355,935" size="263,30" text="Imieniny:" transparent="1" zPosition="2" valign="center" backgroundColor="black" />
+      <eLabel font="Roboto_HD; 22" foregroundColor="green" halign="center" position="1355,935" size="263,30" text="Imieniny:" transparent="1" zPosition="2" valign="center" backgroundColor="black" />
     
-	
-	
-	
-	
-	  <eLabel backgroundColor="black" font="Regular; 27" foregroundColor="blue" position="75,55" size="90,40" text="Teraz:" transparent="1" />
+    <widget source="session.CurrentService" render="j00zekLabel" backgroundColor="black" font="Regular; 27" foregroundColor="blue" position="75,55" size="90,40" transparent="1">
+      <convert type="j00zekTranslator">Now:</convert>
+    </widget>
   <widget backgroundColor="black" font="Regular; 27" foregroundColor="white" halign="right" position="165,55" render="Label" size="90,40" source="session.Event_Now" transparent="1">
     <convert type="EventTime">StartTime</convert>
     <convert type="ClockToText">Default</convert>
@@ -490,8 +492,9 @@
       <convert type="j00zekModEventName">ExtendedDescription</convert>
     </widget>
   
-  
-  <eLabel backgroundColor="black" font="Regular; 27" foregroundColor="blue" position="997,55" size="100,40" text="Potem:" transparent="1" />
+    <widget source="session.CurrentService" render="j00zekLabel" backgroundColor="black" font="Regular; 27" foregroundColor="blue" position="997,55" size="100,40" transparent="1">
+      <convert type="j00zekTranslator">Next:</convert>
+    </widget>
   <widget backgroundColor="black" font="Regular; 27" halign="right" position="1097,55" render="Label" size="90,40" source="session.Event_Next" transparent="1">
     <convert type="EventTime">StartTime</convert>
     <convert type="ClockToText">Default</convert>

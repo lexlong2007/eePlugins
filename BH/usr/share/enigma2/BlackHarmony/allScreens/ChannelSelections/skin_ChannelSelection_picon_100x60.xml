@@ -43,7 +43,9 @@
   <widget source="ServiceEvent" render="j00zekPicons" picontype="zzpicon" position="1300,178" size="400,170" zPosition="2" transparent="1" alphatest="blend">
     <convert type="ServiceName">Reference</convert>
   </widget>
-  <eLabel text="Potem:" position="1180,905" size="100,32" font="Roboto_HD; 26" backgroundColor="black" transparent="1" foregroundColor="yellow" />
+    <widget source="session.CurrentService" render="j00zekLabel" position="1180,905" size="100,32" font="Roboto_HD; 26" backgroundColor="black" transparent="1" foregroundColor="yellow">
+      <convert type="j00zekTranslator">Next:</convert>
+    </widget>
   <widget backgroundColor="background" font="HD_Thin; 34" halign="left" position="1180,407" render="Label" size="635,38" source="ServiceEvent" transparent="1" valign="center" foregroundColor="green">
     <convert type="ServiceName">Name</convert>
   </widget>

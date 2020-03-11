@@ -8,7 +8,6 @@
     <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
   </widget>
   <widget source="Title" render="Label" position="54,160" size="675,35" font="Roboto_HD; 28" backgroundColor="black" transparent="1" halign="center" foregroundColor="light_yellow" />
-  <!--eLabel name="new eLabel" position="1460,80" size="365,30" font="Roboto_HD; 27" foregroundColor="white" backgroundColor="dark_grey" transparent="1" halign="right" text="Channel Selection" /-->
   <widget name="list" position="57,205" size="675,765" serviceItemHeight="45" selectionPixmap="BlackHarmony/menu/sel_675_45.png" scrollbarMode="showNever" enableWrapAround="1" colorServiceDescription="pastel" colorServiceDescriptionSelected="lemon" colorEventProgressbarBorder="border" colorEventProgressbarBorderSelected="border" picServiceEventProgressbar="BlackHarmony/gfx/progcl.png" foregroundColorServiceNotAvail="#777777" serviceNumberFont="Roboto_HD;26" serviceNameFont="Roboto_HD;26" serviceInfoFont="Roboto_HD;26" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" transparent="0" />
   <widget font="Roboto_HD; 26" position="1173,940" render="Label" size="90,30" source="ServiceEvent" transparent="1" zPosition="2" halign="left" backgroundColor="black" foregroundColor="green">
     <convert type="EventTime">Remaining</convert>
@@ -34,7 +33,6 @@
   <widget source="ServiceEvent" render="Label" position="770,205" size="480,70" font="HD_Thin; 30" backgroundColor="black" transparent="1" halign="center" foregroundColor="light_yellow">
     <convert type="j00zekModEventName">Name</convert>
   </widget>
-  <!--eLabel text="Potem:" position="1058,815" size="100,30" font="HD_Thin; 27" backgroundColor="black" transparent="1" foregroundColor="light_yellow" /-->
   <widget backgroundColor="background" font="HD_Thin; 34" halign="center" position="770,160" render="Label" size="480,38" source="ServiceEvent" transparent="1" valign="center" foregroundColor="green">
     <convert type="ServiceName">Name</convert>
   </widget>

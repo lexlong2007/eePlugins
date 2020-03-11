@@ -393,7 +393,9 @@
   </widget>
 
 
-  <eLabel backgroundColor="black" font="Regular; 27" foregroundColor="red" position="75,55" size="90,40" text="Teraz:" transparent="1" />
+    <widget source="session.CurrentService" render="j00zekLabel" backgroundColor="black" font="Regular; 27" foregroundColor="red" position="75,55" size="90,40" transparent="1">
+      <convert type="j00zekTranslator">Now:</convert>
+    </widget>
   <widget backgroundColor="black" font="Regular; 27" foregroundColor="cyan" halign="right" position="165,55" render="Label" size="90,40" source="session.Event_Now" transparent="1">
     <convert type="EventTime">StartTime</convert>
     <convert type="ClockToText">Default</convert>
@@ -414,8 +416,9 @@
       <convert type="j00zekModEventName">ExtendedDescription</convert>
     </widget>
   
-  
-  <eLabel backgroundColor="black" font="Regular; 27" foregroundColor="red" position="997,55" size="100,40" text="Potem:" transparent="1" />
+    <widget source="session.CurrentService" render="j00zekLabel" backgroundColor="black" font="Regular; 27" foregroundColor="red" position="997,55" size="100,40" transparent="1">
+      <convert type="j00zekTranslator">Next:</convert>
+    </widget>
   <widget backgroundColor="black" font="Regular; 27" halign="right" position="1097,55" render="Label" size="90,40" source="session.Event_Next" transparent="1">
     <convert type="EventTime">StartTime</convert>
     <convert type="ClockToText">Default</convert>
