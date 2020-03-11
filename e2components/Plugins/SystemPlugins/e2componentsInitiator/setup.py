@@ -31,9 +31,10 @@ def buildMlist():
     Mlist.append(getConfigListEntry(_("Event Name minimum font size"), config.plugins.j00zekCC.j00zekLabelEN ))
     #
     Mlist.append(getConfigListEntry(""))
-    Mlist.append(getConfigListEntry('\c00289496' + _("---User paths---")))
-    Mlist.append(getConfigListEntry(_("Picons animations user path:"), config.plugins.j00zekCC.PiconAnimation_UserPath ))
-    Mlist.append(getConfigListEntry(_("Alternate user icons path:"), config.plugins.j00zekCC.AlternateUserIconsPath))
+    Mlist.append(getConfigListEntry('\c00289496' + _("---Picons NIE SKONCZONE ---")))
+    Mlist.append(getConfigListEntry(_("Picons main path (where all picons folders lands):"), config.plugins.j00zekCC.PiconsMainRootPath ))
+    Mlist.append(getConfigListEntry(_("Picons style:"), config.plugins.j00zekCC.PiconsStyle ))
+    Mlist.append(getConfigListEntry(_("Automatically download missing picon:"), config.plugins.j00zekCC.PiconsMissingDownload ))
     #
     Mlist.append(getConfigListEntry(""))
     Mlist.append(getConfigListEntry('\c00289496' + _("---Scrolling text---")))
@@ -71,6 +72,11 @@ def buildMlist():
         Mlist.append(getConfigListEntry(_("Standby clock"),  config.plugins.j00zekCC.clockVFDstdby ))
         Mlist.append(getConfigListEntry(_("Standby clock position"),  config.plugins.j00zekCC.clockVFDpos ))
     #self.list.append(getConfigListEntry(_("XXXX"), XXXX ))
+    #
+    Mlist.append(getConfigListEntry(""))
+    Mlist.append(getConfigListEntry('\c00289496' + _("---User paths---")))
+    Mlist.append(getConfigListEntry(_("Picons animations user path:"), config.plugins.j00zekCC.PiconAnimation_UserPath ))
+    Mlist.append(getConfigListEntry(_("Alternate user icons path:"), config.plugins.j00zekCC.AlternateUserIconsPath))
     return Mlist
   
 ######################################################################################

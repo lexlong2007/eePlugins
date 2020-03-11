@@ -35,6 +35,27 @@ MinFontChoices = [("0", _("Defined in skin")), ("1", _("same as max font")),
 
 config.plugins.j00zekCC = ConfigSubsection()
 
+config.plugins.j00zekCC.PiconsMainRootPath = ConfigDirectory(default = '/usr/share/enigma2')  
+config.plugins.j00zekCC.PiconsStyle = ConfigSelection(default = "Transparent%201", choices = [("Blue%201", "Blue 1"),
+                                                                                ("Blue%202", "Blue 2"),
+                                                                                ("Green", "Green"),
+                                                                                ("NoName%201", "NoName 1"),
+                                                                                ("NoName%202", "NoName 2"),
+                                                                                ("NoName%203", "NoName 3"),
+                                                                                ("NoName%204", "NoName 4"),
+                                                                                ("NoName%205", "NoName 5"),
+                                                                                ("SiennaRoot%201", "SiennaRoot 1"),
+                                                                                ("SiennaRoot%202", "SiennaRoot 2"),
+                                                                                ("Silver-Black%201", "Silver-Black 1"),
+                                                                                ("Silver-Black%202", "Silver-Black 2"),
+                                                                                ("Star", "Star"),
+                                                                                ("Transparent%201", "Transparent 1"),
+                                                                                ("Transparent%202", "Transparent 2"),
+                                                                                ("White%201", "White 1"),
+                                                                                ("White%202", "White 2"),
+                                                                              ])
+config.plugins.j00zekCC.PiconsMissingDownload = ConfigYesNo(default = True)
+
 config.plugins.j00zekCC.PiconAnimation_UserPath = ConfigDirectory(default = _('not set'))  
 config.plugins.j00zekCC.AlternateUserIconsPath = ConfigDirectory(default = _('not set'))
 #j00zekLabel
