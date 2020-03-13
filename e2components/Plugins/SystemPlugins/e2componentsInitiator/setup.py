@@ -120,8 +120,8 @@ class e2ComponentsConfig(Screen, ConfigListScreen):
         #self.title = _("j00zek e2components configuration")
         self.title = _("e2components @j00zek %s" % Version)
         self.setTitle(_("e2components @j00zek %s") % Version)
-        selfcurrPiconType = config.plugins.j00zekCC.PiconsStyle.value
-        selfcurrZZPiconType = config.plugins.j00zekCC.zzPiconsStyle.value
+        self.currPiconType = config.plugins.j00zekCC.PiconsStyle.value
+        self.currZZPiconType = config.plugins.j00zekCC.zzPiconsStyle.value
         self.buildList()
 
     def selectFolder(self):
@@ -157,9 +157,9 @@ class e2ComponentsConfig(Screen, ConfigListScreen):
                 if len(x) >= 2:
                     x[1].save()
             configfile.save()
-            if selfcurrPiconType != config.plugins.j00zekCC.PiconsStyle.value:
+            if self.currPiconType != config.plugins.j00zekCC.PiconsStyle.value:
                 os.system('rm -f %s/*' % os.path.join(config.plugins.j00zekCC.PiconsMainRootPath.value, 'picon'))
-            if selfcurrZZPiconType != config.plugins.j00zekCC.zzPiconsStyle.value:
+            if self.currZZPiconType != config.plugins.j00zekCC.zzPiconsStyle.value:
                 os.system('rm -f %s/*' % os.path.join(config.plugins.j00zekCC.PiconsMainRootPath.value, 'zzpicon'))
 
             self.close()
