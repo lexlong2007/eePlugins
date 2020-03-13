@@ -311,3 +311,18 @@ msgstr "Wybierz"
 
 msgid "Save"
 msgstr "Zapisz"
+
+msgid "--- zet71 Picons ---"
+msgstr "--- Pikony zet71 ---"
+
+msgid "Automatically download missing picon:"
+msgstr "Pobierz brakującą pikonę z sieci:"
+
+msgid "Main path for all picons folders:"
+msgstr "Główna ścieżka dla katalogów pikon:"
+
+msgid "Picons style:"
+msgstr "Styl pikon:"
+
+msgid "zzPicons style:"
+msgstr "Styl zzpikon:"

@@ -17,8 +17,8 @@ from enigma import getDesktop
 from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap
-from os import path as os_path
 from version import Version
+import os
 ######################################################################################
 #config.plugins.j00zekCC.FakeEntry = NoSave(ConfigNothing())
 ######################################################################################
@@ -31,10 +31,12 @@ def buildMlist():
     Mlist.append(getConfigListEntry(_("Event Name minimum font size"), config.plugins.j00zekCC.j00zekLabelEN ))
     #
     Mlist.append(getConfigListEntry(""))
-    Mlist.append(getConfigListEntry('\c00289496' + _("---Picons NIE SKONCZONE ---")))
-    Mlist.append(getConfigListEntry(_("Picons main path (where all picons folders lands):"), config.plugins.j00zekCC.PiconsMainRootPath ))
-    Mlist.append(getConfigListEntry(_("Picons style:"), config.plugins.j00zekCC.PiconsStyle ))
+    Mlist.append(getConfigListEntry('\c00289496' + _("--- zet71 Picons ---")))
     Mlist.append(getConfigListEntry(_("Automatically download missing picon:"), config.plugins.j00zekCC.PiconsMissingDownload ))
+    if config.plugins.j00zekCC.PiconsMissingDownload.value == True:
+        Mlist.append(getConfigListEntry(_("Main path for all picons folders:"), config.plugins.j00zekCC.PiconsMainRootPath ))
+        Mlist.append(getConfigListEntry(_("Picons style:"), config.plugins.j00zekCC.PiconsStyle ))
+        Mlist.append(getConfigListEntry(_("zzPicons style:"), config.plugins.j00zekCC.zzPiconsStyle ))
     #
     Mlist.append(getConfigListEntry(""))
     Mlist.append(getConfigListEntry('\c00289496' + _("---Scrolling text---")))
@@ -118,6 +120,8 @@ class e2ComponentsConfig(Screen, ConfigListScreen):
         #self.title = _("j00zek e2components configuration")
         self.title = _("e2components @j00zek %s" % Version)
         self.setTitle(_("e2components @j00zek %s") % Version)
+        selfcurrPiconType = config.plugins.j00zekCC.PiconsStyle.value
+        selfcurrZZPiconType = config.plugins.j00zekCC.zzPiconsStyle.value
         self.buildList()
 
     def selectFolder(self):
@@ -125,7 +129,7 @@ class e2ComponentsConfig(Screen, ConfigListScreen):
         currItem = self["config"].list[curIndex][1]
         currInfo = self["config"].list[curIndex][0]
         if isinstance(currItem, ConfigDirectory):
-            if os_path.isdir(currItem.value):
+            if os.path.isdir(currItem.value):
                 self.session.openWithCallback(boundFunction(self.selectFolderCallBack, curIndex), DirectorySelectorWidget, currDir=currItem.value, title=currInfo)
             else:
                 self.session.openWithCallback(boundFunction(self.selectFolderCallBack, curIndex), DirectorySelectorWidget, currDir='/', title=currInfo)
@@ -153,6 +157,11 @@ class e2ComponentsConfig(Screen, ConfigListScreen):
                 if len(x) >= 2:
                     x[1].save()
             configfile.save()
+            if selfcurrPiconType != config.plugins.j00zekCC.PiconsStyle.value:
+                os.system('rm -f %s/*' % os.path.join(config.plugins.j00zekCC.PiconsMainRootPath.value, 'picon'))
+            if selfcurrZZPiconType != config.plugins.j00zekCC.zzPiconsStyle.value:
+                os.system('rm -f %s/*' % os.path.join(config.plugins.j00zekCC.PiconsMainRootPath.value, 'zzpicon'))
+
             self.close()
 
 ######################################################################################
@@ -216,7 +225,7 @@ class DirectorySelectorWidget(Screen):
         
     def getCurrentDirectory(self):
         currDir = self["filelist"].getCurrentDirectory()
-        if currDir and os_path.isdir( currDir ):
+        if currDir and os.path.isdir( currDir ):
             return currDir
         else:
             return "/"

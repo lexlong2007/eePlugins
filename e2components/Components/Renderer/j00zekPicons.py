@@ -1,6 +1,7 @@
 # standard Picon.py modified by @j00zek to support any picon folder name and animations
 # the name can be defined in xml by putting attrib picontype="<foldername>"
 # e.g. picontype="zzpicon"
+# also autodownload missing picon implemented
 # new attrib implemented doAnimationanimation
 #       doAnimationanimation="blink,<showTime>,<hideTime>"
 
@@ -16,8 +17,9 @@ except Exception:
 
 from Components.Harddisk import harddiskmanager
 from ServiceReference import ServiceReference
-from Components.config import config, ConfigBoolean
+from Components.config import config
 searchPaths = ['/usr/share/enigma2/']
+
 lastPiconsDict = {}
 #piconType = 'picon'
 
@@ -100,6 +102,40 @@ def findPicon(sName, selfPiconType, serviceName):
     return pngname
 
 
+def getOnLinePicon(piconName, piconType):
+    from twisted.web.client import downloadPage
+    DownloadedPiconFilename = None
+    currURL = None
+    def WebPicon(ret):
+        if DBG: j00zekDEBUG( "[j00zekPicons] WebCover >>>")
+        return
+    def dataError(error = '', errorType='downloading'):
+        if DBG: j00zekDEBUG("[j00zekPicons] Error %s data %s" % ( str(errorType),str(error)))
+        return
+    def checkPathExists(picPath):
+        if not os.path.exists(picPath):
+            os.system('mkdir -p %s' % picPath)
+    
+    currPath = os.path.join(config.plugins.j00zekCC.PiconsMainRootPath.value, piconType)
+    currFileName = "%s/%s.png" % (currPath,piconName)
+    if piconType == 'picon':
+        checkPathExists(currPath)
+        currURL = "https://github.com/j00zek/eePicons/raw/master/piconService/%s/%s.png" % (config.plugins.j00zekCC.PiconsStyle.value, piconName)
+    elif piconType == 'zzpicon':
+        checkPathExists(currPath)
+        currURL = "https://github.com/j00zek/eePicons/raw/master/piconService/%s/%s.png" % (config.plugins.j00zekCC.zzPiconsStyle.value, piconName)
+    elif piconType == 'piconProv':
+        checkPathExists(currPath)
+        currURL = "https://github.com/j00zek/eePicons/raw/master/piconProv/%s.png" % (piconName)
+    elif piconType == 'piconSat':
+        checkPathExists(currPath)
+        currURL = "https://github.com/j00zek/eePicons/raw/master/piconSat/%s.png" % (piconName)
+    if not currURL is None:
+        if DBG: j00zekDEBUG("[j00zekPicons]\n\t currURL='%s'\n\t piconFileName='%s'" % ( currURL,currFileName))
+        downloadPage(currURL,currFileName).addCallback(WebPicon).addErrback(dataError)
+    return DownloadedPiconFilename
+    
+
 def getPiconName(serviceName, selfPiconType):
     if DBG: j00zekDEBUG('[j00zekPicons:getPiconName] >>>')
     name = None
@@ -119,12 +155,14 @@ def getPiconName(serviceName, selfPiconType):
         if DBG: j00zekDEBUG('[j00zekPicons:getPiconName] pngname not found by sname')
         fields = sname.split('_', 3)
         isChanged = False
+        isStream = False
         if len(fields) > 2 and fields[2] != '2' and fields[2] != '1':
             fields[2] = '1'
             isChanged = True
         if len(fields) > 0 and (fields[0] == '4097' or fields[0] == '5001' or fields[0] == '5002'):
             fields[0] = '1'
             isChanged = True
+            isStream = True
         if isChanged == True:
             pngname = findPicon('_'.join(fields), selfPiconType, serviceName)
         if not pngname:
@@ -132,13 +170,17 @@ def getPiconName(serviceName, selfPiconType):
             name = ServiceReference(serviceName).getServiceName()
             name = unicodedata.normalize('NFKD', unicode(name, 'utf_8', errors='ignore')).encode('ASCII', 'ignore')
             name = re.sub('[^a-z0-9]', '', name.replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
-            name = name.replace('fhd', 'hd').replace('uhd', 'hd') #iptv streams names correction
+            if isStream:
+                name = name.replace('fhd', 'hd').replace('uhd', 'hd') #iptv streams names correction
             if len(name) > 0:
                 pngname = findPicon(name, selfPiconType, serviceName)
-                if not pngname and len(name) > 2 and name.endswith('hd'):
-                    pngname = findPicon(name[:-2], selfPiconType, serviceName)
-                elif not pngname and len(name) > 2 and name.endswith('pl'):
-                    pngname = findPicon(name[:-2], selfPiconType, serviceName)
+                if not pngname and len(name) > 2:
+                    if name.endswith('hd'):
+                        pngname = findPicon(name[:-2], selfPiconType, serviceName)
+                    elif name.endswith('pl'):
+                        pngname = findPicon(name[:-2], selfPiconType, serviceName)
+                if not pngname and config.plugins.j00zekCC.PiconsMissingDownload.value == True:
+                    pngname = getOnLinePicon(name, selfPiconType)
             if not pngname:
                 if DBG: j00zekDEBUG('[j00zekPicons:getPiconName] service name not found in lamedb, trying provided name')
                 pngname = findPicon(serviceName, selfPiconType, serviceName)
