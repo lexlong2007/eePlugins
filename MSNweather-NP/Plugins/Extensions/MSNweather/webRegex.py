@@ -52,13 +52,13 @@ iconsMap={
     "meistbewoelkt"         :   '27.png', #28
     "teilweisebewoelkt"     :   '29.png',
     'teilweisesonnig'       :   '30.png',
-    
+    'Ueberwiegendsonnig'    :   '34.png',
     }
 
 def utfTOansi(text):
     text = text.replace(" ","").replace("Ś","s").replace("ś","s").replace("ł","l").strip()
     text = text.replace("ę","e").replace("ć","c").replace("ó","o").strip().replace("ż","z").strip()
-    text = text.replace("ö","oe")
+    text = text.replace("ö","oe").replace("Ü","Ue")
     return text.lower()
   
 def decodeHTML(text):
@@ -83,9 +83,13 @@ def getWeather(webContent, DBGnow = False, DBGhourly = False, DBGdaily = False, 
             for i in FC:
                 retList.append(i)
         return retList
+    #report missing icons
+    reportMissingIcons = True
+    missingIcons = ''
+    if reportMissingIcons and os.path.exists("/tmp/MSNWeatherMissingMappings.log"):
+        missingIcons = open("/tmp/MSNWeatherMissingMappings.log", "r").read()
+        #open("/tmp/MSNWeatherMissingMappings.log", "w").write('')
     #now
-    if reportMissingIcons and os.path.exists("/tmp/MSNWeatherWebRegex.log"):
-        open("/tmp/MSNWeatherWebRegex.log", "w").write('')
     nowContent = findInContent(webContent, '<div class="weather-info">(.*?)</div>')
     nowDict = {}
     nowDict['title'] = getList([], nowContent, '<span>(.*?)</span>.*<ul>')
@@ -118,8 +122,9 @@ def getWeather(webContent, DBGnow = False, DBGhourly = False, DBGdaily = False, 
         try:
             weatherIconName = utfTOansi(dailyDict['Record=%s' % id][0][4])
             dailyDict['WeatherIcon4Record=%s' % id] = iconsMap.get(weatherIconName, '')
-            if reportMissingIcons and dailyDict['WeatherIcon4Record=%s' % id] == '':
-                open("/tmp/MSNWeatherWebRegex.log", "a").write('iconsMap(%s) returned nothing\n' % weatherIconName)
+            if reportMissingIcons and dailyDict['WeatherIcon4Record=%s' % id] == '' and weatherIconName not in missingIcons:
+                open("/tmp/MSNWeatherMissingMappings.log", "a").write('Missing iconsMap(%s)\n' % weatherIconName)
+                missingIcons += weatherIconName + '\n'
         except Exception:
             dailyDict['WeatherIcon4Record=%s' % id] = ''
         if DBGdaily:
