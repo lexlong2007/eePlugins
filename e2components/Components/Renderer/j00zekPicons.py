@@ -15,9 +15,12 @@ try:
 except Exception:
     from Tools.Directories import SCOPE_ACTIVE_SKIN as SCOPE_CURRENT_SKIN
 
+
 from Components.Harddisk import harddiskmanager
 from ServiceReference import ServiceReference
 from Components.config import config
+from Components.j00zekComponents import isImageType, isINETworking
+
 searchPaths = ['/usr/share/enigma2/']
 
 lastPiconsDict = {}
@@ -30,6 +33,8 @@ try:
 except Exception:
     DBG = False
 #####
+
+isVTI = isImageType('vti')
 
 def initPiconPaths():
     for part in harddiskmanager.getMountedPartitions():
@@ -103,6 +108,9 @@ def findPicon(sName, selfPiconType, serviceName):
 
 
 def getOnLinePicon(piconName, piconType):
+    if not isINETworking:
+        return None
+    
     from twisted.web.client import downloadPage
     DownloadedPiconFilename = None
     currURL = None
@@ -137,10 +145,18 @@ def getOnLinePicon(piconName, piconType):
     
 
 def getPiconName(serviceName, selfPiconType):
+  
+    def getName(serName):
+        gname = ServiceReference(serName).getServiceName()
+        gname = unicodedata.normalize('NFKD', unicode(gname, 'utf_8', errors='ignore')).encode('ASCII', 'ignore')
+        gname = re.sub('[^a-z0-9]', '', gname.replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
+        return gname
+      
     if DBG: j00zekDEBUG('[j00zekPicons:getPiconName] >>>')
     name = None
     sname = None
     pngname = None
+    
     if selfPiconType == 'piconProv':
         if DBG: j00zekDEBUG('[j00zekPicons:getPiconName] looking for piconProv')
         pngname = findPicon(serviceName.upper(), selfPiconType, serviceName)
@@ -151,6 +167,18 @@ def getPiconName(serviceName, selfPiconType):
         name = 'unknown'
         sname = '_'.join(GetWithAlternative(serviceName).split(':', 10)[:10])
         pngname = findPicon(sname, selfPiconType, serviceName)
+        if pngname and isVTI and os.path.islink(pngname):
+            name = getName(serviceName)
+            cname = os.path.abspath(pngname)
+            cname = os.path.basename(cname)
+            cname = os.path.splitext(cname)
+            if cname != name:
+                if DBG: j00zekDEBUG('[j00zekPicons:getPiconName] %s != %s, deleting' % (cname,name))
+                try:
+                    os.remove(pngname)
+                    pngname = None
+                except Exception:
+                    pass
     if not pngname:
         if DBG: j00zekDEBUG('[j00zekPicons:getPiconName] pngname not found by sname')
         fields = sname.split('_', 3)
@@ -167,13 +195,16 @@ def getPiconName(serviceName, selfPiconType):
             pngname = findPicon('_'.join(fields), selfPiconType, serviceName)
         if not pngname:
             if DBG: j00zekDEBUG('[j00zekPicons:getPiconName] pngname not found by reference, trying by service name')
-            name = ServiceReference(serviceName).getServiceName()
-            name = unicodedata.normalize('NFKD', unicode(name, 'utf_8', errors='ignore')).encode('ASCII', 'ignore')
-            name = re.sub('[^a-z0-9]', '', name.replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
-            if isStream:
-                name = name.replace('fhd', 'hd').replace('uhd', 'hd') #iptv streams names correction
+            name = getName(serviceName)
             if len(name) > 0:
+                if isStream:
+                    name = name.replace('fhd', 'hd').replace('uhd', 'hd') #iptv streams names correction
                 pngname = findPicon(name, selfPiconType, serviceName)
+                if pngname and isVTI:
+                    try:
+                        os.symlink(pngname, '%s/%s.png' % (os.path.dirname(pngname), sname) )
+                    except Exception as e:
+                        if DBG:  j00zekDEBUG('[j00zekPicons:getPiconName] Exception %s' % str(e))
                 if not pngname and len(name) > 2:
                     if name.endswith('hd'):
                         pngname = findPicon(name[:-2], selfPiconType, serviceName)
@@ -181,6 +212,9 @@ def getPiconName(serviceName, selfPiconType):
                         pngname = findPicon(name[:-2], selfPiconType, serviceName)
                 if not pngname and config.plugins.j00zekCC.PiconsMissingDownload.value == True:
                     pngname = getOnLinePicon(name, selfPiconType)
+                    if not pngname:
+                        if name.endswith('hd') or name.endswith('pl'):
+                            pngname = getOnLinePicon(name[:-2], selfPiconType)
             if not pngname:
                 if DBG: j00zekDEBUG('[j00zekPicons:getPiconName] service name not found in lamedb, trying provided name')
                 pngname = findPicon(serviceName, selfPiconType, serviceName)
