@@ -52,7 +52,8 @@ iconsMap={
     "meistbewoelkt"         :   '27.png', #28
     "teilweisebewoelkt"     :   '29.png',
     'teilweisesonnig'       :   '30.png',
-    'Ueberwiegendsonnig'    :   '34.png',
+    'sonnig'                :   '32.png',
+    'ueberwiegendsonnig'    :   '34.png',
     }
 
 def utfTOansi(text):
