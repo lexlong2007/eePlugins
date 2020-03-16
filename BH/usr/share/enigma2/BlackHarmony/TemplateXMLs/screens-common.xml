@@ -1620,7 +1620,9 @@
     <widget source="global.CurrentTime" render="Label" position="125,25" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Select HDD" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="session.CurrentService" render="Label" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekAlternateTitle">Select HDD</convert>
+    </widget>
     <widget name="hddlist" position="65,140" size="1095,640" itemHeight="35" font="Roboto_HD; 27" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_1095_35.png" backgroundColor="black" transparent="1"/>
   </screen>
   <screen name="HarddiskSetup" position="345,93" size="1232,908" title="Eventview" flags="wfNoBorder" backgroundColor="transparent">
@@ -1631,7 +1633,9 @@
     <widget source="global.CurrentTime" render="Label" position="125,25" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Harddisk Setup" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="session.CurrentService" render="Label" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekAlternateTitle">Harddisk Setup</convert>
+    </widget>
     <widget name="model" position="160,355" size="900,32" font="Roboto_HD; 28" transparent="1" backgroundColor="black"/>
     <widget name="capacity" position="160,446" size="900,32" font="Roboto_HD; 28" transparent="1" backgroundColor="black"/>
     <widget name="bus" position="160,530" size="900,32" font="Roboto_HD; 28" transparent="1" backgroundColor="black"/>
@@ -1644,7 +1648,9 @@
     <widget source="global.CurrentTime" render="Label" position="125,25" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Harddisk Wait" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="session.CurrentService" render="Label" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekAlternateTitle">Harddisk Wait</convert>
+    </widget>
     <widget name="wait" position="65,140" itemHeight="35" font="Roboto_HD; 27" size="1095,640" transparent="1"/>
   </screen>
   <screen name="RecordPathsSettings" position="462,128" size="1000,820" title=" " flags="wfNoBorder" backgroundColor="transparent">
@@ -1770,16 +1776,22 @@
     <widget source="global.CurrentTime" render="Label" position="125,25" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Service Info" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="session.CurrentService" render="Label" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekAlternateTitle">Service Info</convert>
+    </widget>
     <widget name="infolist" position="65,140" size="1095,640" itemHeight="40" font="Roboto_HD; 38" selectionDisabled="1" scrollbarMode="showOnDemand" backgroundColor="transpBlack" transparent="1"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="41,850" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="328,850" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="615,850" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_blue.png" position="902,850" size="35,27" alphatest="blend"/>
-    <widget name="key_red" position="91,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
-    <widget name="key_green" position="378,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
-    <widget name="key_yellow" position="665,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
-    <widget name="key_blue" position="952,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <!--nVTI--><widget name="key_red" position="91,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <!--nVTI--><widget name="key_green" position="378,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <!--nVTI--><widget name="key_yellow" position="665,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <!--nVTI--><widget name="key_blue" position="952,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <!--VTI--><widget name="red" position="91,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <!--VTI--><widget name="green" position="378,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <!--VTI--><widget name="yellow" position="665,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
+    <!--VTI--><widget name="blue" position="952,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
   </screen>
   <screen name="Setup" position="345,93" size="1232,908" title="Setup" flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png"/>
@@ -1789,7 +1801,9 @@
     <widget source="global.CurrentTime" render="Label" position="125,25" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Setup" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="session.CurrentService" render="Label" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekAlternateTitle">Setup</convert>
+    </widget>
     <widget name="config" position="65,140" size="1095,640" font="Roboto_HD; 27" itemHeight="40" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_1095_40.png" backgroundColor="black" transparent="1"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="41,850" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="328,850" size="35,27" alphatest="blend"/>
@@ -1900,7 +1914,9 @@
     <widget source="global.CurrentTime" render="Label" position="125,25" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Timer entry" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="session.CurrentService" render="Label" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekAlternateTitle">Timer entry</convert>
+    </widget>
     <widget name="config" font="Roboto_HD; 27" position="65,140" size="1095,640" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" itemHeight="35" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_1095_35.png" backgroundColor="black" transparent="1"/>
     <widget name="cancel" position="41,850" size="35,27" pixmap="BlackHarmony/buttons/key_red.png" alphatest="blend"/>
     <widget name="ok" position="328,850" size="35,27" pixmap="BlackHarmony/buttons/key_green.png" alphatest="blend"/>
@@ -1915,7 +1931,9 @@
     <widget source="global.CurrentTime" render="Label" position="125,25" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Timer Log" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="session.CurrentService" render="Label" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekAlternateTitle">Timer Log</convert>
+    </widget>
     <widget name="loglist" position="65,140" size="1095,420" itemHeight="35" font="Roboto_HD; 26" scrollbarMode="showOnDemand" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" selectionPixmap="BlackHarmony/menu/sel_1095_35.png" backgroundColor="transpBlack" transparent="1"/>
     <widget name="logentry" position="65,585" size="1095,210" font="Roboto_HD; 26" transparent="1" backgroundColor="black"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="41,850" size="35,27" alphatest="blend"/>
@@ -1957,7 +1975,9 @@
     <widget source="global.CurrentTime" render="Label" position="125,25" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Timer Selection" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="session.CurrentService" render="Label" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekAlternateTitle">Timer Selection</convert>
+    </widget>
     <widget name="timerlist" font="Roboto_HD; 27" position="65,157" size="1095,600" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" itemHeight="75" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_1095_75.png" backgroundColor="black" transparent="1"/>
   </screen>
   <screen name="TimeshiftState" position="395,700" size="1140,68" title="TimeshiftState" flags="wfNoBorder" backgroundColor="transparent">
@@ -2139,7 +2159,9 @@
     <widget source="global.CurrentTime" render="Label" position="125,25" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="CD Info" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="session.CurrentService" render="Label" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekAlternateTitle">CD Info</convert>
+    </widget>
     <widget source="info" render="Label" position="65,140" size="1095,50" font="Roboto_HD; 26" backgroundColor="black" transparent="1" foregroundColor="light_yellow"/>
     <widget name="config" position="65,225" size="1095,440" itemHeight="35" font="Roboto_HD; 26" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_1095_35.png" backgroundColor="black" transparent="1"/>
     <widget source="info2" render="Label" position="65,700" size="1095,90" font="Roboto_HD; 26" backgroundColor="black" transparent="1"/>
@@ -2957,7 +2979,9 @@
     <widget source="global.CurrentTime" render="Label" position="125,25" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Webinterface" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="session.CurrentService" render="Label" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekAlternateTitle">Webinterface</convert>
+    </widget>
     <widget name="config" font="Roboto_HD; 27" position="65,140" size="1095,640" itemHeight="35" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_1095_35.png" backgroundColor="black" transparent="1"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="41,850" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="328,850" size="35,27" alphatest="blend"/>
@@ -3465,7 +3489,9 @@
     <widget source="global.CurrentTime" render="Label" position="125,25" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Restore Menu" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="session.CurrentService" render="Label" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekAlternateTitle">Restore Menu</convert>
+    </widget>
     <widget name="filelist" font="Roboto_HD; 27" position="65,140" size="1095,640" itemHeight="35" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_1095_35.png" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" backgroundColor="black" transparent="1"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="41,850" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="328,850" size="35,27" alphatest="blend"/>
@@ -4265,7 +4291,9 @@
     <widget source="global.CurrentTime" render="Label" position="125,25" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="DreamExplorer II" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="session.CurrentService" render="Label" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekAlternateTitle">DreamExplorer II</convert>
+    </widget>
     <widget name="filelist" position="65,141" size="1095,595" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_1095_35.png" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" transparent="1" enableWrapAround="1"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="41,853" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="328,853" size="35,27" alphatest="blend"/>
@@ -4684,7 +4712,9 @@
     <widget source="global.CurrentTime" render="Label" position="125,25" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="CoverFind" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="session.CurrentService" render="Label" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekAlternateTitle">CoverFind</convert>
+    </widget>
     <widget name="searchinfo" position="65,720" size="1095,60" font="Roboto_HD; 27" foregroundColor="light_yellow" backgroundColor="background"/>
     <widget name="list" position="65,140" size="1095,540" font="Roboto_HD; 26" itemHeight="135" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_1095_135.png" backgroundColor="black" transparent="1"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="41,850" size="35,27" alphatest="blend"/>
@@ -5350,7 +5380,9 @@
     <widget source="global.CurrentTime" render="Label" position="125,25" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="CrossEPG Setup" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="session.CurrentService" render="Label" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekAlternateTitle">CrossEPG Setup</convert>
+    </widget>
     <widget name="information" position="65,610" size="1095,170" font="Roboto_HD; 27" foregroundColor="light_yellow" backgroundColor="background"/>
     <widget name="config" font="Roboto_HD; 27" position="65,140" size="1095,440" itemHeight="35" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_1095_35.png" backgroundColor="black" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" transparent="1"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="41,850" size="35,27" alphatest="blend"/>
@@ -7446,26 +7478,26 @@
     <widget name="duration" position="820,30" size="200,30" font="Roboto_HD; 27" transparent="1" noWrap="1" valign="top" halign="left" />
     <widget name="FullDescription" position="45,85" size="1410,210" font="Regular; 26" transparent="1" text="to jest przykladowy tekst do tego co tu bedzie sie wyswietlac" />
   </screen>
-    <screen name="Devices" position="center,center" size="560,550">
-    <widget source="TunerHeader" render="Label" position="0,0" size="560,30" font="Bold; 23" transparent="0" zPosition="1" halign="left" />
-    <widget source="nims" render="Label" position="0,30" size="560,150" font="Regular;21" transparent="0" zPosition="1" noWrap="1" />
-    <widget source="HDDHeader" render="Label" position="0,180" size="560,30" font="Bold;23" transparent="0" zPosition="1" halign="left" />
-    <widget source="hdd" render="Label" position="0,209" size="560,180" font="Regular;18" transparent="0" zPosition="1" />
-    <widget source="MountsHeader" render="Label" position="0,390" size="560,30" font="Bold;23" transparent="0" zPosition="1" halign="left" />
-    <widget source="mounts" render="Label" position="0,420" size="560,145" font="Regular;21" transparent="0" zPosition="1" noWrap="1" />
+  <screen name="Devices" position="center,center" size="860,850">
+    <widget source="TunerHeader" render="Label" position="147,15" size="560,40" font="Bold; 23" transparent="0" zPosition="1" halign="left" foregroundColor="lemon" />
+    <widget source="nims" render="Label" position="147,84" size="560,170" font="Regular;21" transparent="0" zPosition="1" noWrap="1" foregroundColor="lemon" />
+    <widget source="HDDHeader" render="Label" position="146,264" size="560,40" font="Bold;23" transparent="0" zPosition="1" halign="left" foregroundColor="lemon" />
+    <widget source="hdd" render="Label" position="147,331" size="560,200" font="Regular;18" transparent="0" zPosition="1" foregroundColor="lemon" />
+    <widget source="MountsHeader" render="Label" position="147,554" size="560,40" font="Bold;23" transparent="0" zPosition="1" halign="left" foregroundColor="lemon" />
+    <widget source="mounts" render="Label" position="147,616" size="560,215" font="Regular;21" transparent="0" zPosition="1" noWrap="1" foregroundColor="lemon" />
   </screen>
-  <screen name="SystemMemoryInfo" position="center,center" size="560,450">
-    <widget source="lab1" render="Label" position="0,0" size="560,25" font="Boldit;24" transparent="0" zPosition="2" />
-    <widget source="lab2" render="Label" position="0,30" size="560,25" font="Italic;19" transparent="0" zPosition="2" />
-    <widget name="AboutScrollLabel" position="0,60" size="560,390" font="Regular;19" transparent="0" zPosition="1" scrollbarMode="showOnDemand" />
+  <screen name="SystemMemoryInfo" position="center,center" size="860,750">
+    <widget source="lab1" render="Label" position="155,108" size="560,45" font="Boldit;24" transparent="0" zPosition="2" foregroundColor="lemon" />
+    <widget source="lab2" render="Label" position="154,180" size="560,45" font="Italic;22" transparent="0" zPosition="2" foregroundColor="lemon" />
+    <widget name="AboutScrollLabel" position="154,241" size="560,490" font="Regular;22" transparent="0" zPosition="1" scrollbarMode="showOnDemand" foregroundColor="lemon" />
   </screen>
-  <screen name="SystemNetworkInfo" position="center,center" size="560,500">
-    <widget name="AboutScrollLabel" position="0,0" size="560,410" valign="left" font="Regular;20" transparent="1" />
-    <eLabel name="" position="0, 420" size="562, 2" backgroundColor="light_grey" />
-    <widget source="IFtext" render="Label" position="0,435" size="120,25" zPosition="10" font="Regular;20" halign="left" transparent="1" backgroundColor="window-bg" />
-    <widget source="IF" render="Label" position="130,435" size="430,25" zPosition="10" font="Regular;20" halign="left" transparent="1" backgroundColor="window-bg" />
-    <widget source="Statustext" render="Label" position="0,470" size="120,25" zPosition="10" font="Regular;20" halign="left" transparent="1" backgroundColor="window-bg" />
-    <widget name="statuspic" pixmaps="buttons/button_green.png,buttons/button_green_off.png" position="130,474" zPosition="10" size="17,17" transparent="1" alphatest="on" />
+  <screen name="SystemNetworkInfo" position="515,140" size="860,800">
+    <widget name="AboutScrollLabel" position="121,87" size="606,410" valign="left" font="Regular;24" transparent="1" foregroundColor="lemon" />
+    <eLabel name="" position="149,627" size="562, 2" backgroundColor="light_grey" />
+    <widget source="IFtext" render="Label" position="135,668" size="158,45" zPosition="10" font="Regular;20" halign="left" transparent="1" backgroundColor="transpBlack_1" foregroundColor="lemon" />
+    <widget source="IF" render="Label" position="306,667" size="430,45" zPosition="10" font="Regular;24" halign="left" transparent="1" backgroundColor="transpBlack_1" foregroundColor="lemon" />
+    <widget source="Statustext" render="Label" position="133,723" size="161,45" zPosition="10" font="Regular;24" halign="left" transparent="1" backgroundColor="transpBlack_1" foregroundColor="lemon" />
+    <widget name="statuspic" pixmaps="buttons/button_green.png,buttons/button_green_off.png" position="313,746" zPosition="10" size="17,17" transparent="1" alphatest="on" />
   </screen>
   <screen name="ServiceInfoSimple" position="center,center" size="750,390" title="Service info">
     <widget name="infolist" position="0,0" size="750,390" selectionDisabled="1" />
@@ -9007,7 +9039,9 @@ self.instance.move(ePoint(orgWindowPos.x() , orgWindowPos.y() + (windowHeight - 
     <widget source="global.CurrentTime" render="Label" position="125,25" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Zmiany" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="session.CurrentService" render="Label" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekAlternateTitle">Changes</convert>
+    </widget>
     <widget name="AboutScrollLabel" position="65,140" size="1095,640" itemHeight="40" font="Roboto_HD; 30" selectionDisabled="1" scrollbarMode="showOnDemand" scrollbarWidth="10" backgroundColor="transpBlack" transparent="1"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="41,850" size="35,27" alphatest="blend"/>
     <widget name="key_red" position="91,849" size="200,27" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1"/>
@@ -9021,7 +9055,9 @@ self.instance.move(ePoint(orgWindowPos.x() , orgWindowPos.y() + (windowHeight - 
     <widget source="global.CurrentTime" render="Label" position="125,25" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Diagnostyka" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>        
+    <widget source="session.CurrentService" render="Label" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekAlternateTitle">Diagnostic</convert>
+    </widget>
     <widget name="AboutScrollLabel" position="65,140" size="1095,640" itemHeight="30" font="Roboto_HD; 25" selectionDisabled="1" scrollbarMode="showOnDemand" scrollbarWidth="10" backgroundColor="transpBlack" transparent="1"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="41,850" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="328,850" size="35,27" alphatest="blend"/>
@@ -9037,7 +9073,9 @@ self.instance.move(ePoint(orgWindowPos.x() , orgWindowPos.y() + (windowHeight - 
     <widget source="global.CurrentTime" render="Label" position="125,25" size="460,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%A %d.%m.%Y</convert>
     </widget>
-    <eLabel text="Diagnostyka" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="session.CurrentService" render="Label" position="960,25" size="220,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1">
+      <convert type="j00zekAlternateTitle">Diagnostic</convert>
+    </widget>
     <widget name="lmemtext" position= "65,120" size="500,610" itemHeight="30" font="Regular;22" zPosition="1" halign="left" transparent="1"/>
     <widget name="lmemvalue" position="65,120" size="500,610" itemHeight="30" font="Regular;22" zPosition="2" halign="right" transparent="1"/>
     <widget name="rmemtext" position= "670,120" size="490,610" itemHeight="30" font="Regular;22" zPosition="1" halign="left" transparent="1"/>
