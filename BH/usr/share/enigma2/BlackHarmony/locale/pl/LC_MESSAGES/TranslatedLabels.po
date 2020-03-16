@@ -481,3 +481,51 @@ msgstr "temp.odczuwalna"
 
 msgid "Name-day:"
 msgstr "Imieniny:"
+
+msgid "Service Info"
+msgstr "Info o serwisie"
+
+msgid "Select HDD"
+msgstr "Wybór dysku"
+
+msgid "Harddisk Setup"
+msgstr "Konfiguracja dysku"
+
+msgid "Harddisk Wait"
+msgstr "Oczekiwanie na dysk"
+
+msgid "Setup"
+msgstr "Konfiguracja"
+
+msgid "Timer entry"
+msgstr "Wpis timera"
+
+msgid "Timer Log"
+msgstr "Log timera"
+
+msgid "Timer Selection"
+msgstr "Wybór timera"
+
+msgid "CD Info"
+msgstr "Info o CD"
+
+msgid "Webinterface"
+msgstr "Interfejs Web"
+
+msgid "Restore Menu"
+msgstr "Menu odzyskiwania"
+
+msgid "DreamExplorer II"
+msgstr "DreamExplorer II"
+
+msgid "CoverFind"
+msgstr "Szukanie okładek"
+
+msgid "CrossEPG Setup"
+msgstr "Konfiguracja CrossEPG"
+
+msgid "Changes"
+msgstr "Zmiany"
+
+msgid "Diagnostic"
+msgstr "Diagnostyka"
