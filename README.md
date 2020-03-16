@@ -7,4 +7,3 @@ Please respect my and others work. Never remove authors names and always respect
 PL:
 Tworzenie paczki ipk i umieszczanie jej w oficjalnym repozytorium DOWOLNEGO softu jest zabronione bez mojej zgody.
 Prosze uszanuj moją i innych pracę. Nigdy nie usuwaj nikogo z listy autorów i zawsze postępuj zgodnie z licencjami wtyczek!
-
