@@ -1,0 +1,10 @@
+Package: enigma2-plugin-extensions--j00zeks-mod-openmultiboot
+Priority: optional
+Section: utils
+Depends: 
+Description: przygotowywany i testowany tylko pod pli
+Maintainer: j00zek
+Source: http://github.com/j00zek/pli-openmultibootmanager
+Version: 20.03.16.0749
+Architecture: all
+DestinationPath: /usr/lib/enigma2/python/Plugins/Extensions/OpenMultiboot
