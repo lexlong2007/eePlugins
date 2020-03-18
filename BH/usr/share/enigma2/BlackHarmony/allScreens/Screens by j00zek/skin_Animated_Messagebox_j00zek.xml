@@ -17,7 +17,7 @@ WindowWidth = self.instance.size().width()
 windowHeight = self.instance.size().height()
 orgWindowPos = self.instance.position()
 offset = 10
-textFont = 25
+textFont = 30
 listItemHeight = 35
 
 # Move and Resize label

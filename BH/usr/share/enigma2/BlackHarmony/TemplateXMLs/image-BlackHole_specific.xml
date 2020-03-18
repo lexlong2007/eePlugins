@@ -2337,7 +2337,7 @@ MultiContentEntryText(pos = (1160, 0), size = (100, 25), font = 0, flags = RT_HA
     <widget source="key_blue" render="Label" position="952,849" size="200,32" zPosition="1" font="Roboto_HD; 24" halign="left" backgroundColor="dark_grey" transparent="1" />
 
 </screen>
-                     <screen name="BluetoothDiscovery" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
+  <screen name="BluetoothDiscovery" position="345,93" size="1232,908" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png" />
     <widget source="global.CurrentTime" render="Label" position="40,25" size="100,35" font="Roboto_HD; 28" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Default</convert>
