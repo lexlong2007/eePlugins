@@ -47,7 +47,7 @@ from translate import _
 #UserSkin permanent configs
 config.plugins.UserSkin = ConfigSubsection()
 config.plugins.UserSkin.refreshInterval = ConfigNumber(default=30) #in minutes
-
+config.plugins.UserSkin.separator = NoSave(ConfigNothing())
 def clearCache():
     with open("/proc/sys/vm/drop_caches", "w") as f: f.write("1\n")
 
@@ -414,17 +414,13 @@ class UserSkin_Config(Screen, ConfigListScreen):
 
     def createConfigList(self):
         if DBG == True: printDEBUG('self.createConfigList() >>>')
-        self.set_bar = getConfigListEntry(_("Selector bar style:"), self.myUserSkin_bar)
-        self.set_buttons = getConfigListEntry(_("Selector buttons style:"), self.myUserSkin_buttons)
-        self.set_color = getConfigListEntry(_("Colors:"), self.myUserSkin_style)
-        self.set_font = getConfigListEntry(_("Font:"), self.myUserSkin_font)
-        self.set_myatile = getConfigListEntry(_("Enable skin personalization:"), self.myUserSkin_active)
         self.list = []
-        self.list.append(self.set_myatile)
-        self.list.append(self.set_color)
-        self.list.append(self.set_font)
-        self.list.append(self.set_bar)
-        self.list.append(self.set_buttons)
+        self.list.append(getConfigListEntry( '\c00289496' + _("--- Basic settings ---")))
+        self.list.append(getConfigListEntry(_("Enable skin personalization:"), self.myUserSkin_active))
+        self.list.append(getConfigListEntry(_("Colors:"), self.myUserSkin_style))
+        self.list.append(getConfigListEntry(_("Font:"), self.myUserSkin_font))
+        self.list.append(getConfigListEntry(_("Selector bar style:"), self.myUserSkin_bar))
+        self.list.append(getConfigListEntry(_("Selector buttons style:"), self.myUserSkin_buttons))
         if isSlowCPU() == True:
             self.list.append(getConfigListEntry(_("No JPG previews:"), config.plugins.UserSkin.jpgPreview))
         if self.LCDconfigKey != 'none':
@@ -436,6 +432,15 @@ class UserSkin_Config(Screen, ConfigListScreen):
             except Exception:
                 optionText = _("Display skin (OK):")
             self.list.append(getConfigListEntry( optionText, config.plugins.UserSkin.LCDmode) )
+        try:
+            self.list.append(getConfigListEntry(""))
+            #aqq
+            from Plugins.SystemPlugins.e2componentsInitiator.setup import buildMlist
+            self.list.extend(buildMlist())
+            self.currPiconType = config.plugins.j00zekCC.PiconsStyle.value
+            self.currZZPiconType = config.plugins.j00zekCC.zzPiconsStyle.value
+        except Exception as e:
+            if DBG == True: printDEBUG('Exception %s' % str(e))
         self["config"].list = self.list
         self["config"].l.setList(self.list)
         if self.myUserSkin_active.value:
@@ -450,39 +455,46 @@ class UserSkin_Config(Screen, ConfigListScreen):
         self.updateEntries = True
         if DBG == True: printDEBUG("[UserSkin:changedEntry]")
         try:
-            if self["config"].getCurrent() == self.set_color:
-                self.setPicture(self.myUserSkin_style.value)
-            elif self["config"].getCurrent() == self.set_font:
-                self.setPicture(self.myUserSkin_font.value)
-            elif self["config"].getCurrent() == self.set_bar:
-                self.setPicture(self.myUserSkin_bar.value)
-            elif self["config"].getCurrent() == self.set_buttons:
-                self.setPicture(self.myUserSkin_buttons.value)
-            elif self["config"].getCurrent() == self.set_myatile:
-                if self.myUserSkin_active.value:
-                    self["key_yellow"].setText(_("User skins"))
-                else:
-                    self["key_yellow"].setText("")
+            selectedItem = self["config"].getCurrent()
+            if len(selectedItem) == 2:
+                selectedCFG = selectedItem[1]
+                if selectedCFG   == self.myUserSkin_style:   self.setPicture(self.myUserSkin_style.value)
+                elif selectedCFG == self.myUserSkin_font:    self.setPicture(self.myUserSkin_font.value)
+                elif selectedCFG == self.myUserSkin_bar:     self.setPicture(self.myUserSkin_bar.value)
+                elif selectedCFG == self.myUserSkin_buttons: self.setPicture(self.myUserSkin_buttons.value)
+                elif selectedCFG == self.myUserSkin_active:
+                    if self.myUserSkin_active.value:
+                        self["key_yellow"].setText(_("User skins"))
+                    else:
+                        self["key_yellow"].setText("")
+                elif selectedCFG == config.plugins.j00zekCC.PiconsStyle:   self.setPicture(config.plugins.j00zekCC.PiconsStyle.value.replace("%20","").split("/")[0])
+                elif selectedCFG == config.plugins.j00zekCC.zzPiconsStyle: self.setPicture(config.plugins.j00zekCC.zzPiconsStyle.value.replace("%20","").split("/")[0])
         except Exception: pass
 
     def selectionChanged(self):
-        if self["config"].getCurrent() == self.set_color:
-            self.setPicture(self.myUserSkin_style.value)
-        elif self["config"].getCurrent() == self.set_font:
-            self.setPicture(self.myUserSkin_font.value)
-        elif self["config"].getCurrent() == self.set_bar:
-            self.setPicture(self.myUserSkin_bar.value)
-        elif self["config"].getCurrent() == self.set_buttons:
-            self.setPicture(self.myUserSkin_buttons.value)
-        else:
-            self["Picture"].hide()
+        if DBG == True: printDEBUG("[UserSkin:selectionChanged]")
+        try:
+            selectedItem = self["config"].getCurrent()
+            if len(selectedItem) == 2:
+                #self.updateEntries = True
+                selectedCFG = selectedItem[1]
+                if selectedCFG   == self.myUserSkin_style:   self.setPicture(self.myUserSkin_style.value)
+                elif selectedCFG == self.myUserSkin_font:    self.setPicture(self.myUserSkin_font.value)
+                elif selectedCFG == self.myUserSkin_bar:     self.setPicture(self.myUserSkin_bar.value)
+                elif selectedCFG == self.myUserSkin_buttons: self.setPicture(self.myUserSkin_buttons.value)
+                elif selectedCFG == config.plugins.j00zekCC.PiconsStyle:   self.setPicture(config.plugins.j00zekCC.PiconsStyle.value.replace("%20","").split("/")[0])
+                elif selectedCFG == config.plugins.j00zekCC.zzPiconsStyle: self.setPicture(config.plugins.j00zekCC.zzPiconsStyle.value.replace("%20","").split("/")[0])
+                else:
+                    self["Picture"].hide()
+        except Exception: pass
             
     def cancel(self):
-        if self["config"].isChanged():
+        if self.updateEntries: #self["config"].isChanged():
             self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Do you really want to cancel?"), MessageBox.TYPE_YESNO, default = False)
         else:
             for x in self["config"].list:
-                x[1].cancel()
+                if len(x) == 2:
+                    x[1].cancel()
             if self.changed_screens:
                 self.restartGUI()
             else:
@@ -494,7 +506,8 @@ class UserSkin_Config(Screen, ConfigListScreen):
         else:
             printDEBUG("Cancel confirmed. Config changes will be lost.")
             for x in self["config"].list:
-                x[1].cancel()
+                if len(x) == 2:
+                    x[1].cancel()
             self.close()
                 
     def setPicture(self, f):
@@ -545,6 +558,11 @@ class UserSkin_Config(Screen, ConfigListScreen):
                 config.plugins.UserSkin.LCDmode.value = ret[1]
                 if DBG == True: printDEBUG("config.plugins.UserSkin.LCDmode.value=%s" % config.plugins.UserSkin.LCDmode.value )
         
+    def selectFolderCallBack(self, curIndex, newPath):
+        if None != newPath:
+            self["config"].list[curIndex][1].value = newPath
+            self.createConfigList()
+            
     def keyOkbutton(self):
         if DBG == True: printDEBUG("keyOkbutton >>>")
         try:
@@ -553,6 +571,15 @@ class UserSkin_Config(Screen, ConfigListScreen):
                 for item in self.LCDscreensList:
                     mySkin.append((item[1] , item[0]))
                 self.session.openWithCallback(self.LCDskinCB, ChoiceBox, title = _("Choose LCD skin:"), list = mySkin)
+            elif self["config"].getCurrent()[1] == config.plugins.j00zekCC.PiconsMainRootPath:
+                curIndex = self["config"].getCurrentIndex()
+                currItem = self["config"].list[curIndex][1]
+                currInfo = self["config"].list[curIndex][0]
+                from Plugins.SystemPlugins.e2componentsInitiator.setup import DirectorySelectorWidget
+                if os.path.isdir(currItem.value):
+                    self.session.openWithCallback(boundFunction(self.selectFolderCallBack, curIndex), DirectorySelectorWidget, currDir=currItem.value, title=currInfo)
+                else:
+                    self.session.openWithCallback(boundFunction(self.selectFolderCallBack, curIndex), DirectorySelectorWidget, currDir='/', title=currInfo)
             else:
                 self.keyOk()
         except Exception as e:
@@ -560,7 +587,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
             self.keyOk()
     
     def keyOk(self):
-        if self["config"].isChanged() or self.updateEntries == True or self.changed_screens:
+        if self.updateEntries == True or self.changed_screens: #or self["config"].isChanged():
             self.session.openWithCallback(self.keyOkret,MessageBox, _("Do you want to update your skin modification?"), MessageBox.TYPE_YESNO, default = True)
         else:
             self.session.openWithCallback(self.keyOkret,MessageBox, _("Do you want to update your skin modification?"), MessageBox.TYPE_YESNO, default = False)
@@ -572,8 +599,15 @@ class UserSkin_Config(Screen, ConfigListScreen):
             printDEBUG("self.myUserSkin_bar.value=" + self.myUserSkin_bar.value)
             printDEBUG("self.myUserSkin_buttons.value=" + self.myUserSkin_buttons.value)
             for x in self["config"].list:
-                x[1].save()
+                if len(x) == 2:
+                    x[1].save()
             configfile.save()
+            try:
+                if self.currPiconType != config.plugins.j00zekCC.PiconsStyle.value:
+                    os.system('rm -f %s/*' % os.path.join(config.plugins.j00zekCC.PiconsMainRootPath.value, 'picon'))
+                if self.currZZPiconType != config.plugins.j00zekCC.zzPiconsStyle.value:
+                    os.system('rm -f %s/*' % os.path.join(config.plugins.j00zekCC.PiconsMainRootPath.value, 'zzpicon'))
+            except Exception: pass
             ################################ SAFE MODE 
             self.UserSkinToolSet.ClearMemory()
             if isImageType('vti') or isImageType('vuplus') or isImageType('openpli-7'):
@@ -1236,7 +1270,7 @@ class TreeUserSkinScreens(Screen):
             else:
                 try:
                     symlink(d + f, self.UserSkin_Selections_dir + f)
-                except:
+                except Exception:
                     system('ln -sf %s %s' %(d + f,self.UserSkin_Selections_dir + f))
             self.__refreshList()
 

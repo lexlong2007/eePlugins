@@ -2,7 +2,7 @@
 from os import path
 
 repo='u'
-for opkgPath in ('/etc/opkg/opkg-j00zka.conf','/etc/opkg/user-feed.conf',):
+for opkgPath in ('/etc/opkg/opkg-j00zka.conf','/etc/opkg/user-feed.conf','/etc/opkg/j00zek.conf',):
   if path.exists(opkgPath):
     with open(opkgPath, 'r') as f:
       fc=f.read()
