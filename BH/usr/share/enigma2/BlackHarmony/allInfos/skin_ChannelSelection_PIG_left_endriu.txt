@@ -1,4 +1,2 @@
-#titlePL:Lista kanałów z oknem PIG po lewej
-skin_ChannelSelection_PIG_left_endriu.xml
 Lista kanałów z oknem podglądu i informacjami po lewej stronie
 autor endriu

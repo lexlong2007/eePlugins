@@ -1,0 +1,7 @@
+Belka na całość ekranu u góry zawiera:
+- aktualne dane pobierane z czujników airly
+- wschód i zachód słońca
+- fazę księżyca
+- dane o jakości powietrza z airly
+- informację kto obchodzi imieniny
+- pogodę na następny dzień

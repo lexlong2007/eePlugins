@@ -23,28 +23,38 @@
   </widget>
  <eLabel text="%" position="225,54" size="30,23" backgroundColor="black" transparent="1" font="Regular; 22" valign="center"  foregroundColor="white" />
   
- <ePixmap alphatest="blend" pixmap="BlackHarmony/icons/Weather/wsch1.png" position="301,0" size="77,39" zPosition="1" />
- <ePixmap alphatest="blend" pixmap="BlackHarmony/icons/Weather/zach1.png" position="301,40" size="77,39" zPosition="1" />
- <widget backgroundColor="black" font="Regular; 23" halign="right" position="365,10" render="Label" size="80,33" source="global.CurrentTime" transparent="1" valign="center">
+  <!--słońce-->
+  
+  <eLabel position="295,16" size="1,51" backgroundColor="linie" />
+ <ePixmap alphatest="blend" pixmap="BlackHarmony/icons/Weather/wsch1.png" position="310,0" size="77,39" zPosition="1" />
+ <ePixmap alphatest="blend" pixmap="BlackHarmony/icons/Weather/zach1.png" position="310,40" size="77,39" zPosition="1" />
+ <widget backgroundColor="black" font="Regular; 23" halign="right" position="375,10" render="Label" size="80,33" source="global.CurrentTime" transparent="1" valign="center">
     <convert type="j00zekSun">wschod</convert>
   </widget>
- <widget backgroundColor="black" font="Regular; 23" foregroundColor="white" halign="right" position="365,50" render="Label" size="80,33" source="global.CurrentTime" transparent="1" valign="center">
+ <widget backgroundColor="black" font="Regular; 23" foregroundColor="white" halign="right" position="375,50" render="Label" size="80,33" source="global.CurrentTime" transparent="1" valign="center">
     <convert type="j00zekSun">zachod</convert>
   </widget>
   
- <widget alphatest="on" path="/usr/share/enigma2/BlackHarmony/icons" picontype="MoonPhase" position="460,2" render="j00zekPicons" showdefaultpic="no" size="75,75" backgroundColor="background" source="global.CurrentTime" zPosition="8">
+  <!--księżyc-->
+  
+  <eLabel position="472,16" size="1,51" backgroundColor="linie" />
+ <widget alphatest="on" path="/usr/share/enigma2/BlackHarmony/icons" picontype="MoonPhase" position="485,2" render="j00zekPicons" showdefaultpic="no" size="75,75" backgroundColor="background" source="global.CurrentTime" zPosition="8">
  <convert type="j00zekMoon">obraz</convert>
  </widget>
- <widget backgroundColor="background" font="Regular;22" halign="center" valign="center" position="535,0" render="j00zekLabel" size="172,55" source="global.CurrentTime" transparent="1" zPosition="1">
+ <widget backgroundColor="background" font="Regular;22" halign="center" valign="center" position="560,0" render="j00zekLabel" size="175,55" source="global.CurrentTime" transparent="1" zPosition="1">
  <convert type="j00zekMoon">faza</convert>
    </widget> 
- <widget backgroundColor="background" font="Regular;21" halign="left" valign="top" position="540,55" render="Label" size="100,22" source="global.CurrentTime" transparent="1" zPosition="1">
+ <widget backgroundColor="background" font="Regular;21" halign="left" valign="top" position="570,55" render="Label" size="100,22" source="global.CurrentTime" transparent="1" zPosition="1">
  <convert type="j00zekMoon">oswietlenie</convert>
  </widget>
- <widget source="session.CurrentService" render="Label" backgroundColor="black" font="Regular; 25" foregroundColor="lemon" halign="center" position="773,5" size="140,30"  transparent="1" valign="center" zPosition="2" >
+ 
+ <!--imieniny-->
+ 
+ <eLabel position="745,16" size="1,51" backgroundColor="linie" />
+ <widget source="session.CurrentService" render="j00zekLabel" backgroundColor="black" font="Regular; 25" foregroundColor="lemon" halign="center" position="755,3" size="220,26"  transparent="1" valign="center" zPosition="2" >
           <convert type="j00zekTranslator">name day</convert>
         </widget>
- <widget backgroundColor="black" font="Regular; 26" foregroundColor="grey" halign="center" valign="center" noWrap="1" position="675,55" render="j00zekLabel" size="302,27" source="global.CurrentTime" transparent="1" zPosition="3">
+ <widget backgroundColor="black" font="Regular; 25" foregroundColor="grey" halign="center" valign="center" noWrap="0" position="755,29" render="j00zekLabel" size="220,55" source="global.CurrentTime" transparent="1" zPosition="3">
       <convert type="BlackHarmonyimieniny" />
     </widget>
   
