@@ -348,7 +348,7 @@ msgid "Paint a square. "
 msgstr "Tworzy prostokąt. "
 
 msgid "---Picons animations optional settings---"
-msgstr "---Opcjonalne ustawenia animacji pikon---"
+msgstr "***Opcjonalne ustawenia animacji pikon***"
 
 msgid "Personalization mode:"
 msgstr "Tryb personalizacji:"
@@ -616,3 +616,6 @@ msgstr "Prostokątne"
 
 msgid "Standard-mixed"
 msgstr "Standardowe-wymieszane"
+
+msgid "*** Basic settings ***"
+msgstr "*** Ustawienia podstawowe ***"

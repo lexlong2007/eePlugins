@@ -415,7 +415,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
     def createConfigList(self):
         if DBG == True: printDEBUG('self.createConfigList() >>>')
         self.list = []
-        self.list.append(getConfigListEntry( '\c00289496' + _("--- Basic settings ---")))
+        self.list.append(getConfigListEntry( '\c00289496' + _("*** Basic settings ***")))
         self.list.append(getConfigListEntry(_("Enable skin personalization:"), self.myUserSkin_active))
         self.list.append(getConfigListEntry(_("Colors:"), self.myUserSkin_style))
         self.list.append(getConfigListEntry(_("Font:"), self.myUserSkin_font))
