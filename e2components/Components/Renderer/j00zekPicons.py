@@ -115,7 +115,8 @@ def getOnLinePicon(piconName, piconType):
     DownloadedPiconFilename = None
     currURL = None
     def WebPicon(ret):
-        if DBG: j00zekDEBUG( "[j00zekPicons] WebCover >>>")
+        if DBG: j00zekDEBUG( "[j00zekPicons] WebPicon >>>")
+        DownloadedPiconFilename = currFileName
         return
     def dataError(error = '', errorType='downloading'):
         if DBG: j00zekDEBUG("[j00zekPicons] Error %s data %s" % ( str(errorType),str(error)))
@@ -138,7 +139,7 @@ def getOnLinePicon(piconName, piconType):
     elif piconType == 'piconSat':
         checkPathExists(currPath)
         currURL = "https://github.com/j00zek/eePicons/raw/master/piconSat/%s.png" % (piconName)
-    if not currURL is None:
+    if not currURL is None and os.path.exists(currPath):
         if DBG: j00zekDEBUG("[j00zekPicons]\n\t currURL='%s'\n\t piconFileName='%s'" % ( currURL,currFileName))
         downloadPage(currURL,currFileName).addCallback(WebPicon).addErrback(dataError)
     return DownloadedPiconFilename
@@ -146,10 +147,12 @@ def getOnLinePicon(piconName, piconType):
 
 def getPiconName(serviceName, selfPiconType):
   
-    def getName(serName):
-        gname = ServiceReference(serName).getServiceName()
+    def getName(serName, iptvStream = False):
+        gname = ServiceReference(serName).getServiceName().lower()
+        if iptvStream:
+            gname = gname.replace(' fhd', ' hd').replace(' uhd', ' hd') #iptv streams names correction
         gname = unicodedata.normalize('NFKD', unicode(gname, 'utf_8', errors='ignore')).encode('ASCII', 'ignore')
-        gname = re.sub('[^a-z0-9]', '', gname.replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
+        gname = re.sub('[^a-z0-9]', '', gname.replace('&', 'and').replace('+', 'plus').replace('*', 'star'))
         return gname
       
     if DBG: j00zekDEBUG('[j00zekPicons:getPiconName] >>>')
@@ -167,7 +170,7 @@ def getPiconName(serviceName, selfPiconType):
         name = 'unknown'
         sname = '_'.join(GetWithAlternative(serviceName).split(':', 10)[:10])
         pngname = findPicon(sname, selfPiconType, serviceName)
-        if pngname and isVTI and os.path.islink(pngname):
+        if pngname and isVTI and os.path.islink(pngname): #to delete incorrect references
             name = getName(serviceName)
             cname = os.path.abspath(pngname)
             cname = os.path.basename(cname)
@@ -195,10 +198,8 @@ def getPiconName(serviceName, selfPiconType):
             pngname = findPicon('_'.join(fields), selfPiconType, serviceName)
         if not pngname:
             if DBG: j00zekDEBUG('[j00zekPicons:getPiconName] pngname not found by reference, trying by service name')
-            name = getName(serviceName)
+            name = getName(serviceName, isStream)
             if len(name) > 0:
-                if isStream:
-                    name = name.replace('fhd', 'hd').replace('uhd', 'hd') #iptv streams names correction
                 pngname = findPicon(name, selfPiconType, serviceName)
                 if pngname and isVTI:
                     try:

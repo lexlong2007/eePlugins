@@ -28,7 +28,7 @@ _ = mygettext
 ########################### KONFIGURACJA ###########################################
 from Components.config import config, ConfigSubsection, ConfigDirectory, ConfigSelection, ConfigYesNo
 
-MinFontChoices = [("0", _("Defined in skin")), ("1", _("same as max font")),
+MinFontChoices = [("0,67", _("Defined in skin")), ("1", _("same as max font")),
                   ("0.75", _("75%% of defined font")), ("0,67", _("67%% of defined font")),
                   ("0,5", _("50%% of defined font")) ]
 #############################################################################################

@@ -207,7 +207,7 @@ msgstr "+/- 10%"
 
 # buildList
 msgid "Alternate user icons path:"
-msgstr "Ścieżka użytkownika ikon alternatywnych:"
+msgstr "Do alternatywnych ikon:"
 
 msgid "Ammend Font size"
 msgstr "Zmień rozmiar czcionki:"
@@ -219,7 +219,7 @@ msgid "---Dynamic Font Size---"
 msgstr "*** Dynamiczna zmiana czcionki ***"
 
 msgid "Event Name minimum font size"
-msgstr "Minimalna wielkość tytułu audycji:"
+msgstr "Min. wielkość tytułu audycji:"
 
 msgid "---Event description (EventName)---"
 msgstr "*** Nazwa zdarzenia (EventName) ***"
@@ -234,13 +234,13 @@ msgid "Information presented"
 msgstr "Informacje przedstawione:"
 
 msgid "Picons animations user path:"
-msgstr "Ścieżka użytkownika animacji Picons:"
+msgstr "Do animacji pikon:"
 
 msgid "Repeats"
 msgstr "Powtórzyć przewijany tekst:"
 
 msgid "Show TMDB rating at the begining (when available)"
-msgstr "Pokaż ocenę IMDB na początku (jeśli jest dostępna):"
+msgstr "Pokaż ocenę IMDB na początku (gdy jest dostępna):"
 
 msgid "Speed"
 msgstr "Prędkość przewijania:"
@@ -273,7 +273,7 @@ msgid "---Scrolling text---"
 msgstr "*** Przewijanie tekstu ***"
 
 msgid "Service Name minimum font size"
-msgstr "Minimalna wielkość nazwy kanału:"
+msgstr "Min. wielkość nazwy kanału:"
 
 msgid "Type"
 msgstr "Typ przewijania:"
