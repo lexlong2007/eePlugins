@@ -2,14 +2,20 @@ echo "Cleaning skin files"
 find /DuckboxDisk/github/eePlugins/BH/usr/share/enigma2 -name "*.xml" | 
 while read F 
 do
+#zrodla
+  if [ `grep -c '"session\.BlackHarmonyMSNWeather"' < "$F"` -gt 0 ];then #zeby niepotrzebnienie ustawiac daty modyfikacji
+    sed -i 's/"session\.BlackHarmonyMSNWeather"/"session.j00zekMSNWeather"/g' "$F"
+  fi
+
+  #konwertery
   if [ `grep -c 'type="ServiceName2' < "$F"` -gt 0 ];then #zeby niepotrzebnienie ustawiac daty modyfikacji
     sed -i 's/type="ServiceName2"/type="j00zekModServiceName2"/g' "$F"
   fi
   if [ `grep -c 'type="EventName' < "$F"` -gt 0 ];then #zeby niepotrzebnienie ustawiac daty modyfikacji
     sed -i 's/type="EventName"/type="j00zekModEventName"/g' "$F"
   fi
-  if [ `grep -c 'type="ABTCAirlyWidget"' < "$F"` -gt 0 ];then
-    sed -i 's/type="ABTCAirlyWidget"/type="BlackHarmonyABTCAirlyWidget"/g' "$F"
+  if [ `grep -c 'type="BlackHarmonyABTCAirlyWidget"' < "$F"` -gt 0 ];then
+    sed -i 's/type="BlackHarmonyABTCAirlyWidget"/type="j00zekModABTCAirlyWidget"/g' "$F"
   fi
   if [ `grep -c 'type="BlackHarmonyCaidInfo2"' < "$F"` -gt 0 ];then
     sed -i 's/type="BlackHarmonyCaidInfo2"/type="j00zekModCaidInfo2"/g' "$F"
@@ -35,3 +41,4 @@ do
   fi
 done
 exit 0
+

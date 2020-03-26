@@ -30,13 +30,13 @@
 </windowstyle>
 
 <screen name="LCDWetterStandbyTemplate">
- <widget foregroundColor="foreground" backgroundColor="background" font="VFD;50" render="Label" halign="center" valign="center" noWrap="1" transparent="1" source="session.BlackHarmonyMSNWeather" position="10,00" size="460,60" zPosition="5">
+ <widget foregroundColor="foreground" backgroundColor="background" font="VFD;50" render="Label" halign="center" valign="center" noWrap="1" transparent="1" source="session.j00zekMSNWeather" position="10,00" size="460,60" zPosition="5">
  		<convert type="BlackHarmonyMSNWeather">city</convert>
  </widget> 
- <widget foregroundColor="foreground" backgroundColor="background" font="VFD;60" render="Label" halign="right" valign="center" noWrap="1" transparent="1" source="session.BlackHarmonyMSNWeather" position="135,60" size="100,60" zPosition="5">
+ <widget foregroundColor="foreground" backgroundColor="background" font="VFD;60" render="Label" halign="right" valign="center" noWrap="1" transparent="1" source="session.j00zekMSNWeather" position="135,60" size="100,60" zPosition="5">
  		<convert type="BlackHarmonyMSNWeather">temperature_current</convert>
  </widget>
- <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="245,60" size="60,60" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+ <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="245,60" size="60,60" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
     <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
  </widget>
  </screen>
@@ -313,10 +313,10 @@
     <convert type="ClockToText">Format:%m.</convert>
   </widget>
   
-  <widget foregroundColor="foreground" backgroundColor="background" font="VFD;60" render="Label" halign="right" valign="top" noWrap="0" transparent="1" source="session.BlackHarmonyMSNWeather" position="240,105" size="100,60" zPosition="5">
+  <widget foregroundColor="foreground" backgroundColor="background" font="VFD;60" render="Label" halign="right" valign="top" noWrap="0" transparent="1" source="session.j00zekMSNWeather" position="240,105" size="100,60" zPosition="5">
  		<convert type="BlackHarmonyMSNWeather">temperature_current</convert>
   </widget>
- <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="350,105" size="60,60" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+ <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="350,105" size="60,60" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
     <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
  </widget>
   <widget source="session.Event_Now" render="Label" position="285,160" size="130,35" font="VFD;33" halign="right" valign="top" foregroundColor="#00d0dda8">

@@ -192,51 +192,51 @@
   <widget source="session.CurrentService" render="Label" backgroundColor="black" font="Regular;30" halign="center" position="1580,571" size="250,40" transparent="1">
       <convert type="j00zekTranslator">Weather now</convert>
         </widget>
-  <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1501,616" size="170,170" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="2">
+  <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1501,616" size="170,170" source="session.j00zekMSNWeather" transparent="1" zPosition="2">
       <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
     </widget>
-  <widget noWrap="1" backgroundColor="black" font="Regular; 30" render="Label" position="1700,625" size="130,35" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="right" transparent="1" foregroundColor="lemon" >
+  <widget noWrap="1" backgroundColor="black" font="Regular; 30" render="Label" position="1700,625" size="130,35" source="session.j00zekMSNWeather" zPosition="3" halign="right" transparent="1" foregroundColor="lemon" >
       <convert type="BlackHarmonyMSNWeather">temperature_current</convert>
     </widget>
 	<ePixmap pixmap="BlackHarmony/weather_icons/wiatr.png" position="1676,671" size="30,30" zPosition="3" transparent="1" alphatest="blend" />
   <ePixmap pixmap="BlackHarmony/weather_icons/deszcz.png" position="1676,721" size="28,30" zPosition="4" transparent="1" alphatest="blend" />
   
-  <widget backgroundColor="black" font="Regular; 30" foregroundColor="#000090e6" render="Label" position="1731,671" size="140,35" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="left" transparent="1">
+  <widget backgroundColor="black" font="Regular; 30" foregroundColor="#000090e6" render="Label" position="1731,671" size="140,35" source="session.j00zekMSNWeather" zPosition="3" halign="left" transparent="1">
     <convert type="BlackHarmonyMSNWeather">winddisplay</convert>
       </widget>
-  <widget backgroundColor="black" font="Regular; 30" foregroundColor="white" render="Label" position="1720,721" size="55,35" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="right" transparent="1">
+  <widget backgroundColor="black" font="Regular; 30" foregroundColor="white" render="Label" position="1720,721" size="55,35" source="session.j00zekMSNWeather" zPosition="3" halign="right" transparent="1">
     <convert type="BlackHarmonyMSNWeather">humidity</convert>
        </widget>
   <eLabel text="%" position="1780,721" size="35,35" backgroundColor="black" transparent="1" font="Regular; 30"  />
   <widget source="session.CurrentService" render="Label" font="Regular; 27" foregroundColor="light_yellow" halign="left" position="1497,780" size="355,35"  transparent="1" zPosition="2" backgroundColor="black" >
     <convert type="j00zekTranslator">Felt temperature</convert>
        </widget>
-   <widget noWrap="1" backgroundColor="black" font="Regular; 27" render="Label" position="1497,780" size="355,35" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="right" transparent="1" foregroundColor="podsw" >
+   <widget noWrap="1" backgroundColor="black" font="Regular; 27" render="Label" position="1497,780" size="355,35" source="session.j00zekMSNWeather" zPosition="3" halign="right" transparent="1" foregroundColor="podsw" >
       <convert type="BlackHarmonyMSNWeather">feelslike</convert>
        </widget> 
    <widget source="session.CurrentService" render="Label" font="Regular; 27" foregroundColor="green" halign="left" position="1497,816" size="355,35"  transparent="1" zPosition="2" backgroundColor="black" >
      <convert type="j00zekTranslator">Pressure</convert>
         </widget>
-	<widget source="session.BlackHarmonyMSNWeather" render="Label" position="1497,816" size="355,35" font="Regular;27" zPosition="2" halign="right" foregroundColor="lemon" backgroundColor="background" transparent="1" noWrap="1">
+	<widget source="session.j00zekMSNWeather" render="Label" position="1497,816" size="355,35" font="Regular;27" zPosition="2" halign="right" foregroundColor="lemon" backgroundColor="background" transparent="1" noWrap="1">
      <convert type="MSNWeatherWebCurrent">barometrValue</convert>
      </widget>
 	
   <!--airly-->
   
  	<widget position="1505,868" size="100,100" source="session.CurrentService" render="BlackHarmonyABTCAirlyPixmap" alphatest="blend" transparent="1" zPosition="9">
-        <convert type="BlackHarmonyABTCAirlyWidget">indexBackPNG</convert>
+        <convert type="j00zekModABTCAirlyWidget">indexBackPNG</convert>
     </widget>
     <widget position="1505,868" size="100,100" source="session.CurrentService" render="Label" font="Roboto_HD; 34" foregroundColor="foreground" backgroundColor="background" halign="center" valign="center" noWrap="1" transparent="1" zPosition="10">
-        <convert type="BlackHarmonyABTCAirlyWidget">caqi</convert>
+        <convert type="j00zekModABTCAirlyWidget">caqi</convert>
      </widget>
     <widget position="1636,868" size="225,35" source="session.CurrentService" render="Label" font="Regular; 26" foregroundColor="foreground" backgroundColor="background" halign="left" valign="center" noWrap="1" transparent="1" zPosition="10">
-        <convert type="BlackHarmonyABTCAirlyWidget">pm25</convert>
+        <convert type="j00zekModABTCAirlyWidget">pm25</convert>
     </widget>
     <widget position="1636,902" size="225,35" source="session.CurrentService" render="Label" font="Regular; 26" foregroundColor="foreground" backgroundColor="background" halign="left" valign="center" noWrap="1" transparent="1" zPosition="10">
-        <convert type="BlackHarmonyABTCAirlyWidget">pm10</convert>
+        <convert type="j00zekModABTCAirlyWidget">pm10</convert>
     </widget>
     <widget position="1636,935" size="225,35" source="session.CurrentService" render="Label" font="Regular; 26" foregroundColor="foreground" backgroundColor="background" halign="left" valign="center" noWrap="1" transparent="1" zPosition="10">
-        <convert type="BlackHarmonyABTCAirlyWidget">pm1</convert>
+        <convert type="j00zekModABTCAirlyWidget">pm1</convert>
    </widget>
 
 <!--data, godzina-->

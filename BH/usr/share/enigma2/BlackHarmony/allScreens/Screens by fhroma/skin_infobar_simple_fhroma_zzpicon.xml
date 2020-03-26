@@ -99,13 +99,13 @@
     <widget source="session.CurrentService" render="j00zekLabel" position="1680,835" size="200,28" font="Roboto_HD; 23" backgroundColor="black" halign="center" transparent="1" foregroundColor="lemon">
       <convert type="j00zekTranslator">Current weather:</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1540,830" size="136,136" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1540,830" size="136,136" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
       <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
     </widget>
-    <widget noWrap="1" backgroundColor="black" font="Roboto_HD; 30" render="Label" position="1745,870" size="100,35" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="right" transparent="1" valign="top">
+    <widget noWrap="1" backgroundColor="black" font="Roboto_HD; 30" render="Label" position="1745,870" size="100,35" source="session.j00zekMSNWeather" zPosition="3" halign="right" transparent="1" valign="top">
       <convert type="BlackHarmonyMSNWeather">temperature_current</convert>
     </widget>
-    <widget noWrap="1" backgroundColor="black" font="Roboto_HD; 30" render="Label" position="1755,930" size="90,35" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="right" transparent="1" foregroundColor="podsw" valign="top">
+    <widget noWrap="1" backgroundColor="black" font="Roboto_HD; 30" render="Label" position="1755,930" size="90,35" source="session.j00zekMSNWeather" zPosition="3" halign="right" transparent="1" foregroundColor="podsw" valign="top">
       <convert type="BlackHarmonyMSNWeather">feelslike</convert>
     </widget>
 

@@ -2,8 +2,8 @@ from Plugins.Plugin import PluginDescriptor
 
 def sessionstart(session, **kwargs):
     try:
-        from Components.Sources.BlackHarmonyMSNWeather import BlackHarmonyMSNWeather
-        session.screen['BlackHarmonyMSNWeather'] = BlackHarmonyMSNWeather()
+        from Components.Sources.j00zekMSNWeather import j00zekMSNWeather
+        session.screen['j00zekMSNWeather'] = j00zekMSNWeather()
     except Exception, e:
         print "Exception: %s" % str(e)
 

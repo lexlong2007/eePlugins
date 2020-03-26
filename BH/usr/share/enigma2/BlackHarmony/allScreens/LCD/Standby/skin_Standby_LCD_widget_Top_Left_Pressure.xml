@@ -1,6 +1,6 @@
 <skin>
 	<screen name="StandbySummary" position="0,0" size="100%,100%">
-        <widget source="session.BlackHarmonyMSNWeather" render="Label" position="2%,2%" size="52%,16%" font="BHfDlcD;50" halign="left" transparent="1" backgroundColor="black">
+        <widget source="session.j00zekMSNWeather" render="Label" position="2%,2%" size="52%,16%" font="BHfDlcD;50" halign="left" transparent="1" backgroundColor="black">
             <convert type="MSNWeatherWebCurrent">barometrValue</convert>
         </widget>
 	</screen>

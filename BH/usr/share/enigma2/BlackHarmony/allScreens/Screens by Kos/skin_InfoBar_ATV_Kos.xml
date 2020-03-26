@@ -133,10 +133,10 @@
     <widget source="session.CurrentService" render="Label" position="599,955" zPosition="2" size="750,30" font="Roboto_HD; 22" valign="top" halign="left" transparent="1" backgroundColor="black">
       <convert type="CryptoInfo">VerboseInfo</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1407,764" size="55,55" source="session.BlackHarmonyMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1407,764" size="55,55" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
       <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
     </widget>
-    <widget noWrap="1" backgroundColor="black" font="HD_Thin; 24" render="Label" position="1487,777" size="60,26" source="session.BlackHarmonyMSNWeather" zPosition="3" halign="left" transparent="1">
+    <widget noWrap="1" backgroundColor="black" font="HD_Thin; 24" render="Label" position="1487,777" size="60,26" source="session.j00zekMSNWeather" zPosition="3" halign="left" transparent="1">
       <convert type="BlackHarmonyMSNWeather">temperature_current</convert>
     </widget>
     <widget source="session.FrontendInfo" render="Label" position="1410,850" size="125,25" zPosition="3" font="Roboto_HD;22" halign="left" backgroundColor="black" transparent="1">
