@@ -92,7 +92,7 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
   </widget>
   <widget source="session.Event_Now" render="j00zekModRunningText" 
 options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,startdelay=200,always=0,oneshot=0" noWrap="1" position="16,308" size="740,96" font="VFD;80" transparent="1" halign="left" valign="top" foregroundColor="#ffff00">
-    <convert type="EventName">Name</convert>
+    <convert type="j00zekModEventName">Name</convert>
   </widget>
   <widget source="session.Event_Now" render="Progress" pixmap="HomarLCDskins/Homar/Homar_3.png" position="230,411" size="350,50" borderWidth="6" backgroundColor="#00CFFF">
     <convert type="EventTime">Progress</convert>
@@ -126,7 +126,7 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
   </widget>
 <widget source="parent.ServiceEvent" render="j00zekModRunningText" 
 options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,startdelay=800,always=0,oneshot=0" noWrap="1" position="16,308" size="740,96" font="VFD;80" transparent="1" halign="left" valign="top" foregroundColor="#ffff00" >
-  <convert type="EventName">Name</convert>
+  <convert type="j00zekModEventName">Name</convert>
 </widget>
 <widget source="parent.ServiceEvent" render="Label" noWrap="1" position="20,390" size="230,88" font="VFD;78" transparent="1" halign="left" valign="center" foregroundColor="#ffff66">
   <convert type="EventTime">StartTime</convert>
@@ -387,7 +387,7 @@ position="16,280" size="760,90" font="VFD;88" transparent="1" halign="center" va
      </widget>
     	<widget source="parent.ServiceEvent" render="j00zekModRunningText" 
 options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,startdelay=800,always=0,oneshot=0" noWrap="1" position="16,308" size="740,96" font="VFD;80" transparent="1" halign="left" valign="top" foregroundColor="#ffff00" >
-  <convert type="EventName">Name</convert>
+  <convert type="j00zekModEventName">Name</convert>
 </widget>
 <widget source="parent.ServiceEvent" render="Label" noWrap="1" position="20,390" size="230,88" font="VFD;78" transparent="1" halign="left" valign="center" foregroundColor="#ffff66">
   <convert type="EventTime">StartTime</convert>
@@ -931,7 +931,7 @@ options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,start
 </widget>
 <widget source="parent.Event" render="j00zekModRunningText" 
 options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,startdelay=800,always=0,oneshot=0" noWrap="1" position="16,308" size="740,96" font="VFD;80" transparent="1" halign="left" valign="top" foregroundColor="#ffff00" >
-  <convert type="EventName">Name</convert>
+  <convert type="j00zekModEventName">Name</convert>
 </widget>
 <widget source="parent.Event" render="Progress" pixmap="HomarLCDskins/Homar/Homar_3.png" position="230,411" size="350,50" borderWidth="6" backgroundColor="#00CFFF"> 
 	<convert type="EventTime">Progress</convert>
