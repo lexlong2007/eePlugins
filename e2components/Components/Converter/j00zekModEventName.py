@@ -1,9 +1,10 @@
+# -*- coding: utf-8 -*-
 from Components.config import config
 from Components.Converter.Converter import Converter
 from Components.Element import cached
 from Components.Converter.Poll import Poll
 
-try: #obejscie dla VTI 11, które nie ma konwertera genre
+try: #obejscie dla VTI 11, ktore nie ma konwertera genre
     from Components.Converter.genre import getGenreStringSub
 except Exception:
     def getGenreStringSub(hn = None, ln = None):
