@@ -12,7 +12,7 @@ from enigma import eCanvas, eSize, gRGB, eRect
 from Components.VariableText import VariableText
 from Components.config import config
 
-class j00zekWatches(Renderer):
+class j00zekModWatches(Renderer):
 
     def __init__(self):
         Renderer.__init__(self)
