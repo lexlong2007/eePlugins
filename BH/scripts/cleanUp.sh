@@ -1,5 +1,15 @@
 echo "Cleaning skin files"
-find /DuckboxDisk/github/eePlugins/BH/usr/share/enigma2 -name "*.xml" | 
+if [ -z $1 ];then
+  searchPath=/DuckboxDisk/github/eePlugins/BH/usr/share/enigma2
+else
+  searchPath="$1"
+fi
+if [ ! -e "$searchPath" ];then
+  echo "$searchPath does NOT exist, exiting"
+  exit 1
+fi
+
+find "$searchPath" -type f -name "*.xml" | 
 while read F 
 do
 #zrodla
