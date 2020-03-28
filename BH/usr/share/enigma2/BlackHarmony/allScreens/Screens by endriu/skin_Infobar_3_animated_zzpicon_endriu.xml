@@ -98,7 +98,7 @@
   <widget source="session.CurrentService" render="Label" position="1148,1018" zPosition="2" size="322,25" font="Roboto_HD; 22" valign="top" halign="left" transparent="1" backgroundColor="black">
     <convert type="BlackHarmonygExtraInfo">Source</convert>
   </widget>
-  <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1650,900" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+  <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1650,900" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
     <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
   </widget>
   <widget noWrap="1" backgroundColor="black" font="HD_Thin; 34" render="Label" position="1785,900" size="85,40" source="session.j00zekMSNWeather" zPosition="3" halign="left" transparent="1" foregroundColor="lemon">

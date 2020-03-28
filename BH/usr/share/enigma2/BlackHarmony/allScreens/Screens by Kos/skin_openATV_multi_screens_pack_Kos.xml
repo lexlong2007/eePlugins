@@ -50,7 +50,7 @@
 			</convert>
   </widget>
   <widget source="title" render="Label" position="85,140" size="560,40" font="HD_Thin; 36" halign="left" foregroundColor="light_yellow" backgroundColor="black" transparent="1" />
-  <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="70,708" size="135,135" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+  <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="70,708" size="135,135" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
     <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
   </widget>
   <widget noWrap="1" font="HD_Thin; 24" render="Label" position="215,728" size="110,30" source="session.j00zekMSNWeather" zPosition="3" halign="center"  foregroundColor="lemon" backgroundColor="black" transparent="1">
@@ -173,7 +173,7 @@
 	<ePixmap pixmap="BlackHarmony/gfx/linia_IB.png" position="1350,1000" size="450,1" alphatest="blend"/>
 	<widget source="label4" render="Label" position="1268,845" size="280,130" font="Regular; 28" halign="center" valign="center" zPosition="2" foregroundColor="white" backgroundColor="black" transparent="1"/>
 	<widget source="label5" render="Label" position="1575,845" size="280,130" font="Regular; 28" halign="center" valign="center" zPosition="2" foregroundColor="white" backgroundColor="black" transparent="1"/>
-	<widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="70,840" size="135,135" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+	<widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="70,840" size="135,135" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
       <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
     </widget>
     <widget noWrap="1" font="HD_Thin; 24" render="Label" position="515,1020" size="110,30" source="session.j00zekMSNWeather" zPosition="3" halign="center"  foregroundColor="lemon" backgroundColor="black" transparent="1">
@@ -234,7 +234,7 @@
     <widget source="ServiceEvent" render="Progress" position="1358,768" size="376,6" pixmap="BlackHarmony/gfx/progress_cs.png" transparent="1">
       <convert type="EventTime">Progress</convert>
     </widget>
-    <widget source="ServiceEvent" render="BlackHarmonyEventListDisplay" position="1185,810" size="655,140" rowHeight="32" column0="0,80,green,Roboto_HD,25,0,0" column1="90,570,#FFFFFF,Roboto_HD,25,0,1" primetimeoffset="10" alphatest="blend" >
+    <widget source="ServiceEvent" render="j00zekModEventListDisplay" position="1185,810" size="655,140" rowHeight="32" column0="0,80,green,Roboto_HD,25,0,0" column1="90,570,#FFFFFF,Roboto_HD,25,0,1" primetimeoffset="10" alphatest="blend" >
       <convert type="BlackHarmonyEventList">primetime=yes,eventcount=4</convert>
     </widget>
     <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="95,1001" size="35,27" alphatest="blend"/>
@@ -717,7 +717,7 @@
     <widget source="session.Event_Now" render="Progress" position="64,78" zPosition="1" size="1139,6" pixmap="BlackHarmony/gfx/progress.png" transparent="1">
       <convert type="EventTime">Progress</convert>
     </widget>
-    <widget pointer="BlackHarmony/gfx/seekbutton.png:1,1" position="66,68" render="BlackHarmonyPositionGauge" size="1139,25" source="session.Event_Now" zPosition="3" transparent="1">
+    <widget pointer="BlackHarmony/gfx/seekbutton.png:1,1" position="66,68" render="j00zekModPositionGauge" size="1139,25" source="session.Event_Now" zPosition="3" transparent="1">
       <convert type="BlackHarmonyEventPosition">Gauge</convert>
     </widget>
     <widget source="session.Event_Now" render="Label" position="63,95" size="100,32" font="HD_Thin; 30" halign="right" foregroundColor="white" backgroundColor="black" transparent="1">
@@ -758,7 +758,7 @@
   </screen>
   <screen name="Volume" position="78,50" size="72,202" title="Volume" zPosition="1" backgroundColor="transparent" flags="wfNoBorder">
 	<ePixmap pixmap="BlackHarmony/gfx/volback_3.png" position="1,1" size="70,200" zPosition="-5" alphatest="blend" />
-	<widget source="global.CurrentTime" render="BlackHarmonyVVolumeText" position="5,0" size="60,40" font="Roboto_HD;24" halign="center" valign="center" zPosition="20" foregroundColor="white" backgroundColor="black" transparent="1"/>
+	<widget source="global.CurrentTime" render="j00zekModVolumeText" position="5,0" size="60,40" font="Roboto_HD;24" halign="center" valign="center" zPosition="20" foregroundColor="white" backgroundColor="black" transparent="1"/>
 	<!--eLabel text="VOL" position="11,8" size="50,20" font="Regular;18" halign="center" valign="center" foregroundColor="white" backgroundColor="background" transparent="1" /-->
 	<ePixmap pixmap="BlackHarmony/gfx/vol_3.png" position="13,32" size="3,156" alphatest="blend" />
 	<widget name="Volume" pixmap="BlackHarmony/gfx/vol_3.png" position="18,32" size="43,156" orientation="orBottomToTop" transparent="1" />
@@ -1643,7 +1643,7 @@ self.instance.resize(eSize(*wsize))
     <widget name="scan_progress" position="1110,430" size="690,20" borderWidth="2" borderColor="dark_grey" foregroundColor="lemon" backgroundColor="black" transparent="1"/>
     <widget name="scan_state" position="1110,490" size="700,32" zPosition="2" font="Roboto_HD; 27" foregroundColor="light_yellow" backgroundColor="black" transparent="1"/>
     <widget name="pass" position="1110,550" size="700,32" font="Roboto_HD; 27" backgroundColor="black" transparent="1"/>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1110,810" size="135,135" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1110,810" size="135,135" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
       <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
     </widget>
     <widget noWrap="1" font="HD_Thin; 24" render="Label" position="1215,830" size="110,30" source="session.j00zekMSNWeather" zPosition="3" halign="center"  foregroundColor="lemon" backgroundColor="black" transparent="1">
@@ -4430,7 +4430,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget name="year" position="855,741" size="200,35" font="Roboto_HD; 26" valign="top" transparent="1" backgroundColor="black" foregroundColor="white"/>
     <widget name="genretext" position="739,782" size="110,33" font="HD_Thin; 26" valign="top" transparent="1" backgroundColor="black" foregroundColor="green"/>
     <widget name="genre" position="855,780" size="340,70" font="Roboto_HD; 26" valign="top" transparent="1" backgroundColor="black" foregroundColor="white"/>
-    <widget source="session.CurrentService" render="BlackHarmonyPositionGauge" position="741,875" size="440,6" transparent="1" zPosition="4">
+    <widget source="session.CurrentService" render="j00zekModPositionGauge" position="741,875" size="440,6" transparent="1" zPosition="4">
       <convert type="ServicePosition">Gauge</convert>
     </widget>
     <widget source="session.CurrentService" render="Progress" pixmap="BlackHarmony/gfx/progress.png" position="741,875" size="440,6" transparent="1" zPosition="3" borderWidth="1" borderColor="border">
@@ -5532,7 +5532,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="session.CurrentService" render="Progress" position="284,963" zPosition="1" size="1139,6" pixmap="BlackHarmony/gfx/progress.png" transparent="1">
       <convert type="ServicePosition">Position</convert>
     </widget>
-    <widget source="session.CurrentService" render="BlackHarmonyPositionGauge" position="284,963" zPosition="2" size="1139,6" transparent="1">
+    <widget source="session.CurrentService" render="j00zekModPositionGauge" position="284,963" zPosition="2" size="1139,6" transparent="1">
       <convert type="ServicePosition">Gauge</convert>
     </widget>
     <widget source="session.CurrentService" render="Label" position="285,988" size="110,30" font="Roboto_HD; 26" halign="left" backgroundColor="black" transparent="1" foregroundColor="yellow">
@@ -5544,7 +5544,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="session.CurrentService" render="Label" position="505,988" size="110,30" font="Roboto_HD; 26" halign="right" backgroundColor="black" transparent="1" foregroundColor="green">
       <convert type="ServicePosition">Remaining,Negate</convert>
     </widget>
-    <widget source="session.CurrentService" render="BlackHarmonyAudioIcon" path="icons/audio" position="1360,991" size="60,20" zPosition="4" alphatest="blend">
+    <widget source="session.CurrentService" render="j00zekModAudioIcon" path="icons/audio" position="1360,991" size="60,20" zPosition="4" alphatest="blend">
       <convert type="VAudioInfo">AudioIcon</convert>
     </widget>
     <ePixmap position="1304,991" size="36,20" pixmap="BlackHarmony/icons/ico_format_off.png" zPosition="1" alphatest="blend"/>
@@ -5561,7 +5561,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="session.RecordState" render="Pixmap" position="1212,991" size="20,20" pixmap="BlackHarmony/icons/ico_rec_on.png" alphatest="blend">
       <convert type="ConditionalShowHide">Blink</convert>
     </widget>
-    <widget source="session.CurrentService" render="BlackHarmonyCover" position="25,720" size="190,255" zPosition="2" alphatest="blend"/>
+    <widget source="session.CurrentService" render="j00zekModCover" position="25,720" size="190,255" zPosition="2" alphatest="blend"/>
   </screen>
   <screen name="AdvancedFreePlayerConsole" position="365,145" size="1200,800" title="Command execution...">
     <widget name="text" position="20,20" size="1160,800" font="Roboto_HD; 25" backgroundColor="black" transparent="1"/>
@@ -5622,7 +5622,7 @@ self['config'].l.setSeperation(int(300*f))
     <!--widget name="dvrStatus" position="275,970" size="324,60" pixmaps="BlackHarmony/gfx/dvr_pl.png,BlackHarmony/gfx/dvr_pau.png" transparent="1" alphatest="blend" /-->
     <widget name="shuffle" position="335,853" size="75,37" pixmaps="BlackHarmony/gfx/placeholder1.png,BlackHarmony/gfx/shuffle.png" alphatest="blend" backgroundColor="black" transparent="1" zPosition="3"/>
     <widget name="repeat" position="440,853" size="75,37" pixmaps="BlackHarmony/gfx/placeholder1.png,BlackHarmony/gfx/repeat.png" alphatest="blend" backgroundColor="black" transparent="1" zPosition="3"/>
-    <widget source="session.CurrentService" render="BlackHarmonyPositionGauge" position="80,915" size="700,2" transparent="1" zPosition="4">
+    <widget source="session.CurrentService" render="j00zekModPositionGauge" position="80,915" size="700,2" transparent="1" zPosition="4">
       <convert type="ServicePosition">Gauge</convert>
     </widget>
     <ePixmap pixmap="BlackHarmony/buttons/movie/menu.png" position="1732,980" size="75,40" alphatest="blend"/>
@@ -6971,7 +6971,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="90,600" size="210,30" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center">
       <convert type="MSNWeatherWebDaily">Record=0,date</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="128,650" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="128,650" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
         <convert type="MSNWeatherWebDaily">Record=0</convert>
     </widget>
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="90,780" size="210,110" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top">
@@ -6981,7 +6981,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="330,600" size="210,30" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center">
       <convert type="MSNWeatherWebDaily">Record=1,date</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="368,650" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="368,650" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
         <convert type="MSNWeatherWebDaily">Record=1</convert>
     </widget>
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="330,780" size="210,110" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top">
@@ -6991,7 +6991,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="570,600" size="210,30" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center">
       <convert type="MSNWeatherWebDaily">Record=2,date</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="608,650" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="608,650" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
         <convert type="MSNWeatherWebDaily">Record=2</convert>
     </widget>
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="570,780" size="210,110" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top">
@@ -7001,7 +7001,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="810,600" size="210,30" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center">
       <convert type="MSNWeatherWebDaily">Record=3,date</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="848,650" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="848,650" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
         <convert type="MSNWeatherWebDaily">Record=3</convert>
     </widget>
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="810,780" size="210,110" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top">
@@ -7011,7 +7011,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="1055,600" size="210,30" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center">
       <convert type="MSNWeatherWebDaily">Record=4,date</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1088,650" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1088,650" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
         <convert type="MSNWeatherWebDaily">Record=4</convert>
     </widget>
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="1065,780" size="210,110" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top">
@@ -7061,7 +7061,7 @@ self['config'].l.setSeperation(int(300*f))
     </widget>
     <widget source="Title" render="Label" position="1295,70" size="520,35" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
 <!-- top left -->
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="208,202" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="208,202" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
         <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
     </widget>
     <widget render="Label" source="currentTemp" font="Roboto_HD; 40" position="285,234" size="140,45" backgroundColor="black" zPosition="3" transparent="1" halign="right" valign="center" foregroundColor="light_yellow"/>
@@ -7100,7 +7100,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget position="100,107" size="1710,70" source="session.CurrentService" render="Label" font="Roboto_HD; 27" foregroundColor="foreground" backgroundColor="black" halign="center" noWrap="1" transparent="1" zPosition="10">
         <convert type="j00zekModABTCAirlyWidget">ldesc</convert>
     </widget>
-    <widget position="1440,207" size="120,120" source="session.CurrentService" render="BlackHarmonyABTCAirlyPixmap" alphatest="blend" transparent="1" zPosition="9">
+    <widget position="1440,207" size="120,120" source="session.CurrentService" render="j00zekABTCAirlyPixmap" alphatest="blend" transparent="1" zPosition="9">
         <convert type="j00zekModABTCAirlyWidget">indexBackPNG</convert>
     </widget>
     <widget position="1420,189" size="160,160" source="session.CurrentService" render="Label" font="Roboto_HD; 50" foregroundColor="foreground" backgroundColor="black" halign="center" valign="center" noWrap="1" transparent="1" zPosition="10">
@@ -7136,77 +7136,77 @@ self['config'].l.setSeperation(int(300*f))
     <widget position="90,470" size="150,190" zPosition="3" halign="center" valign="top" render="Label" source="session.j00zekMSNWeather" font="Roboto_HD; 22" transparent="1" backgroundColor="black">
       <convert type="BlackHarmonyMSNWeatherWebhourly">Record=0</convert>
     </widget>
-    <widget position="140,500" size="50,50" zPosition="5" alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" source="session.j00zekMSNWeather" transparent="1">
+    <widget position="140,500" size="50,50" zPosition="5" alphatest="blend" render="j00zekMSNWeatherPixmap" source="session.j00zekMSNWeather" transparent="1">
         <convert type="BlackHarmonyMSNWeatherWebhourly">Record=0</convert>
     </widget>
     <!-- h1 -->
     <widget position="250,470" size="150,190" zPosition="3" halign="center" valign="top" render="Label" source="session.j00zekMSNWeather" font="Roboto_HD; 22" transparent="1" backgroundColor="black">
       <convert type="BlackHarmonyMSNWeatherWebhourly">Record=1</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="300,500" size="50,50" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="300,500" size="50,50" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
         <convert type="BlackHarmonyMSNWeatherWebhourly">Record=1</convert>
     </widget>
     <!-- h2 -->
     <widget position="410,470" size="150,190" zPosition="3" halign="center" valign="top" render="Label" source="session.j00zekMSNWeather" font="Roboto_HD; 22" transparent="1" backgroundColor="black">
       <convert type="BlackHarmonyMSNWeatherWebhourly">Record=2</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="460,500" size="50,50" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="460,500" size="50,50" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
         <convert type="BlackHarmonyMSNWeatherWebhourly">Record=2</convert>
     </widget>
     <!-- h3 -->
     <widget position="570,470" size="150,190" zPosition="3" halign="center" valign="top" render="Label" source="session.j00zekMSNWeather" font="Roboto_HD; 22" transparent="1" backgroundColor="black">
       <convert type="BlackHarmonyMSNWeatherWebhourly">Record=3</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="620,500" size="50,50" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="620,500" size="50,50" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
         <convert type="BlackHarmonyMSNWeatherWebhourly">Record=3</convert>
     </widget>
     <!-- h4 -->
     <widget position="730,470" size="150,190" zPosition="3" halign="center" valign="top" render="Label" source="session.j00zekMSNWeather" font="Roboto_HD; 22" transparent="1" backgroundColor="black">
       <convert type="BlackHarmonyMSNWeatherWebhourly">Record=4</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="780,500" size="50,50" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="780,500" size="50,50" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
         <convert type="BlackHarmonyMSNWeatherWebhourly">Record=4</convert>
     </widget>
     <!-- h5 -->
     <widget position="890,470" size="150,190" zPosition="3" halign="center" valign="top" render="Label" source="session.j00zekMSNWeather" font="Roboto_HD; 22" transparent="1" backgroundColor="black">
       <convert type="BlackHarmonyMSNWeatherWebhourly">Record=5</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="940,500" size="50,50" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="940,500" size="50,50" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
         <convert type="BlackHarmonyMSNWeatherWebhourly">Record=5</convert>
     </widget>
     <!-- h6 -->
     <widget position="1050,470" size="150,190" zPosition="3" halign="center" valign="top" render="Label" source="session.j00zekMSNWeather" font="Roboto_HD; 22" transparent="1" backgroundColor="black">
       <convert type="BlackHarmonyMSNWeatherWebhourly">Record=6</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1100,500" size="50,50" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1100,500" size="50,50" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
         <convert type="BlackHarmonyMSNWeatherWebhourly">Record=6</convert>
     </widget>
     <!-- h7 -->
     <widget position="1210,470" size="150,190" zPosition="3" halign="center" valign="top" render="Label" source="session.j00zekMSNWeather" font="Roboto_HD; 22" transparent="1" backgroundColor="black">
       <convert type="BlackHarmonyMSNWeatherWebhourly">Record=7</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1260,500" size="50,50" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1260,500" size="50,50" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
         <convert type="BlackHarmonyMSNWeatherWebhourly">Record=7</convert>
     </widget>
     <!-- h8 -->
     <widget position="1370,470" size="150,190" zPosition="3" halign="center" valign="top" render="Label" source="session.j00zekMSNWeather" font="Roboto_HD; 22" transparent="1" backgroundColor="black">
       <convert type="BlackHarmonyMSNWeatherWebhourly">Record=8</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1420,500" size="50,50" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1420,500" size="50,50" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
         <convert type="BlackHarmonyMSNWeatherWebhourly">Record=8</convert>
     </widget>
     <!-- h9 -->
     <widget position="1530,470" size="150,190" zPosition="3" halign="center" valign="top" render="Label" source="session.j00zekMSNWeather" font="Roboto_HD; 22" transparent="1" backgroundColor="black">
       <convert type="BlackHarmonyMSNWeatherWebhourly">Record=9</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1580,500" size="50,50" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1580,500" size="50,50" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
         <convert type="BlackHarmonyMSNWeatherWebhourly">Record=9</convert>
     </widget>
     <!-- h10 -->
     <widget position="1690,470" size="150,190" zPosition="3" halign="center" valign="top" render="Label" source="session.j00zekMSNWeather" font="Roboto_HD; 22" transparent="1" backgroundColor="black">
       <convert type="BlackHarmonyMSNWeatherWebhourly">Record=10</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1740,500" size="50,50" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1740,500" size="50,50" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
         <convert type="BlackHarmonyMSNWeatherWebhourly">Record=10</convert>
     </widget>
     <ePixmap pixmap="BlackHarmony/gfx/line.png" position="300,665" size="1200,2" zPosition="3" transparent="1" alphatest="blend"/>
@@ -7214,7 +7214,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="100,680" size="190,30" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center">
       <convert type="BlackHarmonyMSNWeatherWebDaily">Record=0,date</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="128,730" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="128,730" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
         <convert type="BlackHarmonyMSNWeatherWebDaily">Record=0</convert>
     </widget>
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="100,860" size="190,110" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top">
@@ -7224,7 +7224,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="290,680" size="190,30" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center">
       <convert type="BlackHarmonyMSNWeatherWebDaily">Record=1,date</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="318,730" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="318,730" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
         <convert type="BlackHarmonyMSNWeatherWebDaily">Record=1</convert>
     </widget>
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="290,860" size="190,110" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top">
@@ -7234,7 +7234,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="480,680" size="190,30" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center">
       <convert type="BlackHarmonyMSNWeatherWebDaily">Record=2,date</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="508,730" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="508,730" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
         <convert type="BlackHarmonyMSNWeatherWebDaily">Record=2</convert>
     </widget>
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="480,860" size="190,110" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top">
@@ -7244,7 +7244,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="670,680" size="190,30" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center">
       <convert type="BlackHarmonyMSNWeatherWebDaily">Record=3,date</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="698,730" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="698,730" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
         <convert type="BlackHarmonyMSNWeatherWebDaily">Record=3</convert>
     </widget>
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="670,860" size="190,110" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top">
@@ -7254,7 +7254,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="860,680" size="190,30" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center">
       <convert type="BlackHarmonyMSNWeatherWebDaily">Record=4,date</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="888,730" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="888,730" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
         <convert type="BlackHarmonyMSNWeatherWebDaily">Record=4</convert>
     </widget>
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="860,860" size="190,110" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top">
@@ -7264,7 +7264,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="1050,680" size="190,30" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center">
       <convert type="BlackHarmonyMSNWeatherWebDaily">Record=5,date</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1078,730" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1078,730" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
         <convert type="BlackHarmonyMSNWeatherWebDaily">Record=5</convert>
     </widget>
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="1050,860" size="190,110" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top">
@@ -7274,7 +7274,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="1240,680" size="190,30" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center">
       <convert type="BlackHarmonyMSNWeatherWebDaily">Record=6,date</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1268,730" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1268,730" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
         <convert type="BlackHarmonyMSNWeatherWebDaily">Record=6</convert>
     </widget>
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="1240,860" size="190,110" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top">
@@ -7284,7 +7284,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="1430,680" size="190,30" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center">
       <convert type="BlackHarmonyMSNWeatherWebDaily">Record=7,date</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1458,730" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1458,730" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
         <convert type="BlackHarmonyMSNWeatherWebDaily">Record=7</convert>
     </widget>
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="1430,860" size="190,110" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top">
@@ -7294,7 +7294,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="1620,680" size="190,30" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center">
       <convert type="BlackHarmonyMSNWeatherWebDaily">Record=8,date</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1648,730" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1648,730" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
         <convert type="BlackHarmonyMSNWeatherWebDaily">Record=8</convert>
     </widget>
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="1620,860" size="190,110" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top">

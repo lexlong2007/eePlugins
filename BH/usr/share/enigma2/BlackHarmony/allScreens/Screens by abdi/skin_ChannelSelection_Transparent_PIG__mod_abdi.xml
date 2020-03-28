@@ -52,7 +52,7 @@
   <widget source="ServiceEvent" render="Progress" position="1358,768" size="376,6" pixmap="BlackHarmony/gfx/progress_cs.png" transparent="1">
     <convert type="EventTime">Progress</convert>
   </widget>
-  <!--widget pointer="BlackHarmony/gfx/seekbutton.png:14,1" position="1360,763" render="BlackHarmonyPositionGauge" size="376,15" source="session.Event_Now" transparent="1" zPosition="3">
+  <!--widget pointer="BlackHarmony/gfx/seekbutton.png:14,1" position="1360,763" render="j00zekModPositionGauge" size="376,15" source="session.Event_Now" transparent="1" zPosition="3">
       <convert type="BlackHarmonyEventPosition">Gauge</convert>
   </widget-->
   <widget source="ServiceEvent" render="j00zekLabel" position="1170,450" size="685,35" font="HD_Thin; 32" backgroundColor="black" transparent="1" halign="left" noWrap="1" foregroundColor="light_yellow">
@@ -65,7 +65,7 @@
   <widget backgroundColor="background" font="HD_Thin; 36" halign="left" position="1170,390" render="j00zekLabel" size="685,40" source="ServiceEvent" transparent="1" valign="center" foregroundColor="green">
     <convert type="ServiceName">Name</convert>
   </widget>
-  <widget alphatest="blend" render="BlackHarmonyEventListDisplay" position="1170,803" size="685,160" source="ServiceEvent" rowHeight="32" column0="0,70,green,Roboto_HD,25,0,0" column1="80,545,white,Roboto_HD,25,0,1" primetimeoffset="10">
+  <widget alphatest="blend" render="j00zekModEventListDisplay" position="1170,803" size="685,160" source="ServiceEvent" rowHeight="32" column0="0,70,green,Roboto_HD,25,0,0" column1="80,545,white,Roboto_HD,25,0,1" primetimeoffset="10">
     <convert type="BlackHarmonyEventList">primetime=yes,eventcount=5</convert>
   </widget>
   <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="94,1016" size="35,27" alphatest="blend" />

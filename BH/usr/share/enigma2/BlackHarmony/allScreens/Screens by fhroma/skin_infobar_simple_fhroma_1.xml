@@ -60,7 +60,7 @@
      <widget pixmap="BlackHarmony/gfx/pointer.png" position="323,896" render="Progress" size="1200,14" source="session.Event_Now" transparent="1" zPosition="3">
   <convert type="EventTime">Progress</convert>
 </widget>
-    <widget pointer="BlackHarmony/gfx/seekbutton.png:14,1" position="323,896" render="BlackHarmonyPositionGauge" size="1200,14" source="session.Event_Now" transparent="1" zPosition="3">
+    <widget pointer="BlackHarmony/gfx/seekbutton.png:14,1" position="323,896" render="j00zekModPositionGauge" size="1200,14" source="session.Event_Now" transparent="1" zPosition="3">
       <convert type="BlackHarmonyEventPosition">Gauge</convert>
     </widget>
 	  <eLabel backgroundColor="green" position="323,901" size="1200,4" transparent="0" zPosition="2" foregroundColor="black" />
@@ -107,7 +107,7 @@
  
   <!-- POGODA -->
     <eLabel text="Pogoda teraz :" position="1680,835" size="200,28" font="Roboto_HD; 23" backgroundColor="black" halign="center" transparent="1" foregroundColor="lemon" />
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1540,830" size="136,136" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1540,830" size="136,136" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
       <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
     </widget>
     <widget noWrap="1" backgroundColor="black" font="Roboto_HD; 30" render="Label" position="1745,870" size="100,35" source="session.j00zekMSNWeather" zPosition="3" halign="right" transparent="1" valign="top">

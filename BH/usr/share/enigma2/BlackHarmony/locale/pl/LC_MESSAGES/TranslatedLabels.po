@@ -423,7 +423,7 @@ msgid "Works:"
 msgstr "Pracuje:"
 
 msgid "You are in WRONG PLACE, use UserSkin to configure BlackHarmony instead !!!"
-msgstr "Jesteś w ZŁYM miejscu, użyj UserSkin aby sutawić skórkę BlackHarmony !!!"
+msgstr "Jesteś w ZŁYM miejscu, użyj UserSkin aby ustawić skórkę BlackHarmony !!!"
 
 msgid "Tuner/System"
 msgstr "Odbiornik/System"

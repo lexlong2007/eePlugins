@@ -6,7 +6,7 @@
   <widget source="session.CurrentService" render="Label" position="140,0" size="100,23" font="Regular; 22" valign="center" backgroundColor="black"  transparent="1" foregroundColor="lemon" >
           <convert type="j00zekTranslator">Now</convert>
         </widget>
- <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="50,0" size="80,80" source="session.j00zekMSNWeather" transparent="1" zPosition="2">
+ <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="50,0" size="80,80" source="session.j00zekMSNWeather" transparent="1" zPosition="2">
       <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
     </widget>
  <widget noWrap="1" backgroundColor="black" font="Regular; 22" render="Label" position="180,0" size="100,23" source="session.j00zekMSNWeather" zPosition="3" halign="right" transparent="1" foregroundColor="lemon" valign="center">
@@ -62,7 +62,7 @@
   
    <!--pogoda dalej-->
    
- <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="993,0" size="80,80" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+ <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="993,0" size="80,80" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
     <convert type="MSNWeatherWebDaily">Record=1</convert>
   </widget>
  <widget source="session.CurrentService" render="Label" position="1099,5" size="190,30" font="Regular; 25" backgroundColor="black" valign="center" halign="left" transparent="1" foregroundColor="lemon"  >
@@ -78,7 +78,7 @@
   
  <eLabel position="1284,6" size="2,73" backgroundColor="linie" />
  
- <widget alphatest="blend" position="1297,5" render="BlackHarmonyMSNWeatherPixmap" size="80,80" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+ <widget alphatest="blend" position="1297,5" render="j00zekMSNWeatherPixmap" size="80,80" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
       <convert type="MSNWeatherWebDaily">Record=2</convert>
     </widget>
  <widget backgroundColor="black" foregroundColor="lemon" halign="left" valign="center" noWrap="1" position="1392,5" size="190,30" font="Regular; 25" render="Label" source="session.j00zekMSNWeather" transparent="1" zPosition="3">
@@ -94,7 +94,7 @@
 	
  <eLabel position="1592,6" size="2,73" backgroundColor="linie" />
 	
- <widget alphatest="blend" position="1596,5" render="BlackHarmonyMSNWeatherPixmap" size="80,80" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+ <widget alphatest="blend" position="1596,5" render="j00zekMSNWeatherPixmap" size="80,80" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
       <convert type="BlackHarmonyMSNWeatherWebDaily">Record=3</convert>
     </widget>
  <widget backgroundColor="black" foregroundColor="lemon" halign="left" valign="center" noWrap="1" position="1695,5" render="Label" size="190,30" font="Regular; 25" source="session.j00zekMSNWeather" transparent="1" zPosition="3">

@@ -40,6 +40,6 @@
   </widget>
   <ePixmap zPosition="1" position="1530,173" size="274,397" pixmap="BlackHarmony/gfx/No-Cover_1.png" backgroundColor="background" alphatest="blend" transparent="0" />
   <ePixmap zPosition="3" position="1510,152" size="310,435" pixmap="BlackHarmony/gfx/No-Cover_bg_1.png" backgroundColor="background" alphatest="blend" transparent="0" />
-  <widget source="Service" render="BlackHarmonyCover" position="1530,173" size="274,397" zPosition="2" backgroundColor="background" alphatest="blend" transparent="0" />
+  <widget source="Service" render="j00zekModCover" position="1530,173" size="274,397" zPosition="2" backgroundColor="background" alphatest="blend" transparent="0" />
 </screen>
   </skin>

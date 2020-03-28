@@ -56,7 +56,7 @@
   <widget source="session.CurrentService" render="Label" backgroundColor="black" halign="center" font="Regular; 35" foregroundColor="blue" position="1317,705" size="548,40" transparent="1" >
     <convert type="j00zekTranslator">later</convert>
   </widget>
-  <widget alphatest="blend" column0="0,80,green,Roboto_HD,26,0,0" column1="85,620,white,Roboto_HD,26,0,1" position="1317,755" primetimeoffset="10" render="BlackHarmonyEventListDisplay" rowHeight="32" size="548,230" source="ServiceEvent">
+  <widget alphatest="blend" column0="0,80,green,Roboto_HD,26,0,0" column1="85,620,white,Roboto_HD,26,0,1" position="1317,755" primetimeoffset="10" render="j00zekModEventListDisplay" rowHeight="32" size="548,230" source="ServiceEvent">
     <convert type="BlackHarmonyEventList">eventcount=7</convert>
   </widget>	
   <eLabel backgroundColor="linie"  position="55,703" size="1810,2" />

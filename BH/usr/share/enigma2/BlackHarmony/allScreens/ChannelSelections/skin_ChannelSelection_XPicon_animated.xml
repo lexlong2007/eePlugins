@@ -40,7 +40,7 @@
   <widget backgroundColor="background" font="Cyfry; 55" halign="left" position="1165,173" render="Label" size="450,55" source="ServiceEvent" transparent="1" valign="center" foregroundColor="green">
     <convert type="ServiceName">Name</convert>
   </widget>
-  <widget alphatest="blend" render="BlackHarmonyEventListDisplay" position="1165,838" size="690,140" source="ServiceEvent" rowHeight="32" column0="0,70,green,Roboto_HD,25,0,0" column1="80,545,white,Roboto_HD,25,0,1" primetimeoffset="10">
+  <widget alphatest="blend" render="j00zekModEventListDisplay" position="1165,838" size="690,140" source="ServiceEvent" rowHeight="32" column0="0,70,green,Roboto_HD,25,0,0" column1="80,545,white,Roboto_HD,25,0,1" primetimeoffset="10">
     <convert type="BlackHarmonyEventList">primetime=yes,eventcount=4</convert>
   </widget>
   <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="94,1016" size="35,27" alphatest="blend" />

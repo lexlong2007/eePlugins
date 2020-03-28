@@ -132,7 +132,7 @@
     <widget source="session.Event_Now" render="Progress" position="313,880" zPosition="1" size="1032,6" pixmap="BlackHarmony/gfx/progress_ib.png" transparent="1">
       <convert type="EventTime">Progress</convert>
     </widget>
-    <widget pointer="BlackHarmony/gfx/seekbutton.png:1,1" position="313,870" render="BlackHarmonyPositionGauge" size="1032,25" source="session.Event_Now" zPosition="3" transparent="1">
+    <widget pointer="BlackHarmony/gfx/seekbutton.png:1,1" position="313,870" render="j00zekModPositionGauge" size="1032,25" source="session.Event_Now" zPosition="3" transparent="1">
       <convert type="BlackHarmonyEventPosition">Gauge</convert>
     </widget>
     <widget source="session.Event_Now" render="Label" position="305,827" size="105,36" font="HD_Thin; 32" halign="center" backgroundColor="black" transparent="1">
@@ -187,7 +187,7 @@
     <widget source="session.CurrentService" render="j00zekLabel" position="599,955" zPosition="2" size="750,30" font="Roboto_HD; 22" valign="top" halign="left" transparent="1" backgroundColor="black">
       <convert type="j00zekModCaidInfo2">UseCFG</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1407,764" size="55,55" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1407,764" size="55,55" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
       <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
     </widget>
     <widget noWrap="1" backgroundColor="black" font="HD_Thin; 24" render="Label" position="1487,777" size="60,26" source="session.j00zekMSNWeather" zPosition="3" halign="left" transparent="1">

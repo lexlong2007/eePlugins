@@ -36,7 +36,7 @@
     <widget backgroundColor="background" font="HD_Thin; 34" foregroundColor="yellow" halign="left" position="1185,365" render="Label" size="655,38" source="ServiceEvent" transparent="1" valign="center">
     <convert type="ServiceName">Name</convert>
   </widget>
-  <widget alphatest="blend" column0="0,30,yellow,Roboto_HD,25,0,0" column1="80,545,white,Roboto_HD,25,0,1" position="1185,795" primetimeoffset="10" render="BlackHarmonyEventListDisplay" rowHeight="32" size="655,166" source="ServiceEvent">
+  <widget alphatest="blend" column0="0,30,yellow,Roboto_HD,25,0,0" column1="80,545,white,Roboto_HD,25,0,1" position="1185,795" primetimeoffset="10" render="j00zekModEventListDisplay" rowHeight="32" size="655,166" source="ServiceEvent">
     <convert type="BlackHarmonyEventList">primetime=yes,eventcount=5</convert>
   </widget>
   <ePixmap alphatest="blend" pixmap="BlackHarmony/buttons/key_red.png" position="95,1001" size="35,27" />

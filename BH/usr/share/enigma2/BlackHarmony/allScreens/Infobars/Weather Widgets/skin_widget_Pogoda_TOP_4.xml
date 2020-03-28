@@ -1,7 +1,7 @@
 ﻿<skin>
   <screen name="InfoBar" position="-2,10" size="1920,1080" title="InfoBar" flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="1176,11" zPosition="-2" size="720,120" pixmap="BlackHarmony/bg_design/infobar_pogodam.png" />
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1294,36" size="75,75" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1294,36" size="75,75" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
       <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
     </widget>
     <ePixmap pixmap="BlackHarmony/weather_icons/wiatr.png" position="1503,36" size="30,30" zPosition="3" transparent="1" alphatest="blend" />
@@ -23,7 +23,7 @@
     </widget>
     <eLabel text="%" position="1584,82" size="30,25" backgroundColor="black" transparent="1" font="Roboto_HD; 21" foregroundColor="white" />
     <eLabel text="Jutro" position="1770,28" size="65,25" font="Roboto_HD; 21" backgroundColor="black" halign="center" transparent="1" foregroundColor="light_yellow" />
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1670,35" size="85,85" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1670,35" size="85,85" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
       <convert type="BlackHarmonyMSNWeather">weathericon,day2</convert>
     </widget>
     <widget noWrap="1" backgroundColor="black" font="Roboto_HD; 21" render="Label" position="1760,60" size="65,25" source="session.j00zekMSNWeather" zPosition="3" halign="right" transparent="1">

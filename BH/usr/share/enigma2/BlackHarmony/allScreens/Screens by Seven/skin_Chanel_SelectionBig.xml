@@ -29,7 +29,7 @@
     <widget source="ServiceEvent" render="j00zekPicons" picontype="zzpicon" position="1417,210" size="400,170" zPosition="8" transparent="1" alphatest="blend">
       <convert type="ServiceName">Reference</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyEventListDisplay" position="1417,495" size="400,450" source="ServiceEvent" rowHeight="32" column0="0,70,green,Roboto_HD,24,0,0" column1="80,545,grey,Roboto_HD,24,0,1" primetimeoffset="10">
+    <widget alphatest="blend" render="j00zekModEventListDisplay" position="1417,495" size="400,450" source="ServiceEvent" rowHeight="32" column0="0,70,green,Roboto_HD,24,0,0" column1="80,545,grey,Roboto_HD,24,0,1" primetimeoffset="10">
       <convert type="BlackHarmonyEventList">eventcount=14</convert>
     </widget>
     <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="95,991" size="35,27" alphatest="blend" />

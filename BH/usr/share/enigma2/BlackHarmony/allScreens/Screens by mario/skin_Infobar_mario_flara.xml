@@ -278,7 +278,7 @@
   </widget> 
 #--pogoda--# 
    <ePixmap pixmap="BlackHarmony/bg_design/pogoda_zachod_mario.png" position="1265,10" size="614,572" zPosition="-2" />
-   <widget alphatest="blend" position="1435,63" render="BlackHarmonyMSNWeatherPixmap" size="100,100" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+   <widget alphatest="blend" position="1435,63" render="j00zekMSNWeatherPixmap" size="100,100" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
    <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
    </widget>
    <ePixmap alphatest="blend" pixmap="BlackHarmony/weather_icons/wiatr.png" position="1687,75" size="30,30" transparent="1" zPosition="3" />
@@ -304,7 +304,7 @@
    <convert type="BlackHarmonyMSNWeather">temperature_heigh_low,day2</convert>
    </widget> 
    <ePixmap alphatest="blend" pixmap="BlackHarmony/weather_icons/temp-.png" position="1447,213" size="20,50" transparent="1" zPosition="3" />
-   <widget alphatest="blend" position="1488,200" render="BlackHarmonyMSNWeatherPixmap" size="70,70" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+   <widget alphatest="blend" position="1488,200" render="j00zekMSNWeatherPixmap" size="70,70" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
    <convert type="MSNWeatherWebDaily">Record=1</convert>
    </widget>
    <ePixmap alphatest="blend" pixmap="BlackHarmony/weather_icons/temp+.png" position="1584,234" size="20,50" transparent="1" zPosition="3" />
@@ -312,7 +312,7 @@
    <convert type="BlackHarmonyMSNWeather">temperature_heigh_low,day3</convert>
    </widget>
    <ePixmap alphatest="blend" pixmap="BlackHarmony/weather_icons/temp-.png" position="1746,213" size="20,50" transparent="1" zPosition="3" />
-   <widget alphatest="blend" position="1786,200" render="BlackHarmonyMSNWeatherPixmap" size="70,70" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+   <widget alphatest="blend" position="1786,200" render="j00zekMSNWeatherPixmap" size="70,70" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
    <convert type="MSNWeatherWebDaily">Record=2</convert>
    </widget>
    <widget backgroundColor="black" font="HD_Thin; 24" foregroundColor="light_yellow" halign="center" noWrap="1" position="1292,23" render="Label" size="575,26" source="session.CurrentService" transparent="1" zPosition="3">
@@ -491,7 +491,7 @@
   </widget>
 #--pogoda--# 
   <eLabel backgroundColor="black" font="Roboto_HD; 22" foregroundColor="blue" position="1567,950" size="180,25" text="Pogoda teraz:" transparent="1" />
-  <widget alphatest="blend" position="1720,940" render="BlackHarmonyMSNWeatherPixmap" size="50,50" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+  <widget alphatest="blend" position="1720,940" render="j00zekMSNWeatherPixmap" size="50,50" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
   <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
   </widget>
   <widget backgroundColor="black" font="HD_Thin; 24" halign="left" noWrap="1" position="1790,951" render="Label" size="60,26" source="session.j00zekMSNWeather" transparent="1" zPosition="3">

@@ -34,7 +34,7 @@
       <convert type="EventTime">StartTime</convert>
       <convert type="ClockToText">Default</convert>
     </widget>
-        <widget backgroundColor="background" font="HD_Thin; 40" foregroundColor="blue" halign="left" noWrap="1" position="610,839" render="BlackHarmonyTypeLabel" size="865,46" source="session.Event_Now" transparent="1" typeCaret="1" typeRepeats="1" typeSpeed="700" typeStartDelay="2000" zPosition="1">
+        <widget backgroundColor="background" font="HD_Thin; 40" foregroundColor="blue" halign="left" noWrap="1" position="610,839" render="j00zekModTypeLabel" size="865,46" source="session.Event_Now" transparent="1" typeCaret="1" typeRepeats="1" typeSpeed="700" typeStartDelay="2000" zPosition="1">
       <convert type="j00zekModEventName">Name</convert>
     </widget>
     <widget source="session.Event_Now" render="Label" position="1490,839" size="140,46" font="HD_Thin; 38" halign="right" backgroundColor="black" transparent="1">
@@ -89,7 +89,7 @@
     <widget backgroundColor="black" font="HD_Thin; 25" halign="center" position="1280,745" render="Label" size="353,35" source="global.CurrentTime" transparent="1" valign="center" noWrap="1" foregroundColor="lemon" text=" ">
       <convert type="ClockToText">Format:%A %d %B </convert>
     </widget>
-            <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1755,725" size="110,110" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+            <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1755,725" size="110,110" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
       <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
     </widget>
     <widget noWrap="1" backgroundColor="black" font="HD_Thin; 30" render="Label" position="1765,873" size="100,35" source="session.j00zekMSNWeather" zPosition="3" halign="right" transparent="1" valign="top">
@@ -98,7 +98,7 @@
         <widget source="session.RecordState" render="Pixmap" position="930,749" size="40,23" zPosition="3" pixmap="BlackHarmony/icons/ico_rec_on.png" alphatest="blend">
       <convert type="ConditionalShowHide">Blink</convert>
     </widget>
-        <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1470,27" size="85,85" source="session.j00zekMSNWeather" transparent="1" zPosition="3">
+        <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1470,27" size="85,85" source="session.j00zekMSNWeather" transparent="1" zPosition="3">
       <convert type="BlackHarmonyMSNWeather">weathericon,day2</convert>
     </widget>
     <ePixmap pixmap="BlackHarmony/weather_icons/temp+.png" position="1595,72" size="20,50" zPosition="3" transparent="1" alphatest="blend" />
@@ -109,7 +109,7 @@
     </widget>
     <ePixmap position="1260,8" zPosition="-2" size="625,120" pixmap="BlackHarmony/bg_design/infobar_kpogoda.png" />
     <eLabel name="new eLabel" position="1630,30" size="130,30" text="Pojutrze" font="HD_Thin; 24" transparent="1" zPosition="3" foregroundColor="green" backgroundColor="black" />
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1780,27" size="85,85" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1780,27" size="85,85" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
       <convert type="BlackHarmonyMSNWeather">weathericon,day3</convert>
     </widget>
     <widget source="session.j00zekMSNWeather" render="Label" position="1615,72" size="140,30" font="Roboto_HD; 20" halign="center" valign="center" transparent="1" zPosition="3">
@@ -134,7 +134,7 @@
     <widget pixmap="BlackHarmony/gfx/pointer.png" position="605,891" render="Progress" size="880,20" source="session.Event_Now" transparent="1" zPosition="3">
   <convert type="EventTime">Progress</convert>
 </widget>
-    <widget pointer="BlackHarmony/gfx/seekbutton.png:14,1" position="605,891" render="BlackHarmonyPositionGauge" size="880,20" source="session.Event_Now" transparent="1" zPosition="3">
+    <widget pointer="BlackHarmony/gfx/seekbutton.png:14,1" position="605,891" render="j00zekModPositionGauge" size="880,20" source="session.Event_Now" transparent="1" zPosition="3">
       <convert type="BlackHarmonyEventPosition">Gauge</convert>
     </widget>
   </screen>

@@ -87,7 +87,7 @@
     <widget pixmap="BlackHarmony/gfx/progress_rec.png" position="504,938" render="Progress" size="1123,5" source="session.Event_Now" transparent="1" zPosition="3">
       <convert type="EventTime">Progress</convert>
     </widget>
-    <widget source="session.Event_Now" position="504,932" size="1123,15" render="BlackHarmonyPositionGauge" pointer="BlackHarmony/gfx/seekbutton.png:1,1" transparent="1" zPosition="3">
+    <widget source="session.Event_Now" position="504,932" size="1123,15" render="j00zekModPositionGauge" pointer="BlackHarmony/gfx/seekbutton.png:1,1" transparent="1" zPosition="3">
       <convert type="BlackHarmonyEventPosition">Gauge</convert>
     </widget>
     <widget source="session.Event_Next" render="Label" position="500,960" size="105,36" font="Roboto_HD; 30" halign="left" foregroundColor="light_grey" backgroundColor="black" transparent="1">
@@ -122,7 +122,7 @@
     <widget source="session.j00zekMSNWeather" render="Label" position="1720,875" size="142,25" font="Regular;19" zPosition="1" halign="right" valign="center" foregroundColor="lemon" backgroundColor="background" transparent="1" noWrap="1">
       <convert type="MSNWeatherWebCurrent">barometrValue</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1637,900" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1637,900" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
       <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
     </widget>
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 30" position="1765,910" size="100,35" zPosition="3" halign="right" foregroundColor="podsw" backgroundColor="black" transparent="1">

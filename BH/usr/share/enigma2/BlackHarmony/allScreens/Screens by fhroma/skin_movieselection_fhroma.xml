@@ -31,7 +31,7 @@
 	<widget source="Service" render="j00zekPicons" picontype="picon" position="1480,250" zPosition="10" size="220,132" transparent="1" alphatest="blend">
     <convert type="BlackHarmonyMovieReference" />
   </widget>
-		<widget source="Service" render="BlackHarmonyCover" position="1170,220" size="280,300" zPosition="3" alphatest="blend" />
+		<widget source="Service" render="j00zekModCover" position="1170,220" size="280,300" zPosition="3" alphatest="blend" />
 			   <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="110,991" size="35,27" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="500,991" size="35,27" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="890,991" size="35,27" alphatest="blend" />

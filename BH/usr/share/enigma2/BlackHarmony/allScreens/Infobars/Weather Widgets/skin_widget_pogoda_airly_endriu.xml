@@ -1,7 +1,7 @@
 <skin>
 <screen name="InfoBar" position="0,0" size="1920,1080" title="InfoBar" flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="25,8" zPosition="-2" size="900,150" pixmap="BlackHarmony/bg_design/infobar_pogoda2.png" />
-	<widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="500,33" size="85,85" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+	<widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="500,33" size="85,85" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
       <convert type="BlackHarmonyMSNWeather">weathericon,day2</convert>
     </widget>
     <ePixmap pixmap="BlackHarmony/weather_icons/wiatr.png" position="60,34" size="30,30" zPosition="3" transparent="1" alphatest="blend" />
@@ -33,7 +33,7 @@
     <widget source="session.CurrentService" render="Label" position="780,26" size="85,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" foregroundColor="light_yellow" >
       <convert type="j00zekTranslator">Day after tomorrow</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="700,33" size="85,85" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="700,33" size="85,85" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
       <convert type="BlackHarmonyMSNWeather">weathericon,day3</convert>
     </widget>
     <widget noWrap="1" backgroundColor="black" font="Roboto_HD; 22" render="Label" position="830,57" size="65,25" source="session.j00zekMSNWeather" zPosition="3" halign="center" transparent="1">
@@ -48,7 +48,7 @@
     <widget position="20,115" size="900,70" source="session.CurrentService" render="Label" font="Roboto_HD; 22" foregroundColor="#66CCCC" backgroundColor="black" halign="center" noWrap="1" transparent="1" zPosition="2">
       <convert type="j00zekModABTCAirlyWidget">ldesc</convert>
 	</widget>
-	<widget position="220,30" size="80,80" source="session.CurrentService" render="BlackHarmonyABTCAirlyPixmap" alphatest="blend" transparent="1" zPosition="9">
+	<widget position="220,30" size="80,80" source="session.CurrentService" render="j00zekABTCAirlyPixmap" alphatest="blend" transparent="1" zPosition="9">
       <convert type="j00zekModABTCAirlyWidget">indexBackPNG</convert>
     </widget>
     <widget position="220,31" size="85,85" source="session.CurrentService" render="Label" font="Roboto_HD; 30" foregroundColor="foreground" backgroundColor="black" halign="center" valign="center" noWrap="1" transparent="1" zPosition="10">

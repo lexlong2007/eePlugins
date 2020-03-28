@@ -36,6 +36,6 @@
   <widget source="Service" render="Label" position="1110,190" size="540,70" font="HD_Thin; 26" backgroundColor="black" valign="top" halign="left" transparent="1" foregroundColor="yellow">
     <convert type="j00zekModEventName">Name</convert>
   </widget>
-  <widget source="Service" render="BlackHarmonyCover" position="1270,302" size="350,510" zPosition="2" backgroundColor="background" alphatest="blend" transparent="1" />
+  <widget source="Service" render="j00zekModCover" position="1270,302" size="350,510" zPosition="2" backgroundColor="background" alphatest="blend" transparent="1" />
 </screen>
   </skin>

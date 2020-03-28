@@ -1,7 +1,7 @@
 <skin>
   <screen name="MoviePlayer" position="center,center" size="1920,1080" title="InfoBar" flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="220,850" zPosition="-1" size="1529,213" pixmap="BlackHarmony/bg_design/infobarmovie.png"/>
-    <widget source="session.CurrentService" render="BlackHarmonyAudioIcon" path="BlackHarmony/icons/audio" position="1260,981" size="60,20" zPosition="4" alphatest="blend">
+    <widget source="session.CurrentService" render="j00zekModAudioIcon" path="BlackHarmony/icons/audio" position="1260,981" size="60,20" zPosition="4" alphatest="blend">
       <convert type="VAudioInfo">AudioIcon</convert>
     </widget>
     <ePixmap position="1387,981" size="36,20" pixmap="BlackHarmony/icons/ico_format_off.png" zPosition="1" alphatest="blend"/>
@@ -27,7 +27,7 @@
     <widget source="session.CurrentService" render="Progress" position="284,953" zPosition="1" size="1139,6" pixmap="BlackHarmony/gfx/progress.png" transparent="1">
       <convert type="ServicePosition">Position</convert>
     </widget>
-    <widget source="session.CurrentService" render="BlackHarmonyPositionGauge" position="284,953" zPosition="2" size="1139,6" transparent="1">
+    <widget source="session.CurrentService" render="j00zekModPositionGauge" position="284,953" zPosition="2" size="1139,6" transparent="1">
       <convert type="ServicePosition">Gauge</convert>
     </widget>
     <widget source="session.CurrentService" render="Label" position="285,978" size="110,30" font="Roboto_HD; 26" halign="left" backgroundColor="black" transparent="1" foregroundColor="yellow">
@@ -42,7 +42,7 @@
     <widget source="session.CurrentService" render="Label" position="395,978" size="110,30" font="Roboto_HD; 26" halign="center" backgroundColor="black" transparent="1">
       <convert type="ServicePosition">Length</convert>
     </widget>
-    <widget source="session.CurrentService" render="BlackHarmonyCover" position="25,770" size="190,255" zPosition="2" alphatest="blend"/>
+    <widget source="session.CurrentService" render="j00zekModCover" position="25,770" size="190,255" zPosition="2" alphatest="blend"/>
   </screen>
   <screen name="EMCMenu" position="345,93" size="1232,908" title="EMC menu" flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png"/>
@@ -361,7 +361,7 @@
     </widget>
     <ePixmap zPosition="1" position="1545,170" size="277,410" pixmap="BlackHarmony/gfx/No-Cover.png" backgroundColor="background" alphatest="blend" transparent="0"/>
     <ePixmap zPosition="3" position="1507,163" size="340,440" pixmap="BlackHarmony/gfx/No-Cover_bg.png" backgroundColor="background" alphatest="blend" transparent="0"/>
-    <widget source="Service" render="BlackHarmonyCover" position="1545,170" size="287,410" zPosition="2" backgroundColor="background" alphatest="blend" transparent="0"/>
+    <widget source="Service" render="j00zekModCover" position="1545,170" size="287,410" zPosition="2" backgroundColor="background" alphatest="blend" transparent="0"/>
   </screen>
   <screen name="MovieMenu" position="345,93" size="1232,908" title="Movie Menu" flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1232,908" pixmap="BlackHarmony/bg_design/mainbg.png"/>

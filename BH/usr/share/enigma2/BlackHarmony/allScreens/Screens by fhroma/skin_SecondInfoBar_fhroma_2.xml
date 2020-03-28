@@ -438,7 +438,7 @@
     <widget source="session.CurrentService" render="j00zekLabel" position="1680,805" size="200,28" font="Roboto_HD; 23" backgroundColor="black" halign="center" transparent="1" foregroundColor="lemon">
       <convert type="j00zekTranslator">Current weather:</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1540,798" size="146,146" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1540,798" size="146,146" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
       <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
     </widget>
     <widget noWrap="1" backgroundColor="black" font="Roboto_HD; 30" render="Label" position="1745,840" size="100,35" source="session.j00zekMSNWeather" zPosition="3" halign="right" transparent="1" valign="top">
@@ -512,7 +512,7 @@
 	  <widget noWrap="1" backgroundColor="black" font="HD_Thin; 24" render="Label" position="90,565" size="225,35" source="session.j00zekMSNWeather" zPosition="3" halign="center" transparent="1" foregroundColor="pastel">
       <convert type="MSNWeatherWebDaily">Record=0,date</convert>
     </widget>
-		<widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="60,580" size="80,80" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+		<widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="60,580" size="80,80" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
         <convert type="MSNWeatherWebDaily">Record=0</convert>
     </widget>
 
@@ -541,7 +541,7 @@
     <widget noWrap="1" backgroundColor="black" font="HD_Thin; 24" render="Label" position="490,565" size="225,35" source="session.j00zekMSNWeather" zPosition="3" halign="center" transparent="1" foregroundColor="pastel">
       <convert type="MSNWeatherWebDaily">Record=1,date</convert>
     </widget>
-		    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="450,580" size="80,80" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+		    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="450,580" size="80,80" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
       <convert type="MSNWeatherWebDaily">Record=1</convert>
     </widget>
 
@@ -555,7 +555,7 @@
   </widget>
 <ePixmap pixmap="BlackHarmony/weather_icons/temp.png" position="615,600" size="20,50" zPosition="3" transparent="1" alphatest="blend" />
   
-   <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="680,580" size="80,80" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+   <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="680,580" size="80,80" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
       <convert type="MSNWeatherWebDaily">Record=2</convert>
     </widget>
 
@@ -570,7 +570,7 @@
   </widget>
 <ePixmap pixmap="BlackHarmony/weather_icons/temp.png" position="835,600" size="20,50" zPosition="3" transparent="1" alphatest="blend" />
   
-   <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="900,580" size="80,80" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+   <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="900,580" size="80,80" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
       <convert type="MSNWeatherWebDaily">Record=3</convert>
     </widget>
   

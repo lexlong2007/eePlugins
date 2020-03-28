@@ -128,7 +128,7 @@
   </widget>
   <widget source="session.CurrentService" render="j00zekVideoResolutionIcon" position="1006,805" size="37,20" zPosition="4" alphatest="blend"/>  
   <!-- POGODA -->
-  <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1450,845" size="100,100" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+  <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1450,845" size="100,100" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
     <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
   </widget>
   <ePixmap pixmap="BlackHarmony/weather_icons/wiatr.png" position="1702,865" size="30,30" zPosition="3" transparent="1" alphatest="blend" />
@@ -154,7 +154,7 @@
     <convert type="BlackHarmonyMSNWeather">temperature_heigh_low,day2</convert>
   </widget>
   <ePixmap pixmap="BlackHarmony/gfx/temp-.png" position="1472,972" size="20,50" zPosition="3" transparent="1" alphatest="blend" />
-  <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1502,963" size="70,70" source="session.j00zekMSNWeather" transparent="1" zPosition="3">
+  <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1502,963" size="70,70" source="session.j00zekMSNWeather" transparent="1" zPosition="3">
     <convert type="BlackHarmonyMSNWeather">weathericon,day2</convert>
   </widget>
   <ePixmap pixmap="BlackHarmony/gfx/temp+.png" position="1604,992" size="20,50" zPosition="3" transparent="1" alphatest="blend" />
@@ -162,7 +162,7 @@
     <convert type="BlackHarmonyMSNWeather">temperature_heigh_low,day3</convert>
   </widget>
   <ePixmap pixmap="BlackHarmony/gfx/temp-.png" position="1764,972" size="20,50" zPosition="3" transparent="1" alphatest="blend" />
-  <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1795,963" size="70,70" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+  <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1795,963" size="70,70" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
     <convert type="BlackHarmonyMSNWeather">weathericon,day3</convert>
   </widget>
   <widget backgroundColor="black" font="HD_Thin; 25" halign="left" position="1316,802" render="Label" size="395,28" source="global.CurrentTime" transparent="1" valign="center" noWrap="1" foregroundColor="light_yellow" text=" ">

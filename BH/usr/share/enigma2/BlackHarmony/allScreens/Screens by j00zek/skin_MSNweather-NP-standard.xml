@@ -26,7 +26,7 @@
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="90,600" size="210,30" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center">
       <convert type="MSNWeatherWebDaily">Record=0,date</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="128,650" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="128,650" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
         <convert type="MSNWeatherWebDaily">Record=0</convert>
     </widget>
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="90,780" size="210,110" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top">
@@ -36,7 +36,7 @@
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="330,600" size="210,30" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center">
       <convert type="MSNWeatherWebDaily">Record=1,date</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="368,650" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="368,650" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
         <convert type="MSNWeatherWebDaily">Record=1</convert>
     </widget>
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="330,780" size="210,110" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top">
@@ -46,7 +46,7 @@
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="570,600" size="210,30" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center">
       <convert type="MSNWeatherWebDaily">Record=2,date</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="608,650" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="608,650" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
         <convert type="MSNWeatherWebDaily">Record=2</convert>
     </widget>
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="570,780" size="210,110" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top">
@@ -56,7 +56,7 @@
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="810,600" size="210,30" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center">
       <convert type="MSNWeatherWebDaily">Record=3,date</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="848,650" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="848,650" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
         <convert type="MSNWeatherWebDaily">Record=3</convert>
     </widget>
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="810,780" size="210,110" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top">
@@ -66,7 +66,7 @@
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="1055,600" size="210,30" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="center">
       <convert type="MSNWeatherWebDaily">Record=4,date</convert>
     </widget>
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1088,650" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1088,650" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
         <convert type="MSNWeatherWebDaily">Record=4</convert>
     </widget>
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 26" position="1065,780" size="210,110" backgroundColor="black" zPosition="3" transparent="1" halign="center" valign="top">

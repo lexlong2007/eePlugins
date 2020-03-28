@@ -438,7 +438,7 @@
       <convert type="j00zekModEventName">ExtendedDescription</convert>
     </widget>
   
-  <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="186,600" size="80,80" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+  <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="186,600" size="80,80" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
     <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
   </widget>
   <ePixmap pixmap="BlackHarmony/weather_icons/wiatr.png" position="405,600" size="30,30" zPosition="3" transparent="1" alphatest="blend" />
@@ -459,7 +459,7 @@
   </widget>
   <eLabel text="%" position="509,644" size="30,25" backgroundColor="black" transparent="1" font="Regular; 21" foregroundColor="white" halign="right" />
   <eLabel text="Jutro" position="582,614" size="85,47" font="Regular; 28" backgroundColor="black" halign="center" transparent="1" foregroundColor="yellow" />
-  <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="690,600" size="80,80" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+  <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="690,600" size="80,80" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
     <convert type="BlackHarmonyMSNWeather">weathericon,day2</convert>
   </widget>
   <widget noWrap="1" backgroundColor="black" font="Regular; 21" render="Label" position="780,609" size="65,25" source="session.j00zekMSNWeather" zPosition="3" halign="right" transparent="1">

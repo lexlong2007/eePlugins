@@ -21,7 +21,7 @@
       <convert type="EventTime">EndTime</convert>
       <convert type="ClockToText">Format:%H:%M</convert>
     </widget>
-    <widget source="ServiceEvent" render="BlackHarmonyTypeLabel" position="675,310" size="775,45" font="HD_Thin; 35" halign="left" foregroundColor="light_yellow" backgroundColor="black" transparent="1">
+    <widget source="ServiceEvent" render="j00zekModTypeLabel" position="675,310" size="775,45" font="HD_Thin; 35" halign="left" foregroundColor="light_yellow" backgroundColor="black" transparent="1">
       <convert type="j00zekModEventName">Name</convert>
     </widget>
 	
@@ -33,7 +33,7 @@
 	
 	<eLabel backgroundColor="linie" foregroundColor="lemon" position="684,685" size="760,1" />
 	
-	<widget alphatest="blend" column0="0,70,green,Roboto_HD,30,0,0" column1="90,545,white,Roboto_HD,30,0,1" position="675,705" primetimeoffset="10" render="BlackHarmonyEventListDisplay" rowHeight="32" size="775,200" source="ServiceEvent">
+	<widget alphatest="blend" column0="0,70,green,Roboto_HD,30,0,0" column1="90,545,white,Roboto_HD,30,0,1" position="675,705" primetimeoffset="10" render="j00zekModEventListDisplay" rowHeight="32" size="775,200" source="ServiceEvent">
       <convert type="BlackHarmonyEventList">eventcount=6</convert>
     </widget>
 	

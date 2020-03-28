@@ -103,7 +103,7 @@
     <widget pixmap="BlackHarmony/gfx/progress_rec.png" position="504,878" render="Progress" size="1123,5" source="session.Event_Now" transparent="1" zPosition="3">
       <convert type="EventTime">Progress</convert>
     </widget>
-    <widget source="session.Event_Now" position="504,872" size="1123,15" render="BlackHarmonyPositionGauge" pointer="BlackHarmony/gfx/seekbutton.png:1,1" transparent="1" zPosition="3">
+    <widget source="session.Event_Now" position="504,872" size="1123,15" render="j00zekModPositionGauge" pointer="BlackHarmony/gfx/seekbutton.png:1,1" transparent="1" zPosition="3">
       <convert type="BlackHarmonyEventPosition">Gauge</convert>
     </widget>
     <widget source="session.Event_Next" render="Label" position="500,900" size="105,36" font="Roboto_HD; 30" halign="left" foregroundColor="light_grey" backgroundColor="black" transparent="1">
@@ -140,7 +140,7 @@
       <convert type="MSNWeatherWebCurrent">barometrValue</convert>
     </widget>
     <eLabel text="hPa" position="1815,815" size="40,25" font="Regular;19" halign="right" zPosition="2" valign="center" foregroundColor="lemon" backgroundColor="black" transparent="1" />
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1637,840" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1637,840" size="128,128" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
       <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
     </widget>
     <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 30" position="1765,850" size="100,35" zPosition="3" halign="right" foregroundColor="podsw" backgroundColor="black" transparent="1">
@@ -190,10 +190,10 @@
     <widget source="session.CurrentService" render="Label" position="1630,30" size="130,30" zPosition="3" font="Roboto_HD; 24" halign="center" foregroundColor="green" backgroundColor="black" transparent="1" >
       <convert type="j00zekTranslator">day after tomorrow</convert>
     </widget>
-    <widget render="BlackHarmonyMSNWeatherPixmap" position="1470,27" size="85,85" source="session.j00zekMSNWeather" transparent="1" zPosition="3" alphatest="blend">
+    <widget render="j00zekMSNWeatherPixmap" position="1470,27" size="85,85" source="session.j00zekMSNWeather" transparent="1" zPosition="3" alphatest="blend">
       <convert type="BlackHarmonyMSNWeather">weathericon,day2</convert>
     </widget>
-    <widget render="BlackHarmonyMSNWeatherPixmap" position="1780,27" size="85,85" source="session.j00zekMSNWeather" transparent="1" zPosition="5" alphatest="blend">
+    <widget render="j00zekMSNWeatherPixmap" position="1780,27" size="85,85" source="session.j00zekMSNWeather" transparent="1" zPosition="5" alphatest="blend">
       <convert type="BlackHarmonyMSNWeather">weathericon,day3</convert>
     </widget>
     <widget source="session.j00zekMSNWeather" render="Label" position="1305,72" size="140,30" font="Roboto_HD; 20" halign="center" valign="center" transparent="1" zPosition="3" alphatest="blend">

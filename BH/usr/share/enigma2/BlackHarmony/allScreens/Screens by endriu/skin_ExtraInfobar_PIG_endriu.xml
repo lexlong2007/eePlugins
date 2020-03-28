@@ -23,7 +23,7 @@
  <widget source="session.Event_Now" render="Progress" position="416,55" zPosition="2" size="266,12" pixmap="BlackHarmony/gfx/Progress_color_dots_266x12.png" transparent="2">
       <convert type="EventTime">Progress</convert>
       </widget>
- <widget pointer="BlackHarmony/gfx/seekbutton.png:14,1" position="416,54" render="BlackHarmonyPositionGauge" size="266,14" source="session.Event_Now" transparent="1" zPosition="3">
+ <widget pointer="BlackHarmony/gfx/seekbutton.png:14,1" position="416,54" render="j00zekModPositionGauge" size="266,14" source="session.Event_Now" transparent="1" zPosition="3">
       <convert type="BlackHarmonyEventPosition">Gauge</convert>
     </widget>
   <widget backgroundColor="black" font="Regular; 33" foregroundColor="white" halign="right" position="725,39" render="Label" size="200,40" source="session.Event_Now" transparent="1">
@@ -192,7 +192,7 @@
   <widget source="session.CurrentService" render="Label" backgroundColor="black" font="Regular;30" halign="center" position="1580,571" size="250,40" transparent="1">
       <convert type="j00zekTranslator">Weather now</convert>
         </widget>
-  <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1501,616" size="170,170" source="session.j00zekMSNWeather" transparent="1" zPosition="2">
+  <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1501,616" size="170,170" source="session.j00zekMSNWeather" transparent="1" zPosition="2">
       <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
     </widget>
   <widget noWrap="1" backgroundColor="black" font="Regular; 30" render="Label" position="1700,625" size="130,35" source="session.j00zekMSNWeather" zPosition="3" halign="right" transparent="1" foregroundColor="lemon" >
@@ -223,7 +223,7 @@
 	
   <!--airly-->
   
- 	<widget position="1505,868" size="100,100" source="session.CurrentService" render="BlackHarmonyABTCAirlyPixmap" alphatest="blend" transparent="1" zPosition="9">
+ 	<widget position="1505,868" size="100,100" source="session.CurrentService" render="j00zekABTCAirlyPixmap" alphatest="blend" transparent="1" zPosition="9">
         <convert type="j00zekModABTCAirlyWidget">indexBackPNG</convert>
     </widget>
     <widget position="1505,868" size="100,100" source="session.CurrentService" render="Label" font="Roboto_HD; 34" foregroundColor="foreground" backgroundColor="background" halign="center" valign="center" noWrap="1" transparent="1" zPosition="10">

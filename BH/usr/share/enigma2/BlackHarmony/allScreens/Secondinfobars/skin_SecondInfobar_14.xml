@@ -153,7 +153,7 @@
   <widget source="session.CurrentService" render="Label" position="774,958" zPosition="2" size="860,25" font="Roboto_HD; 22" valign="top" halign="left" transparent="1" backgroundColor="black">
     <convert type="BlackHarmonygExtraInfo">Source</convert>
   </widget>
-  <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1397,742" size="50,50" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+  <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1397,742" size="50,50" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
     <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
   </widget>
   <widget noWrap="1" backgroundColor="black" font="HD_Thin; 24" render="Label" position="1464,751" size="60,26" source="session.j00zekMSNWeather" zPosition="3" halign="left" transparent="1">

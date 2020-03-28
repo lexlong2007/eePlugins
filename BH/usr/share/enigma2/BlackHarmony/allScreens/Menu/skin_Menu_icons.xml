@@ -16,7 +16,7 @@
 			</convert>
   </widget>
   <widget source="title" render="Label" position="301,148" size="671,70" font="HD_Thin; 55" halign="center" foregroundColor="light_yellow" backgroundColor="black" transparent="1" />
-  <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="340,807" size="135,135" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+  <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="340,807" size="135,135" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
     <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
   </widget>
   <widget noWrap="1" backgroundColor="background" font="HD_Thin; 24" render="Label" position="510,820" size="110,30" source="session.j00zekMSNWeather" zPosition="3" halign="center" transparent="1" foregroundColor="lemon">
@@ -54,7 +54,7 @@
 			</convert>
   </widget>
   <widget source="title" render="Label" position="301,148" size="671,70" font="HD_Thin; 55" halign="center" foregroundColor="light_yellow" backgroundColor="black" transparent="1" />
-  <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="340,807" size="135,135" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+  <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="340,807" size="135,135" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
     <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
   </widget>
   <widget noWrap="1" backgroundColor="background" font="HD_Thin; 24" render="Label" position="510,820" size="110,30" source="session.j00zekMSNWeather" zPosition="3" halign="center" transparent="1" foregroundColor="lemon">
@@ -139,7 +139,7 @@
 			</convert>
   </widget>
   <widget source="title" render="Label" position="301,148" size="671,70" font="HD_Thin; 55" halign="center" foregroundColor="light_yellow" backgroundColor="black" transparent="1" />
-  <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="340,807" size="135,135" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+  <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="340,807" size="135,135" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
     <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
   </widget>
   <widget noWrap="1" backgroundColor="background" font="HD_Thin; 24" render="Label" position="510,820" size="110,30" source="session.j00zekMSNWeather" zPosition="3" halign="center" transparent="1" foregroundColor="lemon">
@@ -177,7 +177,7 @@
 			</convert>
   </widget>
   <widget source="title" render="Label" position="301,148" size="671,70" font="HD_Thin; 55" halign="center" foregroundColor="light_yellow" backgroundColor="black" transparent="1" />
-  <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="340,807" size="135,135" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+  <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="340,807" size="135,135" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
     <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
   </widget>
   <widget noWrap="1" backgroundColor="background" font="HD_Thin; 24" render="Label" position="510,820" size="110,30" source="session.j00zekMSNWeather" zPosition="3" halign="center" transparent="1" foregroundColor="lemon">
@@ -215,7 +215,7 @@
 			</convert>
   </widget>
   <widget source="title" render="Label" position="301,148" size="671,70" font="HD_Thin; 55" halign="center" foregroundColor="light_yellow" backgroundColor="black" transparent="1" />
-  <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="340,807" size="135,135" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+  <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="340,807" size="135,135" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
     <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
   </widget>
   <widget noWrap="1" backgroundColor="background" font="HD_Thin; 24" render="Label" position="510,820" size="110,30" source="session.j00zekMSNWeather" zPosition="3" halign="center" transparent="1" foregroundColor="lemon">

@@ -288,7 +288,7 @@
 	  <widget noWrap="1" backgroundColor="black" font="HD_Thin; 24" render="Label" position="930,378" size="225,35" source="session.j00zekMSNWeather" zPosition="3" halign="center" transparent="1" foregroundColor="pastel">
       <convert type="MSNWeatherWebDaily">Record=0,date</convert>
     </widget>
-	<widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="970,453" size="150,150" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+	<widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="970,453" size="150,150" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
         <convert type="MSNWeatherWebDaily">Record=0</convert>
     </widget>
 	   <widget noWrap="1" foregroundColor="pastel" backgroundColor="background" font="HD_Thin; 23" render="Label" position="950,415" size="75,35" source="session.j00zekMSNWeather" zPosition="3" halign="center" transparent="1">
@@ -305,7 +305,7 @@
        <widget noWrap="1" backgroundColor="black" font="HD_Thin; 24" render="Label" position="1110,378" size="225,35" source="session.j00zekMSNWeather" zPosition="3" halign="center" transparent="1" foregroundColor="pastel">
       <convert type="MSNWeatherWebDaily">Record=1,date</convert>
     </widget>
-	    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1150,453" size="150,150" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+	    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1150,453" size="150,150" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
       <convert type="MSNWeatherWebDaily">Record=1</convert>
     </widget>
  
@@ -324,7 +324,7 @@
       <convert type="MSNWeatherWebDaily">Record=2,date</convert>
     </widget>
 
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1330,453" size="150,150" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1330,453" size="150,150" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
       <convert type="MSNWeatherWebDaily">Record=2</convert>
     </widget>
     <widget noWrap="1" foregroundColor="pastel" backgroundColor="background" font="HD_Thin; 23" render="Label" position="1310,415" size="75,35" source="session.j00zekMSNWeather" zPosition="3" halign="center" transparent="1">
@@ -342,7 +342,7 @@
       <convert type="MSNWeatherWebDaily">Record=3,date</convert>
     </widget>
 	
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1510,453" size="150,150" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1510,453" size="150,150" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
       <convert type="MSNWeatherWebDaily">Record=3</convert>
     </widget>
 	
@@ -361,7 +361,7 @@
       <convert type="MSNWeatherWebDaily">Record=4,date</convert>
     </widget>
 	
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="1690,453" size="150,150" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1690,453" size="150,150" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
       <convert type="MSNWeatherWebDaily">Record=4</convert>
     </widget>
 	
@@ -373,7 +373,7 @@
     </widget>
 
  
-    <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="981,104" size="200,200" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="981,104" size="200,200" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
       <convert type="BlackHarmonyMSNWeather">weathericon,current,/usr/share/enigma2/BlackHarmony/weather_icons/,png</convert>
     </widget>
     <widget noWrap="1" backgroundColor="black" font="HD_Thin; 38" render="Label" position="1265,98" size="201,60" source="session.j00zekMSNWeather" zPosition="3" halign="left" transparent="1" foregroundColor="lemon">

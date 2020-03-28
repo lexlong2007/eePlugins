@@ -36,7 +36,7 @@
     <widget backgroundColor="background" font="HD_Thin; 34" halign="center" position="1195,312" render="Label" size="655,38" source="ServiceEvent" transparent="1" valign="center">
       <convert type="ServiceName">Name</convert>
     </widget>
-    <widget source="ServiceEvent" render="BlackHarmonyEGEpgListNobile" position="1196,810" size="655,160" font="Regular; 26" valign="top" halign="center" foregroundColor="yellow" backgroundColor="background" zPosition="5" transparent="1" />
+    <widget source="ServiceEvent" render="j00zekModEGEpgListNobile" position="1196,810" size="655,160" font="Regular; 26" valign="top" halign="center" foregroundColor="yellow" backgroundColor="background" zPosition="5" transparent="1" />
     <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="95,1020" size="35,27" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="430,1020" size="35,27" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="760,1020" size="35,27" alphatest="blend" />
