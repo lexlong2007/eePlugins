@@ -5,7 +5,9 @@ else
   searchPath="$1"
 fi
 if [ ! -e "$searchPath" ];then
-  echo "$searchPath does NOT exist, exiting"
+  echo "$searchPath does NOT exist, exiting !!!!!!!"
+  echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+  echo
   exit 1
 fi
 

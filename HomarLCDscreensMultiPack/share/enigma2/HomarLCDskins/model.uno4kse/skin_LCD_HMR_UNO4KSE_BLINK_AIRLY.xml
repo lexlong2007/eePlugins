@@ -41,7 +41,7 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
   <widget source="global.CurrentTime" render="Label" position="14,130" size="130,58" font="VFD;50" transparent="1" halign="left" valign="center">
     <convert type="ClockToText">Format:%H:%M</convert>
   </widget>
-   <widget source="session.j00zekMSNWeather" render="BlackHarmonyMSNWeatherPixmap" position="5,5" size="130,130" zPosition="1" transparent="1" alphatest="blend">
+   <widget source="session.j00zekMSNWeather" render="j00zekMSNWeatherPixmap" position="5,5" size="130,130" zPosition="1" transparent="1" alphatest="blend">
       <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
     </widget>
 <widget source="session.j00zekMSNWeather"  render="Label" position="170,60" size="95,55" font="VFD;54" zPosition="1" halign="left" valign="top" foregroundColor="#ff3333" transparent="1" noWrap="1">
@@ -58,7 +58,7 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
 <ePixmap pixmap="HomarLCDskins/weather/thermo.png" position="130,30" size="33,100" zPosition="3" transparent="1" alphatest="blend" />
 
 
-<widget position="285,20" size="105,105" source="global.CurrentTime" render="BlackHarmonyABTCAirlyPixmap" alphatest="blend" transparent="1" zPosition="2">
+<widget position="285,20" size="105,105" source="global.CurrentTime" render="j00zekABTCAirlyPixmap" alphatest="blend" transparent="1" zPosition="2">
         <convert type="j00zekModABTCAirlyWidget">indexBackPNG</convert>
     </widget>
     <widget position="285,21" size="110,110" source="global.CurrentTime" render="Label" font="VFD3; 48" halign="center" valign="center" noWrap="1" transparent="1" zPosition="2">
@@ -108,7 +108,7 @@ options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=2,start
   <widget noWrap="1" font="VFD;35" render="Label" position="10,90" size="145,50" source="session.j00zekMSNWeather" zPosition="3" halign="center" transparent="1" valign="top" foregroundColor="#00CFFF">
     <convert type="BlackHarmonyMSNWeather">temperature_low,current</convert>
   </widget>
-   <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="125,30" size="100,100" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+   <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="125,30" size="100,100" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
       <convert type="MSNWeatherWebDaily">Record=0</convert>
     </widget>
    <widget noWrap="1" font="VFD;35" render="Label" position="20,15" size="150,50" source="session.j00zekMSNWeather" zPosition="3" halign="center" transparent="1" >
@@ -121,7 +121,7 @@ options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=2,start
   <widget noWrap="1" font="VFD;35" render="Label" position="190,90" size="145,50" source="session.j00zekMSNWeather" zPosition="3" halign="center" transparent="1" valign="top" foregroundColor="#00CFFF">
     <convert type="BlackHarmonyMSNWeather">temperature_low,day2</convert>
   </widget>
-   <widget alphatest="blend" render="BlackHarmonyMSNWeatherPixmap" position="305,30" size="100,100" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+   <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="305,30" size="100,100" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
       <convert type="MSNWeatherWebDaily">Record=1</convert>
     </widget>
    <widget noWrap="1" font="VFD;35" render="Label" position="200,15" size="150,50" source="session.j00zekMSNWeather" zPosition="3" halign="center" transparent="1" >
@@ -406,7 +406,7 @@ pixmap="HomarLCDskins/Homar_UNO4KSE/Homar_7.png" position="20,210" size="380,30"
 		<widget source="session.CurrentService" render="Picon" position="45,25" size="170,130" zPosition="0" transparent="1" alphatest="blend">
         <convert type="MovieBarInfo">Reference</convert>
         </widget>
-		<widget position="0,0" render="BlackHarmonyCover" size="240,150" source="session.CurrentService" zPosition="5" transparent="0" alphatest="off" />
+		<widget position="0,0" render="j00zekModCover" size="240,150" source="session.CurrentService" zPosition="5" transparent="0" alphatest="off" />
 <widget source="session.CurrentService" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated_1" position="0,0" size="240,150" zPosition="5" transparent="1" alphatest="blend" />
 <widget source="session.CurrentService" render="Pixmap" pixmap="HomarLCDskins/Homar_UNO4KSE/SD.png" position="260,115" zPosition="1" size="130,40" alphatest="blend">
 	 <convert type="ServiceInfo">VideoWidth</convert>
@@ -487,7 +487,7 @@ pixmap="HomarLCDskins/Homar_UNO4KSE/Homar_7.png" position="20,210" size="380,30"
 		<widget source="session.CurrentService" render="Picon" position="45,25" size="170,130" zPosition="0" transparent="1" alphatest="blend">
         <convert type="MovieBarInfo">Reference</convert>
         </widget>
-		<widget position="0,0" render="BlackHarmonyCover" size="240,150" source="session.CurrentService" zPosition="5" transparent="0" alphatest="off" />
+		<widget position="0,0" render="j00zekModCover" size="240,150" source="session.CurrentService" zPosition="5" transparent="0" alphatest="off" />
 <widget source="session.CurrentService" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated_1" position="0,0" size="240,150" zPosition="5" transparent="1" alphatest="blend" />
 <widget source="session.CurrentService" render="Pixmap" pixmap="HomarLCDskins/Homar_UNO4KSE/SD.png" position="260,115" zPosition="1" size="130,40" alphatest="blend">
 	 <convert type="ServiceInfo">VideoWidth</convert>
@@ -579,7 +579,7 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
 		<widget source="global.CurrentTime" render="Label" position="145,100" size="263,52" font="VFD; 47" halign="center" valign="center" transparent="1" >
         <convert type="ClockToText">Format:%d.%m.%Y</convert>
         </widget>
-<widget source="session.j00zekMSNWeather" render="BlackHarmonyMSNWeatherPixmap" position="20,10" size="140,140" zPosition="1" transparent="1" alphatest="blend">
+<widget source="session.j00zekMSNWeather" render="j00zekMSNWeatherPixmap" position="20,10" size="140,140" zPosition="1" transparent="1" alphatest="blend">
       <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
     </widget>
 <widget source="session.j00zekMSNWeather" render="Label" position="20,130" size="162,73" font="VFD; 66" zPosition="1" halign="left" valign="top" foregroundColor="#00CFFF" transparent="1" noWrap="1">

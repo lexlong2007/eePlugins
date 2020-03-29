@@ -27,7 +27,7 @@
  <widget source="session.j00zekMSNWeather"  render="Label" position="15,248" size="390,75" font="VFD3;75" halign="left" valign="center" foregroundColor="#ffff00"   noWrap="1" transparent="1" zPosition="5">
  		<convert type="BlackHarmonyMSNWeather">city</convert>
  </widget> 
- <widget source="session.j00zekMSNWeather" render="BlackHarmonyMSNWeatherPixmap" position="410,240" size="145,145" transparent="1"
+ <widget source="session.j00zekMSNWeather" render="j00zekMSNWeatherPixmap" position="410,240" size="145,145" transparent="1"
 alphatest="blend" zPosition="1" >
     <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
   </widget>
@@ -92,7 +92,7 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
     <convert type="ClockToText">Format:%H:%M</convert>
   </widget>
 <ePixmap pixmap="HomarLCDskins/Homar/kamera.png" position="160,50" size="800,480" zPosition="-1" alphatest="blend" />
-  <widget source="session.CurrentService" render="BlackHarmonyCover" position="0,0" size="526,320" zPosition="5" transparent="0" alphatest="off" />
+  <widget source="session.CurrentService" render="j00zekModCover" position="0,0" size="526,320" zPosition="5" transparent="0" alphatest="off" />
   <widget source="session.CurrentService" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated_1" position="0,0" size="526,310" zPosition="5" transparent="1" alphatest="blend" />
   <widget source="session.CurrentService" render="Picon" position="10,0" size="516,310" zPosition="4" transparent="5" alphatest="off">
   <convert type="MovieBarInfo">Reference</convert>
@@ -116,7 +116,7 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
   <widget source="global.CurrentTime" render="Label" position="20,390" size="230,88" font="VFD;78" transparent="1" halign="left" valign="center">
     <convert type="ClockToText">Format:%H:%M</convert>
   </widget>
-   <widget source="session.j00zekMSNWeather" render="BlackHarmonyMSNWeatherPixmap" position="615,158" size="155,155" zPosition="1" transparent="1" alphatest="blend">
+   <widget source="session.j00zekMSNWeather" render="j00zekMSNWeatherPixmap" position="615,158" size="155,155" zPosition="1" transparent="1" alphatest="blend">
       <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
     </widget>
   <widget source="session.j00zekMSNWeather" render="Label" position="615,80" size="170,75" font="VFD; 75" zPosition="1" halign="left" valign="top" foregroundColor="#00CFFF" transparent="1" noWrap="1">
@@ -193,8 +193,8 @@ options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,start
   <widget render="j00zekModRunningText" source="parent.Service" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=0,startdelay=6000,wrap" foregroundColor="#111111" font="VFD;56" position="165,86" size="470,270" halign="center" valign="center" transparent="1">
   <convert type="j00zekModServiceName2">Name</convert>
   </widget>
-<widget source="parent.Service" render="BlackHarmonyCover" position="0,75" size="148,240" zPosition="5" transparent="0" alphatest="blend" />
-<widget source="parent.Service" render="BlackHarmonyCover" position="645,73" size="148,240" zPosition="5" transparent="0" alphatest="blend" />
+<widget source="parent.Service" render="j00zekModCover" position="0,75" size="148,240" zPosition="5" transparent="0" alphatest="blend" />
+<widget source="parent.Service" render="j00zekModCover" position="645,73" size="148,240" zPosition="5" transparent="0" alphatest="blend" />
    <widget font="RegularLCD;56" halign="center" valign="center" position="20,380" render="Label" foregroundColor="#00ff00" transparent="1" zPosition="2" size="390,180" source="parent.name_disp" />
   <widget font="RegularLCD;54" position="40,380" render="Label" size="300,64" source="parent.Service" transparent="1" > 
   <convert type="MovieInfo">FileSize</convert>
@@ -249,8 +249,8 @@ pixmap="HomarLCDskins/Homar/Homar_7.png" position="170,421" size="350,40" border
 <widget render="j00zekModRunningText" source="parent.Service" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=0,startdelay=6000,wrap" foregroundColor="#111111" font="VFD;56" position="165,86" size="470,270" halign="center" valign="center" transparent="1">
     <convert type="j00zekModServiceName2">Name</convert>
   </widget>
-<widget source="parent.Service" render="BlackHarmonyCover" position="0,75" size="148,240" zPosition="5" transparent="0" alphatest="blend" />
-<widget source="parent.Service" render="BlackHarmonyCover" position="645,73" size="148,240" zPosition="5" transparent="0" alphatest="blend" />
+<widget source="parent.Service" render="j00zekModCover" position="0,75" size="148,240" zPosition="5" transparent="0" alphatest="blend" />
+<widget source="parent.Service" render="j00zekModCover" position="645,73" size="148,240" zPosition="5" transparent="0" alphatest="blend" />
 <widget source="parent.Service" render="Label" position="40,380" size="300,58" font="VFD;56" transparent="1" halign="left" valign="center">
 		<convert type="MovieInfo">FileSize</convert>
 		</widget>

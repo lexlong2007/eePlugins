@@ -62,4 +62,4 @@ find $myDir -iname skin_LCD_*.xml|while read f; do
 done
 
 echo "Homar Skins: modyfikacja komponentów wewnątrz xml-i zgodnie ze zmianami w BlackHarmony"
-/DuckboxDisk/github/eePlugins/BH/scripts/cleanUp.sh DuckboxDisk/github/eePlugins/HomarLCDscreensMultiPack
+/DuckboxDisk/github/eePlugins/BH/scripts/cleanUp.sh /DuckboxDisk/github/eePlugins/HomarLCDscreensMultiPack
