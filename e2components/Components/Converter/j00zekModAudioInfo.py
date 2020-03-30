@@ -8,7 +8,7 @@ from Components.Converter.Converter import Converter
 from Components.Element import cached
 from Poll import Poll
 
-class j00zekModVAudioInfo(Poll, Converter, object):
+class j00zekModAudioInfo(Poll, Converter, object):
     GET_AUDIO_ICON = 0
     GET_AUDIO_CODEC = 1
 

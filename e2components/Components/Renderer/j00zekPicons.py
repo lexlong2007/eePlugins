@@ -216,6 +216,8 @@ def getPiconName(serviceName, selfPiconType):
                     if not pngname:
                         if name.endswith('hd') or name.endswith('pl'):
                             pngname = getOnLinePicon(name[:-2], selfPiconType)
+                        else:
+                            pngname = getOnLinePicon(name + 'hd', selfPiconType)
             if not pngname:
                 if DBG: j00zekDEBUG('[j00zekPicons:getPiconName] service name not found in lamedb, trying provided name')
                 pngname = findPicon(serviceName, selfPiconType, serviceName)
