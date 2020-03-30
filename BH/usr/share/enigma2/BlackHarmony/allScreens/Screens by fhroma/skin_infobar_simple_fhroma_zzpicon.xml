@@ -28,11 +28,11 @@
 	<convert type="ConditionalShowHide" />
 	</widget>
       <widget source="session.CurrentService" render="Pixmap" pixmap="BlackHarmony/icons/ico_lan_on.png" position="924,770" zPosition="2" size="44,20" transparent="1" alphatest="blend">
-      <convert type="BlackHarmonyRouteInfo">Lan</convert>
+      <convert type="j00zekModRouteInfo">Lan</convert>
       <convert type="ConditionalShowHide" />
     </widget>
     <widget source="session.CurrentService" render="Pixmap" pixmap="BlackHarmony/icons/ico_wifi_on.png" position="924,770" zPosition="3" size="44,20" transparent="1" alphatest="blend">
-      <convert type="BlackHarmonyRouteInfo">Wifi</convert>
+      <convert type="j00zekModRouteInfo">Wifi</convert>
       <convert type="ConditionalShowHide" />
     </widget>
   	<ePixmap alphatest="blend" pixmap="BlackHarmony/icons/ico_rec_off2.png" position="889,770" size="20,20" zPosition="1" />
@@ -45,13 +45,13 @@
     <convert type="ConditionalShowHide" />
   </widget>
   <widget source="session.CurrentService" render="Label" position="85,745" size="650,48" font="HD_Thin; 42" valign="top" noWrap="1" foregroundColor="#66CC99" backgroundColor="black" transparent="1" halign="left">
-    <convert type="BlackHarmonygExtraTuner">ServiceNumberName</convert>
+    <convert type="j00zekModExtraTuner">ServiceNumberName</convert>
   </widget>
      <widget pixmap="BlackHarmony/gfx/pointer.png" position="503,896" render="Progress" size="1020,14" source="session.Event_Now" transparent="1" zPosition="3">
   <convert type="EventTime">Progress</convert>
 </widget>
     <widget pointer="BlackHarmony/gfx/seekbutton.png:14,1" position="503,896" render="j00zekModPositionGauge" size="1020,14" source="session.Event_Now" transparent="1" zPosition="3">
-      <convert type="BlackHarmonyEventPosition">Gauge</convert>
+      <convert type="j00zekModEventPosition">Gauge</convert>
     </widget>
 	  <eLabel backgroundColor="green" position="503,901" size="1020,4" transparent="0" zPosition="2" foregroundColor="black" />
  
@@ -100,13 +100,13 @@
       <convert type="j00zekTranslator">Current weather:</convert>
     </widget>
     <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1540,830" size="136,136" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
-      <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
+      <convert type="j00zekMSNWeather">weathericon,current</convert>
     </widget>
     <widget noWrap="1" backgroundColor="black" font="Roboto_HD; 30" render="Label" position="1745,870" size="100,35" source="session.j00zekMSNWeather" zPosition="3" halign="right" transparent="1" valign="top">
-      <convert type="BlackHarmonyMSNWeather">temperature_current</convert>
+      <convert type="j00zekMSNWeather">temperature_current</convert>
     </widget>
     <widget noWrap="1" backgroundColor="black" font="Roboto_HD; 30" render="Label" position="1755,930" size="90,35" source="session.j00zekMSNWeather" zPosition="3" halign="right" transparent="1" foregroundColor="podsw" valign="top">
-      <convert type="BlackHarmonyMSNWeather">feelslike</convert>
+      <convert type="j00zekMSNWeather">feelslike</convert>
     </widget>
 
     <widget source="session.CurrentService" render="j00zekLabel" font="Roboto_HD; 18" foregroundColor="yellow" halign="center" position="1715,905" size="150,20" transparent="1" zPosition="2" valign="center" backgroundColor="black">

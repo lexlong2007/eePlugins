@@ -50,7 +50,7 @@
   <ePixmap position="1720,1014" size="60,30" pixmap="BlackHarmony/buttons/key_info.png" alphatest="blend" />
   <widget source="ServiceEvent" render="j00zekModSingleEpgListNobile" position="1290,215" size="575,749" font="Roboto_HD; 26" foregroundColor="white" backgroundColor="background" noWrap="1" transparent="1" zPosition="2" />
   <widget position="1290,163" size="575,40" source="ServiceEvent" noWrap="1" render="Label" font="Roboto_HD; 26" halign="left" backgroundColor="black" zPosition="2" transparent="1" foregroundColor="green">
-    <convert type="BlackHarmonyEventName2">NextName</convert>
+    <convert type="j00zekModEventName2">NextName</convert>
   </widget>
 </screen>
   </skin>

@@ -44,10 +44,10 @@
     <widget name="list" font="Roboto_HD; 27" position="65,125" size="1095,675" itemHeight="70" scrollbarMode="showOnDemand" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" selectionPixmap="BlackHarmony/menu/sel_1095_70.png" backgroundColor="background" foregroundColor="white" foregroundColorSelected="lemon" />
     <widget name="text" position="70,500" size="1090,80" font="Roboto_HD; 30" halign="center" zPosition="-1" foregroundColor="#58ccff" backgroundColor="black" transparent="1" />
     <widget source="session.Event_Now" render="Progress" pixmap="BlackHarmony/gfx/progress_scan.png" position="350,840" size="525,20" borderWidth="2" borderColor="dark_grey" zPosition="1" transparent="0">
-      <convert type="BlackHarmonypliLayoutInfo">FleshInfo</convert>
+      <convert type="j00zekModpliLayoutInfo">FleshInfo</convert>
     </widget>
     <widget source="session.CurrentService" render="Label" position="350,870" size="700,30" zPosition="1" font="Roboto_HD;25" halign="left" valign="center" noWrap="0" foregroundColor="white" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonypliLayoutInfo">FleshInfo,Full</convert>
+      <convert type="j00zekModpliLayoutInfo">FleshInfo,Full</convert>
     </widget>
   </screen>
 </skin>

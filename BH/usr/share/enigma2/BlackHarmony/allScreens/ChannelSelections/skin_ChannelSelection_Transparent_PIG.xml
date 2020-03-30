@@ -38,7 +38,7 @@
     <convert type="ServiceName">Name</convert>
   </widget>
   <widget alphatest="blend" render="j00zekModEventListDisplay" position="1170,833" size="685,140" source="ServiceEvent" rowHeight="32" column0="0,70,green,Roboto_HD,25,0,0" column1="80,545,white,Roboto_HD,25,0,1" primetimeoffset="10">
-    <convert type="BlackHarmonyEventList">primetime=yes,eventcount=4</convert>
+    <convert type="j00zekModEventList">primetime=yes,eventcount=4</convert>
   </widget>
   <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="94,1016" size="35,27" alphatest="blend" />
   <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="430,1016" size="35,27" alphatest="blend" />

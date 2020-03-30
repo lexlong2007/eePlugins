@@ -136,7 +136,7 @@
       <convert type="MovieInfo">FileSize</convert>
     </widget>
 	<widget source="Title" render="Label" position="800,80" size="700,35" font="Roboto_HD; 27" noWrap="1" halign="left" foregroundColor="white" backgroundColor="black" transparent="1" >
-	<convert type="BlackHarmonyEMCinfo">emc_pathinfo</convert>
+	<convert type="j00zekModEMCinfo">emc_pathinfo</convert>
 	</widget>
 	<widget name="wait" position="124,190" size="920,740" zPosition="1" font="Roboto_HD; 27" halign="center" valign="center" backgroundColor="black" transparent="1"/>
     <widget name="list" position="124,190" size="920,740" 
@@ -189,7 +189,7 @@
     <ePixmap position="1753,988" size="60,30" pixmap="BlackHarmony/buttons/key_infoo.png" alphatest="blend"/>
     <widget name="Cover" position="1113,185" size="130,200" zPosition="2" alphatest="on" transparent="1"/>
     <widget source="Service" render="j00zekPicons" picontype="picon" position="1270,222" zPosition="10" size="220,132" transparent="1" alphatest="blend">
-      <convert type="BlackHarmonyMovieReference"/>
+      <convert type="j00zekModMovieReference"/>
     </widget>
   </screen>
   <screen name="EMCMediaCenter" position="center,center" size="1920,1080" title=" " flags="wfNoBorder" backgroundColor="transparent">
@@ -352,7 +352,7 @@
       <convert type="ClockToText">Format:%A %d %b %Y</convert>
     </widget>
     <widget source="Service" render="j00zekPicons" picontype="picon" position="1602,805" zPosition="10" size="220,132" transparent="1" alphatest="blend">
-      <convert type="BlackHarmonyMovieReference"/>
+      <convert type="j00zekModMovieReference"/>
     </widget>
     <widget source="Service" render="Label" position="95,745" size="1200,38" font="HD_Thin; 33" backgroundColor="black" valign="center" halign="left" transparent="1" foregroundColor="light_yellow">
       <convert type="j00zekModEventName">Name</convert>

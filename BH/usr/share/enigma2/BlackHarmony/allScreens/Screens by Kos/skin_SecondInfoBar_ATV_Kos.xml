@@ -42,16 +42,16 @@
       <convert type="j00zekModEventName">ExtendedDescription</convert>
     </widget>
     <widget source="session.CurrentService" render="j00zekLabel" position="10,612" size="1700,30" font="HD_Thin; 26" halign="center" valign="top" foregroundColor="lemon" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonyBoxInfo">Uptime</convert>
+      <convert type="j00zekModBoxInfo">Uptime</convert>
     </widget>
     <eLabel text="Internet:" position="1065,615" size="180,30" zPosition="1" font="Bold; 25" halign="center" valign="top" foregroundColor="white" backgroundColor="black" transparent="1"/>
     <widget source="session.CurrentService" render="Label" position="1160,615" size="180,30" zPosition="1" font="Bold; 25" halign="center" valign="top" foregroundColor="#00FF00" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonyTestConnectionON">
+      <convert type="j00zekModTestConnectionON">
     </convert>
     </widget>
     <eLabel text="Internet:" position="1065,615" size="180,30" zPosition="2" font="Bold; 25" halign="center" valign="top" foregroundColor="white" backgroundColor="black" transparent="1"/>
     <widget source="session.CurrentService" render="Label" position="1160,615" size="180,30" zPosition="1" font="Bold; 25" halign="center" valign="top" foregroundColor="#808080" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonyTestConnectionOFF">
+      <convert type="j00zekModTestConnectionOFF">
     </convert>
     </widget>
     <!--##########################################-->
@@ -65,8 +65,8 @@
       <convert type="ConditionalShowHide">Blink</convert>
     </widget>
     <widget source="session.CurrentService" render="Pixmap" position="1319,770" size="17,20" pixmap="BlackHarmony/icons/ico_lan_on.png" zPosition="2" transparent="1" alphatest="blend">
-      <!--convert type="BlackHarmonyRouteInfo">Lan</convert-->
-      <convert type="BlackHarmonyTestConnection">216.58.209.4:80:5</convert>
+      <!--convert type="j00zekModRouteInfo">Lan</convert-->
+      <convert type="j00zekModTestConnection">216.58.209.4:80:5</convert>
       <convert type="ConditionalShowHide"/>
     </widget>
     <ePixmap position="1260,770" size="44,20" zPosition="1" pixmap="BlackHarmony/icons/ico_hbbtv_on.png" alphatest="blend"/>
@@ -133,7 +133,7 @@
       <convert type="EventTime">Progress</convert>
     </widget>
     <widget pointer="BlackHarmony/gfx/seekbutton.png:1,1" position="313,870" render="j00zekModPositionGauge" size="1032,25" source="session.Event_Now" zPosition="3" transparent="1">
-      <convert type="BlackHarmonyEventPosition">Gauge</convert>
+      <convert type="j00zekModEventPosition">Gauge</convert>
     </widget>
     <widget source="session.Event_Now" render="Label" position="305,827" size="105,36" font="HD_Thin; 32" halign="center" backgroundColor="black" transparent="1">
       <convert type="EventTime">StartTime</convert>
@@ -178,20 +178,20 @@
     </widget>
     <eLabel name="new eLabel" position="310,955" size="45,25" font="Roboto_HD; 22" foregroundColor="#FFFF00" backgroundColor="black" text="CA:" transparent="1"/>
     <widget source="session.CurrentService" render="Label" position="353,955" zPosition="2" size="70,25" font="Roboto_HD; 22" valign="top" halign="left" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonygExtraInfo">CaidID</convert>
+      <convert type="j00zekModExtraInfo">CaidID</convert>
     </widget>
     <eLabel text="SID:" font="Roboto_HD; 22" position="426,955" size="50,25" backgroundColor="black" transparent="1" halign="left" foregroundColor="blue"/>
     <widget source="session.CurrentService" render="Label" position="474,955" size="60,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonygExtraInfo">sid</convert>
+      <convert type="j00zekModExtraInfo">sid</convert>
     </widget>
     <widget source="session.CurrentService" render="j00zekLabel" position="599,955" zPosition="2" size="750,30" font="Roboto_HD; 22" valign="top" halign="left" transparent="1" backgroundColor="black">
       <convert type="j00zekModCaidInfo2">UseCFG</convert>
     </widget>
     <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1407,764" size="55,55" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
-      <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
+      <convert type="j00zekMSNWeather">weathericon,current</convert>
     </widget>
     <widget noWrap="1" backgroundColor="black" font="HD_Thin; 24" render="Label" position="1487,777" size="60,26" source="session.j00zekMSNWeather" zPosition="3" halign="left" transparent="1">
-      <convert type="BlackHarmonyMSNWeather">temperature_current</convert>
+      <convert type="j00zekMSNWeather">temperature_current</convert>
     </widget>
     <eLabel text="A" position="1416,850" zPosition="1" size="20,25" font="Roboto_HD; 22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1"/>
     <eLabel text="B" position="1440,850" zPosition="1" size="20,25" font="Roboto_HD; 22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1"/>

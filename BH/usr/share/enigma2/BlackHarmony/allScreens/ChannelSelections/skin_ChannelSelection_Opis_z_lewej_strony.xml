@@ -51,7 +51,7 @@
     <convert type="ServiceName">Name</convert>
   </widget>
   <widget position="207,905" size="535,32" source="ServiceEvent" render="Label" font="Roboto_HD; 26" halign="left" backgroundColor="black" zPosition="2" transparent="1">
-    <convert type="BlackHarmonyEventName2">NextName</convert>
+    <convert type="j00zekModEventName2">NextName</convert>
   </widget>
 </screen>
 </skin>

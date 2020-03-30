@@ -47,7 +47,7 @@
    <eLabel position="70,800" size="960,1" backgroundColor="linie" foregroundColor="linie" />
    <eLabel position="1130,800" size="690,1" backgroundColor="linie" foregroundColor="linie" />
     <widget alphatest="blend" render="j00zekModEventListDisplay" position="1185,810" size="655,170" source="ServiceEvent" rowHeight="32" column0="0,70,green,Roboto_HD,24,0,0" column1="80,545,white,Roboto_HD,24,0,1" primetimeoffset="10">
-      <convert type="BlackHarmonyEventList">eventcount=5</convert>
+      <convert type="j00zekModEventList">eventcount=5</convert>
     </widget>
     <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="95,1001" size="35,27" alphatest="blend" />
     <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="430,1001" size="35,27" alphatest="blend" />

@@ -33,7 +33,7 @@
     <convert type="ClockToText">Format:%A %d %b %Y</convert>
   </widget>
   <widget source="Service" render="j00zekPicons" picontype="picon" position="1602,805" zPosition="10" size="220,132" transparent="1" alphatest="blend">
-    <convert type="BlackHarmonyMovieReference" />
+    <convert type="j00zekModMovieReference" />
   </widget>
   <widget source="Service" render="Label" position="95,745" size="1200,38" font="HD_Thin; 33" backgroundColor="black" valign="center" halign="left" transparent="1" foregroundColor="light_yellow">
     <convert type="j00zekModEventName">Name</convert>

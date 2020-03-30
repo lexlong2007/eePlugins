@@ -25,7 +25,7 @@
       <convert type="MovieInfo">FileSize</convert>
     </widget>
 	<widget source="Title" render="Label" position="800,80" size="700,30" font="Roboto_HD; 27" noWrap="1" halign="left" foregroundColor="white" backgroundColor="background" transparent="1" >
-	<convert type="BlackHarmonyEMCinfo">emc_pathinfo</convert>
+	<convert type="j00zekModEMCinfo">emc_pathinfo</convert>
 	</widget>
     <widget name="list" position="124,190" size="920,740" itemHeight="70" CoolFont="Roboto_HD;27" CoolSelectFont="Roboto_HD;27" CoolDateFont="Roboto_HD;20" WatchingColor="white" FinishedColor="white" RecordingColor="white" CoolFolderSize="545" CoolMovieSize="545" CoolMoviePos="35" CoolDatePos="960" scrollbarMode="showOnDemand" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" selectionPixmap="BlackHarmony/menu/sel_920_70.png" transparent="1"/>
     <widget source="Service" render="Label" position="1113,480" size="675,60" font="HD_Thin; 28" backgroundColor="black" valign="center" halign="left" transparent="1" foregroundColor="light_yellow">
@@ -50,6 +50,6 @@
     <ePixmap position="1753,988" size="60,30" pixmap="BlackHarmony/buttons/key_infoo.png" alphatest="blend"/>
     <widget name="Cover" position="1113,185" size="130,200" zPosition="2" alphatest="on" transparent="1"/>
     <widget source="Service" render="j00zekPicons" picontype="picon" position="1295,222" zPosition="10" size="220,132" transparent="1" alphatest="blend">
-      <convert type="BlackHarmonyMovieReference"/>
+      <convert type="j00zekModMovieReference"/>
     </widget>
   </screen>

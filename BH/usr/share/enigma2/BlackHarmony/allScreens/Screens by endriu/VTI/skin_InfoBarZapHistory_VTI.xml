@@ -34,7 +34,7 @@
 	<eLabel backgroundColor="linie" foregroundColor="lemon" position="684,685" size="760,1" />
 	
 	<widget alphatest="blend" column0="0,70,green,Roboto_HD,30,0,0" column1="90,545,white,Roboto_HD,30,0,1" position="675,705" primetimeoffset="10" render="j00zekModEventListDisplay" rowHeight="32" size="775,200" source="ServiceEvent">
-      <convert type="BlackHarmonyEventList">eventcount=6</convert>
+      <convert type="j00zekModEventList">eventcount=6</convert>
     </widget>
 	
 	<widget name="ZapHistoryList" position="62,160" size="578,750" font="Roboto_HD; 35" itemHeight="50" foregroundColor="white" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" selectionPixmap="BlackHarmony/menu/sel_735_50.png"/>

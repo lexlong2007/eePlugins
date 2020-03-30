@@ -46,7 +46,7 @@
       <convert type="j00zekTranslator">Box Type:</convert>
     </widget>
     <widget font="Roboto_HD; 26" halign="left" position="285,210" render="Label" size="550,32" source="session.CurrentService" zPosition="1" transparent="1" backgroundColor="black" foregroundColor="white">
-      <convert type="BlackHarmonyBoxInfo">BoxTypeValue</convert>
+      <convert type="j00zekModBoxInfo">BoxTypeValue</convert>
     </widget>
 
     <widget source="session.CurrentService" render="Label" backgroundColor="black" font="Roboto_HD; 26" position="65,252" size="210,32" transparent="1" foregroundColor="light_yellow">
@@ -54,7 +54,7 @@
       <convert type="j00zekTranslator">Uptime:</convert>
     </widget>
     <widget font="Roboto_HD; 26" halign="left" position="285,252" render="Label" size="700,32" source="session.CurrentService" zPosition="1" transparent="1" backgroundColor="black">
-      <convert type="BlackHarmonyBoxInfo">UptimeValue</convert>
+      <convert type="j00zekModBoxInfo">UptimeValue</convert>
     </widget>
 
     <widget source="session.CurrentService" render="Label" backgroundColor="black" font="Roboto_HD; 26" foregroundColor="light_yellow" position="64,294" size="210,32" transparent="1">
@@ -62,14 +62,14 @@
       <convert type="j00zekTranslator">Memory:</convert>
     </widget>
     <widget font="Roboto_HD; 26" halign="left" position="285,295" render="Label" size="940,32" source="session.CurrentService" zPosition="1" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonyBoxInfo">MemInfoValue</convert>
+      <convert type="j00zekModBoxInfo">MemInfoValue</convert>
     </widget>
 
     <widget source="session.CurrentService" render="Label" backgroundColor="black" font="Roboto_HD; 26" position="65,336" size="210,32" transparent="1" foregroundColor="light_yellow">
       <convert type="j00zekTranslator">Flash:</convert>
     </widget>
     <widget font="Roboto_HD; 26" halign="left" position="285,336" render="Label" size="940,32" source="session.CurrentService" transparent="1" backgroundColor="black">
-      <convert type="BlackHarmonymFlashInfo">Long</convert>
+      <convert type="j00zekModFlashInfo">Long</convert>
     </widget>
 
     <widget source="session.CurrentService" render="Label" backgroundColor="black" font="Roboto_HD; 26" position="65,378" size="210,32" transparent="1" foregroundColor="light_yellow">
@@ -77,17 +77,17 @@
       <convert type="j00zekTranslator">Load Avg:</convert>
     </widget>
     <widget font="Roboto_HD; 26" halign="left" position="285,378" render="Label" size="550,32" source="session.CurrentService" zPosition="1" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonyBoxInfo">LoadAverageValue</convert>
+      <convert type="j00zekModBoxInfo">LoadAverageValue</convert>
     </widget>
 
     <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="light_yellow" position="65,420" size="210,32" text="Temp CPU:" transparent="1"/>
     <widget font="Roboto_HD; 26" halign="left" position="285,420" render="Label" size="550,32" source="session.CurrentService" zPosition="1" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonyFanTempInfo">TempInfo</convert>
+      <convert type="j00zekModFanTempInfo">TempInfo</convert>
     </widget>
     
     <eLabel backgroundColor="black" font="Roboto_HD; 26" foregroundColor="light_yellow" position="65,462" size="210,32" text="Temp HDD:" transparent="1"/>
     <widget font="Roboto_HD; 26" halign="left" position="285,462" render="Label" size="550,32" source="session.CurrentService" zPosition="1" backgroundColor="black" transparent="1">
-      <convert type="BlackHarmonyHddTempInfo"></convert>
+      <convert type="j00zekModHddTempInfo"></convert>
     </widget>
 
     <eLabel position="65,510" size="1095,1" backgroundColor="linie" zPosition="1" foregroundColor="linie"/>

@@ -50,10 +50,10 @@
       <convert type="j00zekTranslator">Next:</convert>
     </widget>
 <widget alphatest="blend" render="j00zekModEventListDisplay" position="1230,730" size="580,480" source="ServiceEvent" rowHeight="32" column0="0,70,green,Roboto_HD,27,0,0" column1="80,545,white,Roboto_HD,27,0,1" primetimeoffset="10" zPosition="6" >
-      <convert type="BlackHarmonyEventList">eventcount=1</convert>
+      <convert type="j00zekModEventList">eventcount=1</convert>
     </widget>
     <widget alphatest="blend" render="j00zekModEventListDisplay" position="1130,730" size="680,480" source="ServiceEvent" rowHeight="32" column0="0,70,green,Roboto_HD,24,0,0" column1="80,545,white,Roboto_HD,24,0,1" primetimeoffset="10" >
-      <convert type="BlackHarmonyEventList">eventcount=5</convert>
+      <convert type="j00zekModEventList">eventcount=5</convert>
     </widget>
 <widget alphatest="blend" position="1420,898" render="j00zekPicons" picontype="picon" size="129,77" source="ServiceEvent" transparent="1" zPosition="4">
     <convert type="ServiceName">Reference</convert>

@@ -41,7 +41,7 @@
       <convert type="EventTime">Progress</convert>
     </widget>
 	<widget pointer="BlackHarmony/gfx/seekbutton.png:14,1" position="250,599" render="j00zekModPositionGauge" size="380,14" source="ServiceEvent" transparent="1" zPosition="6">
-      <convert type="BlackHarmonyEventPosition">Gauge</convert>
+      <convert type="j00zekModEventPosition">Gauge</convert>
     </widget>
 	<widget backgroundColor="black" font="Roboto_HD; 26" halign="left" position="655,590" render="Label" size="90,30" source="ServiceEvent" transparent="1" zPosition="5">
       <convert type="EventTime">Remaining</convert>
@@ -56,7 +56,7 @@
 	 
 	 <eLabel backgroundColor="linie" position="90,897" size="665,1" />
     <widget alphatest="blend" column0="0,80,blue,Roboto_HD,30,0,0" column1="95,620,white,Roboto_HD,30,0,1" position="60,900" primetimeoffset="10" render="j00zekModEventListDisplay" rowHeight="32" size="720,170" source="ServiceEvent">
-      <convert type="BlackHarmonyEventList">eventcount=2</convert>
+      <convert type="j00zekModEventList">eventcount=2</convert>
     </widget>
 	
 	<!--lista kanałów-->

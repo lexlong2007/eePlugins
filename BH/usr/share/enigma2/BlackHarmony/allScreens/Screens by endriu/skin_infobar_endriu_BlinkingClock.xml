@@ -11,7 +11,7 @@
  <eLabel position="360,810" size="2,186" backgroundColor="linie" /> 
 
  <widget source="session.CurrentService" render="j00zekLabel" position="373,800" size="1000,45" font="HD_Thin; 42" noWrap="1" backgroundColor="black" transparent="1" halign="center" valign="center" foregroundColor="#66CCCC" >
-    <convert type="BlackHarmonygExtraTuner">ServiceNumberName</convert>
+    <convert type="j00zekModExtraTuner">ServiceNumberName</convert>
    </widget>
  <widget source="session.CurrentService" render="Pixmap" position="1375,810" zPosition="2" size="20,20" pixmap="BlackHarmony/icons/update.png" alphatest="blend">
     <convert type="j00zekOPKGupgradeCheck" />
@@ -34,7 +34,7 @@
       <convert type="EventTime">Progress</convert>
     </widget>
 	<widget pointer="BlackHarmony/gfx/seekbutton.png:14,1" position="371,907" render="j00zekModPositionGauge" size="985,14" source="session.Event_Now" transparent="1" zPosition="3">
-      <convert type="BlackHarmonyEventPosition">Gauge</convert>
+      <convert type="j00zekModEventPosition">Gauge</convert>
     </widget>
  <widget source="session.Event_Next" render="Label" position="365,935" size="117,45" font="Regular; 30" halign="center" valign="center" backgroundColor="black" transparent="1" noWrap="1" zPosition="1" foregroundColor="#00595959">
       <convert type="EventTime">StartTime</convert>
@@ -75,10 +75,10 @@
   </widget>
  <eLabel text="CA:" position="430,1007" size="45,25" font="Regular;23" foregroundColor="cyan" backgroundColor="black"  transparent="1" />
  <widget source="session.CurrentService" render="Label" position="475,1007" zPosition="2" size="70,25" font="Regular;23" halign="left" transparent="1" backgroundColor="black">
-    <convert type="BlackHarmonygExtraInfo">CaidID</convert>
+    <convert type="j00zekModExtraInfo">CaidID</convert>
   </widget>
  <widget source="session.CurrentService" render="Label" position="540,1007" zPosition="2" size="540,29" font="Regular;23"  halign="center" transparent="1" backgroundColor="black">
-    <convert type="BlackHarmonygExtraInfo">Source</convert>
+    <convert type="j00zekModExtraInfo">Source</convert>
   </widget>
 	
  <eLabel position="377,994" size="1010,2" backgroundColor="linie" />

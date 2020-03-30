@@ -71,14 +71,104 @@ do
   if [ `grep -c 'type="BlackHarmonyABTCAirlyWidget"' < "$F"` -gt 0 ];then
     sed -i 's/type="BlackHarmonyABTCAirlyWidget"/type="j00zekModABTCAirlyWidget"/g' "$F"
   fi
+  if [ `grep -c 'type="BlackHarmonyBoxInfo"' < "$F"` -gt 0 ];then
+    sed -i 's/type="BlackHarmonyBoxInfo"/type="j00zekModBoxInfo"/g' "$F"
+  fi
   if [ `grep -c 'type="BlackHarmonyCaidInfo2"' < "$F"` -gt 0 ];then
     sed -i 's/type="BlackHarmonyCaidInfo2"/type="j00zekModCaidInfo2"/g' "$F"
+  fi
+  if [ `grep -c 'type="BlackHarmonyCodecInfo"' < "$F"` -gt 0 ];then
+    sed -i 's/type="BlackHarmonyCodecInfo"/type="j00zekModCodecInfo"/g' "$F"
+  fi
+  if [ `grep -c 'type="BlackHarmonyCodecInfoColors"' < "$F"` -gt 0 ];then
+    sed -i 's/type="BlackHarmonyCodecInfoColors"/type="j00zekModCodecInfoColors"/g' "$F"
+  fi
+  if [ `grep -c 'type="BlackHarmonyConditionalShowHide"' < "$F"` -gt 0 ];then
+    sed -i 's/type="BlackHarmonyConditionalShowHide"/type="j00zekModConditionalShowHide"/g' "$F"
+  fi
+  if [ `grep -c 'type="BlackHarmonyCpuUsage_BH"' < "$F"` -gt 0 ];then
+    sed -i 's/type="BlackHarmonyCpuUsage_BH"/type="j00zekModCpuUsage"/g' "$F"
+  fi
+  if [ `grep -c 'type="BlackHarmonyEMCinfo"' < "$F"` -gt 0 ];then
+    sed -i 's/type="BlackHarmonyEMCinfo"/type="j00zekModEMCinfo"/g' "$F"
+  fi
+  if [ `grep -c 'type="BlackHarmonyEventList"' < "$F"` -gt 0 ];then
+    sed -i 's/type="BlackHarmonyEventList"/type="j00zekModEventList"/g' "$F"
+  fi
+  if [ `grep -c 'type="BlackHarmonyEventName2"' < "$F"` -gt 0 ];then
+    sed -i 's/type="BlackHarmonyEventName2"/type="j00zekModEventName2"/g' "$F"
+  fi
+  if [ `grep -c 'type="BlackHarmonyEventPosition"' < "$F"` -gt 0 ];then
+    sed -i 's/type="BlackHarmonyEventPosition"/type="j00zekModEventPosition"/g' "$F"
+  fi
+  if [ `grep -c 'type="BlackHarmonyExtraNumText"' < "$F"` -gt 0 ];then
+    sed -i 's/type="BlackHarmonyExtraNumText"/type="j00zekModExtraNumText"/g' "$F"
+  fi
+  if [ `grep -c 'type="BlackHarmonyFanTempInfo"' < "$F"` -gt 0 ];then
+    sed -i 's/type="BlackHarmonyFanTempInfo"/type="j00zekModFanTempInfo"/g' "$F"
+  fi
+  if [ `grep -c 'type="BlackHarmonyFrontendInfo_BH"' < "$F"` -gt 0 ];then
+    sed -i 's/type="BlackHarmonyFrontendInfo_BH"/type="j00zekModFrontendInfo"/g' "$F"
   fi
   if [ `grep -c 'type="BlackHarmonyFrontendInfo2"' < "$F"` -gt 0 ];then
     sed -i 's/type="BlackHarmonyFrontendInfo2"/type="j00zekModFrontendInfo2"/g' "$F"
   fi
+  if [ `grep -c 'type="BlackHarmonygExtraInfo"' < "$F"` -gt 0 ];then
+    sed -i 's/type="BlackHarmonygExtraInfo"/type="j00zekModExtraInfo"/g' "$F"
+  fi
+  if [ `grep -c 'type="BlackHarmonygExtraTuner"' < "$F"` -gt 0 ];then
+    sed -i 's/type="BlackHarmonygExtraTuner"/type="j00zekModExtraTuner"/g' "$F"
+  fi
+  if [ `grep -c 'type="BlackHarmonyHddTempInfo"' < "$F"` -gt 0 ];then
+    sed -i 's/type="BlackHarmonyHddTempInfo"/type="j00zekModHddTempInfo"/g' "$F"
+  fi
+  if [ `grep -c 'type="BlackHarmonyimieniny"' < "$F"` -gt 0 ];then
+    sed -i 's/type="BlackHarmonyimieniny"/type="j00zekModimieniny"/g' "$F"
+  fi
+  if [ `grep -c 'type="BlackHarmonymFlashInfo"' < "$F"` -gt 0 ];then
+    sed -i 's/type="BlackHarmonymFlashInfo"/type="j00zekModFlashInfo"/g' "$F"
+  fi
+  if [ `grep -c 'type="BlackHarmonyMovieReference"' < "$F"` -gt 0 ];then
+    sed -i 's/type="BlackHarmonyMovieReference"/type="j00zekModMovieReference"/g' "$F"
+  fi
+  if [ `grep -c 'type="BlackHarmonyMSNWeather"' < "$F"` -gt 0 ];then
+    sed -i 's/type="BlackHarmonyMSNWeather"/type="j00zekMSNWeather"/g' "$F"
+  fi
+  if [ `grep -c 'type="BlackHarmonyMSNWeatherThingSpeak"' < "$F"` -gt 0 ];then
+    sed -i 's/type="BlackHarmonyMSNWeatherThingSpeak"/type="j00zekMSNWeatherThingSpeak"/g' "$F"
+  fi
+  if [ `grep -c 'type="BlackHarmonyMSNWeatherWebCurrent"' < "$F"` -gt 0 ];then
+    sed -i 's/type="BlackHarmonyMSNWeatherWebCurrent"/type="j00zekMSNWeatherWebCurrent"/g' "$F"
+  fi
+  if [ `grep -c 'type="BlackHarmonyMSNWeatherWebDaily"' < "$F"` -gt 0 ];then
+    sed -i 's/type="BlackHarmonyMSNWeatherWebDaily"/type="j00zekMSNWeatherWebDaily"/g' "$F"
+  fi
+  if [ `grep -c 'type="BlackHarmonyMSNWeatherWebhourly"' < "$F"` -gt 0 ];then
+    sed -i 's/type="BlackHarmonyMSNWeatherWebhourly"/type="j00zekMSNWeatherWebhourly"/g' "$F"
+  fi
   if [ `grep -c 'type="BlackHarmonyPliExtraInfo"' < "$F"` -gt 0 ];then
     sed -i 's/type="BlackHarmonyPliExtraInfo"/type="j00zekModPliExtraInfo"/g' "$F"
+  fi
+  if [ `grep -c 'type="BlackHarmonypliLayoutInfo"' < "$F"` -gt 0 ];then
+    sed -i 's/type="BlackHarmonypliLayoutInfo"/type="j00zekModpliLayoutInfo"/g' "$F"
+  fi
+  if [ `grep -c 'type="BlackHarmonyQuickEcmInfo"' < "$F"` -gt 0 ];then
+    sed -i 's/type="BlackHarmonyQuickEcmInfo"/type="j00zekModQuickEcmInfo"/g' "$F"
+  fi
+  if [ `grep -c 'type="BlackHarmonyRouteInfo"' < "$F"` -gt 0 ];then
+    sed -i 's/type="BlackHarmonyRouteInfo"/type="j00zekModRouteInfo"/g' "$F"
+  fi
+  if [ `grep -c 'type="BlackHarmonyTestConnection"' < "$F"` -gt 0 ];then
+    sed -i 's/type="BlackHarmonyTestConnection"/type="j00zekModTestConnection"/g' "$F"
+  fi
+  if [ `grep -c 'type="BlackHarmonyTestConnectionOFF"' < "$F"` -gt 0 ];then
+    sed -i 's/type="BlackHarmonyTestConnectionOFF"/type="j00zekModTestConnectionOFF"/g' "$F"
+  fi
+  if [ `grep -c 'type="BlackHarmonyTestConnectionON"' < "$F"` -gt 0 ];then
+    sed -i 's/type="BlackHarmonyTestConnectionON"/type="j00zekModTestConnectionON"/g' "$F"
+  fi
+  if [ `grep -c 'type="BlackHarmonyVAudioInfo"' < "$F"` -gt 0 ];then
+    sed -i 's/type="BlackHarmonyVAudioInfo"/type="j00zekModAudioInfo"/g' "$F"
   fi
 #klawisze kolorow
   if [ `grep -c 'buttons/green.png' < "$F"` -gt 0 ];then

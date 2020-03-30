@@ -9,10 +9,10 @@
     <widget backgroundColor="transpBlack_1" font="Roboto_HD; 35" foregroundColor="light_yellow" halign="left" name="servicename" position="370,33" size="430,60" valign="center" />
   <eLabel backgroundColor="black" font="Roboto_HD; 25" foregroundColor="blue" position="330,140" size="180,30" text="Pogoda teraz:" transparent="1" />
   <widget alphatest="blend" position="490,135" render="j00zekMSNWeatherPixmap" size="50,50" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
-  <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
+  <convert type="j00zekMSNWeather">weathericon,current</convert>
   </widget>
   <widget backgroundColor="black" font="HD_Thin; 24" halign="left" noWrap="1" position="550,140" render="Label" size="60,26" source="session.j00zekMSNWeather" transparent="1" zPosition="3">
-    <convert type="BlackHarmonyMSNWeather">temperature_current</convert>
+    <convert type="j00zekMSNWeather">temperature_current</convert>
   </widget> 
   </screen>
  </skin>

@@ -57,7 +57,7 @@
     <convert type="j00zekTranslator">later</convert>
   </widget>
   <widget alphatest="blend" column0="0,80,green,Roboto_HD,26,0,0" column1="85,620,white,Roboto_HD,26,0,1" position="1317,755" primetimeoffset="10" render="j00zekModEventListDisplay" rowHeight="32" size="548,230" source="ServiceEvent">
-    <convert type="BlackHarmonyEventList">eventcount=7</convert>
+    <convert type="j00zekModEventList">eventcount=7</convert>
   </widget>	
   <eLabel backgroundColor="linie"  position="55,703" size="1810,2" />
   <eLabel backgroundColor="linie"  position="1306,722" size="2,245" />

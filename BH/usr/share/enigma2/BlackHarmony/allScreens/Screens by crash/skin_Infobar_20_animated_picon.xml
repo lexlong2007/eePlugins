@@ -6,7 +6,7 @@
       <convert type="ConditionalShowHide" >Blink</convert>
   </widget>
   <widget source="session.CurrentService" render="Pixmap" pixmap="BlackHarmony/icons/ico_lan_on.png" position="1665,805" zPosition="2" size="17,20" transparent="1" alphatest="blend">
-    <convert type="BlackHarmonyRouteInfo">Lan</convert>
+    <convert type="j00zekModRouteInfo">Lan</convert>
     <convert type="ConditionalShowHide" />
   </widget>
   <ePixmap position="1478,805" size="57,20" zPosition="1" pixmap="BlackHarmony/icons/ico_dolby_off.png" alphatest="blend" />
@@ -31,7 +31,7 @@
     <convert type="ConditionalShowHide" />
   </widget>
   <widget source="session.CurrentService" render="Label" position="65,797" size="700,48" font="HD_Thin; 42" valign="top" noWrap="1" backgroundColor="black" transparent="1" halign="left">
-    <convert type="BlackHarmonygExtraTuner">ServiceNumberName</convert>
+    <convert type="j00zekModExtraTuner">ServiceNumberName</convert>
   </widget>
   <widget source="session.Event_Now" render="Progress" position="313,917" zPosition="1" size="1304,6" pixmap="BlackHarmony/gfx/progress_weather.png" transparent="1">
     <convert type="EventTime">Progress</convert>
@@ -76,10 +76,10 @@
   <widget source="session.CurrentService" render="j00zekPiconAnimation" position="65,873" size="220,132" zPosition="5" transparent="1" alphatest="blend" />
   <eLabel name="new eLabel" position="820,997" size="60,25" font="Roboto_HD; 22" foregroundColor="green" backgroundColor="black" text="CAID:" transparent="1" />
   <widget source="session.CurrentService" render="Label" position="881,997" zPosition="2" size="70,25" font="Roboto_HD; 22" valign="top" halign="left" transparent="1" backgroundColor="black">
-    <convert type="BlackHarmonygExtraInfo">CaidID</convert>
+    <convert type="j00zekModExtraInfo">CaidID</convert>
   </widget>
   <widget source="session.CurrentService" render="Label" position="945,997" zPosition="2" size="675,25" font="Roboto_HD; 22" valign="top" halign="left" transparent="1" backgroundColor="black">
-    <convert type="BlackHarmonygExtraInfo">Source</convert>
+    <convert type="j00zekModExtraInfo">Source</convert>
   </widget>
   <eLabel text="A" position="757,997" zPosition="1" size="20,25" font="Roboto_HD; 22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" />
   <eLabel text="B" position="782,997" zPosition="1" size="20,25" font="Roboto_HD; 22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" />
@@ -222,10 +222,10 @@
     <convert type="ConditionalShowHide" />
   </widget>
   <widget source="session.FrontendStatus" render="Label" font="Roboto_HD; 22" position="1724,870" size="150,25" halign="left" backgroundColor="black" transparent="1" noWrap="1">
-    <convert type="BlackHarmonyFrontendInfo_BH">SNR</convert>
+    <convert type="j00zekModFrontendInfo">SNR</convert>
   </widget>
   <widget source="session.CurrentService" render="Label" position="1719,910" size="150,25" font="Roboto_HD; 22" halign="left" backgroundColor="black" transparent="1" zPosition="3">
-    <convert type="BlackHarmonyCpuUsage_BH">Total</convert>
+    <convert type="j00zekModCpuUsage">Total</convert>
   </widget>
   <eLabel text="SNR:" position="1663,870" size="65,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" foregroundColor="green" />
   <eLabel text="CPU:" position="1665,910" size="65,25" font="Roboto_HD; 22" backgroundColor="black" halign="left" transparent="1" foregroundColor="light_red" />
@@ -240,49 +240,49 @@
   </widget>
   <!-- POGODA -->
   <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1425,103" size="100,100" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
-    <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
+    <convert type="j00zekMSNWeather">weathericon,current</convert>
   </widget>
   <ePixmap pixmap="BlackHarmony/weather_icons/wiatr.png" position="1687,115" size="30,30" zPosition="3" transparent="1" alphatest="blend" />
   <ePixmap pixmap="BlackHarmony/weather_icons/deszcz.png" position="1787,157" size="28,30" zPosition="4" transparent="1" alphatest="blend" />
   <ePixmap pixmap="BlackHarmony/weather_icons/temp.png" position="1618,123" size="20,50" zPosition="3" transparent="1" alphatest="blend" />
   <eLabel text="Jutro" position="1307,248" size="140,25" font="HD_Thin; 21" backgroundColor="black" halign="center" transparent="1" foregroundColor="light_yellow" />
   <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 21" position="1549,120" size="65,25" backgroundColor="black" zPosition="3" transparent="1" valign="center" halign="center">
-    <convert type="BlackHarmonyMSNWeather">temperature_high,current</convert>
+    <convert type="j00zekMSNWeather">temperature_high,current</convert>
   </widget>
   <widget source="session.j00zekMSNWeather" render="Label" font="Roboto_HD; 21" position="1549,151" size="65,25" backgroundColor="black" zPosition="3" transparent="1" valign="center" halign="center">
-    <convert type="BlackHarmonyMSNWeather">temperature_low,current</convert>
+    <convert type="j00zekMSNWeather">temperature_low,current</convert>
   </widget>
   <widget backgroundColor="black" font="Roboto_HD; 21" foregroundColor="white" render="Label" position="1740,117" size="100,25" source="session.j00zekMSNWeather" zPosition="3" halign="left" transparent="1">
-    <convert type="BlackHarmonyMSNWeather">winddisplay</convert>
+    <convert type="j00zekMSNWeather">winddisplay</convert>
   </widget>
   <widget backgroundColor="black" font="Roboto_HD; 21" foregroundColor="white" render="Label" position="1677,160" size="60,25" source="session.j00zekMSNWeather" zPosition="3" halign="right" transparent="1">
-    <convert type="BlackHarmonyMSNWeather">humidity</convert>
+    <convert type="j00zekMSNWeather">humidity</convert>
   </widget>
   <eLabel text="%" position="1737,160" size="30,25" backgroundColor="black" transparent="1" font="Roboto_HD; 21" foregroundColor="white" />
   <ePixmap position="1265,10" zPosition="-2" size="615,321" pixmap="BlackHarmony/bg_design/pogoda_20.png" />
   <eLabel text="Pojutrze" position="1610,248" size="140,25" font="HD_Thin; 21" backgroundColor="black" halign="center" transparent="1" foregroundColor="light_yellow" />
   <ePixmap pixmap="BlackHarmony/gfx/temp+.png" position="1287,283" size="20,50" zPosition="3" transparent="1" alphatest="blend" />
   <widget source="session.j00zekMSNWeather" render="Label" position="1307,283" size="140,30" font="Roboto_HD; 21" halign="center" valign="center" transparent="1" zPosition="3" backgroundColor="black">
-    <convert type="BlackHarmonyMSNWeather">temperature_heigh_low,day2</convert>
+    <convert type="j00zekMSNWeather">temperature_heigh_low,day2</convert>
   </widget>
   <ePixmap pixmap="BlackHarmony/gfx/temp-.png" position="1447,263" size="20,50" zPosition="3" transparent="1" alphatest="blend" />
   <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1485,250" size="70,70" source="session.j00zekMSNWeather" transparent="1" zPosition="3">
-    <convert type="BlackHarmonyMSNWeather">weathericon,day2</convert>
+    <convert type="j00zekMSNWeather">weathericon,day2</convert>
   </widget>
   <ePixmap pixmap="BlackHarmony/gfx/temp+.png" position="1590,283" size="20,50" zPosition="3" transparent="1" alphatest="blend" />
   <widget source="session.j00zekMSNWeather" render="Label" position="1610,283" size="140,30" font="Roboto_HD; 21" halign="center" valign="center" transparent="1" zPosition="3" backgroundColor="black">
-    <convert type="BlackHarmonyMSNWeather">temperature_heigh_low,day3</convert>
+    <convert type="j00zekMSNWeather">temperature_heigh_low,day3</convert>
   </widget>
   <ePixmap pixmap="BlackHarmony/gfx/temp-.png" position="1750,263" size="20,50" zPosition="3" transparent="1" alphatest="blend" />
   <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1785,250" size="70,70" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
-    <convert type="BlackHarmonyMSNWeather">weathericon,day3</convert>
+    <convert type="j00zekMSNWeather">weathericon,day3</convert>
   </widget>
   <widget source="global.CurrentTime" render="Label" position="1290,67" size="575,26" font="Roboto_HD; 21" halign="center" transparent="1" backgroundColor="black" zPosition="3" noWrap="1">
-    <convert type="BlackHarmonyimieniny" />
+    <convert type="j00zekModimieniny" />
   </widget>
   <eLabel font="HD_Thin; 21" halign="right" name="new eLabel" position="1378,205" size="255,25" text="Aktualizcja danych:" transparent="1" zPosition="2" valign="center" backgroundColor="black" />
   <widget source="session.j00zekMSNWeather" render="Label" position="1643,205" size="242,25" zPosition="2" font="Roboto_HD; 21" halign="left" backgroundColor="black" transparent="1" foregroundColor="lemon">
-        <convert type="BlackHarmonyMSNWeather">observationtime</convert>
+        <convert type="j00zekMSNWeather">observationtime</convert>
   </widget>
   <widget backgroundColor="black" font="HD_Thin; 30" halign="center" position="1290,27" render="Label" size="575,32" source="global.CurrentTime" transparent="1" valign="center" noWrap="1" foregroundColor="light_yellow" text=" ">
     <convert type="ClockToText">Format:%A %d %B %Y </convert>
@@ -293,10 +293,10 @@
   
   
   <widget noWrap="1" backgroundColor="black" font="HD_Thin; 37" render="Label" position="1267,127" size="90,40" source="session.j00zekMSNWeather" zPosition="3" halign="right" transparent="1" valign="center">
-    <convert type="BlackHarmonyMSNWeather">feelslike</convert>
+    <convert type="j00zekMSNWeather">feelslike</convert>
   </widget>
   <widget source="session.CurrentService" render="Label" position="768,803" size="530,30" font="Roboto_HD; 22" backgroundColor="black" transparent="1" halign="left" noWrap="1" valign="center" text="19.2E  DVB-S2  10627 27500 3/4 8PSK" zPosition="3">
-    <convert type="BlackHarmonygExtraTuner">TunerInfo</convert>
+    <convert type="j00zekModExtraTuner">TunerInfo</convert>
   </widget>
 </screen>
  

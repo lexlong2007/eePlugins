@@ -135,14 +135,14 @@
 
 
 		    <widget noWrap="1" backgroundColor="black" font="SemiboldLCD;70" foregroundColor="white" render="Label"  position="270,24" size="450,80"  source="session.j00zekMSNWeather" zPosition="3" halign="left" transparent="1" valign="center">
-      <convert type="BlackHarmonyMSNWeather">city</convert>
+      <convert type="j00zekMSNWeather">city</convert>
     </widget>
 		
 		<widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="50,80" size="150,150" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
-    <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
+    <convert type="j00zekMSNWeather">weathericon,current</convert>
   </widget>
   <widget noWrap="1" backgroundColor="black" font="RegularLCD;95"  render="Label" position="55,240" size="150,100" source="session.j00zekMSNWeather" zPosition="3" halign="left" transparent="1" foregroundColor="#C1EA02">
-    <convert type="BlackHarmonyMSNWeather">temperature_current</convert>
+    <convert type="j00zekMSNWeather">temperature_current</convert>
   </widget>
 		
 		
@@ -400,13 +400,13 @@
 	<screen name="MSNWeatherPlugin_summary" position="0,0" size="800,480">
 		<widget source="parent.Title" render="Label" position="20,20" foregroundColor="#00cc99" size="720,80" font="RegularLCD;70" halign="center" valign="center" />
 		<widget source="session.j00zekMSNWeather" noWrap="1" font="RegularLCD;95" render="Label" position="420,160" size="300,100" transparent="1" zPosition="8" halign="center" foregroundColor="#e5b243" >
-			<convert type="BlackHarmonyMSNWeather">temperature_current</convert>
+			<convert type="j00zekMSNWeather">temperature_current</convert>
 		</widget>
 		<widget render="j00zekMSNWeatherPixmap" position="20,140" size="360,200" source="session.j00zekMSNWeather" transparent="1" zPosition="8"  >
-			  <convert type="BlackHarmonyMSNWeather">weathericon,current,/usr/share/enigma2/BlackHarmony/weather_icons/,png</convert>
+			  <convert type="j00zekMSNWeather">weathericon,current,/usr/share/enigma2/BlackHarmony/weather_icons/,png</convert>
 		</widget>
 	<widget noWrap="1" backgroundColor="black"  foregroundColor="#58ccff" render="Label" position="30,350" size="700,80" source="session.j00zekMSNWeather" zPosition="3" font="RegularLCD;70" halign="center" valign="center">
-      <convert type="BlackHarmonyMSNWeather">city</convert>
+      <convert type="j00zekMSNWeather">city</convert>
 	</widget>
 	</screen>
 

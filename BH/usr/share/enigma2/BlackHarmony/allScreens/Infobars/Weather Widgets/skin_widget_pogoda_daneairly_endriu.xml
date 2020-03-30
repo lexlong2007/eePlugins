@@ -9,7 +9,7 @@
           <convert type="j00zekTranslator">Now</convert>
         </widget>
  <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="50,0" size="80,80" source="session.j00zekMSNWeather" transparent="1" zPosition="2">
-      <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
+      <convert type="j00zekMSNWeather">weathericon,current</convert>
     </widget>
  <widget noWrap="1" backgroundColor="black" font="Regular; 22" render="Label" position="180,0" size="100,23" source="session.j00zekMSNWeather" zPosition="3" halign="right" transparent="1" foregroundColor="lemon" valign="center">
       <convert type="j00zekModABTCAirlyWidget">temp</convert>
@@ -87,24 +87,24 @@
           <convert type="j00zekTranslator">name day</convert>
         </widget>
  <widget backgroundColor="black" font="Regular; 25" foregroundColor="grey" halign="center" valign="center" noWrap="0" position="1388,29" render="j00zekLabel" size="200,55" source="global.CurrentTime" transparent="1" zPosition="3">
-      <convert type="BlackHarmonyimieniny" />
+      <convert type="j00zekModimieniny" />
     </widget>
 	
 	<!--jutro-->
  
  <eLabel position="1592,6" size="2,73" backgroundColor="linie" />
 	<widget alphatest="blend" position="1596,5" render="j00zekMSNWeatherPixmap" size="80,80" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
-      <convert type="BlackHarmonyMSNWeatherWebDaily">Record=1</convert>
+      <convert type="j00zekMSNWeatherWebDaily">Record=1</convert>
     </widget>
  <widget source="session.CurrentService" render="Label" position="1695,5" size="190,30" font="Regular; 25" backgroundColor="black" valign="center" halign="left" transparent="1" foregroundColor="lemon"  >
     <convert type="j00zekTranslator">Tomorrow</convert>
     </widget>
  <ePixmap pixmap="BlackHarmony/weather_icons/temp_high_low2.png" position="1740,42" size="70,28" zPosition="3" transparent="1" alphatest="blend" />
  <widget backgroundColor="black" font="Regular; 22" valign="center" halign="center" noWrap="1" position="1675,42" render="Label" size="70,30" source="session.j00zekMSNWeather" transparent="1" zPosition="3">
-    <convert type="BlackHarmonyMSNWeather">temperature_high,day2</convert>
+    <convert type="j00zekMSNWeather">temperature_high,day2</convert>
   </widget>
  <widget backgroundColor="black" font="Regular; 22" valign="center" halign="center" noWrap="1" position="1810,42" render="Label" size="70,30" source="session.j00zekMSNWeather" transparent="1" zPosition="3">
-    <convert type="BlackHarmonyMSNWeather">temperature_low,day2</convert>
+    <convert type="j00zekMSNWeather">temperature_low,day2</convert>
 	</widget>
   
 </screen>

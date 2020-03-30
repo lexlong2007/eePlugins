@@ -29,7 +29,7 @@
     <convert type="j00zekModEventName">ExtendedDescription</convert>
   </widget>
 	<widget source="Service" render="j00zekPicons" picontype="picon" position="1480,250" zPosition="10" size="220,132" transparent="1" alphatest="blend">
-    <convert type="BlackHarmonyMovieReference" />
+    <convert type="j00zekModMovieReference" />
   </widget>
 		<widget source="Service" render="j00zekModCover" position="1170,220" size="280,300" zPosition="3" alphatest="blend" />
 			   <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="110,991" size="35,27" alphatest="blend" />

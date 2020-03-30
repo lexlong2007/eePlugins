@@ -27,7 +27,7 @@
     <convert type="ConditionalShowHide" />
   </widget>
   <widget source="session.CurrentService" render="Label" position="65,760" size="700,48" font="HD_Thin; 42" valign="top" noWrap="1" backgroundColor="black" transparent="1" halign="left">
-    <convert type="BlackHarmonygExtraTuner">ServiceNumberName</convert>
+    <convert type="j00zekModExtraTuner">ServiceNumberName</convert>
   </widget>
   <widget source="global.CurrentTime" render="Label" position="1205,760" size="140,48" font="HD_Thin; 42" halign="right" backgroundColor="black" transparent="1" valign="center" foregroundColor="light_yellow">
     <convert type="ClockToText">Default</convert>
