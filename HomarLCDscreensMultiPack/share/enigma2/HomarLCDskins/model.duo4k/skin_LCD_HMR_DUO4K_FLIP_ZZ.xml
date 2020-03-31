@@ -77,7 +77,7 @@ position="16,15" size="460,50" font="VFD; 40" foregroundColor="#ffff00" halign="
 <widget source="parent.ServiceEvent" render="j00zekModRunningText" 
 options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,startdelay=200,always=0,oneshot=0" noWrap="1"
 position="16,15" size="460,50" font="VFD; 40" foregroundColor="#ffff00" halign="left" zPosition="2" transparent="1" >
-  <convert type="BlackHarmonyEventName2">NextName</convert>
+  <convert type="j00zekModEventName2">NextName</convert>
   </widget>
 <widget source="parent.ServiceEvent" render="j00zekModRunningText" 
 options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,startdelay=800,always=0,oneshot=0" noWrap="1"  position="16,240" size="460,72" font="VFD;64" transparent="1" halign="left" valign="top" foregroundColor="#ffff00" backgroundColor="#000000">
@@ -373,7 +373,7 @@ position="16,190" size="460,69" font="VFD;62" transparent="1" halign="center" va
 <widget source="parent.ServiceEvent" render="j00zekModRunningText" 
 options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,startdelay=200,always=0,oneshot=0" noWrap="1"
 position="16,15" size="460,50" font="VFD; 40" foregroundColor="#ffff00" halign="left" zPosition="2" transparent="1" >
-  <convert type="BlackHarmonyEventName2">NextName</convert>
+  <convert type="j00zekModEventName2">NextName</convert>
   </widget>
 <widget source="parent.ServiceEvent" render="j00zekModRunningText" 
 options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,startdelay=800,always=0,oneshot=0" noWrap="1"  position="16,240" size="460,72" font="VFD;64" transparent="1" halign="left" valign="top" foregroundColor="#ffff00" backgroundColor="#000000">

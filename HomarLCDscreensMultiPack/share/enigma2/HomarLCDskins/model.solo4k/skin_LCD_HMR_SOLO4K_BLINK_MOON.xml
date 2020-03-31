@@ -42,14 +42,14 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
  <convert type="ClockToText">Format:%H:%M</convert>
  </widget>
  <widget source="session.j00zekMSNWeather" render="j00zekMSNWeatherPixmap" position="30,25" size="135,135" zPosition="1" transparent="1" alphatest="blend">
- <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
+ <convert type="j00zekMSNWeather">weathericon,current</convert>
  </widget>
  <widget source="session.j00zekMSNWeather" render="j00zekModRunningText" 
 options="movetype=running,startpoint=0,direction=left,steptime=70,repeat=0,startdelay=2000,always=0,oneshot=0" noWrap="1"  position="30,140" size="150,60" font="VFD;46" transparent="1" halign="left" valign="center" foregroundColor="#ffff00" zPosition="3">
- <convert type="BlackHarmonyMSNWeather">temperature_text,current</convert>
+ <convert type="j00zekMSNWeather">temperature_text,current</convert>
  </widget>
  <widget source="session.j00zekMSNWeather" render="Label" position="220,70" size="130,65" font="VFD;56" zPosition="1" halign="left" valign="top" foregroundColor="#ff3333" transparent="1" noWrap="1">
- <convert type="BlackHarmonyMSNWeather">temperature_current</convert>
+ <convert type="j00zekMSNWeather">temperature_current</convert>
  </widget>
 <ePixmap pixmap="HomarLCDskins/weather/thermo.png" position="180,40" size="33,100" zPosition="3" transparent="1" alphatest="blend" />
 <widget alphatest="blend" path="/usr/share/enigma2/HomarLCDskins" picontype="MoonPhase" position="330,65" render="j00zekPicons" size="115,115" source="global.CurrentTime" zPosition="1">
@@ -108,10 +108,10 @@ options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,start
 </widget>
  <!--   Today   --> 
 <widget noWrap="1" font="VFD;42" render="Label" position="10,60" size="145,50" source="session.j00zekMSNWeather" zPosition="3" halign="center" transparent="1" valign="top" foregroundColor="#ff3333">
-    <convert type="BlackHarmonyMSNWeather">temperature_high,current</convert>
+    <convert type="j00zekMSNWeather">temperature_high,current</convert>
   </widget>
   <widget noWrap="1" font="VFD;42" render="Label" position="10,100" size="145,50" source="session.j00zekMSNWeather" zPosition="3" halign="center" transparent="1" valign="top" foregroundColor="#00CFFF">
-    <convert type="BlackHarmonyMSNWeather">temperature_low,current</convert>
+    <convert type="j00zekMSNWeather">temperature_low,current</convert>
   </widget>
    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="130,50" size="120,120" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
       <convert type="MSNWeatherWebDaily">Record=0</convert>
@@ -121,10 +121,10 @@ options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,start
   </widget>
 <!--   Tomorrow   -->
 <widget noWrap="1" font="VFD;42" render="Label" position="240,60" size="145,50" source="session.j00zekMSNWeather" zPosition="3" halign="center" transparent="1" valign="top" foregroundColor="#ff3333">
-    <convert type="BlackHarmonyMSNWeather">temperature_high,day2</convert>
+    <convert type="j00zekMSNWeather">temperature_high,day2</convert>
   </widget>
   <widget noWrap="1" font="VFD;42" render="Label" position="240,100" size="145,50" source="session.j00zekMSNWeather" zPosition="3" halign="center" transparent="1" valign="top" foregroundColor="#00CFFF">
-    <convert type="BlackHarmonyMSNWeather">temperature_low,day2</convert>
+    <convert type="j00zekMSNWeather">temperature_low,day2</convert>
   </widget>
    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="360,50" size="120,120" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
       <convert type="MSNWeatherWebDaily">Record=1</convert>
@@ -403,7 +403,7 @@ position="16,190" size="460,69" font="VFD;62" transparent="1" halign="center" va
 <widget source="parent.ServiceEvent" render="j00zekModRunningText" 
 options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,startdelay=200,always=0,oneshot=0" noWrap="1"
 position="16,15" size="460,50" font="VFD; 40" foregroundColor="#ffff00" halign="left" zPosition="2" transparent="1" >
-  <convert type="BlackHarmonyEventName2">NextName</convert>
+  <convert type="j00zekModEventName2">NextName</convert>
   </widget>
 <widget source="parent.ServiceEvent" render="j00zekModRunningText" 
 options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,startdelay=800,always=0,oneshot=0" noWrap="1"  position="16,240" size="460,72" font="VFD;64" transparent="1" halign="left" valign="top" foregroundColor="#ffff00" backgroundColor="#000000">
@@ -913,18 +913,18 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
 	  <convert type="ClockToText">Format:M2 %M</convert>
 	</widget>
  <widget source="session.j00zekMSNWeather" render="j00zekMSNWeatherPixmap" position="350,10" size="110,110" zPosition="1" transparent="1" alphatest="blend">
- <convert type="BlackHarmonyMSNWeather">weathericon,current</convert>
+ <convert type="j00zekMSNWeather">weathericon,current</convert>
  </widget>
  <widget source="session.j00zekMSNWeather" render="j00zekModRunningText" 
 options="movetype=running,startpoint=0,direction=left,steptime=70,repeat=0,startdelay=2000,always=0,oneshot=0" noWrap="1"  position="320,150" size="150,60" font="VFD;40" transparent="1" halign="left" valign="center" foregroundColor="#ffff00" zPosition="3">
- <convert type="BlackHarmonyMSNWeather">temperature_text,current</convert>
+ <convert type="j00zekMSNWeather">temperature_text,current</convert>
  </widget>
  <widget source="session.j00zekMSNWeather" render="Label" position="350,100" size="130,65" font="VFD; 58" zPosition="1" halign="left" valign="top" foregroundColor="#001BA1E3" transparent="1" noWrap="1">
- <convert type="BlackHarmonyMSNWeather">temperature_current</convert>
+ <convert type="j00zekMSNWeather">temperature_current</convert>
  </widget>
  <widget source="session.j00zekMSNWeather" render="j00zekModRunningText" 
 options="movetype=running,startpoint=0,direction=left,steptime=70,repeat=0,startdelay=2000,always=0,oneshot=0" noWrap="1"  position="300,200" size="180,60" font="VFD;54" transparent="1" halign="left" valign="center" foregroundColor="#ffff00" zPosition="3">
- <convert type="BlackHarmonyMSNWeather">city</convert>
+ <convert type="j00zekMSNWeather">city</convert>
  </widget>
  <widget source="session.RecordState" render="Pixmap" pixmap="HomarLCDskins/Homar_480x320/Homar_2.png" position="380,30" size="80,20" zPosition="3" alphatest="blend">
  <convert type="ConfigEntryTest">config.usage.blinking_rec_symbol_during_recording,True,CheckSourceBoolean</convert>
