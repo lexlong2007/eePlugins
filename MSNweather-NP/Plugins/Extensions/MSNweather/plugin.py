@@ -97,7 +97,12 @@ def main(session,**kwargs):
     session.open(MSNweather)
 
 def sessionstart(session, **kwargs):
-	session.screen["MSNWeather"] = getWeather()
+    session.screen["MSNWeather"] = getWeather()
+    try:
+        from Components.Sources.MSNWeatherNP import MSNWeatherNP
+        session.screen['MSNWeatherNP'] = MSNWeatherNP()
+    except Exception as e:
+        printDEBUG("sessionstart Exception: %s" % str(e))
 
 def Plugins(**kwargs):
     list = [
