@@ -289,13 +289,11 @@
   <widget source="session.CurrentService" render="Label" position="1666,997" size="210,25" font="HD_Thin;22" halign="center" foregroundColor="grey" backgroundColor="Background" transparent="1" noWrap="1"  valign="center" zPosition="3">
       <convert type="j00zekModEmuName">camd</convert>
   </widget>  
-  <widget source="session.CurrentService" render="Label" position="1445,798" size="80,45" font="Wetter; 24" valign="center" backgroundColor="black" noWrap="1" transparent="1" zPosition="9">
-    <convert type="VWeather">currentWeatherCode</convert>
-  </widget>
-  <widget source="session.CurrentService" render="Label" position="1311,798" size="85,45" font="HD_Thin; 30" halign="right" valign="center" backgroundColor="black" noWrap="1" transparent="1" zPosition="10">
-    <convert type="VWeather">currentWeatherTemp</convert>
-  </widget>
-  <eLabel text="o" position="1399,800" size="10,17" font="HD_Thin;12" backgroundColor="black" transparent="1" />
-  <eLabel text="C" position="1406,798" size="20,45" font="HD_Thin; 30" valign="center" backgroundColor="black" transparent="1" />
+    <widget noWrap="1" backgroundColor="black" font="HD_Thin; 30" render="Label" position="1311,798" size="115,45" source="session.j00zekMSNWeather" zPosition="3" halign="right" transparent="1" valign="top">
+      <convert type="j00zekMSNWeather">temperature_current</convert>
+    </widget>
+    <widget alphatest="blend" render="j00zekMSNWeatherPixmap" position="1445,798" size="45,45" source="session.j00zekMSNWeather" transparent="1" zPosition="5">
+      <convert type="j00zekMSNWeather">weathericon,current</convert>
+    </widget>
 </screen>
 </skin>
