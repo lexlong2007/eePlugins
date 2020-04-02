@@ -61,3 +61,21 @@ msgstr "*** Konfiguracja demona ***"
 
 msgid "*** %s configuration ***"
 msgstr "*** Konfiguracja %s ***"
+
+msgid "Username:"
+msgstr "Użytkownik:"
+
+msgid "Password:"
+msgstr "Hasło:"
+
+msgid "Press OK to create "
+msgstr "Naciśnij OK aby wygenerować "
+
+msgid "Do you want to update '%s' file?"
+msgstr "Zaktualizować plik '%s'?"
+
+msgid "Do you want to create '%s' file?"
+msgstr "Utworzyć plik '%s'?"
+
+msgid "Clear log on each start:"
+msgstr "Kasowanie loga przy pażdym starcie:"

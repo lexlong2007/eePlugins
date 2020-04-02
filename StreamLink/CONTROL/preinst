@@ -1,0 +1,5 @@
+#!/bin/sh
+if [ -e /var/run/streamlink.pid ];then
+ /etc/init.d/streamlinksrv stop
+fi
+exit 0

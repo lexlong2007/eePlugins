@@ -1,6 +1,7 @@
 #!/usr/bin/python2.7
 
 """ Streamlink Daemon """
+# j00zek mod
 
 __version__ = "1.1.0"
 
@@ -54,12 +55,20 @@ _loglevel = LOGLEVEL = getE2config('logLevel', "info") # "critical", "error", "w
 #           DEBUG           10
 #           NOTSET          0
 if getE2config('logToFile', False) :
-    logging.basicConfig(filename= getE2config('logToFile', '/home/root') + '/streamlinksrv.log',
+    if getE2config('ClearLogFile', True):
+        for logPath in ('/home/root','/tmp','/hdd'):
+          if os.path.exists(logPath + '/streamlinksrv.log'):
+              os.system('rm -f /%s/streamlinksrv.log' % logPath)
+    logging.basicConfig(filename= getE2config('logPath', '/home/root') + '/streamlinksrv.log',
                             filemode='a',
                             format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
                             datefmt='%H:%M:%S',
                             level=logging.NOTSET)
-
+else:
+    for logPath in ('/home/root','/tmp','/hdd'):
+      if os.path.exists(logPath + '/streamlinksrv.log'):
+          os.system('rm -f /%s/streamlinksrv.log' % logPath)
+    
 # do not change
 LOGGER = logging.getLogger('streamlink.streamlinksrv')
 STREAM_SYNONYMS = ["best", "worst"]
