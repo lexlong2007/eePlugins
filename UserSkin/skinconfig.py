@@ -23,6 +23,7 @@ from myComponents import UserSkinToolSet
 from Components.ActionMap import ActionMap
 from Components.config import *
 from Components.ConfigList import ConfigListScreen
+from Components.j00zekComponents import isImageType, getImageType
 from Components.Label import Label
 from Components.Pixmap import Pixmap
 from Components.Sources.List import List
@@ -69,44 +70,6 @@ else:
     config.plugins.UserSkin.jpgPreview = ConfigYesNo(default = False)
 
 config.plugins.UserSkin.SafeMode = ConfigYesNo(default = True)
-
-imageType=None
-def isImageType(imgName = ''):
-    global imageType
-    #check using opkg
-    if imageType is None:
-        if path.exists('/etc/opkg/all-feed.conf'):
-            with open('/etc/opkg/all-feed.conf', 'r') as file:
-                fileContent = file.read()
-                file.close()
-                fileContent = fileContent.lower()
-                if fileContent.find('VTi') > -1:
-                    imageType = 'vti'
-                elif fileContent.find('code.vuplus.com') > -1:
-                    imageType = 'vuplus'
-                elif fileContent.find('openpli-7') > -1:
-                    imageType = 'openpli7'
-                elif fileContent.find('openatv') > -1:
-                    imageType = 'openatv'
-                    if fileContent.find('/5.3/') > -1:
-                        imageType += '5.3'
-    #check using specifics
-    if imageType is None:
-        if path.exists(resolveFilename(SCOPE_PLUGINS, 'SystemPlugins/VTIPanel/')):
-            imageType = 'vti'
-        elif path.exists(resolveFilename(SCOPE_PLUGINS, 'Extensions/Infopanel/')):
-            imageType = 'openatv'
-        elif path.exists('/usr/lib/enigma2/python/Blackhole'):
-            imageType = 'blackhole'
-        elif path.exists('/etc/init.d/start_pkt.sh'):
-            imageType = 'pkt'
-        else:
-            imageType = 'unknown'
-    if imgName.lower() == imageType.lower() :
-        return True
-    else:
-        return False
-isImageType() #inicjacja
 
 def getTunerName():
     myName = 'unknown'
@@ -226,8 +189,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
             pass
             
         self.currentSkin = CurrentSkinName
-        global imageType
-        printDEBUG("UserSkinInfo=%s, Image=%s, SkinPath=%s, skin=%s, currentSkin=%s" % (UserSkinInfo, imageType, SkinPath, config.skin.primary_skin.value, self.currentSkin))
+        printDEBUG("UserSkinInfo=%s, Image=%s, SkinPath=%s, skin=%s, currentSkin=%s" % (UserSkinInfo, getImageType(), SkinPath, config.skin.primary_skin.value, self.currentSkin))
         if self.currentSkin != '':
                 self.currentSkin = '_' + self.currentSkin # default_skin = '', others '_skinname', used later
                 

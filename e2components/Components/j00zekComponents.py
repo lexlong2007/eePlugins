@@ -6,10 +6,31 @@ append2file=False
 myDEBUG='/tmp/j00zekComponents.log'
 imageType=None
 
+def getImageType():
+    return imageType
+
 def isImageType(imgName = ''):
     global imageType
+    #check using opkg
     if imageType is None:
-        if path.exists('/usr/lib/enigma2/python/Plugins/SystemPlugins/VTIPanel'):
+        if path.exists('/etc/opkg/all-feed.conf'):
+            with open('/etc/opkg/all-feed.conf', 'r') as file:
+                fileContent = file.read()
+                file.close()
+                fileContent = fileContent.lower()
+                if fileContent.find('VTi') > -1:
+                    imageType = 'vti'
+                elif fileContent.find('code.vuplus.com') > -1:
+                    imageType = 'vuplus'
+                elif fileContent.find('openpli-7') > -1:
+                    imageType = 'openpli7'
+                elif fileContent.find('openatv') > -1:
+                    imageType = 'openatv'
+                    if fileContent.find('/5.3/') > -1:
+                        imageType += '5.3'
+    #check using specifics
+    if imageType is None:
+        if path.exists('/usr/lib/enigma2/python/Plugins/SystemPlugins/VTIPanel/'):
             imageType = 'vti'
         elif path.exists('/usr/lib/enigma2/python/Plugins/Extensions/Infopanel/'):
             imageType = 'openatv'
