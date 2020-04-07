@@ -4,6 +4,8 @@
 #
 from Components.ActionMap import ActionMap
 from Components.Console import Console as ComConsole
+from Components.j00zekComponents import isINETworking, getImageType
+from Components.j00zekModHex2strColor import clr
 from Components.Label import Label
 from Components.MenuList import MenuList
 from Components.ScrollLabel import ScrollLabel 
@@ -11,7 +13,7 @@ from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
 from enigma import eConsoleAppContainer
 from Screens.MessageBox import MessageBox
-from os import listdir, statvfs, popen as os_popen, system as os_system, remove as os_remove
+from os import listdir, statvfs, popen as os_popen, system as os_system, remove as os_remove, path as os_path
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Tools.LoadPixmap import LoadPixmap
@@ -30,11 +32,11 @@ try:
         myDEBUG = True #<openPLI disabled debug, so we debug to own file
 except:
     myDEBUG = True
-  
+
 myDEBUGfile = '/tmp/j00zekOPKGmgr.log'
 append2file=False
 
-def printDEBUG( callingFunction , myText ):
+def printDEBUG( callingFunction , myText = ''):
     global append2file
     if myDEBUG:
         print ("%s: %s" % (callingFunction , myText))
@@ -49,6 +51,41 @@ def printDEBUG( callingFunction , myText ):
         except:
             pass
 
+def feedsStatus():
+    try:
+        from urllib import urlopen
+        import socket
+        socket.setdefaulttimeout(3)
+        d = urlopen("http://openvix.co.uk/TrafficLightState.php")
+        trafficText = d.read()
+    except Exception as e:
+        printDEBUG("%s" % str(e))
+        trafficText = "unknown"
+    if trafficText == 'stable': trafficText = clr['G']
+    elif trafficText == 'updating': trafficText = clr['O']
+    elif trafficText == 'unstable': trafficText = clr['R']
+    else: trafficText = clr['Gray']
+        
+    return trafficText
+
+def areFeedsRunning():
+    retVal = False
+    servers = []
+    if os_path.exists('/etc/opkg'):
+        for filename in listdir('/etc/opkg'):
+            fline=open('/etc/opkg/' + filename).readline().strip()
+            if fline.startswith('src/gz'):
+                srv = fline.split('http://')[1].split('/')[0]
+                if srv not in servers:
+                  servers.append(srv)
+                  #print srv
+        for srv in servers:
+            if isINETworking(srv, 80):
+                retVal = True
+            else:
+                return False
+    return retVal            
+      
 ############################################
 
 class Jopkg(Screen):
@@ -81,6 +118,14 @@ class Jopkg(Screen):
         Screen.__init__(self, session)
         self.session = session
         
+        printDEBUG( '__init__', getImageType() )
+        if getImageType() in ('openatv', 'openatv5.3', 'openvix'):
+            printDEBUG( 'feedstatus', feedsStatus() )
+            self.title = feedsStatus() + _("OPKG manager")
+        else:
+            self.title = _("OPKG manager")
+        self.setTitle(self.title )
+
         self.list = []
         self.SelectedIndex = None
         self.prev_running_service = None
@@ -182,7 +227,7 @@ class Jopkg(Screen):
 
     def layoutFinished(self, ret = 0):
         printDEBUG( "layoutFinished" , "" )
-        self.setTitle(_("OPKG manager"))
+        self.setTitle(self.title )
         self.refreshLists()
         if self.firstRun == True:
             self['key_green'].setText(_('Select option'))
@@ -462,7 +507,11 @@ class Jopkg(Screen):
             printDEBUG( "refreshLists" , "self.firstRun = True" )
             self.list.append((_('Package list update'), '', _('Trying to download a new packetlist. Please wait...'), '', self.goinstalledpng, self.divpng))
             self['list'].setList(self.list)
-            self.Console.ePopen('wget --spider -q http://j00zek.one.pl/opkg-j00zka', refreshLists_firstRun_doWeHaveNetwork )
+            
+            if areFeedsRunning():
+                refreshLists_firstRun_doWeHaveNetwork(None, 0)
+            else:
+                errorMENU(992)
         else:
             self.refreshListsmain()
             

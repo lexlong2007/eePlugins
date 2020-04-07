@@ -1,4 +1,4 @@
-import inspect
+#import inspect
 from os import path, system
 from datetime import datetime
 
@@ -87,21 +87,16 @@ def logMissing(myText = None, Append = True):
         pass
     return
 
-def isINETworking():
+def isINETworking(addr = '8.8.8.8', port = 53):
     try:
         import socket
+        if addr[:1].isdigit(): addr = socket.gethostbyname(addr)
         socket.setdefaulttimeout(0.5)
-        socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect(('8.8.8.8', 53))#connection with google dns service
+        socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect((addr, port))#connection with google dns service
         return True
     except Exception as e:
-        printDEBUG("%s" % str(e))
-    try:
-        import socket
-        socket.setdefaulttimeout(0.5)
-        socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect(('8.8.4.4', 53))#connection with google dns2 service
-        return True
-    except Exception as e:
-        printDEBUG("%s" % str(e))
-    printDEBUG("Error no internet connection. > %s" % str(e))
+        pass
+        #printDEBUG("%s" % str(e))
+    #printDEBUG("Error no internet connection. > %s" % str(e))
     return False
-
+  

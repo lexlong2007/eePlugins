@@ -18,7 +18,8 @@ def Hex2strColor(rgb):
 
 clr={'Y':       Hex2strColor(0x00ffcc00), #yellow
      'R':       Hex2strColor(0x00FF3333), #red
-     'G':       Hex2strColor(0x0066FF33), #
-     'B':       Hex2strColor(0x0033ccff), #
+     'G':       Hex2strColor(0x0066FF33), #green
+     'B':       Hex2strColor(0x0033ccff), #blue
+     'O':       Hex2strColor(0x00ffcc00), #orange
      'Gray':    Hex2strColor(0x00e6e6e6)  #gray
   }
