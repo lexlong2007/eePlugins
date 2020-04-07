@@ -68,8 +68,8 @@ msgstr "Użytkownik:"
 msgid "Password:"
 msgstr "Hasło:"
 
-msgid "Press OK to create "
-msgstr "Naciśnij OK aby wygenerować "
+msgid "Press OK to create %s bouquet"
+msgstr "Naciśnij OK aby wygenerować bukiet %s"
 
 msgid "Do you want to update '%s' file?"
 msgstr "Zaktualizować plik '%s'?"
@@ -79,3 +79,6 @@ msgstr "Utworzyć plik '%s'?"
 
 msgid "Clear log on each start:"
 msgstr "Kasowanie loga przy pażdym starcie:"
+
+msgid "Press OK to download %s bouquet"
+msgstr "Naciśnij OK aby pobrać bukiet %s"

@@ -31,7 +31,15 @@ config.plugins.streamlinksrv.PortNumber = ConfigSelection(default = "8088", choi
 # pilot.wp.pl
 config.plugins.streamlinksrv.WPusername = ConfigText()
 config.plugins.streamlinksrv.WPpassword = ConfigText()
+config.plugins.streamlinksrv.WPbouquet = NoSave(ConfigNothing())
+# teleelevidenie
+config.plugins.streamlinksrv.TELEusername = ConfigText()
+config.plugins.streamlinksrv.TELEpassword = ConfigText()
+config.plugins.streamlinksrv.TELEbouquet = NoSave(ConfigNothing())
 
+if os.path.exists("/tmp/StreamlinkConfig.log"):
+    os.remove("/tmp/StreamlinkConfig.log")
+ 
 class StreamlinkConfiguration(Screen, ConfigListScreen):
     def buildList(self):
         Mlist = []
@@ -39,7 +47,12 @@ class StreamlinkConfiguration(Screen, ConfigListScreen):
         Mlist.append(getConfigListEntry('\c00289496' + _("*** %s configuration ***") % 'pilot.wp.pl'))
         Mlist.append(getConfigListEntry(_("Username:"), config.plugins.streamlinksrv.WPusername))
         Mlist.append(getConfigListEntry(_("Password:"), config.plugins.streamlinksrv.WPpassword))
-        Mlist.append(getConfigListEntry(_("Press OK to create ") + "userbouquet.WPPL.tv", config.plugins.streamlinksrv.generateBouquet))
+        Mlist.append(getConfigListEntry(_("Press OK to create %s bouquet") % "userbouquet.WPPL.tv", config.plugins.streamlinksrv.WPbouquet))
+        Mlist.append(getConfigListEntry(""))
+        Mlist.append(getConfigListEntry('\c00289496' + _("*** %s configuration ***") % 'teleelevidenie')) #https://my.teleelevidenie.com/signin
+        Mlist.append(getConfigListEntry(_("Username:"), config.plugins.streamlinksrv.TELEusername))
+        Mlist.append(getConfigListEntry(_("Password:"), config.plugins.streamlinksrv.TELEpassword))
+        Mlist.append(getConfigListEntry(_("Press OK to download %s bouquet") % "enigma2-hls", config.plugins.streamlinksrv.TELEbouquet))
         Mlist.append(getConfigListEntry(""))
         Mlist.append(getConfigListEntry('\c00289496' + _("*** Deamon configuration ***")))
         Mlist.append(getConfigListEntry(_("Port number (127.0.0.1:X):"), config.plugins.streamlinksrv.PortNumber))
@@ -51,8 +64,25 @@ class StreamlinkConfiguration(Screen, ConfigListScreen):
         return Mlist
 
     def __init__(self, session):
+        self.DBGlog('%s' % '__init__')
+        from enigma import getDesktop
+        if getDesktop(0).size().width() == 1920:
+            self.skin = """<screen name="StreamlinkConfiguration" position="center,center" size="900,400" title="Streamlink configuration">
+                            <eLabel position="5,0" size="690,2" backgroundColor="#aaaaaa" />
+                            <widget name="config" position="20,20" size="860,330" zPosition="1" scrollbarMode="showOnDemand" />
+                            <widget name="key_red"    position="20,360" zPosition="2" size="860,30" foregroundColor="red"   valign="center" halign="left" font="Regular;22" transparent="1" />
+                            <widget name="key_green"  position="20,360" zPosition="2" size="860,30" foregroundColor="green"  valign="center" halign="center" font="Regular;22" transparent="1" />
+                            <!--widget name="key_yellow" position="20,360" zPosition="2" size="860,30" foregroundColor="yellow" valign="center" halign="right" font="Regular;22" transparent="1" /-->
+                          </screen>"""
+        else:
+            self.skin = """<screen name="StreamlinkConfiguration" position="center,center" size="700,200" title="Streamlink configuration">
+                            <eLabel position="5,0" size="690,2" backgroundColor="#aaaaaa" />
+                            <widget name="config" position="20,20" size="640,145" zPosition="1" scrollbarMode="showOnDemand" />
+                            <widget name="key_red"    position="20,150" zPosition="2" size="660,30" foregroundColor="red" valign="center" halign="left" font="Regular;22" transparent="1" />
+                            <widget name="key_green"  position="20,150" zPosition="2" size="660,30" foregroundColor="green" valign="center" halign="center" font="Regular;22" transparent="1" />
+                            <!--widget name="key_yellow" position="20,150" zPosition="2" size="660,30" foregroundColor="yellow" valign="center" halign="right" font="Regular;22" transparent="1" /-->
+                          </screen>"""
         Screen.__init__(self, session)
-        self.skinName = [ "StreamlinkConfiguration", "StartupToStandbyConfiguration", "Setup" ]
 
         # Summary
         self.setup_title = _("Streamlink Configuration" + ' NIE SKONCZONE!!!')
@@ -60,23 +90,22 @@ class StreamlinkConfiguration(Screen, ConfigListScreen):
 
         # Buttons
         self["key_red"] = StaticText(_("Cancel"))
-        self["key_green"] = StaticText(_("OK"))
+        self["key_green"] = StaticText(_("Save"))
 
         # Define Actions
-        self["actions"] = ActionMap(["SetupActions", "ColorActions"],
+        self["actions"] = ActionMap(["StreamlinkConfiguration"],
             {
                 "cancel": self.exit,
                 "red"   : self.exit,
                 "green" : self.save,
                 "save":   self.save,
                 "ok":     self.Okbutton,
-            }
-        )
-        ConfigListScreen.__init__(self, [], session, on_change = self.changed)
-        self["config"].list = self.buildList()
-        # Trigger change
-        self.changed()
+            }, -2)
+        ConfigListScreen.__init__(self, self.buildList(), session, on_change = self.changedEntry)
+        if not self.selectionChanged in self["config"].onSelectionChanged:
+            self["config"].onSelectionChanged.append(self.selectionChanged)
         self.onLayoutFinish.append(self.layoutFinished)
+        self.doAction = None
 
     def save(self):
         for x in self["config"].list:
@@ -91,9 +120,16 @@ class StreamlinkConfiguration(Screen, ConfigListScreen):
     def layoutFinished(self):
         self.setTitle(self.setup_title)
 
-    def changed(self):
-        for x in self.onChangedEntry:
-            x()
+    def changedEntry(self):
+        self.DBGlog('%s' % 'changedEntry()')
+        try:
+            for x in self.onChangedEntry:
+                x()
+        except Exception as e:
+            self.DBGlog('%s' % str(e))
+
+    def selectionChanged(self):
+        self.DBGlog('%s' % 'selectionChanged(%s)' % self["config"].getCurrent()[0])
 
     def getCurrentEntry(self):
         return self["config"].getCurrent()[0]
@@ -104,24 +140,44 @@ class StreamlinkConfiguration(Screen, ConfigListScreen):
     def createSummary(self):
         return SetupSummary
 
+    def DBGlog(self, text):
+        open("/tmp/StreamlinkConfig.log", "a").write('%s\n' % str(text))
+        
     def Okbutton(self):
-        open("/tmp/streamlink.txt", "w").write('%s\n' % 'Okbutton')
+        self.DBGlog('%s' % 'Okbutton')
         try:
-            if self["config"].getCurrent()[1] == config.plugins.streamlinksrv.generateBouquet:
-                open("/tmp/streamlink.txt", "a").write('%s\n' % str(e))
-                for bouquet in ('userbouquet.WPPL.tv',):
-                    open("/tmp/streamlink.txt", "a").write('bouquet="%s"\n' % bouquet)
-                    open("/tmp/streamlink.txt", "a").write('self["config"].getCurrent()[0]="%s"\n' % self["config"].getCurrent()[0])
-                    if bouquet in self["config"].getCurrent()[0]:
-                        if os.path.exists('/etc/enigma2/%s' % bouquet):
-                            self.session.openWithCallback(self.OkbuttonConfirmed,MessageBox, _("Do you want to update '%s' file?") % bouquet, MessageBox.TYPE_YESNO, default = False)
-                        else:
-                            self.session.openWithCallback(self.OkbuttonConfirmed,MessageBox, _("Do you want to create '%s' file?") % bouquet, MessageBox.TYPE_YESNO, default = True)
-                        break
+            self.doAction = None
+            curIndex = self["config"].getCurrentIndex()
+            selectedItem = self["config"].list[curIndex]
+            if len(selectedItem) == 2:
+                currItem = selectedItem[1]
+                currInfo = selectedItem[0]
+                if isinstance(currItem, ConfigText):
+                    from Screens.VirtualKeyBoard import VirtualKeyBoard
+                    self.session.openWithCallback(self.OkbuttonTextChangedConfirmed, VirtualKeyBoard, title=(currInfo), text = currItem.value)
+                elif currItem == config.plugins.streamlinksrv.WPbouquet:
+                    self.doAction = ('wpConfig.py' , '/etc/enigma2/userbouquet.WPPL.tv', config.plugins.streamlinksrv.WPusername.value, config.plugins.streamlinksrv.WPpassword.value)
+                elif currItem == config.plugins.streamlinksrv.TELEbouquet:
+                    self.doAction = ('teleelevidenieConfig.py', '/etc/enigma2/teleelevidenie-hls.tv', config.plugins.streamlinksrv.TELEusername.value, config.plugins.streamlinksrv.TELEpassword.value)
+                self.DBGlog('%s' % str(self.doAction))
+                if not self.doAction is None:
+                    bfn = self.doAction[1]
+                    self.DBGlog('%s' % bfn)
+                    from Screens.MessageBox import MessageBox
+                    if os.path.exists(bfn):
+                        self.session.openWithCallback(self.OkbuttonConfirmed,MessageBox, _("Do you want to update '%s' file?") % bfn, MessageBox.TYPE_YESNO, default = False)
+                    else:
+                        self.session.openWithCallback(self.OkbuttonConfirmed,MessageBox, _("Do you want to create '%s' file?") % bfn, MessageBox.TYPE_YESNO, default = True)
         except Exception as e:
-            open("/tmp/streamlink.txt", "a").write('%s\n' % str(e))
-            print str(e)
+            self.DBGlog('%s' % str(e))
     
+    def OkbuttonTextChangedConfirmed(self, ret ):
+        curIndex = self["config"].getCurrentIndex()
+        self["config"].list[curIndex][1].value = ret
+
     def OkbuttonConfirmed(self, ret = False):
         if ret == True:
-            pass
+            cmd = '/usr/bin/python /usr/lib/enigma2/python/Plugins/Extensions/StreamlinkConfig/plugins/%s %s %s %s %s' % (self.doAction[0], self.doAction[1], self.doAction[2], self.doAction[3], config.plugins.streamlinksrv.PortNumber.value)
+            self.DBGlog('%s' % cmd)
+            status = os.system(cmd)
+            self.DBGlog('%s' % status)
