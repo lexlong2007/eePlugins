@@ -196,7 +196,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
         if path.exists(SkinPath):
             if DBG == True: printDEBUG('#### initializing SUBDIRS ###')
             #### initializing SUBDIRS ###
-            for folder in ("allBars", "allColors", "allFonts", "allInfos", "allPreviews", "allScreens", "UserSkin_Selections", 'allMiniTVskins'):
+            for folder in ("allBars", "allColors", "allFonts", "allInfos", "allPreviews", "allScreens", "UserSkin_Selections", 'allMiniTVskins', 'allButtons'):
                 if not path.exists(SkinPath + folder):
                     mkdir(SkinPath + folder)
             
