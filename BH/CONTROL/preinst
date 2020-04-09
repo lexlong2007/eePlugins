@@ -12,11 +12,14 @@ fi
 if [ `ls /usr/share/enigma2/|grep -c "Pingu-NavyBlue"` -gt 0 ] ; then
   echo "$Tekst !!"
   exit 1
-elif [ `ls /usr/share/enigma2/|grep -c GoldenNight` -gt 0 ] ; then
+elif [ `ls /usr/share/enigma2/|grep -c 'GoldenNight'` -gt 0 ] ; then
   echo "$Tekst !!!"
   exit 1
-elif [ `ls /usr/share/enigma2/|grep -c NexGenGradient` -gt 0 ] ; then
+elif [ `ls /usr/share/enigma2/|grep -c 'NexGenGradient'` -gt 0 ] ; then
   echo "$Tekst !!!!"
+  exit 1
+elif [ `ls /usr/share/enigma2/|grep -c 'PLi-FullNightHD-Mod-M'` -gt 0 ] ; then
+  echo "$Tekst !!!!!"
   exit 1
 else
   exit 0
