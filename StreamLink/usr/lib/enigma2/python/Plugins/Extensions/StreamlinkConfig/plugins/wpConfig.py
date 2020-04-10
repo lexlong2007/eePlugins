@@ -126,6 +126,19 @@ def login():
                                       xbmcgui.NOTIFICATION_ERROR, 5000)
         return ''
 
+def channels():
+    if not sessionid:
+        return []
+    cookies = readFromDB()
+    headers.update({'Cookie': cookies})
+    response = requests.get(
+        main_url,
+        verify=False,
+        headers=headers,
+    ).json()
+
+    return response.get('data', [])
+
 def generate_m3u():
     if not sessionid:
         return
@@ -152,12 +165,46 @@ def generate_m3u():
 
     xbmcgui.Dialog().notification('WP Pilot', 'Wygenerowano liste M3U.', xbmcgui.NOTIFICATION_INFO)
 
+def generate_E2bouquet():
+    if not sessionid:
+        return
+
+    if file_name == '' or path == '':
+        print 'Ustaw nazwe pliku oraz katalog docelowy.'
+        return
+
+    print 'Generuje bukiet...'
+    data = '#NAME PILOT.WP.PL \n'
+    for item in channels():
+        #print item
+        if item.get('access_status', '') != 'unsubscribed':
+            id = item.get('id', None)
+            title = item.get('name', '')
+            data += '#SERVICE 4097:0:1:0:0:0:0:0:0:0:%s%s%s:%s\n' % (streamlinkURL, video_url.replace(':','%3a') , id, title)
+            data += '#DESCRIPTION %s\n' % (title)
+
+    f = xbmcvfs.File(file_name, 'w')
+    f.write(data.encode('utf-8'))
+    f.close()
+
+    print 'Wygenerowano bukiet do pliku %s' % file_name
+    f = open('/etc/enigma2/bouquets.tv','r').read()
+    if not os.path.basename(file_name) in f:
+        print 'Dodano bukiet do listy'
+        if not f.endswith('\n'):
+            f += '\n'
+        f += '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "%s" ORDER BY bouquet\n' % os.path.basename(file_name)
+        open('/etc/enigma2/bouquets.tv','w').write(f)
+
 if __name__ == '__main__' and len(sys.argv) >=5:
-    global username, password, file_name, sessionid
-    username = sys.argv[1]
-    password = sys.argv[2]
-    file_name = sys.argv[3]
-    streamlinkURL = 'http%3a//127.0.0.1%3a%s/' % sys.argv[4]
+    file_name = sys.argv[1]
+    #print 'filename' , file_name
+    #print path + file_name
+    username = sys.argv[2]
+    #print 'username' , username
+    password = sys.argv[3]
+    #print 'password' , password
+    streamlinkURL = 'http%%3a//127.0.0.1%%3a%s/' % sys.argv[4]
     if not sessionid or sessionid == '':
         sessionid = login()
-    generate_m3u() 
+    generate_E2bouquet()

@@ -1,8 +1,9 @@
 from __init__ import mygettext as _
 import os
 # GUI (Screens)
-from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
+from Screens.MessageBox import MessageBox
+from Screens.Screen import Screen
 
 # GUI (Summary)
 from Screens.Setup import SetupSummary
@@ -163,7 +164,6 @@ class StreamlinkConfiguration(Screen, ConfigListScreen):
                 if not self.doAction is None:
                     bfn = self.doAction[1]
                     self.DBGlog('%s' % bfn)
-                    from Screens.MessageBox import MessageBox
                     if os.path.exists(bfn):
                         self.session.openWithCallback(self.OkbuttonConfirmed,MessageBox, _("Do you want to update '%s' file?") % bfn, MessageBox.TYPE_YESNO, default = False)
                     else:
@@ -181,3 +181,10 @@ class StreamlinkConfiguration(Screen, ConfigListScreen):
             self.DBGlog('%s' % cmd)
             status = os.system(cmd)
             self.DBGlog('%s' % status)
+            if status == 0:
+                  self.session.openWithCallback(self.OkbuttonEnd,MessageBox, _("Action done properly"))
+            else:
+                  self.session.openWithCallback(self.OkbuttonEnd,MessageBox, _("Error running script, check log."))
+              
+    def OkbuttonEnd(self, ret = False):
+        pass
