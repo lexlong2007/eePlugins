@@ -309,8 +309,9 @@ pixmap="HomarLCDskins/Homar/Homar_7.png" position="170,421" size="350,40" border
   </widget>
 <widget name="text1" position="320,340"  size="460,50" font="VFD;46" transparent="1" halign="center" valign="center" foregroundColor="#05F7F3" noWrap="1"/>
     <widget name="text2" position="320,410" size="460,40" font="VFD;38" transparent="1" halign="center" valign="center" foregroundColor="#FFFF00"/>
-    <widget name="LCDpic" position="10,10" size="321,465" alphatest="blend" />
+    <widget name="LCDpic" position="10,10" size="321,465" zPosition="2" alphatest="blend" />
     <widget name="AFPlogo" position="360,160" size="400,160" alphatest="blend" />
+<ePixmap pixmap="HomarLCDskins/Homar/player2.png" position="10,0" size="320,480"  zPosition="1" alphatest="blend" />
 </screen>
 
 <!-- SHOUTcast -->
@@ -942,7 +943,7 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
     </widget>
    <ePixmap position="0,0" zPosition="-10" size="800,480" pixmap="HomarLCDskins/Homar/Homar_8.png" transparent="1" alphatest="blend"/>
     <panel name="LCDWetterStandbyTemplate" />
-  <widget source="global.CurrentTime" render="Label" position="180,30" size="720,110" font="VFD;150" transparent="1" valign="center" foregroundColor="#001BA1E3">
+  <widget source="global.CurrentTime" render="Label" position="180,20" size="720,150" font="VFD;150" transparent="1" valign="center" foregroundColor="#001BA1E3">
     <convert type="ClockToText">Format:%H:%M</convert>
   </widget>
   <widget source="global.CurrentTime" render="Label" position="520,10" size="720,110" font="VFD;100" transparent="1" valign="center" foregroundColor="#001BA1E3">
@@ -988,8 +989,8 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
 <!-- EPG -->
 <screen name="EPGSelection_summary" position="0,0" size="800,480" id="1">
 <ePixmap pixmap="HomarLCDskins/Homar/Homar_1.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
-<widget source="parent.Service" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated" position="100,20" size="580,246" zPosition="5" transparent="1" alphatest="blend" />
-<widget source="parent.Service" render="j00zekPicons" picontype="zzpicon" position="100,20" size="580,246" zPosition="4" transparent="1" alphatest="blend">
+<widget source="parent.Service" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated" position="100,10" size="580,246" zPosition="5" transparent="1" alphatest="blend" />
+<widget source="parent.Service" render="j00zekPicons" picontype="zzpicon" position="100,10" size="580,246" zPosition="4" transparent="1" alphatest="blend">
 <convert type="j00zekModServiceName2">Reference</convert>
 </widget>
 <widget source="parent.Service" render="j00zekModRunningText" 
@@ -1174,6 +1175,17 @@ options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,start
 	<screen name="CoolSearch_summary" position="0,0" size="800,480" id="1">
 	<panel name="EPGSelection_summary" />
 	</screen>
+
+<!-- AutoTimer -->
+ <screen name="AutoTimerOverviewSummary" position="0,0" size="800,480">
+ <ePixmap pixmap="HomarLCDskins/Homar/Homar_1.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
+ <widget source="parent.Title" render="Label" position="10,100" size="770,74" font="VFD;68" transparent="1" halign="center" noWrap="1" />
+<widget source="global.CurrentTime" render="Label" position="460,20" size="300,75" font="VFD2;68" transparent="1" halign="right" valign="center">
+  <convert type="ClockToText">Format:%H:%M</convert>
+  </widget>
+  <widget source="entry" render="Label" position="10,190" size="770,230" font="VFD;68" transparent="1" foregroundColor="#ffff00" halign="center" valign="center" />
+		</screen>
+
 
 </skin>
 
