@@ -116,12 +116,25 @@ def autorotate(path):
                                  8: 90
                                 }
                 if orientation in rotate_values:
+                    open("/tmp/autorotate.log", "w").write('rotating %s by %s\n' % (path, rotate_values[orientation]))
                     # Rotate and save the picture
                     image = image.rotate(rotate_values[orientation])
-                    image.save("/tmp/rotated.jpg", quality=95, exif=str(exif))
+                    image_size = image.size  # old_size[0] is in (width, height) format
+                    image_ratio = image_size[0] / float(image_size[1])
+                    if image_ratio < 1.4:
+                        new_im = Image.new("RGB", (int(image_size[1] * 1.778), image_size[1]))
+                        new_im.paste(image, ( (new_im.size[0] - image_size[0]) / 2 , 0))
+                        new_im.save("/tmp/rotated.jpg", quality=95, exif=str(exif))
+                    elif image_ratio > 1.8:
+                        new_im = Image.new("RGB", (image_size[0], int(image_size[0] / 1.778)))
+                        new_im.paste(image, ( 0, (new_im.size[1] - image_size[1]) / 2 ))
+                        new_im.save("/tmp/rotated.jpg", quality=95, exif=str(exif))
+                    else:
+                        image.save("/tmp/rotated.jpg", quality=95, exif=str(exif))
                     os.symlink(path, "/tmp/rotated.jpg.lnk")
                     return True
-    except Exception:
+    except Exception as e:
+        open("/tmp/autorotate.log", "a").write('%s\n' % str(e))
         pass
     
     return False
