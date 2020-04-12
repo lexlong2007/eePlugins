@@ -17,6 +17,7 @@ from Components.config import *
 
 config.plugins.streamlinksrv = ConfigSubsection()
 config.plugins.streamlinksrv.generateBouquet = NoSave(ConfigNothing())
+config.plugins.streamlinksrv.enabled = ConfigYesNo(default = False)
 config.plugins.streamlinksrv.logLevel = ConfigSelection(default = "info", choices = [("none", _("none")),
                                                                                     ("info", _("info")),
                                                                                     ("warning", _("warning")),
@@ -56,6 +57,7 @@ class StreamlinkConfiguration(Screen, ConfigListScreen):
         Mlist.append(getConfigListEntry(_("Press OK to download %s bouquet") % "enigma2-hls", config.plugins.streamlinksrv.TELEbouquet))
         Mlist.append(getConfigListEntry(""))
         Mlist.append(getConfigListEntry('\c00289496' + _("*** Deamon configuration ***")))
+        Mlist.append(getConfigListEntry(_("Enable deamon:"), config.plugins.streamlinksrv.enabled))
         Mlist.append(getConfigListEntry(_("Port number (127.0.0.1:X):"), config.plugins.streamlinksrv.PortNumber))
         Mlist.append(getConfigListEntry(_("Log level:"), config.plugins.streamlinksrv.logLevel))
         Mlist.append(getConfigListEntry(_("Log to file:"), config.plugins.streamlinksrv.logToFile))
@@ -113,12 +115,17 @@ class StreamlinkConfiguration(Screen, ConfigListScreen):
             if len(x) >= 2:
                 x[1].save()
         configfile.save()
+        if os.path.exists('/var/run/streamlink.pid'):
+            os.system('/etc/init.d/streamlinksrv stop')
+        if config.plugins.streamlinksrv.enabled.value:
+            os.system('/etc/init.d/streamlinksrv start')
         self.close(None)
         
     def exit(self):
         self.close(None)
         
     def layoutFinished(self):
+        os.system('/usr/lib/enigma2/python/Plugins/Extensions/StreamlinkConfig/plugins/installPackets.sh &')
         self.setTitle(self.setup_title)
 
     def changedEntry(self):

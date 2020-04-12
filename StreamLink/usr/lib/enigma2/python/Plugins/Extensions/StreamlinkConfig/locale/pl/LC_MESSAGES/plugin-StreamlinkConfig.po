@@ -82,3 +82,6 @@ msgstr "Kasowanie loga przy pażdym starcie:"
 
 msgid "Press OK to download %s bouquet"
 msgstr "Naciśnij OK aby pobrać bukiet %s"
+
+msgid "Enable deamon:"
+msgstr "Aktywacja demona:"
