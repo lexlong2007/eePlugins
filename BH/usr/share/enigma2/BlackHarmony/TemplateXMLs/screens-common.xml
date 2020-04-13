@@ -4373,6 +4373,15 @@
     <widget name="servicebouquet" position="397,110" size="430,60" font="Roboto_HD; 28" halign="left" valign="center" foregroundColor="white" backgroundColor="transpBlack_1"/>
     <widget name="servicename" position="397,33" size="430,60" font="Roboto_HD; 35" halign="left" valign="center" foregroundColor="white" backgroundColor="transpBlack_1"/>
   </screen>
+  <screen name="NumberZapPicon" position="525,397" size="860,200" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap position="0,0" zPosition="-2" size="860,200" pixmap="BlackHarmony/bg_design/zap.png"/>
+    <widget source="Service" render="j00zekPicons" picontype="picon" position="25,33" size="220,132" zPosition="5" alphatest="blend">
+      <convert type="ServiceName">Reference</convert>
+    </widget>
+    <widget name="servicenumber" position="259,33" size="130,60" halign="center" valign="center" font="Roboto_HD; 35" foregroundColor="light_yellow" backgroundColor="transpBlack_1"/>
+    <widget name="servicebouquet" position="397,110" size="430,60" font="Roboto_HD; 28" halign="left" valign="center" foregroundColor="white" backgroundColor="transpBlack_1"/>
+    <widget name="servicename" position="397,33" size="430,60" font="Roboto_HD; 35" halign="left" valign="center" foregroundColor="white" backgroundColor="transpBlack_1"/>
+  </screen>
   <screen name="yweather_setup" position="462,128" size="1000,820" title=" " flags="wfNoBorder" backgroundColor="transparent">
     <ePixmap position="0,0" zPosition="-10" size="1000,820" pixmap="BlackHarmony/bg_design/small.png"/>
     <widget source="global.CurrentTime" render="Label" position="45,30" size="80,30" font="Roboto_HD; 27" backgroundColor="black" transparent="1">
