@@ -326,3 +326,6 @@ msgstr "Styl pikon:"
 
 msgid "zzPicons style:"
 msgstr "Styl zzpikon:"
+
+msgid "Delete old picons:"
+msgstr "Skasuj stare pikony"

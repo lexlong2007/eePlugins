@@ -37,6 +37,7 @@ def buildMlist():
         Mlist.append(getConfigListEntry(_("Main path for all picons folders:"), config.plugins.j00zekCC.PiconsMainRootPath ))
         Mlist.append(getConfigListEntry(_("Picons style:"), config.plugins.j00zekCC.PiconsStyle ))
         Mlist.append(getConfigListEntry(_("zzPicons style:"), config.plugins.j00zekCC.zzPiconsStyle ))
+        Mlist.append(getConfigListEntry(_("Delete old picons:"), config.plugins.j00zekCC.DeleteDownloaded ))
     #
     Mlist.append(getConfigListEntry(""))
     Mlist.append(getConfigListEntry('\c00289496' + _("---Scrolling text---")))
@@ -157,10 +158,14 @@ class e2ComponentsConfig(Screen, ConfigListScreen):
                 if len(x) >= 2:
                     x[1].save()
             configfile.save()
-            if self.currPiconType != config.plugins.j00zekCC.PiconsStyle.value:
+            if config.plugins.j00zekCC.DeleteDownloaded.value:
                 os.system('rm -f %s/*' % os.path.join(config.plugins.j00zekCC.PiconsMainRootPath.value, 'picon'))
-            if self.currZZPiconType != config.plugins.j00zekCC.zzPiconsStyle.value:
                 os.system('rm -f %s/*' % os.path.join(config.plugins.j00zekCC.PiconsMainRootPath.value, 'zzpicon'))
+                config.plugins.j00zekCC.DeleteDownloaded.value = False
+            #if self.currPiconType != config.plugins.j00zekCC.PiconsStyle.value:
+            #    os.system('rm -f %s/*' % os.path.join(config.plugins.j00zekCC.PiconsMainRootPath.value, 'picon'))
+            #if self.currZZPiconType != config.plugins.j00zekCC.zzPiconsStyle.value:
+            #    os.system('rm -f %s/*' % os.path.join(config.plugins.j00zekCC.PiconsMainRootPath.value, 'zzpicon'))
 
             self.close()
 

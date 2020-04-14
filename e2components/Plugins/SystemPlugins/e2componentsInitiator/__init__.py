@@ -26,7 +26,7 @@ language.addCallback(localeInit)
 _ = mygettext
 
 ########################### KONFIGURACJA ###########################################
-from Components.config import config, ConfigSubsection, ConfigDirectory, ConfigSelection, ConfigYesNo
+from Components.config import config, ConfigSubsection, ConfigDirectory, ConfigSelection, ConfigYesNo, NoSave
 
 MinFontChoices = [("0,67", _("Defined in skin")), ("1", _("same as max font")),
                   ("0.75", _("75%% of defined font")), ("0,67", _("67%% of defined font")),
@@ -68,6 +68,7 @@ config.plugins.j00zekCC.zzPiconsStyle = ConfigSelection(default = "Transparent%2
                                                                                 ("White%202/8bit/400x170", "White 2"),
                                                                               ])
 config.plugins.j00zekCC.PiconsMissingDownload = ConfigYesNo(default = True)
+config.plugins.j00zekCC.DeleteDownloaded = NoSave(ConfigYesNo(default = False))
 
 config.plugins.j00zekCC.PiconAnimation_UserPath = ConfigDirectory(default = _('not set'))  
 config.plugins.j00zekCC.AlternateUserIconsPath = ConfigDirectory(default = _('not set'))
