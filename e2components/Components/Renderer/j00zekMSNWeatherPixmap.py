@@ -9,10 +9,13 @@ from Components.AVSwitch import AVSwitch
 from enigma import eEnv, ePicLoad, eRect, eSize, gPixmapPtr
 
 class fakeRendererMSNWeatherPixmap(Renderer):
-	def __init__(self): Renderer.__init__(self)
-	GUI_WIDGET = ePixmap
+    def __init__(self): Renderer.__init__(self)
+    GUI_WIDGET = ePixmap
 
 try:
     from Components.Renderer.MSNWeatherPixmapNP import MSNWeatherPixmapNP as j00zekMSNWeatherPixmap
 except Exception:
-    j00zekMSNWeatherPixmap = fakeRendererMSNWeatherPixmap  
+    try:
+        from Components.Renderer.MSNWeatherPixmapFHR import MSNWeatherPixmapFHR as j00zekMSNWeatherPixmap
+    except Exception:
+        j00zekMSNWeatherPixmap = fakeRendererMSNWeatherPixmap

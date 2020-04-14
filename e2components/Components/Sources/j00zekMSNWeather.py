@@ -35,4 +35,7 @@ class fakeSourcesMSNWaether(Source):
 try:
     from Components.Sources.MSNWeatherNP import MSNWeatherNP as j00zekMSNWeather
 except Exception:
-    j00zekMSNWeather = fakeSourcesMSNWaether 
+    try:
+        from Components.Sources.MSNWeatherFHR import MSNWeatherFHR as j00zekMSNWeather
+    except Exception:
+        j00zekMSNWeather = fakeSourcesMSNWaether 

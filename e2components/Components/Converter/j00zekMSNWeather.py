@@ -16,4 +16,7 @@ class fakeConverterMSNWaether(Converter, object):
 try:
     from Components.Converter.MSNWeatherNP import MSNWeatherNP as j00zekMSNWeather
 except Exception:
-    j00zekMSNWeather = fakeConverterMSNWaether  
+    try:
+        from Components.Converter.FhromaMSNWeatherNP import FhromaMSNWeatherNP as j00zekMSNWeather
+    except Exception:
+        j00zekMSNWeather = fakeConverterMSNWaether  
