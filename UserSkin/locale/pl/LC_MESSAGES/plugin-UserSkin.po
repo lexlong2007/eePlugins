@@ -619,3 +619,6 @@ msgstr "Standardowe-wymieszane"
 
 msgid "*** Basic settings ***"
 msgstr "*** Ustawienia podstawowe ***"
+
+msgid "LCD Colors:"
+msgstr "Kolory na LCD:"

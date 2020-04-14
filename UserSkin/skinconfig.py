@@ -7,12 +7,12 @@
 # extension for openpli, all skins, descriptions, bar selections and other @j00zek 2014/2019
 # Uszanuj czyjąś pracę i NIE przywłaszczaj sobie autorstwa!
 
-#This plugin is free software, you are allowed to
-#modify it (if you keep the license),
-#but you are not allowed to distribute/publish
-#it without source code (this version and your modifications).
-#This means you also have to distribute
-#source code of your modifications.
+# This plugin is free software, you are allowed to
+# modify it (if you keep the license),
+# but you are not allowed to distribute/publish
+# it without source code (this version and your modifications).
+# This means you also have to distribute
+# source code of your modifications.
 DBG = True
 FullDBG = False
 
@@ -145,7 +145,7 @@ def homarLCDskins( skinlist = [] , tunerName = getTunerName() ):
     if path.exists(myRoot):
         path.walk(myRoot, find, '')
     else:
-        skinlist.append(( _('Homar LCD skins from opkg'), _('Homar LCD skins from opkg') ))
+        skinlist.append(( 'HomarLCDskinsFromOPKG', _('Homar LCD skins from opkg') ))
 
     try: skinlist.sort(key=lambda t : tuple(str(t[0]).lower()))
     except Exception: skinlist.sort()
@@ -200,12 +200,12 @@ class UserSkin_Config(Screen, ConfigListScreen):
                 if not path.exists(SkinPath + folder):
                     mkdir(SkinPath + folder)
             
-### initializing VFDskins ###
+#### initializing VFDskins ###
             if getDesktop(1).size().width() >= 320:
-                desktopType = 'lcd'
+                self.desktopType = 'lcd'
             else:
-                desktopType = 'vfd'
-            if DBG == True: printDEBUG('#### initializing %s skins ###' % desktopType)
+                self.desktopType = 'vfd'
+            if DBG == True: printDEBUG('#### initializing %s skins ###' % self.desktopType)
             self.LCDscreensList = [("system", "system")]
             if  path.exists('/usr/lib/enigma2/python/Plugins/Extensions/LCDlinux'):
                 self.LCDscreensList.append(("LCDLinux", "LCDLinux"))
@@ -219,19 +219,19 @@ class UserSkin_Config(Screen, ConfigListScreen):
                         break
 
             for f in sorted(listdir(SkinPath + "allMiniTVskins/"), key=str.lower):
-                if f.startswith('skin_') and f.endswith('.xml') and f.lower().find(desktopType) > -1:
+                if f.startswith('skin_') and f.endswith('.xml') and f.lower().find(self.desktopType) > -1:
                     if not filterVFDskins4model or f.lower().find(tunerName) > -1:
                         if FullDBG: printDEBUG( path.join('BlackHarmony/allMiniTVskins/',f) )
                         self.LCDscreensList.append(( path.join('BlackHarmony/allMiniTVskins/',f), _(f[5:-4].replace("_", " ")) ))
                     
             self.LCDscreensList.extend( atvLCDskins() )
             self.LCDscreensList.extend( vtiLCDskins() )
-            if  desktopType == 'lcd' and tunerName != 'unknown':
+            if  self.desktopType == 'lcd' and tunerName != 'unknown':
                 self.LCDscreensList.extend( homarLCDskins() )
 
             config.plugins.UserSkin.LCDmode = ConfigSelection(default="system", choices = self.LCDscreensList)
+#### initializing FONTS ###
             if DBG == True: printDEBUG('#### initializing FONTS ###')
-            #### initializing FONTS ###
             if not path.exists(SkinPath + "allFonts/font_default.xml"):
                 with open(SkinPath + 'allFonts/font_default.xml', "w") as f:
                     f.write("<skin>\n" + self.readXMLfile(SkinPath + 'skin.xml' , 'fonts') + "</skin>\n")
@@ -245,10 +245,22 @@ class UserSkin_Config(Screen, ConfigListScreen):
                                           default = path.basename(path.realpath( SkinPath + "skin_user_header.xml" )),
                                           choices = mylist) )
             else:
-                self.myUserSkin_font = NoSave(ConfigSelection(default = 'font_default.xml', choices = mylist))
-            
-            if DBG == True: printDEBUG('#### initializing COLORS ###')
+                self.myUserSkin_font = NoSave(ConfigSelection(default = 'font_default.xml', choices = mylist))           
+#### initializing LCD COLORS ###
+            self.LCDcolorsList = [("default", _("default"))]
+            if self.desktopType == 'lcd':
+                for f in sorted(listdir(SkinPath + "allColors/"), key=str.lower):
+                    if f.startswith('LCD_colors_') and f.endswith('.xml'):
+                        mylist.append(( f, _(f[11:-4].replace("_", " ")) ))
+                if path.exists("/usr/share/enigma2/HomarLCDskins/allColors/"):
+                    for f in sorted(listdir("/usr/share/enigma2/HomarLCDskins/allColors/"), key=str.lower):
+                        if f.startswith('LCD_colors_') and f.endswith('.xml'):
+                            mylist.append(( f, _(f[11:-4].replace("_", " ")) ))
+            config.plugins.UserSkin.LCDcolors = ConfigSelection(default="default", choices = self.LCDcolorsList)
+            if config.plugins.UserSkin.LCDcolors.value == 'HomarLCDskinsFromOPKG':
+                config.plugins.UserSkin.LCDcolors.value = "default"
 #### initializing COLORS ###
+            if DBG == True: printDEBUG('#### initializing COLORS ###')
             if not path.exists(SkinPath + "allColors/colors_default.xml") or path.getsize(SkinPath + "allColors/colors_default.xml") > 8192:
                 printDEBUG("generating colors_default.xml")
                 with open(SkinPath + "allColors/colors_default.xml" , "w") as f:
@@ -386,21 +398,20 @@ class UserSkin_Config(Screen, ConfigListScreen):
         if isSlowCPU() == True:
             self.list.append(getConfigListEntry(_("No JPG previews:"), config.plugins.UserSkin.jpgPreview))
         if self.LCDconfigKey != 'none':
-            try:
-                if getDesktop(1).size().width() >= 320:
-                    optionText = _("LCD skin (OK):")
-                else:
-                    optionText = _("VFD skin (OK):")
-            except Exception:
-                optionText = _("Display skin (OK):")
+            if self.desktopType == 'lcd':
+                optionText = _("LCD skin (OK):")
+            else:
+                optionText = _("VFD skin (OK):")
             self.list.append(getConfigListEntry( optionText, config.plugins.UserSkin.LCDmode) )
+            if self.desktopType == 'lcd':
+                self.list.append(getConfigListEntry( _("LCD Colors:"), config.plugins.UserSkin.LCDcolors) )
         try:
             self.list.append(getConfigListEntry(""))
             #aqq
             from Plugins.SystemPlugins.e2componentsInitiator.setup import buildMlist
             self.list.extend(buildMlist())
-            self.currPiconType = config.plugins.j00zekCC.PiconsStyle.value
-            self.currZZPiconType = config.plugins.j00zekCC.zzPiconsStyle.value
+            #self.currPiconType = config.plugins.j00zekCC.PiconsStyle.value
+            #self.currZZPiconType = config.plugins.j00zekCC.zzPiconsStyle.value
         except Exception as e:
             if DBG == True: printDEBUG('Exception %s' % str(e))
         self["config"].list = self.list
@@ -514,7 +525,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
                 self.keyOk()
         if ret:
             if DBG == True: printDEBUG(ret)
-            if ret[0] == _('Homar LCD skins from opkg'):
+            if ret[0] == 'HomarLCDskinsFromOPKG':
                 self.session.openWithCallback(installHomarLCDscreens,MessageBox, _("Installation of LCD screens prepared by Homar from opkg will take a minute. Do you want to proceed?"), MessageBox.TYPE_YESNO, default = False)
             else:
                 config.plugins.UserSkin.LCDmode.value = ret[1]
@@ -565,10 +576,14 @@ class UserSkin_Config(Screen, ConfigListScreen):
                     x[1].save()
             configfile.save()
             try:
-                if self.currPiconType != config.plugins.j00zekCC.PiconsStyle.value:
+                if config.plugins.j00zekCC.DeleteDownloaded.value:
                     os.system('rm -f %s/*' % os.path.join(config.plugins.j00zekCC.PiconsMainRootPath.value, 'picon'))
-                if self.currZZPiconType != config.plugins.j00zekCC.zzPiconsStyle.value:
                     os.system('rm -f %s/*' % os.path.join(config.plugins.j00zekCC.PiconsMainRootPath.value, 'zzpicon'))
+                    config.plugins.j00zekCC.DeleteDownloaded.value = False
+                #if self.currPiconType != config.plugins.j00zekCC.PiconsStyle.value:
+                #    os.system('rm -f %s/*' % os.path.join(config.plugins.j00zekCC.PiconsMainRootPath.value, 'picon'))
+                #if self.currZZPiconType != config.plugins.j00zekCC.zzPiconsStyle.value:
+                #    os.system('rm -f %s/*' % os.path.join(config.plugins.j00zekCC.PiconsMainRootPath.value, 'zzpicon'))
             except Exception: pass
             ################################ SAFE MODE 
             self.UserSkinToolSet.ClearMemory()
@@ -837,7 +852,9 @@ class UserSkin_Config(Screen, ConfigListScreen):
             clearCache()
             if os.path.islink('/usr/share/enigma2/skin_box.xml'):
                 os.system('rm -f /usr/share/enigma2/skin_box.xml' )
-            if config.plugins.UserSkin.LCDmode.value not in ('LCDLinux',"system"):
+            if config.plugins.UserSkin.LCDmode.value in ("HomarLCDskinsFromOPKG"):
+                os.system('opkg update;opkg install enigma2-plugin-skins--j00zeks-homar;sync')
+            if config.plugins.UserSkin.LCDmode.value not in ('LCDLinux',"system", "HomarLCDskinsFromOPKG"):
             ##### VTI style #####
                 if self.LCDconfigKey == 'primary_vfdskin':
                     config.skin.primary_vfdskin.value = config.plugins.UserSkin.LCDmode.value
