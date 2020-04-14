@@ -70,7 +70,7 @@ class j00zekModExtraInfo(Converter, object):
 ######################
 #utils functions
 ######################
-	#converts hex numer to decimal numer. Hex is given as string
+	#converts hex number to decimal numer. Hex is given as string
 	def hex_str2dec(self, str):
 		ret = 0
 		try:

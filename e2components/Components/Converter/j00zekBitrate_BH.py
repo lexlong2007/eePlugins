@@ -44,6 +44,7 @@ class j00zekBitrate_BH(Converter, object):
             self.isSuspended = False
             self.StartTimer.start(100, True)
         else:
+            self.StartTimer.stop()
             self.isSuspended = True
             self.myConsole.ePopen('killall -9 bitrate', self.clearValues )
 

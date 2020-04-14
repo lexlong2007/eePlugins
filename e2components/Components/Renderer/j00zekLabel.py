@@ -29,7 +29,7 @@ class j00zekLabel(Renderer):
         self.txText         = ""
         self.txtFlags       = 0
         self.txFontName     = "Regular"
-        self.maxFontSize    = 14
+        self.maxFontSize    = 18
         self.minFontSize    = 0
         self.cfgminFontSize = 0
         self.cfgContext     = ''
@@ -125,6 +125,11 @@ class j00zekLabel(Renderer):
                 self.minFontSize = int(self.maxFontSize  * 3 / 4)
         else:
             self.minFontSize = int(self.cfgminFontSize  * self.maxFontSize)
+        if self.minFontSize < 18:
+            if self.maxFontSize >= 18:
+                self.minFontSize = 18
+            elif self.maxFontSize < 18:
+                self.minFontSize = self.maxFontSize
         if DBG: j00zekDEBUG("[j00zekLabel:applySkin] cfgContext= '%s', txfontName='%s', maxFontSize='%s', minFontSize='%s', cfgminFontSize='%s'" % (self.cfgContext, self.txFontName, self.maxFontSize, self.minFontSize,self.cfgminFontSize)) 
         ret = Renderer.applySkin(self, desktop, screen)
         
@@ -156,8 +161,11 @@ class j00zekLabel(Renderer):
             if not self.txLabel is None:
                 self.txText = self.source.text or ""
                 self.txLabel.setText(self.txText)
-                if self.txText != "":
-                    self.setFontSize()
+                try:
+                    if self.txText.strip() != "":
+                        self.setFontSize()
+                except Exception:
+                    pass
 
     def setFontSize(self):
         if DBG: j00zekDEBUG("[j00zekLabel:setFontSize] >>>")

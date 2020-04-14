@@ -70,9 +70,9 @@ class j00zekModRunningText(Renderer):
     def __init__(self):
         Renderer.__init__(self)
         self.type     = NONE
-        self.txfont   = gFont("Regular", 14)
+        self.txfont   = gFont("Regular", 18)
         self.txfontName  = "Regular"
-        self.maxFontSize = 14
+        self.maxFontSize = 18
         self.minFontSize = 0
         self.alternateFont = None #font to use to write text in smaller size
         self.useBiggestPossibleFont = False
@@ -140,6 +140,11 @@ class j00zekModRunningText(Renderer):
                     self.txfontName = value.split(';')[0]
                     if self.minFontSize == 0:
                         self.minFontSize = int(self.maxFontSize / 2)
+                        if self.minFontSize < 18:
+                            if self.maxFontSize >= 18:
+                                self.minFontSize = 18
+                            elif self.maxFontSize < 18:
+                                self.minFontSize = self.maxFontSize
                     if DBG: j00zekDEBUG("[j00zekRunningText:applySkin] txfontName='%s', maxFontSize='%s', minFontSize='%s'" % (self.txfontName, self.maxFontSize, self.minFontSize)) 
                 elif attrib == "minFontSize":
                     self.minFontSize = int(value.strip())

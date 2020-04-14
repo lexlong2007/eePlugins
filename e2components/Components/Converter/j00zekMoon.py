@@ -2,7 +2,7 @@
 # j00zek 2018
 #
 
-from enigma import eTimer
+#from enigma import eTimer
 from Components.Converter.Converter import Converter
 from Components.Element import cached
 from Components.j00zekMoonCalculations import phase, get_julian_datetime, phase_string
