@@ -3,6 +3,7 @@
 The function is included unmodified from Python stdlib 3.5.1,
 and is (C) Python
 """
+from __future__ import absolute_import  # Import system's os, not backports.os.
 
 import os
 import sys

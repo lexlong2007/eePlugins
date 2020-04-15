@@ -1,0 +1,3 @@
+#!/usr/bin/python2.7 
+import streamlink_cli.main
+streamlink_cli.main.main()

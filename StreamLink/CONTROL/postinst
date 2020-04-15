@@ -10,7 +10,17 @@ else
     echo ""
     echo "streamlinksrv instalolled"
     echo ""
-fi 
+fi
+#korekta brakujacych skryptow
+if [ ! -e /usr/lib/python2.7/site-packages/backports/__init__.py ];then
+echo "#created by streamlink package
+from pkgutil import extend_path
+__path__ = extend_path(__path__, __name__)
+" > /usr/lib/python2.7/site-packages/backports/__init__.py
+fi
+
+[ -e /usr/lib/python2.7/site-packages/Crypto/Util/Padding.py ] || ln -sf /usr/lib/python2.7/site-packages/streamlink/missingScripts/Padding.py /usr/lib/python2.7/site-packages/Crypto/Util/Padding.py
+
 if [ `grep -c 'config.plugins.streamlinksrv.enabled=true' < /etc/enigma2/settings` -gt 0 ];then
   /etc/init.d/streamlinksrv start
   if [ -e /var/run/streamlink.pid ];then

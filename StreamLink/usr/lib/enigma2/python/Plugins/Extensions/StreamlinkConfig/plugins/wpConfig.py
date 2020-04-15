@@ -166,6 +166,7 @@ def generate_m3u():
     xbmcgui.Dialog().notification('WP Pilot', 'Wygenerowano liste M3U.', xbmcgui.NOTIFICATION_INFO)
 
 def generate_E2bouquet():
+    from datetime import date
     if not sessionid:
         return
 
@@ -174,7 +175,7 @@ def generate_E2bouquet():
         return
 
     print 'Generuje bukiet...'
-    data = '#NAME PILOT.WP.PL \n'
+    data = '#NAME PILOT.WP.PL aktualizacja %s\n' % date.today().strftime("%d-%m-%Y")
     for item in channels():
         #print item
         if item.get('access_status', '') != 'unsubscribed':
