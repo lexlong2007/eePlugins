@@ -513,7 +513,7 @@
     <widget source="Title" render="Label" position="633,50" size="820,30" font="Roboto_HD; 27" halign="right" backgroundColor="dark_grey" transparent="1"/>
     <widget name="config" position="83,190" size="735,480" itemHeight="35" font="Roboto_HD; 27" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_735_35.png" backgroundColor="black" transparent="1"/>
     <widget name="Picture" position="889,285" size="550,290" alphatest="on"/>
-    <widget source="PreviewInfo" render="Label" position="889,505" size="550,220" zPosition="5" font="Roboto_HD; 27" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1"/>
+    <widget source="PreviewInfo" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=2,startdelay=6000,wrap" position="889,505" size="550,220" zPosition="5" font="Roboto_HD; 24" halign="left" foregroundColor="white" backgroundColor="dark_grey" transparent="1"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="72,779" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="447,779" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="735,779" size="35,27" alphatest="blend"/>

@@ -7355,11 +7355,11 @@
   </screen>
   <screen name="Devices" position="center,center" size="860,850">
     <widget source="TunerHeader" render="Label" position="47,15" size="760,40" font="Bold; 23" transparent="0" zPosition="1" halign="left" foregroundColor="lemon" />
-    <widget source="nims" render="Label" position="47,55" size="760,200" font="Regular;20" transparent="0" zPosition="1" noWrap="1" foregroundColor="white" />
-    <widget source="HDDHeader" render="Label" position="46,294" size="760,40" font="Bold;23" transparent="0" zPosition="1" halign="left" foregroundColor="lemon" />
-    <widget source="hdd" render="Label" position="47,334" size="760,170" font="Regular;20" transparent="0" zPosition="1" foregroundColor="white" />
-    <widget source="MountsHeader" render="Label" position="47,554" size="760,40" font="Bold;23" transparent="0" zPosition="1" halign="left" foregroundColor="lemon" />
-    <widget source="mounts" render="Label" position="147,616" size="760,215" font="Regular;20" transparent="0" zPosition="1" noWrap="1" foregroundColor="white" />
+    <widget source="nims" render="Label" position="47,55" size="760,300" font="Regular;20" transparent="0" zPosition="1" noWrap="1" foregroundColor="white" />
+    <widget source="HDDHeader" render="Label" position="46,420" size="760,40" font="Bold;23" transparent="0" zPosition="1" halign="left" foregroundColor="lemon" />
+    <widget source="hdd" render="Label" position="47,460" size="760,170" font="Regular;20" transparent="0" zPosition="1" foregroundColor="white" />
+    <widget source="MountsHeader" render="Label" position="47,640" size="760,40" font="Bold;23" transparent="0" zPosition="1" halign="left" foregroundColor="lemon" />
+    <widget source="mounts" render="Label" position="147,680" size="760,150" font="Regular;20" transparent="0" zPosition="1" noWrap="1" foregroundColor="white" />
   </screen>
   <screen name="SystemMemoryInfo" position="center,center" size="860,750">
     <widget source="lab1" render="Label" position="155,108" size="560,45" font="Boldit;24" transparent="0" zPosition="2" foregroundColor="lemon" />
