@@ -476,4 +476,26 @@
     <widget name="disklabel" position="733,231" size="400,40" font="Roboto_HD; 30" halign="center" valign="center" foregroundColor="lemon" backgroundColor="transpBlack_1" />
     <widget name="labeltoset" position="16,378" size="600,35" font="Roboto_HD; 28" halign="left" valign="center" foregroundColor="lemon" backgroundColor="transpBlack_1" />
   </screen>
+  <screen name="Devices" position="center,center" size="860,920" title="PKT device info">
+  <widget source="TunerHeader" render="Label" position="147,1" size="560,47" font="Bold; 30" transparent="0" zPosition="1" halign="left" foregroundColor="lemon" />
+  <widget source="nims" render="Label" position="107,47" size="631,466" font="Regular; 24" transparent="0" zPosition="1" noWrap="1" foregroundColor="lemon" />
+  <widget source="HDDHeader" render="Label" position="147,517" size="560,40" font="Bold; 30" transparent="0" zPosition="1" halign="left" foregroundColor="lemon" />
+  <widget source="hdd" render="Label" position="53,561" size="744,141" font="Regular; 24" transparent="0" zPosition="1" foregroundColor="lemon" />
+  <widget source="MountsHeader" render="Label" position="149,704" size="560,40" font="Bold; 30" transparent="0" zPosition="1" halign="left" foregroundColor="lemon" />
+  <widget source="mounts" render="Label" position="151,745" size="560,118" font="Regular; 24" transparent="0" zPosition="1" noWrap="1" foregroundColor="lemon" />
+  <ePixmap position="281,866" zPosition="1" size="311,49" pixmap="BlackHarmony/gfx/hyperion-logo.png" alphatest="blend" />
+</screen>
+  <screen name="SystemMemoryInfo" position="center,center" size="860,750">
+    <widget source="lab1" render="Label" position="155,108" size="560,45" font="Bold; 30" transparent="0" zPosition="2" foregroundColor="lemon" />
+    <widget source="lab2" render="Label" position="154,180" size="560,45" font="Roboto_HD; 26" transparent="0" zPosition="2" foregroundColor="lemon" />
+    <widget name="AboutScrollLabel" position="154,241" size="560,490" font="Regular; 26" transparent="0" zPosition="1" scrollbarMode="showOnDemand" foregroundColor="lemon" />
+  </screen>
+  <screen name="SystemNetworkInfo" position="515,140" size="860,800">
+    <widget name="AboutScrollLabel" position="121,87" size="606,410" valign="left" font="Regular; 26" transparent="1" foregroundColor="lemon" />
+    <eLabel name="" position="149,627" size="562, 2" backgroundColor="light_grey" />
+    <widget source="IFtext" render="Label" position="135,668" size="158,45" zPosition="10" font="Regular; 24" halign="left" transparent="1" backgroundColor="transpBlack_1" foregroundColor="lemon" />
+    <widget source="IF" render="Label" position="306,667" size="430,45" zPosition="10" font="Regular; 26" halign="left" transparent="1" backgroundColor="transpBlack_1" foregroundColor="lemon" />
+    <widget source="Statustext" render="Label" position="133,723" size="161,45" zPosition="10" font="Regular;24" halign="left" transparent="1" backgroundColor="transpBlack_1" foregroundColor="lemon" />
+    <widget name="statuspic" pixmaps="buttons/button_green.png,buttons/button_green_off.png" position="313,746" zPosition="10" size="17,17" transparent="1" alphatest="on" />
+  </screen>
 </skin>

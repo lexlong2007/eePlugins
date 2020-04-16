@@ -7354,12 +7354,12 @@
     <widget name="FullDescription" position="45,85" size="1410,210" font="Regular; 26" transparent="1" text="to jest przykladowy tekst do tego co tu bedzie sie wyswietlac" />
   </screen>
   <screen name="Devices" position="center,center" size="860,850">
-    <widget source="TunerHeader" render="Label" position="147,15" size="560,40" font="Bold; 23" transparent="0" zPosition="1" halign="left" foregroundColor="lemon" />
-    <widget source="nims" render="Label" position="147,84" size="560,170" font="Regular;21" transparent="0" zPosition="1" noWrap="1" foregroundColor="lemon" />
-    <widget source="HDDHeader" render="Label" position="146,264" size="560,40" font="Bold;23" transparent="0" zPosition="1" halign="left" foregroundColor="lemon" />
-    <widget source="hdd" render="Label" position="147,331" size="560,200" font="Regular;18" transparent="0" zPosition="1" foregroundColor="lemon" />
-    <widget source="MountsHeader" render="Label" position="147,554" size="560,40" font="Bold;23" transparent="0" zPosition="1" halign="left" foregroundColor="lemon" />
-    <widget source="mounts" render="Label" position="147,616" size="560,215" font="Regular;21" transparent="0" zPosition="1" noWrap="1" foregroundColor="lemon" />
+    <widget source="TunerHeader" render="Label" position="47,15" size="760,40" font="Bold; 23" transparent="0" zPosition="1" halign="left" foregroundColor="lemon" />
+    <widget source="nims" render="Label" position="47,55" size="760,200" font="Regular;20" transparent="0" zPosition="1" noWrap="1" foregroundColor="white" />
+    <widget source="HDDHeader" render="Label" position="46,294" size="760,40" font="Bold;23" transparent="0" zPosition="1" halign="left" foregroundColor="lemon" />
+    <widget source="hdd" render="Label" position="47,334" size="760,170" font="Regular;20" transparent="0" zPosition="1" foregroundColor="white" />
+    <widget source="MountsHeader" render="Label" position="47,554" size="760,40" font="Bold;23" transparent="0" zPosition="1" halign="left" foregroundColor="lemon" />
+    <widget source="mounts" render="Label" position="147,616" size="760,215" font="Regular;20" transparent="0" zPosition="1" noWrap="1" foregroundColor="white" />
   </screen>
   <screen name="SystemMemoryInfo" position="center,center" size="860,750">
     <widget source="lab1" render="Label" position="155,108" size="560,45" font="Boldit;24" transparent="0" zPosition="2" foregroundColor="lemon" />
