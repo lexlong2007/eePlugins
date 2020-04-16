@@ -24,6 +24,7 @@ from Components.ActionMap import ActionMap
 from Components.config import *
 from Components.ConfigList import ConfigListScreen
 from Components.j00zekComponents import isImageType, getImageType
+from Components.j00zekModHex2strColor import Hex2strColor
 from Components.Label import Label
 from Components.Pixmap import Pixmap
 from Components.Sources.List import List
@@ -152,6 +153,43 @@ def homarLCDskins( skinlist = [] , tunerName = getTunerName() ):
     
     return skinlist
 
+def processInfo(myInfoFile):
+    if FullDBG == True: printDEBUG('processInfo(%s)' % myInfoFile)
+    info = ''
+    hasLangDef = False
+    if path.exists(myInfoFile):
+        with open(myInfoFile, 'r') as f:
+            for line in f:
+                line = line.strip()
+                if line == '#Lang:%s' % currLang.upper():
+                    info = ''
+                    hasLangDef = True
+                elif hasLangDef and line == '#Lang:':
+                    break
+                elif line.startswith('#'):
+                    continue
+                else:
+                    index = 0
+                    while line.find('c(#') != -1:
+                        HexColor = line.split('c(#', 2)[1]
+                        HexColor = HexColor.split(')', 2)[0]
+                        try:
+                            if FullDBG == True: printDEBUG('\t HexColor="%s"' % '0x' + HexColor)
+                            hex_int = int('0x' + HexColor, 16)
+                            if FullDBG == True: printDEBUG('\t hex_int="%s"' % hex_int)
+                            colorInHex = Hex2strColor(hex_int)
+                            if FullDBG == True: printDEBUG('\t colorInHex="%s"' % colorInHex)
+                        except Exception as e:
+                            if DBG == True: printDEBUG('\t exception: %s' % str(e))
+                            colorInHex = HexColor
+                        line = line.replace('c(#' + HexColor + ')', colorInHex) #Hex2strColor(0x00ffcc00)
+                        index += 1
+                        if index == 10:
+                            break
+                    info += line + '\n'
+    if FullDBG == True: printDEBUG('\t info:\n"%s"' % info)
+    return info.strip()
+
 class UserSkin_Config(Screen, ConfigListScreen):
     skin = """
   <screen name="UserSkin_Config" position="82,124" size="1101,376" title="UserSkin Setup" backgroundColor="transparent" flags="wfNoBorder">
@@ -165,6 +203,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
     <widget source="Title" render="Label" position="2,4" size="889,43" font="Regular;35" foregroundColor="#00ffffff" backgroundColor="#004e4e4e" transparent="1" />
     <widget name="config" position="6,55" size="657,226" scrollbarMode="showOnDemand" transparent="1" />
     <widget name="Picture" position="676,56" size="400,225" alphatest="blend" />
+    <widget name="PreviewInfo" position="676,575" size="400,225" font="Regular;25" foregroundColor="#00ffeedd" backgroundColor="#004e4e4e" transparent="1" />
     <widget name="key_red" position="18,316" size="210,25" zPosition="1" font="Regular;20" halign="left" foregroundColor="#00ffffff" backgroundColor="#20b81c46" transparent="1" />
     <widget name="key_green" position="299,317" size="210,25" zPosition="1" font="Regular;20" halign="left" foregroundColor="#00ffffff" backgroundColor="#20009f3c" transparent="1" />
     <widget name="key_yellow" position="578,317" size="210,25" zPosition="1" font="Regular;20" halign="left" foregroundColor="#00ffffff" backgroundColor="#209ca81b" transparent="1" />
@@ -200,29 +239,35 @@ class UserSkin_Config(Screen, ConfigListScreen):
                 if not path.exists(SkinPath + folder):
                     mkdir(SkinPath + folder)
             
-#### initializing VFDskins ###
+#### initializing VFD/LCD skins ###
+            tunersMappingDict = {}
             if getDesktop(1).size().width() >= 320:
                 self.desktopType = 'lcd'
             else:
                 self.desktopType = 'vfd'
-            if DBG == True: printDEBUG('#### initializing %s skins ###' % self.desktopType)
+            if DBG == True: printDEBUG('#### initializing %s skins ###' % self.desktopType.upper() )
             self.LCDscreensList = [("system", "system")]
             if  path.exists('/usr/lib/enigma2/python/Plugins/Extensions/LCDlinux'):
                 self.LCDscreensList.append(("LCDLinux", "LCDLinux"))
             
             filterVFDskins4model = False
             tunerName = getTunerName()
+            mappedTunerName = tunersMappingDict.get(tunerName, tunerName)
+            
             if tunerName != 'unknown':
                 for f in sorted(listdir(SkinPath + "allMiniTVskins/"), key=str.lower):
-                    if f.startswith('skin_') and f.endswith('.xml') and f.lower().find(tunerName) > -1:
+                    if f.startswith('skin_') and f.endswith('.xml') and f.lower().find(mappedTunerName) > -1:
                         filterVFDskins4model = True
                         break
 
             for f in sorted(listdir(SkinPath + "allMiniTVskins/"), key=str.lower):
                 if f.startswith('skin_') and f.endswith('.xml') and f.lower().find(self.desktopType) > -1:
-                    if not filterVFDskins4model or f.lower().find(tunerName) > -1:
+                    if not filterVFDskins4model or f.lower().find(mappedTunerName) > -1:
                         if FullDBG: printDEBUG( path.join('BlackHarmony/allMiniTVskins/',f) )
-                        self.LCDscreensList.append(( path.join('BlackHarmony/allMiniTVskins/',f), _(f[5:-4].replace("_", " ")) ))
+                        if mappedTunerName == tunerName:
+                            self.LCDscreensList.append(( path.join('BlackHarmony/allMiniTVskins/',f), _(f[5:-4].replace("_", " ")) ))
+                        else:
+                            self.LCDscreensList.append(( path.join('BlackHarmony/allMiniTVskins/',f), mappedTunerName + ': ' + _(f[5:-4].replace("_", " ")) ))
                     
             self.LCDscreensList.extend( atvLCDskins() )
             self.LCDscreensList.extend( vtiLCDskins() )
@@ -247,15 +292,17 @@ class UserSkin_Config(Screen, ConfigListScreen):
             else:
                 self.myUserSkin_font = NoSave(ConfigSelection(default = 'font_default.xml', choices = mylist))           
 #### initializing LCD COLORS ###
+            if DBG == True: printDEBUG('#### initializing LCD COLORS ###')
             self.LCDcolorsList = [("default", _("default"))]
             if self.desktopType == 'lcd':
                 for f in sorted(listdir(SkinPath + "allColors/"), key=str.lower):
                     if f.startswith('LCD_colors_') and f.endswith('.xml'):
-                        mylist.append(( f, _(f[11:-4].replace("_", " ")) ))
+                        #if DBG == True: printDEBUG('\t f="%s"' % SkinPath + "allColors/" + f)
+                        self.LCDcolorsList.append(( SkinPath + "allColors/" + f, _(f[11:-4].replace("_", " ")) ))
                 if path.exists("/usr/share/enigma2/HomarLCDskins/allColors/"):
                     for f in sorted(listdir("/usr/share/enigma2/HomarLCDskins/allColors/"), key=str.lower):
                         if f.startswith('LCD_colors_') and f.endswith('.xml'):
-                            mylist.append(( f, _(f[11:-4].replace("_", " ")) ))
+                            self.LCDcolorsList.append(( "/usr/share/enigma2/HomarLCDskins/allColors/" + f, _(f[11:-4].replace("_", " ")) ))
             config.plugins.UserSkin.LCDcolors = ConfigSelection(default="default", choices = self.LCDcolorsList)
             if config.plugins.UserSkin.LCDcolors.value == 'HomarLCDskinsFromOPKG':
                 config.plugins.UserSkin.LCDcolors.value = "default"
@@ -308,11 +355,11 @@ class UserSkin_Config(Screen, ConfigListScreen):
             if DBG == True: printDEBUG('#### initializing USER BUTTONS ###')
             #if DBG == True: printDEBUG('\t' + SkinPath + "allButtons/")
             for f in sorted(listdir(SkinPath + "allButtons/"), key=str.lower):
-                if DBG == True: printDEBUG('\t f="%s"' % f)
+                #if DBG == True: printDEBUG('\t f="%s"' % f)
                 if path.isdir(path.join(SkinPath + "allButtons/", f)) and f.endswith('.buttons'):
                     friendly_name = f[:-8]
                     mylist.append((f, _(friendly_name)))
-                    if DBG == True: printDEBUG('\t appended=%s' % f)
+                    #if DBG == True: printDEBUG('\t appended=%s' % f)
 
             if len(mylist) == 0:
                 mylist.append(("default", _("default") ))
@@ -352,6 +399,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
             }, -2)
             
         self["Picture"] = Pixmap()
+        self["PreviewInfo"] = StaticText("")
         
         if not self.selectionChanged in self["config"].onSelectionChanged:
             self["config"].onSelectionChanged.append(self.selectionChanged)
@@ -407,11 +455,9 @@ class UserSkin_Config(Screen, ConfigListScreen):
                 self.list.append(getConfigListEntry( _("LCD Colors:"), config.plugins.UserSkin.LCDcolors) )
         try:
             self.list.append(getConfigListEntry(""))
-            #aqq
+            #e2c configuration elements
             from Plugins.SystemPlugins.e2componentsInitiator.setup import buildMlist
             self.list.extend(buildMlist())
-            #self.currPiconType = config.plugins.j00zekCC.PiconsStyle.value
-            #self.currZZPiconType = config.plugins.j00zekCC.zzPiconsStyle.value
         except Exception as e:
             if DBG == True: printDEBUG('Exception %s' % str(e))
         self["config"].list = self.list
@@ -442,6 +488,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
                         self["key_yellow"].setText("")
                 elif selectedCFG == config.plugins.j00zekCC.PiconsStyle:   self.setPicture(config.plugins.j00zekCC.PiconsStyle.value.replace("%20","").split("/")[0])
                 elif selectedCFG == config.plugins.j00zekCC.zzPiconsStyle: self.setPicture(config.plugins.j00zekCC.zzPiconsStyle.value.replace("%20","").split("/")[0])
+                elif selectedCFG == config.plugins.UserSkin.LCDcolors: self.setPicture(config.plugins.UserSkin.LCDcolors.value)
         except Exception: pass
 
     def selectionChanged(self):
@@ -457,8 +504,11 @@ class UserSkin_Config(Screen, ConfigListScreen):
                 elif selectedCFG == self.myUserSkin_buttons: self.setPicture(self.myUserSkin_buttons.value)
                 elif selectedCFG == config.plugins.j00zekCC.PiconsStyle:   self.setPicture(config.plugins.j00zekCC.PiconsStyle.value.replace("%20","").split("/")[0])
                 elif selectedCFG == config.plugins.j00zekCC.zzPiconsStyle: self.setPicture(config.plugins.j00zekCC.zzPiconsStyle.value.replace("%20","").split("/")[0])
+                elif selectedCFG == config.plugins.UserSkin.LCDcolors: self.setPicture(config.plugins.UserSkin.LCDcolors.value)
                 else:
                     self["Picture"].hide()
+                    self["PreviewInfo"].setText('')
+
         except Exception: pass
             
     def cancel(self):
@@ -490,19 +540,34 @@ class UserSkin_Config(Screen, ConfigListScreen):
             pic = f[:-4]
         else:
             pic = f
-        #check for jpg
-        if path.exists(SkinPath + "allPreviews/" + pic + '.jpg'):
-            self.UpdatePreviewPicture(SkinPath + "allPreviews/" + pic + '.jpg')
-        elif path.exists(SkinPath + "allPreviews/preview_" + pic + '.jpg'):
-            self.UpdatePreviewPicture(SkinPath + "allPreviews/preview_" + pic + '.jpg')
-        #check for png
-        elif path.exists(SkinPath + "allPreviews/" + pic + '.png'):
-            self.UpdatePreviewPicture(SkinPath + "allPreviews/" + pic + '.png')
-        elif path.exists(SkinPath + "allPreviews/preview_" + pic + '.png'):
-            self.UpdatePreviewPicture(SkinPath + "allPreviews/preview_" + pic + '.png')
+        if DBG == True: printDEBUG("UserSkin.setPicture('%s')" % f )
+        if pic.startswith('/'):
+            if path.exists(pic.replace('allColors','allPreviews') + '.png'):
+                self.UpdatePreviewPicture(pic.replace('allColors','allPreviews') + '.png')
+            elif path.exists(pic + '.png'):
+                self.UpdatePreviewPicture(pic + '.png')
+            else:
+                self["Picture"].hide()
         else:
-            if DBG == True: printDEBUG("[UserSkin:setPicture] pic for '%s' not found" % pic )
-            self["Picture"].hide()
+            #check for jpg
+            if path.exists(SkinPath + "allPreviews/" + pic + '.jpg'):
+                self.UpdatePreviewPicture(SkinPath + "allPreviews/" + pic + '.jpg')
+            elif path.exists(SkinPath + "allPreviews/preview_" + pic + '.jpg'):
+                self.UpdatePreviewPicture(SkinPath + "allPreviews/preview_" + pic + '.jpg')
+            #check for png
+            elif path.exists(SkinPath + "allPreviews/" + pic + '.png'):
+                self.UpdatePreviewPicture(SkinPath + "allPreviews/" + pic + '.png')
+            elif path.exists(SkinPath + "allPreviews/preview_" + pic + '.png'):
+                self.UpdatePreviewPicture(SkinPath + "allPreviews/preview_" + pic + '.png')
+            else:
+                self["Picture"].hide()
+          
+        infs = f[:-3] + 'txt'
+        for inf in (infs, infs.replace('allColors','allInfos') ):
+            #if DBG == True: printDEBUG('\t f="%s"' % inf)
+            if path.exists(inf):
+                self["PreviewInfo"].setText(processInfo(inf))
+        
     
     def UpdatePreviewPicture(self, PreviewFileName):
             if DBG == True: printDEBUG("[UserSkin:UpdatePreviewPicture] pic =" + PreviewFileName)
@@ -1163,26 +1228,10 @@ class TreeUserSkinScreens(Screen):
         pic =  self.filelist.getFilename()[:-4]
         #info when exists
         myInfoFile=SkinPath + "allInfos/" + pic + ".txt"
-        printDEBUG("[UserSkin:PreviewTimerCB] myInfoFile='%s'" % myInfoFile )
-        if path.exists(myInfoFile):
-            info = ''
-            hasLangDef = False
-            with open(myInfoFile, 'r') as f:
-                for line in f:
-                    line = line.strip()
-                    if line == '#Lang:%s' % currLang.upper():
-                        info = ''
-                        hasLangDef = True
-                    elif hasLangDef and line == '#Lang:':
-                        break
-                    elif line.startswith('#'):
-                        continue
-                    else:
-                        info += line + '\n'
-            printDEBUG("[UserSkin:PreviewTimerCB] PreviewInfo='%s'" % info.strip() )
-            self["PreviewInfo"].setText(info.strip())
-        else:
-            self["PreviewInfo"].setText("")
+        if not path.exists(myInfoFile):
+            myInfoFile="/usr/share/enigma2/HomarLCDskins/allInfos/" + pic + ".txt"
+        printDEBUG("[UserSkin:PreviewTimerCB] myInfoFile='BH|HMR folder/%s.txt'" % pic )
+        self["PreviewInfo"].setText(processInfo(myInfoFile))
         #picture
         if not self.PreviewAnims is None:
             self.PreviewAnimCurrent += 1
