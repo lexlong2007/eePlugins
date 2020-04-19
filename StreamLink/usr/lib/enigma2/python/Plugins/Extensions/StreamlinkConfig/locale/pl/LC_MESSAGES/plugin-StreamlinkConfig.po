@@ -85,3 +85,39 @@ msgstr "Naciśnij OK aby pobrać bukiet %s"
 
 msgid "Enable deamon:"
 msgstr "Aktywacja demona:"
+
+msgid "Save"
+msgstr "Zapisz"
+
+msgid "Check status"
+msgstr "Sprawdź stan"
+
+msgid "Do you want to force packets reinstallation?"
+msgstr "Wymusić reinstalację pakietów?"
+
+msgid "(Re)installing required packages..."
+msgstr "(Re)instalacja wymaganych pakietów..."
+
+msgid "Checking state of required packages..."
+msgstr "Sprawdzanie stanu wymaganych pakietów..."
+
+msgid "Username & Password are required!"
+msgstr "Nazwa konta i hasło jest wymagane!"
+
+msgid "Updating %s..."
+msgstr "Aktualizacja %s..."
+
+msgid "Creating %s..."
+msgstr "Tworzenie %s..."
+
+msgid "ServiceApp not installed!"
+msgstr "ServiceApp jest niezainstalowany!"
+
+msgid "Select Multiframework"
+msgstr "Wybór renderera wideo"
+
+msgid "Bouquets has been reloaded"
+msgstr "Definicje bukietów zostały przeładowane"
+
+#msgid ""
+#msgstr ""

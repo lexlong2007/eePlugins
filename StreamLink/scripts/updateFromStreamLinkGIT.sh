@@ -17,3 +17,7 @@ if [ `cat $dst/streamlink/__init__.py|grep -c '__version_date__'` -lt 1 ];then
   sed -i '/del get_versions/i __version_date__ = get_versions()["date"]' $dst/streamlink/__init__.py
 fi
 
+if [ `cat $dst/streamlink/utils/l10n.py|grep -c 'except ImportError as e:'` -lt 1 ];then
+  echo "patching l10n.py ..."
+  sed -i 's/\(^except ImportError\)\(:.*\)/\1 as e\2\n    print str(e)\n/' $dst/streamlink/utils/l10n.py
+fi

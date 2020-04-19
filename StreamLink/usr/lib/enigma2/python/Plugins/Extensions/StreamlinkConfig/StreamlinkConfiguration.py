@@ -1,22 +1,23 @@
 from __init__ import mygettext as _
+from version import Version
 import os
 # GUI (Screens)
+from Components.ActionMap import ActionMap
+from Components.config import *
 from Components.ConfigList import ConfigListScreen
+from Components.Label import Label
+#from Components.Sources.StaticText import StaticText
+from Screens.ChoiceBox import ChoiceBox
+from Screens.Console import Console
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
-
-# GUI (Summary)
 from Screens.Setup import SetupSummary
 
-# GUI (Components)
-from Components.ActionMap import ActionMap
-from Components.Sources.StaticText import StaticText
-
-# Configuration
-from Components.config import *
-
 config.plugins.streamlinksrv = ConfigSubsection()
+config.plugins.streamlinksrv.checkPackages = NoSave(ConfigNothing())
 config.plugins.streamlinksrv.generateBouquet = NoSave(ConfigNothing())
+config.plugins.streamlinksrv.modifyBouquet = NoSave(ConfigNothing())
+
 config.plugins.streamlinksrv.enabled = ConfigYesNo(default = False)
 config.plugins.streamlinksrv.logLevel = ConfigSelection(default = "info", choices = [("none", _("none")),
                                                                                     ("info", _("info")),
@@ -32,20 +33,36 @@ config.plugins.streamlinksrv.logPath = ConfigSelection(default = "/home/root", c
 config.plugins.streamlinksrv.PortNumber = ConfigSelection(default = "8088", choices = [("8088", "8088"), ("88", "88"), ])
 # pilot.wp.pl
 config.plugins.streamlinksrv.WPusername = ConfigText()
-config.plugins.streamlinksrv.WPpassword = ConfigText()
+config.plugins.streamlinksrv.WPpassword = ConfigPassword()
 config.plugins.streamlinksrv.WPbouquet = NoSave(ConfigNothing())
 # teleelevidenie
 config.plugins.streamlinksrv.TELEusername = ConfigText()
-config.plugins.streamlinksrv.TELEpassword = ConfigText()
+config.plugins.streamlinksrv.TELEpassword = ConfigPassword()
 config.plugins.streamlinksrv.TELEbouquet = NoSave(ConfigNothing())
 
 if os.path.exists("/tmp/StreamlinkConfig.log"):
     os.remove("/tmp/StreamlinkConfig.log")
  
 class StreamlinkConfiguration(Screen, ConfigListScreen):
+    from enigma import getDesktop
+    if getDesktop(0).size().width() == 1920: #definicja skin-a musi byc tutaj, zeby vti sie nie wywalalo na labelach, inaczje trzeba uzywasc zrodla statictext
+        skin = """<screen name="StreamlinkConfiguration" position="center,center" size="1000,700" title="Streamlink configuration">
+                            <widget name="config" position="20,20" size="960,600" zPosition="1" scrollbarMode="showOnDemand" />
+                            <widget name="key_red"    position="20,630" zPosition="2" size="960,30" foregroundColor="red"   valign="center" halign="left" font="Regular;22" transparent="1" />
+                            <widget name="key_green"  position="20,630" zPosition="2" size="960,30" foregroundColor="green"  valign="center" halign="center" font="Regular;22" transparent="1" />
+                            <widget name="key_yellow" position="20,630" zPosition="2" size="960,30" foregroundColor="yellow" valign="center" halign="right" font="Regular;22" transparent="1" />
+                          </screen>"""
+    else:
+        skin = """<screen name="StreamlinkConfiguration" position="center,center" size="700,200" title="Streamlink configuration">
+                            <widget name="config" position="20,20" size="640,145" zPosition="1" scrollbarMode="showOnDemand" />
+                            <widget name="key_red"    position="20,150" zPosition="2" size="660,30" foregroundColor="red" valign="center" halign="left" font="Regular;22" transparent="1" />
+                            <widget name="key_green"  position="20,150" zPosition="2" size="660,30" foregroundColor="green" valign="center" halign="center" font="Regular;22" transparent="1" />
+                            <widget name="key_yellow" position="20,150" zPosition="2" size="660,30" foregroundColor="yellow" valign="center" halign="right" font="Regular;22" transparent="1" />
+                          </screen>"""
     def buildList(self):
         Mlist = []
         # pilot.wp.pl
+        #Mlist.append(getConfigListEntry("", NoSave(ConfigNothing()) ))
         Mlist.append(getConfigListEntry('\c00289496' + _("*** %s configuration ***") % 'pilot.wp.pl'))
         Mlist.append(getConfigListEntry(_("Username:"), config.plugins.streamlinksrv.WPusername))
         Mlist.append(getConfigListEntry(_("Password:"), config.plugins.streamlinksrv.WPpassword))
@@ -56,6 +73,8 @@ class StreamlinkConfiguration(Screen, ConfigListScreen):
         Mlist.append(getConfigListEntry(_("Password:"), config.plugins.streamlinksrv.TELEpassword))
         Mlist.append(getConfigListEntry(_("Press OK to download %s bouquet") % "enigma2-hls", config.plugins.streamlinksrv.TELEbouquet))
         Mlist.append(getConfigListEntry(""))
+        #Mlist.append(getConfigListEntry(_("Press OK to modify existing bouquet"),config.plugins.streamlinksrv.modifyBouquet))
+        #Mlist.append(getConfigListEntry(""))
         Mlist.append(getConfigListEntry('\c00289496' + _("*** Deamon configuration ***")))
         Mlist.append(getConfigListEntry(_("Enable deamon:"), config.plugins.streamlinksrv.enabled))
         Mlist.append(getConfigListEntry(_("Port number (127.0.0.1:X):"), config.plugins.streamlinksrv.PortNumber))
@@ -66,34 +85,20 @@ class StreamlinkConfiguration(Screen, ConfigListScreen):
         #Mlist.append()
         return Mlist
 
-    def __init__(self, session):
+    def __init__(self, session, args=None):
         self.DBGlog('%s' % '__init__')
-        from enigma import getDesktop
-        if getDesktop(0).size().width() == 1920:
-            self.skin = """<screen name="StreamlinkConfiguration" position="center,center" size="900,400" title="Streamlink configuration">
-                            <eLabel position="5,0" size="690,2" backgroundColor="#aaaaaa" />
-                            <widget name="config" position="20,20" size="860,330" zPosition="1" scrollbarMode="showOnDemand" />
-                            <widget name="key_red"    position="20,360" zPosition="2" size="860,30" foregroundColor="red"   valign="center" halign="left" font="Regular;22" transparent="1" />
-                            <widget name="key_green"  position="20,360" zPosition="2" size="860,30" foregroundColor="green"  valign="center" halign="center" font="Regular;22" transparent="1" />
-                            <!--widget name="key_yellow" position="20,360" zPosition="2" size="860,30" foregroundColor="yellow" valign="center" halign="right" font="Regular;22" transparent="1" /-->
-                          </screen>"""
-        else:
-            self.skin = """<screen name="StreamlinkConfiguration" position="center,center" size="700,200" title="Streamlink configuration">
-                            <eLabel position="5,0" size="690,2" backgroundColor="#aaaaaa" />
-                            <widget name="config" position="20,20" size="640,145" zPosition="1" scrollbarMode="showOnDemand" />
-                            <widget name="key_red"    position="20,150" zPosition="2" size="660,30" foregroundColor="red" valign="center" halign="left" font="Regular;22" transparent="1" />
-                            <widget name="key_green"  position="20,150" zPosition="2" size="660,30" foregroundColor="green" valign="center" halign="center" font="Regular;22" transparent="1" />
-                            <!--widget name="key_yellow" position="20,150" zPosition="2" size="660,30" foregroundColor="yellow" valign="center" halign="right" font="Regular;22" transparent="1" /-->
-                          </screen>"""
         Screen.__init__(self, session)
+        self.session = session
+        ConfigListScreen.__init__(self, self.buildList(), on_change = self.changedEntry)
 
         # Summary
-        self.setup_title = _("Streamlink Configuration" + ' NIE SKONCZONE!!!')
+        self.setup_title = _("Streamlink Configuration" + ' v.' + Version)
         self.onChangedEntry = []
 
         # Buttons
-        self["key_red"] = StaticText(_("Cancel"))
-        self["key_green"] = StaticText(_("Save"))
+        self["key_red"] = Label(_("Cancel"))
+        self["key_green"] = Label(_("Save"))
+        self["key_yellow"] = Label(_("Check status"))
 
         # Define Actions
         self["actions"] = ActionMap(["StreamlinkConfiguration"],
@@ -101,10 +106,10 @@ class StreamlinkConfiguration(Screen, ConfigListScreen):
                 "cancel": self.exit,
                 "red"   : self.exit,
                 "green" : self.save,
+                "yellow": self.yellow,
                 "save":   self.save,
                 "ok":     self.Okbutton,
             }, -2)
-        ConfigListScreen.__init__(self, self.buildList(), session, on_change = self.changedEntry)
         if not self.selectionChanged in self["config"].onSelectionChanged:
             self["config"].onSelectionChanged.append(self.selectionChanged)
         self.onLayoutFinish.append(self.layoutFinished)
@@ -121,11 +126,25 @@ class StreamlinkConfiguration(Screen, ConfigListScreen):
             os.system('/etc/init.d/streamlinksrv start')
         self.close(None)
         
+    def doNothing(self, ret = False):
+        return
+      
+    def yellow(self):
+        def yellowRet(ret = False):
+            if ret:
+                mtitle = _('(Re)installing required packages...')
+                cmd = '/usr/lib/enigma2/python/Plugins/Extensions/StreamlinkConfig/plugins/installPackets.sh forceReinstall'
+            else:
+                mtitle = _('Checking state of required packages...')
+                cmd = '/usr/lib/enigma2/python/Plugins/Extensions/StreamlinkConfig/plugins/installPackets.sh'
+            self.session.openWithCallback(self.doNothing ,Console, title = mtitle, cmdlist = [ cmd ])
+        self.session.openWithCallback(yellowRet, MessageBox, _("Do you want to force packets reinstallation?"), MessageBox.TYPE_YESNO, default = False)
+        
     def exit(self):
         self.close(None)
         
     def layoutFinished(self):
-        os.system('/usr/lib/enigma2/python/Plugins/Extensions/StreamlinkConfig/plugins/installPackets.sh &')
+        #os.system('/usr/lib/enigma2/python/Plugins/Extensions/StreamlinkConfig/plugins/installPackets.sh &')
         self.setTitle(self.setup_title)
 
     def changedEntry(self):
@@ -164,17 +183,29 @@ class StreamlinkConfiguration(Screen, ConfigListScreen):
                     from Screens.VirtualKeyBoard import VirtualKeyBoard
                     self.session.openWithCallback(self.OkbuttonTextChangedConfirmed, VirtualKeyBoard, title=(currInfo), text = currItem.value)
                 elif currItem == config.plugins.streamlinksrv.WPbouquet:
-                    self.doAction = ('wpConfig.py' , '/etc/enigma2/userbouquet.WPPL.tv', config.plugins.streamlinksrv.WPusername.value, config.plugins.streamlinksrv.WPpassword.value)
+                    if config.plugins.streamlinksrv.WPusername.value == '' or config.plugins.streamlinksrv.WPpassword.value == '':
+                        self.session.openWithCallback(self.doNothing,MessageBox, _("Username & Password are required!"), MessageBox.TYPE_INFO, timeout = 5)
+                        return
+                    else:
+                        self.doAction = ('wpBouquet.py' , '/etc/enigma2/userbouquet.WPPL.tv', config.plugins.streamlinksrv.WPusername.value, config.plugins.streamlinksrv.WPpassword.value)
                 elif currItem == config.plugins.streamlinksrv.TELEbouquet:
-                    self.doAction = ('teleelevidenieConfig.py', '/etc/enigma2/teleelevidenie-hls.tv', config.plugins.streamlinksrv.TELEusername.value, config.plugins.streamlinksrv.TELEpassword.value)
+                    if config.plugins.streamlinksrv.TELEusername.value == '' or config.plugins.streamlinksrv.TELEpassword.value == '':
+                        self.session.openWithCallback(self.doNothing,MessageBox, _("Username & Password are required!"), MessageBox.TYPE_INFO, timeout = 5)
+                        return
+                    else:
+                        self.doAction = ('teleelevidenieBouquet.py', '/etc/enigma2/teleelevidenie-hls.tv', config.plugins.streamlinksrv.TELEusername.value, config.plugins.streamlinksrv.TELEpassword.value)
+                elif currItem == config.plugins.streamlinksrv.modifyBouquet:
+                    pass
                 self.DBGlog('%s' % str(self.doAction))
                 if not self.doAction is None:
                     bfn = self.doAction[1]
                     self.DBGlog('%s' % bfn)
                     if os.path.exists(bfn):
-                        self.session.openWithCallback(self.OkbuttonConfirmed,MessageBox, _("Do you want to update '%s' file?") % bfn, MessageBox.TYPE_YESNO, default = False)
+                        self.cmdTitle = _('Updating %s...') % bfn
+                        self.session.openWithCallback(self.OkbuttonConfirmed, MessageBox, _("Do you want to update '%s' file?") % bfn, MessageBox.TYPE_YESNO, default = False)
                     else:
-                        self.session.openWithCallback(self.OkbuttonConfirmed,MessageBox, _("Do you want to create '%s' file?") % bfn, MessageBox.TYPE_YESNO, default = True)
+                        self.cmdTitle = _('Creating %s...') % bfn
+                        self.session.openWithCallback(self.OkbuttonConfirmed, MessageBox, _("Do you want to create '%s' file?") % bfn, MessageBox.TYPE_YESNO, default = True)
         except Exception as e:
             self.DBGlog('%s' % str(e))
     
@@ -183,15 +214,29 @@ class StreamlinkConfiguration(Screen, ConfigListScreen):
         self["config"].list[curIndex][1].value = ret
 
     def OkbuttonConfirmed(self, ret = False):
-        if ret == True:
-            cmd = '/usr/bin/python /usr/lib/enigma2/python/Plugins/Extensions/StreamlinkConfig/plugins/%s %s %s %s %s' % (self.doAction[0], self.doAction[1], self.doAction[2], self.doAction[3], config.plugins.streamlinksrv.PortNumber.value)
-            self.DBGlog('%s' % cmd)
-            status = os.system(cmd)
-            self.DBGlog('%s' % status)
-            if status == 0:
-                  self.session.openWithCallback(self.OkbuttonEnd,MessageBox, _("Action done properly"))
+        if ret:
+            if os.path.exists("/usr/lib/enigma2/python/Plugins/SystemPlugins/ServiceApp/serviceapp.so"):
+                choicesList = [("gstreamer (root 4097)","4097"),("ServiceApp gstreamer (root 5001)","5001"), ("ServiceApp ffmpeg (root 5002)","5002"),("Hardware (root 1)","1")]
             else:
-                  self.session.openWithCallback(self.OkbuttonEnd,MessageBox, _("Error running script, check log."))
-              
-    def OkbuttonEnd(self, ret = False):
-        pass
+                choicesList = [("gstreamer (root 4097)","4097"),("Hardware (root 1)","1"),(_("ServiceApp not installed!"), None)]
+            self.session.openWithCallback(self.SelectedFramework, ChoiceBox, title = _("Select Multiframework"), list = choicesList)
+
+    def SelectedFramework(self, ret):
+        if not ret or ret == "None":
+            ret = (None,'4097')
+        cmd = '/usr/bin/python /usr/lib/enigma2/python/Plugins/Extensions/StreamlinkConfig/plugins/%s %s %s %s %s %s' % (self.doAction[0], self.doAction[1], self.doAction[2], self.doAction[3],
+                                                                                                                         config.plugins.streamlinksrv.PortNumber.value, ret[1]
+                                                                                                                         )
+        self.DBGlog('%s' % cmd)
+        self.session.openWithCallback(self.reloadBouquets ,Console, title = self.cmdTitle, cmdlist = [ cmd ])
+        #status = os.system(cmd)
+        #self.DBGlog('%s' % status)
+        #if status == 0:
+        #    self.session.openWithCallback(self.doNothing,MessageBox, _("Action done properly"), MessageBox.TYPE_INFO, timeout = 5)
+        #else:
+        #    self.session.openWithCallback(self.doNothing,MessageBox, _("Error running script, check log."), MessageBox.TYPE_INFO, timeout = 5)
+    def reloadBouquets(self, ret = False):
+        from enigma import eDVBDB
+        eDVBDB.getInstance().reloadBouquets()
+        self.session.openWithCallback(self.doNothing,MessageBox, _("Bouquets has been reloaded"), MessageBox.TYPE_INFO, timeout = 5)
+        
