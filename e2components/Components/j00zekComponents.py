@@ -6,6 +6,9 @@ append2file=False
 myDEBUG='/tmp/j00zekComponents.log'
 imageType=None
 
+def clearCache():
+    with open("/proc/sys/vm/drop_caches", "w") as f: f.write("1\n")
+
 def getImageType():
     return imageType
 
