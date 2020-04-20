@@ -1015,8 +1015,8 @@ options="movetype=running,startpoint=0,direction=left,steptime=70,repeat=0,start
 <!-- EPG -->
 <screen name="EPGSelection_summary" position="0,0" size="800,480" id="1">
 <ePixmap pixmap="HomarLCDskins/Homar/Homar_1.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
-<widget source="parent.Service" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated" position="100,10" size="580,246" zPosition="5" transparent="1" alphatest="blend" />
-<widget source="parent.Service" render="j00zekPicons" picontype="zzpicon" position="100,10" size="580,246" zPosition="4" transparent="1" alphatest="blend">
+<widget source="parent.Service" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated" position="100,0" size="580,246" zPosition="5" transparent="1" alphatest="blend" />
+<widget source="parent.Service" render="j00zekPicons" picontype="zzpicon" position="100,0" size="580,246" zPosition="4" transparent="1" alphatest="blend">
 <convert type="j00zekModServiceName2">Reference</convert>
 </widget>
 <widget source="parent.Service" render="j00zekModRunningText" 
@@ -1212,6 +1212,19 @@ options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,start
   <widget source="entry" render="Label" position="10,190" size="770,230" font="VFD;68" transparent="1" foregroundColor="#ffff00" halign="center" valign="center" />
 		</screen>
 
+<!-- Airly EU -->
+<screen name="AirlyLCD" position="0,0" size="800,480" >
+<ePixmap pixmap="HomarLCDskins/Homar/Homar_1.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
+<widget size="310,190" position="450,70" zPosition="3" noWrap="1" valign="center" halign="center" font="VFD;100"  transparent="1" render="Label" source="global.CurrentTime">
+<convert type="ClockToText">Format:%H:%M</convert>
+</widget>
+<widget size="150,50" position="530,215" zPosition="10" render="Pixmap" source="session.RecordState" alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Airly/gfx/lcd/ico_rec.png"><convert type="ConfigEntryTest">config.usage.blinking_rec_symbol_during_recording,True,CheckSourceBoolean</convert>
+<convert type="ConditionalShowHide">Blink</convert>
+</widget>
+<ePixmap size="190,180" position="155,70" zPosition="3" alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Airly/gfx/lcd/pl.png"/>
+<ePixmap size="290,180" position="15,320" zPosition="3" alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Airly/plugin.png"/>
+<widget size="740,70" position="30,340" name="version" zPosition="3" valign="center" halign="center" font="VFD;50" transparent="1"/>
+</screen>
 
 </skin>
 

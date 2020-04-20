@@ -159,6 +159,22 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
   </widget>
 </screen>
 
+<!-- EMC Hauptmenü -->
+<screen name="EMCSelectionSummary" position="0,0" size="480,320" id="1">
+   <ePixmap pixmap="HomarLCDskins/Homar_480x320/kino.png" position="7,7" size="480,320" zPosition="-1" alphatest="blend" />
+<widget source="session.CurrentService" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated_1" position="33,7" size="420,227" zPosition="5" transparent="1" alphatest="blend" />
+<widget render="j00zekModRunningText" source="parent.Service" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=0,startdelay=6000,wrap" foregroundColor="#111111" font="VFD;48" position="33,7" size="420,227" halign="center" valign="center" transparent="1">
+    <convert type="j00zekModServiceName2">Name</convert>
+  </widget>
+<widget source="parent.Service" render="Label" position="40,260" size="300,58" font="VFD;42" transparent="1" halign="left" valign="center">
+		<convert type="MovieInfo">FileSize</convert>
+		</widget>
+  <widget source="parent.Service" render="Label" position="290,260" size="160,58" font="VFD;42" transparent="1"  halign="right" valign="center">
+    <convert type="ServiceTime">Duration</convert>
+    <convert type="ClockToText">AsLength</convert>
+  </widget>
+</screen>		
+
  <!-- LCD screen IPTVExtMoviePlayerSummary -->
  <screen name="IPTVExtMoviePlayerSummary" position="0,0" size="480,320">
  <ePixmap pixmap="HomarLCDskins/Homar_480x320/Homar_4.png" position="0,0" size="480,320" zPosition="-1" alphatest="blend" />

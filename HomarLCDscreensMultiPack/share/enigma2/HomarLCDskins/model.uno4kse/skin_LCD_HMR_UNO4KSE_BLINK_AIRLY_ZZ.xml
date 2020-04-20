@@ -56,19 +56,12 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
   <convert type="RemainingToText">InMinutes</convert>
   </widget>
 <ePixmap pixmap="HomarLCDskins/weather/thermo.png" position="130,30" size="33,100" zPosition="3" transparent="1" alphatest="blend" />
-
-
 <widget position="285,20" size="105,105" source="global.CurrentTime" render="j00zekABTCAirlyPixmap" alphatest="blend" transparent="1" zPosition="2">
         <convert type="j00zekModABTCAirlyWidget">indexBackPNG</convert>
     </widget>
     <widget position="285,21" size="110,110" source="global.CurrentTime" render="Label" font="VFD3; 48" halign="center" valign="center" noWrap="1" transparent="1" zPosition="2">
         <convert type="j00zekModABTCAirlyWidget">caqi</convert>
     </widget>
-
-
-
-
-
   <widget source="session.CurrentService" render="Pixmap" pixmap="HomarLCDskins/Homar_UNO4KSE/VTI.png" position="320,20" size="80,20" zPosition="4" alphatest="blend">
   <convert type="ConfigEntryTest">config.usage.update_available,True</convert>
   <convert type="ConditionalShowHide">Blink</convert>
