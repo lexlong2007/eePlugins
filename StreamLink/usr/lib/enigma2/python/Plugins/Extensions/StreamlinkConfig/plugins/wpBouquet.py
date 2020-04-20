@@ -14,8 +14,13 @@ from wpConfig import data
 from wpConfig import getCookie, saveCookie
 
 def _generate_E2bouquet():
+    def doLog(txt, append = 'a' ):
+        print txt
+        open("/tmp/wpBouquet.log", append).write(txt + '\n')
+      
+    doLog('', 'w')
     if file_name == '':
-        print 'Ustaw nazwę pliku docelowego!'
+        doLog('Ustaw nazwę pliku docelowego!')
         return
 
     #login
@@ -23,7 +28,7 @@ def _generate_E2bouquet():
     if not StoredCookie:
         StoredCookie = _login()
         if not StoredCookie:
-            print 'Nieudane logowanie. Sprawdź login i hasło w ustawieniach wtyczki.'
+            doLog('Nieudane logowanie. Sprawdź login i hasło w ustawieniach wtyczki.')
             return
 
     #get channels list
@@ -38,10 +43,11 @@ def _generate_E2bouquet():
     channelsList = response.get('data', [])
 
     #generate bouquet
-    from channelsMappings import name2serviceDict
+    from channelsMappings import name2serviceDict, name2service4wpDict, name2nameDict
     from datetime import date
 
-    print 'Generuje bukiet dla %s ...' % frameWork
+    doLog('Generuje bukiet dla %s ...' % frameWork)
+    open("/tmp/wpBouquet.log", "a").write('Generuje bukiet dla %s ...\n' % frameWork)
     data = '#NAME PILOT.WP.PL aktualizacja %s\n' % date.today().strftime("%d-%m-%Y")
     for item in channelsList:
         #print item
@@ -49,9 +55,14 @@ def _generate_E2bouquet():
             id = item.get('id', None)
             title = item.get('name', '').strip()
             lcaseTitle = title.lower().replace(' ','')
-            ServiceID = name2serviceDict.get(lcaseTitle , '%s:0:1:0:0:0:0:0:0:0' % frameWork)
-            if ServiceID.startswith('%s:0:1:0:0:0:0:0:0:0' % frameWork):
-                print "\t- Brak mapowania referencji kanału  %s (%s) dla EPG" % (title, lcaseTitle)
+            standardReference = '%s:0:1:0:0:0:0:0:0:0' % frameWork
+            #mapowanie bezpośrednie zdefiniowane dla wp
+            ServiceID = name2service4wpDict.get(title , standardReference)
+            if ServiceID.startswith(standardReference):
+                ServiceID = name2serviceDict.get(name2nameDict.get(lcaseTitle, lcaseTitle) , standardReference)
+            #mapowanie po zbalezionych kanalach w bukietach
+                if ServiceID.startswith(standardReference):
+                    doLog("\t- Brak mapowania referencji kanału  %s (%s) dla EPG" % (title, lcaseTitle))
             if not ServiceID.startswith(frameWork):
                 ServiceIDlist = ServiceID.split(':')
                 ServiceIDlist[0] = frameWork
@@ -63,10 +74,10 @@ def _generate_E2bouquet():
         f.write(data.encode('utf-8'))
         f.close()
 
-    print 'Wygenerowano bukiet do pliku %s' % file_name
+    doLog('Wygenerowano bukiet do pliku %s' % file_name)
     f = open('/etc/enigma2/bouquets.tv','r').read()
     if not os.path.basename(file_name) in f:
-        print 'Dodano bukiet do listy'
+        doLog('Dodano bukiet do listy')
         if not f.endswith('\n'):
             f += '\n'
         f += '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "%s" ORDER BY bouquet\n' % os.path.basename(file_name)
