@@ -154,7 +154,7 @@ def homarLCDskins( skinlist = [] , tunerName = getTunerName() ):
     return skinlist
 
 def processInfo(myInfoFile):
-    if FullDBG == True: printDEBUG('processInfo(%s)' % myInfoFile)
+    if DBG == True: printDEBUG('processInfo(%s)' % myInfoFile)
     info = ''
     hasLangDef = False
     if path.exists(myInfoFile):
@@ -567,6 +567,9 @@ class UserSkin_Config(Screen, ConfigListScreen):
             #if DBG == True: printDEBUG('\t f="%s"' % inf)
             if path.exists(inf):
                 self["PreviewInfo"].setText(processInfo(inf))
+                break
+            else:
+                self["PreviewInfo"].setText('')
         
     
     def UpdatePreviewPicture(self, PreviewFileName):
@@ -917,12 +920,19 @@ class UserSkin_Config(Screen, ConfigListScreen):
             clearCache()
             if os.path.islink('/usr/share/enigma2/skin_box.xml'):
                 os.system('rm -f /usr/share/enigma2/skin_box.xml' )
+            if os.path.isfile('/usr/share/enigma2/skin_LCD_UserSkin.xml'):
+                os.system('rm -f /usr/share/enigma2/skin_LCD_UserSkin.xml' )
             if config.plugins.UserSkin.LCDmode.value in ("HomarLCDskinsFromOPKG"):
                 os.system('opkg update;opkg install enigma2-plugin-skins--j00zeks-homar;sync')
             if config.plugins.UserSkin.LCDmode.value not in ('LCDLinux',"system", "HomarLCDskinsFromOPKG"):
             ##### VTI style #####
                 if self.LCDconfigKey == 'primary_vfdskin':
-                    config.skin.primary_vfdskin.value = config.plugins.UserSkin.LCDmode.value
+                    if os.path.exists(config.plugins.UserSkin.LCDcolors.value):
+                        if DBG: printDEBUG("primary_vfdskin (VTI) with colors mode")
+                        self.generateLCDskin('/usr/share/enigma2/%s' % config.plugins.UserSkin.LCDmode.value , '/usr/share/enigma2/skin_LCD_UserSkin.xml')
+                        config.skin.primary_vfdskin.value = 'skin_LCD_UserSkin.xml'
+                    else:
+                        config.skin.primary_vfdskin.value = config.plugins.UserSkin.LCDmode.value
                     config.skin.primary_vfdskin.save()
                     configfile.save()
                     printDEBUG("Set config.skin.primary_vfdskin.value='%s'" % config.skin.primary_vfdskin.value)
@@ -940,19 +950,15 @@ class UserSkin_Config(Screen, ConfigListScreen):
                     self.generateLCDskin('/usr/share/enigma2/%s' % config.plugins.UserSkin.LCDmode.value , '/usr/share/enigma2/skin_LCD_UserSkin.xml')
                     os.system('ln -sf /usr/share/enigma2/skin_LCD_UserSkin.xml /usr/share/enigma2/skin_display.xml' )
                     printDEBUG('linking /usr/share/enigma2/%s to /usr/share/enigma2/skin_display.xml' % (config.plugins.UserSkin.LCDmode.value))
-            ##### PLi style using skin_display.xml #####
+            ##### PLi style using skin_box.xml #####
                 elif self.LCDconfigKey == 'skin_box.xml': #openPLi 2nd style
                     self.generateLCDskin('/usr/share/enigma2/%s' % config.plugins.UserSkin.LCDmode.value , '/usr/share/enigma2/skin_LCD_UserSkin.xml')
                     os.system('ln -sf /usr/share/enigma2/skin_LCD_UserSkin.xml /usr/share/enigma2/skin_box.xml' )
                     printDEBUG('linking /usr/share/enigma2/%s to /usr/share/enigma2/skin_box.xml' % (config.plugins.UserSkin.LCDmode.value))
             ##### ALL disabled #####
             else:
-                if os.path.islink('/usr/share/enigma2/skin_box.xml'):
-                    os.system('rm -f /usr/share/enigma2/skin_box.xml' )
                 if os.path.isfile('/usr/share/enigma2/skin_display.xml.org'):
                     os.system('cp -f /usr/share/enigma2/skin_display.xml.org /usr/share/enigma2/skin_display.xml')
-                if os.path.isfile('/usr/share/enigma2/skin_LCD_UserSkin.xml'):
-                    os.system('rm -f /usr/share/enigma2/skin_LCD_UserSkin.xml' )
                 
             #checking if all scripts are in the system
             if FullDBG: printDEBUG("########################### Final User Skin\n%s\n##############################################\n" % user_skin)
@@ -962,6 +968,32 @@ class UserSkin_Config(Screen, ConfigListScreen):
             self.checkFontColor(user_skin)
 
     def generateLCDskin(self, inFile, outFile): #ATV/PLi does not work when id="1" in display skin.
+        colors2append = ''
+        colorsMarker = False
+        colorsEndMarker = False
+        if os.path.exists(config.plugins.UserSkin.LCDcolors.value):
+           #sprawdzenie czy jest definicja kolorow
+           with open(inFile, 'r') as fr:
+              while True:
+                  fline = fr.readline()
+                  if not fline:
+                      break
+                  if '<colors>' in fline:
+                      colorsMarker = True
+                  elif colorsMarker and '</colors>' in fline:
+                      colorsEndMarker = True
+                      break
+              fr.close()
+           if colorsEndMarker:
+              with open(config.plugins.UserSkin.LCDcolors.value, 'r') as fr:
+                  while True:
+                      fline = fr.readline()
+                      if not fline:
+                          break
+                      if '<color name=' in fline:
+                          colors2append += fline
+                  fr.close()
+               
         with open(inFile, 'r') as fr:
             fw = open(outFile , 'w')
             #first line can contain something which has to be first ;)
@@ -977,10 +1009,13 @@ class UserSkin_Config(Screen, ConfigListScreen):
                     fline = fr.readline()
                     if not fline:
                         break
-                    if 'screen name=' in fline:
-                        fline = fline.replace('id="1"','')
-                    if 'name="vti' in fline.lower(): #ATV has some strange workarrounds for VTI
-                        fline = fline.replace('name="','name="fake')
+                    if colorsMarker and '</colors>' in fline:
+                        fline = colors2append + fline
+                    elif not isImageType('vti'):
+                        if 'screen name=' in fline:
+                            fline = fline.replace('id="1"','')
+                        if 'name="vti' in fline.lower(): #ATV has some strange workarrounds for VTI
+                            fline = fline.replace('name="','name="fake')
                     fw.write(fline)
             fr.close()
             fw.close()
@@ -1102,7 +1137,6 @@ class TreeUserSkinScreens(Screen):
     <widget source="key_blue" render="Label" position="954,635" size="260,25" zPosition="1" font="Regular;20" halign="left" foregroundColor="#00ffffff" backgroundColor="#202673ec" transparent="1" />
   </screen>
 """
-
     EditScreen = False
     DeleteScreen = False
     
