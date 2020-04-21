@@ -133,13 +133,13 @@ options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,start
 <screen name="EMCMoviePlayerSummary" position="0,0" size="480,320" id="1">
   <ePixmap pixmap="HomarLCDskins/Homar_480x320/Homar_4.png" position="0,0" size="480,320" zPosition="-1" alphatest="blend" />
   <widget source="session.CurrentService" render="Progress"
-pixmap="HomarLCDskins/Homar_480x320/Homar_7.png" position="110,275" size="210,34" borderWidth="6" backgroundColor="#00CFFF"> 
+pixmap="HomarLCDskins/Homar_480x320/Homar_7.png" position="110,275" size="260,34" borderWidth="6" backgroundColor="#00CFFF"> 
     <convert type="ServicePosition">Position</convert>
   </widget>
-  <widget source="session.CurrentService" render="Label" position="320,260" size="155,58" font="VFD;44" transparent="1" halign="right" valign="center">
-    <convert type="ServicePosition">Remaining,Negate,ShowHours</convert>
+  <widget source="session.CurrentService" render="Label" position="328,260" size="145,58" font="VFD;46" transparent="1" halign="right" valign="top">
+    <convert type="ServicePosition">Remaining,Negate,ShowHours,ShowNoSeconds</convert>
   </widget>
-<widget source="session.CurrentService" render="Label" position="20,260" size="90,58" font="VFD;44" transparent="1" halign="left" valign="center">
+<widget source="session.CurrentService" render="Label" position="20,260" size="90,58" font="VFD;46" transparent="1" halign="left" valign="top">
     <convert type="ServicePosition">Position,ShowNoSeconds,ShowHours</convert>
   </widget>
 <widget source="session.RecordState" render="Pixmap" pixmap="HomarLCDskins/Homar_480x320/Homar_2.png" position="370,75" size="80,20" zPosition="3" alphatest="blend">
@@ -177,11 +177,13 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
   <widget source="global.CurrentTime" render="Label" position="260,15" size="200,96" font="VFD;48" transparent="1" halign="right" >
     <convert type="ClockToText">Format:%H:%M</convert>
   </widget>
-  <widget source="session.CurrentService" render="Cover" position="0,0" size="310,210" zPosition="5" transparent="0" alphatest="off" />
-  <widget source="session.CurrentService" render="j00zekPicons" picontype="zzpicon" position="10,50" size="300,140" zPosition="4" transparent="1" alphatest="blend">
+  <ePixmap pixmap="HomarLCDskins/Homar_480x320/player2.png" position="10,0" size="140,210"  zPosition="1" alphatest="blend" />
+  <widget source="session.CurrentService" render="Cover" position="0,0" size="320,210" zPosition="5" transparent="1" alphatest="off" />
+  <widget source="session.CurrentService" render="j00zekPicons" picontype="zzpicon" position="150,65" size="170,113" zPosition="4" transparent="1" alphatest="blend">
   <convert type="MovieBarInfo">Reference</convert>
   </widget>
 </screen>
+
 
 <!-- EMC Hauptmenü -->
 <screen name="EMCSelectionSummary" position="0,0" size="480,320" id="1">
@@ -250,13 +252,13 @@ pixmap="HomarLCDskins/Homar_480x320/Homar_7.png" position="120,268" size="205,34
 <screen name="InfoBarMoviePlayerSummary" position="0,0" size="480,320" id="1">
   <ePixmap pixmap="HomarLCDskins/Homar_480x320/Homar_4.png" position="0,0" size="480,320" zPosition="-1" alphatest="blend" />
   <widget source="session.CurrentService" render="Progress"
-pixmap="HomarLCDskins/Homar_480x320/Homar_7.png" position="110,275" size="210,34" borderWidth="6" backgroundColor="#00CFFF"> 
+pixmap="HomarLCDskins/Homar_480x320/Homar_7.png" position="110,275" size="260,34" borderWidth="6" backgroundColor="#00CFFF"> 
     <convert type="ServicePosition">Position</convert>
   </widget>
-  <widget source="session.CurrentService" render="Label" position="320,260" size="155,58" font="VFD;44" transparent="1" halign="right" valign="center">
-    <convert type="ServicePosition">Remaining,Negate,ShowHours</convert>
+  <widget source="session.CurrentService" render="Label" position="328,260" size="145,58" font="VFD;46" transparent="1" halign="right" valign="top">
+    <convert type="ServicePosition">Remaining,Negate,ShowHours,ShowNoSeconds</convert>
   </widget>
-<widget source="session.CurrentService" render="Label" position="20,260" size="90,58" font="VFD;44" transparent="1" halign="left" valign="center">
+<widget source="session.CurrentService" render="Label" position="20,260" size="90,58" font="VFD;46" transparent="1" halign="left" valign="top">
     <convert type="ServicePosition">Position,ShowNoSeconds,ShowHours</convert>
   </widget>
 <widget source="session.RecordState" render="Pixmap" pixmap="HomarLCDskins/Homar_480x320/Homar_2.png" position="370,75" size="80,20" zPosition="3" alphatest="blend">
@@ -294,11 +296,13 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
   <widget source="global.CurrentTime" render="Label" position="260,15" size="200,96" font="VFD;48" transparent="1" halign="right" >
     <convert type="ClockToText">Format:%H:%M</convert>
   </widget>
-  <widget source="session.CurrentService" render="Cover" position="0,0" size="310,210" zPosition="5" transparent="0" alphatest="off" />
-  <widget source="session.CurrentService" render="j00zekPicons" picontype="zzpicon" position="10,50" size="300,140" zPosition="4" transparent="1" alphatest="blend">
+  <ePixmap pixmap="HomarLCDskins/Homar_480x320/player2.png" position="10,0" size="140,210"  zPosition="1" alphatest="blend" />
+  <widget source="session.CurrentService" render="Cover" position="0,0" size="320,210" zPosition="5" transparent="1" alphatest="off" />
+  <widget source="session.CurrentService" render="j00zekPicons" picontype="zzpicon" position="150,65" size="170,113" zPosition="4" transparent="1" alphatest="blend">
   <convert type="MovieBarInfo">Reference</convert>
   </widget>
 </screen>
+
 
 <!-- MovieSelection_summary -->
 <screen name="MovieSelection_summary" position="0,0" size="480,320" id="1">
@@ -335,13 +339,13 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
 <screen name="DVDSummary" position="0,0" size="480,320" id="1">
 <ePixmap pixmap="HomarLCDskins/Homar_480x320/Homar_4.png" position="0,0" size="480,320" zPosition="-1" alphatest="blend" />
   <widget source="session.CurrentService" render="Progress"
-pixmap="HomarLCDskins/Homar_480x320/Homar_7.png" position="110,275" size="210,34" borderWidth="6" backgroundColor="#00CFFF"> 
+pixmap="HomarLCDskins/Homar_480x320/Homar_7.png" position="110,275" size="260,34" borderWidth="6" backgroundColor="#00CFFF"> 
     <convert type="ServicePosition">Position</convert>
   </widget>
-  <widget source="session.CurrentService" render="Label" position="320,260" size="155,58" font="VFD;44" transparent="1" halign="right" valign="center">
-    <convert type="ServicePosition">Remaining,Negate,ShowHours</convert>
+  <widget source="session.CurrentService" render="Label" position="328,260" size="145,58" font="VFD;46" transparent="1" halign="right" valign="top">
+    <convert type="ServicePosition">Remaining,Negate,ShowHours,ShowNoSeconds</convert>
   </widget>
-<widget source="session.CurrentService" render="Label" position="20,260" size="90,58" font="VFD;44" transparent="1" halign="left" valign="center">
+<widget source="session.CurrentService" render="Label" position="20,260" size="90,58" font="VFD;46" transparent="1" halign="left" valign="top">
     <convert type="ServicePosition">Position,ShowNoSeconds,ShowHours</convert>
   </widget>
 <widget source="session.RecordState" render="Pixmap" pixmap="HomarLCDskins/Homar_480x320/Homar_2.png" position="370,75" size="80,20" zPosition="3" alphatest="blend">
@@ -379,8 +383,9 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
   <widget source="global.CurrentTime" render="Label" position="260,15" size="200,96" font="VFD;48" transparent="1" halign="right" >
     <convert type="ClockToText">Format:%H:%M</convert>
   </widget>
-  <widget source="session.CurrentService" render="Cover" position="0,0" size="310,210" zPosition="5" transparent="0" alphatest="off" />
-  <widget source="session.CurrentService" render="j00zekPicons" picontype="zzpicon" position="10,50" size="300,140" zPosition="4" transparent="1" alphatest="blend">
+  <ePixmap pixmap="HomarLCDskins/Homar_480x320/player2.png" position="10,0" size="140,210"  zPosition="1" alphatest="blend" />
+  <widget source="session.CurrentService" render="Cover" position="0,0" size="320,210" zPosition="5" transparent="1" alphatest="off" />
+  <widget source="session.CurrentService" render="j00zekPicons" picontype="zzpicon" position="150,65" size="170,113" zPosition="4" transparent="1" alphatest="blend">
   <convert type="MovieBarInfo">Reference</convert>
   </widget>
 </screen>

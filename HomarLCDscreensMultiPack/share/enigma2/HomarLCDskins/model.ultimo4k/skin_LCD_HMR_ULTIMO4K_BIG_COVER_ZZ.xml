@@ -1216,6 +1216,12 @@ options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,start
 <ePixmap size="190,180" position="155,70" zPosition="3" alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Airly/gfx/lcd/pl.png"/>
 <ePixmap size="290,180" position="15,320" zPosition="3" alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Airly/plugin.png"/>
 <widget size="740,70" position="30,340" name="version" zPosition="3" valign="center" halign="center" font="VFD;50" transparent="1"/>
+<widget position="520,230" size="205,205" source="global.CurrentTime" render="j00zekABTCAirlyPixmap" alphatest="blend" transparent="1" zPosition="2">
+        <convert type="j00zekModABTCAirlyWidget">indexBackPNG</convert>
+    </widget>
+    <widget position="520,231" size="210,210" source="global.CurrentTime" render="Label" font="VFD; 100" halign="center" valign="center" noWrap="1" transparent="1" zPosition="2">
+        <convert type="j00zekModABTCAirlyWidget">caqi</convert>
+    </widget>
 </screen>
 
 </skin>
