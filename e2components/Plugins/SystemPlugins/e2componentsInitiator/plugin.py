@@ -18,9 +18,11 @@ def sessionstart(session, **kwargs):
     try:
         #from Components.Sources.mySource import mySource
         #session.screen['mySource'] = mySource()
+        from Components.Sources.StaticText import StaticText
+        session.screen['j00zekStaticSource'] = StaticText()
         print "e2components config initiated"
     except Exception, e:
-        print "Exception: %s" % str(e)
+        print "Exception for e2components: %s" % str(e)
 
 def Plugins(**kwargs):
     return [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart)]
