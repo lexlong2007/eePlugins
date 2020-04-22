@@ -1,3 +1,2 @@
 Zmiana kolorystyki komponentów:
-c(#ccff00) Czas startu zdarzenia
-c(#66ccff) Tytuł zdarzenia
+c(#66ccff) zmiana koloru żółtego na kolor napisów

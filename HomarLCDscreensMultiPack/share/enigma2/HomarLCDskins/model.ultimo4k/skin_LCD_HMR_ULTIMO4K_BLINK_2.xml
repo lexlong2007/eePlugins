@@ -8,6 +8,14 @@
     <font filename="/usr/share/enigma2/HomarLCDskins/fonts/meteocons.ttf" name="Meteo" scale="100"/>
     <font filename="/usr/share/enigma2/HomarLCDskins/fonts/nmsbd.ttf" name="VFD3" scale="90"/>
 </fonts>
+<colors>
+    <color name="HMRstartTime" value="#ffff66"/>
+    <color name="HMRname" value="#ffff00"/>
+    <color name="HMRendTime" value="#ff3333"/>
+
+
+
+</colors>
 <windowstyle type="skinned" id="1">
     <color name="Background" color="#000000" />
     <color name="LabelForeground" color="#ffffff" />
@@ -24,14 +32,14 @@
 </windowstyle>
 
 <screen name="LCDWetterStandbyTemplate">
- <widget source="session.j00zekMSNWeather"  render="Label" position="15,248" size="390,75" font="VFD3;75" halign="left" valign="center" foregroundColor="#ffff00"   noWrap="1" transparent="1" zPosition="5">
+ <widget source="session.j00zekMSNWeather"  render="Label" position="15,248" size="390,75" font="VFD3;75" halign="left" valign="center" foregroundColor="HMRname"   noWrap="1" transparent="1" zPosition="5">
  		<convert type="j00zekMSNWeather">city</convert>
  </widget> 
  <widget source="session.j00zekMSNWeather" render="j00zekMSNWeatherPixmap" position="410,240" size="145,145" transparent="1"
 alphatest="blend" zPosition="1" >
     <convert type="j00zekMSNWeather">weathericon,current</convert>
   </widget>
- <widget foregroundColor="#ffff00" font="VFD3;100" render="Label" halign="right" valign="center" noWrap="1" transparent="1" source="session.j00zekMSNWeather" position="550,252" size="230,90" zPosition="5">
+ <widget foregroundColor="HMRname" font="VFD3;100" render="Label" halign="right" valign="center" noWrap="1" transparent="1" source="session.j00zekMSNWeather" position="550,252" size="230,90" zPosition="5">
  		<convert type="j00zekMSNWeather">temperature_current</convert>
  </widget>
 <widget font="VFD3;63" render="Label" halign="right" valign="center" noWrap="1" transparent="1" source="session.j00zekMSNWeather" position="548,399" size="230,90" zPosition="5">
@@ -60,7 +68,7 @@ pixmap="HomarLCDskins/Homar/Homar_7.png" position="170,421" size="350,40" border
       <convert type="ConditionalShowHide">Blink</convert>
      </widget>
     <widget source="session.CurrentService" render="j00zekModRunningText" 
-options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,startdelay=200,always=0,oneshot=0" noWrap="1" position="16,305" size="740,100" font="VFD;85" transparent="1" halign="left" valign="top" foregroundColor="#ffff00" >
+options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,startdelay=200,always=0,oneshot=0" noWrap="1" position="16,305" size="740,100" font="VFD;85" transparent="1" halign="left" valign="top" foregroundColor="HMRname" >
     <convert type="j00zekModServiceName2">Name</convert>
   </widget>
      <widget source="session.CurrentService" render="Pixmap" pixmap="HomarLCDskins/Homar/SD.png" position="620,150" zPosition="1" size="130,40" alphatest="blend">
@@ -107,7 +115,7 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
     <convert type="j00zekModServiceName2">Reference</convert>
   </widget>
   <widget source="session.Event_Now" render="j00zekModRunningText" 
-options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,startdelay=200,always=0,oneshot=0" noWrap="1" position="16,308" size="740,96" font="VFD;80" transparent="1" halign="left" valign="top" foregroundColor="#ffff00">
+options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,startdelay=200,always=0,oneshot=0" noWrap="1" position="16,308" size="740,96" font="VFD;80" transparent="1" halign="left" valign="top" foregroundColor="HMRname">
     <convert type="j00zekModEventName">Name</convert>
   </widget>
   <widget source="session.Event_Now" render="Progress" pixmap="HomarLCDskins/Homar/Homar_3.png" position="230,411" size="350,50" borderWidth="6" backgroundColor="#00CFFF">
@@ -125,7 +133,7 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
 <ePixmap pixmap="HomarLCDskins/weather/thermo.png" position="560,60" size="33,100" zPosition="3" transparent="1" alphatest="blend" />
 <ePixmap pixmap="HomarLCDskins/weather/thermo2.png" position="340,60" size="33,100" zPosition="3" transparent="1" alphatest="blend" />
 <widget source="session.j00zekMSNWeather" render="j00zekModRunningText" 
-options="movetype=running,startpoint=0,direction=left,steptime=70,repeat=0,startdelay=2000,always=0,oneshot=0" noWrap="1"  position="375,215" size="210,72" font="VFD;62" transparent="1" halign="left" valign="center" foregroundColor="#ffff00"  zPosition="3">
+options="movetype=running,startpoint=0,direction=left,steptime=70,repeat=0,startdelay=2000,always=0,oneshot=0" noWrap="1"  position="375,215" size="210,72" font="VFD;62" transparent="1" halign="left" valign="center" foregroundColor="HMRname"  zPosition="3">
   <convert type="j00zekMSNWeather">temperature_text,current</convert>
 </widget>
 <widget source="session.j00zekMSNWeather"  render="Label" position="395,80" size="170,75" font="VFD;75" zPosition="1" halign="left" valign="top" foregroundColor="#00CFFF" transparent="1" noWrap="1">
@@ -170,11 +178,11 @@ options="movetype=running,startpoint=0,direction=left,steptime=70,repeat=0,start
   <convert type="j00zekModServiceName2">Reference</convert>
 </widget>
 <widget source="parent.ServiceEvent" render="j00zekModRunningText" 
-options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,startdelay=800,always=0,oneshot=0" noWrap="1" position="16,240" size="261,70" font="VFD;52" transparent="1" halign="left" valign="center" foregroundColor="#ffff00" >
+options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,startdelay=800,always=0,oneshot=0" noWrap="1" position="16,240" size="261,70" font="VFD;52" transparent="1" halign="left" valign="center" foregroundColor="HMRname" >
   <convert type="j00zekModServiceName2">Name</convert>
 </widget>
 <widget source="parent.ServiceEvent" render="j00zekModRunningText" 
-options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,startdelay=800,always=0,oneshot=0" noWrap="1" position="16,308" size="740,96" font="VFD;80" transparent="1" halign="left" valign="top" foregroundColor="#ffff00" >
+options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,startdelay=800,always=0,oneshot=0" noWrap="1" position="16,308" size="740,96" font="VFD;80" transparent="1" halign="left" valign="top" foregroundColor="HMRname" >
   <convert type="j00zekModEventName">Name</convert>
 </widget>
 <widget source="parent.ServiceEvent" render="Label" noWrap="1" position="20,390" size="230,88" font="VFD;78" transparent="1" halign="left" valign="center" foregroundColor="#ffff66">
@@ -234,10 +242,10 @@ options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,start
 <!-- EMC Hauptmenü -->
 <screen id="1" name="EMCSelectionSummary" position="0,0" size="800,480">
    <ePixmap pixmap="HomarLCDskins/Homar/kino.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
-<widget source="global.CurrentTime" render="Label" position="20,11" size="450,75" font="RegularLCD;66" transparent="1" halign="center" valign="center" foregroundColor="#ffff00" >
+<widget source="global.CurrentTime" render="Label" position="20,11" size="450,75" font="RegularLCD;66" transparent="1" halign="center" valign="center" foregroundColor="HMRname" >
   <convert type="ClockToText">Format:%a, %d.%m.%Y</convert>
   </widget>
-  <widget source="global.CurrentTime" render="Label" position="460,9" size="300,75" font="VFD;76" transparent="1" halign="right" valign="center" foregroundColor="#ffff00" >
+  <widget source="global.CurrentTime" render="Label" position="460,9" size="300,75" font="VFD;76" transparent="1" halign="right" valign="center" foregroundColor="HMRname" >
   <convert type="ClockToText">Format:%H:%M:%S</convert>
   </widget>
 <widget font="RegularLCD;52" halign="center" valign="Top" position="220,420" render="Label" size="390,120" source="parent.spacefree" transparent="1" />
@@ -263,7 +271,7 @@ options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,start
 <widget source="session.CurrentService" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated_1" position="0,0" size="800,480" zPosition="5" transparent="1" alphatest="blend" />
   <ePixmap pixmap="HomarLCDskins/Homar/Homar_1.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
 <widget name="text1" position="20,125" size="740,190" font="VFD;45" halign="left" valign="center" transparent="1" />
-  <widget source="session.CurrentService" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,startdelay=200,always=0,oneshot=0" position="16,305" size="740,100" font="VFD;85" foregroundColor="#ffff00" noWrap="1" halign="left" valign="top" transparent="1" zPosition="2">
+  <widget source="session.CurrentService" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,startdelay=200,always=0,oneshot=0" position="16,305" size="740,100" font="VFD;85" foregroundColor="HMRname" noWrap="1" halign="left" valign="top" transparent="1" zPosition="2">
     <convert type="j00zekModServiceName2">Name</convert>
   </widget>
 <widget source="session.CurrentService" render="Label" position="530,390" size="250,88" font="VFD;72" transparent="1" halign="right" valign="top">
@@ -276,7 +284,7 @@ options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,start
 pixmap="HomarLCDskins/Homar/Homar_7.png" position="180,415" size="420,40" borderWidth="6" backgroundColor="#00CFFF">
     <convert type="ServicePosition">Position</convert>
   </widget>
-<widget source="global.CurrentTime" render="Label" position="20,44" size="450,75" font="RegularLCD;66" transparent="1" halign="center" valign="center" foregroundColor="#ffff00" >
+<widget source="global.CurrentTime" render="Label" position="20,44" size="450,75" font="RegularLCD;66" transparent="1" halign="center" valign="center" foregroundColor="HMRname" >
     <convert type="ClockToText">Format:%a, %d.%m.%Y</convert>
   </widget>
 <widget source="global.CurrentTime" render="Label" position="460,36" size="300,75" font="VFD;78" transparent="1" halign="right" valign="center">
@@ -292,10 +300,10 @@ pixmap="HomarLCDskins/Homar/Homar_7.png" position="180,415" size="420,40" border
 <!-- MovieSelection_summary -->
 <screen name="MovieSelection_summary" position="0,0" size="800,480" id="1">
    <ePixmap pixmap="HomarLCDskins/Homar/kino.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
-<widget source="global.CurrentTime" render="Label" position="20,11" size="450,75" font="RegularLCD;66" transparent="1" halign="center" valign="center" foregroundColor="#ffff00" >
+<widget source="global.CurrentTime" render="Label" position="20,11" size="450,75" font="RegularLCD;66" transparent="1" halign="center" valign="center" foregroundColor="HMRname" >
     <convert type="ClockToText">Format:%a, %d.%m.%Y</convert>
   </widget>
-  <widget source="global.CurrentTime" render="Label" position="460,9" size="300,75" font="VFD;76" transparent="1" halign="right" valign="center" foregroundColor="#ffff00" >
+  <widget source="global.CurrentTime" render="Label" position="460,9" size="300,75" font="VFD;76" transparent="1" halign="right" valign="center" foregroundColor="HMRname" >
   <convert type="ClockToText">Format:%H:%M:%S</convert>
   </widget>
 <widget render="j00zekModRunningText" source="parent.Service" options="movetype=running,startpoint=0,direction=top,steptime=90,repeat=0,startdelay=6000,wrap" foregroundColor="#111111" font="VFD;56" position="165,86" size="470,270" halign="center" valign="center" transparent="1">
@@ -322,14 +330,14 @@ pixmap="HomarLCDskins/Homar/Homar_7.png" position="180,415" size="420,40" border
 <!-- AdvancedFreePlayerStartLCD -->
 <screen name="AdvancedFreePlayerStartLCD" position="0,0" size="800,480" id="1">
 <ePixmap pixmap="HomarLCDskins/Homar/Homar_1.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
-<widget source="global.CurrentTime" render="Label" position="330,20" size="450,75" font="RegularLCD;66" transparent="1" halign="center" valign="center" foregroundColor="#ffff00" >
+<widget source="global.CurrentTime" render="Label" position="330,20" size="450,75" font="RegularLCD;66" transparent="1" halign="center" valign="center" foregroundColor="HMRname" >
     <convert type="ClockToText">Format:%a, %d.%m.%Y</convert>
   </widget>
-  <widget source="global.CurrentTime" render="Label" position="390,80" size="300,75" font="VFD;76" transparent="1" halign="right" valign="center" foregroundColor="#ffff00" >
+  <widget source="global.CurrentTime" render="Label" position="390,80" size="300,75" font="VFD;76" transparent="1" halign="right" valign="center" foregroundColor="HMRname" >
   <convert type="ClockToText">Format:%H:%M:%S</convert>
   </widget>
 <widget name="text1" position="320,340"  size="460,50" font="VFD;46" transparent="1" halign="center" valign="center" foregroundColor="#05F7F3" noWrap="1"/>
-    <widget name="text2" position="320,410" size="460,40" font="VFD;38" transparent="1" halign="center" valign="center" foregroundColor="#FFFF00"/>
+    <widget name="text2" position="320,410" size="460,40" font="VFD;38" transparent="1" halign="center" valign="center" foregroundColor="HMRname"/>
     <widget name="LCDpic" position="10,10" size="321,465" zPosition="2" alphatest="blend" />
     <widget name="AFPlogo" position="360,160" size="400,160" alphatest="blend" />
 <ePixmap pixmap="HomarLCDskins/Homar/player2.png" position="10,0" size="320,480"  zPosition="1" alphatest="blend" />
@@ -340,14 +348,14 @@ pixmap="HomarLCDskins/Homar/Homar_7.png" position="180,415" size="420,40" border
 <widget source="session.CurrentService" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated_1" position="0,0" size="800,480" zPosition="5" transparent="1" alphatest="blend" />
   <ePixmap pixmap="HomarLCDskins/Homar/music.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
   <ePixmap pixmap="HomarLCDskins/Homar/shoutcast.png" position="410,300" size="354,100" zPosition="-1" alphatest="blend" />
-  <widget source="global.CurrentTime" render="Label" position="20,44" size="450,75" font="RegularLCD;66" transparent="1" halign="center" valign="center" foregroundColor="#ffff00"  >
+  <widget source="global.CurrentTime" render="Label" position="20,44" size="450,75" font="RegularLCD;66" transparent="1" halign="center" valign="center" foregroundColor="HMRname"  >
     <convert type="ClockToText">Format:%a, %d.%m.%Y</convert>
   </widget>
   <widget source="global.CurrentTime" render="Label" position="460,36" size="300,75" font="VFD;78" transparent="1" halign="right" valign="center">
   <convert type="ClockToText">Format:%H:%M:%S</convert>
   </widget>
 <widget name="text1" position="36,130" size="530,220" font="VFD;65" transparent="1" halign="left" foregroundColor="#84aaf7" valign="center"/>
-    <widget source="text2" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,startdelay=200,always=0,oneshot=0" noWrap="1" position="16,380" size="760,82" font="VFD;73" transparent="1" halign="left" valign="top" foregroundColor="#ffff00" />
+    <widget source="text2" render="j00zekModRunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,startdelay=200,always=0,oneshot=0" noWrap="1" position="16,380" size="760,82" font="VFD;73" transparent="1" halign="left" valign="top" foregroundColor="HMRname" />
 <widget name="songPic" position="0,0" zPosition="4" size="800,386" alphatest="off" />
 </screen>
 
@@ -365,9 +373,9 @@ pixmap="HomarLCDskins/Homar/Homar_7.png" position="180,415" size="420,40" border
       <convert type="ConditionalShowHide">Blink</convert>
      </widget>
     <widget source="Zeile1" render="j00zekModRunningText" 
-options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,startdelay=200,always=0,oneshot=0" noWrap="1" position="440,220" size="380,65" font="VFD;65" halign="left" valign="top" transparent="1" foregroundColor="#ffff00" />
+options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,startdelay=200,always=0,oneshot=0" noWrap="1" position="440,220" size="380,65" font="VFD;65" halign="left" valign="top" transparent="1" foregroundColor="HMRname" />
   <widget source="Zeile2" render="j00zekModRunningText" 
-options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,startdelay=200,always=0,oneshot=0" noWrap="1" position="20,380" size="760,90" font="VFD;90" valign="center" transparent="1" foregroundColor="#ffff00" />
+options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,startdelay=200,always=0,oneshot=0" noWrap="1" position="20,380" size="760,90" font="VFD;90" valign="center" transparent="1" foregroundColor="HMRname" />
   <widget name="picon" position="30,30" size="400,350" alphatest="blend" />
 </screen>
 
@@ -382,19 +390,19 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
   <widget source="session.CurrentService" render="Progress" pixmap="HomarLCDskins/Homar/Homar_7.png" position="225,411" size="340,50" borderWidth="6" backgroundColor="#00CFFF">
     <convert type="ServicePosition">Position</convert>
   </widget>
-<widget source="session.CurrentService" render="HomarRollerCharLCDLong" position="16,308" size="740,96" halign="left" noWrap="1" font="VFD;80" foregroundColor="#ffff00" zPosition="3" transparent="1">
+<widget source="session.CurrentService" render="HomarRollerCharLCDLong" position="16,308" size="740,96" halign="left" noWrap="1" font="VFD;80" foregroundColor="HMRname" zPosition="3" transparent="1">
     <convert type="j00zekModServiceName2">Name</convert>
   </widget>
-<widget source="session.CurrentService" render="Label" position="15,390" size="230,88" font="VFD;74" foregroundColor="#ffff00" transparent="1" halign="left" valign="center">
+<widget source="session.CurrentService" render="Label" position="15,390" size="230,88" font="VFD;74" foregroundColor="HMRname" transparent="1" halign="left" valign="center">
 <convert type="ServicePosition">Position</convert>
 </widget>
-<widget source="session.CurrentService" render="Label" position="545,390" size="230,88" font="VFD;74" foregroundColor="#ffff00" transparent="1" halign="right" valign="top" zPosition="3">
+<widget source="session.CurrentService" render="Label" position="545,390" size="230,88" font="VFD;74" foregroundColor="HMRname" transparent="1" halign="right" valign="top" zPosition="3">
 <convert type="ServicePosition">Length</convert>
 </widget>
-<widget name="text2" position="380,110" size="400,100" halign="left" font="VFD;45" foregroundColor="#ffff00" zPosition="3" transparent="1">
+<widget name="text2" position="380,110" size="400,100" halign="left" font="VFD;45" foregroundColor="HMRname" zPosition="3" transparent="1">
       <convert type="j00zekModServiceName2">Name</convert>
     </widget>
-<widget name="text3" position="380,215" size="400,100" halign="left" font="VFD;45" foregroundColor="#ffff00" zPosition="3" transparent="1">
+<widget name="text3" position="380,215" size="400,100" halign="left" font="VFD;45" foregroundColor="HMRname" zPosition="3" transparent="1">
        <convert type="j00zekModServiceName2">Name</convert>
     </widget>
 <widget name="coverArt" pixmap="/tmp/coverlcd.png" position="0,0" zPosition="1" size="380,320" transparent="1" alphatest="blend" />
@@ -410,7 +418,7 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
 	  <widget source="global.CurrentTime" render="Label" position="360,35" size="440,130" font="RegularLCD;65" halign="center" valign="top" foregroundColor="#00Ced1">
 		<convert type="ClockToText">Format:%H:%M:%S %d.%m.%Y</convert>
 	</widget>		
-  <widget source="parent.HomarRdsDecoder" render="Label" position="20,220" size="760,295" font="RegularLCD;65" foregroundColor="#FFFF00" halign="left" valign="top">
+  <widget source="parent.HomarRdsDecoder" render="Label" position="20,220" size="760,295" font="RegularLCD;65" foregroundColor="HMRname" halign="left" valign="top">
     <convert type="HomarRdsInfo">RadioText</convert>
   </widget>	
 </screen>
@@ -431,7 +439,7 @@ position="30,110" size="740,78" font="VFD;72" transparent="1" halign="left" vali
   <convert type="ClockToText">Format:%H:%M:%S</convert>
   </widget>
 <widget source="parent.Title" render="j00zekModRunningText" 
-options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,startdelay=800,always=0,oneshot=0" noWrap="1" position="16,200" size="740,96" font="VFD;82" transparent="1" halign="left" valign="top" foregroundColor="#ffff00" >
+options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,startdelay=800,always=0,oneshot=0" noWrap="1" position="16,200" size="740,96" font="VFD;82" transparent="1" halign="left" valign="top" foregroundColor="HMRname" >
   </widget>
 <widget source="session.CurrentService" render="Progress" pixmap="HomarLCDskins/Homar/Homar_3.png" position="20,300" size="760,50" borderWidth="6" backgroundColor="#00CFFF"> 
   <convert type="j00zekE2iPlayer">Progress</convert>
@@ -450,7 +458,7 @@ options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,start
 </widget>
 <widget source="parent.Service" render="j00zekModRunningText" 
 options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,startdelay=800,always=0,oneshot=0" noWrap="1"
-position="16,370" size="760,90" font="VFD;82" transparent="1" halign="center" valign="center" foregroundColor="#ffff00" >
+position="16,370" size="760,90" font="VFD;82" transparent="1" halign="center" valign="center" foregroundColor="HMRname" >
 <convert type="j00zekModServiceName2">Name</convert>
 </widget>
 <widget source="parent.Service" render="Label" 
@@ -468,7 +476,7 @@ position="16,280" size="760,90" font="VFD;88" transparent="1" halign="center" va
   </widget>
 <widget source="parent.ServiceEvent" render="j00zekModRunningText" 
 options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,startdelay=200,always=0,oneshot=0" noWrap="1"
-position="16,25" size="765,58" font="VFD;52" foregroundColor="#ffff00" halign="left" zPosition="2" transparent="1" >
+position="16,25" size="765,58" font="VFD;52" foregroundColor="HMRname" halign="left" zPosition="2" transparent="1" >
   <convert type="j00zekModEventName2">NextName</convert>
   </widget>
 <widget source="session.RecordState" render="Pixmap" pixmap="HomarLCDskins/Homar/Homar_2.png" position="680,20" size="120,30" zPosition="3" alphatest="blend">
@@ -476,7 +484,7 @@ position="16,25" size="765,58" font="VFD;52" foregroundColor="#ffff00" halign="l
       <convert type="ConditionalShowHide">Blink</convert>
      </widget>
     <widget source="parent.ServiceEvent" render="j00zekModRunningText" 
-options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,startdelay=800,always=0,oneshot=0" noWrap="1" position="16,308" size="740,96" font="VFD;80" transparent="1" halign="left" valign="top" foregroundColor="#ffff00" >
+options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,startdelay=800,always=0,oneshot=0" noWrap="1" position="16,308" size="740,96" font="VFD;80" transparent="1" halign="left" valign="top" foregroundColor="HMRname" >
   <convert type="j00zekModEventName">Name</convert>
 </widget>
 <widget source="parent.ServiceEvent" render="Label" noWrap="1" position="20,390" size="230,88" font="VFD;78" transparent="1" halign="left" valign="center" foregroundColor="#ffff66">
@@ -542,8 +550,8 @@ options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,start
   <convert type="ServiceInfo">IsMultichannel</convert>
   <convert type="ConditionalShowHide" />
   </widget>
-<widget source="parent.title" render="Label" position="20,80" size="760,180" font="VFD;73" transparent="1" halign="center" valign="center" foregroundColor="#ffff00" />
-  <widget source="parent.menu" render="Label" position="20,220" size="760,180" font="VFD;73" transparent="1" halign="center" valign="center" foregroundColor="#ffff00" >
+<widget source="parent.title" render="Label" position="20,80" size="760,180" font="VFD;73" transparent="1" halign="center" valign="center" foregroundColor="HMRname" />
+  <widget source="parent.menu" render="Label" position="20,220" size="760,180" font="VFD;73" transparent="1" halign="center" valign="center" foregroundColor="HMRname" >
   <convert type="StringListSelection" />
   </widget>
     <widget text="A" position="20,400" size="60,60" font="VFD;60" source="session.TunerInfo" render="FixedLabel" zPosition="3" foregroundColor="#ffffff" halign="center" valign="center" transparent="1">
@@ -701,7 +709,7 @@ options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,start
 <!-- MessageBox -->
 <screen name="MessageBox_summary" position="0,0" size="800,480" id="1">
 <ePixmap pixmap="HomarLCDskins/Homar/Homar_1.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
-<widget render="j00zekModRunningText" source="parent.Text" options="movetype=running,startpoint=0,direction=top,steptime=70,repeat=0,startdelay=6000,wrap" foregroundColor="#ffff00" font="VFD;60" position="30,30" size="770,340" valign="center" transparent="1">
+<widget render="j00zekModRunningText" source="parent.Text" options="movetype=running,startpoint=0,direction=top,steptime=70,repeat=0,startdelay=6000,wrap" foregroundColor="HMRname" font="VFD;60" position="30,30" size="770,340" valign="center" transparent="1">
 </widget>
 <eLabel position="0,374" size="800,4" backgroundColor="#00FFFFFF" />
 <widget source="parent.selectedChoice" render="Label" position="200,384" size="400,66" font="VFD3;66" transparent="1" halign="center" valign="center" />
@@ -710,7 +718,7 @@ options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,start
 <!-- PluginBrowser -->
 <screen name="PluginBrowserSummary" position="0,0" size="800,480" id="1">
 <ePixmap pixmap="HomarLCDskins/Homar/Homar_1.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
-<widget source="entry" render="Label" position="20,48" size="760,180" font="VFD;60" transparent="1" halign="center" valign="center" foregroundColor="#ffff00"  />
+<widget source="entry" render="Label" position="20,48" size="760,180" font="VFD;60" transparent="1" halign="center" valign="center" foregroundColor="HMRname"  />
 <eLabel position="0,240" size="800,4" backgroundColor="#00FFFFFF" />
 <widget render="j00zekModRunningText" source="desc" options="movetype=running,startpoint=0,direction=top,steptime=70,repeat=0,startdelay=6000,wrap" font="VFD;60" position="20,240" size="760,210" halign="center" valign="center"  transparent="1" >
 </widget>
@@ -723,7 +731,7 @@ options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,start
    <convert type="j00zekRefreshBingPicOfTheDay"></convert>
     </widget>
 <ePixmap position="0,0" zPosition="-10" size="800,480" pixmap="HomarLCDskins/Homar/Homar_9.png" transparent="1" alphatest="blend"/>
-    <widget name="Title" position="20,140" size="350,150" font="VFD;68" transparent="1" valign="center" halign="left" foregroundColor="#ffff00"  />
+    <widget name="Title" position="20,140" size="350,150" font="VFD;68" transparent="1" valign="center" halign="left" foregroundColor="HMRname"  />
   <widget name="Service" position="20,300" size="850,150" font="VFD;68" transparent="1" valign="center" halign="left" />
   <widget name="scan_progress" pixmap="HomarLCDskins/Homar/Homar_7.png" position="20,415" size="750,44" borderWidth="8" backgroundColor="#00CFFF">
   </widget>
@@ -912,7 +920,7 @@ options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,start
 <!-- Setup -->
 <screen name="SetupSummary" position="0,0" size="800,480" id="1">
 <ePixmap pixmap="HomarLCDskins/Homar/Homar_1.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
-<widget source="SetupTitle" render="Label" position="20,50" size="760,115" font="VFD;55" transparent="1" halign="center" valign="center" foregroundColor="#ffff00"  />
+<widget source="SetupTitle" render="Label" position="20,50" size="760,115" font="VFD;55" transparent="1" halign="center" valign="center" foregroundColor="HMRname"  />
 <widget render="j00zekModRunningText" source="SetupEntry" options="movetype=running,startpoint=0,direction=top,steptime=70,repeat=0,startdelay=6000,wrap" font="VFD;55" position="20,176" size="760,122" halign="center" valign="center"  transparent="1" >
 </widget>
 <widget source="SetupValue" render="Label" position="20,309" size="760,122" font="VFD;55" transparent="1" halign="center" valign="center" />
@@ -948,10 +956,10 @@ options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,start
   <widget source="global.CurrentTime" render="VWatches" position="330,146" size="150,150" zPosition="4" foregroundColor="#000000" alphatest="on">
   <convert type="VExtraNumText">hourHand</convert>
   </widget>
-  <widget source="global.CurrentTime" render="Label" position="150,110" size="240,140" font="VFD;128" transparent="1" halign="left" foregroundColor="#ffff00"  >
+  <widget source="global.CurrentTime" render="Label" position="150,110" size="240,140" font="VFD;128" transparent="1" halign="left" foregroundColor="HMRname"  >
   <convert type="ClockToText">Format:%H</convert>
   </widget>
-<widget source="global.CurrentTime" render="Label" position="422,110" size="240,140" font="VFD;128" transparent="1" halign="right" foregroundColor="#ffff00"  >
+<widget source="global.CurrentTime" render="Label" position="422,110" size="240,140" font="VFD;128" transparent="1" halign="right" foregroundColor="HMRname"  >
   <convert type="ClockToText">Format:%M</convert>
   </widget>
   <ePixmap pixmap="HomarLCDskins/weather/sun.png" position="10,170" zPosition="1" size="165,165" alphatest="blend" />
@@ -963,7 +971,7 @@ options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,start
     <convert type="j00zekSun">zachod</convert>
   </widget>
 <widget source="parent.Title" render="j00zekModRunningText" 
-options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,startdelay=200,always=0,oneshot=0" noWrap="1" position="10,20" size="780,62" font="RegularLCD;62" halign="center" valign="top" transparent="1" foregroundColor="#ffff00" />
+options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,startdelay=200,always=0,oneshot=0" noWrap="1" position="10,20" size="780,62" font="RegularLCD;62" halign="center" valign="top" transparent="1" foregroundColor="HMRname" />
  </screen>
 
 <!-- Standby -->
@@ -993,14 +1001,14 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
 <!-- VTIPanel -->
 <screen name="VTIPanelSummary" position="0,0" size="800,480" id="1">
   <ePixmap pixmap="HomarLCDskins/Homar/Homar_1.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
-  <widget source="entry" render="Label" position="20,50" size="760,180" font="VFD;65" transparent="1" halign="center" valign="center" foregroundColor="#ffff00"  />
+  <widget source="entry" render="Label" position="20,50" size="760,180" font="VFD;65" transparent="1" halign="center" valign="center" foregroundColor="HMRname"  />
   <widget source="desc" render="Label" position="20,248" size="760,180" font="VFD;55" transparent="1" halign="center" valign="center" />
 </screen>
 
 <!-- Wizard -->
 <screen name="WizardSummary" position="0,0" size="800,480" id="1">
   <ePixmap pixmap="HomarLCDskins/Homar/Homar_1.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
-  <widget source="text" render="Label" position="20,50" size="760,115" font="VFD;55" transparent="1" halign="center" valign="center" foregroundColor="#ffff00"  />
+  <widget source="text" render="Label" position="20,50" size="760,115" font="VFD;55" transparent="1" halign="center" valign="center" foregroundColor="HMRname"  />
   <widget source="parent.list" render="Label" position="20,174" size="760,255" font="VFD;45" transparent="1" halign="center" valign="center">
     <convert type="StringListSelection" />
   </widget>
@@ -1009,7 +1017,7 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
 <!-- SoftwareUpdate -->	
 <screen name="UpdatePlugin_summary" position="0,0" size="800,480">
 <ePixmap pixmap="HomarLCDskins/Homar/Homar_1.png" position="0,0" size="800,480" zPosition="-1" alphatest="blend" />
-<widget source="parent.Title" render="Label" position="20,20" size="720,50" font="VFD;50" transparent="1" foregroundColor="#ffff00" halign="center" noWrap="1" />
+<widget source="parent.Title" render="Label" position="20,20" size="720,50" font="VFD;50" transparent="1" foregroundColor="HMRname" halign="center" noWrap="1" />
 <widget source="parent.package" render="Label" position="20,70" size="720,230" font="VFD;50" transparent="1" halign="center" valign="center" />
 <widget source="parent.status" render="Label" position="20,300" size="720,180" font="VFD;50" halign="center" transparent="1" />
 </screen>
@@ -1026,11 +1034,11 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
 <convert type="j00zekModServiceName2">Reference</convert>
 </widget>
 <widget source="parent.Service" render="j00zekModRunningText" 
-options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,startdelay=800,always=0,oneshot=0" noWrap="1" position="400,253" size="310,70" font="VFD;60" transparent="1" halign="center" valign="top" foregroundColor="#ffff00" >
+options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,startdelay=800,always=0,oneshot=0" noWrap="1" position="400,253" size="310,70" font="VFD;60" transparent="1" halign="center" valign="top" foregroundColor="HMRname" >
   <convert type="j00zekModServiceName2">Name</convert>
 </widget>
 <widget source="parent.Event" render="j00zekModRunningText" 
-options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,startdelay=800,always=0,oneshot=0" noWrap="1" position="16,308" size="740,96" font="VFD;80" transparent="1" halign="left" valign="top" foregroundColor="#ffff00" >
+options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,startdelay=800,always=0,oneshot=0" noWrap="1" position="16,308" size="740,96" font="VFD;80" transparent="1" halign="left" valign="top" foregroundColor="HMRname" >
   <convert type="j00zekModEventName">Name</convert>
 </widget>
 <widget source="parent.Event" render="Progress" pixmap="HomarLCDskins/Homar/Homar_3.png" position="230,411" size="350,50" borderWidth="6" backgroundColor="#00CFFF"> 
@@ -1215,7 +1223,7 @@ options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,start
 <widget source="global.CurrentTime" render="Label" position="460,20" size="300,75" font="VFD2;68" transparent="1" halign="right" valign="center">
   <convert type="ClockToText">Format:%H:%M</convert>
   </widget>
-  <widget source="entry" render="Label" position="10,190" size="770,230" font="VFD;68" transparent="1" foregroundColor="#ffff00" halign="center" valign="center" />
+  <widget source="entry" render="Label" position="10,190" size="770,230" font="VFD;68" transparent="1" foregroundColor="HMRname" halign="center" valign="center" />
 		</screen>
 
 <!-- Airly EU -->

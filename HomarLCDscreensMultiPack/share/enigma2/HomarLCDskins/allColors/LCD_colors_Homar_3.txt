@@ -1,0 +1,2 @@
+Zmiana kolorystyki komponentów:
+c(#ffffff) zmiana koloru zoltego na kolor napisow

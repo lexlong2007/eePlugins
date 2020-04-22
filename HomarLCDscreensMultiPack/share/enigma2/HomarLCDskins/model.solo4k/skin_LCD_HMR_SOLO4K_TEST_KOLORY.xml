@@ -869,7 +869,7 @@ options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,start
 <!-- Simple -->
 <screen name="SimpleSummary" position="0,0" size="480,320" id="1">
   <ePixmap pixmap="HomarLCDskins/Homar_480x320/Homar_1.png" position="0,0" size="480,320" zPosition="-1" alphatest="blend" />
-  <ePixmap pixmap="HomarLCDskins/Homar/Homar_Solo4K.png" position="20,15" size="480,320" zPosition="-1" alphatest="blend" />
+  <widget source="session.j00zekStaticSource" render="j00zekTunerIcon" iconspath="/usr/share/enigma2/HomarLCDskins/Homar" position="20,15" size="480,320" zPosition="-1" alphatest="blend" />
   <ePixmap pixmap="HomarLCDskins/Homar_480x320/Homar_5.png" position="175,72" size="200,200" zPosition="1" alphatest="blend" />
   <widget source="global.CurrentTime" render="VWatches" position="199,95" size="100,100" zPosition="5" foregroundColor="#000000" alphatest="on">
   <convert type="VExtraNumText">minHand</convert>
@@ -917,7 +917,7 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
  <screen name="StandbySummary" position="0,0" size="480,320" id="1">
  <widget source="session.CurrentService" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated_2" position="0,0" size="480,320" zPosition="5" transparent="1" alphatest="blend" />
  <ePixmap pixmap="HomarLCDskins/Homar_480x320/Homar_4.png" position="0,0" size="480,320" zPosition="-1" alphatest="blend" />
- <ePixmap pixmap="HomarLCDskins/Homar/Homar_Solo4K.png" position="30,30" size="480,320" zPosition="-1" alphatest="blend" />
+  <widget source="session.j00zekStaticSource" render="j00zekTunerIcon" iconspath="/usr/share/enigma2/HomarLCDskins/Homar" position="30,30" size="480,320" zPosition="-1" alphatest="blend" />
  <widget source="global.CurrentTime" render="Label" position="30,190" size="323,70" font="RegularLCD;58" transparent="1" halign="left" valign="top">
   <convert type="ClockToText">Format:%d.%m.%Y</convert>
   </widget>
