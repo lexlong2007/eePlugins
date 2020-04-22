@@ -128,18 +128,24 @@ def homarLCDskins( skinlist = [] , tunerName = getTunerName() ):
                 else:
                     skinname = path.join(subRoot,x)
                 if FullDBG: printDEBUG("homarLCDskins skinname'%s'" % (skinname))
-                skinlist.append(( skinname, _(x[len('skin_LCD_'):-4].replace("_", " ")) ))
+                if tunerName == 'duo4k':
+                    skinlist.append(( skinname, _(x[len('skin_LCD_'):-4].replace("_", " ").replace('solo4k', 'duo4k').replace('SOLO4K', 'DUO4K')) ))
+                else:
+                    skinlist.append(( skinname, _(x[len('skin_LCD_'):-4].replace("_", " ")) ))
     
     if path.exists('/usr/share/enigma2/HomarLCDskins/konfiguracja'):
         with open('/usr/share/enigma2/HomarLCDskins/konfiguracja', 'r') as file:
-            if file.read().find('trybDevelopera=On') > -1:
-                tunerName = 'all'
+            trybDevelopera = file.read()
             file.close()
-
+            if trybDevelopera.find('trybDevelopera=On') > -1:
+                tunerName = 'all'
+            elif trybDevelopera.find('trybDevelopera=duo4k') > -1:
+                tunerName = 'duo4k'
+    
     if tunerName == 'all':
         subRoot='HomarLCDskins/'
     else:
-        subRoot='HomarLCDskins/model.%s/' % tunerName
+        subRoot='HomarLCDskins/model.%s/' % tunerName.replace('duo4k', 'solo4k')
     myRoot = '/usr/share/enigma2/%s' % subRoot
     
     if DBG == True: printDEBUG("homarLCDskins selected tuner='%s', myRoot='%s'" % (tunerName, myRoot))

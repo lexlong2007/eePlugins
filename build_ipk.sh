@@ -67,14 +67,18 @@ if [ -z $2 ]; then
   echo "Info: no version provided, date &time of last modification will be used"
   #version=`ls -atR --full-time "$plugAbsPath/"|egrep -v '^dr|version.py|control|*.mo'|grep -m 1 -o '20[12][5678].[0-9]*.[0-9]* [0-9]*\:[0-9]*'|sed 's/^20//'|sed 's/ /./'|sed 's/-/./g'|sed 's/\://g'`
   version=`ls -atR --full-time "$plugAbsPath/"|egrep -v '^dr|version\.py|control|*\.mo'|grep -o '20[12][567890].[0-9]*.[0-9]* [0-9]*\:[0-9]*'|sort -r|head -1|sed 's/^20//'|sed 's/ /./'|sed 's/-/./g'|sed 's/\://g'`
+  versionFileName=`find "$plugAbsPath/" -name version.py`
+  echo "Found version file: '$versionFileName'"
   echo "'$version'"
   [ -z $version ] && echo "Error getting version" && exit 0
 else
   version=$2
 fi
 sed -i "s/^Version\:.*/Version: $version/" $plugAbsPath//CONTROL/control
-[ -e $plugAbsPath/version.py ] && echo "Version='$version'" > $plugAbsPath/version.py
-[ -e $plugAbsPath/Plugins/Extensions/MSNweather/version.py ] && echo "Version='$version'" > $plugAbsPath/Plugins/Extensions/MSNweather/version.py
+if [ -e $plugAbsPath/version.py ];then echo "Version='$version'" > $plugAbsPath/version.py
+elif [ -e $plugAbsPath/Plugins/Extensions/MSNweather/version.py ];then echo "Version='$version'" > $plugAbsPath/Plugins/Extensions/MSNweather/version.py
+elif [ ! -z $versionFileName ] && [ -e $versionFileName ];then echo "Version='$version'" > $versionFileName
+fi
 find $plugAbsPath/ -type f -name *.po  -exec bash -c 'msgfmt "$1" -o "${1%.po}".mo' - '{}' \;
 if [ ! -z $RunScriptBeforeBuild ] && [ -e $plugAbsPath/$RunScriptBeforeBuild ];then
   $plugAbsPath/$RunScriptBeforeBuild
