@@ -144,7 +144,12 @@ class StreamlinkConfiguration(Screen, ConfigListScreen):
         self.close(None)
         
     def layoutFinished(self):
-        #os.system('/usr/lib/enigma2/python/Plugins/Extensions/StreamlinkConfig/plugins/installPackets.sh &')
+        if os.path.exists('/usr/lib/enigma2/python/Plugins/Extensions/StreamlinkConfig/1stRun'):
+            if os.path.exists('/var/run/streamlink.pid'):
+                os.system('/usr/lib/enigma2/python/Plugins/Extensions/StreamlinkConfig/plugins/installPackets.sh &')
+            else:
+                os.system('/usr/lib/enigma2/python/Plugins/Extensions/StreamlinkConfig/plugins/installPackets.sh forceReinstall &')
+            os.remove('/usr/lib/enigma2/python/Plugins/Extensions/StreamlinkConfig/1stRun')
         self.setTitle(self.setup_title)
 
     def changedEntry(self):

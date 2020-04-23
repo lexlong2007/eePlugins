@@ -41,4 +41,6 @@ if [ `grep -c 'config.plugins.streamlinksrv.enabled=true' < /etc/enigma2/setting
     fi 
   fi
 fi
+touch '/usr/lib/enigma2/python/Plugins/Extensions/StreamlinkConfig/1stRun'
+
 exit 0

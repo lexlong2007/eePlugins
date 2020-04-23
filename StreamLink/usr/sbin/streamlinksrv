@@ -372,6 +372,7 @@ class Daemon:
         try:
             pid = os.fork()
             if pid > 0:
+                sys.stderr.write('Missing pid file for already running streamlinksrv?')
                 # exit first parent
                 sys.exit(0)
         except OSError, e:

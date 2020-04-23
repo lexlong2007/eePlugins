@@ -11,8 +11,13 @@ else
   PL=0
 fi
 
-opkg update > /dev/null
+[ $PL -eq 1 ] && echo "Czekam na opkg..." || "Waiting for opkg..."
+while [ -e /var/lib/opkg/lock ]
+do
+  sleep 10
+done
 
+opkg update > /dev/null
 installed=`opkg list-installed|cut -d ' ' -f1`
 paskagesList="ffmpeg
 python-argparse 
@@ -44,11 +49,28 @@ do
         [ $PL -eq 1 ] && echo "$pkg jest już zainstalowany, wymuszam reinstalację" || "$pkg already installed, reinstalling it"
         echo "------------------------------------------------------------"
         opkg install --force-reinstall $pkg
+		err=$?
+		if [ $err -gt 0 ] && [ `ls /usr/lib/enigma2/python/Plugins/Extensions/StreamlinkConfig/plugins/|grep -c $pkg` -eq 1 ];then
+			echo "------------------------------------------------------------"
+			[ $PL -eq 1 ] && echo "BŁĄD: brak $pkg w oficjanym repozytorium, instaluję kopię" || "ERROR: no $pkg in official repo, installing offline version"
+			echo "------------------------------------------------------------"
+			opkg install --force-reinstall /usr/lib/enigma2/python/Plugins/Extensions/StreamlinkConfig/plugins/$pkg*.ipk
+		fi
     fi
   else
     opkg install $pkg
+	err=$?
+	if [ $err -gt 0 ] && [ `ls /usr/lib/enigma2/python/Plugins/Extensions/StreamlinkConfig/plugins/|grep -c $pkg` -eq 1 ];then
+		echo "------------------------------------------------------------"
+		[ $PL -eq 1 ] && echo "BŁĄD: brak $pkg w oficjanym repozytorium, instaluję kopię" || "ERROR: no $pkg in official repo, installing offline version"
+		echo "------------------------------------------------------------"
+		opkg install /usr/lib/enigma2/python/Plugins/Extensions/StreamlinkConfig/plugins/$pkg*.ipk
+	fi
   fi
 done
+
+sync
+[ `grep -c 'config.plugins.streamlinksrv.enabled=true' < /etc/enigma2/settings` -eq 0 ] && exit 0
 
 echo
 if [ -e /var/run/streamlink.pid ];then
@@ -56,6 +78,7 @@ if [ -e /var/run/streamlink.pid ];then
   /etc/init.d/streamlinksrv restart
 else
   [ $PL -eq 1 ] && echo "$pkg jest już zainstalowany" || echo "Starting streamlinksrv"
+  killall streamlinksrv  > /dev/null
   /etc/init.d/streamlinksrv start
 fi
 if [ -e /var/run/streamlink.pid ];then
