@@ -35,6 +35,7 @@ config.plugins.streamlinksrv.PortNumber = ConfigSelection(default = "8088", choi
 config.plugins.streamlinksrv.WPusername = ConfigText()
 config.plugins.streamlinksrv.WPpassword = ConfigPassword()
 config.plugins.streamlinksrv.WPbouquet = NoSave(ConfigNothing())
+config.plugins.streamlinksrv.WPlogin = NoSave(ConfigNothing())
 # teleelevidenie
 config.plugins.streamlinksrv.TELEusername = ConfigText()
 config.plugins.streamlinksrv.TELEpassword = ConfigPassword()
@@ -66,6 +67,7 @@ class StreamlinkConfiguration(Screen, ConfigListScreen):
         Mlist.append(getConfigListEntry('\c00289496' + _("*** %s configuration ***") % 'pilot.wp.pl'))
         Mlist.append(getConfigListEntry(_("Username:"), config.plugins.streamlinksrv.WPusername))
         Mlist.append(getConfigListEntry(_("Password:"), config.plugins.streamlinksrv.WPpassword))
+        Mlist.append(getConfigListEntry(_("Check login credentials"), config.plugins.streamlinksrv.WPlogin))
         Mlist.append(getConfigListEntry(_("Press OK to create %s bouquet") % "userbouquet.WPPL.tv", config.plugins.streamlinksrv.WPbouquet))
         Mlist.append(getConfigListEntry(""))
         Mlist.append(getConfigListEntry('\c00289496' + _("*** %s configuration ***") % 'teleelevidenie')) #https://my.teleelevidenie.com/signin
@@ -115,11 +117,14 @@ class StreamlinkConfiguration(Screen, ConfigListScreen):
         self.onLayoutFinish.append(self.layoutFinished)
         self.doAction = None
 
-    def save(self):
+    def saveConfig(self):
         for x in self["config"].list:
             if len(x) >= 2:
                 x[1].save()
         configfile.save()
+
+    def save(self):
+        self.saveConfig()
         if os.path.exists('/var/run/streamlink.pid'):
             os.system('/etc/init.d/streamlinksrv stop')
         if config.plugins.streamlinksrv.enabled.value:
@@ -193,6 +198,15 @@ class StreamlinkConfiguration(Screen, ConfigListScreen):
                         return
                     else:
                         self.doAction = ('wpBouquet.py' , '/etc/enigma2/userbouquet.WPPL.tv', config.plugins.streamlinksrv.WPusername.value, config.plugins.streamlinksrv.WPpassword.value)
+                elif currItem == config.plugins.streamlinksrv.WPlogin:
+                    if config.plugins.streamlinksrv.WPusername.value == '' or config.plugins.streamlinksrv.WPpassword.value == '':
+                        self.session.openWithCallback(self.doNothing,MessageBox, _("Username & Password are required!"), MessageBox.TYPE_INFO, timeout = 5)
+                        return
+                    else:
+                        self.saveConfig()
+                        cmd = '/usr/bin/python /usr/lib/enigma2/python/Plugins/Extensions/StreamlinkConfig/plugins/wpBouquet.py checkLogin'
+                        self.session.openWithCallback(self.doNothing ,Console, title = _('Credentials verification'), cmdlist = [ cmd ])
+                        return
                 elif currItem == config.plugins.streamlinksrv.TELEbouquet:
                     if config.plugins.streamlinksrv.TELEusername.value == '' or config.plugins.streamlinksrv.TELEpassword.value == '':
                         self.session.openWithCallback(self.doNothing,MessageBox, _("Username & Password are required!"), MessageBox.TYPE_INFO, timeout = 5)

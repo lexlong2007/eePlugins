@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-#   Based on Kodi plugin.video.pilot.wp by c0d34fun
+#   Based on Kodi plugin.video.pilot.wp by c0d34fun licensed under GNU GENERAL PUBLIC LICENSE. Version 2, June 1991
 #   Coded by j00zek
 #
 # ADDED by j00zek
@@ -108,18 +108,24 @@ def _login():
     saveCookie(cookiesToString(response.cookies))
     return getCookie()
 
-if __name__ == '__main__' and len(sys.argv) >=5:
-    file_name = sys.argv[1]
-    #print 'filename' , file_name
-    #print path + file_name
-    data['login'] = sys.argv[2]
-    #print 'username' , data['login']
-    data['password'] = sys.argv[3]
-    #print 'password' , data['password']
-    streamlinkURL = 'http%%3a//127.0.0.1%%3a%s/' % sys.argv[4]
-    frameWork = sys.argv[5]
-    #print frameWork
-    _generate_E2bouquet()
+if __name__ == '__main__':
+    if len(sys.argv) >=5:
+        file_name = sys.argv[1]
+        #print 'filename' , file_name
+        #print path + file_name
+        data['login'] = sys.argv[2]
+        #print 'username' , data['login']
+        data['password'] = sys.argv[3]
+        #print 'password' , data['password']
+        streamlinkURL = 'http%%3a//127.0.0.1%%3a%s/' % sys.argv[4]
+        frameWork = sys.argv[5]
+        #print frameWork
+        _generate_E2bouquet()
+    elif len(sys.argv) == 2 and sys.argv[1] == 'checkLogin':
+        if _login():
+            print 'Zalogowano poprawnie'
+        else:
+            print 'Nieudane logowanie. Sprawdź login i hasło w ustawieniach wtyczki.'
 
 # ORGINAL code for reference plugin.video.pilot.wp-0.1.3
 """

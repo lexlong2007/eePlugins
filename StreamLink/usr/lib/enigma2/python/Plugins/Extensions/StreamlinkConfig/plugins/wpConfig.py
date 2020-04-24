@@ -14,8 +14,8 @@ headers = { 'user-agent': 'ExoMedia 4.3.0 (43000) / Android 8.0.0 / foster_e',
           }
 
 data = {'device': 'AndroidTV', 
-        'login' : getE2config('config.plugins.streamlinksrv.WPusername'), 
-        'password': getE2config('config.plugins.streamlinksrv.WPpassword')
+        'login' : getE2config('WPusername'), 
+        'password': getE2config('WPpassword')
       }
 
 def saveCookie(cookie):
