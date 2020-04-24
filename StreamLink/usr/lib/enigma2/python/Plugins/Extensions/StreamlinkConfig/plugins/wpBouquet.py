@@ -123,9 +123,9 @@ if __name__ == '__main__':
         _generate_E2bouquet()
     elif len(sys.argv) == 2 and sys.argv[1] == 'checkLogin':
         if _login():
-            print 'Zalogowano poprawnie'
+            print 'Zalogowano poprawnie\n\n'
         else:
-            print 'Nieudane logowanie. Sprawdź login i hasło w ustawieniach wtyczki.'
+            print 'Nieudane logowanie. Sprawdź login i hasło w ustawieniach wtyczki.\n\n'
 
 # ORGINAL code for reference plugin.video.pilot.wp-0.1.3
 """

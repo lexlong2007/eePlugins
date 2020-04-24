@@ -119,5 +119,11 @@ msgstr "Wybór renderera wideo"
 msgid "Bouquets has been reloaded"
 msgstr "Definicje bukietów zostały przeładowane"
 
+msgid "Check login credentials"
+msgstr "Naciśnij OK aby zalogować się"
+
+msgid "Credentials verification"
+msgstr "Sprawdzanie danych do logowania"
+
 #msgid ""
 #msgstr ""
