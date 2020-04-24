@@ -16,13 +16,13 @@ from Screens.Screen import Screen
 ######################################################################################
 def sessionstart(session, **kwargs):
     try:
-        #from Components.Sources.mySource import mySource
-        #session.screen['mySource'] = mySource()
-        from Components.Sources.StaticText import StaticText
-        session.screen['j00zekStaticSource'] = StaticText()
+        from Components.Sources.j00zekStaticSource import j00zekStaticSource
+        session.screen['j00zekStaticSource'] = j00zekStaticSource()
         print "e2components config initiated"
+        open("/tmp/j00zekStaticSource.log", "w").write('j00zekStaticSource initiated')
     except Exception, e:
         print "Exception for e2components: %s" % str(e)
+        open("/tmp/j00zekStaticSource.log", "w").write('Exception for e2components: %s' % str(e))
 
 def Plugins(**kwargs):
     return [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart)]
