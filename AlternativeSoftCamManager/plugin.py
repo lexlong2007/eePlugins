@@ -14,17 +14,24 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS, pathExists
 from Tools.LoadPixmap import LoadPixmap
 
 from enigma import eTimer
-from os import path as os_path, mkdir as os_mkdir, remove, listdir as os_listdir
 
-import threading
+import threading, os, time
 
 from Components.Language import language
 import gettext
-from os import environ
-    
+
+DBG = False 
+if os.path.exists("/tmp/AltCamManager.log"):
+    os.remove("/tmp/AltCamManager.log")
+def printDBG(txt1, txt2 = ''):
+    print '[Alternative SoftCam Manager]', txt1, txt2
+    if DBG:
+        open("/tmp/AltCamManager.log", "a").write('%s %s\n' % (str(txt1),str(txt2)))
+
+
 def localeInit():
     lang = language.getLanguage()[:2]
-    environ["LANGUAGE"] = lang
+    os.environ["LANGUAGE"] = lang
     gettext.bindtextdomain("plugin-AlternativeSoftCamManager", \
         resolveFilename(SCOPE_PLUGINS, 'Extensions/AlternativeSoftCamManager/locale'))
 
@@ -32,7 +39,6 @@ def _(txt):
     t = gettext.dgettext("plugin-AlternativeSoftCamManager", txt)
     if t == txt:
             t = gettext.gettext(txt)
-            print "Lack of translation for '%s'" % t
     return t
 
 localeInit()
@@ -45,13 +51,21 @@ config.plugins.AltSoftcam.actcam = ConfigText(default = _("none"))
 config.plugins.AltSoftcam.camdir = ConfigDirectory(default = "/")
 config.plugins.AltSoftcam.camconfig = ConfigDirectory(default = "/")
 AltSoftcamConfigError = False
-if not os_path.isdir(config.plugins.AltSoftcam.camconfig.value):
+if not os.path.isdir(config.plugins.AltSoftcam.camconfig.value):
     config.plugins.AltSoftcam.camconfig.value = _("none")
     AltSoftcamConfigError = True
-if not os_path.isdir(config.plugins.AltSoftcam.camdir.value):
+if not os.path.isdir(config.plugins.AltSoftcam.camdir.value):
     config.plugins.AltSoftcam.camdir.value = _("none")
     AltSoftcamConfigError = True
 
+def doSystemCMD(cmd):
+    printDBG('doSystemCMD',cmd)
+    try: 
+        with open("/proc/sys/vm/drop_caches", "w") as f: f.write("1\n")
+    except Exception:
+        pass
+    os.system(cmd)
+    
 def getcamcmd(cam):
     if "oscam" in cam.lower():
         return config.plugins.AltSoftcam.camdir.value + "/" + cam + " -c " + config.plugins.AltSoftcam.camconfig.value + "/"
@@ -87,8 +101,8 @@ def StartCam(reason, **kwargs):
                 StartCamThread(getcamcmd(config.plugins.AltSoftcam.actcam.value), config.plugins.AltSoftcam.actcam.value).start()
         elif reason == 1: # Enigma stop
             try:
-                Console().ePopen("killall -9 %s" % config.plugins.AltSoftcam.actcam.value)
-                print "[Alternative SoftCam Manager] stopping ", config.plugins.AltSoftcam.actcam.value
+                doSystemCMD("killall -9 %s" % config.plugins.AltSoftcam.actcam.value)
+                printDBG("StartCam(reason=1) doSystemCMD: killall -9 %s" % config.plugins.AltSoftcam.actcam.value)
             except Exception: pass
 
 def Plugins(**kwargs):
@@ -101,14 +115,14 @@ def Plugins(**kwargs):
 def isCamRunning(cam):
     status = False
     try:
-        pids = [pid for pid in os_listdir('/proc') if pid.isdigit()]
+        pids = [pid for pid in os.listdir('/proc') if pid.isdigit()]
         for pid in pids:
-            cmdFile = os_path.join('/proc', pid, 'cmdline')
-            if os_path.exists(cmdFile):
+            cmdFile = os.path.join('/proc', pid, 'cmdline')
+            if os.path.exists(cmdFile):
                 with open(cmdFile, "r") as f:
                     fc = f.read()
                     f.close()
-                if fc.find('oscam') > 0:
+                if fc.find(cam) > 0:
                     status = True
                     break
     except Exception:
@@ -134,14 +148,14 @@ class StartCamThread(threading.Thread):
         loop = 1
         try:
             while (loop < 6):
-                Console().ePopen(self.cmd)
+                doSystemCMD('(' + self.cmd + ') &')
                 sleep(0.5)
                 if isCamRunning(self.actcam):
-                    print "[Alternative SoftCam Manager] started: %s at %d try." % (self.actcam,loop)
+                    printDBG("StartCamThread, %s started at %d try." % (self.actcam,loop))
                     break
                 loop += 1
         except Exception, e:
-            print "[Alternative SoftCam Manager] exception strating softcam: ", str(e)
+            printDBG("StartCamThread exception strating softcam: ", str(e))
 ######################################################################################
 class AltCamManager(Screen):
     skin = """
@@ -193,17 +207,19 @@ class AltCamManager(Screen):
         self.camstartcmd = ""
         self.CreateInfo()
         self.Timer = eTimer()
-        self.Timer.callback.append(self.listecminfo)
+        self.Timer.callback.append(self.listECMinfo)
         self.Timer.start(1000*4, False)
         self.title = _("SoftCam Manager")
 
     def CreateInfo(self):
+        printDBG("self.CreateInfo() >>")
         global AltSoftcamConfigError
         if not AltSoftcamConfigError:
             self.StartCreateCamlist()
-            self.listecminfo()
+            self.listECMinfo()
 
-    def listecminfo(self):
+    def listECMinfo(self):
+        printDBG("self.listECMinfo() >>")
         listecm = ""
         try:
             ecmfiles = open("/tmp/ecm.info", "r")
@@ -220,20 +236,23 @@ class AltCamManager(Screen):
             self["status"].setText(_("No /tmp/ecm.info file!!!"))
 
     def StartCreateCamlist(self):
-        cmd = "ls %s" % config.plugins.AltSoftcam.camdir.value
-        self.Console.ePopen(cmd, self.CamListStart)
+        printDBG("self.StartCreateCamlist() >>")
+        self.softcamList = []
+        if os.path.exists(config.plugins.AltSoftcam.camdir.value) and os.path.isdir(config.plugins.AltSoftcam.camdir.value):
+            for camFileName in sorted(os.listdir(config.plugins.AltSoftcam.camdir.value), key=str.lower):
+                if os.path.isfile(os.path.join(config.plugins.AltSoftcam.camdir.value,camFileName)):
+                    self.softcamList.append(camFileName)
+                    os.chmod(os.path.join(config.plugins.AltSoftcam.camdir.value,camFileName), 0o755)
+                    #if isCamRunning(self.actcam)
 
-    def CamListStart(self, result, retval, extra_args):
-        if not result.startswith('ls: '):
-            self.softcamlist = result
-            self.Console.ePopen("chmod 755 %s" % config.plugins.AltSoftcam.camdir.value)
             self.Console.ePopen("pidof %s" % self.actcam, self.CamActive)
 
     def CamActive(self, result, retval, extra_args):
+        printDBG("self.CamActive() >>")
         if result.strip():
             self.CreateCamList()
         else:
-            for line in self.softcamlist.splitlines():
+            for line in self.softcamList:
                 if config.plugins.AltSoftcam.OsCamonly.value == True and line.lower().find("oscam") < 0:
                     continue
                 if line != self.actcam:
@@ -241,11 +260,13 @@ class AltCamManager(Screen):
             self.Console.ePopen("echo 1", self.CamActiveFromList, "none")
 
     def CamActiveFromList(self, result, retval, extra_args):
+        printDBG("self.CamActiveFromList() >>")
         if result.strip():
             self.actcam = extra_args
             self.CreateCamList()
 
     def CreateCamList(self):
+        printDBG("self.CreateCamList() >>")
         self.list = []
         try:
             test = self.actcam
@@ -257,23 +278,24 @@ class AltCamManager(Screen):
             try:
                 self.list.append((self.actcam, softpng, self.checkcam(self.actcam)))
             except:
-                print "[ASM] error loading self.actcam"
+                printDBG("[ASM] error loading self.actcam")
 
         if pathExists(resolveFilename(SCOPE_PLUGINS, "Extensions/AlternativeSoftCamManager/images/defcam.png")):
             softpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/AlternativeSoftCamManager/images/defcam.png"))
-            if len(self.softcamlist.splitlines()) > 0:
-                for line in self.softcamlist.splitlines():
+            if len(self.softcamList) > 0:
+                for line in self.softcamList:
                     try:
                         if config.plugins.AltSoftcam.OsCamonly.value == True and line.lower().find("oscam") < 0:
                             continue
                         if line != self.actcam:
                             self.list.append((line, softpng, self.checkcam(line)))
                     except:
-                        print "[ASM] error loading %s" % line
+                        printDBG("[ASM] error loading %s" % line)
                         pass
         self["list"].setList(self.list)
 
     def checkcam (self, cam):
+        printDBG("self.checkcam() >>")
         if "oscam" in cam.lower():
             return "Oscam"
         elif "softcam" in cam.lower():
@@ -312,90 +334,68 @@ class AltCamManager(Screen):
             return cam[0:6]
 
     def start(self):
+        printDBG("self.start() >>>")
         global AltSoftcamConfigError
         if not AltSoftcamConfigError:
             self.camstart = self["list"].getCurrent()[0]
             if self.camstart != self.actcam:
-                print "[Alternative SoftCam Manager] Start SoftCam"
-                try: 
-                    with open("/proc/sys/vm/drop_caches", "w") as f: f.write("1\n")
-                except Exception:
-                    pass
-                self.Console.ePopen("chmod 755 %s/*oscam*" % config.plugins.AltSoftcam.camdir.value)
+                printDBG("\t Start SoftCam")
+                doSystemCMD("chmod 755 %s/*oscam*" % config.plugins.AltSoftcam.camdir.value)
                 self.camstartcmd = getcamcmd(self.camstart)
-                msg = _("Starting %s") % self.camstart
-                self.mbox = self.session.open(MessageBox, msg, MessageBox.TYPE_INFO)
-                self.activityTimer = eTimer()
-                self.activityTimer.timeout.get().append(self.Stopping)
-                self.activityTimer.start(100, False)
+                time.sleep(0.5)
+                self.Stopping()
             else:
                 self.restart()
 
     def stop(self):
+        printDBG('self.stop() >>>')
+        printDBG('\t self.actcam=',self.actcam)
         if self.actcam != "none":
-            try: 
-                with open("/proc/sys/vm/drop_caches", "w") as f: f.write("1\n")
-            except Exception:
-                pass
-            self.Console.ePopen("/etc/init.d/softcam stop;killall -9 %s" % self.actcam)
-            print "[Alternative SoftCam Manager] stop ", self.actcam
-            try:
-                remove("/tmp/ecm.info")
-            except Exception:
-                pass
-            msg  = _("Stopping %s") % self.actcam
+            doSystemCMD("/etc/init.d/softcam stop;killall -9 %s" % self.actcam)
+            if pathExists("/tmp/ecm.info"):
+                os.remove("/tmp/ecm.info")
+            if pathExists("/tmp/pmt.tmp"):
+                os.remove("/tmp/pmt.tmp")
             self.actcam = "none"
-            self.mbox = self.session.open(MessageBox, msg, MessageBox.TYPE_INFO)
-            self.activityTimer = eTimer()
-            self.activityTimer.timeout.get().append(self.closestop)
-            self.activityTimer.start(1000, False)
-
-    def closestop(self):
-        self.activityTimer.stop()
-        self.mbox.close()
-        self.CreateInfo()
+            time.sleep(0.5)
+            self.StartCreateCamlist()
 
     def restart(self):
+        printDBG("self.restart() >>")
         global AltSoftcamConfigError
         if not AltSoftcamConfigError:
-            print "[Alternative SoftCam Manager] restart SoftCam"
             self.camstart = self.actcam
             if self.camstartcmd == "":
                 self.camstartcmd = getcamcmd(self.camstart)
-            msg  = _("Restarting %s") % self.actcam
-            self.mbox = self.session.open(MessageBox, msg, MessageBox.TYPE_INFO)
-            self.activityTimer = eTimer()
-            self.activityTimer.timeout.get().append(self.Stopping)
-            self.activityTimer.start(100, False)
+            time.sleep(0.1)
+            self.Stopping()
 
     def Stopping(self):
-        self.activityTimer.stop()
-        if pathExists("/etc/init.d/softcam"):
-            self.Console.ePopen("/etc/init.d/softcam stop")
-        self.Console.ePopen("killall -9 %s" % self.actcam)
-        print "[Alternative SoftCam Manager] stopping ", self.actcam
-        self.activityTimer = eTimer()
-        self.activityTimer.timeout.get().append(self.Starting)
-        self.activityTimer.start(500, False)
+        printDBG("self.stopping() >>>")
+        printDBG("\t self.actcam='%s'" % self.actcam)
+        if 'oscam' in self.actcam:
+            doSystemCMD("/etc/init.d/softcam stop;killall -9 oscam")
+        else:
+            doSystemCMD("/etc/init.d/softcam stop;killall -9 %s" % self.actcam)
+        time.sleep(0.5)
+        self.Starting()
         
     def Starting(self):
-        self.activityTimer.stop()
-        try:
-            if pathExists("/tmp/ecm.info"):
-                remove("/tmp/ecm.info")
-            if pathExists("/tmp/pmt.tmp"):
-                remove("/tmp/pmt.tmp")
-        except Exception:
-            pass
+        printDBG("self.Starting() >>>")
+        if pathExists("/tmp/ecm.info"):
+            os.remove("/tmp/ecm.info")
+        if pathExists("/tmp/pmt.tmp"):
+            os.remove("/tmp/pmt.tmp")
         self.actcam = self.camstart
+        printDBG('\t getting self.session.nav.getCurrentlyPlayingServiceReference()')
         service = self.session.nav.getCurrentlyPlayingServiceReference()
         if service:
+            printDBG('\t self.session.nav.stopService()')
             self.session.nav.stopService()
-        self.Console.ePopen(self.camstartcmd)
-        print "[Alternative SoftCam Manager] started", self.camstartcmd
-        if self.mbox:
-            self.mbox.close()
+        doSystemCMD('(' + self.camstartcmd + ') &')
+        printDBG( "\t started '%s'" % self.camstartcmd)
         if service:
+            printDBG('\t self.session.nav.playService(service)')
             self.session.nav.playService(service)
         self.CreateInfo()
 
@@ -406,12 +406,14 @@ class AltCamManager(Screen):
             self.restart()
 
     def cancel(self):
+        printDBG("self.cancel() >>")
         if config.plugins.AltSoftcam.actcam.value != self.actcam:
             config.plugins.AltSoftcam.actcam.value = self.actcam
             config.plugins.AltSoftcam.actcam.save()
         self.close()
 
     def setup(self):
+        printDBG("self.setup() >>")
         self.session.openWithCallback(self.CreateInfo, ConfigEdit)
 
 ######################################################################################
@@ -461,7 +463,7 @@ class ConfigEdit(Screen, ConfigListScreen):
                 titletxt=_("Select directory with configs")
             else:
                 titletxt=_("Select directory")
-            if os_path.isdir(currItem.value):
+            if os.path.isdir(currItem.value):
                 self.session.openWithCallback(boundFunction(SetDirPathCallBack, curIndex), DirectorySelectorWidget, currDir=currItem.value, title=titletxt)
             else:
                 self.session.openWithCallback(boundFunction(SetDirPathCallBack, curIndex), DirectorySelectorWidget, currDir='/', title=titletxt)
@@ -471,7 +473,7 @@ class ConfigEdit(Screen, ConfigListScreen):
             or self.camdirold != config.plugins.AltSoftcam.camdir.value:
             self.session.openWithCallback(self.updateConfig, MessageBox,
                 (_("Are you sure you want to save this configuration?\n\n")))
-        elif not os_path.isdir(self.camconfigold) or not os_path.isdir(self.camdirold):
+        elif not os.path.isdir(self.camconfigold) or not os.path.isdir(self.camdirold):
             self.updateConfig(True)
         else:
             config.plugins.AltSoftcam.enabled.save()
@@ -482,9 +484,9 @@ class ConfigEdit(Screen, ConfigListScreen):
         if ret == True:
             global AltSoftcamConfigError
             msg = [ ]
-            if not os_path.isdir(config.plugins.AltSoftcam.camconfig.value):
+            if not os.path.isdir(config.plugins.AltSoftcam.camconfig.value):
                 msg.append("%s " % config.plugins.AltSoftcam.camconfig.value)
-            if not os_path.isdir(config.plugins.AltSoftcam.camdir.value):
+            if not os.path.isdir(config.plugins.AltSoftcam.camdir.value):
                 msg.append("%s " % config.plugins.AltSoftcam.camdir.value)
             if msg == [ ]:
                 if config.plugins.AltSoftcam.camconfig.value[-1] == "/":
@@ -520,7 +522,7 @@ class DirectorySelectorWidget(Screen):
             <widget name="filelist"     position="10,85"  zPosition="1"  size="580,335" transparent="1" scrollbarMode="showOnDemand" />
     </screen>"""
     def __init__(self, session, currDir, title="Select directory"):
-        print("DirectorySelectorWidget.__init__ -------------------------------")
+        printDBG("DirectorySelectorWidget.__init__ -------------------------------")
         Screen.__init__(self, session)
         # for the skin: first try MediaPlayerDirectoryBrowser, then FileBrowser, this allows individual skinning
         #self.skinName = ["MediaPlayerDirectoryBrowser", "FileBrowser" ]
@@ -549,7 +551,7 @@ class DirectorySelectorWidget(Screen):
             returns status instead of raising exception
         """
         try:
-            os_mkdir(newdir)
+            os.mkdir(newdir)
             sts = True
             msg = _('Directory "%s" has been created.') % newdir
         except:
@@ -559,15 +561,15 @@ class DirectorySelectorWidget(Screen):
         return sts,msg
     
     def __del__(self):
-        print("DirectorySelectorWidget.__del__ -------------------------------")
+        printDBG("DirectorySelectorWidget.__del__ -------------------------------")
 
     def __onClose(self):
-        print("DirectorySelectorWidget.__onClose -----------------------------")
+        printDBG("DirectorySelectorWidget.__onClose -----------------------------")
         self.onClose.remove(self.__onClose)
         self.onLayoutFinish.remove(self.layoutFinished)
 
     def layoutFinished(self):
-        print("DirectorySelectorWidget.layoutFinished -------------------------------")
+        printDBG("DirectorySelectorWidget.layoutFinished -------------------------------")
         self.setTitle(_(self.title))
         self.currDirChanged()
 
@@ -576,7 +578,7 @@ class DirectorySelectorWidget(Screen):
         
     def getCurrentDirectory(self):
         currDir = self["filelist"].getCurrentDirectory()
-        if currDir and os_path.isdir( currDir ):
+        if currDir and os.path.isdir( currDir ):
             return currDir
         else:
             return "/"
@@ -597,7 +599,7 @@ class DirectorySelectorWidget(Screen):
 
     def newDir(self):
         currDir = self["filelist"].getCurrentDirectory()
-        if currDir and os_path.isdir( currDir ):
+        if currDir and os.path.isdir( currDir ):
             self.session.openWithCallback(boundFunction(self.enterPatternCallBack, currDir), VirtualKeyBoard, title = (_("Enter name")), text = "")
 
     def IsValidFileName(name, NAME_MAX=255):
@@ -613,7 +615,7 @@ class DirectorySelectorWidget(Screen):
         if None != currDir and newDirName != None:
             sts = False
             if self.IsValidFileName(newDirName):
-                sts,msg = self.mkdir(os_path.join(currDir, newDirName))
+                sts,msg = self.mkdir(os.path.join(currDir, newDirName))
             else:
                 msg = _("Incorrect directory name.")
             if sts:
