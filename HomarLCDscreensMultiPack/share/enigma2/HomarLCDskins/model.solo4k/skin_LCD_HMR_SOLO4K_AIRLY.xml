@@ -878,7 +878,7 @@ options="movetype=running,startpoint=0,direction=left,steptime=20,repeat=0,start
 <!-- Simple -->
 <screen name="SimpleSummary" position="0,0" size="480,320" id="1">
   <ePixmap pixmap="HomarLCDskins/Homar_480x320/Homar_1.png" position="0,0" size="480,320" zPosition="-1" alphatest="blend" />
-  <widget source="session.j00zekStaticSource" render="j00zekTunerIcon" iconspath="/usr/share/enigma2/HomarLCDskins/Homar" position="10,15" size="480,320" zPosition="-1" alphatest="blend" />
+  <ePixmap pixmap="HomarLCDskins/Homar/currentBoxLogo.png" position="10,15" size="480,320" zPosition="-1" alphatest="blend" />
   <ePixmap pixmap="HomarLCDskins/Homar_480x320/Homar_5.png" position="175,72" size="200,200" zPosition="1" alphatest="blend" />
   <widget source="global.CurrentTime" render="VWatches" position="199,95" size="100,100" zPosition="5" foregroundColor="#000000" alphatest="on">
   <convert type="VExtraNumText">minHand</convert>

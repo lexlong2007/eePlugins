@@ -1,7 +1,0 @@
-Wszystko jest instalowane w katalogu /usr/share/enigma2/HomarLCDskins
-Katalogi Vu.<nazwa tunera> zawierają definicje ekranów. Instalator paczki tworzy linki w zależności od używanego tunera i softu.
-
-Aby widziec wszystkie skorki w UserSkin i móc nad mini pracować na swoim ultimo, przestaw w pliku konfiguracja opcje trybDevelopera z Off na On
-
-Jak będziesz chciał dodac nowy konwerter, to wyslij mi go na PW, ja do doam pod niekolidująca nazwą do paczki i wtedy będziesz mógł z nego korzystać.
-

@@ -46,7 +46,8 @@ do
     if [ $doRefresh -eq 1 ];then rm -f $skinsDir/display/$LCDskin;fi
   fi  
 done
- 
+
+[ -e /usr/share/enigma2/HomarLCDskins/Homar/vu$model.png ] && ln -sf /usr/share/enigma2/HomarLCDskins/Homar/vu$model.png /usr/share/enigma2/HomarLCDskins/Homar/currentBoxLogo.png
 #info
 echo "$systemType" > /usr/share/enigma2/BlackHarmony/image.info
 if [ $lang == 'PL' ]; then
