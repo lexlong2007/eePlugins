@@ -381,6 +381,10 @@ class FileList(MenuList):
             if selectedIndex >0:
                 self.moveToIndex(selectedIndex-1)
 
+    def setMatchingPattern(self, matchingPattern):
+        if not matchingPattern is None and matchingPattern != '':
+            self.matchingPattern = matchingPattern
+        
     def partitionListChanged(self, action, device):
         self.refreshMountpoints()
         if self.current_directory is None:

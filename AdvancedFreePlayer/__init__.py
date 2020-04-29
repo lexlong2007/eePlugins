@@ -201,9 +201,12 @@ myConfig.Inits = ConfigText(default = "540,60,Regular,0,1,0", fixed_size = False
 #position,size,type,color,visibility,background
 myConfig.PlayerOn = NoSave( ConfigYesNo(default = False))
 
+myConfig.DirectoryCoversDescriptons = ConfigYesNo(default = True) # informacja o katalogu z plikow _dir.info i _dir.png
+
 #Downloading covers
 myConfig.AutoDownloadCoversDescriptions = ConfigYesNo(default = True)
 myConfig.PermanentCoversDescriptons = ConfigYesNo(default = False)
+
 #myConfig.MovieSearchTree = ConfigText(default = "/hdd/movie/", fixed_size = False)
 
 try:
@@ -222,5 +225,9 @@ myConfig.ShowPicturesFiles = ConfigYesNo(default = False)
     
 myConfig.MoveToTrash = ConfigYesNo(default = False)
 myConfig.TrashFolder = ConfigText(default = "/hdd/movie/trashcan", fixed_size = False)
+
+#session settings, not saved
+myConfig.FileNameFilter = NoSave(ConfigText(default = "", fixed_size = False))
+myConfig.FileListSelectedItem = NoSave(ConfigText(default = "", fixed_size = False))
 #ToDo
 myConfig.CacheStreams = ConfigYesNo(default = False)

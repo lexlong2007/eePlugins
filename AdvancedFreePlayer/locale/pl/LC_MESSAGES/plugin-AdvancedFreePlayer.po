@@ -95,11 +95,11 @@ msgstr "Błąd ładowania pliku z napisami !!!"
 msgid "Install DMnapi"
 msgstr "Instalacja DMnapi"
 
-msgid "Sort by name"
-msgstr "Sortowanie wg nazw"
+msgid "Sort by filename"
+msgstr "Posortowano wg nazw plików"
 
 msgid "Sort by date"
-msgstr "Sortowanie wg daty"
+msgstr "Posortowano wg daty"
 
 msgid "Save"
 msgstr "Zapisz"
@@ -222,17 +222,17 @@ msgstr "Napisy SRT wyświetlane przez:"
 msgid "Line1\nLine2\nLine3"
 msgstr "Linia 1\nLinia 2\nLinia 3"
 
-msgid "--- Standard settings ---"
-msgstr "--- Ustawienia standardowe ---"
+msgid "*** Standard settings ***"
+msgstr "*** Ustawienia standardowe ***"
 
-msgid "--- Infobar settings ---"
-msgstr "--- Ustawienia paska informacyjnego ---"
+msgid "*** Infobar settings ***"
+msgstr "*** Ustawienia paska informacyjnego ***"
 
-msgid "--- Subtitles settings ---"
-msgstr "--- Ustawienia napisow ---"
+msgid "*** Subtitles settings ***"
+msgstr "*** Ustawienia napisow ***"
 
-msgid "--- Advanced settings ---"
-msgstr "--- Ustawienia dodatkowe ---"
+msgid "*** Advanced settings ***"
+msgstr "*** Ustawienia dodatkowe ***"
 
 msgid "Download:"
 msgstr "Pobierz:"
@@ -270,8 +270,8 @@ msgstr "Początkowe sortowanie:"
 msgid "Time displaying infobar:"
 msgstr "Czas wyświetlanie belki informacyjnej:"
 
-msgid "--- Cover & Descriptions settings ---"
-msgstr "--- Ustawienia pobierania miniatur i opisów ---"
+msgid "*** Cover & Descriptions settings ***"
+msgstr "*** Ustawienia pobierania miniatur i opisów ***"
 
 msgid "Download Covers & Descriptions from WEB:"
 msgstr "Pobierz okładki i opisy z sieci:"
@@ -380,3 +380,37 @@ msgstr "Przenieść film '%s' do śmietnika?"
 
 msgid "From: %s\n"
 msgstr "Z: %s\n"
+
+msgid "Show Movie with name containing:"
+msgstr "Wyświetl filmy zawierające w nazwie:"
+
+msgid "Missing directory info (_dir.info)"
+msgstr "Brak informacji o katalogu (_dir.info)"
+
+msgid "Missing directory cover (_dir.png)"
+msgstr "Brak okładki dla katalogu (_dir.png)"
+
+msgid "*** Session settings ***"
+msgstr "*** Ustawienia sesji ***"
+
+msgid "Show only movies containing (OK):"
+msgstr "Tylko filmy zawierające w nazwie (OK):"
+
+msgid "Rename (OK):"
+msgstr "Zmień nazwę (OK):"
+
+msgid "Fitering disabled"
+msgstr "Bez filtrowania"
+
+msgid "Active filter: %s"
+msgstr "Aktywny filtr: %s"
+
+msgid "Changing '%s' to '%s'\nDo you confirm it?"
+msgstr "Zmiana '%s' na '%s'\nPotwierdzasz?"
+
+msgid "New filename..."
+msgstr "Nowa nazwa pliku..."
+
+msgid "Movie name must contain..."
+msgstr "Nazwa filmu musi zawierać..."
+

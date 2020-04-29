@@ -115,7 +115,8 @@
     <widget name="filelist" position="95,225" size="1130,560" font0="Roboto_HD; 27" itemHeight="35" scrollbarMode="showOnDemand" selectionPixmap="BlackHarmony/menu/sel_1130_35.png" backgroundColor="black" enableWrapAround="1" scrollbarWidth="10" scrollbarSliderBorderWidth="1" scrollbarSliderForegroundColor="#e6e6e6" scrollbarSliderBorderColor="#3b3e3f" transparent="1"/>
     <widget name="filemovie" position="95,862" size="1130,30" font="Roboto_HD; 27" backgroundColor="background" transparent="1" foregroundColor="green"/>
     <widget name="filesubtitle" position="95,913" size="1130,30" font="Roboto_HD; 27" backgroundColor="background" transparent="1" foregroundColor="pastel"/>
-    <widget name="myPath" position="97,170" size="1128,30" font="Roboto_HD; 27" foregroundColor="light_yellow" backgroundColor="background" transparent="1"/>
+    <widget name="myPath"   position="97,170" size="1128,30" font="Roboto_HD; 27" foregroundColor="light_yellow" backgroundColor="background" transparent="1"/>
+    <widget name="myFilter" position="97,170" size="1128,30" font="Roboto_HD; 27" foregroundColor="lemon" backgroundColor="background" transparent="1" halign="right"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_red.png" position="110,996" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_green.png" position="500,996" size="35,27" alphatest="blend"/>
     <ePixmap pixmap="BlackHarmony/buttons/key_yellow.png" position="890,996" size="35,27" alphatest="blend"/>

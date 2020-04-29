@@ -1180,7 +1180,6 @@ class AdvancedFreePlayerLCD(Screen):
     
 ##################################################################### Status Screen <<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 class StatusScreen(Screen):
-
     def __init__(self, session):
         self.delayTimer = eTimer()
         self.delayTimer.callback.append(self.hideStatus)

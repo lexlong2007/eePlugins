@@ -23,6 +23,7 @@
   
   <widget name="info" position="40,25" size="800,30" font="Regular; 27" backgroundColor="#20606060" transparent="1" />
   <widget name="myPath" position="50,86" size="715,25" font="Regular;20" foregroundColor="#00ffffff" backgroundColor="#004e4e4e" transparent="1" />
+  <widget name="myFilter" position="50,86" size="715,25" font="Regular;20" foregroundColor="#00ffffff" backgroundColor="#004e4e4e" transparent="1" halign="right"/>
   <widget name="filelist" position="60,116" size="690,439" zPosition="1" font="Regular;20" transparent="1" scrollbarMode="showOnDemand" />
 
   <widget name="Description" position="780,256" size="435,366" font="Regular;18" zPosition="1" transparent="1"/>

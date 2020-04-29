@@ -20,7 +20,7 @@ from Components.Label import Label
 from Components.Sources.StaticText import StaticText
 from Components.config import *
 #from Tools.LoadPixmap import LoadPixmap
-from os import path, remove, listdir, symlink, system, access, W_OK
+#from os import path, remove, listdir, symlink, system, access, W_OK,
 import re
 
 from enigma import eTimer
@@ -31,10 +31,10 @@ from time import *
 from j00zekFileList import FileList, EXTENSIONS
 import json
 import datetime
+import os
 import time
 
 class AdvancedFreePlayerStarter(Screen):
-
     def __init__(self, session, openmovie, movieTitle):
         printDEBUG("AdvancedFreePlayerStarter >>>")
         self.sortDate = False
@@ -45,7 +45,7 @@ class AdvancedFreePlayerStarter(Screen):
         self.rootID = myConfig.MultiFramework.value
         self.LastPlayedService = None
   
-        if path.exists(ExtPluginsPath + '/DMnapi/DMnapi.pyo') or path.exists(ExtPluginsPath +'/DMnapi/DMnapi.pyc') or path.exists(ExtPluginsPath +'/DMnapi/DMnapi.py'):
+        if os.path.exists(ExtPluginsPath + '/DMnapi/DMnapi.pyo') or os.path.exists(ExtPluginsPath +'/DMnapi/DMnapi.pyc') or os.path.exists(ExtPluginsPath +'/DMnapi/DMnapi.py'):
             self.DmnapiInstalled = True
         else:
             self.DmnapiInstalled = False
@@ -58,9 +58,9 @@ class AdvancedFreePlayerStarter(Screen):
     def PlayMovie(self):
         self.onShow.remove(self.PlayMovie)
         if not self.openmovie == "":
-            if not path.exists(self.openmovie + '.cuts'):
+            if not os.path.exists(self.openmovie + '.cuts'):
                 self.SelectFramework()
-            elif path.getsize(self.openmovie + '.cuts') == 0:
+            elif os.path.getsize(self.openmovie + '.cuts') == 0:
                 self.SelectFramework()
             else:
                 self.session.openWithCallback(self.ClearCuts, MessageBox, _("Do you want to resume this playback?"), timeout=10, default=True)
@@ -90,9 +90,9 @@ class AdvancedFreePlayerStarter(Screen):
     def StartPlayer(self):
         self.lastOPLIsetting = None
         
-        if not path.exists(self.opensubtitle) and not self.opensubtitle.startswith("http://"):
+        if not os.path.exists(self.opensubtitle) and not self.opensubtitle.startswith("http://"):
             self.opensubtitle = ""
-        if path.exists(self.openmovie) or self.openmovie.startswith("http://"):
+        if os.path.exists(self.openmovie) or self.openmovie.startswith("http://"):
             if myConfig.SRTplayer.value =="system":
                 try: 
                     self.lastOPLIsetting = config.subtitles.pango_autoturnon.value
@@ -122,7 +122,6 @@ class AdvancedFreePlayerStarter(Screen):
 ##################################################################### CLASS END #####################################################################
 
 class AdvancedFreePlayerStart(Screen):
-
     def __init__(self, session):
         #printDEBUG("AdvancedFreePlayerStart >>>")
         self.openmovie = ''
@@ -142,6 +141,7 @@ class AdvancedFreePlayerStart(Screen):
         Screen.__init__(self, session)
         self["info"] = Label()
         self["myPath"] = Label(myConfig.FileListLastFolder.value)
+        self["myFilter"] = Label(_('Fitering disabled'))
         
         self["filemovie"] = Label(self.movietxt)
         self["filesubtitle"] = Label(self.subtitletxt)
@@ -154,7 +154,7 @@ class AdvancedFreePlayerStart(Screen):
         self["Description"] = Label(KeyMapInfo)
         self["Cover"] = j00zekAccellPixmap()
         
-        if path.exists(ExtPluginsPath + '/DMnapi/DMnapi.pyo') or path.exists(ExtPluginsPath +'/DMnapi/DMnapi.pyc') or path.exists(ExtPluginsPath +'/DMnapi/DMnapi.py'):
+        if os.path.exists(ExtPluginsPath + '/DMnapi/DMnapi.pyo') or os.path.exists(ExtPluginsPath +'/DMnapi/DMnapi.pyc') or os.path.exists(ExtPluginsPath +'/DMnapi/DMnapi.py'):
             self.DmnapiInstalled = True
             self["key_green"] = StaticText(_("DMnapi"))
         else:
@@ -166,26 +166,12 @@ class AdvancedFreePlayerStart(Screen):
             self["key_blue"] = StaticText(_("Sort by date"))
             self.sortDate = True
         else:
-            self["key_blue"] = StaticText(_("Sort by name"))
+            self["key_blue"] = StaticText(_("Sort by filename"))
             self.sortDate = False
         self["info"].setText(PluginName + ' ' + PluginInfo)
         
-        self.matchingPattern = ""
-        for myExtension in EXTENSIONS:
-            print myExtension, EXTENSIONS[myExtension]
-            if EXTENSIONS[myExtension] == "movie":
-                self.matchingPattern += "|" + myExtension
-            elif EXTENSIONS[myExtension] == "movieurl":
-                self.matchingPattern += "|" + myExtension
-            elif myConfig.ShowMusicFiles.value == True and  EXTENSIONS[myExtension] == "music":
-                self.matchingPattern += "|" + myExtension
-            elif myConfig.ShowPicturesFiles.value == True and  EXTENSIONS[myExtension] == "picture":
-                self.matchingPattern += "|" + myExtension
-            elif myConfig.TextFilesOnFileList.value == True and  EXTENSIONS[myExtension] == "text":
-                self.matchingPattern += "|" + myExtension
-        self.matchingPattern = self.matchingPattern[1:]
-        print   self.matchingPattern
-        self.filelist = FileList(myConfig.FileListLastFolder.value, matchingPattern = "(?i)^.*\.(" + self.matchingPattern + ")(?!\.(cuts|ap$|meta$|sc$|wget$))",sortDate=self.sortDate)
+         
+        self.filelist = FileList(myConfig.FileListLastFolder.value, matchingPattern = self.buildmatchingPattern(), sortDate=self.sortDate)
             
         self["filelist"] = self.filelist
         self["actions"] = ActionMap(["AdvancedFreePlayerSelector"],
@@ -208,6 +194,7 @@ class AdvancedFreePlayerStart(Screen):
             self.session.nav.stopService()
         
         self.onLayoutFinish.append(self.__onLayoutFinish)
+        self.onShown.append(self.__onShown) 
         self.GetCoverTimer = eTimer()
         #TZ LOCAL TIME offset
         now_timestamp = time.time()
@@ -217,6 +204,33 @@ class AdvancedFreePlayerStart(Screen):
     def __onLayoutFinish(self):
         self.GetCoverTimer.callback.append(self.__refreshFilelist)
         self.GetCoverTimer.start(50, True)
+
+    def __onShown(self):
+        printDEBUG("__onShown()")
+        self.session.summary.LCD_showLogo()
+    
+    def buildmatchingPattern(self):
+        matchingPattern = "(?i)^.*"
+        if myConfig.FileNameFilter.value != '':
+            matchingPattern += myConfig.FileNameFilter.value + '.*'
+        matchingPattern += "\.("
+        tmpPart = ''
+        for myExtension in EXTENSIONS:
+            print myExtension, EXTENSIONS[myExtension]
+            if EXTENSIONS[myExtension] == "movie":
+                tmpPart += "|" + myExtension
+            elif EXTENSIONS[myExtension] == "movieurl":
+                tmpPart += "|" + myExtension
+            elif myConfig.ShowMusicFiles.value == True and  EXTENSIONS[myExtension] == "music":
+                tmpPart += "|" + myExtension
+            elif myConfig.ShowPicturesFiles.value == True and  EXTENSIONS[myExtension] == "picture":
+                tmpPart += "|" + myExtension
+            elif myConfig.TextFilesOnFileList.value == True and  EXTENSIONS[myExtension] == "text":
+                tmpPart += "|" + myExtension
+        matchingPattern += tmpPart[1:] + ")(?!\.(cuts|ap$|meta$|sc$|wget$))"
+        printDEBUG("matchingPattern=%s" % matchingPattern)
+        self.currentFileNameFilter = myConfig.FileNameFilter.value
+        return matchingPattern
     
     def __refreshFilelist(self):
         self.GetCoverTimer.callback.remove(self.__refreshFilelist)
@@ -294,22 +308,22 @@ class AdvancedFreePlayerStart(Screen):
                 ClearMemory()
                 if selection[1] == True: # isDir
                     printDEBUG('Deleting folder %s' % selection[0])
-                    system('rm -rf "%s"' % selection[0])
+                    os.system('rm -rf "%s"' % selection[0])
                 else:
                     if selection[0][-4:].lower() in ('.srt','.txt','.url'):
                         if myConfig.MoveToTrash.value == True:
                             printDEBUG('Moving file "%s/%s" to %s/' % (self.filelist.getCurrentDirectory(),selection[0], myConfig.TrashFolder.value))
-                            system('mkdir -p "%s";mv -f "%s/%s" %s/' % (myConfig.TrashFolder.value, self.filelist.getCurrentDirectory(),selection[0], myConfig.TrashFolder.value))
+                            os.system('mkdir -p "%s";mv -f "%s/%s" %s/' % (myConfig.TrashFolder.value, self.filelist.getCurrentDirectory(),selection[0], myConfig.TrashFolder.value))
                         else:
                             printDEBUG('Deleting file "%s/%s"' % (self.filelist.getCurrentDirectory(),selection[0]))
-                            system('rm -rf "%s/%s"' % (self.filelist.getCurrentDirectory(),selection[0]))
+                            os.system('rm -rf "%s/%s"' % (self.filelist.getCurrentDirectory(),selection[0]))
                     else:
                         if myConfig.MoveToTrash.value == True:
                             printDEBUG('Moving files "%s/%s"* to %s/' % (self.filelist.getCurrentDirectory(),selection[0][:-4], myConfig.TrashFolder.value))
-                            system('mkdir -p "%s";mv -f "%s/%s"* %s/' % (myConfig.TrashFolder.value, self.filelist.getCurrentDirectory(),selection[0][:-4], myConfig.TrashFolder.value))
+                            os.system('mkdir -p "%s";mv -f "%s/%s"* %s/' % (myConfig.TrashFolder.value, self.filelist.getCurrentDirectory(),selection[0][:-4], myConfig.TrashFolder.value))
                         else:
                             printDEBUG('Deleting files "%s/%s"*' % (self.filelist.getCurrentDirectory(),selection[0][:-4]))
-                            system('rm -rf "%s/%s"*' % (self.filelist.getCurrentDirectory(),selection[0][:-4]))
+                            os.system('rm -rf "%s/%s"*' % (self.filelist.getCurrentDirectory(),selection[0][:-4]))
             self["filelist"].refresh()
             self.buttonsNames()
             self.GetCoverTimer.stop()
@@ -391,10 +405,10 @@ class AdvancedFreePlayerStart(Screen):
             self.openmovie = ''
             self.opensubtitle = ''
 
-        if not path.exists(self.opensubtitle) and not self.opensubtitle.startswith("http://"):
+        if not os.path.exists(self.opensubtitle) and not self.opensubtitle.startswith("http://"):
             self.opensubtitle = ""
             
-        if path.exists(self.openmovie) or self.openmovie.startswith("http://"):
+        if os.path.exists(self.openmovie) or self.openmovie.startswith("http://"):
             if myConfig.SRTplayer.value =="system":
                 printDEBUG("PlayWithSystem title:'%s' filename:'%s'" %(self.movieTitle,self.openmovie))
                 from PlayWithSystem import AdvancedFreePlayer
@@ -419,9 +433,47 @@ class AdvancedFreePlayerStart(Screen):
         else:
             printDEBUG("StartPlayer>>> File %s does not exist :(" % self.openmovie)
 
+    def runConfigRet(self):
+        doRefresh = False
+        #obsluga zmiany filtra
+        if self.currentFileNameFilter != myConfig.FileNameFilter.value:
+            doRefresh = True
+            if myConfig.FileNameFilter.value == '':
+                self["myFilter"].setText(_('Fitering disabled'))
+            else:
+                self["myFilter"].setText(_('Active filter: %s') % myConfig.FileNameFilter.value)
+            self["filelist"].setMatchingPattern(self.buildmatchingPattern())
+        #obsluga zmiany nazwy
+        if myConfig.FileListSelectedItem.value != '' and myConfig.FileListSelectedItem.value != self.FileListSelectedItem:
+                doRefresh = True
+                currDir = self.filelist.getCurrentDirectory().strip()
+                if self["filelist"].getSelection()[1] == True: # isDir
+                    FullPathSource = os.path.join(currDir, self.FileListSelectedItem)
+                    if os.path.exists(FullPathSource) and os.path.isdir(FullPathSource):
+                        FullPathDest = os.path.join(currDir, myConfig.FileListSelectedItem.value)
+                        if FullPathDest.strip() != currDir:
+                            printDEBUG("Renaming directory...\n\t %s\n\t %s" % (FullPathSource,FullPathDest))
+                            ClearMemory()
+                            os.system('mv -f %s %s' % (FullPathSource, FullPathDest))
+                    else:
+                        printDEBUG("'%s' does not exist. Renaming impossible" % FullPathSource)
+                else: #isFile
+                    sourceNamePartToReplace = self.FileListSelectedItem + '.'
+                    for f in os.listdir(currDir):
+                        sourceFile = os.path.join(currDir, f)
+                        if os.path.isfile(sourceFile) and sourceNamePartToReplace in f:
+                            destFile = sourceFile.replace(sourceNamePartToReplace, myConfig.FileListSelectedItem.value + '.')
+                            printDEBUG("Renaming...\n\t %s\n\t %s" % (sourceFile, destFile ))
+                            ClearMemory()
+                            os.system('mv -f %s %s' % (sourceFile, destFile))
+
+        #finalnie odswierzamy liste, jesli to potrzebne
+        if doRefresh:
+            self["filelist"].refresh()
+
     def runConfig(self):
         from AFPconfig import AdvancedFreePlayerConfig
-        self.session.open(AdvancedFreePlayerConfig)
+        self.session.openWithCallback(self.runConfigRet, AdvancedFreePlayerConfig)
         return
 
     def setSort(self):
@@ -429,7 +481,7 @@ class AdvancedFreePlayerStart(Screen):
             #print "sortDate=False"
             self["filelist"].sortDateDisable()
             self.sortDate=False
-            self["key_blue"].setText(_("Sort by name"))
+            self["key_blue"].setText(_("Sort by filename"))
         else:
             #print "sortDate=True"
             self["filelist"].sortDateEnable()
@@ -524,10 +576,10 @@ class AdvancedFreePlayerStart(Screen):
         if movieNameWithPath == '':
             self["filesubtitle"].setText(self.subtitletxt)
             self.opensubtitle = ''
-        elif path.exists( movieNameWithPath[:-4] + ".srt"):
+        elif os.path.exists( movieNameWithPath[:-4] + ".srt"):
             self["filesubtitle"].setText(movieNameWithPath[:-4] + ".srt")
             self.opensubtitle = movieNameWithPath[:-4] + ".srt"
-        elif path.exists( movieNameWithPath[:-4] + ".txt"):
+        elif os.path.exists( movieNameWithPath[:-4] + ".txt"):
             self["filesubtitle"].setText(movieNameWithPath[:-4] + ".txt")
             self.opensubtitle = movieNameWithPath[:-4] + ".txt"
         else:
@@ -535,7 +587,7 @@ class AdvancedFreePlayerStart(Screen):
             self.opensubtitle = ''
       
     def getExtension(self, MovieNameWithExtension):
-        return path.splitext( path.basename(MovieNameWithExtension) )[1]
+        return os.path.splitext( os.path.basename(MovieNameWithExtension) )[1]
       
     def SetLocalDescriptionAndCover(self, MovieNameWithPath):
         FoundCover = False
@@ -547,17 +599,17 @@ class AdvancedFreePlayerStart(Screen):
         temp = getNameWithoutExtension(MovieNameWithPath)
         WebCoverFile='/tmp/%s.AFP.jpg' % getNameWithoutExtension(self.filelist.getFilename())
         ### COVER ###
-        if path.exists(temp + '.jpg'):
+        if os.path.exists(temp + '.jpg'):
             self.setCover(temp + '.jpg')
             FoundCover = True
-        elif path.exists(WebCoverFile) and myConfig.PermanentCoversDescriptons.value == False:
+        elif os.path.exists(WebCoverFile) and myConfig.PermanentCoversDescriptons.value == False:
             self.setCover(WebCoverFile)
             FoundCover = True
         else:
             self.setCover('hideCover')
         WebDescrFile='/tmp/%s.AFP.txt' % getNameWithoutExtension(self.filelist.getFilename())
         ### DESCRIPTION from EIT ###
-        if path.exists(temp + '.eit'):
+        if os.path.exists(temp + '.eit'):
             def parseMJD(MJD):
                 # Parse 16 bit unsigned int containing Modified Julian Date,
                 # as per DVB-SI spec
@@ -575,7 +627,7 @@ class AdvancedFreePlayerStart(Screen):
             import struct
 
             ChannelName = ''
-            if path.exists(MovieNameWithPath + '.meta'):
+            if os.path.exists(MovieNameWithPath + '.meta'):
                 with open(MovieNameWithPath + '.meta','r') as descrTXT:
                     tmpTXT = descrTXT.readline()
                     if tmpTXT.find('::') > -1:
@@ -627,7 +679,7 @@ class AdvancedFreePlayerStart(Screen):
                 self.setDescription(myDescr + ConvertChars(EETtxt) )
                 FoundDescr = True
         ### DESCRIPTION from TXT ###
-        elif path.exists(temp + '.txt'):
+        elif os.path.exists(temp + '.txt'):
             with open(temp + '.txt','r') as descrTXT:
                 myDescr = descrTXT.read()
                 if len(myDescr) < 4 or myDescr[0] == "{" or myDescr[0] =="[" or myDescr[1] == ":" or myDescr[2] == ":":
@@ -635,7 +687,7 @@ class AdvancedFreePlayerStart(Screen):
                 else:
                     self.setDescription(myDescr)
                     FoundDescr = True
-        elif path.exists(WebDescrFile) and myConfig.PermanentCoversDescriptons.value == False:
+        elif os.path.exists(WebDescrFile) and myConfig.PermanentCoversDescriptons.value == False:
             with open(WebDescrFile,'r') as descrTXT:
                 myDescr = descrTXT.read()
                 if len(myDescr) < 4 or myDescr[0] == "{" or myDescr[0] =="[" or myDescr[1] == ":" or myDescr[2] == ":":
@@ -663,8 +715,10 @@ class AdvancedFreePlayerStart(Screen):
             self.LastFolderSelected= None
             self.movieTitle = None
             ClearMemory() #just in case for nbox, where we have limited RAM
-            system('(rm -rf /tmp/*.AFP.*;mkdir -p %s) &' % myConfig.TrashFolder.value)
+            os.system('(rm -rf /tmp/*.AFP.*;mkdir -p %s) &' % myConfig.TrashFolder.value)
             myConfig.PlayerOn.value = False
+            myConfig.FileNameFilter.value = ''
+            myConfig.FileListSelectedItem.value = ''
             configfile.save()
         except Exception:
             pass
@@ -675,7 +729,7 @@ class AdvancedFreePlayerStart(Screen):
         self["Description"].setText(Text)
         
     def setCover(self, FileName):
-        if FileName in ('','hideCover') or not path.exists(FileName):
+        if FileName in ('','hideCover') or not os.path.exists(FileName):
             printDEBUG("setCover hide cover for '%s'" % FileName)
             #self["Cover"].updateIcon('dummyCover')
             self["Cover"].hide()
@@ -692,16 +746,57 @@ class AdvancedFreePlayerStart(Screen):
             self["Cover"].show()
     
     def GetCoverTimerCB(self, AlternateMovieName = ''):
+        printDEBUG("GetCoverTimerCB >>>")
         self.GetCoverTimer.stop()
         if self.gettingDataFromWEB == True:
             printDEBUG("AFP is processing webdata, waiting %s ms." % self.ShowDelay)
             self.GetCoverTimer.start(self.ShowDelay,False)
             return
-        #first we check if file selected, if no, cleaning everything
+        #wybrano katalog
         if self["filelist"].getSelection()[1] == True: # isDir
-            self.setCover('hideCover')
-            self.setDescription('')
+            # do zmiany nazwy, dla katalogu podajemy cala nazwe
+            self.FileListSelectedItem = os.path.basename(os.path.normpath(self["filelist"].getSelection()[0]))
+            myConfig.FileListSelectedItem.value = self.FileListSelectedItem
+            if self["filelist"].getSelectedIndex() != 0 and self["filelist"].getSelection()[0][:1] != '.':
+                dirFullPath = os.path.join(self.filelist.getCurrentDirectory(), myConfig.FileListSelectedItem.value)
+                printDEBUG("CurrentDirectory path %s" % dirFullPath)
+                dirDescrFile = ''
+                dirPngFile = ''
+                dirError = ''
+                if os.path.exists(dirFullPath + '_dir.info'):
+                    dirDescrFile = dirFullPath + '_dir.info'
+                elif os.path.exists(dirFullPath + '.dir.info'):
+                    dirDescrFile = dirFullPath + '.dir.info'
+                if os.path.exists(dirFullPath + '_dir.png'):
+                    dirPngFile = dirFullPath + '_dir.png'
+                elif os.path.exists(dirFullPath + '_dir.png'):
+                    dirPngFile = dirFullPath + '_dir.png'
+                    
+                if dirDescrFile != '':
+                    self["Description"].setText(open(dirDescrFile, 'r').read())
+                else:
+                    dirError = _('Missing directory info (_dir.info)')
+                    
+                if dirPngFile != '':
+                    self.setCover(dirPngFile)
+                else:
+                    self.setCover('hideCover')
+                    dirError += '\n' + _('Missing directory cover (_dir.png)')
+                    
+                if myConfig.DirectoryCoversDescriptons.value == True:
+                    self["Description"].setText(dirError)
+                else:
+                    self.setDescription('')
+            else:
+                self.setCover('hideCover')
+                self.setDescription('')
             return
+        
+        # wybrano plik
+        # do zmiany nazwy, dla plikow, nie podajemy rozszerzenia
+        self.FileListSelectedItem = os.path.splitext( self.filelist.getFilename() )[0]
+        myConfig.FileListSelectedItem.value = self.FileListSelectedItem
+
         extension = self.getExtension(self.filelist.getFilename())[1:]
         if not EXTENSIONS.has_key(extension) or EXTENSIONS[extension] != "movie":
             self.setCover('hideCover')
@@ -814,7 +909,7 @@ class AdvancedFreePlayerStart(Screen):
                                                 _('Score: ') + vote_average + '\n'
                     printDEBUG("========== Dane filmu %s ==========\nPlakat: %s,\n%s\n====================" %(title, coverUrl,Pelny_opis))
                     printDEBUG(WebDescrFile)
-                    if not path.exists(WebDescrFile) and Pelny_opis.strip() != '':
+                    if not os.path.exists(WebDescrFile) and Pelny_opis.strip() != '':
                         with open(WebDescrFile, 'w') as WDF:
                             WDF.write(Pelny_opis)
                             WDF.close()
@@ -942,11 +1037,11 @@ class AdvancedFreePlayerStartLCD(Screen):
             self["LCDpic"] = j00zekAccellPixmap()
             self["AFPlogo"] = j00zekAccellPixmap()
             printDEBUG("AdvancedFreePlayerStartLCD:__init__ using j00zekAccellPixmap()")
-            self.onShow.append(self.showLogo)
+            self.onShow.append(self.LCD_showLogo)
         except Exception as e:
             printDEBUG("AdvancedFreePlayerStartLCD:__init__ Exception %s" % str(e))
 
-    def showLogo(self):
+    def LCD_showLogo(self):
         self.LCD_showPic('AFPlogo' ,"/usr/lib/enigma2/python/Plugins/Extensions/AdvancedFreePlayer/AdvancedFreePlayer.png")
     
     def setText(self, text):
