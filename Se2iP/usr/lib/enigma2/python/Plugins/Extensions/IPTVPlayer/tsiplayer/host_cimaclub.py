@@ -100,12 +100,13 @@ class TSIPHost(TSCBaseHostClass):
 		if sts:		
 			lst_data=re.findall('media-block" data-post="(.*?)".*?href="(.*?)".*?src="(.*?)".*?class="info">(.*?)<h3>(.*?)</h3>', data, re.S)
 			for (data_post,url1,image,desc0,name_eng) in lst_data:
-				name_eng=name_eng.replace(' اون لاين','')
-				name_eng=name_eng.replace('مسلسل ','')
-				name_eng=name_eng.replace('فيلم ','')
+				#name_eng=name_eng.replace(' اون لاين','')
+				#name_eng=name_eng.replace('مسلسل ','')
+				#name_eng=name_eng.replace('فيلم ','')
+				desc00,name_eng = self.uniform_titre(name_eng)
 				if '://'in image: image = image.split('://')[0]+'://'+urllib.quote(image.split('://')[1])
 				else: image = cItem['image']
-				desc=ph.clean_html(desc0)#self.get_desc(desc0,desc1)
+				desc=desc00+ph.clean_html(desc0)#self.get_desc(desc0,desc1)
 				self.addDir({'import':cItem['import'],'good_for_fav':True,'category':'host2', 'url':url1,'data_post':data_post, 'title':ph.clean_html(name_eng), 'desc':desc, 'icon':image, 'mode':'31','EPG':True,'hst':'tshost'} )							
 			if page!=0:
 				self.addDir({'import':cItem['import'],'category':'host2', 'url':url0, 'title':tscolor('\c0000??00')+'Page Suivante', 'page':page+1, 'desc':'Page Suivante', 'icon':cItem['icon'], 'mode':'30'})	
@@ -125,9 +126,7 @@ class TSIPHost(TSCBaseHostClass):
 		for (href,titre) in elm_list:
 			if 'category' in href: desc=desc+tscolor('\c00??????')+'Category: '+tscolor('\c00????00')+ph.clean_html(titre)+'\n'				
 			if 'quality' in href: desc=desc+tscolor('\c00??????')+'Quality: '+tscolor('\c00????00')+ph.clean_html(titre)+'\n'	
-			
-
-			
+				
 		return desc
 
 
@@ -142,6 +141,11 @@ class TSIPHost(TSCBaseHostClass):
 		#sts, data = self.cm.getPage(url0)	
 		sts, data = self.getPage(url0)
 		if sts:
+			tr_data=re.findall('TrailerPopup">.*?src="(.*?)"', data, re.S)		
+			if tr_data:			
+				if tr_data[0].strip() != 'https://www.youtube.com/embed/':
+					params = {'import':cItem['import'],'good_for_fav':True,'category' : 'video','url': tr_data[0],'title':'Trailer','desc':'','icon':cItem['icon'],'hst':'none'} 
+					self.addVideo(params)		
 			cat_data=re.findall('<div data-season="(.*?)".*?href="(.*?)">(.*?)<', data, re.S)		
 			if cat_data:
 				cat_data2=re.findall('<div class="season" data-filter="(.*?)">(.*?)<', data, re.S)
@@ -184,12 +188,12 @@ class TSIPHost(TSCBaseHostClass):
 				#		params = {'import':cItem['import'],'good_for_fav':True,'category' : 'video','url': url,'title':name_eng,'desc':ph.clean_html(desc),'icon':image,'hst':'tshost'} 
 				#		self.addVideo(params)	
 	def SearchResult(self,str_ch,page,extra):
-		url_=self.MAIN_URL+'/page/'+str(page)+'/?s='+str_ch
+		url_=self.MAIN_URL+'/?s='+str_ch+'&paged='+str(page)
 		sts, data = self.getPage(url_)
 		if sts:
-			cat_data=re.findall('<div class="Block">.*?href="(.*?)".*?src="(.*?)".*?<h2>(.*?)<.*?DescPost">(.*?)</a>', data, re.S)
-			for (url1,image,name_eng,desc) in cat_data:
-				params = {'import':extra,'good_for_fav':True,'category' : 'host2','url': url1,'title':ph.clean_html(name_eng),'desc':ph.clean_html(desc),'icon':image,'mode':'31','EPG':True,'hst':'tshost'} 
+			cat_data=re.findall('class="box-.*?data-post="(.*?)".*?href="(.*?)".*?src="(.*?)".*?info">(.*?)<a.*?<h3>(.*?)<', data, re.S)
+			for (data_post,url1,image,desc,name_eng) in cat_data:
+				params = {'import':extra,'data_post':data_post,'good_for_fav':True,'category' : 'host2','url': url1,'title':ph.clean_html(name_eng),'desc':ph.clean_html(desc),'icon':image,'mode':'31','EPG':True,'hst':'tshost'} 
 				self.addDir(params)		
 		
 	def get_links(self,cItem): 	
@@ -249,7 +253,7 @@ class TSIPHost(TSCBaseHostClass):
 		desc = cItem.get('desc','')
 		sts, data = self.getPage(cItem['url'])
 		if sts:
-			lst_dat=re.findall('StoryContentExtend">(.*?)</div>', data, re.S)
+			lst_dat=re.findall('storyline">(.*?)</div>', data, re.S)
 			if lst_dat: 
 				if ph.clean_html(lst_dat[0])!='':
 					desc = tscolor('\c00????00')+'Story: '+tscolor('\c00??????')+ph.clean_html(lst_dat[0])

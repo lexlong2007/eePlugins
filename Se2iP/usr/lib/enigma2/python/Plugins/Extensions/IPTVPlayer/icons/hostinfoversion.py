@@ -133,7 +133,7 @@ class IPTVHost(IHost):
     ###################################################
 
 class Host:
-    infoversion = "2020.03.01"
+    infoversion = "2020.04.13b"
     inforemote  = "0.0.0"
     currList = []
     SEARCH_proc = ''
@@ -270,7 +270,7 @@ class Host:
            valTab.append(CDisplayListItem('Kamery Animallive.tv', 'http://animallive.tv', CDisplayListItem.TYPE_CATEGORY, ['http://animallive.tv/pl/kamery-online.html'], 'animallive', 'https://pbs.twimg.com/profile_images/935924816082866177/oYFAlqKG_400x400.jpg', None)) 
            valTab.append(CDisplayListItem('Kamery San Diego ZOO', 'http://zoo.sandiegozoo.org', CDisplayListItem.TYPE_CATEGORY, ['http://zoo.sandiegozoo.org/content/video-more'], 'sandiegozoo', 'https://zoo.sandiegozoo.org/sites/default/files/inline-images/sdzlogo.png', None)) 
            valTab.append(CDisplayListItem('Kamery Szczecin', 'https://www.lantech.com.pl/liveszczecin/', CDisplayListItem.TYPE_CATEGORY, ['https://www.lantech.com.pl/liveszczecin/'], 'szczecin', 'https://naszywki24.pl/galerie/h/herb-szczecina_1745_m.jpg', None)) 
-           valTab.append(CDisplayListItem('Kamery Earth TV', 'http://www.earthtv.com', CDisplayListItem.TYPE_CATEGORY, ['https://www.earthtv.com/en/webcams'], 'earthtv', 'https://i1.wp.com/www.broadbandtvnews.com/wp-content/uploads/2015/10/Earth-TV.jpg?w=600&ssl=1', None)) 
+           #valTab.append(CDisplayListItem('Kamery Earth TV', 'http://www.earthtv.com', CDisplayListItem.TYPE_CATEGORY, ['https://www.earthtv.com/en/webcams'], 'earthtv', 'https://i1.wp.com/www.broadbandtvnews.com/wp-content/uploads/2015/10/Earth-TV.jpg?w=600&ssl=1', None)) 
            valTab.append(CDisplayListItem('Kamery SBL (Bieruń-Lędziny)', 'http://sblinternet.pl/kamery', CDisplayListItem.TYPE_CATEGORY, ['http://sblinternet.pl/kamery/bieru-rynek-76'], 'sbl', 'http://sblinternet.pl/img/logotype.png', None)) 
            #valTab.append(CDisplayListItem('Kamery Piła', 'http://www.tvasta.pl', CDisplayListItem.TYPE_CATEGORY, ['http://www.tvasta.pl/home/'], 'asta', 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/POL_Pi%C5%82a_COA_1.svg/330px-POL_Pi%C5%82a_COA_1.svg.png', None)) 
            valTab.append(CDisplayListItem('Kamery WLKP24', 'http://wlkp24.info/kamery/', CDisplayListItem.TYPE_CATEGORY, ['http://wlkp24.info/kamery/'], 'wlkp24', 'http://archiwum.wlkp24.info/static/img/squarelogo400.jpg', None)) 
@@ -319,9 +319,9 @@ class Host:
            valTab.append(CDisplayListItem('Echo24', 'http://www.echo24.tv/', CDisplayListItem.TYPE_CATEGORY, ['http://www.echo24.tv/'], 'echo24', 'http://www.echo24.tv/bundles/echo24web/favicons-assets/favicon-152.png', None)) 
            valTab.append(CDisplayListItem('Popler TV', 'http://www.popler.tv/live', CDisplayListItem.TYPE_CATEGORY, ['http://www.popler.tv/live'], 'poplertv', 'http://www.popler.tv/oferta_new/images/logo.png', None)) 
            valTab.append(CDisplayListItem('Galicja TV', 'Galicja TV', CDisplayListItem.TYPE_VIDEO, [CUrlItem('', 'https://www.youtube.com/channel/UC0wRIobYwfHvugdAGIZ1j0g/live', 1)], 'Galicja', 'https://i.ytimg.com/vi/lPjeomL5RPk/maxresdefault.jpg', None)) 
-           valTab.append(CDisplayListItem('LUBACZÓW TV', 'LUBACZÓW TV', CDisplayListItem.TYPE_VIDEO, [CUrlItem('', 'https://www.youtube.com/channel/UCB5tN7RbpyWws1zVn4Sy85Q/live', 1)], 'LUBACZÓW', 'http://lubaczow.tv/wp-content/uploads/2018/02/logoTV-white.png', None)) 
+           #valTab.append(CDisplayListItem('LUBACZÓW TV', 'LUBACZÓW TV', CDisplayListItem.TYPE_VIDEO, [CUrlItem('', 'https://www.youtube.com/channel/UCB5tN7RbpyWws1zVn4Sy85Q/live', 1)], 'LUBACZÓW', 'http://lubaczow.tv/wp-content/uploads/2018/02/logoTV-white.png', None)) 
            valTab.append(CDisplayListItem('Relax TV', 'Relax TV', CDisplayListItem.TYPE_VIDEO, [CUrlItem('', 'https://www.youtube.com/channel/UCZvmZep3wknWdBPcKnwsPHA/live', 1)], 'Relax', 'http://tvrelax.pl/templates/srem_tv/themes/red-color/images/logo.png', None)) 
-           valTab.append(CDisplayListItem('LTVM TV MIĘDZYRZEC PODL.', 'LTVM TV MIĘDZYRZEC PODL. ', CDisplayListItem.TYPE_VIDEO, [CUrlItem('', 'https://www.youtube.com/channel/UCU7uwCYami150L_lydp2OHQ/live', 1)], 'LTVM', 'https://yt3.ggpht.com/a/AGF-l79SsBAwCM8wWJq12NdFFYLrWlJKjAEWaV93Jg=s288-c-k-c0xffffffff-no-rj-mo', None)) 
+           #valTab.append(CDisplayListItem('LTVM TV MIĘDZYRZEC PODL.', 'LTVM TV MIĘDZYRZEC PODL. ', CDisplayListItem.TYPE_VIDEO, [CUrlItem('', 'https://www.youtube.com/channel/UCU7uwCYami150L_lydp2OHQ/live', 1)], 'LTVM', 'https://yt3.ggpht.com/a/AGF-l79SsBAwCM8wWJq12NdFFYLrWlJKjAEWaV93Jg=s288-c-k-c0xffffffff-no-rj-mo', None)) 
 
            #valTab.append(CDisplayListItem('Gorlice TV', 'http://gorlice.tv', CDisplayListItem.TYPE_CATEGORY, ['http://gorlice.tv/%C2%A0'], 'gorlice', 'http://gorlice.tv/static/gfx/service/gorlicetv/logo.png?96eb5', None)) 
            #valTab.append(CDisplayListItem('Karting', '', CDisplayListItem.TYPE_CATEGORY, ['http://polskikarting.pl/live/'], 'karting', 'http://polskikarting.pl/wp-content/uploads/2015/06/logo_polski_karting_cza_272x90.png', None)) 
@@ -1149,7 +1149,8 @@ class Host:
                 Title = self._cleanHtmlStr(item).strip()+'  na żywo'
                 if Url.startswith('/'): Url = 'http://animallive.tv' + Url
                 valTab.append(CDisplayListItem(Title,Title,CDisplayListItem.TYPE_CATEGORY, [Url],'animallive-clips', '', None)) 
-            valTab.append(CDisplayListItem('Estonia karmnik', 'Estonia karmnik',  CDisplayListItem.TYPE_VIDEO, [CUrlItem('', 'https://www.youtube.com/channel/UCa7D-kXKYvG-fOEDn_HVkkA/live', 1)], 0, '', None))
+            valTab.append(CDisplayListItem('Kalakaamera', 'Kalakaamera',  CDisplayListItem.TYPE_VIDEO, [CUrlItem('', 'https://www.youtube.com/channel/UCN8196-VuPxsUBzCLgwVUfA/live', 1)], 0, '', None))
+            valTab.append(CDisplayListItem('Estonia live', 'Estonia live',  CDisplayListItem.TYPE_VIDEO, [CUrlItem('', 'https://www.youtube.com/channel/UCa7D-kXKYvG-fOEDn_HVkkA/live', 1)], 0, '', None))
             valTab.append(CDisplayListItem('Żubry online', 'Żubry online',  CDisplayListItem.TYPE_VIDEO, [CUrlItem('', 'http://www.lasy.gov.pl/pl/informacje/kampanie_i_akcje/zubryonline', 1)], 0, 'http://www.lasy.gov.pl/pl/informacje/kampanie_i_akcje/zubryonline/logo_projekt_zubr-200-2.jpg', None))
             valTab.insert(0,CDisplayListItem('--- Kamery kukaj.sk ---', 'http://www.kukaj.sk/', CDisplayListItem.TYPE_CATEGORY, ['http://www.kukaj.sk/'], 'kukaj', 'http://www.kukaj.sk/images/design/logo.png', None)) 
             valTab.insert(0,CDisplayListItem("--- Ptaki w gniazdach ---","Ptaki w gniazdach",     CDisplayListItem.TYPE_CATEGORY,[''],'ptaki',    '',None))
@@ -1998,6 +1999,16 @@ class Host:
                     Name = item['name']
                     #printDBG( 'Host name:  '+Name )
                     valTab.append(CDisplayListItem('Echo24    '+Name, 'Echo24    '+Name,  CDisplayListItem.TYPE_VIDEO, [CUrlItem('', Url, 0)], 0, 'http://www.echo24.tv/bundles/echo24web/favicons-assets/favicon-152.png', None))
+            elif Url!='':
+                sts, data = self.get_Page(Url)
+                if not sts: return valTab
+                printDBG( 'Host listsItems data2: '+data )
+                Url = self.cm.ph.getSearchGroups(data, '''<source[^>]+?src=['"]([^"^']+?)['"]''', 1, True)[0]
+                if self.cm.isValidUrl(Url): 
+                    tmp = getDirectM3U8Playlist(Url, checkContent=True, sortWithMaxBitrate=999999999)
+                    for item in tmp:
+                        valTab.append(CDisplayListItem('Echo24    '+str(item['name']), 'Echo24    '+str(item['name']),  CDisplayListItem.TYPE_VIDEO, [CUrlItem('', str(item['url']), 0)], 0, 'http://www.echo24.tv/bundles/echo24web/favicons-assets/favicon-152.png', None))
+                    return valTab
             else:
                 videoUrls = self.getLinksForVideo('https://www.youtube.com/channel/UCdoilpG38E_GuLKu5DPwchw/live')
                 if videoUrls:
@@ -2028,7 +2039,8 @@ class Host:
                 icon  = ph.search(item, 'image:\surl\(([^"]+?)\)')[0]
                 title = self._cleanHtmlStr(ITEM_MARKER + item).split('kamera IP')[0]
                 title = title.split('na żywo')[0]
-                desc  = self._cleanHtmlStr(ITEM_MARKER + item).replace('Autor','\nAutor')
+                if 'Kanał prywatny' in title: continue
+                desc  = self._cleanHtmlStr(ITEM_MARKER + item).replace(',','\n').replace('Autor','\nAutor').strip()
                 Url   = self.cm.ph.getSearchGroups(item, 'href="([^"]+?)"')[0]
                 if Url.startswith('/'): Url = 'http://www.popler.tv' + Url
                 valTab.append(CDisplayListItem(title.strip(), desc,  CDisplayListItem.TYPE_VIDEO, [CUrlItem('', Url, 1)], 0, '', None))
@@ -2085,7 +2097,7 @@ class Host:
 
         if 'darmowa' == name:
             valTab.insert(0,CDisplayListItem("--- Pastebin --- Przypadkowe listy m3u, wyszukane w google na stronie pastebin.com","Przypadkowe listy m3u, wyszukane w google na stronie pastebin.com",     CDisplayListItem.TYPE_CATEGORY,['https://pastebin.com'],'pastebin',    '',None))
-            valTab.insert(0,CDisplayListItem("--- Zobacz.ws ---","Zobacz.ws",     CDisplayListItem.TYPE_CATEGORY,['http://zobacz.ws'],'zobacz_ws',    '',None))
+            #valTab.insert(0,CDisplayListItem("--- Zobacz.ws ---","Zobacz.ws",     CDisplayListItem.TYPE_CATEGORY,['http://zobacz.ws'],'zobacz_ws',    '',None))
             valTab.insert(0,CDisplayListItem("--- SwirTeam ---","SwirTeam",     CDisplayListItem.TYPE_CATEGORY,['http://tv-swirtvteam.info/'],'SwirTeamTk',    '',None))
             #valTab.insert(0,CDisplayListItem("--- SuperSportowo ---","SuperSportowo",     CDisplayListItem.TYPE_CATEGORY,['http://supersportowo.com'],'SuperSportowo',    '',None))
             valTab.insert(0,CDisplayListItem("--- Ustreamix ---","Ustreamix",     CDisplayListItem.TYPE_CATEGORY,['https://ssl.ustreamix.com/search.php?q=poland'],'Ustreamix',    '',None))
@@ -3478,7 +3490,12 @@ class Host:
         if 'ptaki' == name:
             printDBG( 'Host listsItems begin name='+name )
 
-            valTab.append(CDisplayListItem('Bociany z Przygodzic', 'Bociany z Przygodzic',  CDisplayListItem.TYPE_VIDEO, [CUrlItem('', 'http://www.bociany.przygodzice.pl/', 1)], 0, 'http://dinoanimals.pl/wp-content/uploads/2013/05/Bocian-DinoAnimals.pl-5.jpg', None))
+            valTab.append(CDisplayListItem('Bociany z Przygodzic CAM1', 'Bociany z Przygodzic CAM1',  CDisplayListItem.TYPE_VIDEO, [CUrlItem('', 'http://www.bociany.przygodzice.pl/', 1)], 0, 'http://dinoanimals.pl/wp-content/uploads/2013/05/Bocian-DinoAnimals.pl-5.jpg', None))
+            valTab.append(CDisplayListItem('Bociany z Przygodzic CAM2', 'Bociany z Przygodzic CAM2',  CDisplayListItem.TYPE_VIDEO, [CUrlItem('', 'http://www.bociany.przygodzice.pl/indexcam2.html', 1)], 0, 'http://dinoanimals.pl/wp-content/uploads/2013/05/Bocian-DinoAnimals.pl-5.jpg', None))
+            valTab.append(CDisplayListItem('Sokół wędrowny Płock ORLEN podest', 'Sokół wędrowny Płock ORLEN',  CDisplayListItem.TYPE_VIDEO, [CUrlItem('', 'https://stream.orlen.pl:443/sokol/podest.stream/playlist.m3u8', 0)], 0, 'http://postis.pl/wp-content/uploads/sok%C3%B3%C5%82-w%C4%99drowny.jpeg', None))
+            valTab.append(CDisplayListItem('Sokół wędrowny Płock ORLEN gniazdo', 'Sokół wędrowny Płock ORLEN',  CDisplayListItem.TYPE_VIDEO, [CUrlItem('', 'https://stream.orlen.pl:443/sokol/gniazdo.stream/playlist.m3u8', 0)], 0, 'http://postis.pl/wp-content/uploads/sok%C3%B3%C5%82-w%C4%99drowny.jpeg', None))
+            valTab.append(CDisplayListItem('Sokół wędrowny na kominie Miejskiego Przedsiębiorstwa Energetyki Cieplnej we Włocławku', 'Sokół wędrowny na kominie Miejskiego Przedsiębiorstwa Energetyki Cieplnej we Włocławku',  CDisplayListItem.TYPE_VIDEO, [CUrlItem('', 'https://53c7d208964cd.streamlock.net/mpecz/mpecpodest.stream/playlist.m3u8', 0)], 0, 'http://postis.pl/wp-content/uploads/sok%C3%B3%C5%82-w%C4%99drowny.jpeg', None))
+            valTab.append(CDisplayListItem('Sokół wędrowny na kominie Miejskiego Przedsiębiorstwa Energetyki Cieplnej we Włocławku', 'Sokół wędrowny na kominie Miejskiego Przedsiębiorstwa Energetyki Cieplnej we Włocławku',  CDisplayListItem.TYPE_VIDEO, [CUrlItem('', 'https://53c7d208964cd.streamlock.net/mpecw/mpecw.stream_aac/playlist.m3u8', 0)], 0, 'http://postis.pl/wp-content/uploads/sok%C3%B3%C5%82-w%C4%99drowny.jpeg', None))
 
             url ='https://www.sokolka.tv/index.php/kamery-online/gniazdo-bocianie'
             query_data = {'url': url, 'use_host': False, 'use_cookie': False, 'use_post': False, 'return_data': True}
@@ -3494,7 +3511,6 @@ class Host:
                #valTab.append(CDisplayListItem('Kamera na bocianim gnieździe Sokółka (youtube)', 'Kamera na bocianim gnieździe Sokółka (youtube)',  CDisplayListItem.TYPE_VIDEO, [CUrlItem('', Url, 1)], 0, 'http://zasoby.ekologia.pl/artykulyNew/19316/xxl/800px-ciconia-ciconia-01-bocian-bialy_800x600.jpg', None))
 
             #valTab.append(CDisplayListItem('Sokół wędrowny Płock ORLEN (rtmp)', 'Sokół wędrowny Płock ORLEN',  CDisplayListItem.TYPE_VIDEO, [CUrlItem('', 'rtmp://stream.orlen.pl:1935/sokol playpath=gniazdo.stream swfUrl=http://webcam.peregrinus.pl/plugins/hwdvs-videoplayer/jwflv/mediaplayer.swf pageUrl=http://webcam.peregrinus.pl/pl/plock-orlen-podglad', 0)], 0, 'http://postis.pl/wp-content/uploads/sok%C3%B3%C5%82-w%C4%99drowny.jpeg', None))
-            valTab.append(CDisplayListItem('Sokół wędrowny Płock ORLEN (m3u8)', 'Sokół wędrowny Płock ORLEN',  CDisplayListItem.TYPE_VIDEO, [CUrlItem('', 'https://stream.orlen.pl:443/sokol/gniazdo.stream/playlist.m3u8', 0)], 0, 'http://postis.pl/wp-content/uploads/sok%C3%B3%C5%82-w%C4%99drowny.jpeg', None))
 
             url ='https://live.mstream.pl/uwb/cam-4923/'
             #valTab.append(CDisplayListItem('Instytut Biologii UwB zaprasza do oglądania transmisji z gniazda jastrzębia ', 'Zapraszamy do oglądania transmisji z gniazda jastrzębia pod Białymstokiem w  Nadleśnictwie Dojlidy. W godzinach 23.00-4.00 transmisja jest przerywana',  CDisplayListItem.TYPE_VIDEO, [CUrlItem('', url, 1)], 0, 'https://biologia.biol-chem.uwb.edu.pl/media/_versions/biologia/podstrony_statyczne_zdjecia/panel_main_photo_detail.jpg', None))
@@ -4205,26 +4221,45 @@ class Host:
 
         if 'popler' in url:
             printDBG( 'Host getResolvedURL mainurl: '+url )
-            COOKIEFILE = os_path.join(GetCookieDir(), 'tawizja.cookie')
-            host = "Mozilla/5.0 (Linux; U; Android 4.1.1; en-us; androVM for VirtualBox ('Tablet' version with phone caps) Build/JRO03S) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Safari/534.30"
-            header = {'Referer':url, 'User-Agent': host, 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'}   
-            try: data = self.cm.getURLRequestData({ 'url': url, 'header': header, 'use_host': False, 'use_cookie': True, 'save_cookie': True, 'load_cookie': False, 'cookiefile': COOKIEFILE, 'use_post': False, 'return_data': True })
-            except:
-                printDBG( 'Host getResolvedURL query error url: '+url )
-                return ''
-            printDBG( 'Host listsItems data1: '+data )
+            COOKIEFILE = os_path.join(GetCookieDir(), 'poplertv.cookie')
+            self.HTTP_HEADER = self.cm.getDefaultHeader(browser='chrome')
+            self.HTTP_HEADER['Referer'] = 'http://www.popler.tv/live'
+            self.HTTP_HEADER['X-Requested-With'] = 'XMLHttpRequest'
+            self.defaultParams = {'header':self.HTTP_HEADER, 'use_cookie': True, 'load_cookie': True, 'save_cookie': True, 'cookiefile': COOKIEFILE}
+            sts, data = self.get_Page(url, self.defaultParams)
+            if not sts: return valTab
+            printDBG( 'Host listsItems data: '+data )
             data = self.cm.ph.getDataBeetwenMarkers(data, '<iframe', '/iframe>', False)[1].replace('\\','')
             #printDBG( 'Host listsItems data2: '+data )
             url = self.cm.ph.getSearchGroups(data, '''src=['"]([^"^']+?)['"]''', 1, True)[0] 
             if url.startswith('//'): url = 'http:' + url
-            header = {'Referer':url, 'User-Agent': host, 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'}   
-            try: data = self.cm.getURLRequestData({ 'url': url, 'header': header, 'use_host': False, 'use_cookie': True, 'save_cookie': True, 'load_cookie': False, 'cookiefile': COOKIEFILE, 'use_post': False, 'return_data': True })
-            except:
-                printDBG( 'Host getResolvedURL query error url: '+url )
-                return ''
-            printDBG( 'Host listsItems data2: '+data )
+            sts, data = self.get_Page(url, self.defaultParams)
+            if not sts: return valTab
+            printDBG( 'Host listsItems data3: '+data )
+            videoUrl = self.cm.ph.getSearchGroups(data, '''src:  ['"]([^"^']+?)['"]''', 1, True)[0] 
+            tmp = getDirectM3U8Playlist(videoUrl, checkContent=True, sortWithMaxBitrate=999999999)
+            for item in tmp:
+                return item['url']
 
-            return self.cm.ph.getSearchGroups(data, '''src:  ['"]([^"^']+?)['"]''', 1, True)[0] 
+            path = self.cm.ph.getSearchGroups(data, '''path = ['"]([^"^']+?)['"]''', 1, True)[0] 
+            app = self.cm.ph.getSearchGroups(data, '''app = ['"]([^"^']+?)['"]''', 1, True)[0] 
+            stream = self.cm.ph.getSearchGroups(data, '''stream = ['"]([^"^']+?)['"]''', 1, True)[0] 
+            cdn = self.cm.ph.getSearchGroups(data, '''cdn = ['"]([^"^']+?)['"]''', 1, True)[0] 
+            multi = self.cm.ph.getSearchGroups(data, '''multi = ['"]([^"^']+?)['"]''', 1, True)[0] 
+
+            posturl = 'https://www.popler.tv/api/urlsign.php'
+            postdata = {'path': path, 'app': app, 'stream': stream, 'cdn': cdn, 'multi': multi, 'dvr': '1', 'ile': '1'}
+            sts, data = self.get_Page(posturl, self.defaultParams, postdata)
+            if not sts: return valTab
+            printDBG( 'Host listsItems data4: '+data )
+            try:
+                result = byteify(simplejson.loads(data))
+                for item in result:
+                    printDBG( 'Host listsItems data5: '+item )
+                    if 'm3u8' in item: return item
+            except Exception as e:
+                printExc()
+            return ''
 
         if url.startswith('http://www.rbl.tv'):
             printDBG( 'Host getResolvedURL mainurl: '+url )
@@ -4788,9 +4823,14 @@ class Host:
             cam = self.cm.ph.getSearchGroups(data, '''var cam = ['"]([^"^']+?)['"]''')[0] 
             if not cam: cam = url.split('cam=')[-1] 
 
-            videoUrl = self.cm.ph.getSearchGroups(data, '''source: ['"]([^"^']+?)['"]''')[0]
+            #videoUrl = self.cm.ph.getSearchGroups(data, '''source: ['"]([^"^']+?)['"]''')[0]
+            videoUrl = re.findall('source: "(.*?)"', data, re.S)
+            if videoUrl: 
+                videoUrl = videoUrl[-1]
+            else:
+                return ''
             if 'm3u8' in videoUrl: return videoUrl
-            videoUrl = videoUrl + cam + "/playlist.m3u8"
+            videoUrl = videoUrl + app +'/'+ cam + "/playlist.m3u8"
             printDBG( 'Host listsItems app: '+app )
             printDBG( 'Host listsItems cam: '+cam )
             printDBG( 'Host listsItems videoUrl: '+videoUrl )

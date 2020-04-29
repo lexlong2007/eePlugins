@@ -2,6 +2,7 @@
 from Plugins.Extensions.IPTVPlayer.tools.iptvtools import printDBG
 from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.tstools import TSCBaseHostClass
 from tsiplayer.libs.packer import cPacker
+from Plugins.Extensions.IPTVPlayer.components.iptvplayerinit       import SetIPTVPlayerLastHostError
 
 import re
 import base64
@@ -121,6 +122,9 @@ class TSIPHost(TSCBaseHostClass):
 					urlTab.append((URL,'3'))
 				else:
 					urlTab.append((URL,'0'))
+			else:
+				if 'File is no longer available' in data:
+					SetIPTVPlayerLastHostError('File is no longer available')
 		return urlTab	
 			
 	def start(self,cItem):

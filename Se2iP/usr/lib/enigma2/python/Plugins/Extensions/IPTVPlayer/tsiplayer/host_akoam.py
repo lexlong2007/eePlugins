@@ -200,15 +200,20 @@ class TSIPHost(TSCBaseHostClass):
 				trailer_data=re.findall('class="sub_trailer">.*?class="youtube-player.*?id="(.*?)"', data, re.S)
 				if trailer_data:
 					self.addVideo({'category' : 'host2','title':'TRAILER','url':'https://www.youtube.com/watch?v='+trailer_data[0],'desc':'','icon':cItem['icon'],'hst':'none'})	
-				if 'sub_episode_links">' in data:
+				if 'الانتقال إلي التصميم الجديد' in data:
+					lst_data=re.findall('class="sub_desc">.*?href="(.*?)"', data, re.S)
+					if lst_data:
+						Url=lst_data[0]
+						import_ = 'from Plugins.Extensions.IPTVPlayer.tsiplayer.host_akwam import '
+						titre = tscolor('\c0000??00')+ '[New Site] '+tscolor('\c00??????')+cItem['title']
+						self.addDir({'import':import_,'category' : 'host2','title': titre ,'url':Url ,'desc':cItem['desc'],'icon':cItem['icon'],'hst':'tshost','mode':'31'})
+							
+				elif 'sub_episode_links">' in data:
 					lst_data=re.findall('_episode_links">(.*?)title">(.*?)<.*?<h5>(.*?)<div class="sub', data, re.S)			
 					for (inf,titre1,data1) in lst_data:
 						img_data=re.findall('src="(.*?)"', inf, re.S)
 						img_ = cItem['icon']
 						if img_data: img_ = img_data[0]
-						
-						
-						
 						
 						self.addMarker({'title':tscolor('\c0000????')+titre1.strip(),'icon':img_})
 						if 'box epsoide_box\'>' in data1:

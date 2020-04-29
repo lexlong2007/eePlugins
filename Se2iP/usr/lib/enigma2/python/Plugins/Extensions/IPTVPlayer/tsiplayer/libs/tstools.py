@@ -60,7 +60,7 @@ def gethostname(url):
 	if '/' in url:
 		url=url.split('/',1)[0]
 	return url
-
+		
 def resolve_liveFlash(link,referer):
 	URL=''
 	cm = common()
@@ -216,12 +216,21 @@ class TSCBaseHostClass:
 
     def uniform_titre(self,titre,year_op=0):
 		titre=titre.replace('مشاهدة وتحميل مباشر','').replace('مشاهدة','').replace('اون لاين','')
-		
-		tag_type = ['مدبلج للعربية', 'مدبلجة', 'مترجمة', 'فيلم' , 'مترجم' , 'مدبلج', 'مسلسل', 'عرض']
-		tag_qual = ['1080p','720p','WEB-DL','BluRay','DVDRip','HDCAM','HDTC','HDRip', 'HD', '1080P','720P','DVBRip','TVRip','DVD','SD']
+		tag_type   = ['مدبلج للعربية','مترجمة للعربية','مترجم للعربية', 'مدبلجة', 'مترجمة' , 'مترجم' , 'مدبلج', 'مسلسل', 'عرض', 'انمي', 'فيلم']
+		tag_qual   = ['1080p','720p','WEB-DL','BluRay','DVDRip','HDCAM','HDTC','HDRip', 'HD', '1080P','720P','DVBRip','TVRip','DVD','SD']
+		tag_saison = [('الموسم الثاني','02'),('الموسم الاول','01'),('الموسم الثالث','03'),('الموسم الرابع','04'),('الموسم الخامس','05'),('الموسم السادس','06'),('الموسم السابع','07'),('الموسم الثامن','08'),('الموسم التاسع','09'),('الموسم العاشر','10')]
 		type_ = tscolor('\c00????00')+ 'Type: '+tscolor('\c00??????')
 		qual = tscolor('\c00????00')+ 'Quality: '+tscolor('\c00??????')
+		sais = tscolor('\c00????00')+ 'Saison: '+tscolor('\c00??????')
 		desc=''
+		saison=''
+		
+		for elm in tag_saison:
+			if elm[0] in titre:
+				sais=sais+elm[1]
+				titre = titre.replace(elm[0],'')
+				break
+				
 		for elm in tag_type:
 			if elm in titre:
 				titre = titre.replace(elm,'')
@@ -237,13 +246,22 @@ class TSCBaseHostClass:
 		if data:
 			year_ = data[0][0]
 			year_out = tscolor('\c0000????')+data[0][0]+tscolor('\c00??????')
-			if year_op==0: titre = year_out+'  '+titre.replace(year_, '')
-			else: titre = titre.replace(year_, '')
-			if year_op<2:
+			if year_op==0:
+				titre = year_out+'  '+titre.replace(year_, '')
 				desc = 	tscolor('\c00????00')+ 'Year: '+tscolor('\c00??????')+year_+'\n'
-			else:
-				desc = 	year_	
+			elif year_op==-1:
+				titre = year_out+'  '+titre.replace(year_, '')
+				desc = 	''			
+			elif year_op==1:
+				titre = titre.replace(year_, '')
+				desc = 	tscolor('\c00????00')+ 'Year: '+tscolor('\c00??????')+year_+'\n'
+			elif year_op==2:	
+				titre = titre.replace(year_, '')
+				desc = 	year_
+					
 		if year_op<2:
+			if sais != tscolor('\c00????00')+ 'Saison: '+tscolor('\c00??????'):
+				desc = desc+sais+'\n'				
 			if type_!=tscolor('\c00????00')+ 'Type: '+tscolor('\c00??????'):
 				desc = desc+type_[:-3]+'\n'
 			if qual != tscolor('\c00????00')+ 'Quality: '+tscolor('\c00??????'):

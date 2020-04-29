@@ -165,9 +165,9 @@ class TSIPlayer(CBaseHostClass):
 		#self.addDir(params)		
 		#params = {'category' : 'update_now2','title':tscolor('\c0000????')+' +++++++ FORCE UPDATE & RESTART (Zip method) +++++++ ','name':'update_restart'} 
 		#self.addDir(params)			
-		self.addMarker({'category' :'marker','title':tscolor('\c00????00')+' -----●★| Hosts en développement |★●-----','desc':'Dessins animés & Animes en VF et VOSTFR'})
+		self.addMarker({'category' :'marker','title':tscolor('\c00????00')+' -----●★| Not supported Hosts |★●-----','desc':''})
 		self.tsiplayer_host({'cat_id':'102'})	
-		self.addMarker({'category' :'marker','title':tscolor('\c00????00')+' -----●★| Hosts Out |★●-----','desc':'Dessins animés & Animes en VF et VOSTFR'})
+		self.addMarker({'category' :'marker','title':tscolor('\c00????00')+' -----●★| Hosts Out |★●-----','desc':''})
 		self.tsiplayer_host({'cat_id':'104'})	
 
 
@@ -473,6 +473,7 @@ class TSIPlayer(CBaseHostClass):
 				name_ = elm.get('name','XXXX')
 				type_ = elm.get('type','XXXX')
 				color =''
+				name_ = name_.replace('\c0060??60','').replace('\c0090??20','').replace('\c00??3030','').replace('\C0060??60','').replace('\C0090??20','').replace('\C00??3030','')
 				if type_=='local':
 					color = tscolor('\c0060??60')
 				elif ts_urlparser().checkHostSupportbyname(name_):

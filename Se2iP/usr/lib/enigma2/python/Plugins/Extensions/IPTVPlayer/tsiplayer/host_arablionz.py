@@ -3,7 +3,7 @@ from Plugins.Extensions.IPTVPlayer.tools.iptvtools import printDBG
 from Plugins.Extensions.IPTVPlayer.libs import ph
 from Plugins.Extensions.IPTVPlayer.tsiplayer.libs.tstools import TSCBaseHostClass,tscolor
 
-import re
+import re,urllib
 
 def getinfo():
 	info_={}
@@ -23,7 +23,7 @@ class TSIPHost(TSCBaseHostClass):
 	def __init__(self):
 		TSCBaseHostClass.__init__(self,{'cookie':'arblionz.cookie'})
 		self.USER_AGENT = 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0'
-		self.MAIN_URL = 'https://eg.arblionz.tv'
+		self.MAIN_URL = 'https://m.arblionz.tv'
 		self.HEADER = {'User-Agent': self.USER_AGENT, 'Connection': 'keep-alive', 'Accept-Encoding':'gzip', 'Content-Type':'application/x-www-form-urlencoded','Referer':self.getMainUrl(), 'Origin':self.getMainUrl()}
 		self.defaultParams = {'header':self.HEADER, 'use_cookie': True, 'load_cookie': True, 'save_cookie': True, 'cookiefile': self.COOKIE_FILE}
 		self.getPage = self.cm.getPage
@@ -98,6 +98,12 @@ class TSIPHost(TSCBaseHostClass):
 		url=cItem['url']
 		titre=cItem['title']
 		img_=cItem['icon']
+		printDBG('url='+url)
+		url=urllib.unquote(url)
+		printDBG('url='+url)
+		url=url.replace('://','rgysoft')
+		url=urllib.quote(url).replace('rgysoft','://')
+		printDBG('url='+url)
 		if gnr=='items':
 			sts, data = self.getPage(url)
 			desc=''
@@ -163,6 +169,9 @@ class TSIPHost(TSCBaseHostClass):
 		URL=url_origin.replace('/episode/','/watch/')
 		URL=URL.replace('/film/','/watch/')
 		URL=URL.replace('/post/','/watch/')
+		URL=urllib.unquote(URL)
+		URL=URL.replace('://','rgysoft')
+		URL=urllib.quote(URL).replace('rgysoft','://')
 		sts, data = self.getPage(URL)
 		if sts:
 			server_data = re.findall('data-embedd="&lt.*?(SRC|src)=&quot;(.*?)&quot;.*?">(.*?)"', data, re.S)
@@ -190,13 +199,14 @@ class TSIPHost(TSCBaseHostClass):
 				url_=self.MAIN_URL+'/ajaxCenter?_action=getdownloadlinks&postId='+server_data[0]
 				HTTP_HEADER= {'X-Requested-With':'XMLHttpRequest','Referer':url_origin}
 				sts, data_ = self.getPage(url_,{'header':HTTP_HEADER})
-				server_data = re.findall('<a href="(.*?)"', data_, re.S)
-				for (url_1) in server_data:
+				printDBG('data ajax='+data_)
+				server_data = re.findall('class="serversTitle ti-slow.*?">(.*?)</h6>.*?<a href="(.*?)"', data_, re.S)
+				for (label,url_1) in server_data:
 					hostUrl=url_1.replace("www.", "")				
 					raw1 =  re.findall('//(.*?)/', hostUrl, re.S)
 					if raw1: hostUrl=raw1[0]
-					if ('openload' in hostUrl.lower())or('uptobox' in hostUrl.lower()):
-						urlTab.append({'name':'|Download Server| '+hostUrl, 'url':url_1, 'need_resolve':1})
+					if ('uppom' in hostUrl.lower()):
+						urlTab.append({'name':'|Down Serv: '+label+'| '+hostUrl, 'url':url_1, 'need_resolve':1})
 			else:
 				code_data = re.findall('data-embedd="(.*?)".*?alt="(.*?)"', data, re.S)
 				id_data = re.findall("attr\('data-embedd'\).*?url: \"(.*?)\"", data, re.S)

@@ -8,7 +8,7 @@ def getinfo():
 	info_['name']='DisneyHD'
 	info_['version']='1.0 28/07/2019'
 	info_['dev']='RGYSoft'
-	info_['cat_id']='301'
+	info_['cat_id']='104'
 	info_['desc']='Films & Series Disney HD'
 	info_['icon']='https://i.ibb.co/09jnM7Z/dhd.png'
 	info_['recherche_all']='0'

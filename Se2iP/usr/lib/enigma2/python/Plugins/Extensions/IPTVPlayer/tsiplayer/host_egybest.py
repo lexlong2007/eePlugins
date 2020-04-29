@@ -28,10 +28,11 @@ def getinfo():
 	
 class TSIPHost(TSCBaseHostClass):
 	def __init__(self):
-		TSCBaseHostClass.__init__(self,{'cookie':'egybest5.cookie'})
+		TSCBaseHostClass.__init__(self,{'cookie':'egybest.cookie'})
 		self.USER_AGENT = 'Mozilla/5.0 (Linux; Android 7.0; PLUS Build/NRD90M) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.98 Mobile Safari/537.36'
 		self.MAIN_URL = 'https://tool.egybest.ltd'
 		self.VID_URL  = 'https://vidstream.kim'
+		self.varconst = 'a0'
 		self.HTTP_HEADER = {'User-Agent': self.USER_AGENT, 'DNT':'1', 'Accept': 'text/html', 'Accept-Encoding':'gzip, deflate', 'Referer':self.getMainUrl(), 'Origin':self.getMainUrl()}
 		self.AJAX_HEADER = dict(self.HTTP_HEADER)
 		self.AJAX_HEADER.update( {'X-Requested-With': 'XMLHttpRequest', 'Accept-Encoding':'gzip, deflate', 'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8', 'Accept':'application/json, text/javascript, */*; q=0.01'} )
@@ -289,7 +290,10 @@ class TSIPHost(TSCBaseHostClass):
 		urlTab = []	
 		if not videoUrl.startswith('http'): videoUrl=self.MAIN_URL+videoUrl
 		if 'watch/?v' in videoUrl:
-			urlTab = self.parserVIDSTREAM(videoUrl,'egy')
+			try:
+				urlTab = self.parserVIDSTREAM(videoUrl,'egy')
+			except Exception, e:
+				printDBG('ERREUR:'+str(e))
 		else:
 			sts, data = self.getPage(videoUrl)
 			if sts:
@@ -298,7 +302,11 @@ class TSIPHost(TSCBaseHostClass):
 				if VID_URL.endswith('/'): VID_URL = VID_URL[:-1]
 				self.VID_URL = VID_URL
 				printDBG('HOST vstream = '+self.VID_URL)
-				urlTab = self.parserVIDSTREAM(URL)
+				try:				
+					urlTab = self.parserVIDSTREAM(URL)
+				except Exception, e:
+					printDBG('ERREUR:'+str(e))				
+				
 		return urlTab	 							
 		
 	def getArticle(self, cItem):
@@ -396,7 +404,7 @@ class TSIPHost(TSCBaseHostClass):
 
 				#  model for step }(a, 0x1b4));
 				# search for big list of words
-				tmpStep = re.findall("}\(a ?,(0x[0-9a-f]{1,3})\)\);", script)
+				tmpStep = re.findall("}\("+self.varconst+"a ?,(0x[0-9a-f]{1,3})\)\);", script)
 				if tmpStep:
 					step = eval(tmpStep[0])
 				else:
@@ -411,16 +419,16 @@ class TSIPHost(TSCBaseHostClass):
 					printDBG("Not found post_key ... check code")
 					return
 
-				tmpVar = re.findall("(var a=\[.*?\];)", script)
+				tmpVar = re.findall("(var "+self.varconst+"a=\[.*?\];)", script)
 				if tmpVar:
 					wordList=[]
-					var_list = tmpVar[0].replace('var a=','wordList=').replace("];","]").replace(";","|")
+					var_list = tmpVar[0].replace('var '+self.varconst+'a=','wordList=').replace("];","]").replace(";","|")
 					printDBG("-----var_list-------")
 					printDBG(var_list)
 					exec(var_list)
 					printDBG(script)
 					# search for second list of vars
-					tmpVar2 = re.findall(";q\(\);(var .*?)\$\('\*'\)", script, re.S)
+					tmpVar2 = re.findall(";"+self.varconst+"c\(\);(var .*?)\$\('\*'\)", script, re.S)
 					if tmpVar2:
 						printDBG("------------")
 						printDBG(tmpVar2[0])
@@ -434,7 +442,8 @@ class TSIPHost(TSCBaseHostClass):
 						# substitutions of terms from first list
 						printDBG("------------ len(wordList) %s" % len(wordList))
 						for i in range(0,len(wordList)):
-							r = "b('0x{0:x}')".format(i)
+							r = self.varconst+"b('0x{0:x}')".format(i)
+							printDBG ('rrrrrrrrrrrrrr='+r)
 							j = i + step
 							while j >= len(wordList):
 								j = j - len(wordList)
