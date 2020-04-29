@@ -1,7 +1,10 @@
 #!/usr/bin/python2.7
+# version: 1.1.0 mod j00zek 2020
+# changes:
+# - connection with e2settings
+# - proceeding url parameters according to html standard
 
 """ Streamlink Daemon """
-# j00zek mod
 
 __version__ = "1.1.0"
 
@@ -78,13 +81,20 @@ PLUGIN_ARGS = False
 #
 # setup options
 #
-def setOptions(streamlink):
+def setDefaultOptions(streamlink):
     """
     As of version 1.0.5, it's possible to save the options or plug-in-specific options in configuration files: https://streamlink.github.io/cli.html#configuration-file
 
     You can also append these options to URL.
-    Example: 'http://127.0.0.1:8088/q=720p,best/zattoo.com/watch/zdf -l debug --zattoo-email "your email" --zattoo-password "your password"'
+    Example for commandline streamlink client:
+        streamlink https://pilot.wp.pl/api/v1/channel/158 720,best --hls-segment-threads=3
+        
+    Example HTTP URL:
+        http://127.0.0.1:8088/https://pilot.wp.pl/api/v1/channel/11;SLARGS;quality=720,best;--hls-segment-threads=3
 
+    To test streamlinksrv from commandline:
+        curl "http://127.0.0.1:8088/https://pilot.wp.pl/api/v1/channel/11;SLARGS;quality=720,best;--hls-segment-threads=3" -o /dev/null
+    
     Not all options are available, just many of the possible ones:
     Some General, Player & Stream Options, most HTTP and Stream Transport Options and the Plugin Specific Options
 
@@ -92,12 +102,56 @@ def setOptions(streamlink):
 
     Note: The options set here have the lowest priority.
     """
+    
+    #streamlink.set_option("hds-live-edge", args.hds_live_edge)                                 # The time live HDS streams will start from the edge of stream. Default is 10.0
+    #streamlink.set_option("hds-segment-attempts", 3)                   # How many attempts should be done to download each HDS segment before giving up. Default is 3
+    #streamlink.set_option("hds-segment-threads", args.hds_segment_threads)                     # The size of the thread pool used to download HDS segments. Values 1-10. Default is 1
+    #streamlink.set_option("hds-segment-timeout", args.hds_segment_timeout) #
+    #streamlink.set_option("hds-timeout", args.hds_timeout) #
 
-    #streamlink.set_option("http-ssl-verify", "/etc/ssl/certs/ca-certificates.crt")
+    #streamlink.set_option("hls-live-edge", args.hls_live_edge) #
+    #streamlink.set_option("hls-segment-stream-data", args.hls_segment_stream_data) #
+    #streamlink.set_option("hls-segment-attempts", args.hls_segment_attempts) #
+    #streamlink.set_option("hls-playlist-reload-attempts", 3) #
+    streamlink.set_option("hls-segment-threads", 9)                                            # The size of the thread pool used to download HLS segments. Values 1-10. Default is 1
+    #streamlink.set_option("hls-segment-timeout", args.hls_segment_timeout) #
+    #streamlink.set_option("hls-segment-ignore-names", args.hls_segment_ignore_names) #
+    #streamlink.set_option("hls-segment-key-uri", args.hls_segment_key_uri) #
+    #streamlink.set_option("hls-timeout", args.hls_timeout) #
+    #streamlink.set_option("hls-audio-select", args.hls_audio_select) #
+    #streamlink.set_option("hls-start-offset", args.hls_start_offset) #
+    #streamlink.set_option("hls-duration", args.hls_duration) #
+    #streamlink.set_option("hls-live-restart", args.hls_live_restart) #
 
-#
-#
-#
+
+    #streamlink.set_option("http-ssl-verify", "/etc/ssl/certs/ca-certificates.crt") #
+    #streamlink.set_option("http-stream-timeout", args.http_stream_timeout) #
+
+    #streamlink.set_option("ringbuffer-size", args.ringbuffer_size) #
+
+    #streamlink.set_option("rtmp-proxy", args.rtmp_proxy) #
+    #streamlink.set_option("rtmp-rtmpdump", args.rtmp_rtmpdump) #
+    #streamlink.set_option("rtmp-timeout", args.rtmp_timeout) #
+
+    #streamlink.set_option("stream-segment-attempts", args.stream_segment_attempts) #
+    #streamlink.set_option("stream-segment-threads", args.stream_segment_threads) #
+    #streamlink.set_option("stream-segment-timeout", args.stream_segment_timeout) #
+    #streamlink.set_option("stream-timeout", args.stream_timeout) #
+
+    #streamlink.set_option("ffmpeg-ffmpeg", args.ffmpeg_ffmpeg) #
+    #streamlink.set_option("ffmpeg-verbose", args.ffmpeg_verbose) #
+    #streamlink.set_option("ffmpeg-verbose-path", args.ffmpeg_verbose_path) #
+    #streamlink.set_option("ffmpeg-video-transcode", args.ffmpeg_video_transcode) #
+    #streamlink.set_option("ffmpeg-audio-transcode", args.ffmpeg_audio_transcode) #
+    
+    # The maximum size of ringbuffer. Add a M or K suffix to specify mega or kilo bytes instead of bytes.
+    # The ringbuffer is used as a temporary storage between the stream and the player.
+    # This is to allows us to download the stream faster than the player wants to read it. Default is "16M"
+    #streamlink.set_option("ringbuffer-size", "32M")
+    
+    #streamlink.set_option("subprocess-errorlog", args.subprocess_errorlog) #
+    #streamlink.set_option("subprocess-errorlog-path", args.subprocess_errorlog_path) #
+    #streamlink.set_option("locale", args.locale) #
 
 def resolve_stream_name(streams, stream_name):
     if stream_name in STREAM_SYNONYMS and stream_name in streams:
@@ -166,7 +220,7 @@ def Stream(streamlink, http, url, argstr, quality):
     not_stream_opened = True
     try:
         # setup default options
-        setOptions(streamlink)
+        setDefaultOptions(streamlink)
 
         # setup plugin, http & stream specific options
         args = plugin = None
@@ -176,7 +230,7 @@ def Stream(streamlink, http, url, argstr, quality):
                 PLUGIN_ARGS = setup_plugin_args(streamlink)
             config_files, plugin = setup_config_files(streamlink, url)
             if config_files or argstr:
-                arglist = argsplit(" -{}".format(argstr[0])) if argstr else []
+                arglist = argsplit(" {}".format(argstr[0])) if argstr else []
                 LOGGER.debug("URL Args: {}", str(arglist))
                 try:
                     args = setup_args(arglist, config_files=config_files, ignore_unknown=False)
@@ -283,15 +337,22 @@ class StreamHandler(BaseHTTPRequestHandler):
         url=unquote(s.path[1:])
         quality="best"
 
-        if url.startswith("q=") and url.index("/") > 0:
-            i = url.index("/")
-            quality = url[2:i]
-            url = url[i+1:]
-        url = url.split(' -', 1)
+        LOGGER.debug("Received URL: {}", url)
+        #split args
+        url = url.split(';SLARGS;', 1)
+        if len(url) > 1:
+            url[1] = url[1].replace(';',' ')
+            if 'quality=' in url[1]:
+                for arg in url[1].split(' '):
+                    if arg.startswith('quality='):
+                        quality = arg[8:]
+                        LOGGER.debug("quality params: {}", quality)
+                        url[1] = url[1].replace('quality=%s' % quality,'').strip()
+                        break
         LOGGER.info("Processing URL: {}", url[0].strip())
 
         streamlink = Streamlink2()
-        return Stream(streamlink, s, url[0].strip(), url[1:2], quality)
+        return Stream(streamlink, s, url[0].strip(), url[1:2], quality) #ciekawa konstrukcja, zwrca url[1] jesli istnieje lub [] jesli nie
 
     def finish(self, *args, **kw):
         try:
@@ -372,7 +433,7 @@ class Daemon:
         try:
             pid = os.fork()
             if pid > 0:
-                sys.stderr.write('Missing pid file for already running streamlinksrv?')
+                #sys.stderr.write('Missing pid file for already running streamlinksrv?')
                 # exit first parent
                 sys.exit(0)
         except OSError, e:
