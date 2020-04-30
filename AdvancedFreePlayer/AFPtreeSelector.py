@@ -754,6 +754,8 @@ class AdvancedFreePlayerStart(Screen):
             return
         #wybrano katalog
         if self["filelist"].getSelection()[1] == True: # isDir
+            self.setDescription('')
+            self.setCover('hideCover')
             # do zmiany nazwy, dla katalogu podajemy cala nazwe
             self.FileListSelectedItem = os.path.basename(os.path.normpath(self["filelist"].getSelection()[0]))
             myConfig.FileListSelectedItem.value = self.FileListSelectedItem
@@ -763,14 +765,16 @@ class AdvancedFreePlayerStart(Screen):
                 dirDescrFile = ''
                 dirPngFile = ''
                 dirError = ''
-                if os.path.exists(dirFullPath + '_dir.info'):
-                    dirDescrFile = dirFullPath + '_dir.info'
-                elif os.path.exists(dirFullPath + '.dir.info'):
-                    dirDescrFile = dirFullPath + '.dir.info'
-                if os.path.exists(dirFullPath + '_dir.png'):
-                    dirPngFile = dirFullPath + '_dir.png'
-                elif os.path.exists(dirFullPath + '_dir.png'):
-                    dirPngFile = dirFullPath + '_dir.png'
+                for ft in ('_dir.info', '.dir.info'):
+                    ftf = os.path.join(dirFullPath, ft)
+                    if os.path.exists(ftf):
+                        dirDescrFile = ftf
+                        break
+                for ft in ('_dir.png', '.dir.png'):
+                    ftf = os.path.join(dirFullPath, ft)
+                    if os.path.exists(ftf):
+                        dirPngFile = ftf
+                        break
                     
                 if dirDescrFile != '':
                     self["Description"].setText(open(dirDescrFile, 'r').read())
@@ -780,16 +784,10 @@ class AdvancedFreePlayerStart(Screen):
                 if dirPngFile != '':
                     self.setCover(dirPngFile)
                 else:
-                    self.setCover('hideCover')
                     dirError += '\n' + _('Missing directory cover (_dir.png)')
                     
-                if myConfig.DirectoryCoversDescriptons.value == True:
+                if myConfig.DirectoryCoversDescriptons.value == True and dirError != '':
                     self["Description"].setText(dirError)
-                else:
-                    self.setDescription('')
-            else:
-                self.setCover('hideCover')
-                self.setDescription('')
             return
         
         # wybrano plik
