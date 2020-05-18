@@ -47,12 +47,12 @@ config.plugins.j00zekCC.PiconsStyle = ConfigSelection(default = "Transparent%201
                                                                                 ("NoName%205/8bit/220x132", "NoName 5"),
                                                                                 ("SiennaRoot%201/8bit/220x132", "SiennaRoot 1"),
                                                                                 ("SiennaRoot%202/8bit/220x132", "SiennaRoot 2"),
-                                                                                ("Silver-Black%201/8bit/100x60", "Silver-Black 1"),
+                                                                                #("Silver-Black%201/8bit/100x60", "Silver-Black 1"),
                                                                                 ("Silver-Black%202/8bit/220x132", "Silver-Black 2"),
-                                                                                ("Star/8bit/100x60", "Star"),
+                                                                                #("Star/8bit/100x60", "Star"),
                                                                                 ("Transparent%201/8bit/220x132", "Transparent 1"),
                                                                                 ("Transparent%202/8bit/220x132", "Transparent 2"),
-                                                                                ("White%201/8bit/100x60", "White 1"),
+                                                                                #("White%201/8bit/100x60", "White 1"),
                                                                                 ("White%202/8bit/220x132", "White 2"),
                                                                               ])
 config.plugins.j00zekCC.zzPiconsStyle = ConfigSelection(default = "Transparent%201/8bit/400x170", choices = [
