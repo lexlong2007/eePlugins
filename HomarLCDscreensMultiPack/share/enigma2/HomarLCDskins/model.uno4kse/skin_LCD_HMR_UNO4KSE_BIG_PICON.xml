@@ -7,6 +7,7 @@
     <font filename="/usr/share/enigma2/HomarLCDskins/fonts/analog.ttf" name="VFD2" scale="90"/>
     <font filename="/usr/share/enigma2/HomarLCDskins/fonts/meteocons.ttf" name="Meteo" scale="100"/>
     <font filename="/usr/share/enigma2/HomarLCDskins/fonts/nmsbd.ttf" name="VFD3" scale="90"/>
+<font filename="/usr/share/enigma2/HomarLCDskins/fonts/CarbonPhyber-Regular 400.ttf" name="Carbon" scale="100"/>
 </fonts>
 <colors>
     <color name="HMRstartTime" value="#ffff66"/>
@@ -39,7 +40,7 @@
   <widget alphatest="off" render="j00zekPicons" doAnimation="blink,60000,60000" picontype="picon" position="0,0" size="400,200" source="session.CurrentService" zPosition="4" transparent="1">
     <convert type="j00zekModServiceName2">Reference</convert>
   </widget>
-        <widget source="session.Event_Now" render="Progress" pixmap="HomarLCDskins/Homar_UNO4KSE/Homar_3.png" position="0,200" size="400,42"  >
+        <widget source="session.Event_Now" render="Progress" pixmap="HomarLCDskins/Homar_UNO4KSE/Homar_3.png" position="0,200" size="400,42" transparent="1" >
     <convert type="EventTime">Progress</convert>
   </widget>
   <widget source="global.CurrentTime" render="Label" position="30,30" size="400,160" font="VFD;160" transparent="1" halign="left" valign="center">
@@ -78,7 +79,7 @@
 <screen name="NumberZapWithName_summary" position="0,0" size="400,240" id="1">
 <ePixmap pixmap="HomarLCDskins/Homar_UNO4KSE/Homar_1.png" position="0,0" size="400,240" zPosition="-1" alphatest="blend" />
 <widget source="parent.Service" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated" position="60,0" size="290,150" zPosition="5" transparent="1" alphatest="blend" />
-<widget source="parent.Service" render="j00zekPicons" picontype="zzpicon" position="60,0" size="290,150" zPosition="4" transparent="1" alphatest="blend">
+<widget source="parent.Service" render="j00zekPicons" picontype="picon" position="60,0" size="290,150" zPosition="4" transparent="1" alphatest="blend">
 <convert type="j00zekModServiceName2">Reference</convert>
 </widget>
 <widget source="parent.Service" render="j00zekModRunningText" 
@@ -96,7 +97,7 @@ position="16,145" size="400,58" font="VFD;52" transparent="1" halign="center" va
 <screen name="InfoBarZapHistory_summary" position="0,0" size="400,240" id="1">
 <ePixmap pixmap="HomarLCDskins/Homar_UNO4KSE/Homar_1.png" position="0,0" size="400,240" zPosition="-1" alphatest="blend" />
 <widget source="session.CurrentService" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated" position="60,0" size="290,140" zPosition="5" transparent="1" alphatest="blend" />
-<widget source="parent.ServiceEvent" render="j00zekPicons" picontype="zzpicon" position="60,0" size="290,140" zPosition="4" transparent="1" alphatest="blend">
+<widget source="parent.ServiceEvent" render="j00zekPicons" picontype="picon" position="60,0" size="290,140" zPosition="4" transparent="1" alphatest="blend">
   <convert type="j00zekModServiceName2">Reference</convert>
   </widget>
 <widget source="parent.ServiceEvent" render="j00zekModRunningText" 

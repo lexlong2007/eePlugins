@@ -35,18 +35,15 @@
 
 <!-- InfoBar -->
  <screen name="InfoBarSummary" position="0,0" size="400,240" id="1">
-  <ePixmap pixmap="HomarLCDskins/Homar_UNO4KSE/Homar_4.png" position="0,0" size="400,240" zPosition="-1" alphatest="blend" />
-  <widget source="session.CurrentService" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated" position="0,0" size="400,200" zPosition="5" transparent="1" alphatest="blend" />
-  <widget alphatest="off" render="j00zekPicons" doAnimation="blink,60000,60000" picontype="zzpicon" position="0,0" size="400,200" source="session.CurrentService" zPosition="4" transparent="1">
+  <ePixmap pixmap="HomarLCDskins/Homar_UNO4KSE/Homar_4.png" position="0,0" size="400,240" zPosition="1" alphatest="blend" />
+  <widget source="session.CurrentService" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated" position="40,10" size="320,192" zPosition="5" transparent="1" alphatest="blend" />
+  <widget alphatest="blend" render="j00zekPicons" picontype="zzpicon" position="40,10" size="320,192" source="session.CurrentService" zPosition="4" transparent="1">
     <convert type="j00zekModServiceName2">Reference</convert>
   </widget>
-        <widget source="session.Event_Now" render="Progress" pixmap="HomarLCDskins/Homar_UNO4KSE/Homar_3.png" position="0,200" size="400,42" transparent="1" >
+        <widget source="session.Event_Now" render="Progress" pixmap="HomarLCDskins/Homar_UNO4KSE/Homar_3.png" position="0,205" size="400,42" zPosition="2"  transparent="1" >
     <convert type="EventTime">Progress</convert>
   </widget>
-  <widget source="global.CurrentTime" render="Label" position="30,30" size="400,160" font="VFD;160" transparent="1" halign="left" valign="center">
-    <convert type="ClockToText">Format:%H:%M</convert>
-  </widget>
-     <widget source="session.RecordState" render="Pixmap" pixmap="HomarLCDskins/Homar_UNO4KSE/Homar_2.png" position="320,20" size="80,20" zPosition="4" alphatest="blend">
+       <widget source="session.RecordState" render="Pixmap" pixmap="HomarLCDskins/Homar_UNO4KSE/Homar_2.png" position="320,20" size="80,20" zPosition="4" alphatest="blend">
         <convert type="ConfigEntryTest">config.usage.blinking_rec_symbol_during_recording,True,CheckSourceBoolean</convert>
       <convert type="ConditionalShowHide">Blink</convert>
      </widget>
@@ -55,19 +52,22 @@
   <convert type="ConditionalShowHide">Blink</convert>
   </widget>
   <!-- Timeshift -->
-<widget source="session.CurrentService" render="Progress" pixmap="HomarLCDskins/Homar_UNO4KSE/Homar_7.png" position="0,200" size="400,42" zPosition="2" transparent="2" >
+<widget source="session.CurrentService" render="Progress" pixmap="HomarLCDskins/Homar_UNO4KSE/Homar_7.png" position="0,205" size="400,42" zPosition="3" transparent="2" >
     <convert type="ServicePosition">Position</convert>
   </widget>
 </screen>
 
 <!-- ChannelSelection -->
 <screen name="ChannelSelection_summary" position="0,0" size="400,240" id="1">
-  <ePixmap pixmap="HomarLCDskins/Homar_UNO4KSE/Homar_4.png" position="0,0" size="400,240" zPosition="-1" alphatest="blend" />
-<widget source="parent.ServiceEvent" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated" position="0,0" size="400,240" zPosition="5" transparent="1" alphatest="blend" />
- <widget source="parent.ServiceEvent" render="j00zekPicons" picontype="zzpicon" position="0,0" size="400,240" zPosition="4" transparent="1" alphatest="blend">
+  <ePixmap pixmap="HomarLCDskins/Homar_UNO4KSE/Homar_4.png" position="0,0" size="400,240" zPosition="1" alphatest="blend" />
+<widget source="parent.ServiceEvent" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated" position="40,10" size="320,192" zPosition="5" transparent="1" alphatest="blend" />
+ <widget source="parent.ServiceEvent" render="j00zekPicons" picontype="zzpicon" position="40,10" size="320,192" zPosition="4" transparent="1" alphatest="blend">
  <convert type="j00zekModServiceName2">Reference</convert>
  </widget>
 
+<widget source="parent.ServiceEvent" render="Progress" pixmap="HomarLCDskins/Homar_480x320/Homar_3.png" position="0,205" size="400,42" transparent="1" zPosition="2" >                     
+ <convert type="EventTime">Progress</convert>
+ </widget>
 
 
 
@@ -519,19 +519,19 @@ options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=0,start
 	    <screen name="StandbySummary" position="0,0" size="400,240" id="1">
 <ePixmap pixmap="HomarLCDskins/Homar_UNO4KSE/Homar_4.png" position="0,0" size="400,240" zPosition="-1" alphatest="blend" />
 <widget source="session.CurrentService" render="j00zekPiconAnimation" pixmaps="HomarLCDskins/common/animated_2" position="0,0" size="400,240" zPosition="5" transparent="1" alphatest="blend" />
-  <widget source="global.CurrentTime" render="Label" position="52,120" size="306,120" font="VFD; 120" halign="center" transparent="1" >
+  <widget source="global.CurrentTime" render="Label" position="7,76" size="400,200" font="VFD; 172" halign="center" foregroundColor="#00CFFF" transparent="1" >
         <convert type="ClockToText">Format:%H:%M</convert>
         </widget>
-		<widget source="session.j00zekMSNWeather" render="j00zekMSNWeatherPixmap" position="200,10" size="140,140" zPosition="1" transparent="1" alphatest="blend">
-      <convert type="j00zekMSNWeather">weathericon,current</convert>
-    </widget>
+		
 <widget source="session.j00zekMSNWeather" render="Label" position="20,17" size="162,73" font="VFD; 66" zPosition="1" halign="left" valign="top" foregroundColor="#00CFFF" transparent="1" noWrap="1">
       <convert type="j00zekMSNWeather">temperature_current</convert>
     </widget>
-<widget source="session.j00zekMSNWeather" render="j00zekModRunningText" 
-options="movetype=running,startpoint=0,direction=left,steptime=70,repeat=0,startdelay=2000,always=0,oneshot=0" noWrap="1"  position="20,75" size="165,75" font="VFD;55" transparent="1" halign="left" valign="center" foregroundColor="HMRname"  zPosition="5">
-<convert type="j00zekMSNWeather">city</convert>
-</widget>
+<widget source="session.j00zekMSNWeather"  render="Label" position="265,17" size="120,73" font="VFD;66" halign="left" foregroundColor="#00CFFF" transparent="1" >
+ 		<convert type="j00zekMSNWeather">humidity</convert>
+   </widget> 
+<eLabel text="%" position="360,17" size="55,73" font="VFD;66"  halign="left" foregroundColor="#00CFFF" transparent="1" />
+
+
 <widget source="session.RecordState" render="Pixmap" pixmap="HomarLCDskins/Homar_UNO4KSE/Homar_2.png" position="300,10" size="80,20" zPosition="3" alphatest="blend">
         <convert type="ConfigEntryTest">config.usage.blinking_rec_symbol_during_recording,True,CheckSourceBoolean</convert>
       <convert type="ConditionalShowHide">Blink</convert>
