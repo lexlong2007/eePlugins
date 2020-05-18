@@ -5,7 +5,7 @@ Depends: enigma2---j00zeks-components enigma2-plugin-extensions--j00zeks-userski
 Description: crash BlackHarmonyFHD multi image version mod by j00zek and friends
 Maintainer: j00zek
 Source: NA
-Version: 20.04.27.0832
+Version: 20.05.17.0937
 Architecture: all
 DestinationPath: /
 ExcludeFolder: scripts

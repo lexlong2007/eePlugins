@@ -8,7 +8,11 @@
     <widget name="InfoPixmap" pixmap="BlackHarmony/icons/transparent.png" position="5,5" size="120,180" alphatest="blend"/>
     <applet type="onLayoutFinish">
 # this should be factored out into some helper code, but currently demonstrates applets.
+
+DBG=False
+
 from enigma import eSize, ePoint
+if DBG: open("/tmp/MessageBox.log", "w").write('%s\n' % self.text)
 
 animPosition = (0, 0)
 animWidth = self["QuestionPixmap"].instance.size().width()
@@ -17,7 +21,7 @@ WindowWidth = self.instance.size().width()
 windowHeight = self.instance.size().height()
 orgWindowPos = self.instance.position()
 offset = 10
-textFont = 30
+textFont = 25
 listItemHeight = 35
 
 # Move and Resize label
@@ -28,14 +32,17 @@ textSize = ( textWidth, textTmpHeight)
 self["text"].instance.move(ePoint(textPos[0], textPos[1]))
 self["text"].instance.resize(eSize(textWidth, textTmpHeight))
 textHeight = self["text"].instance.calculateSize().height()
+if DBG: open("/tmp/MessageBox.log", "a").write('textHeight=%s\n' % textHeight)
+if DBG: open("/tmp/MessageBox.log", "a").write('textTmpHeight=%s\n' % textTmpHeight)
 if textHeight > textTmpHeight:
         self["text"].instance.resize(eSize(textWidth, textHeight))
 else:
         textHeight = textTmpHeight
 
 listHeight = listItemHeight * len(self.list)
-if (textPos[1] + textHeight + offset + listHeight + offset) > (animPosition[1] + animHeight + offset):
-        listPos = (offset, animPosition[1] + animHeight + offset)
+if DBG: open("/tmp/MessageBox.log", "a").write('listHeight=%s\n' % listHeight)
+if (textPos[1] + textHeight + offset) > (animPosition[1] + animHeight + offset):
+        listPos = (offset, textPos[1] + textHeight + offset)
         listSize = (WindowWidth - offset * 2, listHeight)
         newWindowHeight = listPos[1] + listSize[1] + offset
 else:

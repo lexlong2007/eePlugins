@@ -1,20 +1,20 @@
 <skin>
   <!-- vfd-Skin Solo4k by Nathanael,Eisman, Schomi, Mod by stub, Mod by magier12 -->
   <!-- v5.2 -->
-<colors>
+  <colors>
     <color name="Background" value="#000000" />
     <color name="windowBackground" value="#000000" />
     <color name="LCDBackground" value="#000000" />
-</colors>
-<fonts>
-		<font filename="analog.ttf" name="VFD2" scale="90"/>
+  </colors>
+  <fonts>
+    <font filename="analog.ttf" name="VFD2" scale="90"/>
     <font filename="/usr/share/enigma2/BlackHarmony/fonts/nmsbd.ttf" name="VFD" scale="90"/>
-		<font filename="MyriadPro-Regular.otf" name="RegularLCD" scale="100" />
-		<font filename="MyriadPro-Semibold.otf" name="SemiboldLCD" scale="100" />
-		<font filename="MyriadPro-SemiboldIt.otf" name="SemiboldLCDit" scale="100" />
-		<font filename="meteocons.ttf" name="Meteo" scale="100" /> 
-</fonts>
-<windowstyle type="skinned" id="1">
+    <font filename="MyriadPro-Regular.otf" name="RegularLCD" scale="100" />
+    <font filename="MyriadPro-Semibold.otf" name="SemiboldLCD" scale="100" />
+    <font filename="MyriadPro-SemiboldIt.otf" name="SemiboldLCDit" scale="100" />
+    <font filename="/usr/share/enigma2/BlackHarmony/fonts/meteocons.ttf" name="Meteo" scale="100" /> 
+  </fonts>
+  <windowstyle type="skinned" id="1">
     <color name="Background" color="#000000" />
     <color name="LabelForeground" color="#ffffff" />
     <color name="ListboxBackground" color="#ffffff" />
@@ -27,7 +27,7 @@
     <color name="ListboxMarkedAndSelectedForeground" color="#000000" />
     <color name="WindowTitleForeground" color="#000000" />
     <color name="WindowTitleBackground" color="#ffffff" />
-</windowstyle>
+  </windowstyle>
 
 <screen name="LCDWetterStandbyTemplate">
  <widget foregroundColor="foreground" backgroundColor="background" font="VFD;50" render="Label" halign="center" valign="center" noWrap="1" transparent="1" source="session.j00zekMSNWeather" position="10,00" size="460,60" zPosition="5">

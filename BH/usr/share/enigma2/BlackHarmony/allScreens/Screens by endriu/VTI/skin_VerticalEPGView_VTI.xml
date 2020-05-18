@@ -38,12 +38,12 @@
 	<eLabel position="1553,145" size="1,65" backgroundColor="#000090e6" zPosition="4" />
 	<eLabel position="75,210" size="1774,2" backgroundColor="#000090e6" zPosition="4" />
 	
-	<widget font="Roboto_HD;25" halign="center" valign="center" name="currCh1" position="179,145" size="191,60" transparent="1" zPosition="2" backgroundColor="black" />
-	<widget font="Roboto_HD;25" halign="center" valign="center" name="currCh2" position="475,145" size="191,60" transparent="1" zPosition="2" backgroundColor="black" />
-	<widget font="Roboto_HD;25" halign="center" valign="center" name="currCh3" position="771,145" size="191,60" transparent="1" zPosition="2" backgroundColor="black" />
-	<widget font="Roboto_HD;25" halign="center" valign="center" name="currCh4" position="1067,145" size="191,60" transparent="1" zPosition="2" backgroundColor="black"/>
-	<widget font="Roboto_HD;25" halign="center" valign="center" name="currCh5" position="1363,145" size="191,60" transparent="1" zPosition="2" backgroundColor="black" />
-	<widget font="Roboto_HD;25" halign="center" valign="center" name="currCh6" position="1659,145" size="191,60" transparent="1" zPosition="2" backgroundColor="black" />
+	<widget font="Roboto_HD;25" halign="center" valign="bottom" name="currCh1" position="179,145" size="191,60" transparent="1" zPosition="2" backgroundColor="black" />
+	<widget font="Roboto_HD;25" halign="center" valign="bottom" name="currCh2" position="475,145" size="191,60" transparent="1" zPosition="2" backgroundColor="black" />
+	<widget font="Roboto_HD;25" halign="center" valign="bottom" name="currCh3" position="771,145" size="191,60" transparent="1" zPosition="2" backgroundColor="black" />
+	<widget font="Roboto_HD;25" halign="center" valign="bottom" name="currCh4" position="1067,145" size="191,60" transparent="1" zPosition="2" backgroundColor="black"/>
+	<widget font="Roboto_HD;25" halign="center" valign="bottom" name="currCh5" position="1363,145" size="191,60" transparent="1" zPosition="2" backgroundColor="black" />
+	<widget font="Roboto_HD;25" halign="center" valign="bottom" name="currCh6" position="1659,145" size="191,60" transparent="1" zPosition="2" backgroundColor="black" />
 	
 	<widget itemHeight="80" name="epg_list1" position="74,212"  size="296,560" TimeStringColor="#00FFFFCC" TimeColor="#00FF9900"  transparent="1" zPosition="4" scrollbarMode="showAlways" scrollbarWidth="6" selectionPixmap="BlackHarmony/menu/sel_675_80.png"  />
     <widget itemHeight="80" name="epg_list2" position="370,212" size="296,560" TimeStringColor="#00FFFFCC" TimeColor="#00FF9900" transparent="1" zPosition="4" scrollbarMode="showAlways" scrollbarWidth="6" selectionPixmap="BlackHarmony/menu/sel_675_80.png"  />
