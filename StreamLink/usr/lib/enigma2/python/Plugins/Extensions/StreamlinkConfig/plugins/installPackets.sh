@@ -37,7 +37,8 @@ python-pysocks
 python-sqlite3
 python-subprocess
 python-websocket 
-rtmpdump"
+rtmpdump
+hlsdl"
 
 for pkg in $paskagesList;
 do
