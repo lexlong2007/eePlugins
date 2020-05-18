@@ -753,41 +753,44 @@ class AdvancedFreePlayerStart(Screen):
             self.GetCoverTimer.start(self.ShowDelay,False)
             return
         #wybrano katalog
-        if self["filelist"].getSelection()[1] == True: # isDir
+        if self["filelist"].getSelection()[1] == True and not self["filelist"].getSelection()[0] is None: # isDir
             self.setDescription('')
             self.setCover('hideCover')
             # do zmiany nazwy, dla katalogu podajemy cala nazwe
-            self.FileListSelectedItem = os.path.basename(os.path.normpath(self["filelist"].getSelection()[0]))
-            myConfig.FileListSelectedItem.value = self.FileListSelectedItem
-            if self["filelist"].getSelectedIndex() != 0 and self["filelist"].getSelection()[0][:1] != '.':
-                dirFullPath = os.path.join(self.filelist.getCurrentDirectory(), myConfig.FileListSelectedItem.value)
-                printDEBUG("CurrentDirectory path %s" % dirFullPath)
-                dirDescrFile = ''
-                dirPngFile = ''
-                dirError = ''
-                for ft in ('_dir.info', '.dir.info'):
-                    ftf = os.path.join(dirFullPath, ft)
-                    if os.path.exists(ftf):
-                        dirDescrFile = ftf
-                        break
-                for ft in ('_dir.png', '.dir.png'):
-                    ftf = os.path.join(dirFullPath, ft)
-                    if os.path.exists(ftf):
-                        dirPngFile = ftf
-                        break
+            try:
+                self.FileListSelectedItem = os.path.basename(os.path.normpath(self["filelist"].getSelection()[0]))
+                myConfig.FileListSelectedItem.value = self.FileListSelectedItem
+                if self["filelist"].getSelectedIndex() != 0 and self["filelist"].getSelection()[0][:1] != '.':
+                    dirFullPath = os.path.join(self.filelist.getCurrentDirectory(), myConfig.FileListSelectedItem.value)
+                    printDEBUG("CurrentDirectory path %s" % dirFullPath)
+                    dirDescrFile = ''
+                    dirPngFile = ''
+                    dirError = ''
+                    for ft in ('_dir.info', '.dir.info'):
+                        ftf = os.path.join(dirFullPath, ft)
+                        if os.path.exists(ftf):
+                            dirDescrFile = ftf
+                            break
+                    for ft in ('_dir.png', '.dir.png'):
+                        ftf = os.path.join(dirFullPath, ft)
+                        if os.path.exists(ftf):
+                            dirPngFile = ftf
+                            break
                     
-                if dirDescrFile != '':
-                    self["Description"].setText(open(dirDescrFile, 'r').read())
-                else:
-                    dirError = _('Missing directory info (_dir.info)')
+                    if dirDescrFile != '':
+                        self["Description"].setText(open(dirDescrFile, 'r').read())
+                    else:
+                        dirError = _('Missing directory info (_dir.info)')
                     
-                if dirPngFile != '':
-                    self.setCover(dirPngFile)
-                else:
-                    dirError += '\n' + _('Missing directory cover (_dir.png)')
+                    if dirPngFile != '':
+                        self.setCover(dirPngFile)
+                    else:
+                        dirError += '\n' + _('Missing directory cover (_dir.png)')
                     
-                if myConfig.DirectoryCoversDescriptons.value == True and dirError != '':
-                    self["Description"].setText(dirError)
+                    if myConfig.DirectoryCoversDescriptons.value == True and dirError != '':
+                        self["Description"].setText(dirError)
+            except Exception as e:
+                printDEBUG("Exception: %s" % str(e))
             return
         
         # wybrano plik
