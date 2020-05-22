@@ -247,7 +247,7 @@ class UserSkin_Config(Screen, ConfigListScreen):
             
 #### initializing VFD/LCD skins ###
             tunersMappingDict = {}
-            if getDesktop(1).size().width() >= 320:
+            if getDesktop(1).size().width() >= 220:
                 self.desktopType = 'lcd'
             else:
                 self.desktopType = 'vfd'
