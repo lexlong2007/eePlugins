@@ -42,7 +42,7 @@ def _generate_E2bouquet():
     doLog('Generuje bukiet dla %s ...' % frameWork)
     open("/tmp/wpBouquet.log", "a").write('Generuje bukiet dla %s ...\n' % frameWork)
     data = '#NAME TVP Regionalne aktualizacja %s\n' % date.today().strftime("%d-%m-%Y")
-for item in channelsList:
+    for item in channelsList:
         #print item
             title = item.split('=')[1].strip().replace('tvpb','TVP B').replace('tvpg','TVP G').replace('tvpk','TVP K').replace('tvpl','TVP L').replace('tvpo','TVP O').replace('tvpp','TVP P').replace('tvpr','TVP R').replace('tvps','TVP S').replace('tvpw','TVP W')
             lcaseTitle = title.lower().replace(' ','')

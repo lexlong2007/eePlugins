@@ -40,6 +40,13 @@ config.plugins.streamlinksrv.WPlogin = NoSave(ConfigNothing())
 config.plugins.streamlinksrv.TELEusername = ConfigText()
 config.plugins.streamlinksrv.TELEpassword = ConfigPassword()
 config.plugins.streamlinksrv.TELEbouquet = NoSave(ConfigNothing())
+# remote E2
+config.plugins.streamlinksrv.remoteE2address = ConfigText(default = "192.168.1.8")
+config.plugins.streamlinksrv.remoteE2port = ConfigText(default = "8001")
+config.plugins.streamlinksrv.remoteE2username = ConfigText(default = "root")
+config.plugins.streamlinksrv.remoteE2password = ConfigPassword(default = "root")
+config.plugins.streamlinksrv.remoteE2zap = ConfigEnableDisable(default = True)
+config.plugins.streamlinksrv.remoteE2wakeup = ConfigEnableDisable(default = True)
 
 if os.path.exists("/tmp/StreamlinkConfig.log"):
     os.remove("/tmp/StreamlinkConfig.log")
@@ -69,6 +76,14 @@ class StreamlinkConfiguration(Screen, ConfigListScreen):
         Mlist.append(getConfigListEntry(_("Password:"), config.plugins.streamlinksrv.WPpassword))
         Mlist.append(getConfigListEntry(_("Check login credentials"), config.plugins.streamlinksrv.WPlogin))
         Mlist.append(getConfigListEntry(_("Press OK to create %s bouquet") % "userbouquet.WPPL.tv", config.plugins.streamlinksrv.WPbouquet))
+        Mlist.append(getConfigListEntry(""))
+        Mlist.append(getConfigListEntry('\c00289496' + _("*** remote E2 helper ***")))
+        Mlist.append(getConfigListEntry(_("IP address:"), config.plugins.streamlinksrv.remoteE2address))
+        Mlist.append(getConfigListEntry(_("Username:"), config.plugins.streamlinksrv.remoteE2username))
+        Mlist.append(getConfigListEntry(_("Password:"), config.plugins.streamlinksrv.remoteE2password))
+        Mlist.append(getConfigListEntry(_("Wakeup if remote E2 in standby:"), config.plugins.streamlinksrv.remoteE2wakeup))
+        Mlist.append(getConfigListEntry(_("Zap before stream workarround:"), config.plugins.streamlinksrv.remoteE2zap))
+        
         Mlist.append(getConfigListEntry(""))
         Mlist.append(getConfigListEntry('\c00289496' + _("*** %s configuration ***") % 'teleelevidenie')) #https://my.teleelevidenie.com/signin
         Mlist.append(getConfigListEntry(_("Username:"), config.plugins.streamlinksrv.TELEusername))
