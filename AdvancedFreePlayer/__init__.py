@@ -157,7 +157,8 @@ myConfig = config.plugins.AdvancedFreePlayer
 myConfig.FileListFontSize = ConfigSelectionNumber(20, 32, 2, default = 24)
 myConfig.TextFilesOnFileList = ConfigYesNo(default = False)
 myConfig.NamesNOfiles = ConfigYesNo(default = True) # configures, if file selector should present MovieNames or FileNames
-myConfig.FileListSort = ConfigSelection(default = "name", choices = [("name", _("Sort by name")),("date", _("Sort by date"))])
+myConfig.FileListSort = ConfigSelection(default = "name", choices = [("name", _("Sort by name")),("dateasc", _("Sort by date ascending")),("datedesc", _("Sort by date descending"))])
+myConfig.DirListSort = ConfigSelection(default = "name", choices = [("asfiles", _("Like files")),("name", _("Sort by name")),("dateasc", _("Sort by date ascending")),("datedesc", _("Sort by date descending"))])
 if getPlatform() == 'sh4':
     myConfig.MultiFramework = ConfigSelection(default = "4097", choices = [("4097", "gstreamer (root 4097)"),("4099", "ffmpeg (root 4099)"),("1", "hardware (root 1)"), ("select", _("Select during start"))])
     choicesList = [("gstreamer (root 4097)","4097"),("ffmpeg (root 4099)","4099"),("Hardware (root 1)","1")]

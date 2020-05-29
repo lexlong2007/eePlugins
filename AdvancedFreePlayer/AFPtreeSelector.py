@@ -37,7 +37,7 @@ import time
 class AdvancedFreePlayerStarter(Screen):
     def __init__(self, session, openmovie, movieTitle):
         printDEBUG("AdvancedFreePlayerStarter >>>")
-        self.sortDate = False
+        self.sortType = 'name'
         self.openmovie = openmovie
         self.movieTitle = movieTitle
         self.opensubtitle = ''
@@ -150,28 +150,29 @@ class AdvancedFreePlayerStart(Screen):
             self["filesubtitle"].hide()
             
         self["key_red"] = StaticText()
+        self["key_green"] = StaticText()
+        self["key_blue"] = StaticText()
+        self["key_yellow"] = StaticText(_("Config"))
+        
         from PlayWithdmnapi import KeyMapInfo #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
         self["Description"] = Label(KeyMapInfo)
         self["Cover"] = j00zekAccellPixmap()
         
         if os.path.exists(ExtPluginsPath + '/DMnapi/DMnapi.pyo') or os.path.exists(ExtPluginsPath +'/DMnapi/DMnapi.pyc') or os.path.exists(ExtPluginsPath +'/DMnapi/DMnapi.py'):
             self.DmnapiInstalled = True
-            self["key_green"] = StaticText(_("DMnapi"))
+            self["key_green"].setText(_("DMnapi"))
         else:
             self.DmnapiInstalled = False
-            self["key_green"] = StaticText(_("Install DMnapi"))
+            self["key_green"].setText(_("Install DMnapi"))
             
-        self["key_yellow"] = StaticText(_("Config"))
-        if myConfig.FileListSort.value == 'date':
-            self["key_blue"] = StaticText(_("Sort by date"))
-            self.sortDate = True
-        else:
-            self["key_blue"] = StaticText(_("Sort by filename"))
-            self.sortDate = False
+        self.sortType = myConfig.FileListSort.value
+        if self.sortType == 'dateasc':    self["key_blue"].setText(_("Sorted by date ascending"))
+        elif self.sortType == 'datedesc': self["key_blue"].setText(_("Sorted by date descending"))
+        else:                             self["key_blue"].setText(_("Sorted by name"))
         self["info"].setText(PluginName + ' ' + PluginInfo)
         
          
-        self.filelist = FileList(myConfig.FileListLastFolder.value, matchingPattern = self.buildmatchingPattern(), sortDate=self.sortDate)
+        self.filelist = FileList(myConfig.FileListLastFolder.value, matchingPattern = self.buildmatchingPattern(), sortType=self.sortType)
             
         self["filelist"] = self.filelist
         self["actions"] = ActionMap(["AdvancedFreePlayerSelector"],
@@ -477,16 +478,21 @@ class AdvancedFreePlayerStart(Screen):
         return
 
     def setSort(self):
-        if self.sortDate:
-            #print "sortDate=False"
-            self["filelist"].sortDateDisable()
-            self.sortDate=False
-            self["key_blue"].setText(_("Sort by filename"))
+        printDEBUG('AFPstart.sort(sortType="%s")' % self.sortType)
+        if self.sortType == 'dateasc':    self.sortType = 'datedesc'
+        elif self.sortType == 'datedesc': self.sortType = 'name'
+        else:                             self.sortType = 'dateasc'
+
+        #wyswietalnie info
+        printDEBUG('\t after change sortType="%s"' % self.sortType)
+        if self.sortType == 'dateasc':
+            self["key_blue"].setText(_("Sorted by date ascending"))
+        elif self.sortType == 'datedesc':
+            self["key_blue"].setText(_("Sorted by date descending"))
         else:
-            #print "sortDate=True"
-            self["filelist"].sortDateEnable()
-            self.sortDate=True
-            self["key_blue"].setText(_("Sort by date"))
+            self["key_blue"].setText(_("Sorted by name"))
+        
+        self["filelist"].setSortType(self.sortType)
         self["filelist"].refresh()
 
     def selectFile(self):

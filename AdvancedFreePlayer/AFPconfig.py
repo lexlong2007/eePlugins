@@ -57,6 +57,8 @@ class AdvancedFreePlayerConfig(Screen, ConfigListScreen):
         self.list.append(getConfigListEntry(_("Show Music files on the list:"), myConfig.ShowMusicFiles))
         #self.list.append(getConfigListEntry(_("Show Picture files on the list:"), myConfig.ShowPicturesFiles))
         self.list.append(getConfigListEntry(_("Initial files sorting:"), myConfig.FileListSort))
+        self.list.append(getConfigListEntry(_("Initial directories sorting:"), myConfig.DirListSort))
+        
         self.list.append(getConfigListEntry(_("Stop playing entering AdvancedFreePlayer:"), myConfig.StopService))
         self.list.append(getConfigListEntry(_("Initial movies folder:"), myConfig.FileListLastFolder))
         self.list.append(getConfigListEntry(_("Remember last used folder:"), myConfig.StoreLastFolder))

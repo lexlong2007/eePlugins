@@ -115,7 +115,7 @@ def FileEntryComponent(name, absolute = None, isDir = False, goBack = False, cur
     return res
 
 class FileList(MenuList):
-    def __init__(self, directory, showDirectories = True, showFiles = True, showMountpoints = True, matchingPattern = None, useServiceRef = False, inhibitDirs = False, inhibitMounts = False, isTop = False, enableWrapAround = False, additionalExtensions = None, sortDate=False):
+    def __init__(self, directory, showDirectories = True, showFiles = True, showMountpoints = True, matchingPattern = None, inhibitDirs = False, inhibitMounts = False, isTop = False, enableWrapAround = False, additionalExtensions = None, sortType='name'):
         MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
         GUIComponent.__init__(self)
 
@@ -123,7 +123,6 @@ class FileList(MenuList):
         self.mountpoints = []
         self.current_directory = None
         self.current_mountpoint = None
-        self.useServiceRef = useServiceRef
         self.showDirectories = showDirectories
         self.showMountpoints = showMountpoints
         self.showFiles = showFiles
@@ -132,7 +131,7 @@ class FileList(MenuList):
         self.matchingPattern = matchingPattern
         self.inhibitDirs = inhibitDirs or []
         self.inhibitMounts = inhibitMounts or []
-        self.sortDate = sortDate
+        self.sortType = sortType
 
         self.refreshMountpoints()
         #self.changeDir(directory)
@@ -244,47 +243,67 @@ class FileList(MenuList):
         elif directory is None:
             files = [ ]
             directories = [ ]
-        elif self.useServiceRef:
-            root = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + directory)
-            if self.additional_extensions:
-                root.setName(self.additional_extensions)
-            serviceHandler = eServiceCenter.getInstance()
-            list = serviceHandler.list(root)
-
-            while 1:
-                s = list.getNext()
-                if not s.valid():
-                    del list
-                    break
-                if s.flags & s.mustDescent:
-                    directories.append(s.getPath())
-                else:
-                    files.append(s)
-            directories.sort(key=lambda s: s.lower())
-            files.sort(key=lambda s: s.lower())
         else:
             if fileExists(directory):
                 try:
-                    files = listdir(directory)
-                    
+                    for x in listdir(directory):
+                        #printDEBUG('x[-4:]="%s"' % x[-4:] )
+                        if x[-4:] in ('meta','.eit', 's.ap', 's.sc', 'cuts'):
+                            continue
+                        elif os_path.isdir(directory + x):
+                            directories.append((directory + x + "/", os_path.getmtime(directory + x), DecodeNationalLetters(x).lower()))
+                            #printDEBUG('%s, %s, %s' % (directory + x + "/", os_path.getmtime(directory + x), DecodeNationalLetters(x).lower()))
+                        else:
+                            if config.plugins.AdvancedFreePlayer.NamesNOfiles.value:
+                                files.append( (x, os_path.getmtime(directory + x), cleanFile(DecodeNationalLetters(x),ReturnMovieYear = False, metaFileName = "%s/%s.meta" %(directory,x))) )
+                                printDEBUG("'%s', '%s', '%s'" % (x, os_path.getmtime(directory + x), cleanFile(DecodeNationalLetters(x),ReturnMovieYear = False, metaFileName = "%s/%s.meta" %(directory,x))))
+                            else:
+                                files.append( (x, os_path.getmtime(directory + x), DecodeNationalLetters(x).lower()) )
+                                #printDEBUG('%s', '%s', '%s' % (x, os_path.getmtime(directory + x), DecodeNationalLetters(x).lower()))
                 except Exception, e:
                     files = []
-                if self.sortDate:
-                    try: files.sort(key=lambda s: os_path.getmtime(os_path.join(directory, s)))
-                    except Exception, e: print "Exception sorting by date!!! ", str(e)
-                    files.reverse()
-                elif config.plugins.AdvancedFreePlayer.NamesNOfiles.value:
-                    try: files.sort(key=lambda s: cleanFile(s,ReturnMovieYear = False).lower() )
-                    except Exception, e: print "Exception sorting by MovieName!!! ", str(e)
-                else:
-                    files.sort(key=lambda s: s.lower())
-                tmpfiles = files[:]
-                for x in tmpfiles:
-                    if os_path.isdir(directory + x):
-                        directories.append(directory + x + "/")
-                        files.remove(x)
-                try: directories.sort(key=lambda s: s.lower())
-                except Exception, e: print "Exception sorting directories!!! ", str(e)
+                    directories = []
+                    
+                #sortowanie plików
+                printDEBUG("FileList.sortType ='%s'" % self.sortType )
+                #printDEBUG("config.plugins.AdvancedFreePlayer.DirListSort.value ='%s'" % config.plugins.AdvancedFreePlayer.DirListSort.value )
+                if self.sortType == 'name':
+                    files = sorted(files , key = lambda x: x[2].lower())
+                elif self.sortType == 'dateasc':
+                    files = sorted(files , key = lambda x: x[1])
+                elif self.sortType == 'datedesc':
+                    files = sorted(files , key = lambda x: x[1], reverse=True)
+                
+                #sortowanie katalogow
+                #printDEBUG("config.plugins.AdvancedFreePlayer.DirListSort.value ='%s'" % config.plugins.AdvancedFreePlayer.DirListSort.value )
+                if config.plugins.AdvancedFreePlayer.DirListSort.value == 'name':
+                    directories = sorted(directories , key = lambda x: x[2])
+                elif config.plugins.AdvancedFreePlayer.DirListSort.value == 'dateasc':
+                    directories = sorted(directories , key = lambda x: x[1])
+                elif config.plugins.AdvancedFreePlayer.DirListSort.value == 'datedesc':
+                    directories = sorted(directories , key = lambda x: x[1], reverse=True)
+                elif config.plugins.AdvancedFreePlayer.DirListSort.value == 'asfiles':
+                    if self.sortType == 'name':
+                        directories = sorted(directories , key = lambda x: x[2])
+                    elif self.sortType == 'dateasc':
+                        directories = sorted(directories , key = lambda x: x[1])
+                    elif self.sortType == 'datedesc':
+                        directories = sorted(directories , key = lambda x: x[1], reverse=True)
+                    
+                #sortowanie
+                #if self.sortType.startswith('date'):
+                #    try: files.sort(key=lambda s: os_path.getmtime(os_path.join(directory, s)))
+                #    except Exception, e: printDEBUG("Exception sorting by date: %s" % str(e))
+                #    if self.sortType == 'datedesc': files.reverse()
+                #elif config.plugins.AdvancedFreePlayer.NamesNOfiles.value:
+                #    try: files.sort(key=lambda s: cleanFile(s,ReturnMovieYear = False).lower() )
+                #    except Exception, e: printDEBUG("Exception sorting by MovieName: %s" % str(e))
+                #else:
+                #    files.sort(key=lambda s: s.lower())
+                #finalnie porzadki
+                files = [x[0] for x in files]
+                directories = [x[0] for x in directories]
+                
 
         if directory is not None and self.showDirectories and not self.isTop:
             if directory == self.current_mountpoint and self.showMountpoints:
@@ -297,17 +316,15 @@ class FileList(MenuList):
             for x in directories:
                 if not (self.inhibitMounts and self.getMountpoint(x) in self.inhibitMounts) and not self.inParentDirs(x, self.inhibitDirs):
                     name = x.split('/')[-2]
-                    #self.list.append(FileEntryComponent(name = name, absolute = x, isDir = True))
-                    self.list.append(FileEntryComponent(name = name, absolute = x, isDir = True, DimText0 = self.DimText0, DimText1=self.DimText1, DimPIC=self.DimPIC))
+                    if config.plugins.AdvancedFreePlayer.FileNameFilter.value != '' and not config.plugins.AdvancedFreePlayer.FileNameFilter.value in name:
+                        continue
+                    else:
+                        self.list.append(FileEntryComponent(name = name, absolute = x, isDir = True, DimText0 = self.DimText0, DimText1=self.DimText1, DimPIC=self.DimPIC))
 
         if self.showFiles:
             for x in files:
-                if self.useServiceRef:
-                    path = x.getPath()
-                    name = path.split('/')[-1]
-                else:
-                    path = directory + x
-                    name = x
+                path = directory + x
+                name = x
 
                 if (self.matchingPattern is None) or re_compile(self.matchingPattern).search(path):
                     #self.list.append(FileEntryComponent(name = name, absolute = x , isDir = False))
@@ -329,13 +346,8 @@ class FileList(MenuList):
                     self.moveToIndex(i)
                 i += 1
 
-    def sortDateEnable(self):
-        #print "sortDateEnable"
-        self.sortDate=True
-
-    def sortDateDisable(self):
-        #print "sortDateDisable"
-        self.sortDate=False
+    def setSortType(self, sortType):
+        self.sortType=sortType
 
     def getCurrentDirectory(self):
         return self.current_directory

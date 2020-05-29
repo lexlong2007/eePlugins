@@ -14,7 +14,9 @@ def cleanFile(text, ReturnMovieYear = True, metaFileName = ''):
         movieYear=''
         #removing exact character combinations
         ExactCutList = ['.ts', '^[12][09][0-9]* [0-9][0-9]* -', '.*[kK]omediowa sobota', '.*[Dd]obre kino', 
-                    '.*[Hh]it na sobotę', '.*[Kk]omediowy czwartek', '.*[Ss]iatkówka mężczyzn', '.*HD -', '.*TV -', '^[ ]*[-][ ]*']
+                    '.*[Hh]it na sobotę', '.*[Kk]omediowy czwartek', '.*[Ss]iatkówka mężczyzn','.*[Cc]anal.* [Ff]ilm w akcji', '.*[Mm]ocne sobotnie kino',
+                    '.*[Zz]akochana jedynka',
+                    '.*HD -', '.*TV -', '^[ ]*[-][ ]*']
         for word in ExactCutList:
             text = re.sub(word,'', text, flags=re.I) 
         text = re.sub('(\_|\.|\+)',' ', text, flags=re.I) #cleaning

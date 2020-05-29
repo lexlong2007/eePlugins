@@ -414,3 +414,5 @@ msgstr "Nowa nazwa pliku..."
 msgid "Movie name must contain..."
 msgstr "Nazwa filmu musi zawierać..."
 
+msgid "Sort also directories:"
+msgstr "Sortuj również katalogi:"
