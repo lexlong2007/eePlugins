@@ -47,6 +47,7 @@ config.plugins.streamlinksrv.remoteE2username = ConfigText(default = "root")
 config.plugins.streamlinksrv.remoteE2password = ConfigPassword(default = "root")
 config.plugins.streamlinksrv.remoteE2zap = ConfigEnableDisable(default = True)
 config.plugins.streamlinksrv.remoteE2wakeup = ConfigEnableDisable(default = True)
+config.plugins.streamlinksrv.remoteE2bouquet = NoSave(ConfigNothing())
 
 if os.path.exists("/tmp/StreamlinkConfig.log"):
     os.remove("/tmp/StreamlinkConfig.log")
@@ -79,10 +80,12 @@ class StreamlinkConfiguration(Screen, ConfigListScreen):
         Mlist.append(getConfigListEntry(""))
         Mlist.append(getConfigListEntry('\c00289496' + _("*** remote E2 helper ***")))
         Mlist.append(getConfigListEntry(_("IP address:"), config.plugins.streamlinksrv.remoteE2address))
+        Mlist.append(getConfigListEntry(_("Streaming port:"), config.plugins.streamlinksrv.remoteE2port))
         Mlist.append(getConfigListEntry(_("Username:"), config.plugins.streamlinksrv.remoteE2username))
         Mlist.append(getConfigListEntry(_("Password:"), config.plugins.streamlinksrv.remoteE2password))
         Mlist.append(getConfigListEntry(_("Wakeup if remote E2 in standby:"), config.plugins.streamlinksrv.remoteE2wakeup))
         Mlist.append(getConfigListEntry(_("Zap before stream workarround:"), config.plugins.streamlinksrv.remoteE2zap))
+        Mlist.append(getConfigListEntry(_("Press OK to select and download %s bouquet") % "userbouquet.remoteE2.tv", config.plugins.streamlinksrv.remoteE2bouquet))
         
         Mlist.append(getConfigListEntry(""))
         Mlist.append(getConfigListEntry('\c00289496' + _("*** %s configuration ***") % 'teleelevidenie')) #https://my.teleelevidenie.com/signin
@@ -90,7 +93,6 @@ class StreamlinkConfiguration(Screen, ConfigListScreen):
         Mlist.append(getConfigListEntry(_("Password:"), config.plugins.streamlinksrv.TELEpassword))
         Mlist.append(getConfigListEntry(_("Press OK to download %s bouquet") % "enigma2-hls", config.plugins.streamlinksrv.TELEbouquet))
         Mlist.append(getConfigListEntry(""))
-        #Mlist.append(getConfigListEntry(_("Press OK to modify existing bouquet"),config.plugins.streamlinksrv.modifyBouquet))
         #Mlist.append(getConfigListEntry(""))
         Mlist.append(getConfigListEntry('\c00289496' + _("*** Deamon configuration ***")))
         Mlist.append(getConfigListEntry(_("Enable deamon:"), config.plugins.streamlinksrv.enabled))
@@ -228,8 +230,9 @@ class StreamlinkConfiguration(Screen, ConfigListScreen):
                         return
                     else:
                         self.doAction = ('teleelevidenieBouquet.py', '/etc/enigma2/teleelevidenie-hls.tv', config.plugins.streamlinksrv.TELEusername.value, config.plugins.streamlinksrv.TELEpassword.value)
-                elif currItem == config.plugins.streamlinksrv.modifyBouquet:
-                    pass
+                elif currItem == config.plugins.streamlinksrv.remoteE2bouquet:
+                    from StreamingChannelConverter import StreamingChannelFromServerScreen
+                    session.openWithCallback(self.doNothing, StreamingChannelFromServerScreen) 
                 self.DBGlog('%s' % str(self.doAction))
                 if not self.doAction is None:
                     bfn = self.doAction[1]

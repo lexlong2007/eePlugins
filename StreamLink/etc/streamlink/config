@@ -1,0 +1,3 @@
+#https://streamlink.github.io/cli.html#configuration-file
+http-no-ssl-verify
+hls-segment-threads=9

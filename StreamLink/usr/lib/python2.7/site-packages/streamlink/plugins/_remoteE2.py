@@ -12,6 +12,7 @@ log = logging.getLogger(__name__)
 
 import sys
 import re
+import time
 
 from xml.etree import cElementTree as ET
 
@@ -83,6 +84,7 @@ class remoteE2(Plugin):
                 return
         #wylaczenie tunera?
         #strumieniowanie
+        time.sleep(1)
         return {"live": HTTPStream(self.session, streamURL, **params)} 
 
 __plugin__ = remoteE2

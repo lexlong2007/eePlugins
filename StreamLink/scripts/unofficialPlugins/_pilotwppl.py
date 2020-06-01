@@ -7,6 +7,7 @@ from streamlink.plugin import Plugin
 from streamlink.plugin.api import useragents
 #from streamlink.plugin.api.utils import itertags
 from streamlink.stream import HLSStream
+from streamlink.stream.dash import DASHStream
 from streamlink.utils import update_scheme
 
 log = logging.getLogger(__name__)
@@ -28,6 +29,7 @@ class PilotWPpl(Plugin):
         return cls._url_re.match(url) is not None
 
     def _get_streams(self):
+        log.debug("PilotWPpl._get_streams() >>>")
         cookies = getCookie()
         if not cookies:
             cookies = _login()
@@ -66,22 +68,28 @@ class PilotWPpl(Plugin):
                 else:
                     return"""
             
-        if 'hls@live:abr' in response[u'data'][u'stream_channel'][u'streams'][0][u'type']:
-            type = 'hls'
-            finalUrl = response[u'data'][u'stream_channel'][u'streams'][0][u'url'][0]
+        log.debug("1st stream type: %s" % response[u'data'][u'stream_channel'][u'streams'][0][u'type'])
+        
+        if 'dash@live:abr' in response[u'data'][u'stream_channel'][u'streams'][0][u'type']:
+            dashUrl = response[u'data'][u'stream_channel'][u'streams'][0][u'url'][0]
+        if 'hls@live:abr' in response[u'data'][u'stream_channel'][u'streams'][1][u'type']:
+            hlsUrl = response[u'data'][u'stream_channel'][u'streams'][1][u'url'][0]
+        log.debug("Found streams:\n\t dash: %s\n\t hls: %s" % (dashUrl,hlsUrl))
+        
+        PreferDash=True
+        
+        if PreferDash:
+            return DASHStream.parse_manifest(self.session, dashUrl)
         else:
-            type = 'not hls'
-            finalUrl = response[u'data'][u'stream_channel'][u'streams'][1][u'url'][0]
-            
-            return HLSStream.parse_variant_playlist(
-                self.session,
-                update_scheme(self.url, finalUrl),
-                headers={'Referer': self.url, 
-                         'user-agent': headers['user-agent'],
-#                         'accept': 'application/json', 
-                         'x-version': headers['x-version'],
-#                         'content-type': 'application/json; charset=UTF-8',
-                         'Cookie': cookies}
-            ) 
+            return HLSStream.parse_variant_playlist(self.session,
+                                                    update_scheme(self.url, hlsUrl),
+                                                                    headers={'Referer': self.url, 
+                                                                    'user-agent': headers['user-agent'],
+#                                                                    'accept': 'application/json', 
+                                                                     'x-version': headers['x-version'],
+#                                                                    'content-type': 'application/json; charset=UTF-8',
+                                                                    'Cookie': cookies
+                                                                 }
+                                                    ) 
 
 __plugin__ = PilotWPpl

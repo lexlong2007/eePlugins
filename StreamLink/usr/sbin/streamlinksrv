@@ -9,6 +9,8 @@
 __version__ = "1.1.0"
 
 import os
+os.environ["XDG_CONFIG_HOME"] = "/etc"
+
 import sys
 import time
 import atexit
@@ -78,6 +80,8 @@ LOGGER = logging.getLogger('streamlink.streamlinksrv')
 STREAM_SYNONYMS = ["best", "worst"]
 parser = None
 PLUGIN_ARGS = False
+
+
 
 #
 # setup options
@@ -208,6 +212,7 @@ def remoteE2( url = '' ):
             except Exception as e:
                 LOGGER.error("Exception : {}", str(e))
                 return '/usr/share/offline.mp4'
+        time.sleep(1)
         return 'http://%s:%s/%s' % ( remoteE2address , remoteE2port , url )
     elif not remoteE2standbyCMD is None:
         LOGGER.info("request standby:")

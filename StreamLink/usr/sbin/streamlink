@@ -1,3 +1,8 @@
 #!/usr/bin/python2.7 
+import os
+os.environ["XDG_CONFIG_HOME"] = "/etc"
+
+print 'Usage: streamlink -l debug "url" best'
+
 import streamlink_cli.main
 streamlink_cli.main.main()
