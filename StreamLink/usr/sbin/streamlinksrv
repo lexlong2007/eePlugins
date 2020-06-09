@@ -288,7 +288,8 @@ def sendOfflineMP4(http, send_headers=True):
 def Stream(streamlink, http, url, argstr, quality):
     global parser, _loglevel
 
-    url = remoteE2(url)
+    if url.startswith('remoteE2/'):
+        url = remoteE2(url)
         
     fd = None
     not_stream_opened = True
@@ -409,6 +410,7 @@ class StreamHandler(BaseHTTPRequestHandler):
         sendHeaders(s)
 
     def do_GET(s):
+        print '!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
         url=urllib.unquote(s.path[1:])
         quality="best"
 
@@ -530,6 +532,7 @@ class Daemon:
             sys.stderr.write("fork #2 failed: %d (%s)\n" % (e.errno, e.strerror))
             sys.exit(1)
 
+        sys.stdout.write('streamlink started correctly, logging level: %s\n' % LOGLEVEL)
         # redirect standard file descriptors
         sys.stdout.flush()
         sys.stderr.flush()

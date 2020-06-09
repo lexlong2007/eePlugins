@@ -31,6 +31,7 @@ config.plugins.streamlinksrv.logToFile = ConfigEnableDisable(default = False)
 config.plugins.streamlinksrv.ClearLogFile = ConfigEnableDisable(default = True)
 config.plugins.streamlinksrv.logPath = ConfigSelection(default = "/home/root", choices = [("/home/root", "/home/root"), ("/tmp", "/tmp"), ("/hdd", "/hdd"), ])
 config.plugins.streamlinksrv.PortNumber = ConfigSelection(default = "8088", choices = [("8088", "8088"), ("88", "88"), ])
+config.plugins.streamlinksrv.bufferPath = ConfigText(default = "/tmp")
 # pilot.wp.pl
 config.plugins.streamlinksrv.WPusername = ConfigText()
 config.plugins.streamlinksrv.WPpassword = ConfigPassword()
@@ -101,6 +102,7 @@ class StreamlinkConfiguration(Screen, ConfigListScreen):
         Mlist.append(getConfigListEntry(_("Log to file:"), config.plugins.streamlinksrv.logToFile))
         Mlist.append(getConfigListEntry(_("Clear log on each start:"), config.plugins.streamlinksrv.ClearLogFile))
         Mlist.append(getConfigListEntry(_("Save log file in:"), config.plugins.streamlinksrv.logPath))
+        Mlist.append(getConfigListEntry(_("Buffer path:"), config.plugins.streamlinksrv.bufferPath))
         #Mlist.append()
         return Mlist
 
