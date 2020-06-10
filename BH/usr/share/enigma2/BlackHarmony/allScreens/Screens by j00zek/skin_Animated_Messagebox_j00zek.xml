@@ -46,9 +46,10 @@ if (textPos[1] + textHeight + offset) > (animPosition[1] + animHeight + offset):
         listSize = (WindowWidth - offset * 2, listHeight)
         newWindowHeight = listPos[1] + listSize[1] + offset
 else:
-        newWindowHeight = animPosition[1] + animHeight + offset
         listPos = (textPos[0], textHeight + offset) 
         listSize =  (textWidth, listHeight)
+        newWindowHeight = animPosition[1] + animHeight + offset
+#newWindowHeight = listPos[1] + listSize[1] + offset
 
 # Move and Resize list
 self["list"].instance.move(ePoint(listPos[0], listPos[1]))
