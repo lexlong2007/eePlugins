@@ -29,6 +29,21 @@
                         <convert type="ClockToText"></convert>
                 </widget>
         </screen>
+<!-- StandbySummary -->
+        <screen name="StandbySummary" position="0,0" size="100%,100%">
+        <widget source="session.j00zekMSNWeather" render="Label" position="2%,2%" size="52%,16%" font="BHfDlcD;50" halign="left" transparent="1" backgroundColor="black">
+            <convert type="MSNWeatherWebCurrent">barometrValue</convert>
+        </widget> 
+        <widget position="67%,2%" size="31%,16%" font="BHfDlcD;50" noWrap="1" foregroundColor="#ccffff" backgroundColor="#000000" render="Label" source="session.j00zekMSNWeather" zPosition="3" halign="right" transparent="1">
+            <convert type="j00zekMSNWeather">temperature_current</convert>
+        </widget> 
+                <widget backgroundColor="#000000" font="BHfDlcD;140" foregroundColor="white" halign="center" position="0%,27%" render="Label" size="100%,48%" source="global.CurrentTime" transparent="0" zPosition="2">
+                        <convert type="ClockToText">Format:%-H:%M</convert>
+                </widget> 
+                <widget backgroundColor="#000000" font="BHfDlcD;44" foregroundColor="#FFFF00" halign="center" position="0,81%" render="Label" size="100%,17%" source="global.CurrentTime" transparent="0" zPosition="2">
+                        <convert type="ClockToText">Format:%d.%m.%Y</convert>
+                </widget>
+        </screen>
 <!-- main-->
         <!-- menus-->
         <screen name="MenuSummary" position="0,0" size="480,320">
