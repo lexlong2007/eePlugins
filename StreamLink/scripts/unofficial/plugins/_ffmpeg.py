@@ -9,7 +9,7 @@ from streamlink.stream._ffmpegmux import FFMPEGMuxer
 log = logging.getLogger(__name__)
 
 class ffmpegCMDplugin(Plugin):
-    _url_re = re.compile(r"ffmpeg|")
+    _url_re = re.compile(r".*ffmpeg\|.*")
 
     @classmethod
     def can_handle_url(cls, url):
