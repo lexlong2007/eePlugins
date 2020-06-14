@@ -229,3 +229,5 @@ msgstr "Przetwarzam"
 msgid "Installing"
 msgstr "Instaluję"
 
+msgid "Force uninstall"
+msgstr "Wymuś odinstalowanie"

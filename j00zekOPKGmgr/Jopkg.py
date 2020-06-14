@@ -157,6 +157,7 @@ class Jopkg(Screen):
         self.BlockedInput = True
         self.packages2upgrade = 0
         self.keyGreenAction = ""
+        self.keyYellowAction = ""
         self.keyBlueAction = ""
         self.actionInfo = ""
         self.SkinSelectorInstalled = 0
@@ -378,11 +379,18 @@ class Jopkg(Screen):
             return
         printDEBUG( "keyBlue" , self.keyBlueAction )
         if self.keyBlueAction != '':
+            self.SelectedIndex = self["list"].getIndex()
             self.session.openWithCallback(self.refreshLists ,Jconsole, title = "%s" % self.keyBlueAction, cmdlist = [ self.keyBlueAction ])
         return
 
     def keyYellow(self):
-        printDEBUG( "keyYellow" , "MenuOPKGsettings TBD" )
+        if self.BlockedInput == True:
+            return
+        printDEBUG( "keyYellow" , self.keyYellowAction )
+        if self.keyYellowAction != '':
+            self.SelectedIndex = self["list"].getIndex()
+            self.session.openWithCallback(self.refreshLists ,Jconsole, title = "%s" % self.keyYellowAction, cmdlist = [ self.keyYellowAction ])
+        return
 
     def keyYellowEnd(self, ret = 0):
         return
@@ -676,6 +684,7 @@ class Jopkg(Screen):
         current = self['list'].getCurrent()
         self.keyBlueAction =''
         self['key_blue'].setText('')
+        self["key_yellow"].setText('')
         if current:
             #printDEBUG( "selectionChanged" , "selectionChanged.current = %s" % current[3] )
             #print current
@@ -683,6 +692,8 @@ class Jopkg(Screen):
                 self['key_green'].setText(_("Delete"))
                 self.actionInfo = _("delete %s" )  % current[0]
                 self.keyGreenAction = 'opkg remove --autoremove %s' % current[0]
+                self["key_yellow"].setText(_('Force uninstall'))
+                self.keyYellowAction = 'opkg remove --force-depends %s' % current[0]
                 self['key_blue'].setText(_("Reinstall"))
                 self.keyBlueAction ='opkg install --force-reinstall %s' % current[0]
             elif current[3] == 'installable':
