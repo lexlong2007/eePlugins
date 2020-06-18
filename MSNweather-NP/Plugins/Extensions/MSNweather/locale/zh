@@ -1,1 +1,316 @@
 
+msgid ""
+msgstr ""
+"Project-Id-Version: WeatherPlugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-05-13 08:33+0100\n"
+"PO-Revision-Date: 2015-01-04 18:17+0100\n"
+"Last-Translator: Mariusz1970 lexlong2007<Mariusz1970@onet.eu>\n"
+"Language-Team: Björn Freise <Mariusz1970@onet.eu>\n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.7.1\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SearchPath-0: ../src\n"
+
+msgid "Add"
+msgstr "添加"
+
+msgid "Back"
+msgstr "返回"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "City"
+msgstr "城市"
+
+msgid "Delete"
+msgstr "删除"
+
+msgid "Edit"
+msgstr "编辑"
+
+msgid "Feels like %s"
+msgstr "感觉像"
+
+msgid "Getting weather information..."
+msgstr "正在获取天气信息..."
+
+msgid "Humidity: %s %%"
+msgstr "湿度: %s %%"
+
+msgid "Location code"
+msgstr "位置代码"
+
+msgid "MSN location search result"
+msgstr "MSN位置搜索结果"
+
+msgid "OK"
+msgstr "确认"
+
+msgid "Observation point: %s"
+msgstr "观察点: %s"
+
+msgid "Observation time: %s"
+msgstr "观察时间: %s"
+
+msgid "Please enter a valid city name."
+msgstr "请输入有效的城市名称。"
+
+msgid "Please enter a valid location code for the city."
+msgstr "请输入城市的有效位置代码。"
+
+msgid "Really delete this WeatherPlugin Entry?"
+msgstr "真的要删除这条目吗？"
+
+msgid "Search Code"
+msgstr "搜索代码"
+
+msgid "Show Weather Forecast"
+msgstr "显示天气预报"
+
+msgid "System"
+msgstr "系统"
+
+msgid "Weather Plugin"
+msgstr "天气插件"
+
+msgid "WeatherPlugin: Edit Entry"
+msgstr "WeatherPlugin:编辑条目"
+
+msgid "WeatherPlugin: List of Entries"
+msgstr "WeatherPlugin:条目列表"
+
+msgid ""
+"You need to enter a valid city name before you can search for the location "
+"code."
+msgstr "您需要输入有效的城市名称，然后才能搜索位置代码."
+
+msgid "imperial system"
+msgstr "美制"
+
+msgid "metric system"
+msgstr "公制"
+
+msgid "Animated plugin icons"
+msgstr "动画插件图标"
+
+msgid "Animated infobar icons"
+msgstr "动画信息栏图标"
+
+msgid "Jan"
+msgstr "一月"
+
+msgid "Feb"
+msgstr "二月"
+
+msgid "Mar"
+msgstr "三月"
+
+msgid "Apr"
+msgstr "四月"
+
+msgid "May"
+msgstr "五月"
+
+msgid "Jun"
+msgstr "六月"
+
+msgid "Jul"
+msgstr "七月"
+
+msgid "Aug"
+msgstr "八月"
+
+msgid "Sep"
+msgstr "九月"
+
+msgid "Oct"
+msgstr "十月"
+
+msgid "Nov"
+msgstr "十一月"
+
+msgid "Dec"
+msgstr "十二月"
+
+msgid "Location Full name"
+msgstr "位置全名"
+
+msgid "thingSpeak meteo channel ID"
+msgstr "thingSpeak气象频道ID"
+
+msgid "Pressure %s"
+msgstr "气压 %s"
+
+msgid "pon."
+msgstr "pon."
+
+msgid "wto."
+msgstr "wto."
+
+msgid "Sro."
+msgstr "Sro."
+
+msgid "czw."
+msgstr "czw."
+
+msgid "pią."
+msgstr "pią."
+
+msgid "sob."
+msgstr "sob."
+
+msgid "niedz."
+msgstr "niedz."
+
+msgid "MSN weather NP"
+msgstr "MSN天气 NP版"
+
+msgid "Icons type:"
+msgstr "图标类型："
+
+msgid "Debug (require restart):"
+msgstr "调试（需要重新启动）："
+
+msgid "MSN service icons"
+msgstr "MSN服务图标"
+
+msgid "skin Icons"
+msgstr "皮肤图标"
+
+msgid "animated Icons"
+msgstr "动画图标"
+
+msgid "Debug log file size:"
+msgstr "调试日志文件大小："
+
+msgid "Build histograms:"
+msgstr "构建直方图："
+
+msgid "What happened in weather during last %s hours?"
+msgstr "在过去 %s 小时里天气怎么样了？"
+
+msgid "Pressure"
+msgstr "压力"
+
+msgid "Temperature | Feelng temperature"
+msgstr "温度|体感温度"
+
+msgid "Icons scaling engine:"
+msgstr "图标缩放引擎："
+
+msgid "internal E2"
+msgstr "内部 E2"
+
+msgid "ePicLoad (E.g. Vu+ org)"
+msgstr "ePicLoad(E.g. Vu+ org)"
+
+msgid "Weather maps"
+msgstr "天气图"
+
+msgid "Temperature"
+msgstr "温度"
+
+msgid "Precipation"
+msgstr "沉淀"
+
+msgid "Satellite"
+msgstr "卫星"
+
+msgid "Cloud"
+msgstr "云"
+
+msgid "temperature_today"
+msgstr "今天的温度"
+
+msgid "precipitation_forecast"
+msgstr "降水量预报"
+
+msgid "satellite_observation"
+msgstr "卫星观测"
+
+msgid "clouds_forecast"
+msgstr "云层预测"
+
+msgid "Feature not available in this system!!!"
+msgstr "此系统中没有此功能"
+
+msgid "Downloading today's temperature maps..."
+msgstr "正在下载今天的温度图..."
+
+msgid "Downloading precipitation forecast maps..."
+msgstr "正在下载降水预报图..."
+
+msgid "Downloading satellite observation maps..."
+msgstr "正在下载卫星观测图..."
+
+msgid "Downloading clouds forecast maps..."
+msgstr "正在下载云预测地图..."
+
+msgid "General Error"
+msgstr "一般错误"
+
+msgid "Error wrong input data"
+msgstr "错误输入数据"
+
+msgid "Error sychronizing web data"
+msgstr "同数据时出错"
+
+msgid "Error analyzing web data"
+msgstr "分数据时出错"
+
+msgid "Exception %s"
+msgstr "例外 %s"
+
+msgid "Error sychronizing webMaps data"
+msgstr "同数据时出错"
+
+msgid "Storms"
+msgstr "风暴"
+
+msgid "Loading storms maps..."
+msgstr "正在加载风暴图..."
+
+msgid "Storms observations"
+msgstr "风暴观测"
+
+msgid "Period:"
+msgstr "期间："
+
+msgid "Last 24h"
+msgstr "最后24小时"
+
+msgid "Last 12h"
+msgstr "最后12小时"
+
+msgid "Last 6h"
+msgstr "最后6小时"
+
+msgid "Last 3h"
+msgstr "最后3小时"
+
+msgid "Last hour"
+msgstr "最后一小时"
+
+msgid "Geo Latitude"
+msgstr "纬度"
+
+msgid "auto"
+msgstr "自动"
+
+msgid "Geo Longitude"
+msgstr "经度"
+
+msgid "Show Weather Forecast NP@lexlong"
+msgstr "天气插件NP特别版@lexlong"
+
+msgid "Location in www.foreca.com/<this part>"
+msgstr "在www.foreca.com中的位置/<这个部分>"
+
